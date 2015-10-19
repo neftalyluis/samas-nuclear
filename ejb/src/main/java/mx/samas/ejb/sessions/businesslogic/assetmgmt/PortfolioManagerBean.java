@@ -341,8 +341,17 @@ public class PortfolioManagerBean implements PortfolioManagerLocal {
         Query q = em.createQuery("SELECT lt FROM Transaction lt ORDER BY lt.id ASC");
         return q.getResultList();
     }
-
+    /**
+     * 
+     * Creates a Strategy for a slicevector list, a name and a risk profile
+     * 
+     * @param lsv The list containing the slice vectors.
+     * @param name The name of the strategy
+     * @param rk The Risk Profile for this strategy
+     * @return 
+     */
     //Metodos basicos para crear un portafolio y hacerle un "bootstrap"
+    
     @Override
     public Strategy createStrategy(List<SliceVector> lsv, String name, RiskProfile rk) {
         Strategy st = new Strategy();
