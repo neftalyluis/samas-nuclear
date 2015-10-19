@@ -47,6 +47,9 @@ public class Blotter implements Serializable {
     @ManyToOne
     private Transaction transaction;
     
+    @ManyToOne
+    private TransactionSource transactionSource;
+    
     private Long quantity;
     
     private Double price;
@@ -290,6 +293,20 @@ public class Blotter implements Serializable {
      */
     public void setContract(Contract contract) {
         this.contract = contract;
+    }
+
+    /**
+     * @return the transactionSource
+     */
+    public TransactionSource getTransactionSource() {
+        return transactionSource;
+    }
+
+    /**
+     * @param transactionSource the transactionSource to set
+     */
+    public void setTransactionSource(TransactionSource transactionSource) {
+        this.transactionSource = transactionSource;
     }
 
 }
