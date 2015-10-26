@@ -34,37 +34,36 @@ public class Blotter implements Serializable {
 
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Date inputDate;
-     
+
     @ManyToOne
     private Asset asset;
-    
+
     @ManyToOne
     private Broker broker;
-    
+
     @ManyToOne
     private PortfolioVector portfolio;
-    
+
     @ManyToOne
     private Transaction transaction;
-    
+
     @ManyToOne
     private TransactionSource transactionSource;
-    
+
     private Long quantity;
-    
+
     private Double price;
-    
+
     private Double cashFlow;
-    
-    private Double activeComission; 
-    
+
+    private Double activeComission;
+
     private Double passiveComission;
-    
+
     private Double quantityFlow;
-    
+
     @ManyToOne
     private Contract contract;
-    
 
     public Long getId() {
         return id;

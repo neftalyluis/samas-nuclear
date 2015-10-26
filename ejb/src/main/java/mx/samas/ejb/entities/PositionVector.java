@@ -20,28 +20,25 @@ import javax.persistence.Temporal;
  */
 @Entity
 public class PositionVector implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
+
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Date dateTime;
-    
+
     @ManyToOne
     private PortfolioVector portfolioVector;
-    
+
     @ManyToOne
     private SliceVector sliceVector;
-    
+
     @ManyToOne
     private Asset asset;
-    
+
     private Long quantity;
-    
-    
-    
-    
 
     public Long getId() {
         return id;
@@ -145,5 +142,5 @@ public class PositionVector implements Serializable {
     public void setSliceVector(SliceVector sliceVector) {
         this.sliceVector = sliceVector;
     }
-    
+
 }

@@ -20,15 +20,16 @@ import javax.persistence.OneToMany;
  */
 @Entity
 public class Strategy implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    
-    @OneToMany(mappedBy="strategy")
+
+    @OneToMany(mappedBy = "strategy")
     private List<SliceVector> slices;
-    
+
     @ManyToOne
     private RiskProfile riskProfile;
 
@@ -93,7 +94,6 @@ public class Strategy implements Serializable {
         this.slices = slices;
     }
 
-
     /**
      * @return the riskProfile
      */
@@ -107,5 +107,5 @@ public class Strategy implements Serializable {
     public void setRiskProfile(RiskProfile riskProfile) {
         this.riskProfile = riskProfile;
     }
-    
+
 }

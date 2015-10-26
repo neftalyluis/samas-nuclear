@@ -22,15 +22,14 @@ public class BondVector extends AssetVector implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-   
+
     private Double dirtyPrice;
     private Double yield;
     private Double couponRate;
     /**
-    * "Spread" significa sobretasa versus 
-    * tasa de referencia en bonos revisables;
-    * para bonos tasa fija es = 0.0 . 
-    */
+     * "Spread" significa sobretasa versus tasa de referencia en bonos
+     * revisables; para bonos tasa fija es = 0.0 .
+     */
     private Double spread;
     private Double amountOutstanding;
     private String gradeMoodys;
@@ -71,7 +70,6 @@ public class BondVector extends AssetVector implements Serializable {
     public String toString() {
         return "mx.samas.entities.BondVector[ id=" + id + " ]";
     }
-
 
     /**
      * @return the gradeMoodys
@@ -212,7 +210,5 @@ public class BondVector extends AssetVector implements Serializable {
     public void setFaceValue(Double faceValue) {
         this.faceValue = faceValue;
     }
-
-
 
 }

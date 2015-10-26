@@ -17,6 +17,7 @@ import javax.persistence.Id;
  */
 @Entity
 public class FungibleProperties implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -54,5 +55,5 @@ public class FungibleProperties implements Serializable {
     public String toString() {
         return "mx.samas.entities.FungibleProperties[ id=" + id + " ]";
     }
-    
+
 }

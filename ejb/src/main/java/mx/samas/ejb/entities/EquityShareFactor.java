@@ -31,7 +31,7 @@ public class EquityShareFactor implements Serializable {
 
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Date dateTime;
-    
+
     private Double factor;
 
     public Long getId() {

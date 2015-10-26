@@ -17,6 +17,7 @@ import javax.persistence.Id;
  */
 @Entity
 public class Equity extends Asset implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -56,5 +57,5 @@ public class Equity extends Asset implements Serializable {
     public String toString() {
         return "mx.samas.entities.Stock[ id=" + id + " ]";
     }
-    
+
 }

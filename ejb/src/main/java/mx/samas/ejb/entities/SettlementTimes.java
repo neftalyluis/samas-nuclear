@@ -17,6 +17,7 @@ import javax.persistence.Id;
  */
 @Entity
 public class SettlementTimes implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -84,5 +85,5 @@ public class SettlementTimes implements Serializable {
     public void setVal(Long val) {
         this.val = val;
     }
-    
+
 }

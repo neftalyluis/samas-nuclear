@@ -8,6 +8,7 @@ package mx.samas.ejb.sessions.businesslogic.assetmgmt;
 import java.util.List;
 import mx.samas.ejb.entities.Asset;
 import mx.samas.ejb.entities.AssetVector;
+import mx.samas.ejb.entities.Client;
 import mx.samas.ejb.entities.PortfolioVector;
 import mx.samas.ejb.entities.RiskProfile;
 import mx.samas.ejb.entities.SliceVector;
@@ -51,5 +52,9 @@ public interface PortfolioManagerRemote {
     public Boolean sellAsset(Asset a, Long quantity, PortfolioVector pv);
 
     public Boolean setRevenue(Double flux, PortfolioVector pv);
+
+    public Boolean createClient(Client c);
+
+    public List<Client> getClients();
 
 }

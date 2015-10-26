@@ -16,7 +16,6 @@ import java.util.List;
 public class DocumentConnection {
 
     //private final FTPConnection pip;
-
     private List<String> routesPIP;
     public List<String> filesToUpload = new LinkedList<>();
 

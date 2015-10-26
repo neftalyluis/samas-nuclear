@@ -20,6 +20,7 @@ import javax.persistence.Temporal;
  */
 @Entity
 public class FixingDate implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,8 +29,7 @@ public class FixingDate implements Serializable {
     private Bond bond;
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date fixingDate;
-    
-    
+
     public Long getId() {
         return id;
     }
@@ -90,5 +90,5 @@ public class FixingDate implements Serializable {
     public void setFixingDate(Date fixingDate) {
         this.fixingDate = fixingDate;
     }
-    
+
 }

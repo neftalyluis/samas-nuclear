@@ -20,11 +20,12 @@ import javax.persistence.Temporal;
  */
 @Entity
 public class BusinessAccrual implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
+
     private Double amount;
 
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
@@ -175,5 +176,5 @@ public class BusinessAccrual implements Serializable {
     public void setAccrualType(AccrualType accrualType) {
         this.accrualType = accrualType;
     }
-    
+
 }

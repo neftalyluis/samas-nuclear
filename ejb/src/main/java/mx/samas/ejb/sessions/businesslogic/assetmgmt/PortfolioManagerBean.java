@@ -24,6 +24,7 @@ import javax.persistence.Query;
 import mx.samas.ejb.entities.Asset;
 import mx.samas.ejb.entities.AssetVector;
 import mx.samas.ejb.entities.Blotter;
+import mx.samas.ejb.entities.Client;
 import mx.samas.ejb.entities.PortfolioVector;
 import mx.samas.ejb.entities.PositionVector;
 import mx.samas.ejb.entities.RiskProfile;
@@ -341,17 +342,17 @@ public class PortfolioManagerBean implements PortfolioManagerLocal {
         Query q = em.createQuery("SELECT lt FROM Transaction lt ORDER BY lt.id ASC");
         return q.getResultList();
     }
+
     /**
-     * 
+     *
      * Creates a Strategy for a slicevector list, a name and a risk profile
-     * 
+     *
      * @param lsv The list containing the slice vectors.
      * @param name The name of the strategy
      * @param rk The Risk Profile for this strategy
-     * @return 
+     * @return
      */
     //Metodos basicos para crear un portafolio y hacerle un "bootstrap"
-    
     @Override
     public Strategy createStrategy(List<SliceVector> lsv, String name, RiskProfile rk) {
         Strategy st = new Strategy();
@@ -447,8 +448,6 @@ public class PortfolioManagerBean implements PortfolioManagerLocal {
             AssetVector ave = (AssetVector) q.getSingleResult();
             Double precio = ave.getCleanPrice();
             Double diana = sv.getTargetAllocation();
-            
-            
 
         }
 
@@ -632,6 +631,26 @@ public class PortfolioManagerBean implements PortfolioManagerLocal {
         } catch (Exception e) {
             System.out.println("OOPS! I DID IT AGAIN :V");
             return false;
+        }
+    }
+
+    @Override
+    public Boolean createClient(Client c) {
+        try {
+            em.persist(c);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    @Override
+    public List<Client> getClients() {
+        try {
+            Query q = em.createQuery("SELECT c FROM Client c");
+            return q.getResultList();
+        } catch (Exception e) {
+            return null;
         }
     }
 

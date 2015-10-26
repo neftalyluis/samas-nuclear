@@ -20,18 +20,18 @@ import javax.persistence.Temporal;
  */
 @Entity
 public class CashflowDate implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
+
     @ManyToOne
     private Bond bond;
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date payDate;
     /**
-     * 1- Interest
-     * 0.- Principal
+     * 1- Interest 0.- Principal
      */
     private Boolean interest;
 
@@ -109,5 +109,5 @@ public class CashflowDate implements Serializable {
     public void setCouponPrincipal(Boolean couponPrincipal) {
         this.interest = couponPrincipal;
     }
-    
+
 }

@@ -8,6 +8,7 @@ package mx.samas.ejb.sessions.businesslogic.assetmgmt;
 import java.util.List;
 import mx.samas.ejb.entities.Asset;
 import mx.samas.ejb.entities.AssetVector;
+import mx.samas.ejb.entities.Client;
 import mx.samas.ejb.entities.PortfolioVector;
 import mx.samas.ejb.entities.RiskProfile;
 import mx.samas.ejb.entities.SliceVector;
@@ -53,5 +54,9 @@ public interface PortfolioManagerLocal {
     SliceVector createSliceVector();
 
     Boolean setRevenue(Double flux, PortfolioVector pv);
+
+    Boolean createClient(Client c);
+
+    List<Client> getClients();
 
 }

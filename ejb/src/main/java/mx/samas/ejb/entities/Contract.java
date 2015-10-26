@@ -10,7 +10,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
 /**
@@ -19,13 +18,14 @@ import javax.persistence.ManyToOne;
  */
 @Entity
 public class Contract implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
+
     private String accountNumber;
-    
+
     @ManyToOne
     private Bank bank;
 
@@ -60,7 +60,7 @@ public class Contract implements Serializable {
     @Override
     public String toString() {
         return "mx.samas.entities.Contract[ id=" + id + " ]";
-    } 
+    }
 
     /**
      * @return the bank
@@ -89,5 +89,5 @@ public class Contract implements Serializable {
     public void setAccountNumber(String accountNumber) {
         this.accountNumber = accountNumber;
     }
-    
+
 }

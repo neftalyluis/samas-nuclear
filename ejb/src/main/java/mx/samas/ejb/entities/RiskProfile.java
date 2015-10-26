@@ -17,11 +17,12 @@ import javax.persistence.Id;
  */
 @Entity
 public class RiskProfile implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
+
     private String name;
 
     public Long getId() {
@@ -70,5 +71,5 @@ public class RiskProfile implements Serializable {
     public void setName(String name) {
         this.name = name;
     }
-    
+
 }

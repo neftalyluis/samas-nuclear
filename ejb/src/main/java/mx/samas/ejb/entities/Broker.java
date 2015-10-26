@@ -17,16 +17,15 @@ import javax.persistence.Id;
  */
 @Entity
 public class Broker implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
+
     private String name;
-    
+
     private Double comission;
-    
-    
 
     public Long getId() {
         return id;
@@ -88,5 +87,5 @@ public class Broker implements Serializable {
     public void setComission(Double comission) {
         this.comission = comission;
     }
-    
+
 }

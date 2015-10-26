@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mx.samas.appclient.controller;
+package mx.samas.appclient.misc;
 
 import javax.security.auth.callback.Callback;
 import javax.security.auth.callback.CallbackHandler;

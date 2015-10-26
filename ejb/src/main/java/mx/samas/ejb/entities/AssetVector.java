@@ -20,6 +20,7 @@ import javax.persistence.Temporal;
  */
 @Entity
 public class AssetVector implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -104,6 +105,5 @@ public class AssetVector implements Serializable {
     public void setCleanPrice(Double cleanPrice) {
         this.cleanPrice = cleanPrice;
     }
-
 
 }

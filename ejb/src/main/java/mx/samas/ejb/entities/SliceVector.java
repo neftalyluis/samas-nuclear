@@ -32,8 +32,8 @@ public class SliceVector implements Serializable {
 
     @OneToOne
     private Asset asset;
-    
-    @ManyToOne  
+
+    @ManyToOne
     private Fungible fungible;
 
     @ManyToOne

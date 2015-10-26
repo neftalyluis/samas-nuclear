@@ -10,5 +10,5 @@ package mx.samas.ejb.sessions.system;
  * @author neftaly
  */
 public interface ClientManagerLocal {
-    
+
 }

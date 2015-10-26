@@ -17,6 +17,7 @@ import javax.persistence.Id;
  */
 @Entity
 public class PortfolioStatus implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -69,5 +70,5 @@ public class PortfolioStatus implements Serializable {
     public void setName(String name) {
         this.name = name;
     }
-    
+
 }

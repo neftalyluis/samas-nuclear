@@ -17,12 +17,11 @@ import javax.persistence.Id;
  */
 @Entity
 public class Currency extends Asset implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
-    
 
     public Long getId() {
         return id;
@@ -56,5 +55,5 @@ public class Currency extends Asset implements Serializable {
     public String toString() {
         return "mx.samas.entities.Currency[ id=" + id + " ]";
     }
-    
+
 }

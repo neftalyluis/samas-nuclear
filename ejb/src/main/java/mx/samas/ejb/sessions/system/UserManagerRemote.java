@@ -12,6 +12,7 @@ import mx.samas.ejb.entities.User;
  * @author neftaly
  */
 public interface UserManagerRemote {
+
     public String greet();
 
     public boolean createUser(User u);

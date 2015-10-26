@@ -35,7 +35,7 @@ public class PortfolioVector implements Serializable {
     private List<Client> clients;
 
     @ManyToOne
-    private Strategy strategy; 
+    private Strategy strategy;
 
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Date dateTime;
@@ -44,10 +44,10 @@ public class PortfolioVector implements Serializable {
     private Contract contract;
 
     private Double comission;
-    
+
     @ManyToOne
     private ComissionType comissionType;
-    
+
     @ManyToOne
     private PortfolioStatus portfolioStatus;
 
@@ -125,8 +125,6 @@ public class PortfolioVector implements Serializable {
     public void setDateTime(Date dateTime) {
         this.dateTime = dateTime;
     }
-
-
 
     /**
      * @return the contract

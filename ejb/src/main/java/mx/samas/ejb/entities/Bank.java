@@ -17,14 +17,14 @@ import javax.persistence.Id;
  */
 @Entity
 public class Bank implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;
-    
-    
+
     public Long getId() {
         return id;
     }
@@ -71,5 +71,5 @@ public class Bank implements Serializable {
     public void setName(String name) {
         this.name = name;
     }
-    
+
 }

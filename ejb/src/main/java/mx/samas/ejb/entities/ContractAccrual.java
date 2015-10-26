@@ -36,13 +36,13 @@ public class ContractAccrual implements Serializable {
 
     @ManyToOne
     private Asset asset;
-    
+
     @ManyToOne
     private Broker broker;
-    
+
     @ManyToOne
     private Bank bank;
-    
+
     @ManyToOne
     private AccrualType accrualType;
 

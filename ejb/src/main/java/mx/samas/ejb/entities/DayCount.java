@@ -17,13 +17,12 @@ import javax.persistence.Id;
  */
 @Entity
 public class DayCount implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String count;
-    
-    
 
     public Long getId() {
         return id;
@@ -71,5 +70,5 @@ public class DayCount implements Serializable {
     public void setCount(String count) {
         this.count = count;
     }
-    
+
 }

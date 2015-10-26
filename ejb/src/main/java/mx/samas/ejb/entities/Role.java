@@ -26,7 +26,7 @@ public class Role implements Serializable {
 
     @ManyToOne
     private User user;
- 
+
     @ManyToOne
     private Profile profile;
 

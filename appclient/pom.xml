@@ -22,9 +22,9 @@
             <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.guigarage</groupId>
-            <artifactId>flatter</artifactId>
-            <version>0.7</version>
+            <groupId>org.controlsfx</groupId>
+            <artifactId>controlsfx</artifactId>
+            <version>8.40.9</version>
         </dependency>
     </dependencies>
     <build>

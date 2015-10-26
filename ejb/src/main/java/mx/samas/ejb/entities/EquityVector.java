@@ -17,6 +17,7 @@ import javax.persistence.Id;
  */
 @Entity
 public class EquityVector extends AssetVector implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -54,5 +55,5 @@ public class EquityVector extends AssetVector implements Serializable {
     public String toString() {
         return "mx.samas.entities.EquityVector[ id=" + id + " ]";
     }
-    
+
 }

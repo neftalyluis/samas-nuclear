@@ -22,5 +22,4 @@ import javax.persistence.PersistenceContext;
 @DeclareRoles({"ComplianceContrallor", "Administrator"})
 public class ClientManagerBean implements ClientManagerLocal {
 
-
 }

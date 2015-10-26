@@ -10,6 +10,7 @@ import javax.ejb.Stateless;
 @Stateless
 @Remote
 public class DummyBean implements Dummy {
+
     @Override
     public String sayHello(String name) {
         return "Hello, " + name;

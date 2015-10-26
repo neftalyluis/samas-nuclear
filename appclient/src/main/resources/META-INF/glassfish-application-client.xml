@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE glassfish-application-client PUBLIC "-//GlassFish.org//DTD GlassFish Application Server 3.1 Java EE Application Client 6.0//EN" "http://glassfish.org/dtds/glassfish-application-client_6_0-1.dtd">
+<glassfish-application-client>
+    <java-web-start-access>
+        <context-root>launch</context-root>
+        <eligible>true</eligible>
+        <vendor>money.png::money.png::SAMAS</vendor>
+    </java-web-start-access>
+</glassfish-application-client>
