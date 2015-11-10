@@ -34,9 +34,9 @@
                                         <RowConstraints maxHeight="60.0" minHeight="60.0" prefHeight="60.0" vgrow="SOMETIMES" />
                                     </rowConstraints>
                                     <children>
-                                        <Label text="Nueva Estrategia" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER"/>
+                                        <Label text="Nueva Estrategia" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
                                         <Label text="Nombre" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-                                        <TextField fx:id="nameClient" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                        <TextField fx:id="nameStrategy" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                                         <ButtonBar prefHeight="40.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
                                             <buttons>
                                                 <Button fx:id="createClientAction" layoutX="359.0" layoutY="124.0" mnemonicParsing="false" text="Crear" />
@@ -44,7 +44,7 @@
                                         </ButtonBar>
                                         <Label fx:id="state" prefHeight="69.0" prefWidth="95.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="TOP" />
                                         <Label text="RiskProfile" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
-                                        <ChoiceBox prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                        <ChoiceBox fx:id="riskProfileChoice" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                                     </children>
                                 </GridPane>
                             </children>

@@ -5,10 +5,9 @@
  */
 package mx.samas.appclient.controller;
 
+import com.panemu.tiwulfx.table.TableControl;
 import java.net.URL;
-import java.util.List;
 import java.util.ResourceBundle;
-import javafx.beans.value.ObservableDoubleValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -16,8 +15,6 @@ import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.chart.LineChart;
-import javafx.scene.chart.PieChart;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
@@ -40,13 +37,7 @@ public class ClientesController implements Initializable {
     private TextField nameClient;
 
     @FXML
-    private TableView clientsTable;
-
-    @FXML
-    private TableColumn idColumn;
-
-    @FXML
-    private TableColumn nameColumn;
+    private TableControl clientTable;
 
     @FXML
     private Tab readTab;
@@ -63,7 +54,6 @@ public class ClientesController implements Initializable {
             @Override
             public void handle(Event event) {
                 if (readTab.isSelected()) {
-                    loadClientTable();
 
                 }
             }
@@ -88,11 +78,6 @@ public class ClientesController implements Initializable {
             state.setText("El campo nombre esta vacio");
         }
 
-    }
-
-    @FXML
-    private void loadClientTable() {
-        clientsTable.setItems(getInitialData());
     }
 
     private ObservableList getInitialData() {

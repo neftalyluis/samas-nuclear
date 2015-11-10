@@ -21,6 +21,14 @@ import mx.samas.ejb.entities.Transaction;
  */
 public interface PortfolioManagerRemote {
 
+    public boolean createStrategy(Strategy s);
+
+    
+    
+    public List<RiskProfile> getRiskProfileList(); 
+
+    public List<Strategy> getStrategyList();
+
     public Boolean doEverything();
 
     public Boolean makeMyStrategy();

@@ -56,6 +56,28 @@ public class PortfolioManagerBean implements PortfolioManagerLocal {
     }
 
     @Override
+    public List<Strategy> getStrategyList() {
+        Query q = em.createQuery("SELECT s FROM Strategy s");
+        return q.getResultList();
+    }
+
+    @Override
+    public List<RiskProfile> getRiskProfileList() {
+        Query q = em.createQuery("SELECT rk FROM RiskProfile rk");
+        return q.getResultList();
+    }
+
+    @Override
+    public boolean createStrategy(Strategy s) {
+        try {
+            em.persist(s);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    @Override
     public List<AssetVector> getPricesBetweenDates(Asset a) {
 
         //Obtengo mis Activos que voy a asignar a mis portafolios
