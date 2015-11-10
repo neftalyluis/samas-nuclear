@@ -31,7 +31,7 @@ public class SliceVector implements Serializable {
     private Date dateTime;
 
     @OneToOne
-    private Asset asset;
+    private AssetType asset;
 
     @ManyToOne
     private Fungible fungible;
@@ -77,14 +77,14 @@ public class SliceVector implements Serializable {
     /**
      * @return the asset
      */
-    public Asset getAsset() {
+    public AssetType getAsset() {
         return asset;
     }
 
     /**
      * @param asset the asset to set
      */
-    public void setAsset(Asset asset) {
+    public void setAsset(AssetType asset) {
         this.asset = asset;
     }
 

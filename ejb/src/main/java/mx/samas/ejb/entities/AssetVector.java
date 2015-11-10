@@ -28,7 +28,7 @@ public class AssetVector implements Serializable {
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Date dateTime;
     @ManyToOne
-    private Asset asset;
+    private AssetType asset;
     private Double cleanPrice;
 
     public Long getId() {
@@ -81,14 +81,14 @@ public class AssetVector implements Serializable {
     /**
      * @return the asset
      */
-    public Asset getAsset() {
+    public AssetType getAsset() {
         return asset;
     }
 
     /**
      * @param asset the asset to set
      */
-    public void setAsset(Asset asset) {
+    public void setAsset(AssetType asset) {
         this.asset = asset;
     }
 

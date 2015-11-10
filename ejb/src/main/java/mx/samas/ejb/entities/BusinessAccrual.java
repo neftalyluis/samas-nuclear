@@ -32,10 +32,10 @@ public class BusinessAccrual implements Serializable {
     private Date dateTime;
 
     @ManyToOne
-    private Contract contract;
+    private PortfolioAccount contract;
 
     @ManyToOne
-    private Asset asset;
+    private AssetType asset;
 
     @ManyToOne
     private Broker broker;
@@ -110,28 +110,28 @@ public class BusinessAccrual implements Serializable {
     /**
      * @return the contract
      */
-    public Contract getContract() {
+    public PortfolioAccount getContract() {
         return contract;
     }
 
     /**
      * @param contract the contract to set
      */
-    public void setContract(Contract contract) {
+    public void setContract(PortfolioAccount contract) {
         this.contract = contract;
     }
 
     /**
      * @return the asset
      */
-    public Asset getAsset() {
+    public AssetType getAsset() {
         return asset;
     }
 
     /**
      * @param asset the asset to set
      */
-    public void setAsset(Asset asset) {
+    public void setAsset(AssetType asset) {
         this.asset = asset;
     }
 

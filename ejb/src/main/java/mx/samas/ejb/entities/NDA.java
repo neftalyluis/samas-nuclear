@@ -16,7 +16,7 @@ import javax.persistence.Id;
  * @author abimael
  */
 @Entity
-public class NDA extends Asset implements Serializable {
+public class NDA extends AssetType implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id

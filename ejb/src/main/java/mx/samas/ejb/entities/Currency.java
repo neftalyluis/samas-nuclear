@@ -16,7 +16,7 @@ import javax.persistence.Id;
  * @author neftaly
  */
 @Entity
-public class Currency extends Asset implements Serializable {
+public class Currency extends AssetType implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id

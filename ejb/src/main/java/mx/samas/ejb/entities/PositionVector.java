@@ -36,7 +36,7 @@ public class PositionVector implements Serializable {
     private SliceVector sliceVector;
 
     @ManyToOne
-    private Asset asset;
+    private AssetType asset;
 
     private Long quantity;
 
@@ -90,14 +90,14 @@ public class PositionVector implements Serializable {
     /**
      * @return the asset
      */
-    public Asset getAsset() {
+    public AssetType getAsset() {
         return asset;
     }
 
     /**
      * @param asset the asset to set
      */
-    public void setAsset(Asset asset) {
+    public void setAsset(AssetType asset) {
         this.asset = asset;
     }
 

@@ -41,7 +41,7 @@ public class PortfolioVector implements Serializable {
     private Date dateTime;
 
     @ManyToOne
-    private Contract contract;
+    private PortfolioAccount contract;
 
     private Double comission;
 
@@ -129,14 +129,14 @@ public class PortfolioVector implements Serializable {
     /**
      * @return the contract
      */
-    public Contract getContract() {
+    public PortfolioAccount getContract() {
         return contract;
     }
 
     /**
      * @param contract the contract to set
      */
-    public void setContract(Contract contract) {
+    public void setContract(PortfolioAccount contract) {
         this.contract = contract;
     }
 

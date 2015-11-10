@@ -25,7 +25,7 @@ import javax.persistence.UniqueConstraint;
 @Entity
 @Table(uniqueConstraints = {
     @UniqueConstraint(columnNames = {"TICKER"})})
-public class Asset implements Serializable {
+public class AssetType implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -47,7 +47,7 @@ public class Asset implements Serializable {
     @OneToMany(mappedBy = "asset", cascade = CascadeType.ALL)
     private List<AssetVector> vectors;
 
-    public Asset() {
+    public AssetType() {
         this.vectors = new LinkedList<>();
     }
 
@@ -69,10 +69,10 @@ public class Asset implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Asset)) {
+        if (!(object instanceof AssetType)) {
             return false;
         }
-        Asset other = (Asset) object;
+        AssetType other = (AssetType) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
