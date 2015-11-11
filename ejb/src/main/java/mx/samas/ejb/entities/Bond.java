@@ -24,7 +24,7 @@ import javax.persistence.Temporal;
  * @author neftaly
  */
 @Entity
-public class BondType extends Asset implements Serializable {
+public class Bond extends Asset implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -35,7 +35,7 @@ public class BondType extends Asset implements Serializable {
     @OneToOne
     private FixingDate fixingDate;
     
-    // Falta un private FloatfaceValue para el valor nominal
+    private Double faceValue;
 
     // Va en TyC
     @Temporal(javax.persistence.TemporalType.DATE)
@@ -59,7 +59,7 @@ public class BondType extends Asset implements Serializable {
     private List<CashflowDate> couponDates;
     private Boolean callable;
 
-    public BondType() {
+    public Bond() {
         this.couponDates = new LinkedList<>();
     }
 
@@ -83,10 +83,10 @@ public class BondType extends Asset implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof BondType)) {
+        if (!(object instanceof Bond)) {
             return false;
         }
-        BondType other = (BondType) object;
+        Bond other = (Bond) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -222,6 +222,20 @@ public class BondType extends Asset implements Serializable {
      */
     public void setBondCollateral(BondCollateral bondCollateral) {
         this.bondCollateral = bondCollateral;
+    }
+
+    /**
+     * @return the faceValue
+     */
+    public Double getFaceValue() {
+        return faceValue;
+    }
+
+    /**
+     * @param faceValue the faceValue to set
+     */
+    public void setFaceValue(Double faceValue) {
+        this.faceValue = faceValue;
     }
 
 }

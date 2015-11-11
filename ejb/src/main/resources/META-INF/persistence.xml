@@ -4,6 +4,7 @@
     <jta-data-source>samas</jta-data-source>
     <class>mx.samas.ejb.entities.TransactionSource</class>
     <class>mx.samas.ejb.entities.Employee</class>
+    <class>mx.samas.ejb.entities.DenominatorCurrency</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.schema-generation.database.action" value="create"/>

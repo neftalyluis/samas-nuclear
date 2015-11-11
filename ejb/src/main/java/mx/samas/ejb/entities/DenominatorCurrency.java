@@ -10,25 +10,27 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 /**
  *
  * @author neftaly
  */
 @Entity
-public class EquityType extends Asset implements Serializable {
-
+public class DenominatorCurrency implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    
+    @OneToOne
+    private Currency currency;
+    
 
-    @Override
     public Long getId() {
         return id;
     }
 
-    @Override
     public void setId(Long id) {
         this.id = id;
     }
@@ -43,10 +45,10 @@ public class EquityType extends Asset implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof EquityType)) {
+        if (!(object instanceof DenominatorCurrency)) {
             return false;
         }
-        EquityType other = (EquityType) object;
+        DenominatorCurrency other = (DenominatorCurrency) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -55,7 +57,21 @@ public class EquityType extends Asset implements Serializable {
 
     @Override
     public String toString() {
-        return "mx.samas.entities.Stock[ id=" + id + " ]";
+        return "mx.samas.ejb.entities.DenominatorCurrency[ id=" + id + " ]";
     }
 
+    /**
+     * @return the currency
+     */
+    public Currency getCurrency() {
+        return currency;
+    }
+
+    /**
+     * @param currency the currency to set
+     */
+    public void setCurrency(Currency currency) {
+        this.currency = currency;
+    }
+    
 }

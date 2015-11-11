@@ -46,9 +46,9 @@ public class PortfolioAccrual implements Serializable {
     @ManyToOne
     private AccrualType accrualType;
     
-    /* Es necesario agregar un campo de denominatorCurrency instanciando
-    DenominatorCurrency; ver comentario Asset referetne a moneda */
-
+    @ManyToOne
+    private DenominatorCurrency currencyDenomination;
+    
     public Long getId() {
         return id;
     }
@@ -178,6 +178,20 @@ public class PortfolioAccrual implements Serializable {
      */
     public void setAccrualType(AccrualType accrualType) {
         this.accrualType = accrualType;
+    }
+
+    /**
+     * @return the currencyDenomination
+     */
+    public DenominatorCurrency getCurrencyDenomination() {
+        return currencyDenomination;
+    }
+
+    /**
+     * @param currencyDenomination the currencyDenomination to set
+     */
+    public void setCurrencyDenomination(DenominatorCurrency currencyDenomination) {
+        this.currencyDenomination = currencyDenomination;
     }
 
 }

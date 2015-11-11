@@ -6,34 +6,29 @@
 package mx.samas.ejb.entities;
 
 import java.io.Serializable;
-import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.Temporal;
 
 /**
  *
  * @author neftaly
  */
 @Entity
-public class FixingDate implements Serializable {
+public class Equity extends Asset implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @ManyToOne
-    private Bond bond;
-    @Temporal(javax.persistence.TemporalType.DATE)
-    private Date fixingDate;
 
+    @Override
     public Long getId() {
         return id;
     }
 
+    @Override
     public void setId(Long id) {
         this.id = id;
     }
@@ -48,10 +43,10 @@ public class FixingDate implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof FixingDate)) {
+        if (!(object instanceof Equity)) {
             return false;
         }
-        FixingDate other = (FixingDate) object;
+        Equity other = (Equity) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -60,35 +55,7 @@ public class FixingDate implements Serializable {
 
     @Override
     public String toString() {
-        return "mx.samas.entities.FixingDate[ id=" + id + " ]";
-    }
-
-    /**
-     * @return the bond
-     */
-    public Bond getBond() {
-        return bond;
-    }
-
-    /**
-     * @param bond the bond to set
-     */
-    public void setBond(Bond bond) {
-        this.bond = bond;
-    }
-
-    /**
-     * @return the fixingDate
-     */
-    public Date getFixingDate() {
-        return fixingDate;
-    }
-
-    /**
-     * @param fixingDate the fixingDate to set
-     */
-    public void setFixingDate(Date fixingDate) {
-        this.fixingDate = fixingDate;
+        return "mx.samas.entities.Stock[ id=" + id + " ]";
     }
 
 }

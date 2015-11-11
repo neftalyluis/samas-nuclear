@@ -37,11 +37,8 @@ public class Asset implements Serializable {
     private String issuer;
     private String series;
     private String isin;
-    private String currencyDenomination; // Cambiar a «private DenominatorCurrency currencyDenomination;
-    
-    
-    /* Se necesita crear una entidad DenominatorCurrency (catálogo de monedas denominación); 
-    una moneda es un «activo» (tomas posición) y a su vez un «denominador» (sólo valúa) */
+    @ManyToOne
+    private DenominatorCurrency currencyDenomination;
     
     /**
      * "tickSize" es lo que viene siendo la "puja"
@@ -160,20 +157,6 @@ public class Asset implements Serializable {
     }
 
     /**
-     * @return the currencyDenomination
-     */
-    public String getCurrencyDenomination() {
-        return currencyDenomination;
-    }
-
-    /**
-     * @param currencyDenomination the currencyDenomination to set
-     */
-    public void setCurrencyDenomination(String currencyDenomination) {
-        this.currencyDenomination = currencyDenomination;
-    }
-
-    /**
      * @return the issuer
      */
     public String getIssuer() {
@@ -227,6 +210,20 @@ public class Asset implements Serializable {
      */
     public void setSettlementTimes(SettlementTimes settlementTimes) {
         this.settlementTimes = settlementTimes;
+    }
+
+    /**
+     * @return the currencyDenomination
+     */
+    public DenominatorCurrency getCurrencyDenomination() {
+        return currencyDenomination;
+    }
+
+    /**
+     * @param currencyDenomination the currencyDenomination to set
+     */
+    public void setCurrencyDenomination(DenominatorCurrency currencyDenomination) {
+        this.currencyDenomination = currencyDenomination;
     }
 
 }

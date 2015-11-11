@@ -27,7 +27,7 @@ public class CashflowDate implements Serializable {
     private Long id;
 
     @ManyToOne
-    private BondType bond;
+    private Bond bond;
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date payDate;
     /**
@@ -71,14 +71,14 @@ public class CashflowDate implements Serializable {
     /**
      * @return the bond
      */
-    public BondType getBond() {
+    public Bond getBond() {
         return bond;
     }
 
     /**
      * @param bond the bond to set
      */
-    public void setBond(BondType bond) {
+    public void setBond(Bond bond) {
         this.bond = bond;
     }
 

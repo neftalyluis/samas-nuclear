@@ -16,7 +16,7 @@ import javax.persistence.Id;
  * @author neftaly
  */
 @Entity
-public class CurrencyType extends Asset implements Serializable {
+public class Currency extends Asset implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -41,10 +41,10 @@ public class CurrencyType extends Asset implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof CurrencyType)) {
+        if (!(object instanceof Currency)) {
             return false;
         }
-        CurrencyType other = (CurrencyType) object;
+        Currency other = (Currency) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
