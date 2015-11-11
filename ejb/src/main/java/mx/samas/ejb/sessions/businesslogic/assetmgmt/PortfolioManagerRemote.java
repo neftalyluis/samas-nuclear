@@ -6,7 +6,7 @@
 package mx.samas.ejb.sessions.businesslogic.assetmgmt;
 
 import java.util.List;
-import mx.samas.ejb.entities.AssetType;
+import mx.samas.ejb.entities.Asset;
 import mx.samas.ejb.entities.AssetVector;
 import mx.samas.ejb.entities.Client;
 import mx.samas.ejb.entities.PortfolioVector;
@@ -35,7 +35,7 @@ public interface PortfolioManagerRemote {
 
     public Boolean makePortfolio();
 
-    public List<AssetVector> getPricesBetweenDates(AssetType a);
+    public List<AssetVector> getPricesBetweenDates(Asset a);
 
     public Boolean makeThreePortfoliosWithDiffMoney();
 
@@ -50,14 +50,14 @@ public interface PortfolioManagerRemote {
 
     public Boolean firstTimePortfolioPurchase(PortfolioVector pv);
 
-    public AssetType getAssetByTicker(String ticker);
+    public Asset getAssetByTicker(String ticker);
 
     //Metodos para hacer y que van despues del proceso anterior
     public void rebalance();
 
-    public Boolean buyAsset(AssetType a, Long quantity, PortfolioVector pv);
+    public Boolean buyAsset(Asset a, Long quantity, PortfolioVector pv);
 
-    public Boolean sellAsset(AssetType a, Long quantity, PortfolioVector pv);
+    public Boolean sellAsset(Asset a, Long quantity, PortfolioVector pv);
 
     public Boolean setRevenue(Double flux, PortfolioVector pv);
 

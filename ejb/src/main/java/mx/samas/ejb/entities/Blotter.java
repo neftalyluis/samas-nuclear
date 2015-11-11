@@ -36,7 +36,7 @@ public class Blotter implements Serializable {
     private Date inputDate;
 
     @ManyToOne
-    private AssetType asset;
+    private Asset asset;
 
     @ManyToOne
     private Broker broker;
@@ -143,14 +143,14 @@ public class Blotter implements Serializable {
     /**
      * @return the asset
      */
-    public AssetType getAsset() {
+    public Asset getAsset() {
         return asset;
     }
 
     /**
      * @param asset the asset to set
      */
-    public void setAsset(AssetType asset) {
+    public void setAsset(Asset asset) {
         this.asset = asset;
     }
 

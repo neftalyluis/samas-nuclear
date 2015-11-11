@@ -24,7 +24,7 @@ import javax.persistence.Temporal;
  * @author neftaly
  */
 @Entity
-public class Bond extends AssetType implements Serializable {
+public class Bond extends Asset implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id

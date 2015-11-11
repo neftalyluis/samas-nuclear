@@ -21,7 +21,7 @@ import javax.ejb.TransactionManagementType;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import mx.samas.ejb.entities.AssetType;
+import mx.samas.ejb.entities.Asset;
 import mx.samas.ejb.entities.AssetVector;
 import mx.samas.ejb.entities.Blotter;
 import mx.samas.ejb.entities.Client;
@@ -78,12 +78,12 @@ public class PortfolioManagerBean implements PortfolioManagerLocal {
     }
 
     @Override
-    public List<AssetVector> getPricesBetweenDates(AssetType a) {
+    public List<AssetVector> getPricesBetweenDates(Asset a) {
 
         //Obtengo mis Activos que voy a asignar a mis portafolios
         Query qa = em.createQuery("SELECT a FROM Asset a WHERE a.ticker= :tc");
         qa.setParameter("tc", "1A_TSLA_*");
-        AssetType tesla = (AssetType) qa.getSingleResult();
+        Asset tesla = (Asset) qa.getSingleResult();
 
         String dateInString = "2015-07-01 15:00:00 ";
         Date f = new Date();
@@ -118,9 +118,9 @@ public class PortfolioManagerBean implements PortfolioManagerLocal {
         //Obtengo mis Activos que voy a asignar a mis portafolios
         Query q = em.createQuery("SELECT a FROM Asset a WHERE a.ticker= :tc");
         q.setParameter("tc", "1A_TSLA_*");
-        AssetType tesla = (AssetType) q.getSingleResult();
+        Asset tesla = (Asset) q.getSingleResult();
         q.setParameter("tc", "1A_AMD_*");
-        AssetType amd = (AssetType) q.getSingleResult();
+        Asset amd = (Asset) q.getSingleResult();
 
         //Estrategia de cien mil a 50 50
         Strategy cienmil = new Strategy();
@@ -224,9 +224,9 @@ public class PortfolioManagerBean implements PortfolioManagerLocal {
         //Obtengo mis Activos que voy a asignar a mis portafolios
         Query q = em.createQuery("SELECT a FROM Asset a WHERE a.ticker= :tc");
         q.setParameter("tc", "1A_TSLA_*");
-        AssetType tesla = (AssetType) q.getSingleResult();
+        Asset tesla = (Asset) q.getSingleResult();
         q.setParameter("tc", "1A_AMD_*");
-        AssetType amd = (AssetType) q.getSingleResult();
+        Asset amd = (Asset) q.getSingleResult();
 
         Strategy cienmil = new Strategy();
         cienmil.setName("TSLA & AMD");
@@ -429,7 +429,7 @@ public class PortfolioManagerBean implements PortfolioManagerLocal {
 
         q = em.createQuery("SELECT ass FROM Asset ass WHERE ass.ticker= :ti");
         q.setParameter("ti", "MONEY");
-        AssetType lqs = (AssetType) q.getSingleResult();
+        Asset lqs = (Asset) q.getSingleResult();
 
         deposito1.setPortfolio(pv);
         deposito1.setCashFlow(money);
@@ -465,7 +465,7 @@ public class PortfolioManagerBean implements PortfolioManagerLocal {
         List<SliceVector> lsv = pv.getStrategy().getSlices();
         for (SliceVector sv : lsv) {
             Query q = em.createQuery("SELECT av FROM AssetVector av WHERE av.asset= :ass ORDER BY av.dateTime DESC");
-            AssetType a = sv.getAsset();
+            Asset a = sv.getAsset();
             q.setParameter("ass", a);
             AssetVector ave = (AssetVector) q.getSingleResult();
             Double precio = ave.getCleanPrice();
@@ -482,7 +482,7 @@ public class PortfolioManagerBean implements PortfolioManagerLocal {
     }
 
     @Override
-    public Boolean buyAsset(AssetType a, Long quantity, PortfolioVector pv) {
+    public Boolean buyAsset(Asset a, Long quantity, PortfolioVector pv) {
 
         Blotter v = new Blotter();
         Date d = new Date();
@@ -521,7 +521,7 @@ public class PortfolioManagerBean implements PortfolioManagerLocal {
     }
 
     @Override
-    public Boolean sellAsset(AssetType a, Long quantity, PortfolioVector pv) {
+    public Boolean sellAsset(Asset a, Long quantity, PortfolioVector pv) {
 
         Blotter v = new Blotter();
         Date d = new Date();
@@ -602,10 +602,10 @@ public class PortfolioManagerBean implements PortfolioManagerLocal {
     }
 
     @Override
-    public AssetType getAssetByTicker(String ticker) {
+    public Asset getAssetByTicker(String ticker) {
         Query qa = em.createQuery("SELECT a FROM Asset a WHERE a.ticker= :tc");
         qa.setParameter("tc", ticker);
-        return (AssetType) qa.getSingleResult();
+        return (Asset) qa.getSingleResult();
     }
 
     @Override
