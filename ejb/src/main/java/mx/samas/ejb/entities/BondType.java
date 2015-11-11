@@ -34,6 +34,8 @@ public class BondType extends Asset implements Serializable {
     private DayCount dayCount;
     @OneToOne
     private FixingDate fixingDate;
+    
+    // Falta un private FloatfaceValue para el valor nominal
 
     // Va en TyC
     @Temporal(javax.persistence.TemporalType.DATE)
