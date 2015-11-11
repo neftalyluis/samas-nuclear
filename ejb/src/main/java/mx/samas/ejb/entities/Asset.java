@@ -37,7 +37,12 @@ public class Asset implements Serializable {
     private String issuer;
     private String series;
     private String isin;
-    private String currencyDenomination;
+    private String currencyDenomination; // Cambiar a «private DenominatorCurrency currencyDenomination;
+    
+    
+    /* Se necesita crear una entidad DenominatorCurrency (catálogo de monedas denominación); 
+    una moneda es un «activo» (tomas posición) y a su vez un «denominador» (sólo valúa) */
+    
     /**
      * "tickSize" es lo que viene siendo la "puja"
      */

@@ -26,7 +26,7 @@ public class FixingDate implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ManyToOne
-    private Bond bond;
+    private BondType bond;
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date fixingDate;
 
@@ -66,14 +66,14 @@ public class FixingDate implements Serializable {
     /**
      * @return the bond
      */
-    public Bond getBond() {
+    public BondType getBond() {
         return bond;
     }
 
     /**
      * @param bond the bond to set
      */
-    public void setBond(Bond bond) {
+    public void setBond(BondType bond) {
         this.bond = bond;
     }
 

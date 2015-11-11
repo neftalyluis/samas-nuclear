@@ -16,17 +16,19 @@ import javax.persistence.Id;
  * @author neftaly
  */
 @Entity
-public class Currency extends Asset implements Serializable {
+public class EquityType extends Asset implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Override
     public Long getId() {
         return id;
     }
 
+    @Override
     public void setId(Long id) {
         this.id = id;
     }
@@ -41,10 +43,10 @@ public class Currency extends Asset implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Currency)) {
+        if (!(object instanceof EquityType)) {
             return false;
         }
-        Currency other = (Currency) object;
+        EquityType other = (EquityType) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -53,7 +55,7 @@ public class Currency extends Asset implements Serializable {
 
     @Override
     public String toString() {
-        return "mx.samas.entities.Currency[ id=" + id + " ]";
+        return "mx.samas.entities.Stock[ id=" + id + " ]";
     }
 
 }

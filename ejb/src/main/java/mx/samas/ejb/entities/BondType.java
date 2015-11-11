@@ -24,7 +24,7 @@ import javax.persistence.Temporal;
  * @author neftaly
  */
 @Entity
-public class Bond extends Asset implements Serializable {
+public class BondType extends Asset implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -57,7 +57,7 @@ public class Bond extends Asset implements Serializable {
     private List<CashflowDate> couponDates;
     private Boolean callable;
 
-    public Bond() {
+    public BondType() {
         this.couponDates = new LinkedList<>();
     }
 
@@ -81,10 +81,10 @@ public class Bond extends Asset implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Bond)) {
+        if (!(object instanceof BondType)) {
             return false;
         }
-        Bond other = (Bond) object;
+        BondType other = (BondType) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
