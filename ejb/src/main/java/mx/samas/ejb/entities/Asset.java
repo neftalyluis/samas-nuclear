@@ -44,6 +44,16 @@ public class Asset implements Serializable {
      * "tickSize" es lo que viene siendo la "puja"
      */
     private Double tickSize;
+    
+    /* Si «settlementTimes» a ser constante, no va aquí; este es un campo
+    relevante para operar en mercado (un método). Si es variable -- esto es, aquí
+    sólo de define el valor por defecto -- puede caber en «Asset». No obstante,
+    existe el riesgo de generar un comportamiento indeseado por la comodiad de
+    de evitar declarar explícitamente la fecha valor  -- «settlementTimes» -- para
+    cada operación. Quizás se le puede dar al usuario la opción -- de pedir su
+    declaración explícita; esto sería por activo.    
+    */
+    
     @ManyToOne
     private SettlementTimes settlementTimes;
     @OneToMany(mappedBy = "asset", cascade = CascadeType.ALL)

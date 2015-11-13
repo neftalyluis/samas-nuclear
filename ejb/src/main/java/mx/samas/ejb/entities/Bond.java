@@ -56,11 +56,11 @@ public class Bond extends Asset implements Serializable {
     private TermStructure termStructure;
 
     @OneToMany(mappedBy = "bond", cascade = CascadeType.ALL)
-    private List<CashflowDate> couponDates;
+    private List<CashflowDate> cashflowDates;
     private Boolean callable;
 
     public Bond() {
-        this.couponDates = new LinkedList<>();
+        this.cashflowDates = new LinkedList<>();
     }
 
     @Override
@@ -99,17 +99,17 @@ public class Bond extends Asset implements Serializable {
     }
 
     /**
-     * @return the couponDates
+     * @return the cashflowDates
      */
-    public List<CashflowDate> getCouponDates() {
-        return couponDates;
+    public List<CashflowDate> getCashflowDates() {
+        return cashflowDates;
     }
 
     /**
-     * @param couponDates the couponDates to set
+     * @param cashflowDates the cashflowDates to set
      */
-    public void setCouponDates(List<CashflowDate> couponDates) {
-        this.couponDates = couponDates;
+    public void setCashflowDates(List<CashflowDate> cashflowDates) {
+        this.cashflowDates = cashflowDates;
     }
 
     /**
