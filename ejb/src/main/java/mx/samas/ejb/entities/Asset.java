@@ -22,6 +22,76 @@ import javax.persistence.UniqueConstraint;
  *
  * @author alfonso
  */
+
+/** Necesitamos crear varias entidades más, esto no agrega complejidad y asienta
+ * las bases de las fungibilidades y la extensibilidad de SAMAS a futuro:
+ * 
+ * (1) «SecurityClass» estos son los tipos de valor
+ *      Campos:
+ *          + ID
+ *          + code
+ *          + description
+ *          + «Lista de «Asset{Bond,Equity,Currency,Derivative}»» asociados a cada tipo valor
+ *              Por ejemplo: 'Equity' tiene asociados '1' '1A' '1I' '1B' ...
+ *                           'Bond' tiene asociados 'M', 'S', '91', ...
+ * 
+ * (2) «LegalEntity» (entidad/compañía emisora) ('LegalEntity' suena feo, sugieran)
+ *      La justificación la existencia de esta entidad es que cataloga el universo
+ *      de entidades emisores -- los cuales llevan en sí un grado crediticio
+ *      Campos:
+ *          + ID
+ *          + name (Razón social), ej. Petróleos Méxicanos
+ *          + fiscalDomicile, ej. Torre Pémex
+ *          + «Lista de códigos «CreditRating»» asociados, ej. [1,2,...] => 1:= (S&P,"AAA"), 2:=(Moody's, "Aaa"), ...
+ *          + «Lista de códicos de «Issuer»» asociados, ej. 'PEMEX', 'PMX', ...
+ *          
+ * (3) «Issuer»
+ *      De igual manera, esto va a servir para las fungibilidades
+ *      Campos:
+ *          + ID
+ *          + code, ej. 'PEMEX', 'PMX', 'BONOS', 'AMX', ...
+ *          Tarea:  Investigar si son necesarios los campos de 'Trato fiscal' y
+ *                  'jurisdicción fiscal' a nivel «Issuer»; quizás es a nivel «SecurityClass»
+ * 
+ * (4) «Market»
+ *      Este campo nos va a ayudar a saber dónde operar qué
+ *      Campos:
+ *          + ID
+ *          + type := {'Exchage','OTC'}
+ *          + code, ej. 'BMV', 'MEXDER', 'IEX', 'NYSE',... # Quizás asociado al protocolo FIX
+ *          + Asociación a UN «DenominatorCurrency» para liquidación
+ *          + *** Quizás se tenga que definir el sabor de FIX protocol para cada «Market»
+ *          + «Lista de códigos «SecurityClass»» asociados que operan en este «Market»
+ *          + «Lista de códigos «Broker»» asociados que agencian este «Market»
+ *          
+ *          Tarea:  Política de margen
+ * 
+ *      NB: Se tiene que asociar un campo en «Blotter» a esta entidad
+ * 
+ * (4) «CreditRating»
+ *          Campos:
+ *          + ID
+ *          + Agency # ¿Crear una entidad que catalogue «Agency»? hmmm...
+ *          + Grade
+ * 
+ *      Esta entidad generará una tabla así:
+ * 
+ *      |   ID  |   Agency  |   Grade   |
+ *      |-------|-----------|-----------|
+ *      |   1   |   S&P     |   AAA     |
+ *      |   2   |   S&P     |   AA      |
+ *      |   3   |   Moody's |   Aaa     |
+ *      |   4   |   Moody's |   Aa      |
+ *      ...etc
+ * 
+ *      Esta nueva entidad conjuga los cuatro campos en «BondVector»
+ *      de «grade*» * := {SP,Moodys,Fitch,HR}
+ * 
+ *      Tarea:  Crear equivalencias de grados crediticios => en SAMAS inteligencia
+ * 
+* 
+*/
+
 @Entity
 @Table(uniqueConstraints = {
     @UniqueConstraint(columnNames = {"TICKER"})})
@@ -34,7 +104,7 @@ public class Asset implements Serializable {
     private String ticker;
     private String name;
     private String tv;
-    private String issuer;
+    private String issuer; // va atado a la nueva entidad «Issuer»
     private String series;
     private String isin;
     @ManyToOne
