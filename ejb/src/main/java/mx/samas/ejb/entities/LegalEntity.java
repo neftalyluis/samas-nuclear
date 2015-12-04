@@ -6,29 +6,33 @@
 package mx.samas.ejb.entities;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 /**
  *
  * @author neftaly
  */
 @Entity
-public class Role implements Serializable {
+public class LegalEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    private User user;
-
-    @ManyToOne
-    private Profile profile;
+    private String name;
+    private String fiscalDomicile;
+    
+    @OneToMany
+    private List<CreditRating> rating;
+    
+    @OneToMany
+    private List<Issuer> issuers;
 
     public Long getId() {
         return id;
@@ -48,10 +52,10 @@ public class Role implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Role)) {
+        if (!(object instanceof LegalEntity)) {
             return false;
         }
-        Role other = (Role) object;
+        LegalEntity other = (LegalEntity) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -60,35 +64,35 @@ public class Role implements Serializable {
 
     @Override
     public String toString() {
-        return "mx.samas.entities.Role[ id=" + id + " ]";
+        return "mx.samas.ejb.entities.LegalClass[ id=" + id + " ]";
     }
 
     /**
-     * @return the user
+     * @return the name
      */
-    public User getUser() {
-        return user;
+    public String getName() {
+        return name;
     }
 
     /**
-     * @param user the user to set
+     * @param name the name to set
      */
-    public void setUser(User user) {
-        this.user = user;
+    public void setName(String name) {
+        this.name = name;
     }
 
     /**
-     * @return the profile
+     * @return the fiscalDomicile
      */
-    public Profile getProfile() {
-        return profile;
+    public String getFiscalDomicile() {
+        return fiscalDomicile;
     }
 
     /**
-     * @param profile the profile to set
+     * @param fiscalDomicile the fiscalDomicile to set
      */
-    public void setProfile(Profile profile) {
-        this.profile = profile;
+    public void setFiscalDomicile(String fiscalDomicile) {
+        this.fiscalDomicile = fiscalDomicile;
     }
 
 }

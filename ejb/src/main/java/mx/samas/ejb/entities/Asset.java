@@ -34,6 +34,7 @@ import javax.persistence.UniqueConstraint;
  *          + «Lista de «Asset{Bond,Equity,Currency,Derivative}»» asociados a cada tipo valor
  *              Por ejemplo: 'Equity' tiene asociados '1' '1A' '1I' '1B' ...
  *                           'Bond' tiene asociados 'M', 'S', '91', ...
+ *          + Tipo de Asset(Bond, Equity, etc, etc)
  * 
  * (2) «LegalEntity» (entidad/compañía emisora) ('LegalEntity' suena feo, sugieran)
  *      La justificación la existencia de esta entidad es que cataloga el universo

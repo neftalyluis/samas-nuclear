@@ -10,25 +10,26 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 /**
  *
  * @author neftaly
  */
 @Entity
-public class Role implements Serializable {
-
+public class Market implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @ManyToOne
-    private User user;
-
-    @ManyToOne
-    private Profile profile;
+    
+    private String code;
+    
+    
+    @OneToOne
+    private DenominatorCurrency currency;   
+    
+    
 
     public Long getId() {
         return id;
@@ -48,10 +49,10 @@ public class Role implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Role)) {
+        if (!(object instanceof Market)) {
             return false;
         }
-        Role other = (Role) object;
+        Market other = (Market) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -60,35 +61,35 @@ public class Role implements Serializable {
 
     @Override
     public String toString() {
-        return "mx.samas.entities.Role[ id=" + id + " ]";
+        return "mx.samas.ejb.entities.Market[ id=" + id + " ]";
     }
 
     /**
-     * @return the user
+     * @return the code
      */
-    public User getUser() {
-        return user;
+    public String getCode() {
+        return code;
     }
 
     /**
-     * @param user the user to set
+     * @param code the code to set
      */
-    public void setUser(User user) {
-        this.user = user;
+    public void setCode(String code) {
+        this.code = code;
     }
 
     /**
-     * @return the profile
+     * @return the currency
      */
-    public Profile getProfile() {
-        return profile;
+    public DenominatorCurrency getCurrency() {
+        return currency;
     }
 
     /**
-     * @param profile the profile to set
+     * @param currency the currency to set
      */
-    public void setProfile(Profile profile) {
-        this.profile = profile;
+    public void setCurrency(DenominatorCurrency currency) {
+        this.currency = currency;
     }
-
+    
 }

@@ -5,6 +5,12 @@
     <class>mx.samas.ejb.entities.TransactionSource</class>
     <class>mx.samas.ejb.entities.Employee</class>
     <class>mx.samas.ejb.entities.DenominatorCurrency</class>
+    <class>mx.samas.ejb.entities.SecurityClass</class>
+    <class>mx.samas.ejb.entities.LegalEntity</class>
+    <class>mx.samas.ejb.entities.Issuer</class>
+    <class>mx.samas.ejb.entities.Market</class>
+    <class>mx.samas.ejb.entities.CreditRating</class>
+    <class>mx.samas.ejb.entities.RatingAgency</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.schema-generation.database.action" value="create"/>
