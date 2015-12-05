@@ -6,10 +6,12 @@
 package mx.samas.ejb.entities;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 
 /**
@@ -28,6 +30,12 @@ public class Market implements Serializable {
     
     @OneToOne
     private DenominatorCurrency currency;   
+    
+    @ManyToMany
+    private List <SecurityClass> securities;
+    
+    @ManyToMany
+    private List <Broker> brokers;
     
     
 
@@ -90,6 +98,34 @@ public class Market implements Serializable {
      */
     public void setCurrency(DenominatorCurrency currency) {
         this.currency = currency;
+    }
+
+    /**
+     * @return the securities
+     */
+    public List <SecurityClass> getSecurities() {
+        return securities;
+    }
+
+    /**
+     * @param securities the securities to set
+     */
+    public void setSecurities(List <SecurityClass> securities) {
+        this.securities = securities;
+    }
+
+    /**
+     * @return the brokers
+     */
+    public List <Broker> getBrokers() {
+        return brokers;
+    }
+
+    /**
+     * @param brokers the brokers to set
+     */
+    public void setBrokers(List <Broker> brokers) {
+        this.brokers = brokers;
     }
     
 }

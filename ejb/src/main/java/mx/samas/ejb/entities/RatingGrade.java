@@ -10,19 +10,29 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 /**
  *
  * @author neftaly
  */
 @Entity
-public class CreditRating implements Serializable {
+public class RatingGrade implements Serializable {
     private static final long serialVersionUID = 1L;
+
+    /**
+     * @return the serialVersionUID
+     */
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    private String agency;
+    @OneToOne
+    private RatingAgency agency;
+    private String grade;
 
     public Long getId() {
         return id;
@@ -35,18 +45,18 @@ public class CreditRating implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        hash += (getId() != null ? getId().hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof CreditRating)) {
+        if (!(object instanceof RatingGrade)) {
             return false;
         }
-        CreditRating other = (CreditRating) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        RatingGrade other = (RatingGrade) object;
+        if ((this.getId() == null && other.getId() != null) || (this.getId() != null && !this.id.equals(other.id))) {
             return false;
         }
         return true;
@@ -54,21 +64,34 @@ public class CreditRating implements Serializable {
 
     @Override
     public String toString() {
-        return "mx.samas.ejb.entities.CreditRating[ id=" + id + " ]";
-    }
+        return "mx.samas.ejb.entities.CreditRating[ id=" + getId() + " ]";
+    }    
 
     /**
      * @return the agency
      */
-    public String getAgency() {
+    public RatingAgency getAgency() {
         return agency;
     }
 
     /**
      * @param agency the agency to set
      */
-    public void setAgency(String agency) {
+    public void setAgency(RatingAgency agency) {
         this.agency = agency;
     }
-    
+
+    /**
+     * @return the grade
+     */
+    public String getGrade() {
+        return grade;
+    }
+
+    /**
+     * @param grade the grade to set
+     */
+    public void setGrade(String grade) {
+        this.grade = grade;
+    }
 }

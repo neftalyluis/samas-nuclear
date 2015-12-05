@@ -38,13 +38,13 @@ import javax.persistence.UniqueConstraint;
  * 
  * (2) «LegalEntity» (entidad/compañía emisora) ('LegalEntity' suena feo, sugieran)
  *      La justificación la existencia de esta entidad es que cataloga el universo
- *      de entidades emisores -- los cuales llevan en sí un grado crediticio
+ *      de entidades emisoras -- los cuales llevan en sí un grado crediticio
  *      Campos:
  *          + ID
  *          + name (Razón social), ej. Petróleos Méxicanos
  *          + fiscalDomicile, ej. Torre Pémex
  *          + «Lista de códigos «CreditRating»» asociados, ej. [1,2,...] => 1:= (S&P,"AAA"), 2:=(Moody's, "Aaa"), ...
- *          + «Lista de códicos de «Issuer»» asociados, ej. 'PEMEX', 'PMX', ...
+ *          + «Lista de códigos de «Issuer»» asociados, ej. 'PEMEX', 'PMX', ...
  *          
  * (3) «Issuer»
  *      De igual manera, esto va a servir para las fungibilidades
@@ -69,7 +69,7 @@ import javax.persistence.UniqueConstraint;
  * 
  *      NB: Se tiene que asociar un campo en «Blotter» a esta entidad
  * 
- * (4) «CreditRating»
+ * (5) «CreditRating»
  *          Campos:
  *          + ID
  *          + Agency # ¿Crear una entidad que catalogue «Agency»? hmmm...
