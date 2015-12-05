@@ -104,8 +104,10 @@ public class Asset implements Serializable {
     private Long id;
     private String ticker;
     private String name;
-    private String tv;
-    private String issuer; // va atado a la nueva entidad «Issuer»
+    @ManyToOne
+    private SecurityClass tv;
+    @ManyToOne
+    private Issuer issuer;
     private String series;
     private String isin;
     @ManyToOne
@@ -145,7 +147,7 @@ public class Asset implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        hash += (getId() != null ? getId().hashCode() : 0);
         return hash;
     }
 
@@ -156,7 +158,7 @@ public class Asset implements Serializable {
             return false;
         }
         Asset other = (Asset) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if ((this.getId() == null && other.getId() != null) || (this.getId() != null && !this.id.equals(other.id))) {
             return false;
         }
         return true;
@@ -164,7 +166,7 @@ public class Asset implements Serializable {
 
     @Override
     public String toString() {
-        return "mx.samas.entities.Asset[ id=" + id + " ]";
+        return "mx.samas.entities.Asset[ id=" + getId() + " ]";
     }
 
     /**
@@ -206,7 +208,7 @@ public class Asset implements Serializable {
      * @param tv the tv to set
      */
     public void setTv(String tv) {
-        this.tv = tv;
+        this.setTv(tv);
     }
 
     /**
@@ -248,7 +250,7 @@ public class Asset implements Serializable {
      * @param issuer the issuer to set
      */
     public void setIssuer(String issuer) {
-        this.issuer = issuer;
+        this.setIssuer(issuer);
     }
 
     /**
@@ -305,6 +307,20 @@ public class Asset implements Serializable {
      */
     public void setCurrencyDenomination(DenominatorCurrency currencyDenomination) {
         this.currencyDenomination = currencyDenomination;
+    }
+
+    /**
+     * @param tv the tv to set
+     */
+    public void setTv(SecurityClass tv) {
+        this.tv = tv;
+    }
+
+    /**
+     * @param issuer the issuer to set
+     */
+    public void setIssuer(Issuer issuer) {
+        this.issuer = issuer;
     }
 
 }
