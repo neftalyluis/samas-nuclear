@@ -99,6 +99,13 @@ import javax.persistence.UniqueConstraint;
 public class Asset implements Serializable {
 
     private static final long serialVersionUID = 1L;
+
+    /**
+     * @return the serialVersionUID
+     */
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -158,10 +165,7 @@ public class Asset implements Serializable {
             return false;
         }
         Asset other = (Asset) object;
-        if ((this.getId() == null && other.getId() != null) || (this.getId() != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
+        return !((this.getId() == null && other.getId() != null) || (this.getId() != null && !this.id.equals(other.id)));
     }
 
     @Override
@@ -200,7 +204,7 @@ public class Asset implements Serializable {
     /**
      * @return the tv
      */
-    public String getTv() {
+    public SecurityClass getTv() {
         return tv;
     }
 
@@ -242,7 +246,7 @@ public class Asset implements Serializable {
     /**
      * @return the issuer
      */
-    public String getIssuer() {
+    public Issuer getIssuer() {
         return issuer;
     }
 
