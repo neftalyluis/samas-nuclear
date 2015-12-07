@@ -478,7 +478,7 @@ public class PortfolioManagerBean implements PortfolioManagerLocal {
 
     @Override
     public void rebalance() {
-        System.out.println("");
+        System.out.println("holin de glassfish");
     }
 
     @Override
@@ -674,6 +674,11 @@ public class PortfolioManagerBean implements PortfolioManagerLocal {
         } catch (Exception e) {
             return null;
         }
+    }
+
+    @Override
+    public String test(String a) {
+        return "Hola" + a + "desde Glassfish";
     }
 
 }

@@ -21,6 +21,8 @@ import mx.samas.ejb.entities.Transaction;
  */
 public interface PortfolioManagerLocal {
 
+    public String test(String a);
+
     boolean createStrategy(Strategy s);
 
     List<Strategy> getStrategyList();

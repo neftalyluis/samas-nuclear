@@ -23,7 +23,7 @@ public interface PortfolioManagerRemote {
 
     public boolean createStrategy(Strategy s);
 
-    
+    public String test(String a);
     
     public List<RiskProfile> getRiskProfileList(); 
 
