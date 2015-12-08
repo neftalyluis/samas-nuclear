@@ -108,6 +108,7 @@ public class BondRevisable extends Bond implements Serializable {
     /**
      * @param cashflowDates the cashflowDates to set
      */
+    @Override
     public void setCashflowDates(List<CashflowDate> cashflowDates) {
         this.cashflowDates = cashflowDates;
     }
@@ -115,6 +116,7 @@ public class BondRevisable extends Bond implements Serializable {
     /**
      * @return the callable
      */
+    @Override
     public Boolean isCallable() {
         return callable;
     }
@@ -192,6 +194,7 @@ public class BondRevisable extends Bond implements Serializable {
     /**
      * @param dayCount the dayCount to set
      */
+    @Override
     public void setDayCount(DayCount dayCount) {
         this.dayCount = dayCount;
     }
@@ -213,6 +216,7 @@ public class BondRevisable extends Bond implements Serializable {
     /**
      * @return the bondCollateral
      */
+    @Override
     public BondCollateral getBondCollateral() {
         return bondCollateral;
     }
@@ -220,6 +224,7 @@ public class BondRevisable extends Bond implements Serializable {
     /**
      * @param bondCollateral the bondCollateral to set
      */
+    @Override
     public void setBondCollateral(BondCollateral bondCollateral) {
         this.bondCollateral = bondCollateral;
     }
@@ -227,6 +232,7 @@ public class BondRevisable extends Bond implements Serializable {
     /**
      * @return the faceValue
      */
+    @Override
     public Double getFaceValue() {
         return faceValue;
     }
@@ -234,6 +240,7 @@ public class BondRevisable extends Bond implements Serializable {
     /**
      * @param faceValue the faceValue to set
      */
+    @Override
     public void setFaceValue(Double faceValue) {
         this.faceValue = faceValue;
     }

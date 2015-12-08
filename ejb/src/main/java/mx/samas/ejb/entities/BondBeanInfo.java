@@ -149,7 +149,6 @@ public class BondBeanInfo extends SimpleBeanInfo {
 
 //GEN-FIRST:Superclass
     // Here you can add code for customizing the Superclass BeanInfo.
-
     /**
      * @return the PROPERTY_amortizing
      */
@@ -626,5 +625,5 @@ public class BondBeanInfo extends SimpleBeanInfo {
                 return null;
         }
     }
-    
+
 }
