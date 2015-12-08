@@ -9,15 +9,8 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.persistence.Temporal;
 
 /**
  *
@@ -27,37 +20,16 @@ import javax.persistence.Temporal;
 public class BondRevisable extends Bond implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    @OneToOne
-    private DayCount dayCount;
+    
     @OneToOne
     private FixingDate fixingDate;
     
-    private Double faceValue;
-
-    // Va en TyC
-    @Temporal(javax.persistence.TemporalType.DATE)
-    private Date maturityDate;
-
-    private Boolean amortizing;
-
-    @ManyToOne
-    private BondCollateral bondCollateral;
-
     /**
      * Este campo determina la regla cupón: tasa fija si "fija"; tasa revisable
      * si "!fija"
      */
     @OneToOne
     private ReferenceRate referenceRate;
-    @OneToOne
-    private TermStructure termStructure;
-
-    @OneToMany(mappedBy = "bond", cascade = CascadeType.ALL)
-    private List<CashflowDate> cashflowDates;
-    private Boolean callable;
 
     public BondRevisable() {
         this.cashflowDates = new LinkedList<>();
@@ -86,7 +58,7 @@ public class BondRevisable extends Bond implements Serializable {
         if (!(object instanceof Bond)) {
             return false;
         }
-        Bond other = (Bond) object;
+        BondRevisable other = (BondRevisable) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
