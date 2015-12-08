@@ -24,21 +24,16 @@ import javax.persistence.Temporal;
  * @author neftaly
  */
 @Entity
-public class Bond extends Asset implements Serializable {
+public class BondRevisable extends Bond implements Serializable {
 
     private static final long serialVersionUID = 1L;
-
-    /**
-     * @return the serialVersionUID
-     */
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
-    }
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @OneToOne
     private DayCount dayCount;
+    @OneToOne
+    private FixingDate fixingDate;
     
     private Double faceValue;
 
@@ -51,6 +46,12 @@ public class Bond extends Asset implements Serializable {
     @ManyToOne
     private BondCollateral bondCollateral;
 
+    /**
+     * Este campo determina la regla cupón: tasa fija si "fija"; tasa revisable
+     * si "!fija"
+     */
+    @OneToOne
+    private ReferenceRate referenceRate;
     @OneToOne
     private TermStructure termStructure;
 
@@ -58,7 +59,7 @@ public class Bond extends Asset implements Serializable {
     private List<CashflowDate> cashflowDates;
     private Boolean callable;
 
-    public Bond() {
+    public BondRevisable() {
         this.cashflowDates = new LinkedList<>();
     }
 
@@ -75,7 +76,7 @@ public class Bond extends Asset implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (getId() != null ? getId().hashCode() : 0);
+        hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
 
@@ -86,7 +87,7 @@ public class Bond extends Asset implements Serializable {
             return false;
         }
         Bond other = (Bond) object;
-        if ((this.getId() == null && other.getId() != null) || (this.getId() != null && !this.id.equals(other.id))) {
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
         return true;
@@ -94,7 +95,7 @@ public class Bond extends Asset implements Serializable {
 
     @Override
     public String toString() {
-        return "mx.samas.entities.Bond[ id=" + getId() + " ]";
+        return "mx.samas.entities.Bond[ id=" + id + " ]";
     }
 
     /**
@@ -115,7 +116,7 @@ public class Bond extends Asset implements Serializable {
      * @return the callable
      */
     public Boolean isCallable() {
-        return getCallable();
+        return callable;
     }
 
     /**
@@ -129,7 +130,7 @@ public class Bond extends Asset implements Serializable {
      * @return the amortizing
      */
     public Boolean isAmortizing() {
-        return getAmortizing();
+        return amortizing;
     }
 
     /**
@@ -168,6 +169,20 @@ public class Bond extends Asset implements Serializable {
     }
 
     /**
+     * @return the referenceRate
+     */
+    public ReferenceRate getReferenceRate() {
+        return referenceRate;
+    }
+
+    /**
+     * @param referenceRate the referenceRate to set
+     */
+    public void setReferenceRate(ReferenceRate referenceRate) {
+        this.referenceRate = referenceRate;
+    }
+
+    /**
      * @return the dayCount
      */
     public DayCount getDayCount() {
@@ -179,6 +194,20 @@ public class Bond extends Asset implements Serializable {
      */
     public void setDayCount(DayCount dayCount) {
         this.dayCount = dayCount;
+    }
+
+    /**
+     * @return the fixingDate
+     */
+    public FixingDate getFixingDate() {
+        return fixingDate;
+    }
+
+    /**
+     * @param fixingDate the fixingDate to set
+     */
+    public void setFixingDate(FixingDate fixingDate) {
+        this.fixingDate = fixingDate;
     }
 
     /**
@@ -207,20 +236,6 @@ public class Bond extends Asset implements Serializable {
      */
     public void setFaceValue(Double faceValue) {
         this.faceValue = faceValue;
-    }
-
-    /**
-     * @return the amortizing
-     */
-    public Boolean getAmortizing() {
-        return amortizing;
-    }
-
-    /**
-     * @return the callable
-     */
-    public Boolean getCallable() {
-        return callable;
     }
 
 }
