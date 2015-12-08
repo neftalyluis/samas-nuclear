@@ -24,7 +24,7 @@ import javax.persistence.Temporal;
  * @author neftaly
  */
 @Entity
-public class Bond extends Asset implements Serializable {
+public class BondFixed extends Bond implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -58,7 +58,7 @@ public class Bond extends Asset implements Serializable {
     private List<CashflowDate> cashflowDates;
     private Boolean callable;
 
-    public Bond() {
+    public BondFixed() {
         this.cashflowDates = new LinkedList<>();
     }
 
@@ -85,8 +85,8 @@ public class Bond extends Asset implements Serializable {
         if (!(object instanceof Bond)) {
             return false;
         }
-        Bond other = (Bond) object;
-        if ((this.getId() == null && other.getId() != null) || (this.getId() != null && !this.id.equals(other.id))) {
+        BondFixed other = (BondFixed) object;
+        if ((this.getId() == null && other.id != null) || (this.getId() != null && !this.id.equals(other.id))) {
             return false;
         }
         return true;
