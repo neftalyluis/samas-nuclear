@@ -672,6 +672,7 @@ public class PortfolioManagerBean implements PortfolioManagerLocal {
             Query q = em.createQuery("SELECT c FROM Client c");
             return q.getResultList();
         } catch (Exception e) {
+            e.printStackTrace();
             return null;
         }
     }
