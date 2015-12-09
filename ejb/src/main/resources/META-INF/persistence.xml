@@ -13,6 +13,9 @@
     <class>mx.samas.ejb.entities.RatingAgency</class>
     <class>mx.samas.ejb.entities.AssetType</class>
     <class>mx.samas.ejb.entities.AssetProperties</class>
+    <class>mx.samas.ejb.entities.NewAsset</class>
+    <class>mx.samas.ejb.entities.NewAssetProperty</class>
+    <class>mx.samas.ejb.entities.NewAssetValue</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.schema-generation.database.action" value="create"/>

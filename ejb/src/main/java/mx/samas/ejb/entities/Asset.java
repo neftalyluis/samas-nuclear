@@ -61,6 +61,7 @@ public class Asset implements Serializable {
     
     @ManyToOne
     private SettlementTimes settlementTimes;
+    
     @OneToMany(mappedBy = "asset", cascade = CascadeType.ALL)
     private List<AssetVector> vectors;
 
