@@ -24,7 +24,6 @@ public class NewAssetProperty implements Serializable {
     
     private String name;
     private String description;
-    
     private String type;
 
     public Long getId() {

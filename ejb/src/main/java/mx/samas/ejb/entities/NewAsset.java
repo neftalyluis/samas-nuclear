@@ -23,15 +23,7 @@ public class NewAsset implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String ticker;
     private String name;
-//    @ManyToOne
-//    private Issuer issuer;
-//    private String series;
-//    private String isin;
-//
-//    @OneToMany(mappedBy = "asset", cascade = CascadeType.ALL)
-//    private List<AssetVector> vectors;
 
 
     public Long getId() {
@@ -65,20 +57,6 @@ public class NewAsset implements Serializable {
     @Override
     public String toString() {
         return "mx.samas.ejb.entities.NewAsset[ id=" + id + " ]";
-    }
-
-    /**
-     * @return the ticker
-     */
-    public String getTicker() {
-        return ticker;
-    }
-
-    /**
-     * @param ticker the ticker to set
-     */
-    public void setTicker(String ticker) {
-        this.ticker = ticker;
     }
 
     /**
