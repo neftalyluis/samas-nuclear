@@ -16,24 +16,24 @@ import javax.persistence.ManyToOne;
 /**
  *
  * @author neftaly
- * @param <T>
  */
 @Entity
-public class NewAssetValue<T> implements Serializable {
+public class AssetValue implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
+
     @ManyToOne
-    private NewAssetProperty property;
-    
+    private AssetProperty property;
+
     @ManyToOne
-    private NewAsset asset;
-    
+    private Asset asset;
+
     @Lob
-    private Class<T> objectValue;
-    
+    private Serializable objectValue;
+
     public Long getId() {
         return id;
     }
@@ -52,10 +52,10 @@ public class NewAssetValue<T> implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof NewAssetValue)) {
+        if (!(object instanceof AssetValue)) {
             return false;
         }
-        NewAssetValue other = (NewAssetValue) object;
+        AssetValue other = (AssetValue) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -70,47 +70,43 @@ public class NewAssetValue<T> implements Serializable {
     /**
      * @return the property
      */
-    public NewAssetProperty getProperty() {
+    public AssetProperty getProperty() {
         return property;
     }
 
     /**
      * @param property the property to set
      */
-    public void setProperty(NewAssetProperty property) {
+    public void setProperty(AssetProperty property) {
         this.property = property;
     }
 
     /**
      * @return the asset
      */
-    public NewAsset getAsset() {
+    public Asset getAsset() {
         return asset;
     }
 
     /**
      * @param asset the asset to set
      */
-    public void setAsset(NewAsset asset) {
+    public void setAsset(Asset asset) {
         this.asset = asset;
     }
 
     /**
      * @return the objectValue
      */
-    public Class<T> getObjectValue() {
+    public Serializable getObjectValue() {
         return objectValue;
     }
 
     /**
      * @param objectValue the objectValue to set
      */
-    public void setObjectValue(Class<T> objectValue) {
+    public void setObjectValue(Serializable objectValue) {
         this.objectValue = objectValue;
     }
 
-
-
-
-    
 }

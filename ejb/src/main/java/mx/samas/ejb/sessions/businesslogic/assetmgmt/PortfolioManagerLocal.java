@@ -7,13 +7,8 @@ package mx.samas.ejb.sessions.businesslogic.assetmgmt;
 
 import java.util.List;
 import mx.samas.ejb.entities.Asset;
-import mx.samas.ejb.entities.AssetVector;
-import mx.samas.ejb.entities.Client;
-import mx.samas.ejb.entities.PortfolioVector;
-import mx.samas.ejb.entities.RiskProfile;
-import mx.samas.ejb.entities.SliceVector;
-import mx.samas.ejb.entities.Strategy;
-import mx.samas.ejb.entities.Transaction;
+import mx.samas.ejb.entities.AssetProperty;
+import mx.samas.ejb.entities.AssetValue;
 
 /**
  *
@@ -21,50 +16,20 @@ import mx.samas.ejb.entities.Transaction;
  */
 public interface PortfolioManagerLocal {
 
-    public String test(String a);
+    String test(String a);
 
-    boolean createStrategy(Strategy s);
+    Boolean createAsset(Asset a);
 
-    List<Strategy> getStrategyList();
+    Boolean createProperty(AssetProperty ap);
 
-    List<RiskProfile> getRiskProfileList();
+    Boolean createAssetValue(AssetProperty ap, AssetValue av, Asset a);
 
-    Boolean doEverything();
+    Boolean asignValuetoAsset(Asset a, AssetProperty ap, AssetValue av);
 
-    Boolean makeMyStrategy();
+    List<AssetProperty> getProperties();
 
-    Boolean makePortfolio();
+    List<AssetValue> getValues();
 
-    List<AssetVector> getPricesBetweenDates(Asset a);
-
-    Boolean makeThreePortfoliosWithDiffMoney();
-
-    List<Transaction> getAllTransactions();
-
-    //Metodos basicos para crear un portafolio y hacerle un "bootstrap"
-    Strategy createStrategy(List<SliceVector> lsv, String name, RiskProfile rk);
-
-    PortfolioVector createPortfolioVector(Strategy s);
-
-    Boolean depositMoneyToPortfolio(PortfolioVector pv, Double money);
-
-    Boolean firstTimePortfolioPurchase(PortfolioVector pv);
-
-    Asset getAssetByTicker(String ticker);
-
-    //Metodos para hacer y que van despues del proceso anterior
-    void rebalance();
-
-    Boolean buyAsset(Asset a, Long quantity, PortfolioVector pv);
-
-    Boolean sellAsset(Asset a, Long quantity, PortfolioVector pv);
-
-    SliceVector createSliceVector();
-
-    Boolean setRevenue(Double flux, PortfolioVector pv);
-
-    Boolean createClient(Client c);
-
-    List<Client> getClients();
+    Boolean createAssetWithProps(List<AssetProperty> lap, List<AssetValue> lav, Asset a);
 
 }

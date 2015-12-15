@@ -27,7 +27,7 @@ public class EquityShareFactor implements Serializable {
     private Long id;
 
     @ManyToOne
-    private Bond bond;
+    private Asset bond;
 
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Date dateTime;
@@ -67,19 +67,7 @@ public class EquityShareFactor implements Serializable {
         return "mx.samas.entities.CorporateAction[ id=" + id + " ]";
     }
 
-    /**
-     * @return the bond
-     */
-    public Bond getBond() {
-        return bond;
-    }
 
-    /**
-     * @param bond the bond to set
-     */
-    public void setBond(Bond bond) {
-        this.bond = bond;
-    }
 
     /**
      * @return the dateTime

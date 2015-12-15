@@ -27,7 +27,7 @@ public class CashflowDate implements Serializable {
     private Long id;
 
     @ManyToOne
-    private Bond bond;
+    private Asset bond;
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date payDate;
     /**
@@ -68,19 +68,7 @@ public class CashflowDate implements Serializable {
         return "mx.samas.entities.CouponDate[ id=" + id + " ]";
     }
 
-    /**
-     * @return the bond
-     */
-    public Bond getBond() {
-        return bond;
-    }
 
-    /**
-     * @param bond the bond to set
-     */
-    public void setBond(Bond bond) {
-        this.bond = bond;
-    }
 
     /**
      * @return the payDate

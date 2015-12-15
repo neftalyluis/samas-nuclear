@@ -26,7 +26,7 @@ public class FixingDate implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ManyToOne
-    private Bond bond;
+    private Asset bond;
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date fixingDate;
 
@@ -61,20 +61,6 @@ public class FixingDate implements Serializable {
     @Override
     public String toString() {
         return "mx.samas.entities.FixingDate[ id=" + id + " ]";
-    }
-
-    /**
-     * @return the bond
-     */
-    public Bond getBond() {
-        return bond;
-    }
-
-    /**
-     * @param bond the bond to set
-     */
-    public void setBond(Bond bond) {
-        this.bond = bond;
     }
 
     /**

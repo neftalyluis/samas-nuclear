@@ -7,13 +7,8 @@ package mx.samas.ejb.sessions.businesslogic.assetmgmt;
 
 import java.util.List;
 import mx.samas.ejb.entities.Asset;
-import mx.samas.ejb.entities.AssetVector;
-import mx.samas.ejb.entities.Client;
-import mx.samas.ejb.entities.PortfolioVector;
-import mx.samas.ejb.entities.RiskProfile;
-import mx.samas.ejb.entities.SliceVector;
-import mx.samas.ejb.entities.Strategy;
-import mx.samas.ejb.entities.Transaction;
+import mx.samas.ejb.entities.AssetProperty;
+import mx.samas.ejb.entities.AssetValue;
 
 /**
  *
@@ -21,48 +16,19 @@ import mx.samas.ejb.entities.Transaction;
  */
 public interface PortfolioManagerRemote {
 
-    public boolean createStrategy(Strategy s);
-
     public String test(String a);
-    
-    public List<RiskProfile> getRiskProfileList(); 
 
-    public List<Strategy> getStrategyList();
+    public Boolean createAsset(Asset a);
 
-    public Boolean doEverything();
+    public Boolean createProperty(AssetProperty ap);
 
-    public Boolean makeMyStrategy();
+    public Boolean createAssetValue(AssetProperty ap, AssetValue av, Asset a);
 
-    public Boolean makePortfolio();
+    public Boolean asignValuetoAsset(Asset a, AssetProperty ap, AssetValue av);
 
-    public List<AssetVector> getPricesBetweenDates(Asset a);
+    public List<AssetProperty> getProperties();
 
-    public Boolean makeThreePortfoliosWithDiffMoney();
+    public List<AssetValue> getValues();
 
-    public List<Transaction> getAllTransactions();
-
-    //Metodos basicos para crear un portafolio y hacerle un "bootstrap"
-    public Strategy createStrategy(List<SliceVector> lsv, String name, RiskProfile rk);
-
-    public PortfolioVector createPortfolioVector(Strategy s);
-
-    public Boolean depositMoneyToPortfolio(PortfolioVector pv, Double money);
-
-    public Boolean firstTimePortfolioPurchase(PortfolioVector pv);
-
-    public Asset getAssetByTicker(String ticker);
-
-    //Metodos para hacer y que van despues del proceso anterior
-    public void rebalance();
-
-    public Boolean buyAsset(Asset a, Long quantity, PortfolioVector pv);
-
-    public Boolean sellAsset(Asset a, Long quantity, PortfolioVector pv);
-
-    public Boolean setRevenue(Double flux, PortfolioVector pv);
-
-    public Boolean createClient(Client c);
-
-    public List<Client> getClients();
-
+    public Boolean createAssetWithProps(List<AssetProperty> lap, List<AssetValue> lav, Asset a);
 }

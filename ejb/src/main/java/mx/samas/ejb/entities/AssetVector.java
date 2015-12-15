@@ -25,8 +25,10 @@ public class AssetVector implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Date dateTime;
+    
     @ManyToOne
     private Asset asset;
     private Double cleanPrice;
