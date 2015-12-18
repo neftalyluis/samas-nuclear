@@ -19,6 +19,7 @@
     <class>mx.samas.ejb.entities.Bond</class>
     <class>mx.samas.ejb.entities.Derivative</class>
     <class>mx.samas.ejb.entities.Currency</class>
+    <class>mx.samas.ejb.entities.BondCollateral</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.schema-generation.database.action" value="create"/>

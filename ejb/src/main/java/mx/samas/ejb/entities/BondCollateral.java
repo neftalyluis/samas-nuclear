@@ -16,10 +16,10 @@ import javax.persistence.Id;
  * @author neftaly
  */
 @Entity
-public class Derivative extends Asset implements Serializable {
+public class BondCollateral implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     public Long getId() {
@@ -40,10 +40,10 @@ public class Derivative extends Asset implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Derivative)) {
+        if (!(object instanceof BondCollateral)) {
             return false;
         }
-        Derivative other = (Derivative) object;
+        BondCollateral other = (BondCollateral) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -52,7 +52,7 @@ public class Derivative extends Asset implements Serializable {
 
     @Override
     public String toString() {
-        return "mx.samas.ejb.entities.Derivative[ id=" + id + " ]";
+        return "mx.samas.ejb.entities.BondCollateral[ id=" + id + " ]";
     }
     
 }
