@@ -37,12 +37,17 @@ public class Asset implements Serializable {
 
     @ManyToOne
     private SecurityClass securityClass;
+    
     @ManyToOne
     private Ticker ticker;
+    
     @ManyToOne
     private Issuer issuer;
+    
     private String series;
+    
     private String isin;
+    
     @ManyToOne
     private DenominatorCurrency currencyDenomination;
 

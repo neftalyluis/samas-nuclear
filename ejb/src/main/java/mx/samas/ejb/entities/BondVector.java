@@ -6,10 +6,12 @@
 package mx.samas.ejb.entities;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 
 /**
  *
@@ -32,10 +34,18 @@ public class BondVector extends AssetVector implements Serializable {
      */
     private Double spread;
     private Double amountOutstanding;
+    
+    /**
+     * Checar la migracion de calificaciones a Entidades, tucán
+     */
     private String gradeMoodys;
     private String gradeSP;
     private String gradeHR;
     private String gradeFitch;
+    
+    @ManyToMany
+    private List<RatingGrade> ratings;
+    
     private Double faceValue;
 
     public Long getId() {

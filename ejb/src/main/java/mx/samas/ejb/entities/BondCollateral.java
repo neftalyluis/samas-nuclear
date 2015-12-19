@@ -17,10 +17,14 @@ import javax.persistence.Id;
  */
 @Entity
 public class BondCollateral implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
+    private String name;
+    private Boolean collateral;
 
     public Long getId() {
         return id;
@@ -54,5 +58,33 @@ public class BondCollateral implements Serializable {
     public String toString() {
         return "mx.samas.ejb.entities.BondCollateral[ id=" + id + " ]";
     }
-    
+
+    /**
+     * @return the name
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * @param name the name to set
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    /**
+     * @return the collateral
+     */
+    public Boolean getCollateral() {
+        return collateral;
+    }
+
+    /**
+     * @param collateral the collateral to set
+     */
+    public void setCollateral(Boolean collateral) {
+        this.collateral = collateral;
+    }
+
 }

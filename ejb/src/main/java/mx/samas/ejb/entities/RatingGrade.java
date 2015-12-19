@@ -10,7 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 
 /**
  *
@@ -24,8 +24,9 @@ public class RatingGrade implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    @OneToOne
+    @ManyToOne
     private RatingAgency agency;
+    
     private String grade;
 
     public Long getId() {
@@ -61,31 +62,4 @@ public class RatingGrade implements Serializable {
         return "mx.samas.ejb.entities.CreditRating[ id=" + getId() + " ]";
     }    
 
-    /**
-     * @return the agency
-     */
-    public RatingAgency getAgency() {
-        return agency;
-    }
-
-    /**
-     * @param agency the agency to set
-     */
-    public void setAgency(RatingAgency agency) {
-        this.agency = agency;
-    }
-
-    /**
-     * @return the grade
-     */
-    public String getGrade() {
-        return grade;
-    }
-
-    /**
-     * @param grade the grade to set
-     */
-    public void setGrade(String grade) {
-        this.grade = grade;
-    }
 }

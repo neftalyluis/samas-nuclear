@@ -7,10 +7,15 @@ package mx.samas.ejb.entities;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 
 /**
@@ -19,28 +24,37 @@ import javax.persistence.Temporal;
  */
 @Entity
 public class Bond extends Asset implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
+
     private Double spreadFixed;
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date maturityDate;
-    private CashflowDate cashflowDates;
+    @OneToMany(mappedBy = "bond", cascade = CascadeType.ALL)
+    private List<CashflowDate> cashflowDates;
+
+    @OneToOne
     private DayCount dayCount;
-    private DenominatorCurrency currencyDenomination;
+
+    @ManyToOne
+    private ReferenceRate referenceRate;
+
+    @OneToOne
+    private TermStructure termStructure;
     
     /**
      * Propiedades Distintivas
      */
     private Boolean callable;
     private Boolean amortizing;
-    //Falta definir BondCollateral
+    @ManyToOne
     private BondCollateral collateralized;
-    private TermStructure termStructure;
-    
-    
+    private Boolean convertible;
+    private Boolean taxable;
+
     public Long getId() {
         return id;
     }
@@ -103,20 +117,6 @@ public class Bond extends Asset implements Serializable {
     }
 
     /**
-     * @return the cashflowDates
-     */
-    public CashflowDate getCashflowDates() {
-        return cashflowDates;
-    }
-
-    /**
-     * @param cashflowDates the cashflowDates to set
-     */
-    public void setCashflowDates(CashflowDate cashflowDates) {
-        this.cashflowDates = cashflowDates;
-    }
-
-    /**
      * @return the dayCount
      */
     public DayCount getDayCount() {
@@ -128,20 +128,6 @@ public class Bond extends Asset implements Serializable {
      */
     public void setDayCount(DayCount dayCount) {
         this.dayCount = dayCount;
-    }
-
-    /**
-     * @return the currencyDenomination
-     */
-    public DenominatorCurrency getCurrencyDenomination() {
-        return currencyDenomination;
-    }
-
-    /**
-     * @param currencyDenomination the currencyDenomination to set
-     */
-    public void setCurrencyDenomination(DenominatorCurrency currencyDenomination) {
-        this.currencyDenomination = currencyDenomination;
     }
 
     /**
@@ -199,5 +185,61 @@ public class Bond extends Asset implements Serializable {
     public void setTermStructure(TermStructure termStructure) {
         this.termStructure = termStructure;
     }
-    
+
+    /**
+     * @return the cashflowDates
+     */
+    public List<CashflowDate> getCashflowDates() {
+        return cashflowDates;
+    }
+
+    /**
+     * @param cashflowDates the cashflowDates to set
+     */
+    public void setCashflowDates(List<CashflowDate> cashflowDates) {
+        this.cashflowDates = cashflowDates;
+    }
+
+    /**
+     * @return the convertible
+     */
+    public Boolean getConvertible() {
+        return convertible;
+    }
+
+    /**
+     * @param convertible the convertible to set
+     */
+    public void setConvertible(Boolean convertible) {
+        this.convertible = convertible;
+    }
+
+    /**
+     * @return the referenceRate
+     */
+    public ReferenceRate getReferenceRate() {
+        return referenceRate;
+    }
+
+    /**
+     * @param referenceRate the referenceRate to set
+     */
+    public void setReferenceRate(ReferenceRate referenceRate) {
+        this.referenceRate = referenceRate;
+    }
+
+    /**
+     * @return the taxable
+     */
+    public Boolean getTaxable() {
+        return taxable;
+    }
+
+    /**
+     * @param taxable the taxable to set
+     */
+    public void setTaxable(Boolean taxable) {
+        this.taxable = taxable;
+    }
+
 }
