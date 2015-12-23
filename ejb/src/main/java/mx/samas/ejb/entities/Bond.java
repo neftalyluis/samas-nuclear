@@ -52,12 +52,12 @@ public class Bond extends Asset implements Serializable {
     /**
      * Propiedades Distintivas  <= Recuerda que estas van en AssetProperty.java
      */
-    private Boolean callable;
-    private Boolean amortizing;
-    @ManyToOne
-    private BondCollateral collateralized;
-    private Boolean convertible;
-    private Boolean taxable;
+//    private Boolean callable;
+//    private Boolean amortizing;
+//    @ManyToOne
+//    private BondCollateral collateralized;
+//    private Boolean convertible;
+//    private Boolean taxable;
     
     /* Para todas estas propiedades que se declaran, veamos cómo autogenerar un
     campo booleano de estas: por ejemplo, si le declaras a un bono un impuesto
@@ -150,48 +150,6 @@ public class Bond extends Asset implements Serializable {
     }
 
     /**
-     * @return the callable
-     */
-    public Boolean getCallable() {
-        return callable;
-    }
-
-    /**
-     * @param callable the callable to set
-     */
-    public void setCallable(Boolean callable) {
-        this.callable = callable;
-    }
-
-    /**
-     * @return the amortizing
-     */
-    public Boolean getAmortizing() {
-        return amortizing;
-    }
-
-    /**
-     * @param amortizing the amortizing to set
-     */
-    public void setAmortizing(Boolean amortizing) {
-        this.amortizing = amortizing;
-    }
-
-    /**
-     * @return the collateralized
-     */
-    public BondCollateral getCollateralized() {
-        return collateralized;
-    }
-
-    /**
-     * @param collateralized the collateralized to set
-     */
-    public void setCollateralized(BondCollateral collateralized) {
-        this.collateralized = collateralized;
-    }
-
-    /**
      * @return the termStructure
      */
     public TermStructure getTermStructure() {
@@ -219,19 +177,6 @@ public class Bond extends Asset implements Serializable {
         this.cashflowDate = cashflowDate;
     }
 
-    /**
-     * @return the convertible
-     */
-    public Boolean getConvertible() {
-        return convertible;
-    }
-
-    /**
-     * @param convertible the convertible to set
-     */
-    public void setConvertible(Boolean convertible) {
-        this.convertible = convertible;
-    }
 
     /**
      * @return the referenceRate
@@ -247,18 +192,5 @@ public class Bond extends Asset implements Serializable {
         this.referenceRate = referenceRate;
     }
 
-    /**
-     * @return the taxable
-     */
-    public Boolean getTaxable() {
-        return taxable;
-    }
-
-    /**
-     * @param taxable the taxable to set
-     */
-    public void setTaxable(Boolean taxable) {
-        this.taxable = taxable;
-    }
 
 }

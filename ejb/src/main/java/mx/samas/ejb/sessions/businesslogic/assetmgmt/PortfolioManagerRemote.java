@@ -7,8 +7,8 @@ package mx.samas.ejb.sessions.businesslogic.assetmgmt;
 
 import java.util.List;
 import mx.samas.ejb.entities.Asset;
-import mx.samas.ejb.entities.AssetProperty;
-import mx.samas.ejb.entities.AssetValue;
+import mx.samas.ejb.entities.AssetPropertyType;
+import mx.samas.ejb.entities.AssetPropertyValue;
 
 /**
  *
@@ -20,15 +20,15 @@ public interface PortfolioManagerRemote {
 
     public Boolean createAsset(Asset a);
 
-    public Boolean createProperty(AssetProperty ap);
+    public Boolean createProperty(AssetPropertyType ap);
 
-    public Boolean createAssetValue(AssetProperty ap, AssetValue av, Asset a);
+    public Boolean createAssetValue(AssetPropertyType ap, AssetPropertyValue av, Asset a);
 
-    public Boolean asignValuetoAsset(Asset a, AssetProperty ap, AssetValue av);
+    public Boolean asignValuetoAsset(Asset a, AssetPropertyType ap, AssetPropertyValue av);
 
-    public List<AssetProperty> getProperties();
+    public List<AssetPropertyType> getProperties();
 
-    public List<AssetValue> getValues();
+    public List<AssetPropertyValue> getValues();
 
-    public Boolean createAssetWithProps(List<AssetProperty> lap, List<AssetValue> lav, Asset a);
+    public Boolean createAssetWithProps(List<AssetPropertyType> lap, List<AssetPropertyValue> lav, Asset a);
 }

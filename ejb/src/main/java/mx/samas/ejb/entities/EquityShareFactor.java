@@ -17,6 +17,8 @@ import javax.persistence.Temporal;
 /**
  *
  * @author neftaly
+ *
+ *
  */
 @Entity
 public class EquityShareFactor implements Serializable {
@@ -27,12 +29,35 @@ public class EquityShareFactor implements Serializable {
     private Long id;
 
     @ManyToOne
-    private Asset bond;
+    private Equity equity;
 
-    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date dateTime;
-
-    private Double factor;
+    /**
+     * Si Split
+     * 
+     *      Q_0::Int * factor::Int = Q_1::Int 
+     * 
+     * Si Accretion 
+     * 
+     *      Q_0::Int / factor::Int = Q_1::Int
+     * 
+     * Si Dividend
+     *      
+     *      precio_0 + factor = precio_1
+     * 
+     * 
+     
+     */
+    private Long factor; 
+    
+    /** si !isFactor => Dividendo
+     * en su caso, no se ajustan títulos, sino precio_t-1 (precio cierre)
+     * Esto es en la aplicación.
+    */
+    
+    private String factorType; // = {Split, Accretion, Dividend}
+    private Long dividend;
 
     public Long getId() {
         return id;
@@ -67,8 +92,6 @@ public class EquityShareFactor implements Serializable {
         return "mx.samas.entities.CorporateAction[ id=" + id + " ]";
     }
 
-
-
     /**
      * @return the dateTime
      */
@@ -84,17 +107,60 @@ public class EquityShareFactor implements Serializable {
     }
 
     /**
+     * @return the equity
+     */
+    public Equity getEquity() {
+        return equity;
+    }
+
+    /**
+     * @param equity the equity to set
+     */
+    public void setEquity(Equity equity) {
+        this.equity = equity;
+    }
+
+    /**
      * @return the factor
      */
-    public Double getFactor() {
+    public Long getFactor() {
         return factor;
     }
 
     /**
      * @param factor the factor to set
      */
-    public void setFactor(Double factor) {
+    public void setFactor(Long factor) {
         this.factor = factor;
     }
+
+    /**
+     * @return the factorType
+     */
+    public String getFactorType() {
+        return factorType;
+    }
+
+    /**
+     * @param factorType the factorType to set
+     */
+    public void setFactorType(String factorType) {
+        this.factorType = factorType;
+    }
+
+    /**
+     * @return the dividend
+     */
+    public Long getDividend() {
+        return dividend;
+    }
+
+    /**
+     * @param dividend the dividend to set
+     */
+    public void setDividend(Long dividend) {
+        this.dividend = dividend;
+    }
+
 
 }

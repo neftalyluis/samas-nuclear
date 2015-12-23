@@ -24,7 +24,7 @@ public class DenominatorCurrency implements Serializable {
     private Long id;
     
     @OneToOne
-    private Asset currency;
+    private Currency currency;
     
 
     public Long getId() {
@@ -58,6 +58,20 @@ public class DenominatorCurrency implements Serializable {
     @Override
     public String toString() {
         return "mx.samas.ejb.entities.DenominatorCurrency[ id=" + id + " ]";
+    }
+
+    /**
+     * @return the currency
+     */
+    public Currency getCurrency() {
+        return currency;
+    }
+
+    /**
+     * @param currency the currency to set
+     */
+    public void setCurrency(Currency currency) {
+        this.currency = currency;
     }
 
     

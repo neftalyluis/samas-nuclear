@@ -12,8 +12,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 /**
+ * Aplicacion Normativa
  *
- * @author neftaly
+ * @author neftaly Esto se refiere al DayCount Convention existentes para cada
+ * Bono, referirse a la documentacion de MATLAB estos son para los metodos de
+ * calculo de metodos
  */
 @Entity
 public class DayCount implements Serializable {

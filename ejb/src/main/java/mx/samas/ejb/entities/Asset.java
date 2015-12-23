@@ -25,8 +25,10 @@ import javax.persistence.OneToMany;
  *
  *
  */
+
+// Convectir a Abstracto
 @Entity
-public class Asset implements Serializable {
+public abstract class Asset implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -50,6 +52,11 @@ public class Asset implements Serializable {
     
     @ManyToOne
     private DenominatorCurrency currencyDenomination;
+    
+    /**
+     * Si es verdadero, entonces se asocia ese asset a una comision (pasiva::Broker y activa::Client)
+     */    
+    private Boolean comission;
 
     /**
      * "tickSize" es lo que viene siendo la "puja"
@@ -241,6 +248,20 @@ public class Asset implements Serializable {
      */
     public void setVectors(List<AssetVector> vectors) {
         this.vectors = vectors;
+    }
+
+    /**
+     * @return the comission
+     */
+    public Boolean getComission() {
+        return comission;
+    }
+
+    /**
+     * @param comission the comission to set
+     */
+    public void setComission(Boolean comission) {
+        this.comission = comission;
     }
 
 }

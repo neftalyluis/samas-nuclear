@@ -16,10 +16,12 @@ import javax.persistence.Temporal;
 
 /**
  *
- * @author neftaly
+ * @author neftaly Accrual acumula en el proceso de cierre y es en función a la
+ * posición del dia que devengan impuestos, comisiones y/o solicitudes del
+ * cliente como lo expresa el PositionVector de ese día .
  */
 @Entity
-public class BusinessAccrual implements Serializable {
+public class Accrual implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -28,23 +30,22 @@ public class BusinessAccrual implements Serializable {
 
     private Double amount;
 
-    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date dateTime;
 
     @ManyToOne
     private PortfolioAccount contract;
 
+    /**
+     * Los dueños de AccrualType Gobierno.- Impuestos; Negocio.- Comisiones;
+     * Cliente.-Solicitudes de liquidez
+     *
+     */
     @ManyToOne
-    private Asset asset;
-
+    private TransactionSource accrualOwner;
+    
     @ManyToOne
-    private Broker broker;
-
-    @ManyToOne
-    private Bank bank;
-
-    @ManyToOne
-    private AccrualType accrualType;
+    private DenominatorCurrency currencyDenomination;
 
     public Long getId() {
         return id;
@@ -64,10 +65,10 @@ public class BusinessAccrual implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof BusinessAccrual)) {
+        if (!(object instanceof Accrual)) {
             return false;
         }
-        BusinessAccrual other = (BusinessAccrual) object;
+        Accrual other = (Accrual) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -94,20 +95,6 @@ public class BusinessAccrual implements Serializable {
     }
 
     /**
-     * @return the dateTime
-     */
-    public Date getDateTime() {
-        return dateTime;
-    }
-
-    /**
-     * @param dateTime the dateTime to set
-     */
-    public void setDateTime(Date dateTime) {
-        this.dateTime = dateTime;
-    }
-
-    /**
      * @return the contract
      */
     public PortfolioAccount getContract() {
@@ -122,59 +109,45 @@ public class BusinessAccrual implements Serializable {
     }
 
     /**
-     * @return the asset
+     * @return the accrualOwner
      */
-    public Asset getAsset() {
-        return asset;
+    public TransactionSource getAccrualOwner() {
+        return accrualOwner;
     }
 
     /**
-     * @param asset the asset to set
+     * @param accrualOwner the accrualOwner to set
      */
-    public void setAsset(Asset asset) {
-        this.asset = asset;
+    public void setAccrualOwner(TransactionSource accrualOwner) {
+        this.accrualOwner = accrualOwner;
     }
 
     /**
-     * @return the broker
+     * @return the dateTime
      */
-    public Broker getBroker() {
-        return broker;
+    public Date getDateTime() {
+        return dateTime;
     }
 
     /**
-     * @param broker the broker to set
+     * @param dateTime the dateTime to set
      */
-    public void setBroker(Broker broker) {
-        this.broker = broker;
+    public void setDateTime(Date dateTime) {
+        this.dateTime = dateTime;
     }
 
     /**
-     * @return the bank
+     * @return the currencyDenomination
      */
-    public Bank getBank() {
-        return bank;
+    public DenominatorCurrency getCurrencyDenomination() {
+        return currencyDenomination;
     }
 
     /**
-     * @param bank the bank to set
+     * @param currencyDenomination the currencyDenomination to set
      */
-    public void setBank(Bank bank) {
-        this.bank = bank;
-    }
-
-    /**
-     * @return the accrualType
-     */
-    public AccrualType getAccrualType() {
-        return accrualType;
-    }
-
-    /**
-     * @param accrualType the accrualType to set
-     */
-    public void setAccrualType(AccrualType accrualType) {
-        this.accrualType = accrualType;
+    public void setCurrencyDenomination(DenominatorCurrency currencyDenomination) {
+        this.currencyDenomination = currencyDenomination;
     }
 
 }

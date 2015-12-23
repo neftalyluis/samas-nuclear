@@ -17,8 +17,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import mx.samas.ejb.entities.Asset;
-import mx.samas.ejb.entities.AssetProperty;
-import mx.samas.ejb.entities.AssetValue;
+import mx.samas.ejb.entities.AssetPropertyType;
+import mx.samas.ejb.entities.AssetPropertyValue;
 
 /**
  *
@@ -53,7 +53,7 @@ public class PortfolioManagerBean implements PortfolioManagerLocal {
     }
 
     @Override
-    public Boolean createProperty(AssetProperty ap) {
+    public Boolean createProperty(AssetPropertyType ap) {
         try {
             em.persist(ap);
             return true;
@@ -64,7 +64,7 @@ public class PortfolioManagerBean implements PortfolioManagerLocal {
     }
 
     @Override
-    public Boolean createAssetValue(AssetProperty ap, AssetValue av, Asset a) {
+    public Boolean createAssetValue(AssetPropertyType ap, AssetPropertyValue av, Asset a) {
         try {
             em.persist(a);
             em.persist(ap);
@@ -77,12 +77,12 @@ public class PortfolioManagerBean implements PortfolioManagerLocal {
     }
 
     @Override
-    public Boolean asignValuetoAsset(Asset a, AssetProperty ap, AssetValue av) {
+    public Boolean asignValuetoAsset(Asset a, AssetPropertyType ap, AssetPropertyValue av) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public List<AssetProperty> getProperties() {
+    public List<AssetPropertyType> getProperties() {
         try {
             Query q = em.createQuery("SELECT ap FROM AssetProperty ap");
             return q.getResultList();
@@ -93,7 +93,7 @@ public class PortfolioManagerBean implements PortfolioManagerLocal {
     }
 
     @Override
-    public List<AssetValue> getValues() {
+    public List<AssetPropertyValue> getValues() {
         try {
             Query q = em.createQuery("SELECT av FROM AssetValue av");
             return q.getResultList();
@@ -104,16 +104,16 @@ public class PortfolioManagerBean implements PortfolioManagerLocal {
     }
 
     @Override
-    public Boolean createAssetWithProps(List<AssetProperty> lap, List<AssetValue> lav, Asset a) {
+    public Boolean createAssetWithProps(List<AssetPropertyType> lap, List<AssetPropertyValue> lav, Asset a) {
         try {
 
             em.persist(a);
 
-            for (AssetProperty ap : lap) {
+            for (AssetPropertyType ap : lap) {
                 em.persist(ap);
             }
 
-            for (AssetValue av : lav) {
+            for (AssetPropertyValue av : lav) {
                 em.persist(av);
             }
 

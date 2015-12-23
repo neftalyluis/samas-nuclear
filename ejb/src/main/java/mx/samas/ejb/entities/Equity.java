@@ -23,11 +23,16 @@ public class Equity extends Asset implements Serializable {
     private Long id;
     
     private Boolean privateMarket;
-    private Boolean fund;
+    
     /**
-     * Solo si fund es verdadero, sino NULL
+     * Propiedades distintivas
+     * @return 
      */
-    private Double fee;
+//    private Boolean fund;
+//    /**
+//     * Solo si fund es verdadero, sino NULL
+//     */
+//    private Double fee;
 
     public Long getId() {
         return id;
@@ -76,32 +81,5 @@ public class Equity extends Asset implements Serializable {
         this.privateMarket = privateMarket;
     }
 
-    /**
-     * @return the fund
-     */
-    public Boolean getFund() {
-        return fund;
-    }
-
-    /**
-     * @param fund the fund to set
-     */
-    public void setFund(Boolean fund) {
-        this.fund = fund;
-    }
-
-    /**
-     * @return the fee
-     */
-    public Double getFee() {
-        return fee;
-    }
-
-    /**
-     * @param fee the fee to set
-     */
-    public void setFee(Double fee) {
-        this.fee = fee;
-    }
     
 }

@@ -23,6 +23,8 @@ import javax.persistence.Temporal;
 //un cliente puede tener muchos portafolios en un contrato y que el pago de 
 //dividendo/cupon/rendimiento se asigna a cada portafolio en funcion de los 
 //titulos que tiene
+// * Si es discretionary, entonces comission es una comision devengada, sino
+// * es transaccional
 @Entity
 public class PortfolioVector implements Serializable {
 
@@ -45,8 +47,7 @@ public class PortfolioVector implements Serializable {
 
     private Double comission;
 
-    @ManyToOne
-    private ComissionType comissionType;
+    private Boolean discretionary;
 
     @ManyToOne
     private PortfolioStatus portfolioStatus;
@@ -140,19 +141,6 @@ public class PortfolioVector implements Serializable {
         this.contract = contract;
     }
 
-    /**
-     * @return the comissionType
-     */
-    public ComissionType getComissionType() {
-        return comissionType;
-    }
-
-    /**
-     * @param comissionType the comissionType to set
-     */
-    public void setComissionType(ComissionType comissionType) {
-        this.comissionType = comissionType;
-    }
 
     /**
      * @return the portfolioStatus
@@ -180,6 +168,20 @@ public class PortfolioVector implements Serializable {
      */
     public void setComission(Double comission) {
         this.comission = comission;
+    }
+
+    /**
+     * @return the discretionary
+     */
+    public Boolean getDiscretionary() {
+        return discretionary;
+    }
+
+    /**
+     * @param discretionary the discretionary to set
+     */
+    public void setDiscretionary(Boolean discretionary) {
+        this.discretionary = discretionary;
     }
 
 }

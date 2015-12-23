@@ -11,8 +11,8 @@ import java.util.LinkedList;
 import java.util.List;
 import static mx.samas.appclient.main.Main.pmr;
 import mx.samas.ejb.entities.Asset;
-import mx.samas.ejb.entities.AssetProperty;
-import mx.samas.ejb.entities.AssetValue;
+import mx.samas.ejb.entities.AssetPropertyType;
+import mx.samas.ejb.entities.AssetPropertyValue;
 
 /**
  *
@@ -24,11 +24,11 @@ public class AssetHandler {
         Asset a = new Asset();
         a.setName("Prueba, soy un Stock");
 
-        AssetProperty ap = new AssetProperty();
+        AssetPropertyType ap = new AssetPropertyType();
         ap.setName("TICKER");
         ap.setType("String");
 
-        AssetValue av = new AssetValue();
+        AssetPropertyValue av = new AssetPropertyValue();
         av.setProperty(ap);
         av.setAsset(a);
         String ti = "AAPL";
@@ -43,13 +43,13 @@ public class AssetHandler {
 
     public boolean secondTest() {
         try {
-            List<AssetProperty> lap = pmr.getProperties();
-            for (AssetProperty ap : lap) {
+            List<AssetPropertyType> lap = pmr.getProperties();
+            for (AssetPropertyType ap : lap) {
                 System.out.println(ap.getName() + ": " + ap.getType() + " :" + ap.getDescription());
             }
 
-            List<AssetValue> lav = pmr.getValues();
-            for (AssetValue av : lav) {
+            List<AssetPropertyValue> lav = pmr.getValues();
+            for (AssetPropertyValue av : lav) {
                 Serializable o = av.getObjectValue();
                 if (o instanceof String) {
                     String s = (String) o;
@@ -78,8 +78,8 @@ public class AssetHandler {
 
     public boolean thirdTest() {
 
-        List<AssetProperty> lap = new LinkedList<>();
-        List<AssetValue> lav = new LinkedList<>();
+        List<AssetPropertyType> lap = new LinkedList<>();
+        List<AssetPropertyValue> lav = new LinkedList<>();
 
         Double numero = 678.6789;
         Long otronumero = (long) 874512;
@@ -90,11 +90,11 @@ public class AssetHandler {
         Asset a = new Asset();
         a.setName("Prueba, soy otro Stock");
 
-        AssetProperty aps = new AssetProperty();
+        AssetPropertyType aps = new AssetPropertyType();
         aps.setName("TICKER");
         aps.setType("String");
 
-        AssetValue avs = new AssetValue();
+        AssetPropertyValue avs = new AssetPropertyValue();
         avs.setAsset(a);
         avs.setProperty(aps);
         avs.setObjectValue(cadena);
@@ -102,11 +102,11 @@ public class AssetHandler {
         lap.add(aps);
         lav.add(avs);
 
-        AssetProperty apd = new AssetProperty();
+        AssetPropertyType apd = new AssetPropertyType();
         apd.setName("FECHA");
         apd.setType("DATE");
 
-        AssetValue avd = new AssetValue();
+        AssetPropertyValue avd = new AssetPropertyValue();
         avd.setAsset(a);
         avd.setProperty(apd);
         avd.setObjectValue(fecha);
@@ -114,11 +114,11 @@ public class AssetHandler {
         lap.add(apd);
         lav.add(avd);
 
-        AssetProperty apdo = new AssetProperty();
+        AssetPropertyType apdo = new AssetPropertyType();
         apdo.setName("VALOR FLOTANTE");
         apdo.setType("DOUBLE");
 
-        AssetValue avdo = new AssetValue();
+        AssetPropertyValue avdo = new AssetPropertyValue();
         avdo.setAsset(a);
         avdo.setProperty(apdo);
         avdo.setObjectValue(numero);
@@ -126,11 +126,11 @@ public class AssetHandler {
         lap.add(apdo);
         lav.add(avdo);
 
-        AssetProperty apb = new AssetProperty();
+        AssetPropertyType apb = new AssetPropertyType();
         apb.setName("ESTA ACTIVO?");
         apb.setType("BOOLEAN");
 
-        AssetValue avb = new AssetValue();
+        AssetPropertyValue avb = new AssetPropertyValue();
         avb.setAsset(a);
         avb.setProperty(apb);
         avb.setObjectValue(boleano);
@@ -138,11 +138,11 @@ public class AssetHandler {
         lap.add(apb);
         lav.add(avb);
 
-        AssetProperty apl = new AssetProperty();
+        AssetPropertyType apl = new AssetPropertyType();
         apl.setName("CUANTOS?");
         apl.setType("LONG");
 
-        AssetValue avl = new AssetValue();
+        AssetPropertyValue avl = new AssetPropertyValue();
         avl.setAsset(a);
         avl.setProperty(apl);
         avl.setObjectValue(otronumero);

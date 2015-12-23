@@ -10,20 +10,29 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
 
 /**
  *
  * @author neftaly
  */
 @Entity
-public class AccrualType implements Serializable {
+public class AssetPropertyValue implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
+    @ManyToOne
+    private AssetPropertyType property;
+
+    @ManyToOne
+    private Asset asset;
+
+    @Lob
+    private Serializable objectValue;
 
     public Long getId() {
         return id;
@@ -43,10 +52,10 @@ public class AccrualType implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof AccrualType)) {
+        if (!(object instanceof AssetPropertyValue)) {
             return false;
         }
-        AccrualType other = (AccrualType) object;
+        AssetPropertyValue other = (AssetPropertyValue) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -55,21 +64,49 @@ public class AccrualType implements Serializable {
 
     @Override
     public String toString() {
-        return "mx.samas.entities.AccrualType[ id=" + id + " ]";
+        return "mx.samas.ejb.entities.NewAssetValues[ id=" + id + " ]";
     }
 
     /**
-     * @return the name
+     * @return the property
      */
-    public String getName() {
-        return name;
+    public AssetPropertyType getProperty() {
+        return property;
     }
 
     /**
-     * @param name the name to set
+     * @param property the property to set
      */
-    public void setName(String name) {
-        this.name = name;
+    public void setProperty(AssetPropertyType property) {
+        this.property = property;
+    }
+
+    /**
+     * @return the asset
+     */
+    public Asset getAsset() {
+        return asset;
+    }
+
+    /**
+     * @param asset the asset to set
+     */
+    public void setAsset(Asset asset) {
+        this.asset = asset;
+    }
+
+    /**
+     * @return the objectValue
+     */
+    public Serializable getObjectValue() {
+        return objectValue;
+    }
+
+    /**
+     * @param objectValue the objectValue to set
+     */
+    public void setObjectValue(Serializable objectValue) {
+        this.objectValue = objectValue;
     }
 
 }

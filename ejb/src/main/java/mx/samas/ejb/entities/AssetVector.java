@@ -19,7 +19,7 @@ import javax.persistence.Temporal;
  * @author neftaly
  */
 @Entity
-public class AssetVector implements Serializable {
+public abstract class AssetVector implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id

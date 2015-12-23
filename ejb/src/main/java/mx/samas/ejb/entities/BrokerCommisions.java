@@ -10,22 +10,26 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 /**
  *
  * @author neftaly
  */
 @Entity
-public class BondCollateral implements Serializable {
-
+public class BrokerCommisions implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private String name;
-    private Boolean collateral;
+    @ManyToOne
+    private Broker broker;
+    
+    private Double transactionalComission;
 
+    private String assetType;
+    
     public Long getId() {
         return id;
     }
@@ -44,10 +48,10 @@ public class BondCollateral implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof BondCollateral)) {
+        if (!(object instanceof BrokerCommisions)) {
             return false;
         }
-        BondCollateral other = (BondCollateral) object;
+        BrokerCommisions other = (BrokerCommisions) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -56,35 +60,49 @@ public class BondCollateral implements Serializable {
 
     @Override
     public String toString() {
-        return "mx.samas.ejb.entities.BondCollateral[ id=" + id + " ]";
+        return "mx.samas.ejb.entities.BrokerCommisions[ id=" + id + " ]";
     }
 
     /**
-     * @return the name
+     * @return the broker
      */
-    public String getName() {
-        return name;
+    public Broker getBroker() {
+        return broker;
     }
 
     /**
-     * @param name the name to set
+     * @param broker the broker to set
      */
-    public void setName(String name) {
-        this.name = name;
+    public void setBroker(Broker broker) {
+        this.broker = broker;
     }
 
     /**
-     * @return the collateral
+     * @return the transactionalComission
      */
-    public Boolean getCollateral() {
-        return collateral;
+    public Double getTransactionalComission() {
+        return transactionalComission;
     }
 
     /**
-     * @param collateral the collateral to set
+     * @param transactionalComission the transactionalComission to set
      */
-    public void setCollateral(Boolean collateral) {
-        this.collateral = collateral;
+    public void setTransactionalComission(Double transactionalComission) {
+        this.transactionalComission = transactionalComission;
     }
 
+    /**
+     * @return the assetType
+     */
+    public String getAssetType() {
+        return assetType;
+    }
+
+    /**
+     * @param assetType the assetType to set
+     */
+    public void setAssetType(String assetType) {
+        this.assetType = assetType;
+    }
+    
 }

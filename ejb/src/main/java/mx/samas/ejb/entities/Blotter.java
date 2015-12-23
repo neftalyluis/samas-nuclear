@@ -12,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 
 /**
@@ -26,12 +27,19 @@ public class Blotter implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    /**
+     * 2.- Momento en el que se ejecuta la orden
+     */
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Date tradeDate;
-
-    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
+    /**
+     * 3.- Dia que se Liquida
+     */
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date settlementDate;
-
+    /**
+     * 1.- Momento que se (asenta) ingresa la orden
+     */
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Date inputDate;
 
@@ -46,7 +54,9 @@ public class Blotter implements Serializable {
 
     @ManyToOne
     private Transaction transaction;
-
+    /**
+     * Client Gvt Portfolio, osea quien dirige la transaccion.
+     */
     @ManyToOne
     private TransactionSource transactionSource;
 
@@ -56,14 +66,27 @@ public class Blotter implements Serializable {
 
     private Double cashFlow;
 
+    /**
+     * Comision de Cliente
+     */
     private Double activeComission;
 
+    /**
+     * A lo mejor instanciar la comision de broker
+     * 
+     */
     private Double passiveComission;
 
+    /**
+     * Flujo de titulos
+     */
     private Double quantityFlow;
 
     @ManyToOne
     private PortfolioAccount contract;
+
+    @OneToOne
+    private Market market;
 
     public Long getId() {
         return id;
@@ -306,6 +329,20 @@ public class Blotter implements Serializable {
      */
     public void setTransactionSource(TransactionSource transactionSource) {
         this.transactionSource = transactionSource;
+    }
+
+    /**
+     * @return the market
+     */
+    public Market getMarket() {
+        return market;
+    }
+
+    /**
+     * @param market the market to set
+     */
+    public void setMarket(Market market) {
+        this.market = market;
     }
 
 }
