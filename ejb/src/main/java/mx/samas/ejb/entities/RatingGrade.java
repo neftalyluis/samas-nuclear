@@ -20,6 +20,13 @@ import javax.persistence.ManyToOne;
 public class RatingGrade implements Serializable {
     private static final long serialVersionUID = 1L;
 
+    /**
+     * @return the serialVersionUID
+     */
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -61,5 +68,33 @@ public class RatingGrade implements Serializable {
     public String toString() {
         return "mx.samas.ejb.entities.CreditRating[ id=" + getId() + " ]";
     }    
+
+    /**
+     * @return the agency
+     */
+    public RatingAgency getAgency() {
+        return agency;
+    }
+
+    /**
+     * @param id
+     */
+    public void setAgency(RatingAgency id) {
+        this.agency = id;
+    }
+
+    /**
+     * @return the grade
+     */
+    public String getGrade() {
+        return grade;
+    }
+
+    /**
+     * @param grade the grade to set
+     */
+    public void setGrade(String grade) {
+        this.grade = grade;
+    }
 
 }

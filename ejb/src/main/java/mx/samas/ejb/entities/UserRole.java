@@ -10,21 +10,25 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 /**
  *
  * @author neftaly
- 
  */
 @Entity
-public class Fungible implements Serializable {
+public class UserRole implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
+    @ManyToOne
+    private User user;
+
+    @ManyToOne
+    private UserProfile profile;
 
     public Long getId() {
         return id;
@@ -44,10 +48,10 @@ public class Fungible implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Fungible)) {
+        if (!(object instanceof UserRole)) {
             return false;
         }
-        Fungible other = (Fungible) object;
+        UserRole other = (UserRole) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -56,21 +60,35 @@ public class Fungible implements Serializable {
 
     @Override
     public String toString() {
-        return "mx.samas.entities.Fungible[ id=" + id + " ]";
+        return "mx.samas.entities.Role[ id=" + id + " ]";
     }
 
     /**
-     * @return the name
+     * @return the user
      */
-    public String getName() {
-        return name;
+    public User getUser() {
+        return user;
     }
 
     /**
-     * @param name the name to set
+     * @param user the user to set
      */
-    public void setName(String name) {
-        this.name = name;
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    /**
+     * @return the profile
+     */
+    public UserProfile getProfile() {
+        return profile;
+    }
+
+    /**
+     * @param profile the profile to set
+     */
+    public void setProfile(UserProfile profile) {
+        this.profile = profile;
     }
 
 }

@@ -58,7 +58,7 @@ public class Blotter implements Serializable {
      * Client Gvt Portfolio, osea quien dirige la transaccion.
      */
     @ManyToOne
-    private TransactionSource transactionSource;
+    private SourceOwner transactionSource;
 
     private Long quantity;
 
@@ -320,14 +320,14 @@ public class Blotter implements Serializable {
     /**
      * @return the transactionSource
      */
-    public TransactionSource getTransactionSource() {
+    public SourceOwner getTransactionSource() {
         return transactionSource;
     }
 
     /**
      * @param transactionSource the transactionSource to set
      */
-    public void setTransactionSource(TransactionSource transactionSource) {
+    public void setTransactionSource(SourceOwner transactionSource) {
         this.transactionSource = transactionSource;
     }
 

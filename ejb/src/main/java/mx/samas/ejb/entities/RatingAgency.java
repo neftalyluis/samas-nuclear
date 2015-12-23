@@ -22,7 +22,7 @@ public class RatingAgency implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    private String code;
+    private String code; // ¿En lugar de nombre?
     private String description;
 
     public Long getId() {
