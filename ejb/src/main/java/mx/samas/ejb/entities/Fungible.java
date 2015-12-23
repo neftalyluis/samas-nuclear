@@ -14,6 +14,7 @@ import javax.persistence.Id;
 /**
  *
  * @author neftaly
+ 
  */
 @Entity
 public class Fungible implements Serializable {
