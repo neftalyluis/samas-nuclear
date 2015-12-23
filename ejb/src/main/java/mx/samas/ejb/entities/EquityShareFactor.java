@@ -24,6 +24,13 @@ import javax.persistence.Temporal;
 public class EquityShareFactor implements Serializable {
 
     private static final long serialVersionUID = 1L;
+
+    /**
+     * @return the serialVersionUID
+     */
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -51,13 +58,7 @@ public class EquityShareFactor implements Serializable {
      */
     private Long factor; 
     
-    /** si !isFactor => Dividendo
-     * en su caso, no se ajustan títulos, sino precio_t-1 (precio cierre)
-     * Esto es en la aplicación.
-    */
-    
     private String factorType; // = {Split, Accretion, Dividend}
-    private Long dividend;
 
     public Long getId() {
         return id;
@@ -70,7 +71,7 @@ public class EquityShareFactor implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        hash += (getId() != null ? getId().hashCode() : 0);
         return hash;
     }
 
@@ -81,7 +82,7 @@ public class EquityShareFactor implements Serializable {
             return false;
         }
         EquityShareFactor other = (EquityShareFactor) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if ((this.getId() == null && other.getId() != null) || (this.getId() != null && !this.id.equals(other.id))) {
             return false;
         }
         return true;
@@ -89,7 +90,7 @@ public class EquityShareFactor implements Serializable {
 
     @Override
     public String toString() {
-        return "mx.samas.entities.CorporateAction[ id=" + id + " ]";
+        return "mx.samas.entities.CorporateAction[ id=" + getId() + " ]";
     }
 
     /**
@@ -147,20 +148,4 @@ public class EquityShareFactor implements Serializable {
     public void setFactorType(String factorType) {
         this.factorType = factorType;
     }
-
-    /**
-     * @return the dividend
-     */
-    public Long getDividend() {
-        return dividend;
-    }
-
-    /**
-     * @param dividend the dividend to set
-     */
-    public void setDividend(Long dividend) {
-        this.dividend = dividend;
-    }
-
-
 }

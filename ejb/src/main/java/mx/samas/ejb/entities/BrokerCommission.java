@@ -17,7 +17,7 @@ import javax.persistence.ManyToOne;
  * @author neftaly
  */
 @Entity
-public class BrokerCommisions implements Serializable {
+public class BrokerCommission implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -26,7 +26,7 @@ public class BrokerCommisions implements Serializable {
     @ManyToOne
     private Broker broker;
     
-    private Double transactionalComission;
+    private Double transactionalCommission;
 
     private String assetType;
     
@@ -48,10 +48,10 @@ public class BrokerCommisions implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof BrokerCommisions)) {
+        if (!(object instanceof BrokerCommission)) {
             return false;
         }
-        BrokerCommisions other = (BrokerCommisions) object;
+        BrokerCommission other = (BrokerCommission) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -78,17 +78,17 @@ public class BrokerCommisions implements Serializable {
     }
 
     /**
-     * @return the transactionalComission
+     * @return the transactionalCommission
      */
-    public Double getTransactionalComission() {
-        return transactionalComission;
+    public Double getTransactionalCommission() {
+        return transactionalCommission;
     }
 
     /**
-     * @param transactionalComission the transactionalComission to set
+     * @param transactionalCommission the transactionalCommission to set
      */
-    public void setTransactionalComission(Double transactionalComission) {
-        this.transactionalComission = transactionalComission;
+    public void setTransactionalCommission(Double transactionalCommission) {
+        this.transactionalCommission = transactionalCommission;
     }
 
     /**
