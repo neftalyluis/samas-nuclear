@@ -27,7 +27,7 @@ public class LegalEntity implements Serializable {
     private Long id;
 
     private String name;
-//    private String fiscalDomicile; // Por ahora no lo usemos
+    private String fiscalDomicile;
     
     @OneToMany
     private List<RatingGrade> rating;
@@ -82,19 +82,19 @@ public class LegalEntity implements Serializable {
         this.name = name;
     }
 
-//    /**
-//     * @return the fiscalDomicile
-//     */
-//    public String getFiscalDomicile() {
-//        return fiscalDomicile;
-//    }
-//
-//    /**
-//     * @param fiscalDomicile the fiscalDomicile to set
-//     */
-//    public void setFiscalDomicile(String fiscalDomicile) {
-//        this.fiscalDomicile = fiscalDomicile;
-//    }
+    /**
+     * @return the fiscalDomicile
+     */
+    public String getFiscalDomicile() {
+        return fiscalDomicile;
+    }
+
+    /**
+     * @param fiscalDomicile the fiscalDomicile to set
+     */
+    public void setFiscalDomicile(String fiscalDomicile) {
+        this.fiscalDomicile = fiscalDomicile;
+    }
 
     /**
      * @return the rating

@@ -42,7 +42,7 @@ public class Accrual implements Serializable {
      *
      */
     @ManyToOne
-    private SourceOwner accrualOwner;
+    private TransactionSource accrualOwner;
     
     @ManyToOne
     private DenominatorCurrency currencyDenomination;
@@ -111,14 +111,14 @@ public class Accrual implements Serializable {
     /**
      * @return the accrualOwner
      */
-    public SourceOwner getAccrualOwner() {
+    public TransactionSource getAccrualOwner() {
         return accrualOwner;
     }
 
     /**
      * @param accrualOwner the accrualOwner to set
      */
-    public void setAccrualOwner(SourceOwner accrualOwner) {
+    public void setAccrualOwner(TransactionSource accrualOwner) {
         this.accrualOwner = accrualOwner;
     }
 

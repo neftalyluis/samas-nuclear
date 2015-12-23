@@ -16,15 +16,15 @@ import javax.persistence.Id;
  * @author neftaly
  */
 @Entity
-public class UserProfile implements Serializable {
+public class Profile implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String profileName;
-    private String profileID;
+    private String profilename;
+    private String profileid;
 
     public Long getId() {
         return id;
@@ -44,10 +44,10 @@ public class UserProfile implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof UserProfile)) {
+        if (!(object instanceof Profile)) {
             return false;
         }
-        UserProfile other = (UserProfile) object;
+        Profile other = (Profile) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -60,31 +60,31 @@ public class UserProfile implements Serializable {
     }
 
     /**
-     * @return the profileName
+     * @return the profilename
      */
-    public String getProfileName() {
-        return profileName;
+    public String getProfilename() {
+        return profilename;
     }
 
     /**
-     * @param profileName the profileName to set
+     * @param profilename the profilename to set
      */
-    public void setProfileName(String profileName) {
-        this.profileName = profileName;
+    public void setProfilename(String profilename) {
+        this.profilename = profilename;
     }
 
     /**
-     * @return the profileID
+     * @return the profileid
      */
-    public String getProfileID() {
-        return profileID;
+    public String getProfileid() {
+        return profileid;
     }
 
     /**
-     * @param profileID the profileID to set
+     * @param profileid the profileid to set
      */
-    public void setProfileID(String profileID) {
-        this.profileID = profileID;
+    public void setProfileid(String profileid) {
+        this.profileid = profileid;
     }
 
 }

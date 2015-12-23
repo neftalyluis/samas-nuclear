@@ -14,7 +14,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 
 /**
@@ -30,13 +29,6 @@ import javax.persistence.Temporal;
 public class PortfolioVector implements Serializable {
 
     private static final long serialVersionUID = 1L;
-
-    /**
-     * @return the serialVersionUID
-     */
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
-    }
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -47,17 +39,15 @@ public class PortfolioVector implements Serializable {
     @ManyToOne
     private Strategy strategy;
 
-    @Temporal(javax.persistence.TemporalType.DATE)
+    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Date dateTime;
 
     @ManyToOne
-    private PortfolioAccount accountNumber;
+    private PortfolioAccount contract;
 
-    @ManyToOne
-    private PortfolioAccount commission;
+    private Double comission;
 
-    @ManyToOne
-    private PortfolioAccount discretionary;
+    private Boolean discretionary;
 
     @ManyToOne
     private PortfolioStatus portfolioStatus;
@@ -73,7 +63,7 @@ public class PortfolioVector implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (getId() != null ? getId().hashCode() : 0);
+        hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
 
@@ -84,7 +74,7 @@ public class PortfolioVector implements Serializable {
             return false;
         }
         PortfolioVector other = (PortfolioVector) object;
-        if ((this.getId() == null && other.getId() != null) || (this.getId() != null && !this.id.equals(other.id))) {
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
         return true;
@@ -92,7 +82,7 @@ public class PortfolioVector implements Serializable {
 
     @Override
     public String toString() {
-        return "mx.samas.entities.Portfolio[ id=" + getId() + " ]";
+        return "mx.samas.entities.Portfolio[ id=" + id + " ]";
     }
 
     /**
@@ -138,17 +128,17 @@ public class PortfolioVector implements Serializable {
     }
 
     /**
-     * @return the accountNumber
+     * @return the contract
      */
     public PortfolioAccount getContract() {
-        return getAccountNumber();
+        return contract;
     }
 
     /**
-     * @param accountNumber
+     * @param contract the contract to set
      */
-    public void setContract(PortfolioAccount accountNumber) {
-        this.setAccountNumber(accountNumber);
+    public void setContract(PortfolioAccount contract) {
+        this.contract = contract;
     }
 
 
@@ -169,56 +159,29 @@ public class PortfolioVector implements Serializable {
     /**
      * @return the comission
      */
-    public PortfolioAccount getActiveCommission() {
-        return getCommission();
+    public Double getComission() {
+        return comission;
     }
 
     /**
-     * @param activeComission
+     * @param comission the comission to set
      */
-    public void setActiveComission(PortfolioAccount activeComission) {
-        this.setCommission(activeComission);
+    public void setComission(Double comission) {
+        this.comission = comission;
     }
 
     /**
      * @return the discretionary
      */
-    public PortfolioAccount getDiscretionary() {
+    public Boolean getDiscretionary() {
         return discretionary;
     }
 
     /**
-     * @param discretionary
+     * @param discretionary the discretionary to set
      */
-    public void setDiscretionary(PortfolioAccount discretionary) {
+    public void setDiscretionary(Boolean discretionary) {
         this.discretionary = discretionary;
     }
 
-    /**
-     * @return the accountNumber
-     */
-    public PortfolioAccount getAccountNumber() {
-        return accountNumber;
-    }
-
-    /**
-     * @param accountNumber the accountNumber to set
-     */
-    public void setAccountNumber(PortfolioAccount accountNumber) {
-        this.accountNumber = accountNumber;
-    }
-
-    /**
-     * @return the commission
-     */
-    public PortfolioAccount getCommission() {
-        return commission;
-    }
-
-    /**
-     * @param commission the commission to set
-     */
-    public void setCommission(PortfolioAccount commission) {
-        this.commission = commission;
-    }
 }

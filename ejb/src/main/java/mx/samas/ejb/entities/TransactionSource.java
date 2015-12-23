@@ -16,7 +16,7 @@ import javax.persistence.Id;
  * @author alfonso
  */
 @Entity
-public class SourceOwner implements Serializable {
+public class TransactionSource implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -24,14 +24,6 @@ public class SourceOwner implements Serializable {
     private Long id;
 
     private String name;
-    
-    /* Siento que SourceOwner = {
-        + Business := Comisiones (activas), Bonificaciones, etc;
-        + Client := Depósitos, Retiros presupuestados
-        + Portfolio := Dividendos, etc
-        + Broker := Comisiones (pasivas)
-        + Hacienda := Impuestos}
-    */
 
     public Long getId() {
         return id;
@@ -51,10 +43,10 @@ public class SourceOwner implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof SourceOwner)) {
+        if (!(object instanceof TransactionSource)) {
             return false;
         }
-        SourceOwner other = (SourceOwner) object;
+        TransactionSource other = (TransactionSource) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }

@@ -27,7 +27,7 @@ public class Broker implements Serializable {
     private String name;
 
     @OneToMany
-    private BrokerCommission commisions;
+    private BrokerCommisions commisions;
 
     public Long getId() {
         return id;
@@ -80,14 +80,14 @@ public class Broker implements Serializable {
     /**
      * @return the commisions
      */
-    public BrokerCommission getCommisions() {
+    public BrokerCommisions getCommisions() {
         return commisions;
     }
 
     /**
      * @param commisions the commisions to set
      */
-    public void setCommisions(BrokerCommission commisions) {
+    public void setCommisions(BrokerCommisions commisions) {
         this.commisions = commisions;
     }
 
