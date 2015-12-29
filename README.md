@@ -1,29 +1,3 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
-<html>
-<head>
-	<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
-	<title></title>
-	<meta name="generator" content="LibreOffice 5.0.3.2 (Linux)"/>
-	<meta name="created" content="2015-12-10T18:19:58.569626202"/>
-	<meta name="changed" content="2015-12-23T15:28:03.440553040"/>
-	<style type="text/css">
-		@page { margin: 2cm }
-		p { margin-bottom: 0.25cm; font-weight: normal; line-height: 120% }
-		h2.western { font-family: "Liberation Sans", sans-serif; font-size: 16pt }
-		h2.cjk { font-family: "Source Han Sans CN Regular"; font-size: 16pt }
-		h2.ctl { font-family: "Lohit Devanagari"; font-size: 16pt }
-		h1 { margin-bottom: 0.21cm; color: #004586 }
-		h1.western { font-family: "Liberation Sans", sans-serif; font-size: 18pt }
-		h1.cjk { font-family: "Source Han Sans CN Regular"; font-size: 18pt }
-		h1.ctl { font-family: "Lohit Devanagari"; font-size: 18pt }
-		td p { margin-bottom: 0cm; font-weight: normal }
-		p.sdfootnote { margin-bottom: 0cm; font-weight: normal; line-height: 100% }
-		a:link { so-language: zxx }
-		var { color: #004586; background: transparent }
-		var.western { font-family: "Liberation Mono", monospace; font-size: 10pt; font-style: normal; font-weight: bold }
-		var.cjk { font-size: 10pt }
-		a.sdfootnoteanc { font-size: 57% }
-	</style>
 </head>
 <body lang="es-MX" dir="ltr">
 <h1 class="western">Tipos de activos</h1>
