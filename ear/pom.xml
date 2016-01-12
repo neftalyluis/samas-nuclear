@@ -24,11 +24,6 @@
         </dependency>
         <dependency>
             <groupId>mx.samas</groupId>
-            <artifactId>appclient</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>mx.samas</groupId>
             <artifactId>web</artifactId>
             <version>${project.version}</version>
             <type>war</type>
@@ -53,11 +48,6 @@
                             <groupId>${project.groupId}</groupId>
                             <artifactId>ejb</artifactId>
                         </ejbModule>
-                        <jarModule>
-                            <groupId>${project.groupId}</groupId>
-                            <artifactId>appclient</artifactId>
-                            <bundleDir>/</bundleDir>
-                        </jarModule>
                     </modules>
                 </configuration>
             </plugin>
