@@ -10,7 +10,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 
 /**
@@ -31,8 +30,7 @@ public class AssetPropertyValue implements Serializable {
     @ManyToOne
     private Asset asset;
 
-    @Lob
-    private Serializable objectValue;
+    private String objectValue;
 
     public Long getId() {
         return id;
@@ -98,15 +96,17 @@ public class AssetPropertyValue implements Serializable {
     /**
      * @return the objectValue
      */
-    public Serializable getObjectValue() {
+    public String getObjectValue() {
         return objectValue;
     }
 
     /**
      * @param objectValue the objectValue to set
      */
-    public void setObjectValue(Serializable objectValue) {
+    public void setObjectValue(String objectValue) {
         this.objectValue = objectValue;
     }
+
+
 
 }

@@ -10,7 +10,6 @@
 
     <modules>
         <module>ejb</module>
-        <module>appclient</module>
         <module>ear</module>
         <module>web</module>
     </modules>
