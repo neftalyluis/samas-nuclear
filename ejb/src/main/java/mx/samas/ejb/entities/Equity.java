@@ -17,18 +17,27 @@ import javax.persistence.Id;
  */
 @Entity
 public class Equity extends Asset implements Serializable {
-
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    
+    private Boolean privateMarket;
+    
+    /**
+     * Propiedades distintivas
+     * @return 
+     */
+//    private Boolean fund;
+//    /**
+//     * Solo si fund es verdadero, sino NULL
+//     */
+//    private Double fee;
 
-    @Override
     public Long getId() {
         return id;
     }
 
-    @Override
     public void setId(Long id) {
         this.id = id;
     }
@@ -55,7 +64,22 @@ public class Equity extends Asset implements Serializable {
 
     @Override
     public String toString() {
-        return "mx.samas.entities.Stock[ id=" + id + " ]";
+        return "mx.samas.ejb.entities.Equity[ id=" + id + " ]";
     }
 
+    /**
+     * @return the privateMarket
+     */
+    public Boolean getPrivateMarket() {
+        return privateMarket;
+    }
+
+    /**
+     * @param privateMarket the privateMarket to set
+     */
+    public void setPrivateMarket(Boolean privateMarket) {
+        this.privateMarket = privateMarket;
+    }
+
+    
 }

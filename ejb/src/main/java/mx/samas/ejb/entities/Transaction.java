@@ -28,7 +28,7 @@ public class Transaction implements Serializable {
     private Long opQuantity;
 
     private Long opCash;
-
+  
     public Long getId() {
         return id;
     }

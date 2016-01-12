@@ -16,13 +16,15 @@ import javax.persistence.Id;
  * @author neftaly
  */
 @Entity
-public class ComissionType implements Serializable {
-
+public class Ticker implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
+   /**
+    * TICKER CON MARKET
+    * @return 
+    */
 
     public Long getId() {
         return id;
@@ -35,18 +37,18 @@ public class ComissionType implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (getId() != null ? getId().hashCode() : 0);
+        hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof ComissionType)) {
+        if (!(object instanceof Ticker)) {
             return false;
         }
-        ComissionType other = (ComissionType) object;
-        if ((this.getId() == null && other.getId() != null) || (this.getId() != null && !this.id.equals(other.id))) {
+        Ticker other = (Ticker) object;
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
         return true;
@@ -54,21 +56,7 @@ public class ComissionType implements Serializable {
 
     @Override
     public String toString() {
-        return "mx.samas.entities.ComissionType[ id=" + getId() + " ]";
+        return "mx.samas.ejb.entities.Ticker[ id=" + id + " ]";
     }
-
-    /**
-     * @return the name
-     */
-    public String getName() {
-        return name;
-    }
-
-    /**
-     * @param name the name to set
-     */
-    public void setName(String name) {
-        this.name = name;
-    }
-
+    
 }

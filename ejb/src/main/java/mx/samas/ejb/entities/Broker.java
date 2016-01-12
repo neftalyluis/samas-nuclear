@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 /**
  *
@@ -25,7 +26,8 @@ public class Broker implements Serializable {
 
     private String name;
 
-    private Double comission;
+    @OneToMany
+    private BrokerCommission commisions;
 
     public Long getId() {
         return id;
@@ -74,18 +76,19 @@ public class Broker implements Serializable {
         this.name = name;
     }
 
+
     /**
-     * @return the comission
+     * @return the commisions
      */
-    public Double getComission() {
-        return comission;
+    public BrokerCommission getCommisions() {
+        return commisions;
     }
 
     /**
-     * @param comission the comission to set
+     * @param commisions the commisions to set
      */
-    public void setComission(Double comission) {
-        this.comission = comission;
+    public void setCommisions(BrokerCommission commisions) {
+        this.commisions = commisions;
     }
 
 }

@@ -17,22 +17,48 @@ import javax.persistence.Temporal;
 /**
  *
  * @author neftaly
+ *
+ *
  */
 @Entity
 public class EquityShareFactor implements Serializable {
 
     private static final long serialVersionUID = 1L;
+
+    /**
+     * @return the serialVersionUID
+     */
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
-    private Bond bond;
+    private Equity equity;
 
-    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date dateTime;
-
-    private Double factor;
+    /**
+     * Si Split
+     * 
+     *      Q_0::Int * factor::Int = Q_1::Int 
+     * 
+     * Si Accretion 
+     * 
+     *      Q_0::Int / factor::Int = Q_1::Int
+     * 
+     * Si Dividend
+     *      
+     *      precio_0 + factor = precio_1
+     * 
+     * 
+     
+     */
+    private Long factor; 
+    
+    private String factorType; // = {Split, Accretion, Dividend}
 
     public Long getId() {
         return id;
@@ -45,7 +71,7 @@ public class EquityShareFactor implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        hash += (getId() != null ? getId().hashCode() : 0);
         return hash;
     }
 
@@ -56,7 +82,7 @@ public class EquityShareFactor implements Serializable {
             return false;
         }
         EquityShareFactor other = (EquityShareFactor) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if ((this.getId() == null && other.getId() != null) || (this.getId() != null && !this.id.equals(other.id))) {
             return false;
         }
         return true;
@@ -64,21 +90,7 @@ public class EquityShareFactor implements Serializable {
 
     @Override
     public String toString() {
-        return "mx.samas.entities.CorporateAction[ id=" + id + " ]";
-    }
-
-    /**
-     * @return the bond
-     */
-    public Bond getBond() {
-        return bond;
-    }
-
-    /**
-     * @param bond the bond to set
-     */
-    public void setBond(Bond bond) {
-        this.bond = bond;
+        return "mx.samas.entities.CorporateAction[ id=" + getId() + " ]";
     }
 
     /**
@@ -96,17 +108,44 @@ public class EquityShareFactor implements Serializable {
     }
 
     /**
+     * @return the equity
+     */
+    public Equity getEquity() {
+        return equity;
+    }
+
+    /**
+     * @param equity the equity to set
+     */
+    public void setEquity(Equity equity) {
+        this.equity = equity;
+    }
+
+    /**
      * @return the factor
      */
-    public Double getFactor() {
+    public Long getFactor() {
         return factor;
     }
 
     /**
      * @param factor the factor to set
      */
-    public void setFactor(Double factor) {
+    public void setFactor(Long factor) {
         this.factor = factor;
     }
 
+    /**
+     * @return the factorType
+     */
+    public String getFactorType() {
+        return factorType;
+    }
+
+    /**
+     * @param factorType the factorType to set
+     */
+    public void setFactorType(String factorType) {
+        this.factorType = factorType;
+    }
 }

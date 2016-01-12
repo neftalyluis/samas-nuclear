@@ -14,12 +14,4 @@
     <groupId>mx.samas</groupId>
     <packaging>jar</packaging>
     <name>ejb</name>
-    <dependencies>
-        <dependency>
-            <groupId>org.eclipse.persistence</groupId>
-            <artifactId>eclipselink</artifactId>
-            <version>2.5.2</version>
-        </dependency>
-
-    </dependencies>
 </project>

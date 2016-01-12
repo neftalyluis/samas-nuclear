@@ -16,8 +16,7 @@ import javax.persistence.Id;
  * @author neftaly
  */
 @Entity
-public class FungibleProperties implements Serializable {
-
+public class Derivative extends Asset implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -41,10 +40,10 @@ public class FungibleProperties implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof FungibleProperties)) {
+        if (!(object instanceof Derivative)) {
             return false;
         }
-        FungibleProperties other = (FungibleProperties) object;
+        Derivative other = (Derivative) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -53,7 +52,7 @@ public class FungibleProperties implements Serializable {
 
     @Override
     public String toString() {
-        return "mx.samas.entities.FungibleProperties[ id=" + id + " ]";
+        return "mx.samas.ejb.entities.Derivative[ id=" + id + " ]";
     }
-
+    
 }

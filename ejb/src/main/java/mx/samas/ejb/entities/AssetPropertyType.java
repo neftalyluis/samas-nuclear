@@ -13,15 +13,18 @@ import javax.persistence.Id;
 
 /**
  *
- * @author abimael
+ * @author neftaly
  */
 @Entity
-public class NDA extends Asset implements Serializable {
-
+public class AssetPropertyType implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    
+    private String name;
+    private String description;
+    private String type;
 
     public Long getId() {
         return id;
@@ -41,10 +44,10 @@ public class NDA extends Asset implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof NDA)) {
+        if (!(object instanceof AssetPropertyType)) {
             return false;
         }
-        NDA other = (NDA) object;
+        AssetPropertyType other = (AssetPropertyType) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -53,7 +56,49 @@ public class NDA extends Asset implements Serializable {
 
     @Override
     public String toString() {
-        return "mx.samas.entities.NDF[ id=" + id + " ]";
+        return "mx.samas.ejb.entities.NewAssetProperties[ id=" + id + " ]";
     }
 
+    /**
+     * @return the name
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * @param name the name to set
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    /**
+     * @return the description
+     */
+    public String getDescription() {
+        return description;
+    }
+
+    /**
+     * @param description the description to set
+     */
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    /**
+     * @return the type
+     */
+    public String getType() {
+        return type;
+    }
+
+    /**
+     * @param type the type to set
+     */
+    public void setType(String type) {
+        this.type = type;
+    }
+    
 }

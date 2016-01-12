@@ -10,18 +10,27 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 /**
  *
  * @author neftaly
  */
 @Entity
-public class FungibleAssets implements Serializable {
+public class AssetPropertyValue implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @ManyToOne
+    private AssetPropertyType property;
+
+    @ManyToOne
+    private Asset asset;
+
+    private String objectValue;
 
     public Long getId() {
         return id;
@@ -41,10 +50,10 @@ public class FungibleAssets implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof FungibleAssets)) {
+        if (!(object instanceof AssetPropertyValue)) {
             return false;
         }
-        FungibleAssets other = (FungibleAssets) object;
+        AssetPropertyValue other = (AssetPropertyValue) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -53,7 +62,51 @@ public class FungibleAssets implements Serializable {
 
     @Override
     public String toString() {
-        return "mx.samas.entities.FungibleAssets[ id=" + id + " ]";
+        return "mx.samas.ejb.entities.NewAssetValues[ id=" + id + " ]";
     }
+
+    /**
+     * @return the property
+     */
+    public AssetPropertyType getProperty() {
+        return property;
+    }
+
+    /**
+     * @param property the property to set
+     */
+    public void setProperty(AssetPropertyType property) {
+        this.property = property;
+    }
+
+    /**
+     * @return the asset
+     */
+    public Asset getAsset() {
+        return asset;
+    }
+
+    /**
+     * @param asset the asset to set
+     */
+    public void setAsset(Asset asset) {
+        this.asset = asset;
+    }
+
+    /**
+     * @return the objectValue
+     */
+    public String getObjectValue() {
+        return objectValue;
+    }
+
+    /**
+     * @param objectValue the objectValue to set
+     */
+    public void setObjectValue(String objectValue) {
+        this.objectValue = objectValue;
+    }
+
+
 
 }

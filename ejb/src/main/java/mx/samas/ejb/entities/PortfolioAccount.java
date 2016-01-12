@@ -15,6 +15,9 @@ import javax.persistence.ManyToOne;
 /**
  *
  * @author neftaly
+
+ Si es discretionary, entonces activeCommission es una comision devengada, sino
+ es transaccional
  */
 @Entity
 public class PortfolioAccount implements Serializable {
@@ -25,6 +28,10 @@ public class PortfolioAccount implements Serializable {
     private Long id;
 
     private String accountNumber;
+
+    private Boolean discretionary;
+
+    private Double activeCommission;
 
     @ManyToOne
     private Bank bank;
@@ -88,6 +95,34 @@ public class PortfolioAccount implements Serializable {
      */
     public void setAccountNumber(String accountNumber) {
         this.accountNumber = accountNumber;
+    }
+
+    /**
+     * @return the activeCommission
+     */
+    public Double getActiveCommission() {
+        return activeCommission;
+    }
+
+    /**
+     * @param activeCommission the activeCommission to set
+     */
+    public void setActiveCommission(Double activeCommission) {
+        this.activeCommission = activeCommission;
+    }
+
+    /**
+     * @return the discretionary
+     */
+    public Boolean getDiscretionary() {
+        return discretionary;
+    }
+
+    /**
+     * @param discretionary the discretionary to set
+     */
+    public void setDiscretionary(Boolean discretionary) {
+        this.discretionary = discretionary;
     }
 
 }

@@ -6,7 +6,6 @@
 package mx.samas.ejb.entities;
 
 import java.io.Serializable;
-import java.util.LinkedList;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -15,58 +14,68 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
 
 /**
  *
- * @author alfonso
+ * @author neftaly
+ *
+ * Campos:
+ *
+ * TV == Security Class; EMISORA == Issuer; SERIE == java.lang.String;
+ *
+ *
  */
 
-
+// Convectir a Abstracto
 @Entity
-@Table(uniqueConstraints = {
-    @UniqueConstraint(columnNames = {"TICKER"})})
-public class Asset implements Serializable {
+public abstract class Asset implements Serializable {
 
     private static final long serialVersionUID = 1L;
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String ticker;
+
     private String name;
+
     @ManyToOne
-    private SecurityClass tv;
+    private SecurityClass securityClass;
+    
+    @ManyToOne
+    private Ticker ticker;
+    
     @ManyToOne
     private Issuer issuer;
+    
     private String series;
+    
     private String isin;
+    
     @ManyToOne
     private DenominatorCurrency currencyDenomination;
     
     /**
+     * Si es verdadero, entonces se asocia ese asset a una comision (pasiva::Broker y activa::Client)
+     */    
+    private Boolean comission;
+
+    /**
      * "tickSize" es lo que viene siendo la "puja"
      */
     private Double tickSize;
-    
+
     /* Si «settlementTimes» a ser constante, no va aquí; este es un campo
-    relevante para operar en mercado (un método). Si es variable -- esto es, aquí
-    sólo de define el valor por defecto -- puede caber en «Asset». No obstante,
-    existe el riesgo de generar un comportamiento indeseado por la comodiad de
-    de evitar declarar explícitamente la fecha valor  -- «settlementTimes» -- para
-    cada operación. Quizás se le puede dar al usuario la opción -- de pedir su
-    declaración explícita; esto sería por activo.    
-    */
-    
+     relevante para operar en mercado (un método). Si es variable -- esto es, aquí
+     sólo de define el valor por defecto -- puede caber en «Asset». No obstante,
+     existe el riesgo de generar un comportamiento indeseado por la comodiad de
+     de evitar declarar explícitamente la fecha valor  -- «settlementTimes» -- para
+     cada operación. Quizás se le puede dar al usuario la opción -- de pedir su
+     declaración explícita; esto sería por activo.    
+     */
     @ManyToOne
     private SettlementTimes settlementTimes;
+
     @OneToMany(mappedBy = "asset", cascade = CascadeType.ALL)
     private List<AssetVector> vectors;
-
-    public Asset() {
-        this.vectors = new LinkedList<>();
-    }
 
     public Long getId() {
         return id;
@@ -79,7 +88,7 @@ public class Asset implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (getId() != null ? getId().hashCode() : 0);
+        hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
 
@@ -90,26 +99,15 @@ public class Asset implements Serializable {
             return false;
         }
         Asset other = (Asset) object;
-        return !((this.getId() == null && other.getId() != null) || (this.getId() != null && !this.id.equals(other.id)));
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+            return false;
+        }
+        return true;
     }
 
     @Override
     public String toString() {
-        return "mx.samas.entities.Asset[ id=" + getId() + " ]";
-    }
-
-    /**
-     * @return the ticker
-     */
-    public String getTicker() {
-        return ticker;
-    }
-
-    /**
-     * @param ticker the ticker to set
-     */
-    public void setTicker(String ticker) {
-        this.ticker = ticker;
+        return "mx.samas.ejb.entities.NewAsset[ id=" + id + " ]";
     }
 
     /**
@@ -127,17 +125,59 @@ public class Asset implements Serializable {
     }
 
     /**
-     * @return the tv
+     * @return the securityClass
      */
-    public SecurityClass getTv() {
-        return tv;
+    public SecurityClass getSecurityClass() {
+        return securityClass;
     }
 
     /**
-     * @param tv the tv to set
+     * @param securityClass the securityClass to set
      */
-    public void setTv(String tv) {
-        this.setTv(tv);
+    public void setSecurityClass(SecurityClass securityClass) {
+        this.securityClass = securityClass;
+    }
+
+    /**
+     * @return the issuer
+     */
+    public Issuer getIssuer() {
+        return issuer;
+    }
+
+    /**
+     * @param issuer the issuer to set
+     */
+    public void setIssuer(Issuer issuer) {
+        this.issuer = issuer;
+    }
+
+    /**
+     * @return the series
+     */
+    public String getSeries() {
+        return series;
+    }
+
+    /**
+     * @param series the series to set
+     */
+    public void setSeries(String series) {
+        this.series = series;
+    }
+
+    /**
+     * @return the ticker
+     */
+    public Ticker getTicker() {
+        return ticker;
+    }
+
+    /**
+     * @param ticker the ticker to set
+     */
+    public void setTicker(Ticker ticker) {
+        this.ticker = ticker;
     }
 
     /**
@@ -155,45 +195,17 @@ public class Asset implements Serializable {
     }
 
     /**
-     * @return the vectors
+     * @return the currencyDenomination
      */
-    public List<AssetVector> getVectors() {
-        return vectors;
+    public DenominatorCurrency getCurrencyDenomination() {
+        return currencyDenomination;
     }
 
     /**
-     * @param vectors the vectors to set
+     * @param currencyDenomination the currencyDenomination to set
      */
-    public void setVectors(List<AssetVector> vectors) {
-        this.vectors = vectors;
-    }
-
-    /**
-     * @return the issuer
-     */
-    public Issuer getIssuer() {
-        return issuer;
-    }
-
-    /**
-     * @param issuer the issuer to set
-     */
-    public void setIssuer(String issuer) {
-        this.setIssuer(issuer);
-    }
-
-    /**
-     * @return the series
-     */
-    public String getSeries() {
-        return series;
-    }
-
-    /**
-     * @param series the series to set
-     */
-    public void setSeries(String series) {
-        this.series = series;
+    public void setCurrencyDenomination(DenominatorCurrency currencyDenomination) {
+        this.currencyDenomination = currencyDenomination;
     }
 
     /**
@@ -225,31 +237,31 @@ public class Asset implements Serializable {
     }
 
     /**
-     * @return the currencyDenomination
+     * @return the vectors
      */
-    public DenominatorCurrency getCurrencyDenomination() {
-        return currencyDenomination;
+    public List<AssetVector> getVectors() {
+        return vectors;
     }
 
     /**
-     * @param currencyDenomination the currencyDenomination to set
+     * @param vectors the vectors to set
      */
-    public void setCurrencyDenomination(DenominatorCurrency currencyDenomination) {
-        this.currencyDenomination = currencyDenomination;
+    public void setVectors(List<AssetVector> vectors) {
+        this.vectors = vectors;
     }
 
     /**
-     * @param tv the tv to set
+     * @return the comission
      */
-    public void setTv(SecurityClass tv) {
-        this.tv = tv;
+    public Boolean getComission() {
+        return comission;
     }
 
     /**
-     * @param issuer the issuer to set
+     * @param comission the comission to set
      */
-    public void setIssuer(Issuer issuer) {
-        this.issuer = issuer;
+    public void setComission(Boolean comission) {
+        this.comission = comission;
     }
 
 }

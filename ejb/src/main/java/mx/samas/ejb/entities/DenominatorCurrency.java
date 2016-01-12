@@ -73,5 +73,6 @@ public class DenominatorCurrency implements Serializable {
     public void setCurrency(Currency currency) {
         this.currency = currency;
     }
+
     
 }

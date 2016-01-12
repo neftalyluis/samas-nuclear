@@ -23,6 +23,13 @@ import javax.persistence.Temporal;
 public class SliceVector implements Serializable {
 
     private static final long serialVersionUID = 1L;
+
+    /**
+     * @return the serialVersionUID
+     */
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -34,7 +41,7 @@ public class SliceVector implements Serializable {
     private Asset asset;
 
     @ManyToOne
-    private Fungible fungible;
+    private Fungibility fungibility;
 
     @ManyToOne
     private Strategy strategy;
@@ -52,7 +59,7 @@ public class SliceVector implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        hash += (getId() != null ? getId().hashCode() : 0);
         return hash;
     }
 
@@ -63,7 +70,7 @@ public class SliceVector implements Serializable {
             return false;
         }
         SliceVector other = (SliceVector) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if ((this.getId() == null && other.getId() != null) || (this.getId() != null && !this.id.equals(other.id))) {
             return false;
         }
         return true;
@@ -71,7 +78,7 @@ public class SliceVector implements Serializable {
 
     @Override
     public String toString() {
-        return "mx.samas.SliceVector[ id=" + id + " ]";
+        return "mx.samas.SliceVector[ id=" + getId() + " ]";
     }
 
     /**
@@ -82,10 +89,10 @@ public class SliceVector implements Serializable {
     }
 
     /**
-     * @param asset the asset to set
+     * @param id
      */
-    public void setAsset(Asset asset) {
-        this.asset = asset;
+    public void setAsset(Asset id) {
+        this.asset = id;
     }
 
     /**
@@ -117,17 +124,17 @@ public class SliceVector implements Serializable {
     }
 
     /**
-     * @return the fungible
+     * @return the fungibility
      */
-    public Fungible getFungible() {
-        return fungible;
+    public Fungibility getFungibility() {
+        return fungibility;
     }
 
     /**
-     * @param fungible the fungible to set
+     * @param fungibility the fungibility to set
      */
-    public void setFungible(Fungible fungible) {
-        this.fungible = fungible;
+    public void setFungibility(Fungibility fungibility) {
+        this.fungibility = fungibility;
     }
 
     /**

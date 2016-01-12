@@ -22,7 +22,7 @@ public class PortfolioStatus implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
+    private String name; // = {Active, Suspended, Luiquidation}
 
     public Long getId() {
         return id;

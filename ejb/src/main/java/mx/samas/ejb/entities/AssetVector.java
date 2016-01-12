@@ -19,14 +19,16 @@ import javax.persistence.Temporal;
  * @author neftaly
  */
 @Entity
-public class AssetVector implements Serializable {
+public abstract class AssetVector implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Date dateTime;
+    
     @ManyToOne
     private Asset asset;
     private Double cleanPrice;

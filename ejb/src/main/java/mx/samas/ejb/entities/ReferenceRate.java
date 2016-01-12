@@ -14,6 +14,9 @@ import javax.persistence.Id;
 /**
  *
  * @author neftaly
+ * 
+ * @author dmct => ¡¡¡ Falta crear ReferenceRateVector para registrar el nivel !!!
+ * 
  */
 @Entity
 public class ReferenceRate implements Serializable {

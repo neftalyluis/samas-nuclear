@@ -10,7 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 
 /**
  *
@@ -20,12 +20,20 @@ import javax.persistence.OneToOne;
 public class RatingGrade implements Serializable {
     private static final long serialVersionUID = 1L;
 
+    /**
+     * @return the serialVersionUID
+     */
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    @OneToOne
+    @ManyToOne
     private RatingAgency agency;
+    
     private String grade;
 
     public Long getId() {
@@ -69,10 +77,10 @@ public class RatingGrade implements Serializable {
     }
 
     /**
-     * @param agency the agency to set
+     * @param id
      */
-    public void setAgency(RatingAgency agency) {
-        this.agency = agency;
+    public void setAgency(RatingAgency id) {
+        this.agency = id;
     }
 
     /**
@@ -88,4 +96,5 @@ public class RatingGrade implements Serializable {
     public void setGrade(String grade) {
         this.grade = grade;
     }
+
 }

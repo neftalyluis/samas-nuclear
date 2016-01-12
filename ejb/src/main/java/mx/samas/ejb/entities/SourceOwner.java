@@ -13,10 +13,10 @@ import javax.persistence.Id;
 
 /**
  *
- * @author neftaly
+ * @author alfonso
  */
 @Entity
-public class AccrualType implements Serializable {
+public class SourceOwner implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -24,6 +24,14 @@ public class AccrualType implements Serializable {
     private Long id;
 
     private String name;
+    
+    /* Siento que SourceOwner = {
+        + Business := Comisiones (activas), Bonificaciones, etc;
+        + Client := Depósitos, Retiros presupuestados
+        + Portfolio := Dividendos, etc
+        + Broker := Comisiones (pasivas)
+        + Hacienda := Impuestos}
+    */
 
     public Long getId() {
         return id;
@@ -43,10 +51,10 @@ public class AccrualType implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof AccrualType)) {
+        if (!(object instanceof SourceOwner)) {
             return false;
         }
-        AccrualType other = (AccrualType) object;
+        SourceOwner other = (SourceOwner) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -55,7 +63,7 @@ public class AccrualType implements Serializable {
 
     @Override
     public String toString() {
-        return "mx.samas.entities.AccrualType[ id=" + id + " ]";
+        return "mx.samas.ejb.entities.TransactionSource[ id=" + id + " ]";
     }
 
     /**

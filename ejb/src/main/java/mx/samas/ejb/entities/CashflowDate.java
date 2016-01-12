@@ -27,7 +27,27 @@ public class CashflowDate implements Serializable {
     private Long id;
 
     @ManyToOne
-    private Bond bond;
+    private Asset bond;
+    /* Retos:  
+     (1) ¿Cómo le vamos a hacer con los perpetuos?
+     los perpetuos -- sin venciminto -- se valúan con una función de límite 
+     donde el resultado es:
+        
+     Precio = Flujo/tasa
+                  
+     por ende, cuándo son perpetuos, solo es necesario capturar spreadFixed 
+     y la fecha de pagos
+    
+     (2) ¿Cómo vamos a determinar los cashflowDates para los revisables?
+     Para la siguiente fecha de pago, sabemos la tasa cupón -- ya que se
+     fijó en la última revisión y se mantiene constante hasta las siguiente
+     revisión. Los cashflowDates subsecuentes, se calculan de manera uniforme
+     suponiendo que marketSpread se mantiene constante; sin embargo, cada que
+     haya un cambio en marketSpread, estos cambian. marketSpread cambia por
+     (1) valuación (una vez al día) o (2) para operar en secundario.
+    
+     */
+
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date payDate;
     /**
@@ -69,20 +89,6 @@ public class CashflowDate implements Serializable {
     }
 
     /**
-     * @return the bond
-     */
-    public Bond getBond() {
-        return bond;
-    }
-
-    /**
-     * @param bond the bond to set
-     */
-    public void setBond(Bond bond) {
-        this.bond = bond;
-    }
-
-    /**
      * @return the payDate
      */
     public Date getPayDay() {
@@ -108,6 +114,20 @@ public class CashflowDate implements Serializable {
      */
     public void setCouponPrincipal(Boolean couponPrincipal) {
         this.interest = couponPrincipal;
+    }
+
+    /**
+     * @return the bond
+     */
+    public Asset getBond() {
+        return bond;
+    }
+
+    /**
+     * @param bond the bond to set
+     */
+    public void setBond(Asset bond) {
+        this.bond = bond;
     }
 
 }
