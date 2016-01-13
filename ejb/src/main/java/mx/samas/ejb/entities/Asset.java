@@ -25,7 +25,6 @@ import javax.persistence.OneToMany;
  *
  *
  */
-
 // Convectir a Abstracto
 @Entity
 public abstract class Asset implements Serializable {
@@ -39,23 +38,24 @@ public abstract class Asset implements Serializable {
 
     @ManyToOne
     private SecurityClass securityClass;
-    
+
     @ManyToOne
     private Ticker ticker;
-    
+
     @ManyToOne
     private Issuer issuer;
-    
+
     private String series;
-    
+
     private String isin;
-    
+
     @ManyToOne
     private DenominatorCurrency currencyDenomination;
-    
+
     /**
-     * Si es verdadero, entonces se asocia ese asset a una comision (pasiva::Broker y activa::Client)
-     */    
+     * Si es verdadero, entonces se asocia ese asset a una comision
+     * (pasiva::Broker y activa::Client)
+     */
     private Boolean comission;
 
     /**
@@ -175,6 +175,28 @@ public abstract class Asset implements Serializable {
 
     /**
      * @param ticker the ticker to set
+     * 
+     * <PRE format="md">
+     *
+     * some text some text some text some text some text some text some text
+     * ##### Lists
+     *
+     * - item1
+     *    1. item11
+     *    2. item12
+     * - item1
+     *
+     * ##### Text formatting
+     *
+     * _emphasis_ and __strong__ and some `code` :
+     *
+     * code line 1 code line 2
+     * 
+     *
+     * some text some text some text some text some text some text some text
+     *
+     * </PRE>
+     *
      */
     public void setTicker(Ticker ticker) {
         this.ticker = ticker;

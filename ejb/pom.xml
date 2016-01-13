@@ -36,9 +36,9 @@
                         -hyperref
                         -output TeXDoclet.tex
                         -createpdf
-                        -title "TeXDoclet Java Documentation"
-                        -subtitle "Created with Javadoc TeXDoclet Doclet"
-                        -author "Greg Wonderly \and S{\"o}ren Caspersen \and Stefan Marx"
+                        -title "Documentaci\'{0}n samas nuclear"
+                        -subtitle "Para beneficio de la humanidad"
+                        -author "Neftaly y SrAceves"
                         -subpackages org
                         -shortinherited
                     </additionalparam>
