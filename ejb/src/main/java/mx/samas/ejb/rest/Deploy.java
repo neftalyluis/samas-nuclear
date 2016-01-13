@@ -3,12 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mx.samas.ejb.sessions.system;
+package mx.samas.ejb.rest;
+
+import javax.ws.rs.ApplicationPath;
+import javax.ws.rs.core.Application;
 
 /**
  *
  * @author neftaly
  */
-public interface ClientManagerRemote {
-
+@ApplicationPath("api")
+public class Deploy extends Application{
+    
 }

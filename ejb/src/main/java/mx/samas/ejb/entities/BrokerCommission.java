@@ -6,11 +6,12 @@
 package mx.samas.ejb.entities;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.ManyToMany;
 
 /**
  *
@@ -23,8 +24,8 @@ public class BrokerCommission implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @ManyToOne
-    private Broker broker;
+    @ManyToMany
+    private List<Broker> broker;
     
     private Double transactionalCommission;
 
@@ -63,19 +64,6 @@ public class BrokerCommission implements Serializable {
         return "mx.samas.ejb.entities.BrokerCommisions[ id=" + id + " ]";
     }
 
-    /**
-     * @return the broker
-     */
-    public Broker getBroker() {
-        return broker;
-    }
-
-    /**
-     * @param broker the broker to set
-     */
-    public void setBroker(Broker broker) {
-        this.broker = broker;
-    }
 
     /**
      * @return the transactionalCommission
@@ -103,6 +91,20 @@ public class BrokerCommission implements Serializable {
      */
     public void setAssetType(String assetType) {
         this.assetType = assetType;
+    }
+
+    /**
+     * @return the broker
+     */
+    public List<Broker> getBroker() {
+        return broker;
+    }
+
+    /**
+     * @param broker the broker to set
+     */
+    public void setBroker(List<Broker> broker) {
+        this.broker = broker;
     }
     
 }
