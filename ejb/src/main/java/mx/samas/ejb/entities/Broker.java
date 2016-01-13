@@ -6,11 +6,12 @@
 package mx.samas.ejb.entities;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 
 /**
  *
@@ -26,8 +27,8 @@ public class Broker implements Serializable {
 
     private String name;
 
-    @OneToMany
-    private BrokerCommission commisions;
+    @ManyToMany
+    private List<BrokerCommission> commisions;
 
     public Long getId() {
         return id;
@@ -74,21 +75,6 @@ public class Broker implements Serializable {
      */
     public void setName(String name) {
         this.name = name;
-    }
-
-
-    /**
-     * @return the commisions
-     */
-    public BrokerCommission getCommisions() {
-        return commisions;
-    }
-
-    /**
-     * @param commisions the commisions to set
-     */
-    public void setCommisions(BrokerCommission commisions) {
-        this.commisions = commisions;
     }
 
 }
