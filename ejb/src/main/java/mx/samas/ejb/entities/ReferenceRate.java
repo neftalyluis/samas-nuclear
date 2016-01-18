@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
@@ -19,6 +20,7 @@ import javax.persistence.Id;
  * 
  */
 @Entity
+@XmlRootElement
 public class ReferenceRate implements Serializable {
 
     private static final long serialVersionUID = 1L;

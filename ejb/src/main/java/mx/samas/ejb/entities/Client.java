@@ -12,12 +12,15 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
  * @author neftaly
  */
 @Entity
+@XmlRootElement
 public class Client implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -80,6 +83,7 @@ public class Client implements Serializable {
     /**
      * @return the portfolios
      */
+    @XmlTransient
     public List<PortfolioVector> getPortfolios() {
         return portfolios;
     }

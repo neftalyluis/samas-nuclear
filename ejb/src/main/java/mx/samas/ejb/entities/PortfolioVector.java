@@ -16,6 +16,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -27,6 +29,7 @@ import javax.persistence.Temporal;
 // * Si es discretionary, entonces comission es una comision devengada, sino
 // * es transaccional
 @Entity
+@XmlRootElement
 public class PortfolioVector implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -98,6 +101,7 @@ public class PortfolioVector implements Serializable {
     /**
      * @return the clients
      */
+    @XmlTransient
     public List<Client> getClients() {
         return clients;
     }

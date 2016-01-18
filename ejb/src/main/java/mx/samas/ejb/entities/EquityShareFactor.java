@@ -13,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
@@ -21,6 +22,7 @@ import javax.persistence.Temporal;
  *
  */
 @Entity
+@XmlRootElement
 public class EquityShareFactor implements Serializable {
 
     private static final long serialVersionUID = 1L;

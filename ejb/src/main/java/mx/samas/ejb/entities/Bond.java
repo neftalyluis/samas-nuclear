@@ -17,12 +17,15 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
  * @author neftaly
  */
 @Entity
+@XmlRootElement
 public class Bond extends Asset implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -166,6 +169,7 @@ public class Bond extends Asset implements Serializable {
     /**
      * @return the cashflowDate
      */
+    @XmlTransient
     public List<CashflowDate> getCashflowDate() {
         return cashflowDate;
     }
