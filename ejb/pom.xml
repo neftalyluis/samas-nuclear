@@ -12,7 +12,7 @@
 
     <artifactId>ejb</artifactId>
     <groupId>mx.samas</groupId>
-    <packaging>jar</packaging>
+    <packaging>ejb</packaging>
     <name>ejb</name>
     
     <build> <!-- Incio configuración para TeXDoclet https://github.com/doclet/texdoclet -->

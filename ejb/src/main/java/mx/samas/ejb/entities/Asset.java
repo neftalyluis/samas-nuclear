@@ -14,6 +14,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -27,6 +29,7 @@ import javax.persistence.OneToMany;
  */
 // Convectir a Abstracto
 @Entity
+@XmlRootElement
 public abstract class Asset implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -261,6 +264,7 @@ public abstract class Asset implements Serializable {
     /**
      * @return the vectors
      */
+    @XmlTransient
     public List<AssetVector> getVectors() {
         return vectors;
     }

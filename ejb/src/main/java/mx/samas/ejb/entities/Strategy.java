@@ -13,12 +13,15 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
  * @author alfonso
  */
 @Entity
+@XmlRootElement
 public class Strategy implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -83,6 +86,7 @@ public class Strategy implements Serializable {
     /**
      * @return the slices
      */
+    @XmlTransient
     public List<SliceVector> getSlices() {
         return slices;
     }

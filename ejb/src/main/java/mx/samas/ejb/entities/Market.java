@@ -13,12 +13,15 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
  * @author neftaly
  */
 @Entity
+@XmlRootElement
 public class Market implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -103,6 +106,7 @@ public class Market implements Serializable {
     /**
      * @return the securities
      */
+    @XmlTransient
     public List <SecurityClass> getSecurities() {
         return securities;
     }
@@ -117,6 +121,7 @@ public class Market implements Serializable {
     /**
      * @return the brokers
      */
+    @XmlTransient
     public List <Broker> getBrokers() {
         return brokers;
     }

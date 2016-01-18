@@ -12,12 +12,15 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
  * @author neftaly
  */
 @Entity
+@XmlRootElement
 public class BrokerCommission implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -96,6 +99,7 @@ public class BrokerCommission implements Serializable {
     /**
      * @return the broker
      */
+    @XmlTransient
     public List<Broker> getBroker() {
         return broker;
     }

@@ -12,12 +12,15 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
  * @author neftaly
  */
 @Entity
+@XmlRootElement
 public class LegalEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -99,6 +102,7 @@ public class LegalEntity implements Serializable {
     /**
      * @return the rating
      */
+    @XmlTransient
     public List<RatingGrade> getRating() {
         return rating;
     }
@@ -113,6 +117,7 @@ public class LegalEntity implements Serializable {
     /**
      * @return the issuers
      */
+    @XmlTransient
     public List<Issuer> getIssuers() {
         return issuers;
     }
