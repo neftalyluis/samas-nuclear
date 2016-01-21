@@ -7,7 +7,6 @@ package mx.samas.ejb.entities;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,7 +14,6 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -35,7 +33,7 @@ public class ReferenceRateVector implements Serializable {
     private Double rate;
     
     @ManyToOne
-    private List<ReferenceRate> referenceRate;
+    private ReferenceRate referenceRate;
 
     public Long getId() {
         return id;
@@ -102,16 +100,16 @@ public class ReferenceRateVector implements Serializable {
     /**
      * @return the referenceRate
      */
-    @XmlTransient
-    public List<ReferenceRate> getReferenceRate() {
+    public ReferenceRate getReferenceRate() {
         return referenceRate;
     }
 
     /**
      * @param referenceRate the referenceRate to set
      */
-    public void setReferenceRate(List<ReferenceRate> referenceRate) {
+    public void setReferenceRate(ReferenceRate referenceRate) {
         this.referenceRate = referenceRate;
     }
+
     
 }

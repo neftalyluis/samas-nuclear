@@ -14,7 +14,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -34,12 +33,6 @@ public class PortfolioVector implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    /**
-     * @return the serialVersionUID
-     */
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
-    }
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -54,13 +47,7 @@ public class PortfolioVector implements Serializable {
     private Date dateTime;
 
     @ManyToOne
-    private PortfolioAccount accountNumber;
-
-    @ManyToOne
-    private PortfolioAccount commission;
-
-    @ManyToOne
-    private PortfolioAccount discretionary;
+    private PortfolioAccount account;
 
     @ManyToOne
     private PortfolioStatus portfolioStatus;
@@ -142,21 +129,6 @@ public class PortfolioVector implements Serializable {
     }
 
     /**
-     * @return the accountNumber
-     */
-    public PortfolioAccount getContract() {
-        return getAccountNumber();
-    }
-
-    /**
-     * @param accountNumber
-     */
-    public void setContract(PortfolioAccount accountNumber) {
-        this.setAccountNumber(accountNumber);
-    }
-
-
-    /**
      * @return the portfolioStatus
      */
     public PortfolioStatus getPortfolioStatus() {
@@ -171,58 +143,17 @@ public class PortfolioVector implements Serializable {
     }
 
     /**
-     * @return the comission
+     * @return the account
      */
-    public PortfolioAccount getActiveCommission() {
-        return getCommission();
+    public PortfolioAccount getAccount() {
+        return account;
     }
 
     /**
-     * @param activeComission
+     * @param account the account to set
      */
-    public void setActiveComission(PortfolioAccount activeComission) {
-        this.setCommission(activeComission);
+    public void setAccount(PortfolioAccount account) {
+        this.account = account;
     }
 
-    /**
-     * @return the discretionary
-     */
-    public PortfolioAccount getDiscretionary() {
-        return discretionary;
-    }
-
-    /**
-     * @param discretionary
-     */
-    public void setDiscretionary(PortfolioAccount discretionary) {
-        this.discretionary = discretionary;
-    }
-
-    /**
-     * @return the accountNumber
-     */
-    public PortfolioAccount getAccountNumber() {
-        return accountNumber;
-    }
-
-    /**
-     * @param accountNumber the accountNumber to set
-     */
-    public void setAccountNumber(PortfolioAccount accountNumber) {
-        this.accountNumber = accountNumber;
-    }
-
-    /**
-     * @return the commission
-     */
-    public PortfolioAccount getCommission() {
-        return commission;
-    }
-
-    /**
-     * @param commission the commission to set
-     */
-    public void setCommission(PortfolioAccount commission) {
-        this.commission = commission;
-    }
 }

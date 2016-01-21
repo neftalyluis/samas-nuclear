@@ -26,12 +26,6 @@ public class SliceVector implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    /**
-     * @return the serialVersionUID
-     */
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
-    }
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

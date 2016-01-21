@@ -15,8 +15,17 @@
     <packaging>ejb</packaging>
     <name>ejb</name>
     
-    <build> <!-- Incio configuración para TeXDoclet https://github.com/doclet/texdoclet -->
+    <build>
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-ejb-plugin</artifactId>
+                <version>2.5.1</version>
+                <configuration>
+                    <ejbVersion>3.0</ejbVersion>
+                </configuration>
+            </plugin>
+            <!-- Incio configuración para TeXDoclet https://github.com/doclet/texdoclet -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
@@ -44,6 +53,7 @@
                     </additionalparam>
                 </configuration>
             </plugin>
+            <!-- Fin configuración para TeXDoclet -->
         </plugins>
-    </build> <!-- Fin configuración para TeXDoclet -->
+    </build> 
 </project>

@@ -6,18 +6,22 @@
 package mx.samas.ejb.entities;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
  * @author neftaly
- * 
- * @author dmct => ¡¡¡ Falta crear ReferenceRateVector para registrar el nivel !!!
- * 
+ *
+ * @author dmct => ¡¡¡ Falta crear ReferenceRateVector para registrar el nivel
+ * !!!
+ *
  */
 @Entity
 @XmlRootElement
@@ -28,6 +32,9 @@ public class ReferenceRate implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String code;
+
+    @OneToMany
+    private List<ReferenceRateVector> vector;
 
     public Long getId() {
         return id;
@@ -74,6 +81,21 @@ public class ReferenceRate implements Serializable {
      */
     public void setCode(String code) {
         this.code = code;
+    }
+
+    /**
+     * @return the vector
+     */
+    @XmlTransient
+    public List<ReferenceRateVector> getVector() {
+        return vector;
+    }
+
+    /**
+     * @param vector the vector to set
+     */
+    public void setVector(List<ReferenceRateVector> vector) {
+        this.vector = vector;
     }
 
 }

@@ -1,5 +1,10 @@
 <RCC>
     <qresource prefix="/">
         <file>main.qml</file>
+        <file>PortfolioVectorService.js</file>
+        <file>MainForm.ui.qml</file>
+        <file>AssetDetails.qml</file>
+        <file>AssetDetailsForm.ui.qml</file>
+        <file>AssetModel.qml</file>
     </qresource>
 </RCC>
