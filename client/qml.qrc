@@ -1,10 +1,19 @@
 <RCC>
     <qresource prefix="/">
         <file>main.qml</file>
-        <file>PortfolioVectorService.js</file>
         <file>MainForm.ui.qml</file>
-        <file>AssetDetails.qml</file>
-        <file>AssetDetailsForm.ui.qml</file>
-        <file>AssetModel.qml</file>
+        <file>Dashboard.qml</file>
+        <file>DashboardForm.ui.qml</file>
+        <file>IDE.qml</file>
+        <file>IDEForm.ui.qml</file>
+        <file>DashboardView.qml</file>
+        <file>DashboardViewForm.ui.qml</file>
+        <file>Contract.qml</file>
+        <file>ContractForm.ui.qml</file>
+        <file>controls/Variables.qml</file>
+        <file>controls/Text.qml</file>
+        <file>controls/Loader.qml</file>
+        <file>controls/Button.qml</file>
+        <file>FontAwesome.qml</file>
     </qresource>
 </RCC>

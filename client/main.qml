@@ -8,8 +8,14 @@ import QtQuick.Dialogs 1.2
 
 ApplicationWindow {
     visible: true
+
+    minimumHeight: 780
+    maximumHeight: 780
+    minimumWidth: 1024
+    maximumWidth: 1024
     width: 1024
-    height: 768
+    height: 780
+
     title: qsTr("SAMAS")
 
     Loader { id: pageLoader }
@@ -20,6 +26,10 @@ ApplicationWindow {
         title: qsTr("Acerca de")
         text: "SAMAS"
         informativeText: qsTr("Holi :)")
+    }
+
+    DashboardForm {
+        id: dash
     }
 
     menuBar: MenuBar {
@@ -91,24 +101,26 @@ ApplicationWindow {
                 }
                 Item { Layout.fillWidth: true }
 
-                BusyIndicator {
-                    running: false
-                }
+
             }
         }
 
-    MainForm {
-        id: mainForm
 
-        anchors.fill: parent
 
-        Layout.minimumWidth: 710
-        Layout.minimumHeight: 480
-        Layout.preferredWidth: 710
-        Layout.preferredHeight: 480
-
-        tableView.model: CustomerModel
-
-        Component.onCompleted: CustomerModel.selection = tableView.selection
+    statusBar: StatusBar {
+        RowLayout {
+            anchors.fill: parent
+            Label{
+                text: "test"
+            }
+            /*
+            BusyIndicator {
+                running: true
+                anchors.right: parent.right
+            }
+            */
+        }
     }
+
+
 }

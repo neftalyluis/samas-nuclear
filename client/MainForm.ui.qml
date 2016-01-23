@@ -39,7 +39,7 @@ Item {
 
             Tab {
                 title: qsTr("Detalles")
-                source: "qml/Settings.qml"
+                source: "AssetDetails.qml"
             }
             Tab {
                 title: qsTr("Precios")
