@@ -6,6 +6,7 @@
 package mx.samas.ejb.entities;
 
 import java.io.Serializable;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -26,8 +27,10 @@ public class SecurityClass implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(unique = true)
     private String code;
     private String description;
+    private String kind;
 
     public Long getId() {
         return id;
@@ -88,6 +91,20 @@ public class SecurityClass implements Serializable {
      */
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    /**
+     * @return the kind
+     */
+    public String getKind() {
+        return kind;
+    }
+
+    /**
+     * @param kind the kind to set
+     */
+    public void setKind(String kind) {
+        this.kind = kind;
     }
 
 }

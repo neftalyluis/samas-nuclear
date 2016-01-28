@@ -6,34 +6,33 @@
 package mx.samas.ejb.entities;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.Temporal;
-import javax.xml.bind.annotation.XmlRootElement;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 /**
  *
  * @author neftaly
  */
-@XmlRootElement
 @Entity
-public class ReferenceRateVector implements Serializable {
+public class AssetType implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
     
-    @Temporal(javax.persistence.TemporalType.DATE)
-    private Date dateTime;
-    private Double rate;
+    private String name;
     
-    @ManyToOne
-    private ReferenceRate referenceRate;
+    @OneToMany
+    private List<Asset> asset;
+    
+    @ManyToMany
+    private List<AssetPropertyType> propertyList;
 
     public Long getId() {
         return id;
@@ -53,10 +52,10 @@ public class ReferenceRateVector implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof ReferenceRateVector)) {
+        if (!(object instanceof AssetType)) {
             return false;
         }
-        ReferenceRateVector other = (ReferenceRateVector) object;
+        AssetType other = (AssetType) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -65,51 +64,49 @@ public class ReferenceRateVector implements Serializable {
 
     @Override
     public String toString() {
-        return "mx.samas.ejb.entities.ReferenceRateVector[ id=" + id + " ]";
-    }
-
-
-    /**
-     * @return the rate
-     */
-    public Double getRate() {
-        return rate;
+        return "mx.samas.ejb.entities.AssetType[ id=" + id + " ]";
     }
 
     /**
-     * @param rate the rate to set
+     * @return the name
      */
-    public void setRate(Double rate) {
-        this.rate = rate;
+    public String getName() {
+        return name;
     }
 
     /**
-     * @return the dateTime
+     * @param name the name to set
      */
-    public Date getDateTime() {
-        return dateTime;
+    public void setName(String name) {
+        this.name = name;
     }
 
     /**
-     * @param dateTime the dateTime to set
+     * @return the asset
      */
-    public void setDateTime(Date dateTime) {
-        this.dateTime = dateTime;
+    public List<Asset> getAsset() {
+        return asset;
     }
 
     /**
-     * @return the referenceRate
+     * @param asset the asset to set
      */
-    public ReferenceRate getReferenceRate() {
-        return referenceRate;
+    public void setAsset(List<Asset> asset) {
+        this.asset = asset;
     }
 
     /**
-     * @param referenceRate the referenceRate to set
+     * @return the propertyList
      */
-    public void setReferenceRate(ReferenceRate referenceRate) {
-        this.referenceRate = referenceRate;
+    public List<AssetPropertyType> getPropertyList() {
+        return propertyList;
     }
 
+    /**
+     * @param propertyList the propertyList to set
+     */
+    public void setPropertyList(List<AssetPropertyType> propertyList) {
+        this.propertyList = propertyList;
+    }
     
 }

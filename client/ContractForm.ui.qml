@@ -88,11 +88,11 @@ Item {
 
         TableView{
             id: tablaClientes
-            width: 490
+            width: 608
             height: 150
-            Layout.columnSpan: 7
+            Layout.columnSpan: 5
             property int columnWidth: width / 3
-            Layout.minimumWidth: splitView.width / 3
+            Layout.minimumWidth: formularioContratos.width / 3
 
 
 
@@ -123,15 +123,13 @@ Item {
         anchors.top: formularioContratos.bottom
 
         Button {
-            id: save
-            text: qsTr("Save")
-            enabled: false
+            id: guardar
+            text: qsTr("Guardar")
         }
 
         Button {
-            id: cancel
-            text: qsTr("Cancel")
-            enabled: false
+            id: cancelar
+            text: qsTr("Cancelar")
         }
     }
 

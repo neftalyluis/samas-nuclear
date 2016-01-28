@@ -3,103 +3,85 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mx.samas.ejb;
+package mx.samas.ejb.timers;
 
-import javax.ejb.Schedule;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.io.UnsupportedEncodingException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.text.DateFormat;
+import java.text.Normalizer;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.regex.Pattern;
 import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import mx.samas.ejb.entities.Asset;
+import mx.samas.ejb.entities.SecurityClass;
+import org.apache.commons.csv.CSVFormat;
+import org.apache.commons.csv.CSVParser;
+import org.apache.commons.csv.CSVRecord;
+import org.apache.commons.io.input.BOMInputStream;
 
 /**
  *
  * @author neftaly
  */
 @Stateless
-public class PrecioTimer {
+public class CheckAssets implements CheckAssetsLocal {
 
-    @Schedule(dayOfWeek = "Mon-Fri", month = "*", hour = "20", dayOfMonth = "*", year = "*", minute = "0", second = "0")
-    public void doWork() {
-        System.out.println("Subo precios, jeje es neta :^]");
-    }
+    Map<String, String> assetType;
+    Map<String, Asset> assetProps;
+    SimpleDateFormat formatterTyC = new SimpleDateFormat("yyyy/MM/dd");
+    //SimpleDateFormat formatterTyC = new SimpleDateFormat("MM/dd/yyyy");
+    DateFormat format = new SimpleDateFormat("yyyyMMdd HH:mm:ss");
+    java.util.Date date = new java.util.Date();
+    @PersistenceContext(unitName = "mx_samas_ejb_1.0PU")
+    private EntityManager em;
+    Calendar cal = Calendar.getInstance();
 
-//    Map<String, String> assetType;
-//    Map<String, Asset> assetProps;
-//    SimpleDateFormat formatterTyC = new SimpleDateFormat("yyyy/MM/dd");
-//    //SimpleDateFormat formatterTyC = new SimpleDateFormat("MM/dd/yyyy");
-//    DateFormat format = new SimpleDateFormat("yyyyMMdd HH:mm:ss");
-//    java.util.Date date = new java.util.Date();
-//    Calendar cal = Calendar.getInstance();
-//
-////    public static void main(String[] args) {
-////        try {
-////            System.out.println("HOLI");
-////            System.in.read();
-////        } catch (IOException ex) {
-////            Logger.getLogger(PrecioTimer.class.getName()).log(Level.SEVERE, null, ex);
-////        }
-////        Main a = new Main();
-////        a.getAssetFromCSV();
-////        a.getAssetVectorFromCSV();
-////    }
-//
-//    public void getHeadliners() {
-//        DocumentConnection dc = new DocumentConnection();
-//        Map<String, Integer> heads = new HashMap<>();
-//        List<String> routes;
-//        char delimiter = '\'';
-//        routes = dc.listAllFiles();
-//        for (String r : routes) {
-//            System.out.println(r);
-//            Reader reader = null;
-//            try {
-//                final URL url = new URL("file://" + r);
-//                reader = new InputStreamReader(new BOMInputStream(url.openStream()), "UTF-8");
-//                final CSVParser parser = new CSVParser(reader, CSVFormat.EXCEL.withHeader().withQuote(delimiter));
-//                try {
-//                    for (Map.Entry<String, Integer> entry
-//                            : parser.getHeaderMap().entrySet()) {
-//                        heads.put(entry.getKey(), entry.getValue());
-//                    }
-//                } finally {
-//                    parser.close();
-//                    reader.close();
-//                }
-//            } catch (UnsupportedEncodingException ex) {
-//                Logger.getLogger(PrecioTimer.class.getName()).log(Level.SEVERE, null, ex);
-//            } catch (MalformedURLException ex) {
-//                Logger.getLogger(PrecioTimer.class.getName()).log(Level.SEVERE, null, ex);
-//            } catch (IOException ex) {
-//                Logger.getLogger(PrecioTimer.class.getName()).log(Level.SEVERE, null, ex);
-//            } catch (Exception ex) {
-//            } finally {
-//                try {
-//                    reader.close();
-//                } catch (IOException ex) {
-//                    Logger.getLogger(PrecioTimer.class.getName()).log(Level.SEVERE, null, ex);
-//                }
-//            }
-//
-//        }
-//    }
-//
-//    public void getAssetFromCSV() {
-//        assetType = getAssetType();
-//        Map<String, Asset> listAssets = new HashMap<>();
-//        DocumentConnection dc = new DocumentConnection();
-//        List<String> routes;
-//        char delimiter = '\'';
-//        routes = dc.listAllFiles();
-//        for (String r : routes) {
-//            System.out.println(r);
-//            Reader reader = null;
-//            try {
-//                final URL url = new URL("file://" + r);
-//                reader = new InputStreamReader(new BOMInputStream(url.openStream()), "UTF-8");
-//                final CSVParser parser = new CSVParser(reader, CSVFormat.EXCEL.withHeader().withQuote(delimiter));
-//                try {
-//                    int count = 0;
-//                    for (final CSVRecord record : parser) {
-//                        count++;
-//                        try {
-//                            Asset value = new Asset();
+    public void getAssetFromCSV() {
+        Map<String, Asset> listAssets = new HashMap<>();
+        DocumentConnection dc = new DocumentConnection();
+        List<String> routes;
+        char delimiter = '\'';
+        routes = dc.listAllCSVFiles();
+        List<SecurityClass> lsc = getSecurityList();
+        for (String r : routes) {
+            System.out.println(r);
+            Reader reader = null;
+            try {
+                final URL url = new URL("file://" + r);
+                reader = new InputStreamReader(new BOMInputStream(url.openStream()), "UTF-8");
+                final CSVParser parser = new CSVParser(reader, CSVFormat.EXCEL.withHeader().withQuote(delimiter));
+                try {
+                    int count = 0;
+                    for (final CSVRecord record : parser) {
+                        try {
+
+                            String sc = record.get(1);
+                            for (SecurityClass s : lsc) {
+                                if (s.getCode().equals(sc)) {
+
+                                }
+                            }
+//                            System.out.println(record.get(1) + "_" + record.get(2) + "_" + record.get(3).replace("\"", "").replace("\'", ""));
+//                            System.out.println(record.get(9).replace("\"", "").replace("\'", ""));
+//                            System.out.println(record.get(1).replace("\"", "").replace("\'", ""));
+//                            System.out.println(record.get(2).replace("\"", "").replace("\'", ""));
+//                            System.out.println(record.get(3).replace("\"", "").replace("\'", ""));
+                            System.out.println(record.get(18).replace("\"", "").replace("\'", ""));
+
+//                            Asset value;
 //                            String key = record.get(1) + "_" + record.get(2) + "_" + record.get(3).replace("\"", "").replace("\'", "");
 //                            String tipovalor = record.get(1).replace("\"", "").replace("\'", "");
 //
@@ -116,32 +98,25 @@ public class PrecioTimer {
 //                                }
 //                            }
 //                            listAssets.put(key, value);
-//                        } catch (NullPointerException e) {
-//                        } catch (ArrayIndexOutOfBoundsException e) {
-//                            e.printStackTrace();
-//                            //System.out.println("Malformado " + count);
-//                        }
-//                    }
-//                } finally {
-//                    parser.close();
-//                    reader.close();
-//                }
-//            } catch (UnsupportedEncodingException ex) {
-//                Logger.getLogger(PrecioTimer.class.getName()).log(Level.SEVERE, null, ex);
-//            } catch (MalformedURLException ex) {
-//                Logger.getLogger(PrecioTimer.class.getName()).log(Level.SEVERE, null, ex);
-//            } catch (IOException ex) {
-//                Logger.getLogger(PrecioTimer.class.getName()).log(Level.SEVERE, null, ex);
-//            } catch (Exception ex) {
-//                ex.printStackTrace();
-//            } finally {
-//                try {
-//                    reader.close();
-//                } catch (IOException ex) {
-//                    Logger.getLogger(PrecioTimer.class.getName()).log(Level.SEVERE, null, ex);
-//                }
-//            }
-//        }
+                        } catch (NullPointerException e) {
+                        } catch (ArrayIndexOutOfBoundsException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                } finally {
+                    parser.close();
+                    reader.close();
+                }
+            } catch (Exception ex) {
+                Logger.getLogger(PrecioTimer.class.getName()).log(Level.SEVERE, null, ex);
+            } finally {
+                try {
+                    reader.close();
+                } catch (IOException ex) {
+                    Logger.getLogger(PrecioTimer.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
 //        getAssetPropertiesFromTyC(listAssets);
 //        if (pushAssetsToDB(listAssets)) {
 //            System.out.println("Assets en DB");
@@ -149,13 +124,28 @@ public class PrecioTimer {
 //            System.out.println("Nope");
 //        }
 //        listAssets.clear();
-//    }
-//
-//    private String deAccent(String str) {
-//        String nfdNormalizedString = Normalizer.normalize(str, Normalizer.Form.NFD);
-//        Pattern pattern = Pattern.compile("\\p{InCombiningDiacriticalMarks}+");
-//        return pattern.matcher(nfdNormalizedString).replaceAll("");
-//    }
+    }
+
+    private List<SecurityClass> getSecurityList() {
+        Query q = em.createQuery("SELECT s FROM SecurityClass s");
+        return q.getResultList();
+    }
+
+    private Map<String, Asset> getAssetMap() {
+        Map<String, Asset> ma = new HashMap<>();
+        Query q = em.createQuery("SELECT a FROM Asset a");
+        List<Asset> la = q.getResultList();
+        for (Asset a : la) {
+            ma.put(a.getTicker().getTickerValue(), a);
+        }
+        return ma;
+    }
+
+    private String deAccent(String str) {
+        String nfdNormalizedString = Normalizer.normalize(str, Normalizer.Form.NFD);
+        Pattern pattern = Pattern.compile("\\p{InCombiningDiacriticalMarks}+");
+        return pattern.matcher(nfdNormalizedString).replaceAll("");
+    }
 //
 //    public Map<String, Asset> getAssetPropertiesFromTyC(Map<String, Asset> ma) {
 //        assetType = getAssetType();
@@ -193,7 +183,6 @@ public class PrecioTimer {
 ////        } catch (SQLException ex) {
 ////            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
 ////        }
-//
 //        String r = "/home/neftaly/tyc.csv";
 //        Reader reader = null;
 //        try {
@@ -215,16 +204,12 @@ public class PrecioTimer {
 //                                String daycount = record.get(16);
 //                                if (daycount.contains("COMERCIALES")) {
 //                                    va.setDayCount(Long.valueOf(1));
+//                                } else if (daycount.contains("DESCONOCIDO")) {
+//                                    va.setDayCount(Long.valueOf(2));
+//                                } else if (daycount.contains("NATURALES")) {
+//                                    va.setDayCount(Long.valueOf(3));
 //                                } else {
-//                                    if (daycount.contains("DESCONOCIDO")) {
-//                                        va.setDayCount(Long.valueOf(2));
-//                                    } else {
-//                                        if (daycount.contains("NATURALES")) {
-//                                            va.setDayCount(Long.valueOf(3));
-//                                        } else {
-//                                            va.setDayCount(null);
-//                                        }
-//                                    }
+//                                    va.setDayCount(null);
 //                                }
 //                                String mdate = record.get(37);
 //                                try {
@@ -294,51 +279,54 @@ public class PrecioTimer {
 //        }
 //        return ma;
 //    }
-//
-//    public Map<String, String> getAssetType() {
-//        Map<String, String> assetType = new HashMap<>();
-//        char delimiter = '\'';
-//        String r = "/home/neftaly/types.csv";
-//        Reader reader = null;
-//        try {
-//            final URL url = new URL("file://" + r);
-//            reader = new InputStreamReader(new BOMInputStream(url.openStream()), "UTF-8");
-//            final CSVParser parser = new CSVParser(reader, CSVFormat.EXCEL);
-//            try {
-//                int count = 0;
-//                for (final CSVRecord record : parser) {
-//                    count++;
-//                    try {
-//                        assetType.put(record.get(1).replaceAll("\\s+", ""), record.get(0));
-//                    } catch (NullPointerException e) {
-//                        System.out.println("Linea en blanco " + count);
-//                    } catch (ArrayIndexOutOfBoundsException e) {
-//                        System.out.println("Malformado " + count);
-//                    }
-//                }
-//            } finally {
-//                parser.close();
-//                reader.close();
-//            }
-//        } catch (UnsupportedEncodingException ex) {
-//            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
-//        } catch (MalformedURLException ex) {
-//            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
-//        } catch (IOException ex) {
-//            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
-//        } catch (Exception ex) {
-//            System.out.println("Excepcion de escape en CSV o una cosa rara que hace PIP");
-//            ex.printStackTrace();
-//        } finally {
-//            try {
-//                reader.close();
-//            } catch (IOException ex) {
-//                Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
-//            }
-//        }
-//        return assetType;
-//    }
-//
+
+    public void persistSecurityClassFromCSV() {
+        String r = "/home/neftaly/samasDocs/types.csv";
+        Reader reader = null;
+        try {
+            final URL url = new URL("file://" + r);
+            reader = new InputStreamReader(new BOMInputStream(url.openStream()), "UTF-8");
+            final CSVParser parser = new CSVParser(reader, CSVFormat.EXCEL);
+            try {
+                int count = 0;
+                for (final CSVRecord record : parser) {
+                    count++;
+                    try {
+                        SecurityClass sc = new SecurityClass();
+                        sc.setCode(record.get(0).replaceAll("\\s+", ""));
+                        sc.setKind(record.get(2));
+                        sc.setDescription(record.get(1));
+                        em.persist(sc);
+                    } catch (NullPointerException e) {
+                        System.out.println("Linea en blanco " + count);
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        System.out.println("Malformado " + count);
+                    } catch (Exception e) {
+                        System.out.println("Encontramos un Security Class con el mismo codigo");
+                        e.printStackTrace();
+                    }
+                }
+            } finally {
+                parser.close();
+                reader.close();
+            }
+        } catch (UnsupportedEncodingException ex) {
+            Logger.getLogger(CheckAssets.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(CheckAssets.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(CheckAssets.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            System.out.println("Excepcion de escape en CSV o una cosa rara que hace PIP");
+        } finally {
+            try {
+                reader.close();
+            } catch (IOException ex) {
+                Logger.getLogger(CheckAssets.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+////
 //    private boolean pushAssetsToDB(Map<String, Asset> assets) {
 //        String query = "INSERT INTO ASSET( "
 //                + " DTYPE,"
@@ -556,5 +544,5 @@ public class PrecioTimer {
 //        }
 //
 //    }
-//}
+
 }

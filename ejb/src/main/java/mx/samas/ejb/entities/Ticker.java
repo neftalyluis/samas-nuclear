@@ -27,6 +27,7 @@ public class Ticker implements Serializable {
     * TICKER CON MARKET
     * @return 
     */
+    private String tickerValue;
 
     public Long getId() {
         return id;
@@ -59,6 +60,21 @@ public class Ticker implements Serializable {
     @Override
     public String toString() {
         return "mx.samas.ejb.entities.Ticker[ id=" + id + " ]";
+    }
+
+
+    /**
+     * @return the tickerValue
+     */
+    public String getTickerValue() {
+        return tickerValue;
+    }
+
+    /**
+     * @param tickerValue the tickerValue to set
+     */
+    public void setTickerValue(String tickerValue) {
+        this.tickerValue = tickerValue;
     }
     
 }
