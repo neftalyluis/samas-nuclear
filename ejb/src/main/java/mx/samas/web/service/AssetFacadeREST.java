@@ -87,5 +87,5 @@ public class AssetFacadeREST extends AbstractFacade<Asset> {
     protected EntityManager getEntityManager() {
         return em;
     }
-    
+
 }
