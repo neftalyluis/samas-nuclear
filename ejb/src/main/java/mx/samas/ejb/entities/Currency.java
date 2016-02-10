@@ -15,10 +15,15 @@ import javax.xml.bind.annotation.XmlRootElement;
 /**
  *
  * @author neftaly
+ *
+ * Esta entidad que extiende a Asset sirve para distinguir los Activos que son
+ * moneda, no usa otros parametros mas alla de los suministrados por la clase
+ * padre.
  */
 @Entity
 @XmlRootElement
 public class Currency extends Asset implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -56,5 +61,5 @@ public class Currency extends Asset implements Serializable {
     public String toString() {
         return "mx.samas.ejb.entities.Currency[ id=" + id + " ]";
     }
-    
+
 }

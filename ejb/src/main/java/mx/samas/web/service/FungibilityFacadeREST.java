@@ -25,7 +25,7 @@ import mx.samas.ejb.entities.Fungibility;
  * @author neftaly
  */
 @Stateless
-@Path("mx.samas.ejb.entities.fungibility")
+@Path("fungibility")
 public class FungibilityFacadeREST extends AbstractFacade<Fungibility> {
 
     @PersistenceContext(unitName = "mx_samas_ejb_1.0PU")

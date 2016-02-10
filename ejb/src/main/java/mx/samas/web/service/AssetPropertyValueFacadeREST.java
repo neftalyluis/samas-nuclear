@@ -25,7 +25,7 @@ import mx.samas.ejb.entities.AssetPropertyValue;
  * @author neftaly
  */
 @Stateless
-@Path("mx.samas.ejb.entities.assetpropertyvalue")
+@Path("assetpropertyvalue")
 public class AssetPropertyValueFacadeREST extends AbstractFacade<AssetPropertyValue> {
 
     @PersistenceContext(unitName = "mx_samas_ejb_1.0PU")

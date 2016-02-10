@@ -25,7 +25,7 @@ import mx.samas.ejb.entities.Ticker;
  * @author neftaly
  */
 @Stateless
-@Path("mx.samas.ejb.entities.ticker")
+@Path("ticker")
 public class TickerFacadeREST extends AbstractFacade<Ticker> {
 
     @PersistenceContext(unitName = "mx_samas_ejb_1.0PU")

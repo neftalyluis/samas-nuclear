@@ -25,7 +25,7 @@ import mx.samas.ejb.entities.Issuer;
  * @author neftaly
  */
 @Stateless
-@Path("mx.samas.ejb.entities.issuer")
+@Path("issuer")
 public class IssuerFacadeREST extends AbstractFacade<Issuer> {
 
     @PersistenceContext(unitName = "mx_samas_ejb_1.0PU")

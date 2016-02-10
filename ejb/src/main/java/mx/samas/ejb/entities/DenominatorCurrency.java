@@ -16,18 +16,21 @@ import javax.xml.bind.annotation.XmlRootElement;
 /**
  *
  * @author neftaly
+ *
+ * Esta entidad sirve como relacion con los Assets, para reflejar la moneda en
+ * la que cotizan
  */
 @Entity
 @XmlRootElement
 public class DenominatorCurrency implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
+
     @OneToOne
     private Currency currency;
-    
 
     public Long getId() {
         return id;
@@ -76,5 +79,4 @@ public class DenominatorCurrency implements Serializable {
         this.currency = currency;
     }
 
-    
 }

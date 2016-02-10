@@ -25,7 +25,7 @@ import mx.samas.ejb.entities.Blotter;
  * @author neftaly
  */
 @Stateless
-@Path("mx.samas.ejb.entities.blotter")
+@Path("blotter")
 public class BlotterFacadeREST extends AbstractFacade<Blotter> {
 
     @PersistenceContext(unitName = "mx_samas_ejb_1.0PU")

@@ -25,7 +25,7 @@ import mx.samas.ejb.entities.Broker;
  * @author neftaly
  */
 @Stateless
-@Path("mx.samas.ejb.entities.broker")
+@Path("broker")
 public class BrokerFacadeREST extends AbstractFacade<Broker> {
 
     @PersistenceContext(unitName = "mx_samas_ejb_1.0PU")

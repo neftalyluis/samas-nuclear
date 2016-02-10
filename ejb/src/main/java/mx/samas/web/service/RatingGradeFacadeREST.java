@@ -25,7 +25,7 @@ import mx.samas.ejb.entities.RatingGrade;
  * @author neftaly
  */
 @Stateless
-@Path("mx.samas.ejb.entities.ratinggrade")
+@Path("ratinggrade")
 public class RatingGradeFacadeREST extends AbstractFacade<RatingGrade> {
 
     @PersistenceContext(unitName = "mx_samas_ejb_1.0PU")

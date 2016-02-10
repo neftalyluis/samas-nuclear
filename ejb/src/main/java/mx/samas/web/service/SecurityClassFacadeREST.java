@@ -25,7 +25,7 @@ import mx.samas.ejb.entities.SecurityClass;
  * @author neftaly
  */
 @Stateless
-@Path("mx.samas.ejb.entities.securityclass")
+@Path("securityclass")
 public class SecurityClassFacadeREST extends AbstractFacade<SecurityClass> {
 
     @PersistenceContext(unitName = "mx_samas_ejb_1.0PU")

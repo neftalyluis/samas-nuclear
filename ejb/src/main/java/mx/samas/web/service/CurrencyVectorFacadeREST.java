@@ -25,7 +25,7 @@ import mx.samas.ejb.entities.CurrencyVector;
  * @author neftaly
  */
 @Stateless
-@Path("mx.samas.ejb.entities.currencyvector")
+@Path("currencyvector")
 public class CurrencyVectorFacadeREST extends AbstractFacade<CurrencyVector> {
 
     @PersistenceContext(unitName = "mx_samas_ejb_1.0PU")

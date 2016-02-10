@@ -25,7 +25,7 @@ import mx.samas.ejb.entities.SliceVector;
  * @author neftaly
  */
 @Stateless
-@Path("mx.samas.ejb.entities.slicevector")
+@Path("slicevector")
 public class SliceVectorFacadeREST extends AbstractFacade<SliceVector> {
 
     @PersistenceContext(unitName = "mx_samas_ejb_1.0PU")

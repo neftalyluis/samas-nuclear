@@ -25,7 +25,7 @@ import mx.samas.ejb.entities.DayCount;
  * @author neftaly
  */
 @Stateless
-@Path("mx.samas.ejb.entities.daycount")
+@Path("daycount")
 public class DayCountFacadeREST extends AbstractFacade<DayCount> {
 
     @PersistenceContext(unitName = "mx_samas_ejb_1.0PU")

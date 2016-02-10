@@ -25,7 +25,7 @@ import mx.samas.ejb.entities.UserRole;
  * @author neftaly
  */
 @Stateless
-@Path("mx.samas.ejb.entities.userrole")
+@Path("userrole")
 public class UserRoleFacadeREST extends AbstractFacade<UserRole> {
 
     @PersistenceContext(unitName = "mx_samas_ejb_1.0PU")

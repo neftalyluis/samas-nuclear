@@ -25,7 +25,7 @@ import mx.samas.ejb.entities.Currency;
  * @author neftaly
  */
 @Stateless
-@Path("mx.samas.ejb.entities.currency")
+@Path("currency")
 public class CurrencyFacadeREST extends AbstractFacade<Currency> {
 
     @PersistenceContext(unitName = "mx_samas_ejb_1.0PU")

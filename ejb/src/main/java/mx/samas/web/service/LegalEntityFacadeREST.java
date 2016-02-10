@@ -25,7 +25,7 @@ import mx.samas.ejb.entities.LegalEntity;
  * @author neftaly
  */
 @Stateless
-@Path("mx.samas.ejb.entities.legalentity")
+@Path("legalentity")
 public class LegalEntityFacadeREST extends AbstractFacade<LegalEntity> {
 
     @PersistenceContext(unitName = "mx_samas_ejb_1.0PU")

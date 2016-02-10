@@ -25,7 +25,7 @@ import mx.samas.ejb.entities.UserProfile;
  * @author neftaly
  */
 @Stateless
-@Path("mx.samas.ejb.entities.userprofile")
+@Path("userprofile")
 public class UserProfileFacadeREST extends AbstractFacade<UserProfile> {
 
     @PersistenceContext(unitName = "mx_samas_ejb_1.0PU")

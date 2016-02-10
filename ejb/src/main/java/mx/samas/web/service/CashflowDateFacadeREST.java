@@ -25,7 +25,7 @@ import mx.samas.ejb.entities.CashflowDate;
  * @author neftaly
  */
 @Stateless
-@Path("mx.samas.ejb.entities.cashflowdate")
+@Path("cashflowdate")
 public class CashflowDateFacadeREST extends AbstractFacade<CashflowDate> {
 
     @PersistenceContext(unitName = "mx_samas_ejb_1.0PU")

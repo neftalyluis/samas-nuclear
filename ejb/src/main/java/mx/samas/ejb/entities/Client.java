@@ -18,6 +18,8 @@ import javax.xml.bind.annotation.XmlTransient;
 /**
  *
  * @author neftaly
+ * 
+ * Entidad que guarda una lista de Clientes de los portafolios
  */
 @Entity
 @XmlRootElement

@@ -25,7 +25,7 @@ import mx.samas.ejb.entities.PortfolioVector;
  * @author neftaly
  */
 @Stateless
-@Path("mx.samas.ejb.entities.portfoliovector")
+@Path("portfoliovector")
 public class PortfolioVectorFacadeREST extends AbstractFacade<PortfolioVector> {
 
     @PersistenceContext(unitName = "mx_samas_ejb_1.0PU")

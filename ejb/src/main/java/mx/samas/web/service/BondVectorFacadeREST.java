@@ -25,7 +25,7 @@ import mx.samas.ejb.entities.BondVector;
  * @author neftaly
  */
 @Stateless
-@Path("mx.samas.ejb.entities.bondvector")
+@Path("bondvector")
 public class BondVectorFacadeREST extends AbstractFacade<BondVector> {
 
     @PersistenceContext(unitName = "mx_samas_ejb_1.0PU")

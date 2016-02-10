@@ -25,7 +25,7 @@ import mx.samas.ejb.entities.Accrual;
  * @author neftaly
  */
 @Stateless
-@Path("mx.samas.ejb.entities.accrual")
+@Path("accrual")
 public class AccrualFacadeREST extends AbstractFacade<Accrual> {
 
     @PersistenceContext(unitName = "mx_samas_ejb_1.0PU")

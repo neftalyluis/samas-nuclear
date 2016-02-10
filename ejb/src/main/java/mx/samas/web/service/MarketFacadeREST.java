@@ -25,7 +25,7 @@ import mx.samas.ejb.entities.Market;
  * @author neftaly
  */
 @Stateless
-@Path("mx.samas.ejb.entities.market")
+@Path("market")
 public class MarketFacadeREST extends AbstractFacade<Market> {
 
     @PersistenceContext(unitName = "mx_samas_ejb_1.0PU")

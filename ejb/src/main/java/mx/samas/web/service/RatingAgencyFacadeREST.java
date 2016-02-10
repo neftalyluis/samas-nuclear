@@ -25,7 +25,7 @@ import mx.samas.ejb.entities.RatingAgency;
  * @author neftaly
  */
 @Stateless
-@Path("mx.samas.ejb.entities.ratingagency")
+@Path("ratingagency")
 public class RatingAgencyFacadeREST extends AbstractFacade<RatingAgency> {
 
     @PersistenceContext(unitName = "mx_samas_ejb_1.0PU")

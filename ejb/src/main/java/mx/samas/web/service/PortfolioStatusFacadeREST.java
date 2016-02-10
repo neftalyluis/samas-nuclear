@@ -25,7 +25,7 @@ import mx.samas.ejb.entities.PortfolioStatus;
  * @author neftaly
  */
 @Stateless
-@Path("mx.samas.ejb.entities.portfoliostatus")
+@Path("portfoliostatus")
 public class PortfolioStatusFacadeREST extends AbstractFacade<PortfolioStatus> {
 
     @PersistenceContext(unitName = "mx_samas_ejb_1.0PU")

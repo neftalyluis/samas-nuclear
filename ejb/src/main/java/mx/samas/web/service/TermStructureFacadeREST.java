@@ -25,7 +25,7 @@ import mx.samas.ejb.entities.TermStructure;
  * @author neftaly
  */
 @Stateless
-@Path("mx.samas.ejb.entities.termstructure")
+@Path("termstructure")
 public class TermStructureFacadeREST extends AbstractFacade<TermStructure> {
 
     @PersistenceContext(unitName = "mx_samas_ejb_1.0PU")

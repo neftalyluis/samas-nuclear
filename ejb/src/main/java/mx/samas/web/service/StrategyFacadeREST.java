@@ -25,7 +25,7 @@ import mx.samas.ejb.entities.Strategy;
  * @author neftaly
  */
 @Stateless
-@Path("mx.samas.ejb.entities.strategy")
+@Path("strategy")
 public class StrategyFacadeREST extends AbstractFacade<Strategy> {
 
     @PersistenceContext(unitName = "mx_samas_ejb_1.0PU")

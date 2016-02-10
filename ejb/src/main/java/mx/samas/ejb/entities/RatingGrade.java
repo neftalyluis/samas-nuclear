@@ -20,22 +20,16 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Entity
 @XmlRootElement
 public class RatingGrade implements Serializable {
-    private static final long serialVersionUID = 1L;
 
-    /**
-     * @return the serialVersionUID
-     */
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
-    }
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
+
     @ManyToOne
     private RatingAgency agency;
-    
+
     private String grade;
 
     public Long getId() {
@@ -69,7 +63,7 @@ public class RatingGrade implements Serializable {
     @Override
     public String toString() {
         return "mx.samas.ejb.entities.CreditRating[ id=" + getId() + " ]";
-    }    
+    }
 
     /**
      * @return the agency

@@ -15,9 +15,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 /**
  * Aplicacion Normativa
  *
- * @author neftaly Esto se refiere al DayCount Convention existentes para cada
- * Bono, referirse a la documentacion de MATLAB estos son para los metodos de
- * calculo de metodos
+ * @author neftaly
+ *
+ * Esto se refiere al DayCount Convention existentes para cada Bono, referirse a
+ * la documentacion de MATLAB estos son para los metodos de calculo de metodos
  */
 @Entity
 @XmlRootElement

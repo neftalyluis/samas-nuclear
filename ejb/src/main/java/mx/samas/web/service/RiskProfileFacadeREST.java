@@ -25,7 +25,7 @@ import mx.samas.ejb.entities.RiskProfile;
  * @author neftaly
  */
 @Stateless
-@Path("mx.samas.ejb.entities.riskprofile")
+@Path("riskprofile")
 public class RiskProfileFacadeREST extends AbstractFacade<RiskProfile> {
 
     @PersistenceContext(unitName = "mx_samas_ejb_1.0PU")

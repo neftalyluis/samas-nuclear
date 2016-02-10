@@ -25,7 +25,7 @@ import mx.samas.ejb.entities.Bank;
  * @author neftaly
  */
 @Stateless
-@Path("mx.samas.ejb.entities.bank")
+@Path("bank")
 public class BankFacadeREST extends AbstractFacade<Bank> {
 
     @PersistenceContext(unitName = "mx_samas_ejb_1.0PU")

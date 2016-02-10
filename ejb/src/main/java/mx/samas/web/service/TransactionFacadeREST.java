@@ -25,7 +25,7 @@ import mx.samas.ejb.entities.Transaction;
  * @author neftaly
  */
 @Stateless
-@Path("mx.samas.ejb.entities.transaction")
+@Path("transaction")
 public class TransactionFacadeREST extends AbstractFacade<Transaction> {
 
     @PersistenceContext(unitName = "mx_samas_ejb_1.0PU")

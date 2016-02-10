@@ -25,7 +25,7 @@ import mx.samas.ejb.entities.Bond;
  * @author neftaly
  */
 @Stateless
-@Path("mx.samas.ejb.entities.bond")
+@Path("bond")
 public class BondFacadeREST extends AbstractFacade<Bond> {
 
     @PersistenceContext(unitName = "mx_samas_ejb_1.0PU")

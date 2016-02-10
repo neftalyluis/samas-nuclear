@@ -25,7 +25,7 @@ import mx.samas.ejb.entities.SettlementTimes;
  * @author neftaly
  */
 @Stateless
-@Path("mx.samas.ejb.entities.settlementtimes")
+@Path("settlementtimes")
 public class SettlementTimesFacadeREST extends AbstractFacade<SettlementTimes> {
 
     @PersistenceContext(unitName = "mx_samas_ejb_1.0PU")

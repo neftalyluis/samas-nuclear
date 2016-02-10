@@ -25,7 +25,7 @@ import mx.samas.ejb.entities.PositionVector;
  * @author neftaly
  */
 @Stateless
-@Path("mx.samas.ejb.entities.positionvector")
+@Path("positionvector")
 public class PositionVectorFacadeREST extends AbstractFacade<PositionVector> {
 
     @PersistenceContext(unitName = "mx_samas_ejb_1.0PU")
