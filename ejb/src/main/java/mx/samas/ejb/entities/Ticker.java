@@ -10,24 +10,31 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author neftaly
+ * @author neftaly Esta entidad se encarga de dar un catalogo de identificadores
+ * para activos que operan en mas de un mercado.
  */
 @Entity
 @XmlRootElement
 public class Ticker implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-   /**
-    * TICKER CON MARKET
-    * @return 
-    */
+    /**
+     * TICKER CON MARKET
+     *
+     * @return
+     */
     private String tickerValue;
+
+    @ManyToOne
+    private Market market;
 
     public Long getId() {
         return id;
@@ -62,7 +69,6 @@ public class Ticker implements Serializable {
         return "mx.samas.ejb.entities.Ticker[ id=" + id + " ]";
     }
 
-
     /**
      * @return the tickerValue
      */
@@ -76,5 +82,19 @@ public class Ticker implements Serializable {
     public void setTickerValue(String tickerValue) {
         this.tickerValue = tickerValue;
     }
-    
+
+    /**
+     * @return the market
+     */
+    public Market getMarket() {
+        return market;
+    }
+
+    /**
+     * @param market the market to set
+     */
+    public void setMarket(Market market) {
+        this.market = market;
+    }
+
 }

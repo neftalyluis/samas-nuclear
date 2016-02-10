@@ -17,6 +17,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 /**
  *
  * @author neftaly
+ *
+ * Entidad que guarda con relacion al tiempo las propiedades imperativas de los
+ * Bonos
  */
 @Entity
 @XmlRootElement
@@ -36,7 +39,7 @@ public class BondVector extends AssetVector implements Serializable {
      */
     private Double spread;
     private Double amountOutstanding;
-    
+
     /**
      * Checar la migracion de calificaciones a Entidades, tucán
      */
@@ -44,10 +47,10 @@ public class BondVector extends AssetVector implements Serializable {
     private String gradeSP;
     private String gradeHR;
     private String gradeFitch;
-    
+
     @ManyToMany
     private List<RatingGrade> ratings;
-    
+
     private Double faceValue;
 
     public Long getId() {

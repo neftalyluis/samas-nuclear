@@ -30,7 +30,7 @@ public class SecurityClass implements Serializable {
     @Column(unique = true)
     private String code;
     private String description;
-    private String kind;
+    private String assetType;
 
     public Long getId() {
         return id;
@@ -93,18 +93,19 @@ public class SecurityClass implements Serializable {
         this.description = description;
     }
 
+
     /**
-     * @return the kind
+     * @return the assetType
      */
-    public String getKind() {
-        return kind;
+    public String getAssetType() {
+        return assetType;
     }
 
     /**
-     * @param kind the kind to set
+     * @param assetType the assetType to set
      */
-    public void setKind(String kind) {
-        this.kind = kind;
+    public void setAssetType(String assetType) {
+        this.assetType = assetType;
     }
 
 }

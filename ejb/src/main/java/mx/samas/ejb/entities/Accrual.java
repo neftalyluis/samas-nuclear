@@ -17,9 +17,11 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author neftaly Accrual acumula en el proceso de cierre y es en función a la
- * posición del dia que devengan impuestos, comisiones y/o solicitudes del
- * cliente como lo expresa el PositionVector de ese día .
+ * @author neftaly
+ *
+ * Accrual acumula en el proceso de cierre y es en función a la posición del dia
+ * que devengan impuestos, comisiones y/o solicitudes del cliente como lo
+ * expresa el PositionVector de ese día .
  */
 @Entity
 @XmlRootElement
@@ -45,7 +47,7 @@ public class Accrual implements Serializable {
      */
     @ManyToOne
     private SourceOwner accrualOwner;
-    
+
     @ManyToOne
     private DenominatorCurrency currencyDenomination;
 

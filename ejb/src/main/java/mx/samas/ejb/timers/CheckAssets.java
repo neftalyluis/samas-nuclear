@@ -136,7 +136,7 @@ public class CheckAssets implements CheckAssetsLocal {
         Query q = em.createQuery("SELECT a FROM Asset a");
         List<Asset> la = q.getResultList();
         for (Asset a : la) {
-            ma.put(a.getTicker().getTickerValue(), a);
+//            ma.put(a.getTicker().getTickerValue(), a);
         }
         return ma;
     }
@@ -294,7 +294,7 @@ public class CheckAssets implements CheckAssetsLocal {
                     try {
                         SecurityClass sc = new SecurityClass();
                         sc.setCode(record.get(0).replaceAll("\\s+", ""));
-                        sc.setKind(record.get(2));
+//                        sc.setKind(record.get(2));
                         sc.setDescription(record.get(1));
                         em.persist(sc);
                     } catch (NullPointerException e) {

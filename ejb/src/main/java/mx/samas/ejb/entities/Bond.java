@@ -23,6 +23,8 @@ import javax.xml.bind.annotation.XmlTransient;
 /**
  *
  * @author neftaly
+ *
+ * Entidad que engloba las propiedades imperativas para los bonos
  */
 @Entity
 @XmlRootElement
@@ -35,11 +37,10 @@ public class Bond extends Asset implements Serializable {
 
     private Double spreadFixed;
     @Temporal(javax.persistence.TemporalType.DATE)
-    
+
     /* maturityDate puede ser eliminada ya que la última entrada en cashflowDate
     es el vencimiento, dónde paga cupón y amortiza. */
-    
-    private Date maturityDate; 
+    private Date maturityDate;
     @OneToMany(mappedBy = "bond", cascade = CascadeType.ALL)
     private List<CashflowDate> cashflowDate;
 
@@ -51,9 +52,9 @@ public class Bond extends Asset implements Serializable {
 
     @OneToOne
     private TermStructure termStructure;
-    
+
     /**
-     * Propiedades Distintivas  <= Recuerda que estas van en AssetProperty.java
+     * Propiedades Distintivas <= Recuerda que estas van en AssetProperty.java
      */
 //    private Boolean callable;
 //    private Boolean amortizing;
@@ -61,7 +62,6 @@ public class Bond extends Asset implements Serializable {
 //    private BondCollateral collateralized;
 //    private Boolean convertible;
 //    private Boolean taxable;
-    
     /* Para todas estas propiedades que se declaran, veamos cómo autogenerar un
     campo booleano de estas: por ejemplo, si le declaras a un bono un impuesto
     «taxRate» considerar usar la introspección de Java para generar una propiedad
@@ -75,8 +75,7 @@ public class Bond extends Asset implements Serializable {
     
     Por cierto, esto aplica también para la propiedad «fund» de Equity; pero esa
     la hacemos a mano.
-    */
-
+     */
     public Long getId() {
         return id;
     }
@@ -181,7 +180,6 @@ public class Bond extends Asset implements Serializable {
         this.cashflowDate = cashflowDate;
     }
 
-
     /**
      * @return the referenceRate
      */
@@ -195,6 +193,5 @@ public class Bond extends Asset implements Serializable {
     public void setReferenceRate(ReferenceRate referenceRate) {
         this.referenceRate = referenceRate;
     }
-
 
 }

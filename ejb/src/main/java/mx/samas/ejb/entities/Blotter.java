@@ -19,6 +19,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 /**
  *
  * @author neftaly
+ *
+ * Aquí se registran los flujos que ocurren en el tiempo para cada operacion
+ * donde haya un intercambio.
  */
 @Entity
 @XmlRootElement
@@ -75,7 +78,7 @@ public class Blotter implements Serializable {
 
     /**
      * A lo mejor instanciar la comision de broker
-     * 
+     *
      */
     private Double passiveComission;
 

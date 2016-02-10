@@ -12,6 +12,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -25,9 +26,11 @@ import javax.xml.bind.annotation.XmlTransient;
  *
  * TV == Security Class; EMISORA == Issuer; SERIE == java.lang.String;
  *
+ * Esta entidad es la entidad padre en la que se basan los cuatro tipos de
+ * activos Basicamente son las propiedades que tienen todos los Activos
+ * existentes
  *
  */
-// Convectir a Abstracto
 @Entity
 @XmlRootElement
 public abstract class Asset implements Serializable {
@@ -39,15 +42,24 @@ public abstract class Asset implements Serializable {
 
     private String name;
 
-    @ManyToOne
-    private SecurityClass securityClass;
+    @ManyToMany
+    private List<Ticker> ticker;
 
-    @ManyToOne
-    private Ticker ticker;
+    /**
+     * Tipo Valor
+     */
+    
+    private String securityClass;
 
+    /**
+     * Emisora
+     */
     @ManyToOne
     private Issuer issuer;
 
+    /**
+     * Serie
+     */
     private String series;
 
     private String isin;
@@ -128,20 +140,6 @@ public abstract class Asset implements Serializable {
     }
 
     /**
-     * @return the securityClass
-     */
-    public SecurityClass getSecurityClass() {
-        return securityClass;
-    }
-
-    /**
-     * @param securityClass the securityClass to set
-     */
-    public void setSecurityClass(SecurityClass securityClass) {
-        this.securityClass = securityClass;
-    }
-
-    /**
      * @return the issuer
      */
     public Issuer getIssuer() {
@@ -167,42 +165,6 @@ public abstract class Asset implements Serializable {
      */
     public void setSeries(String series) {
         this.series = series;
-    }
-
-    /**
-     * @return the ticker
-     */
-    public Ticker getTicker() {
-        return ticker;
-    }
-
-    /**
-     * @param ticker the ticker to set
-     * 
-     * <PRE format="md">
-     *
-     * some text some text some text some text some text some text some text
-     * ##### Lists
-     *
-     * - item1
-     *    1. item11
-     *    2. item12
-     * - item1
-     *
-     * ##### Text formatting
-     *
-     * _emphasis_ and __strong__ and some `code` :
-     *
-     * code line 1 code line 2
-     * 
-     *
-     * some text some text some text some text some text some text some text
-     *
-     * </PRE>
-     *
-     */
-    public void setTicker(Ticker ticker) {
-        this.ticker = ticker;
     }
 
     /**
@@ -288,6 +250,34 @@ public abstract class Asset implements Serializable {
      */
     public void setComission(Boolean comission) {
         this.comission = comission;
+    }
+
+    /**
+     * @return the ticker
+     */
+    public List<Ticker> getTicker() {
+        return ticker;
+    }
+
+    /**
+     * @param ticker the ticker to set
+     */
+    public void setTicker(List<Ticker> ticker) {
+        this.ticker = ticker;
+    }
+
+    /**
+     * @return the securityClass
+     */
+    public String getSecurityClass() {
+        return securityClass;
+    }
+
+    /**
+     * @param securityClass the securityClass to set
+     */
+    public void setSecurityClass(String securityClass) {
+        this.securityClass = securityClass;
     }
 
 }

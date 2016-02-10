@@ -17,6 +17,10 @@ import javax.persistence.OneToMany;
 /**
  *
  * @author neftaly
+ *
+ * Esta entidad se encarga de hacer un agrupamiento de Activos por sus
+ * propiedades, muy importante para las fungibilidades
+ *
  */
 @Entity
 public class AssetType implements Serializable {
@@ -25,12 +29,12 @@ public class AssetType implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
-    
+
     private String name;
-    
+
     @OneToMany
     private List<Asset> asset;
-    
+
     @ManyToMany
     private List<AssetPropertyType> propertyList;
 
@@ -108,5 +112,5 @@ public class AssetType implements Serializable {
     public void setPropertyList(List<AssetPropertyType> propertyList) {
         this.propertyList = propertyList;
     }
-    
+
 }

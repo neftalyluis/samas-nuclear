@@ -16,6 +16,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 /**
  *
  * @author neftaly
+ *
+ * Guarda los valores de de cada AssetProperty
+ *
  */
 @Entity
 @XmlRootElement
@@ -108,7 +111,5 @@ public class AssetPropertyValue implements Serializable {
     public void setObjectValue(String objectValue) {
         this.objectValue = objectValue;
     }
-
-
 
 }
