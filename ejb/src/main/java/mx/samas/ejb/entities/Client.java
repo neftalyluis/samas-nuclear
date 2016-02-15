@@ -18,7 +18,7 @@ import javax.xml.bind.annotation.XmlTransient;
 /**
  *
  * @author neftaly
- * 
+ *
  * Entidad que guarda una lista de Clientes de los portafolios
  */
 @Entity
@@ -34,6 +34,10 @@ public class Client implements Serializable {
 
     @ManyToMany
     private List<PortfolioVector> portfolios;
+
+    public Client(String name) {
+        this.name = name;
+    }
 
     public Long getId() {
         return id;

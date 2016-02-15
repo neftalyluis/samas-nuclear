@@ -14,6 +14,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -30,9 +32,15 @@ import javax.xml.bind.annotation.XmlTransient;
  * activos Basicamente son las propiedades que tienen todos los Activos
  * existentes
  *
+ * 
+ * Boolean ShortSale 
  */
 @Entity
 @XmlRootElement
+@NamedQueries({
+    @NamedQuery(name = "Asset.findByTicker", query = "SELECT a FROM Asset a WHERE a.ticker = :ticker")
+
+})
 public abstract class Asset implements Serializable {
 
     private static final long serialVersionUID = 1L;

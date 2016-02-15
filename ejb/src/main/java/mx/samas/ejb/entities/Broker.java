@@ -17,6 +17,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 /**
  *
  * @author neftaly
+ * 
+ * Esta entidad describe todos los agentes que operan en los portafolios 
  */
 @Entity
 @XmlRootElement
@@ -28,6 +30,10 @@ public class Broker implements Serializable {
     private Long id;
 
     private String name;
+
+    public Broker(String name) {
+        this.name = name;
+    }
 
     @ManyToMany
     private List<BrokerCommission> commisions;
@@ -77,6 +83,20 @@ public class Broker implements Serializable {
      */
     public void setName(String name) {
         this.name = name;
+    }
+
+    /**
+     * @return the commisions
+     */
+    public List<BrokerCommission> getCommisions() {
+        return commisions;
+    }
+
+    /**
+     * @param commisions the commisions to set
+     */
+    public void setCommisions(List<BrokerCommission> commisions) {
+        this.commisions = commisions;
     }
 
 }

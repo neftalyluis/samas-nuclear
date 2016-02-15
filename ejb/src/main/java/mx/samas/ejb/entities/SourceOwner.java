@@ -26,14 +26,17 @@ public class SourceOwner implements Serializable {
     private Long id;
 
     private String name;
-    
+
     /* Siento que SourceOwner = {
         + Business := Comisiones (activas), Bonificaciones, etc;
         + Client := Depósitos, Retiros presupuestados
         + Portfolio := Dividendos, etc
         + Broker := Comisiones (pasivas)
         + Hacienda := Impuestos}
-    */
+     */
+    public SourceOwner(String name) {
+        this.name = name;
+    }
 
     public Long getId() {
         return id;

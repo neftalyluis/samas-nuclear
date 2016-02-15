@@ -12,7 +12,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -33,7 +32,7 @@ public class SliceVector implements Serializable {
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Date dateTime;
 
-    @OneToOne
+    @ManyToOne
     private Asset asset;
 
     @ManyToOne
@@ -43,6 +42,16 @@ public class SliceVector implements Serializable {
     private Strategy strategy;
 
     private Double targetAllocation;
+
+    public SliceVector() {
+    }
+
+    public SliceVector(Date d, Asset a, Strategy s, Double target) {
+        this.asset = a;
+        this.dateTime = d;
+        this.strategy = s;
+        this.targetAllocation = target;
+    }
 
     public Long getId() {
         return id;

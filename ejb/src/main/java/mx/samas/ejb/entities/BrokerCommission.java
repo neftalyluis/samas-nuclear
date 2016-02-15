@@ -18,10 +18,14 @@ import javax.xml.bind.annotation.XmlTransient;
 /**
  *
  * @author neftaly
+ *
+ * Esta entidad describe los tipos de comision para todos los agentes que operan
+ * en los portafolios
  */
 @Entity
 @XmlRootElement
 public class BrokerCommission implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -29,11 +33,11 @@ public class BrokerCommission implements Serializable {
 
     @ManyToMany
     private List<Broker> broker;
-    
+
     private Double transactionalCommission;
 
     private String assetType;
-    
+
     public Long getId() {
         return id;
     }
@@ -66,7 +70,6 @@ public class BrokerCommission implements Serializable {
     public String toString() {
         return "mx.samas.ejb.entities.BrokerCommisions[ id=" + id + " ]";
     }
-
 
     /**
      * @return the transactionalCommission
@@ -110,5 +113,5 @@ public class BrokerCommission implements Serializable {
     public void setBroker(List<Broker> broker) {
         this.broker = broker;
     }
-    
+
 }

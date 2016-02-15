@@ -19,6 +19,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 
  Si es discretionary, entonces activeCommission es una comision devengada, sino
  es transaccional
+ * 
+ * Bool ShortSale
  */
 @Entity
 @XmlRootElement

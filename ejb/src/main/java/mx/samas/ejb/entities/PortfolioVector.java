@@ -20,13 +20,19 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
+ * Esta entidad refleja el comportamiento sobre el tiempo de portafolios, dicese
+ * comportamiendo al cambio de Estrategia, Clientes, Estatus o Cuenta.
+ *
+ * 
+ * Nota Adicional : 
+ * 
+ * Un cliente puede tener muchos portafolios en un contrato y que el pago de
+ * dividendo/cupon/rendimiento se asigna a cada portafolio en funcion de los
+ * titulos que tiene Si es discretionary, entonces comission es una comision
+ * devengada, sino es transaccional
+ *
  * @author neftaly
  */
-//un cliente puede tener muchos portafolios en un contrato y que el pago de 
-//dividendo/cupon/rendimiento se asigna a cada portafolio en funcion de los 
-//titulos que tiene
-// * Si es discretionary, entonces comission es una comision devengada, sino
-// * es transaccional
 @Entity
 @XmlRootElement
 public class PortfolioVector implements Serializable {

@@ -19,6 +19,13 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
+ * Esta entidad se encarga de agrupar los objetivos de uno o mas portafolios: 
+ * - Lista de Activos
+ * - Perfil de Riesgo (TBD)
+ * 
+ * 
+ *  
+ * Boolean ShortSale 
  * @author alfonso
  */
 @Entity

@@ -14,8 +14,12 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
+ * ¿Seria una buena idea para manejar fungibilidades 1:n hacer un DSL?
+ *
+ * FungiRule
+ *
  * @author neftaly
- 
+ *
  */
 @Entity
 @XmlRootElement
@@ -27,6 +31,10 @@ public class Fungibility implements Serializable {
     private Long id;
 
     private String name;
+
+    private Boolean dynamic;
+    
+    //TBD Fungibilidad
 
     public Long getId() {
         return id;
@@ -73,6 +81,20 @@ public class Fungibility implements Serializable {
      */
     public void setName(String name) {
         this.name = name;
+    }
+
+    /**
+     * @return the dynamic
+     */
+    public Boolean getDynamic() {
+        return dynamic;
+    }
+
+    /**
+     * @param dynamic the dynamic to set
+     */
+    public void setDynamic(Boolean dynamic) {
+        this.dynamic = dynamic;
     }
 
 }
