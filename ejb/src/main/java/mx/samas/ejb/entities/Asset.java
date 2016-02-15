@@ -32,8 +32,8 @@ import javax.xml.bind.annotation.XmlTransient;
  * activos Basicamente son las propiedades que tienen todos los Activos
  * existentes
  *
- * 
- * Boolean ShortSale 
+ *
+ * Boolean ShortSale
  */
 @Entity
 @XmlRootElement
@@ -50,13 +50,11 @@ public abstract class Asset implements Serializable {
 
     private String name;
 
-    @ManyToMany
-    private List<Ticker> ticker;
+    private String ticker;
 
     /**
      * Tipo Valor
      */
-    
     private String securityClass;
 
     /**
@@ -76,13 +74,11 @@ public abstract class Asset implements Serializable {
     private DenominatorCurrency currencyDenomination;
 
     /**
-     * Si es verdadero, entonces se asocia ese asset a una comision
-     * (pasiva::Broker y activa::Client)
-     */
-    private Boolean comission;
-
-    /**
      * "tickSize" es lo que viene siendo la "puja"
+     *
+     * Unidad para ofertar
+     * 
+     * Puja minima,
      */
     private Double tickSize;
 
@@ -93,6 +89,9 @@ public abstract class Asset implements Serializable {
      de evitar declarar explícitamente la fecha valor  -- «settlementTimes» -- para
      cada operación. Quizás se le puede dar al usuario la opción -- de pedir su
      declaración explícita; esto sería por activo.    
+     */
+    /**
+     * Tiempo en que liquida
      */
     @ManyToOne
     private SettlementTimes settlementTimes;
@@ -247,34 +246,6 @@ public abstract class Asset implements Serializable {
     }
 
     /**
-     * @return the comission
-     */
-    public Boolean getComission() {
-        return comission;
-    }
-
-    /**
-     * @param comission the comission to set
-     */
-    public void setComission(Boolean comission) {
-        this.comission = comission;
-    }
-
-    /**
-     * @return the ticker
-     */
-    public List<Ticker> getTicker() {
-        return ticker;
-    }
-
-    /**
-     * @param ticker the ticker to set
-     */
-    public void setTicker(List<Ticker> ticker) {
-        this.ticker = ticker;
-    }
-
-    /**
      * @return the securityClass
      */
     public String getSecurityClass() {
@@ -286,6 +257,20 @@ public abstract class Asset implements Serializable {
      */
     public void setSecurityClass(String securityClass) {
         this.securityClass = securityClass;
+    }
+
+    /**
+     * @return the ticker
+     */
+    public String getTicker() {
+        return ticker;
+    }
+
+    /**
+     * @param ticker the ticker to set
+     */
+    public void setTicker(String ticker) {
+        this.ticker = ticker;
     }
 
 }

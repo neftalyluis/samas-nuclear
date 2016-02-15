@@ -18,6 +18,7 @@ import mx.samas.ejb.exceptions.NotACompleteStrategyException;
 /**
  *
  * Bean que hace operaciones que se aplican a las estrategias
+ *
  * @author neftaly
  */
 @Stateless
@@ -40,15 +41,26 @@ public class StrategyGenerator implements StrategyGeneratorLocal {
         if (full == 100.0) {
             try {
                 em.persist(s);
-                
+
                 return true;
             } catch (Exception e) {
                 LOG.log(Level.WARNING, "No pudimos persistir, la excepcion es: {0}", e.getMessage());
-                
+
                 return false;
             }
         } else {
             throw new NotACompleteStrategyException();
+        }
+    }
+
+    @Override
+    public Strategy getStrategyByName(String name) {
+        try {
+            return (Strategy) em.createNamedQuery("Strategy.findByName").setParameter("name", name).getSingleResult();
+        } catch (Exception e) {
+            LOG.log(Level.WARNING, "No pudimos obtener la estrategia, la excepcion es: {0}", e.getMessage());
+            e.printStackTrace();
+            return null;
         }
     }
 }

@@ -19,4 +19,13 @@ public class BlotterRegistrer implements BlotterRegistrerLocal {
     @PersistenceContext(unitName = "mx_samas_ejb_1.0PU")
     private EntityManager em;
 
+    @Override
+    public boolean depositMoney() {
+        try {
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
 }

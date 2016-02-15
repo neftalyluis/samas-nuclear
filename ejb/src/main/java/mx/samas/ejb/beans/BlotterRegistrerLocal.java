@@ -14,4 +14,7 @@ import javax.ejb.Local;
 @Local
 public interface BlotterRegistrerLocal {
     
+    public boolean depositMoney();
+    
+    
 }

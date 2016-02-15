@@ -34,6 +34,10 @@ public class SourceOwner implements Serializable {
         + Broker := Comisiones (pasivas)
         + Hacienda := Impuestos}
      */
+    public SourceOwner() {
+
+    }
+
     public SourceOwner(String name) {
         this.name = name;
     }

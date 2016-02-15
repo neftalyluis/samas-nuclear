@@ -10,6 +10,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -22,6 +24,10 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @Entity
 @XmlRootElement
+@NamedQueries({
+    @NamedQuery(name = "DenominatorCurrency.findByTicker", query = "SELECT dc FROM DenominatorCurrency dc WHERE dc.currency.ticker= :ticker")
+
+})
 public class DenominatorCurrency implements Serializable {
 
     private static final long serialVersionUID = 1L;

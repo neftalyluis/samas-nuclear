@@ -30,6 +30,10 @@ public class Broker implements Serializable {
     private Long id;
 
     private String name;
+    
+    public Broker(){
+        
+    }
 
     public Broker(String name) {
         this.name = name;

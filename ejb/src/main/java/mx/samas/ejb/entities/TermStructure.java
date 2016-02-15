@@ -26,6 +26,10 @@ public class TermStructure implements Serializable {
     private Long id;
     private String code;
 
+    public TermStructure(){
+        
+    }
+    
     public TermStructure(String name) {
         this.code = name;
     }

@@ -15,4 +15,5 @@ import mx.samas.ejb.entities.Strategy;
 @Local
 public interface StrategyGeneratorLocal {
     public boolean persistStrategy(Strategy s);
+    public Strategy getStrategyByName(String name);
 }
