@@ -35,9 +35,6 @@ public class PositionVector implements Serializable {
     private PortfolioVector portfolioVector;
 
     @ManyToOne
-    private SliceVector sliceVector;
-
-    @ManyToOne
     private Asset asset;
 
     private Long quantity;
@@ -129,20 +126,6 @@ public class PositionVector implements Serializable {
      */
     public void setPortfolioVector(PortfolioVector portfolioVector) {
         this.portfolioVector = portfolioVector;
-    }
-
-    /**
-     * @return the sliceVector
-     */
-    public SliceVector getSliceVector() {
-        return sliceVector;
-    }
-
-    /**
-     * @param sliceVector the sliceVector to set
-     */
-    public void setSliceVector(SliceVector sliceVector) {
-        this.sliceVector = sliceVector;
     }
 
 }

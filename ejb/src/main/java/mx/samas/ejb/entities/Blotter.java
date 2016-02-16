@@ -54,8 +54,6 @@ public class Blotter implements Serializable {
     @ManyToOne
     private Broker broker;
 
-    @ManyToOne
-    private PortfolioVector portfolio;
 
     @ManyToOne
     private Transaction transaction;
@@ -194,20 +192,6 @@ public class Blotter implements Serializable {
      */
     public void setBroker(Broker broker) {
         this.broker = broker;
-    }
-
-    /**
-     * @return the portfolio
-     */
-    public PortfolioVector getPortfolio() {
-        return portfolio;
-    }
-
-    /**
-     * @param portfolio the portfolio to set
-     */
-    public void setPortfolio(PortfolioVector portfolio) {
-        this.portfolio = portfolio;
     }
 
     /**

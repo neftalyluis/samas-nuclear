@@ -5,6 +5,7 @@
  */
 package mx.samas.ejb.timers;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -18,6 +19,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import mx.samas.ejb.beans.StrategyGeneratorLocal;
 import mx.samas.ejb.entities.Bank;
+import mx.samas.ejb.entities.Blotter;
 import mx.samas.ejb.entities.Bond;
 import mx.samas.ejb.entities.Broker;
 import mx.samas.ejb.entities.Client;
@@ -34,6 +36,7 @@ import mx.samas.ejb.entities.SliceVector;
 import mx.samas.ejb.entities.SourceOwner;
 import mx.samas.ejb.entities.Strategy;
 import mx.samas.ejb.entities.TermStructure;
+import mx.samas.ejb.entities.Transaction;
 
 /**
  *
@@ -71,6 +74,10 @@ public class OnDeployBootstraping {
         persistBank();
         persistPortfolioStatuses();
         persistPortfolioVectors();
+        createBrokersAndCommisions();
+        persistTransactions();
+        depositMoneyToPortfolio();
+        buyEquityAMZN();
         log.info("=================SAMAS Bootstrap=================");
         timer.cancel();
     }
@@ -376,6 +383,7 @@ public class OnDeployBootstraping {
             em.persist(HSBC);
             return true;
         } catch (Exception e) {
+            log.log(Level.WARNING, "No pudimos persistir el Broker, la excepcion es: {0}", e.getMessage());
             return false;
         }
     }
@@ -609,5 +617,111 @@ public class OnDeployBootstraping {
             log.log(Level.WARNING, "No pudimos persistir los PortfolioVector, la excepcion es: {0}", e.getMessage());
             return false;
         }
+    }
+
+    private Broker getUniqueBroker() {
+        try {
+            return (Broker) em.createNamedQuery("Broker.getByName").setParameter("name", "HSBC").getSingleResult();
+        } catch (Exception e) {
+            log.log(Level.WARNING, "No pudimos obtener nuestro broker, la excepcion es: {0}", e.getMessage());
+            return null;
+        }
+    }
+
+    private PortfolioAccount getContract(String name) {
+        try {
+            return (PortfolioAccount) em.createQuery("SELECT pa FROM PortfolioAccount pa WHERE pa.accountNumber= :number").setParameter("number", name).getSingleResult();
+        } catch (Exception e) {
+            log.log(Level.WARNING, "No pudimos obtener nuestro contrato, la excepcion es: {0}", e.getMessage());
+            return null;
+        }
+
+    }
+
+    private boolean persistTransactions() {
+        Transaction depositMoneyFromClient = new Transaction();
+        depositMoneyFromClient.setName("Deposito en efectivo");
+        depositMoneyFromClient.setOpCash(new Long(1));
+        depositMoneyFromClient.setOpQuantity(new Long(0));
+
+        Transaction buyAsset = new Transaction();
+        buyAsset.setName("Compra");
+        buyAsset.setOpCash(new Long(-1));
+        buyAsset.setOpQuantity(new Long(1));
+        try {
+            em.persist(depositMoneyFromClient);
+            em.persist(buyAsset);
+            return true;
+        } catch (Exception e) {
+            log.log(Level.WARNING, "No pudimos persistir nuestra transaccion, la excepcion es: {0}", e.getMessage());
+            return false;
+        }
+
+    }
+
+    private void depositMoneyToPortfolio() {
+
+        try {
+            Blotter b = new Blotter();
+            b.setActiveComission(0.0);
+            b.setAsset(null);
+            b.setBroker(getUniqueBroker());
+            b.setCashFlow(10000000.0);
+            b.setContract(getContract("GYRFEMK_87654"));
+            b.setInputDate(saveDate(2013, 2, 25));
+            b.setPassiveComission(0.0);
+            b.setPrice(1.0);
+            b.setQuantity(new Long(10000000));
+            b.setQuantityFlow(10000000.0);
+            b.setSettlementDate(saveDate(2013, 2, 25));
+            b.setTradeDate(saveDate(2013, 2, 25));
+            b.setTransaction((Transaction) em.createQuery("SELECT t FROM Transaction t WHERE t.name= :name").setParameter("name", "Deposito en efectivo").setMaxResults(1).getSingleResult());
+            b.setTransactionSource((SourceOwner) em.createQuery("SELECT so FROM SourceOwner so WHERE so.name= :name").setParameter("name", "Client").setMaxResults(1).getSingleResult());
+
+            em.persist(b);
+        } catch (Exception e) {
+            log.log(Level.WARNING, "No pudimos persistir nuestra operacion en el blotter, la excepcion es: {0}", e.getMessage());
+
+        }
+    }
+
+    private void buyEquityAMZN() {
+        try {
+            Blotter b = new Blotter();
+            b.setAsset((Equity) em.createNamedQuery("Asset.findByTicker").setParameter("ticker", "1A_AMZN_*").getSingleResult());
+            b.setContract(getContract("GYRFEMK_87654"));
+            b.setBroker(getUniqueBroker());
+            
+            b.setActiveComission(0.0);
+            b.setPassiveComission(0.0);
+            
+            b.setCashFlow(-400158.92);
+            b.setPrice(3304.45);
+            
+            b.setQuantity(new Long(121));
+            b.setQuantityFlow(121.0);
+            
+            b.setInputDate(saveDate(2013, 2, 25));
+            b.setSettlementDate(saveDate(2013, 2, 28));
+            b.setTradeDate(saveDate(2013, 2, 25));
+            
+            b.setTransaction((Transaction) em.createQuery("SELECT t FROM Transaction t WHERE t.name= :name").setParameter("name", "Compra").setMaxResults(1).getSingleResult());
+            b.setTransactionSource((SourceOwner) em.createQuery("SELECT so FROM SourceOwner so WHERE so.name= :name").setParameter("name", "Portfolio").setMaxResults(1).getSingleResult());
+
+            em.persist(b);
+        } catch (Exception e) {
+            log.log(Level.WARNING, "No pudimos persistir nuestra operacion en el blotter, la excepcion es: {0}", e.getMessage());
+
+        }
+    }
+
+//    private PortfolioVector getLastPortfolioVector(){
+////        tryc
+//    }
+    private Date saveDate(int y, int m, int d) {
+        Calendar cal = Calendar.getInstance();
+        // set the year,month and day to something else
+        cal.set(y, m, d);
+        return cal.getTime();
     }
 }
