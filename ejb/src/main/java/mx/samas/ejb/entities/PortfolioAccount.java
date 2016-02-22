@@ -16,10 +16,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 /**
  *
  * @author neftaly
-
- Si es discretionary, entonces activeCommission es una comision devengada, sino
- es transaccional
- * 
+ *
+ * Si es discretionary, entonces activeCommission es una comision devengada,
+ * sino es transaccional
+ *
  * Bool ShortSale
  */
 @Entity
@@ -36,6 +36,8 @@ public class PortfolioAccount implements Serializable {
     private Boolean discretionary;
 
     private Double activeCommission;
+    
+    private Boolean shortSale;
 
     @ManyToOne
     private Bank bank;
@@ -127,6 +129,20 @@ public class PortfolioAccount implements Serializable {
      */
     public void setDiscretionary(Boolean discretionary) {
         this.discretionary = discretionary;
+    }
+
+    /**
+     * @return the shortSale
+     */
+    public Boolean getShortSale() {
+        return shortSale;
+    }
+
+    /**
+     * @param shortSale the shortSale to set
+     */
+    public void setShortSale(Boolean shortSale) {
+        this.shortSale = shortSale;
     }
 
 }

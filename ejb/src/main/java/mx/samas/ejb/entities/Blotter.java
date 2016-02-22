@@ -52,45 +52,32 @@ public class Blotter implements Serializable {
     private Asset asset;
 
     @ManyToOne
-    private Broker broker;
-
-
-    @ManyToOne
     private Transaction transaction;
-    /**
-     * Client Gvt Portfolio, osea quien dirige la transaccion.
-     */
-    @ManyToOne
-    private SourceOwner transactionSource;
-
-    private Long quantity;
 
     private Double price;
 
-    private Double cashFlow;
+    /**
+     * Tasa: Como precio en operacion en directo Tasa: Como tasa a devengar en
+     * operaciones a credito
+     */
+    private Double rate;
 
     /**
-     * Comision de Cliente
+     * Es el flujo de efectivo de la operación
      */
-    private Double activeComission;
-
-    /**
-     * A lo mejor instanciar la comision de broker
-     *
-     */
-    private Double passiveComission;
-
+    private Double amount;
+    
     /**
      * Flujo de titulos
      */
-    private Double quantityFlow;
+    private Double quantity;
 
     @ManyToOne
     private PortfolioAccount contract;
 
     @OneToOne
     private Market market;
-
+    
     public Long getId() {
         return id;
     }
@@ -181,20 +168,6 @@ public class Blotter implements Serializable {
     }
 
     /**
-     * @return the broker
-     */
-    public Broker getBroker() {
-        return broker;
-    }
-
-    /**
-     * @param broker the broker to set
-     */
-    public void setBroker(Broker broker) {
-        this.broker = broker;
-    }
-
-    /**
      * @return the transaction
      */
     public Transaction getTransaction() {
@@ -206,20 +179,6 @@ public class Blotter implements Serializable {
      */
     public void setTransaction(Transaction transaction) {
         this.transaction = transaction;
-    }
-
-    /**
-     * @return the quantity
-     */
-    public Long getQuantity() {
-        return quantity;
-    }
-
-    /**
-     * @param quantity the quantity to set
-     */
-    public void setQuantity(Long quantity) {
-        this.quantity = quantity;
     }
 
     /**
@@ -237,59 +196,45 @@ public class Blotter implements Serializable {
     }
 
     /**
-     * @return the cashFlow
+     * @return the rate
      */
-    public Double getCashFlow() {
-        return cashFlow;
+    public Double getRate() {
+        return rate;
     }
 
     /**
-     * @param cashFlow the cashFlow to set
+     * @param rate the rate to set
      */
-    public void setCashFlow(Double cashFlow) {
-        this.cashFlow = cashFlow;
+    public void setRate(Double rate) {
+        this.rate = rate;
     }
 
     /**
-     * @return the activeComission
+     * @return the amount
      */
-    public Double getActiveComission() {
-        return activeComission;
+    public Double getAmount() {
+        return amount;
     }
 
     /**
-     * @param activeComission the activeComission to set
+     * @param amount the amount to set
      */
-    public void setActiveComission(Double activeComission) {
-        this.activeComission = activeComission;
+    public void setAmount(Double amount) {
+        this.amount = amount;
     }
 
     /**
-     * @return the passiveComission
+     * @return the quantity
      */
-    public Double getPassiveComission() {
-        return passiveComission;
+    public Double getQuantity() {
+        return quantity;
     }
 
     /**
-     * @param passiveComission the passiveComission to set
+     * @param quantity the quantity to set
      */
-    public void setPassiveComission(Double passiveComission) {
-        this.passiveComission = passiveComission;
-    }
-
-    /**
-     * @return the quantityFlow
-     */
-    public Double getQuantityFlow() {
-        return quantityFlow;
-    }
-
-    /**
-     * @param quantityFlow the quantityFlow to set
-     */
-    public void setQuantityFlow(Double quantityFlow) {
-        this.quantityFlow = quantityFlow;
+    public void setQuantity(Double quantity) {
+        this.quantity = quantity;
     }
 
     /**
@@ -304,20 +249,6 @@ public class Blotter implements Serializable {
      */
     public void setContract(PortfolioAccount contract) {
         this.contract = contract;
-    }
-
-    /**
-     * @return the transactionSource
-     */
-    public SourceOwner getTransactionSource() {
-        return transactionSource;
-    }
-
-    /**
-     * @param transactionSource the transactionSource to set
-     */
-    public void setTransactionSource(SourceOwner transactionSource) {
-        this.transactionSource = transactionSource;
     }
 
     /**

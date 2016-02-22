@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -25,12 +26,20 @@ public class Transaction implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    /**
+     * Client Gvt Portfolio, osea quien dirige la transaccion.
+     */
+    @ManyToOne
+    private SourceOwner transactionSource;
+
     private String name;
+
+    private Boolean credit;
 
     private Long opQuantity;
 
     private Long opCash;
-  
+
     public Long getId() {
         return id;
     }
@@ -104,6 +113,34 @@ public class Transaction implements Serializable {
      */
     public void setOpCash(Long opCash) {
         this.opCash = opCash;
+    }
+
+    /**
+     * @return the credit
+     */
+    public Boolean getCredit() {
+        return credit;
+    }
+
+    /**
+     * @param credit the credit to set
+     */
+    public void setCredit(Boolean credit) {
+        this.credit = credit;
+    }
+
+    /**
+     * @return the transactionSource
+     */
+    public SourceOwner getTransactionSource() {
+        return transactionSource;
+    }
+
+    /**
+     * @param transactionSource the transactionSource to set
+     */
+    public void setTransactionSource(SourceOwner transactionSource) {
+        this.transactionSource = transactionSource;
     }
 
 }

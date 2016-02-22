@@ -6,6 +6,8 @@
 package mx.samas.ejb.beans;
 
 import javax.ejb.Local;
+import mx.samas.ejb.entities.Market;
+import mx.samas.ejb.entities.PortfolioAccount;
 
 /**
  *
@@ -13,8 +15,13 @@ import javax.ejb.Local;
  */
 @Local
 public interface BlotterRegistrerLocal {
-    
-    public boolean depositMoney();
-    
-    
+
+    public boolean depositMoney(Double amount, PortfolioAccount contract);
+
+    public boolean sellAsset();
+
+    public boolean buyAsset();
+
+    public boolean reporto();
+
 }

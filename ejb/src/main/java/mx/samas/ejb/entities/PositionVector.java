@@ -39,6 +39,13 @@ public class PositionVector implements Serializable {
 
     private Long quantity;
 
+    /**
+     * Si es collateral esta posicion es la prenda que respalda el credito; de
+     * no existir prenda en un credito en un quirografario
+     *  
+     */
+    private Boolean collateral;
+
     public Long getId() {
         return id;
     }
@@ -126,6 +133,20 @@ public class PositionVector implements Serializable {
      */
     public void setPortfolioVector(PortfolioVector portfolioVector) {
         this.portfolioVector = portfolioVector;
+    }
+
+    /**
+     * @return the collateral
+     */
+    public Boolean getCollateral() {
+        return collateral;
+    }
+
+    /**
+     * @param collateral the collateral to set
+     */
+    public void setCollateral(Boolean collateral) {
+        this.collateral = collateral;
     }
 
 }
