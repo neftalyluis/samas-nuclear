@@ -53,29 +53,6 @@ public class Bond extends Asset implements Serializable {
     @OneToOne
     private TermStructure termStructure;
 
-    /**
-     * Propiedades Distintivas <= Recuerda que estas van en AssetProperty.java
-     */
-//    private Boolean callable;
-//    private Boolean amortizing;
-//    @ManyToOne
-//    private BondCollateral collateralized;
-//    private Boolean convertible;
-//    private Boolean taxable;
-    /* Para todas estas propiedades que se declaran, veamos cómo autogenerar un
-    campo booleano de estas: por ejemplo, si le declaras a un bono un impuesto
-    «taxRate» considerar usar la introspección de Java para generar una propiedad
-    «isTaxRate = true». Ganamos tres cosas: (1) simplicidad -- sólo usamos booleanos
-    para las propiedades distintivas; (2) una vez creada «isTaxRate», ya puede ser
-    utilizado para otros Assets, así como sus métodos relacionados con este; y
-    (3) ya que fue creado por introspección para ese primer bono, todos los otros
-    bonos definidos previo a este bono -- cuando no existía la propiedad «taxRate» --
-    por definición serán «isTaxRate = false», quedando perfectamente consistente
-    la estructura analítica de samas.
-    
-    Por cierto, esto aplica también para la propiedad «fund» de Equity; pero esa
-    la hacemos a mano.
-     */
     public Long getId() {
         return id;
     }

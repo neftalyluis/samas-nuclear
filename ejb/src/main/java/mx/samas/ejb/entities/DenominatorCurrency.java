@@ -38,6 +38,14 @@ public class DenominatorCurrency implements Serializable {
     @OneToOne
     private Currency currency;
 
+    public DenominatorCurrency() {
+
+    }
+
+    public DenominatorCurrency(Currency currency) {
+        this.currency = currency;
+    }
+
     public Long getId() {
         return id;
     }

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mx.samas.ejb.beans;
+package mx.samas.ejb.beans.logic;
 
 import java.util.List;
 import java.util.logging.Level;
@@ -22,12 +22,12 @@ import mx.samas.ejb.exceptions.NotACompleteStrategyException;
  * @author neftaly
  */
 @Stateless
-public class StrategyGenerator implements StrategyGeneratorLocal {
+public class StrategyBean implements StrategyBeanLocal {
 
     @PersistenceContext(unitName = "mx_samas_ejb_1.0PU")
     private EntityManager em;
 
-    private static final Logger LOG = Logger.getLogger(StrategyGenerator.class.getName());
+    private static final Logger LOG = Logger.getLogger(StrategyBean.class.getName());
 
 //Solo se puede aplicar cuando no existen fungibilidades, o de menos Liquidez
     @Override

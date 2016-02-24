@@ -19,8 +19,6 @@ import javax.xml.bind.annotation.XmlRootElement;
  *
  * Si es discretionary, entonces activeCommission es una comision devengada,
  * sino es transaccional
- *
- * Bool ShortSale
  */
 @Entity
 @XmlRootElement
@@ -31,14 +29,29 @@ public class PortfolioAccount implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    /**
+     * Numero de cuenta
+     */
     private String accountNumber;
 
+    /**
+     * Se refiere a que si esta contrato tiene comision discrecional
+     */
     private Boolean discretionary;
 
+    /**
+     * La comision activa
+     */
     private Double activeCommission;
     
+    /**
+     * Indica si esta cuenta acepta ventas en corto
+     */
     private Boolean shortSale;
 
+    /**
+     * El banco al cual pertenece esta cuenta
+     */
     @ManyToOne
     private Bank bank;
 

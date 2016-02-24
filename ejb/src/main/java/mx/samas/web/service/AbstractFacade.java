@@ -11,6 +11,7 @@ import javax.persistence.EntityManager;
 /**
  *
  * @author neftaly
+ * @param <T> La entidad con la que se va a operar
  */
 public abstract class AbstractFacade<T> {
 

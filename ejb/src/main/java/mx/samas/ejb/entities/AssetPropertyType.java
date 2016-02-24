@@ -28,8 +28,18 @@ public class AssetPropertyType implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    /**
+     * Nombre de la propiedad
+     */
     private String name;
+    /**
+     * Descripcion de la propiedad
+     */
     private String description;
+    /**
+     * El tipo de dato que va a manejar esta propiedad: - Boolean -
+     * String - Integer - Double - Date
+     */
     private String type;
 
     public Long getId() {

@@ -29,6 +29,23 @@ public class Currency extends Asset implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    /**
+     * Nuevo objeto vacio
+     */
+    public Currency() {
+    }
+
+    /**
+     * @param name El nombre del Activo
+     * @param securityClass El tipo valor
+     * @param issuer La emisora
+     * @param series La serie
+     * @param shortSale ¿Este activo se puede usar para ventas en corto?
+     */
+    public Currency(String name, String securityClass, Issuer issuer, String series, Boolean shortSale) {
+        super(name, securityClass, issuer, series, shortSale);
+    }
+
     public Long getId() {
         return id;
     }

@@ -32,22 +32,32 @@ public class Accrual implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    /**
+     * Cantidad a devengar
+     */
     private Double amount;
 
+    /**
+     * Fecha del registro
+     */
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date dateTime;
 
+    /**
+     * A que portafolio le pertenece este devengo
+     */
     @ManyToOne
     private PortfolioAccount contract;
 
     /**
-     * Los dueños de AccrualType Gobierno.- Impuestos; Negocio.- Comisiones;
-     * Cliente.-Solicitudes de liquidez
-     *
+     * De quien proviene ese devengo
      */
     @ManyToOne
     private SourceOwner accrualOwner;
 
+    /**
+     * Moneda en el que esta valuado este devengo
+     */
     @ManyToOne
     private DenominatorCurrency currencyDenomination;
 

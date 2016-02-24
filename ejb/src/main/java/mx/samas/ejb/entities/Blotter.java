@@ -12,7 +12,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -33,6 +32,41 @@ public class Blotter implements Serializable {
     private Long id;
 
     /**
+     * Contructor generico
+     */
+    public Blotter() {
+
+    }
+
+    /**
+     * 
+     * @param amount
+     * @param asset
+     * @param account
+     * @param inputDate
+     * @param market
+     * @param price
+     * @param quantity
+     * @param rate
+     * @param settlementDate
+     * @param tradeDate
+     * @param transaction 
+     */
+    public Blotter(Double amount, Asset asset, PortfolioAccount account, Date inputDate, Market market, Double price, Long quantity, Double rate, Date settlementDate, Date tradeDate, Transaction transaction) {
+        this.amount = amount;
+        this.asset = asset;
+        this.contract = account;
+        this.inputDate = inputDate;
+        this.market = market;
+        this.price = price;
+        this.quantity = quantity;
+        this.rate = rate;
+        this.settlementDate = settlementDate;
+        this.tradeDate = tradeDate;
+        this.transaction = transaction;
+    }
+
+    /**
      * 2.- Momento en el que se ejecuta la orden
      */
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
@@ -48,12 +82,21 @@ public class Blotter implements Serializable {
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Date inputDate;
 
+    /**
+     * Activo al cual se le esta registrando, si es que existe alguna
+     */
     @ManyToOne
     private Asset asset;
 
+    /**
+     * Tipo de transaccion que se registra
+     */
     @ManyToOne
     private Transaction transaction;
 
+    /**
+     * Precio total
+     */
     private Double price;
 
     /**
@@ -66,18 +109,24 @@ public class Blotter implements Serializable {
      * Es el flujo de efectivo de la operación
      */
     private Double amount;
-    
+
     /**
      * Flujo de titulos
      */
-    private Double quantity;
+    private Long quantity;
 
+    /**
+     * Contrato del que deriva esta entrada
+     */
     @ManyToOne
     private PortfolioAccount contract;
 
-    @OneToOne
+    /**
+     * Mercado en el cual se operó esta transaccion
+     */
+    @ManyToOne
     private Market market;
-    
+
     public Long getId() {
         return id;
     }
@@ -226,14 +275,14 @@ public class Blotter implements Serializable {
     /**
      * @return the quantity
      */
-    public Double getQuantity() {
+    public Long getQuantity() {
         return quantity;
     }
 
     /**
      * @param quantity the quantity to set
      */
-    public void setQuantity(Double quantity) {
+    public void setQuantity(Long quantity) {
         this.quantity = quantity;
     }
 

@@ -23,7 +23,11 @@ public class BlotterChild extends Blotter implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    
+
+    public BlotterChild() {
+
+    }
+
     @ManyToOne
     private Blotter father;
 
@@ -73,5 +77,5 @@ public class BlotterChild extends Blotter implements Serializable {
     public void setFather(Blotter father) {
         this.father = father;
     }
-    
+
 }

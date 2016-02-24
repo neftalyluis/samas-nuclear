@@ -23,24 +23,22 @@ import javax.xml.bind.annotation.XmlTransient;
 @Entity
 @XmlRootElement
 public class Market implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
+
     private String code;
-    
-    
+
     @OneToOne
-    private DenominatorCurrency currency;   
-    
+    private DenominatorCurrency currency;
+
     @ManyToMany
-    private List <SecurityClass> securities;
-    
+    private List<SecurityClass> securities;
+
     @ManyToMany
-    private List <Broker> brokers;
-    
-    
+    private List<Broker> brokers;
 
     public Long getId() {
         return id;
@@ -107,14 +105,14 @@ public class Market implements Serializable {
      * @return the securities
      */
     @XmlTransient
-    public List <SecurityClass> getSecurities() {
+    public List<SecurityClass> getSecurities() {
         return securities;
     }
 
     /**
      * @param securities the securities to set
      */
-    public void setSecurities(List <SecurityClass> securities) {
+    public void setSecurities(List<SecurityClass> securities) {
         this.securities = securities;
     }
 
@@ -122,15 +120,15 @@ public class Market implements Serializable {
      * @return the brokers
      */
     @XmlTransient
-    public List <Broker> getBrokers() {
+    public List<Broker> getBrokers() {
         return brokers;
     }
 
     /**
      * @param brokers the brokers to set
      */
-    public void setBrokers(List <Broker> brokers) {
+    public void setBrokers(List<Broker> brokers) {
         this.brokers = brokers;
     }
-    
+
 }

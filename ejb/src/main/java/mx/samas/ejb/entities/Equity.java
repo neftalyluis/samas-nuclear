@@ -25,16 +25,6 @@ public class Equity extends Asset implements Serializable {
     private Long id;
     
     private Boolean privateMarket;
-    
-    /**
-     * Propiedades distintivas
-     * @return 
-     */
-//    private Boolean fund;
-//    /**
-//     * Solo si fund es verdadero, sino NULL
-//     */
-//    private Double fee;
 
     public Long getId() {
         return id;

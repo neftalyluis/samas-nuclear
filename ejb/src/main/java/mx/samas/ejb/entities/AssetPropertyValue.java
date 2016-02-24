@@ -17,7 +17,10 @@ import javax.xml.bind.annotation.XmlRootElement;
  *
  * @author neftaly
  *
- * Guarda los valores de de cada AssetProperty
+ * Aquí guardamos los valores de la propiedad y asset asignado
+ *
+ * Esto es: para cada asset con un assetproperty siempre debe de existir un
+ * assetpropertyvalues
  *
  */
 @Entity

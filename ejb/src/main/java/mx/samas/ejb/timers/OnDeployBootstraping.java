@@ -18,7 +18,6 @@ import javax.ejb.Timer;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import mx.samas.ejb.beans.BlotterRegistrerLocal;
-import mx.samas.ejb.beans.StrategyGeneratorLocal;
 import mx.samas.ejb.entities.Bank;
 import mx.samas.ejb.entities.Bond;
 import mx.samas.ejb.entities.Broker;
@@ -37,6 +36,7 @@ import mx.samas.ejb.entities.SourceOwner;
 import mx.samas.ejb.entities.Strategy;
 import mx.samas.ejb.entities.TermStructure;
 import mx.samas.ejb.entities.Transaction;
+import mx.samas.ejb.beans.logic.StrategyBeanLocal;
 
 /**
  *
@@ -53,7 +53,7 @@ public class OnDeployBootstraping {
     private EntityManager em;
 
     @EJB
-    private StrategyGeneratorLocal sgl;
+    private StrategyBeanLocal sgl;
 
     @EJB
     private BlotterRegistrerLocal brl;
@@ -64,7 +64,9 @@ public class OnDeployBootstraping {
     protected void init(Timer timer) {
         log.info("=================SAMAS Bootstrap=================");
         log.info("Persistiendo Entidades Iniciales");
-        persistSecurityClasses();
+
+        //Por ahora no se usaran estas entidades.
+//        persistSecurityClasses();
         persistIssuers();
         persistClients();
         persistInitialCurrency();
@@ -133,15 +135,6 @@ public class OnDeployBootstraping {
         }
     }
 
-    private Issuer getIssuerByCode(String code) {
-        try {
-            return (Issuer) em.createNamedQuery("Issuer.findByCode").setParameter("code", code).getSingleResult();
-        } catch (Exception e) {
-            log.log(Level.WARNING, "No pudimos obtener el Issuer, la excepcion es: {0}", e.getMessage());
-            return null;
-        }
-    }
-
     private boolean persistIssuers() {
         try {
             Issuer bonos = new Issuer();
@@ -198,7 +191,47 @@ public class OnDeployBootstraping {
         }
     }
 
+    private boolean persistClients() {
+        try {
+            Client j = new Client("Juan");
+            Client a = new Client("Eduardo");
+            Client e = new Client("Ricardo");
+            em.persist(e);
+            em.persist(a);
+            em.persist(j);
+            return true;
+        } catch (Exception e) {
+            log.log(Level.WARNING, "No pudimos persistir los Clients, la excepcion es: {0}", e.getMessage());
+            return false;
+        }
+    }
+
+    private void persistInitialCurrency() {
+
+        DenominatorCurrency mxpcd = new DenominatorCurrency();
+
+        Currency mxpeso = new Currency();
+        mxpeso.setCurrencyDenomination(mxpcd);
+        mxpeso.setName("Peso Mexicano");
+        mxpeso.setSecurityClass("*C");
+        mxpeso.setIssuer((Issuer) em.createNamedQuery("Issuer.findByCode").setParameter("code", "MXP").getSingleResult());
+        mxpeso.setSeries("");
+        mxpeso.setTicker("*C_MXP_");
+
+        mxpcd.setCurrency(mxpeso);
+
+        try {
+            log.info("--Currency MXP");
+            log.info("--Asset MXP");
+            em.persist(mxpeso);
+            em.persist(mxpcd);
+        } catch (Exception e) {
+            log.log(Level.WARNING, "No pudimos persistir el Currency Inicial, la excepcion es: {0}", e.getMessage());
+        }
+    }
+
     private boolean persistAssets() {
+
         Equity amzn = new Equity();
         amzn.setCurrencyDenomination(getMXPCurrency());
         amzn.setSecurityClass("1A");
@@ -312,7 +345,6 @@ public class OnDeployBootstraping {
         brfs.setTicker("1A_BRFS_N");
 
         try {
-            log.info("--Assets");
 
             em.persist(amzn);
             em.persist(tsla);
@@ -328,63 +360,14 @@ public class OnDeployBootstraping {
             em.persist(bonos24);
             em.persist(bonos42);
             em.persist(brfs);
+
+            log.info("--Equities y Bonds");
             return true;
         } catch (Exception e) {
             log.log(Level.WARNING, "No pudimos persistir los Assets iniciales, la excepcion es: {0}", e.getMessage());
             return false;
         }
 
-    }
-
-    private void persistInitialCurrency() {
-
-        DenominatorCurrency mxpcd = new DenominatorCurrency();
-
-        Currency mxpeso = new Currency();
-        mxpeso.setIsin(null);
-        mxpeso.setCurrencyDenomination(mxpcd);
-        mxpeso.setName("Peso Mexicano");
-        mxpeso.setSecurityClass("*C");
-        mxpeso.setIssuer((Issuer) em.createNamedQuery("Issuer.findByCode").setParameter("code", "MXP").getSingleResult());
-        mxpeso.setSeries("");
-        mxpeso.setSettlementTimes(null);
-        mxpeso.setTickSize(null);
-        mxpeso.setTicker("*C_MXP_");
-
-        mxpcd.setCurrency(mxpeso);
-
-        try {
-            log.info("--Persistimos el Currency inicial");
-
-            em.persist(mxpeso);
-            em.persist(mxpcd);
-        } catch (Exception e) {
-            log.log(Level.WARNING, "No pudimos persistir el Currency Inicial, la excepcion es: {0}", e.getMessage());
-        }
-    }
-
-    private DenominatorCurrency getMXPCurrency() {
-        try {
-            return (DenominatorCurrency) em.createNamedQuery("DenominatorCurrency.findByTicker").setParameter("ticker", "*C_MXP_").getSingleResult();
-        } catch (Exception e) {
-            log.log(Level.WARNING, "No pudimos obtener el Denominator Currency, la excepcion es: {0}", e.getMessage());
-
-            return null;
-        }
-    }
-
-    private boolean createBrokersAndCommisions() {
-        try {
-            //Checar el ambito de las comisiones, hay muchos campos y falta doncumentacion
-            Broker HSBC = new Broker("HSBC");
-//            BrokerCommission hsbcc = new BrokerCommission();
-//            hsbcc.setBroker(hsbcc.getBroker().push(HSBC));
-            em.persist(HSBC);
-            return true;
-        } catch (Exception e) {
-            log.log(Level.WARNING, "No pudimos persistir el Broker, la excepcion es: {0}", e.getMessage());
-            return false;
-        }
     }
 
     private boolean persistRiskProfile() {
@@ -458,18 +441,23 @@ public class OnDeployBootstraping {
         }
     }
 
-    private boolean persistClients() {
+    private boolean persistSourceOwners() {
         try {
-            Client j = new Client("Juan");
-            Client a = new Client("Eduardo");
-            Client e = new Client("Ricardo");
-            em.persist(e);
-            em.persist(a);
-            em.persist(j);
+            SourceOwner bu = new SourceOwner("Business");
+            SourceOwner cl = new SourceOwner("Client");
+            SourceOwner po = new SourceOwner("Portfolio");
+            SourceOwner br = new SourceOwner("Broker");
+            SourceOwner ha = new SourceOwner("Treasury");
+
+            em.persist(bu);
+            em.persist(cl);
+            em.persist(po);
+            em.persist(br);
+            em.persist(ha);
+
             return true;
         } catch (Exception e) {
-            log.log(Level.WARNING, "No pudimos persistir los Clients, la excepcion es: {0}", e.getMessage());
-
+            log.log(Level.WARNING, "No pudimos persistir los SourceOwners, la excepcion es: {0}", e.getMessage());
             return false;
         }
     }
@@ -498,27 +486,6 @@ public class OnDeployBootstraping {
         }
     }
 
-    private boolean persistSourceOwners() {
-        try {
-            SourceOwner bu = new SourceOwner("Business");
-            SourceOwner cl = new SourceOwner("Client");
-            SourceOwner po = new SourceOwner("Portfolio");
-            SourceOwner br = new SourceOwner("Broker");
-            SourceOwner ha = new SourceOwner("Treasury");
-
-            em.persist(bu);
-            em.persist(cl);
-            em.persist(po);
-            em.persist(br);
-            em.persist(ha);
-
-            return true;
-        } catch (Exception e) {
-            log.log(Level.WARNING, "No pudimos persistir los SourceOwners, la excepcion es: {0}", e.getMessage());
-            return false;
-        }
-    }
-
     private boolean persistBank() {
         Bank b = new Bank();
         b.setName("HSBC");
@@ -528,24 +495,6 @@ public class OnDeployBootstraping {
         } catch (Exception e) {
             log.log(Level.WARNING, "No pudimos persistir el Bank, la excepcion es: {0}", e.getMessage());
             return false;
-        }
-    }
-
-    private Bank getBank() {
-        try {
-            return (Bank) em.createNamedQuery("Bank.findByName").setParameter("name", "HSBC").getSingleResult();
-        } catch (Exception e) {
-            log.log(Level.WARNING, "No pudimos obtener el bank, la excepcion es: {0}", e.getMessage());
-            return null;
-        }
-    }
-
-    private List<Client> getClients() {
-        try {
-            return em.createQuery("SELECT c FROM Client c").getResultList();
-        } catch (Exception e) {
-            log.log(Level.WARNING, "No pudimos obtener la lista de clientes, la excepcion es: {0}", e.getMessage());
-            return null;
         }
     }
 
@@ -567,15 +516,6 @@ public class OnDeployBootstraping {
         } catch (Exception e) {
             log.log(Level.WARNING, "No pudimos persistir los PortfolioStatus, la excepcion es: {0}", e.getMessage());
             return false;
-        }
-    }
-
-    private PortfolioStatus getActiveStatus() {
-        try {
-            return (PortfolioStatus) em.createNamedQuery("PortfolioStatus.active").setMaxResults(1).getSingleResult();
-        } catch (Exception e) {
-            log.log(Level.WARNING, "No pudimos obetener el estatus Activo, la excepcion es: {0}", e.getMessage());
-            return null;
         }
     }
 
@@ -618,31 +558,29 @@ public class OnDeployBootstraping {
         }
     }
 
-    private Broker getUniqueBroker() {
+    private boolean createBrokersAndCommisions() {
         try {
-            return (Broker) em.createNamedQuery("Broker.getByName").setParameter("name", "HSBC").getSingleResult();
+            //Checar el ambito de las comisiones, hay muchos campos y falta doncumentacion
+            Broker HSBC = new Broker("HSBC");
+//            BrokerCommission hsbcc = new BrokerCommission();
+//            hsbcc.setBroker(hsbcc.getBroker().push(HSBC));
+            em.persist(HSBC);
+            return true;
         } catch (Exception e) {
-            log.log(Level.WARNING, "No pudimos obtener nuestro broker, la excepcion es: {0}", e.getMessage());
-            return null;
+            log.log(Level.WARNING, "No pudimos persistir el Broker, la excepcion es: {0}", e.getMessage());
+            return false;
         }
-    }
-
-    private PortfolioAccount getContract(String name) {
-        try {
-            return (PortfolioAccount) em.createQuery("SELECT pa FROM PortfolioAccount pa WHERE pa.accountNumber= :number").setParameter("number", name).getSingleResult();
-        } catch (Exception e) {
-            log.log(Level.WARNING, "No pudimos obtener nuestro contrato, la excepcion es: {0}", e.getMessage());
-            return null;
-        }
-
     }
 
     private boolean persistTransactions() {
+        
+        
+        
         Transaction depositMoneyFromClient = new Transaction();
         depositMoneyFromClient.setName("Deposito en efectivo del Cliente");
         depositMoneyFromClient.setOpCash(new Long(1));
         depositMoneyFromClient.setOpQuantity(new Long(0));
-//        depositMoneyFromClient.setCredit(false);
+        depositMoneyFromClient.setCredit(false);
 //        depositMoneyFromClient.setTransactionSource();
 
 //        Transaction depositMoneyFromClient = new Transaction();
@@ -662,6 +600,7 @@ public class OnDeployBootstraping {
 //        depositMoneyFromClient.setOpCash(new Long(0));
 //        depositMoneyFromClient.setOpQuantity(new Long(-1));
 //        depositMoneyFromClient.setCredit(false);
+
 //////////////////////////////////////////////BUSINESS
 //        Transaction depositMoneyFromClient = new Transaction();
 //        depositMoneyFromClient.setName("Reembolso");
@@ -733,13 +672,58 @@ public class OnDeployBootstraping {
     }
 
     private void depositMoneyToPortfolio() {
-
         try {
-
+            brl.depositMoney(100000000.0, "GYRFEMK_87654");
         } catch (Exception e) {
             log.log(Level.WARNING, "No pudimos persistir nuestra operacion en el blotter, la excepcion es: {0}", e.getMessage());
 
         }
+    }
+
+    private Bank getBank() {
+        try {
+            return (Bank) em.createNamedQuery("Bank.findByName").setParameter("name", "HSBC").getSingleResult();
+        } catch (Exception e) {
+            log.log(Level.WARNING, "No pudimos obtener el bank, la excepcion es: {0}", e.getMessage());
+            return null;
+        }
+    }
+
+    private List<Client> getClients() {
+        try {
+            return em.createQuery("SELECT c FROM Client c").getResultList();
+        } catch (Exception e) {
+            log.log(Level.WARNING, "No pudimos obtener la lista de clientes, la excepcion es: {0}", e.getMessage());
+            return null;
+        }
+    }
+
+    private PortfolioStatus getActiveStatus() {
+        try {
+            return (PortfolioStatus) em.createNamedQuery("PortfolioStatus.active").setMaxResults(1).getSingleResult();
+        } catch (Exception e) {
+            log.log(Level.WARNING, "No pudimos obetener el estatus Activo, la excepcion es: {0}", e.getMessage());
+            return null;
+        }
+    }
+
+    private Broker getUniqueBroker() {
+        try {
+            return (Broker) em.createNamedQuery("Broker.getByName").setParameter("name", "HSBC").getSingleResult();
+        } catch (Exception e) {
+            log.log(Level.WARNING, "No pudimos obtener nuestro broker, la excepcion es: {0}", e.getMessage());
+            return null;
+        }
+    }
+
+    private PortfolioAccount getContract(String name) {
+        try {
+            return (PortfolioAccount) em.createQuery("SELECT pa FROM PortfolioAccount pa WHERE pa.accountNumber= :number").setParameter("number", name).getSingleResult();
+        } catch (Exception e) {
+            log.log(Level.WARNING, "No pudimos obtener nuestro contrato, la excepcion es: {0}", e.getMessage());
+            return null;
+        }
+
     }
 
 //    private void buyEquityAMZN() {
@@ -771,14 +755,29 @@ public class OnDeployBootstraping {
 //
 //        }
 //    }
-//
-////    private PortfolioVector getLastPortfolioVector(){
-//////        tryc
-////    }
     private Date saveDate(int y, int m, int d) {
         Calendar cal = Calendar.getInstance();
         // set the year,month and day to something else
         cal.set(y, m, d);
         return cal.getTime();
+    }
+
+    private Issuer getIssuerByCode(String code) {
+        try {
+            return (Issuer) em.createNamedQuery("Issuer.findByCode").setParameter("code", code).getSingleResult();
+        } catch (Exception e) {
+            log.log(Level.WARNING, "No pudimos obtener el Issuer, la excepcion es: {0}", e.getMessage());
+            return null;
+        }
+    }
+
+    private DenominatorCurrency getMXPCurrency() {
+        try {
+            return (DenominatorCurrency) em.createNamedQuery("DenominatorCurrency.findByTicker").setParameter("ticker", "*C_MXP_").getSingleResult();
+        } catch (Exception e) {
+            log.log(Level.WARNING, "No pudimos obtener el Denominator Currency, la excepcion es: {0}", e.getMessage());
+
+            return null;
+        }
     }
 }

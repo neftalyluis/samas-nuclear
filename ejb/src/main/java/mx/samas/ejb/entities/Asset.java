@@ -8,11 +8,11 @@ package mx.samas.ejb.entities;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -22,18 +22,10 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author neftaly
- *
- * Campos:
- *
- * TV == Security Class; EMISORA == Issuer; SERIE == java.lang.String;
- *
- * Esta entidad es la entidad padre en la que se basan los cuatro tipos de
- * activos Basicamente son las propiedades que tienen todos los Activos
- * existentes
+ * @author neftaly Entidad padre en la que se basan los cuatro tipos de activos,
+ * esta incluyen las propiedades que tienen todos los Activos.
  *
  *
- * Boolean ShortSale
  */
 @Entity
 @XmlRootElement
@@ -48,8 +40,38 @@ public abstract class Asset implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    /**
+     * Nuevo objeto vacio
+     */
+    public Asset() {
+
+    }
+
+    /**
+     * @param name El nombre del Activo
+     * @param securityClass El tipo valor
+     * @param issuer La emisora
+     * @param series La serie
+     * @param shortSale ¿Este activo se puede usar para ventas en corto?
+     */
+    public Asset(String name, String securityClass, Issuer issuer, String series, Boolean shortSale) {
+        this.name = name;
+        this.securityClass = securityClass;
+        this.issuer = issuer;
+        this.series = series;
+        this.ticker = securityClass + "_" + issuer + "_" + series;
+        this.shortSale = shortSale;
+    }
+
+    /**
+     * Nombre del Activo
+     */
     private String name;
 
+    /**
+     * Identificador de un activo, es la concatenacion de TV, Emisora y Serie
+     */
+    @Column(unique=true)
     private String ticker;
 
     /**
@@ -68,6 +90,10 @@ public abstract class Asset implements Serializable {
      */
     private String series;
 
+    /**
+     * Identificador unico de un Asset, puede ser otra opcioón ademas del Ticker
+     */
+    @Column(unique=true)
     private String isin;
 
     @ManyToOne
@@ -77,7 +103,7 @@ public abstract class Asset implements Serializable {
      * "tickSize" es lo que viene siendo la "puja"
      *
      * Unidad para ofertar
-     * 
+     *
      * Puja minima,
      */
     private Double tickSize;
@@ -95,6 +121,11 @@ public abstract class Asset implements Serializable {
      */
     @ManyToOne
     private SettlementTimes settlementTimes;
+
+    /**
+     * Este valor indica si se puede usar este Asset para ventas en corto
+     */
+    private Boolean shortSale;
 
     @OneToMany(mappedBy = "asset", cascade = CascadeType.ALL)
     private List<AssetVector> vectors;
@@ -271,6 +302,20 @@ public abstract class Asset implements Serializable {
      */
     public void setTicker(String ticker) {
         this.ticker = ticker;
+    }
+
+    /**
+     * @return the shortSale
+     */
+    public Boolean getShortSale() {
+        return shortSale;
+    }
+
+    /**
+     * @param shortSale the shortSale to set
+     */
+    public void setShortSale(Boolean shortSale) {
+        this.shortSale = shortSale;
     }
 
 }

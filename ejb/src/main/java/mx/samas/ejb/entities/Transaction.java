@@ -27,17 +27,29 @@ public class Transaction implements Serializable {
     private Long id;
 
     /**
-     * Client Gvt Portfolio, osea quien dirige la transaccion.
+     * Quien dirige la transaccion
      */
     @ManyToOne
     private SourceOwner transactionSource;
 
+    /**
+     * Nombre de la Transaccion
+     */
     private String name;
 
+    /**
+     * Si esta transaccion es a credito
+     */
     private Boolean credit;
 
+    /**
+     * Indica si entran, salen o no hay flujo de titulos
+     */
     private Long opQuantity;
 
+    /**
+     * Indica si entran, salen o no hay flujo de efectivo
+     */
     private Long opCash;
 
     public Long getId() {
