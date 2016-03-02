@@ -33,4 +33,24 @@
             </plugin>
         </plugins>
     </build>
+    <dependencies>
+        <dependency>
+            <groupId>io.swagger</groupId>
+            <artifactId>swagger-jersey2-jaxrs</artifactId>
+            <version>1.5.7</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-beanutils</groupId>
+            <artifactId>commons-beanutils</artifactId>
+            <version>1.8.3</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>mx.samas</groupId>
+            <artifactId>ejb</artifactId>
+            <version>alpha</version>
+            <type>ejb</type>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
 </project>

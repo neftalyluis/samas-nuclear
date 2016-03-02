@@ -17,7 +17,8 @@ import javax.ejb.Stateless;
 import javax.ejb.Timer;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import mx.samas.ejb.beans.BlotterRegistrerLocal;
+import mx.samas.ejb.beans.logic.BlotterRegistrer;
+import mx.samas.ejb.beans.logic.StrategyBean;
 import mx.samas.ejb.entities.Bank;
 import mx.samas.ejb.entities.Bond;
 import mx.samas.ejb.entities.Broker;
@@ -36,7 +37,6 @@ import mx.samas.ejb.entities.SourceOwner;
 import mx.samas.ejb.entities.Strategy;
 import mx.samas.ejb.entities.TermStructure;
 import mx.samas.ejb.entities.Transaction;
-import mx.samas.ejb.beans.logic.StrategyBeanLocal;
 
 /**
  *
@@ -53,10 +53,10 @@ public class OnDeployBootstraping {
     private EntityManager em;
 
     @EJB
-    private StrategyBeanLocal sgl;
+    private StrategyBean sgl;
 
     @EJB
-    private BlotterRegistrerLocal brl;
+    private BlotterRegistrer brl;
 
     private static final Logger log = Logger.getLogger(OnDeployBootstraping.class.getName());
 
@@ -706,6 +706,7 @@ public class OnDeployBootstraping {
             return null;
         }
     }
+    
 
     private Broker getUniqueBroker() {
         try {

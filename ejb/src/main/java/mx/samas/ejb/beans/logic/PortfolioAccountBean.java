@@ -13,9 +13,8 @@ import mx.samas.ejb.entities.PortfolioAccount;
  * @author neftaly
  */
 @Stateless
-public class PortfolioAccountBean implements PortfolioAccountBeanLocal {
+public class PortfolioAccountBean{
 
-    @Override
     public PortfolioAccount findByAccountNumber(String accountNumber) {
         return null;
     }

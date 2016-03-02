@@ -13,9 +13,9 @@ import mx.samas.ejb.entities.Transaction;
  * @author neftaly
  */
 @Stateless
-public class TransactionBean implements TransactionBeanLocal {
+public class TransactionBean{
 
-    @Override
+    
     public Transaction findBySourceAndName(String sourceOwner, String transactionName) {
         return null;
     }

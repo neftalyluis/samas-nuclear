@@ -13,7 +13,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import mx.samas.ejb.entities.SliceVector;
 import mx.samas.ejb.entities.Strategy;
-import mx.samas.ejb.exceptions.NotACompleteStrategyException;
 
 /**
  *
@@ -22,7 +21,7 @@ import mx.samas.ejb.exceptions.NotACompleteStrategyException;
  * @author neftaly
  */
 @Stateless
-public class StrategyBean implements StrategyBeanLocal {
+public class StrategyBean {
 
     @PersistenceContext(unitName = "mx_samas_ejb_1.0PU")
     private EntityManager em;
@@ -30,7 +29,7 @@ public class StrategyBean implements StrategyBeanLocal {
     private static final Logger LOG = Logger.getLogger(StrategyBean.class.getName());
 
 //Solo se puede aplicar cuando no existen fungibilidades, o de menos Liquidez
-    @Override
+    
     public boolean persistStrategy(Strategy s) {
         List<SliceVector> lsv = s.getSlices();
         Double full = 0.0;
@@ -49,11 +48,11 @@ public class StrategyBean implements StrategyBeanLocal {
                 return false;
             }
         } else {
-            throw new NotACompleteStrategyException();
+            return false;
         }
     }
 
-    @Override
+    
     public Strategy getStrategyByName(String name) {
         try {
             return (Strategy) em.createNamedQuery("Strategy.findByName").setParameter("name", name).getSingleResult();

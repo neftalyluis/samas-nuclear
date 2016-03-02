@@ -37,7 +37,7 @@ import org.apache.commons.io.input.BOMInputStream;
  * @author neftaly
  */
 @Stateless
-public class CheckAssets implements CheckAssetsLocal {
+public class CheckAssets {
 
     Map<String, String> assetType;
     Map<String, Asset> assetProps;
