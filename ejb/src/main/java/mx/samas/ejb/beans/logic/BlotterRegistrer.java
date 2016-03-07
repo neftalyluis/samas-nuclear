@@ -12,9 +12,6 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import mx.samas.ejb.beans.logic.AssetBean;
-import mx.samas.ejb.beans.logic.PortfolioAccountBean;
-import mx.samas.ejb.beans.logic.TransactionBean;
 import mx.samas.ejb.entities.Blotter;
 import mx.samas.ejb.entities.BlotterChild;
 

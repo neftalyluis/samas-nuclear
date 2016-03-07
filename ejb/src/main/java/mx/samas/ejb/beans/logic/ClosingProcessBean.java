@@ -5,11 +5,15 @@
  */
 package mx.samas.ejb.beans.logic;
 
+import java.util.Date;
+import java.util.List;
 import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import mx.samas.ejb.entities.Strategy;
+import javax.persistence.TemporalType;
+import mx.samas.ejb.entities.Blotter;
+import mx.samas.ejb.entities.PortfolioAccount;
 
 /**
  *
@@ -17,7 +21,7 @@ import mx.samas.ejb.entities.Strategy;
  */
 @Stateless
 public class ClosingProcessBean {
-
+    
     @PersistenceContext(unitName = "mx_samas_ejb_1.0PU")
     private EntityManager em;
     private static final Logger LOG = Logger.getLogger(ClosingProcessBean.class.getName());
@@ -26,47 +30,59 @@ public class ClosingProcessBean {
      * Posiciones en Directo
      *
      * Directos son titulo personal, titular el protafoclio
-     * 
+     *
      * SELECT POSITION VECTOR WHERE DATE= Día anterior AND NOT COLLATERAL
-     *  cotejar con el Blotter los flujos de titulos 
+     * cotejar con el Blotter los flujos de titulos
+     *
+     *
+     * @param pa
+     * @param d
      */
-    public void onDirect(Strategy s) {
+    public void onDirect(PortfolioAccount pa, Date d) {
         
-        
+        List<Blotter> lb = em.createNamedQuery("Blotter.BuyAndSellFromDateAndAccountWithAsset")
+                .setParameter("account", pa)
+                .setParameter("input", d, TemporalType.DATE)
+                .getResultList();
     }
 
     /**
      * Posiciones en credito
-     * 
+     *
      * titulos que debes o deben
+     *
+     * @param pa
      */
-    public void onCredit(Strategy s) {
-
+    public void onCredit(PortfolioAccount pa) {
+        
     }
 
     /**
      * Posiciones en Flujo Interno
+     *
+     * @param pa
      */
-    public void onFlux(Strategy s) {
-
+    public void onFlux(PortfolioAccount pa) {
+        
+    }
+    
+    public void accrualByServices(PortfolioAccount pa) {
+        
+    }
+    
+    public void accrualByPosition(PortfolioAccount pa) {
+        
+    }
+    
+    public void accrualByCredit(PortfolioAccount pa) {
+        
     }
 
-    public void accrualByServices(Strategy s) {
-
-    }
-
-    public void accrualByPosition(Strategy s) {
-
-    }
-
-    public void accrualByCredit(Strategy s) {
-
-    }
-
-    /**+
+    /**
+     * +
      * Se alimenta PriceVector
      */
     public void genericValuation() {
-
+        
     }
 }

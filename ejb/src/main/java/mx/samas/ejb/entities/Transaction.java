@@ -11,6 +11,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -19,6 +21,10 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @Entity
 @XmlRootElement
+@NamedQueries({
+    @NamedQuery(name = "Transaction.BuyFromPortfolio", query = "SELECT t FROM Transaction t WHERE t.transactionSource.name='Portfolio' AND t.name= 'Compra'"),
+    @NamedQuery(name = "Transaction.SellFromPortfolio", query = "SELECT t FROM Transaction t WHERE t.transactionSource.name='Portfolio' AND t.name= 'Venta'")
+})
 public class Transaction implements Serializable {
 
     private static final long serialVersionUID = 1L;

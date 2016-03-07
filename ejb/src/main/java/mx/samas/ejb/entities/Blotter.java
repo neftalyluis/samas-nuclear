@@ -12,6 +12,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Temporal;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -24,6 +26,28 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @Entity
 @XmlRootElement
+@NamedQueries({
+    @NamedQuery(name = "Blotter.BuyAndSellFromDateAndAccountWithAsset",
+            query = "SELECT b FROM Blotter b JOIN b.transaction t WHERE "
+            + "b.contract= :account "
+            + "AND b.inputDate= :input "
+            + "AND t.transactionSource.name= 'Portfolio' "
+            + "AND (t.name= 'Compra' OR t.name= 'Venta'"
+            + "AND b.asset= :asset)"),
+
+    @NamedQuery(name = "Blotter.BuyAndSellFromDateAndAccountWith",
+            query = "SELECT b FROM Blotter b JOIN b.transaction t WHERE "
+            + "b.contract= :account "
+            + "AND b.inputDate= :input "
+            + "AND t.transactionSource.name= 'Portfolio' "
+            + "AND (t.name= 'Compra' OR t.name= 'Venta'"
+            + "AND b.asset= :asset)"),
+    //Aplica para todos 
+    //Todo lo que opere hoy, traeme todo lo que opere hoy que me liquide siguiente dia, 
+    //
+    @NamedQuery(name = "Blotter.flujosInternosPorDia", query = "SELECT Blotter b WHERE b.inputDate= :date")
+
+})
 public class Blotter implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -39,7 +63,7 @@ public class Blotter implements Serializable {
     }
 
     /**
-     * 
+     *
      * @param amount
      * @param asset
      * @param account
@@ -50,7 +74,7 @@ public class Blotter implements Serializable {
      * @param rate
      * @param settlementDate
      * @param tradeDate
-     * @param transaction 
+     * @param transaction
      */
     public Blotter(Double amount, Asset asset, PortfolioAccount account, Date inputDate, Market market, Double price, Long quantity, Double rate, Date settlementDate, Date tradeDate, Transaction transaction) {
         this.amount = amount;
