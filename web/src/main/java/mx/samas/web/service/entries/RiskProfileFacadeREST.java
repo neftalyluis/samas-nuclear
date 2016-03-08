@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mx.samas.web.service.service;
+package mx.samas.web.service.entries;
 
 import java.util.List;
 import javax.ejb.Stateless;

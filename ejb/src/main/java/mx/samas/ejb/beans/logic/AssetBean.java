@@ -6,6 +6,9 @@
 package mx.samas.ejb.beans.logic;
 
 import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import mx.samas.ejb.beans.exceptions.AppException;
 import mx.samas.ejb.entities.Asset;
 
 /**
@@ -15,8 +18,15 @@ import mx.samas.ejb.entities.Asset;
 @Stateless
 public class AssetBean {
 
-    public Asset findByTicker(String ticker) {
-        return null;
-    }   
-    
+    @PersistenceContext(unitName = "mx_samas_ejb_1.0PU")
+    private EntityManager em;
+
+    public Asset findByTicker(String ticker) throws AppException {
+        try {
+            return (Asset) em.createNamedQuery("Asset.findByTicker").setParameter("ticker", ticker).getSingleResult();
+        } catch (Exception e) {
+            throw new AppException(404, 404, "Asset no encontrado por el ticker", "", "");
+        }
+    }
+
 }

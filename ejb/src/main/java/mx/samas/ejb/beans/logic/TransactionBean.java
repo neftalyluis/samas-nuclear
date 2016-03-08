@@ -6,6 +6,9 @@
 package mx.samas.ejb.beans.logic;
 
 import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import mx.samas.ejb.beans.exceptions.AppException;
 import mx.samas.ejb.entities.Transaction;
 
 /**
@@ -15,13 +18,16 @@ import mx.samas.ejb.entities.Transaction;
 @Stateless
 public class TransactionBean{
 
-    
-    public Transaction findBySourceAndName(String sourceOwner, String transactionName) {
-        return null;
-    }
+    @PersistenceContext(unitName = "mx_samas_ejb_1.0PU")
+    private EntityManager em;
 
-    // Add business logic below. (Right-click in editor and choose
-    // "Insert Code > Add Business Method")
     
+    public Transaction findBySourceAndName(String sourceOwner, String transactionName) throws AppException {
+        try {
+            return (Transaction) em.createNamedQuery("Transaction.findByNameAndOwner").setParameter("nameOwner", sourceOwner).setParameter("nameTransaction", transactionName).getSingleResult();
+        } catch (Exception e) {
+            throw new AppException();
+        }
+    }
     
 }

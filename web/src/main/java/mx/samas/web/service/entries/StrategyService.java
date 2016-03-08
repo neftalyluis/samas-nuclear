@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mx.samas.web.service.service;
+package mx.samas.web.service.entries;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -22,7 +22,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import mx.samas.ejb.beans.logic.StrategyBean;
 import mx.samas.ejb.entities.Strategy;
-import mx.samas.web.errorhandling.NotACompleteStrategyException;
+import mx.samas.ejb.beans.exceptions.NotACompleteStrategyException;
 
 /**
  *

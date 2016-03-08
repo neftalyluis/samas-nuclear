@@ -12,6 +12,7 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import mx.samas.ejb.beans.exceptions.AppException;
 import mx.samas.ejb.entities.Blotter;
 import mx.samas.ejb.entities.BlotterChild;
 
@@ -65,8 +66,14 @@ public class BlotterRegistrer{
         }
     }
     
-    public boolean sellAsset() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean sellEquity() throws AppException{
+        try {
+//            Blotter b = new Blotter(Double.NaN, asset, account, inputDate, market, Double.NaN, Long.MIN_VALUE, Double.NaN, settlementDate, tradeDate, transaction)
+            
+            return false;
+        } catch (Exception e) {
+            throw new AppException();
+        }
     }
     
     public boolean buyEquity(String ticker, Double price, Long quantity, String contract) {

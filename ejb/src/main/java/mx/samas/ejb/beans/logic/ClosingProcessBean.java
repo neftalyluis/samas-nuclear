@@ -29,7 +29,7 @@ public class ClosingProcessBean {
     /**
      * Posiciones en Directo
      *
-     * Directos son titulo personal, titular el protafoclio
+     * Directos son titulo personal, titular el portafolio
      *
      * SELECT POSITION VECTOR WHERE DATE= Día anterior AND NOT COLLATERAL
      * cotejar con el Blotter los flujos de titulos

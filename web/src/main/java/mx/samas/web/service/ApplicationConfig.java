@@ -42,12 +42,12 @@ public class ApplicationConfig extends Application {
      * out calling this method in getClasses().
      */
     private void addRestResourceClasses(Set<Class<?>> resources) {
-        resources.add(mx.samas.web.errorhandling.AppExceptionMapper.class);
         resources.add(mx.samas.web.service.Authentication.class);
         resources.add(mx.samas.web.service.CORSFilter.class);
         resources.add(mx.samas.web.service.CORSRequestFilter.class);
-        resources.add(mx.samas.web.service.service.RiskProfileFacadeREST.class);
-        resources.add(mx.samas.web.service.service.StrategyService.class);
+        resources.add(mx.samas.web.service.entries.RiskProfileFacadeREST.class);
+        resources.add(mx.samas.web.service.entries.StrategyService.class);
+        resources.add(mx.samas.web.service.errorhandling.AppExceptionMapper.class);
     }
 
 }

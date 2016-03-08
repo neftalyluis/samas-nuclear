@@ -436,7 +436,6 @@ public class OnDeployBootstraping {
             return true;
         } catch (Exception e) {
             log.log(Level.WARNING, "No pudimos persistir los Strategies y Slices, la excepcion es: {0} ", e.getMessage());
-            e.printStackTrace();
             return false;
         }
     }
@@ -520,33 +519,34 @@ public class OnDeployBootstraping {
     }
 
     private boolean persistPortfolioVectors() {
-        PortfolioAccount pa = new PortfolioAccount();
-        pa.setAccountNumber("GYRFEMK_87654");
-        pa.setActiveCommission(0.0);
-        pa.setBank(getBank());
-        pa.setDiscretionary(Boolean.FALSE);
-
-        PortfolioVector pv = new PortfolioVector();
-        pv.setAccount(pa);
-        pv.setClients(getClients());
-        pv.setDateTime(new Date());
-        pv.setPortfolioStatus(getActiveStatus());
-        pv.setStrategy(sgl.getStrategyByName("Dividendo y Deuda"));
-
-        PortfolioAccount pal = new PortfolioAccount();
-        pal.setAccountNumber("HGRFD_7654GHJ");
-        pal.setActiveCommission(0.0);
-        pal.setBank(getBank());
-        pal.setDiscretionary(Boolean.FALSE);
-
-        PortfolioVector pvl = new PortfolioVector();
-        pvl.setAccount(pal);
-        pvl.setClients(getClients());
-        pvl.setDateTime(new Date());
-        pvl.setPortfolioStatus(getActiveStatus());
-        pvl.setStrategy(sgl.getStrategyByName("Liquidez"));
 
         try {
+            PortfolioAccount pa = new PortfolioAccount();
+            pa.setAccountNumber("GYRFEMK_87654");
+            pa.setActiveCommission(0.0);
+            pa.setBank(getBank());
+            pa.setDiscretionary(Boolean.FALSE);
+
+            PortfolioVector pv = new PortfolioVector();
+            pv.setAccount(pa);
+            pv.setClients(getClients());
+            pv.setDateTime(new Date());
+            pv.setPortfolioStatus(getActiveStatus());
+            pv.setStrategy(sgl.getStrategyByName("Dividendo y Deuda"));
+
+            PortfolioAccount pal = new PortfolioAccount();
+            pal.setAccountNumber("HGRFD_7654GHJ");
+            pal.setActiveCommission(0.0);
+            pal.setBank(getBank());
+            pal.setDiscretionary(Boolean.FALSE);
+
+            PortfolioVector pvl = new PortfolioVector();
+            pvl.setAccount(pal);
+            pvl.setClients(getClients());
+            pvl.setDateTime(new Date());
+            pvl.setPortfolioStatus(getActiveStatus());
+            pvl.setStrategy(sgl.getStrategyByName("Liquidez"));
+
             em.persist(pa);
             em.persist(pv);
             em.persist(pal);
@@ -573,96 +573,113 @@ public class OnDeployBootstraping {
     }
 
     private boolean persistTransactions() {
-        
-        
-        
+
+        List<Transaction> tl = new LinkedList<>();
+//////////////////////////////////////////////CLIENT
         Transaction depositMoneyFromClient = new Transaction();
         depositMoneyFromClient.setName("Deposito en efectivo del Cliente");
         depositMoneyFromClient.setOpCash(new Long(1));
         depositMoneyFromClient.setOpQuantity(new Long(0));
         depositMoneyFromClient.setCredit(false);
-//        depositMoneyFromClient.setTransactionSource();
+        tl.add(depositMoneyFromClient);
 
-//        Transaction depositMoneyFromClient = new Transaction();
-//        depositMoneyFromClient.setName("Deposito en titulos del Cliente");
-//        depositMoneyFromClient.setOpCash(new Long(0));
-//        depositMoneyFromClient.setOpQuantity(new Long(1));
-//        depositMoneyFromClient.setCredit(false);
-//
-//        Transaction depositMoneyFromClient = new Transaction();
-//        depositMoneyFromClient.setName("Retiro de Efectivo del Cliente");
-//        depositMoneyFromClient.setOpCash(new Long(-1));
-//        depositMoneyFromClient.setOpQuantity(new Long(0));
-//        depositMoneyFromClient.setCredit(false);
-//
-//        Transaction depositMoneyFromClient = new Transaction();
-//        depositMoneyFromClient.setName("Retiro en titulos del Cliente");
-//        depositMoneyFromClient.setOpCash(new Long(0));
-//        depositMoneyFromClient.setOpQuantity(new Long(-1));
-//        depositMoneyFromClient.setCredit(false);
+        Transaction depositTitlesFromClient = new Transaction();
+        depositTitlesFromClient.setName("Deposito en titulos del Cliente");
+        depositTitlesFromClient.setOpCash(new Long(0));
+        depositTitlesFromClient.setOpQuantity(new Long(1));
+        depositTitlesFromClient.setCredit(false);
+        tl.add(depositTitlesFromClient);
+
+        Transaction withdrawalMoneyFromClient = new Transaction();
+        withdrawalMoneyFromClient.setName("Retiro de Efectivo del Cliente");
+        withdrawalMoneyFromClient.setOpCash(new Long(-1));
+        withdrawalMoneyFromClient.setOpQuantity(new Long(0));
+        withdrawalMoneyFromClient.setCredit(false);
+        tl.add(withdrawalMoneyFromClient);
+
+        Transaction withdrawalTitlesFromClient = new Transaction();
+        withdrawalTitlesFromClient.setName("Retiro en titulos del Cliente");
+        withdrawalTitlesFromClient.setOpCash(new Long(0));
+        withdrawalTitlesFromClient.setOpQuantity(new Long(-1));
+        withdrawalTitlesFromClient.setCredit(false);
+        tl.add(withdrawalTitlesFromClient);
 
 //////////////////////////////////////////////BUSINESS
-//        Transaction depositMoneyFromClient = new Transaction();
-//        depositMoneyFromClient.setName("Reembolso");
-//        depositMoneyFromClient.setOpCash(new Long(1));
-//        depositMoneyFromClient.setOpQuantity(new Long(0));
-//        depositMoneyFromClient.setCredit(false);
-//
-//        Transaction depositMoneyFromClient = new Transaction();
-//        depositMoneyFromClient.setName("Comisión");
-//        depositMoneyFromClient.setOpCash(new Long(-1));
-//        depositMoneyFromClient.setOpQuantity(new Long(0));
-//        depositMoneyFromClient.setCredit(false);
-//
-//        Transaction depositMoneyFromClient = new Transaction();
-//        depositMoneyFromClient.setName("Llamada de Margen");
-//        depositMoneyFromClient.setOpCash(new Long(0));
-//        depositMoneyFromClient.setOpQuantity(new Long(-1));
-//        depositMoneyFromClient.setCredit(false);
-//
-//        Transaction depositMoneyFromClient = new Transaction();
-//        depositMoneyFromClient.setName("Credito Margen");
-//        depositMoneyFromClient.setOpCash(new Long(1));
-//        depositMoneyFromClient.setOpQuantity(new Long(0));
-//        depositMoneyFromClient.setCredit(true);
-//
-//        Transaction depositMoneyFromClient = new Transaction();
-//        depositMoneyFromClient.setName("Prestamo de Valores Entrante");
-//        depositMoneyFromClient.setOpCash(new Long(0));
-//        depositMoneyFromClient.setOpQuantity(new Long(1));
-//        depositMoneyFromClient.setCredit(true);
-//
-//        Transaction depositMoneyFromClient = new Transaction();
-//        depositMoneyFromClient.setName("Pestamo de valores Saliente");
-//        depositMoneyFromClient.setOpCash(new Long(0));
-//        depositMoneyFromClient.setOpQuantity(new Long(-1));
-//        depositMoneyFromClient.setCredit(true);
-//
-//        Transaction depositMoneyFromClient = new Transaction();
-//        depositMoneyFromClient.setName("Amortización Margen");
-//        depositMoneyFromClient.setOpCash(new Long(-1));
-//        depositMoneyFromClient.setOpQuantity(new Long(0));
-//        depositMoneyFromClient.setCredit(true);
+        Transaction refundFromBusiness = new Transaction();
+        refundFromBusiness.setName("Reembolso");
+        refundFromBusiness.setOpCash(new Long(1));
+        refundFromBusiness.setOpQuantity(new Long(0));
+        refundFromBusiness.setCredit(false);
+        tl.add(refundFromBusiness);
+
+        Transaction comissionFromBusiness = new Transaction();
+        comissionFromBusiness.setName("Comisión");
+        comissionFromBusiness.setOpCash(new Long(-1));
+        comissionFromBusiness.setOpQuantity(new Long(0));
+        comissionFromBusiness.setCredit(false);
+        tl.add(comissionFromBusiness);
+
+        Transaction marginCallFromBusiness = new Transaction();
+        marginCallFromBusiness.setName("Llamada de Margen");
+        marginCallFromBusiness.setOpCash(new Long(0));
+        marginCallFromBusiness.setOpQuantity(new Long(-1));
+        marginCallFromBusiness.setCredit(false);
+        tl.add(marginCallFromBusiness);
+
+        Transaction marginCreditFromBusiness = new Transaction();
+        marginCreditFromBusiness.setName("Credito Margen");
+        marginCreditFromBusiness.setOpCash(new Long(1));
+        marginCreditFromBusiness.setOpQuantity(new Long(0));
+        marginCreditFromBusiness.setCredit(true);
+        tl.add(marginCreditFromBusiness);
+
+        Transaction incomingSecurityLendingFromBusiness = new Transaction();
+        incomingSecurityLendingFromBusiness.setName("Prestamo de Valores Entrante");
+        incomingSecurityLendingFromBusiness.setOpCash(new Long(0));
+        incomingSecurityLendingFromBusiness.setOpQuantity(new Long(1));
+        incomingSecurityLendingFromBusiness.setCredit(true);
+        tl.add(incomingSecurityLendingFromBusiness);
+
+        Transaction outgoingSecurityLendingFromBusiness = new Transaction();
+        outgoingSecurityLendingFromBusiness.setName("Pestamo de valores Saliente");
+        outgoingSecurityLendingFromBusiness.setOpCash(new Long(0));
+        outgoingSecurityLendingFromBusiness.setOpQuantity(new Long(-1));
+        outgoingSecurityLendingFromBusiness.setCredit(true);
+        tl.add(outgoingSecurityLendingFromBusiness);
+
+        Transaction amortizationMarginFromBusiness = new Transaction();
+        amortizationMarginFromBusiness.setName("Amortización Margen");
+        amortizationMarginFromBusiness.setOpCash(new Long(-1));
+        amortizationMarginFromBusiness.setOpQuantity(new Long(0));
+        amortizationMarginFromBusiness.setCredit(true);
+        tl.add(amortizationMarginFromBusiness);
 //////////////////////////////////////////////////////////////// BROKER
-//
-//        Transaction depositMoneyFromClient = new Transaction();
-//        depositMoneyFromClient.setName("Reembolso de Correduría");
-//        depositMoneyFromClient.setOpCash(new Long(1));
-//        depositMoneyFromClient.setOpQuantity(new Long(0));
-//        depositMoneyFromClient.setCredit(false);
-//
-//        Transaction depositMoneyFromClient = new Transaction();
-//        depositMoneyFromClient.setName("Reembolso");
-//        depositMoneyFromClient.setOpCash(new Long(0));
-//        depositMoneyFromClient.setOpQuantity(new Long(1));
-//        depositMoneyFromClient.setCredit(false);
+
+        Transaction refundFromBroker = new Transaction();
+        refundFromBroker.setName("Reembolso de Correduría");
+        refundFromBroker.setOpCash(new Long(1));
+        refundFromBroker.setOpQuantity(new Long(0));
+        refundFromBroker.setCredit(false);
+        tl.add(refundFromBroker);
+
+        Transaction refund2FromBroker = new Transaction();
+        refund2FromBroker.setName("Reembolso");
+        refund2FromBroker.setOpCash(new Long(0));
+        refund2FromBroker.setOpQuantity(new Long(1));
+        refund2FromBroker.setCredit(false);
+        tl.add(refund2FromBroker);
+
         Transaction buyAsset = new Transaction();
         buyAsset.setName("Compra");
         buyAsset.setOpCash(new Long(-1));
         buyAsset.setOpQuantity(new Long(1));
+        buyAsset.setCredit(false);
+        tl.add(buyAsset);
+
         try {
-            em.persist(depositMoneyFromClient);
-            em.persist(buyAsset);
+            for (Transaction t : tl) {
+                em.persist(t);
+            }
             return true;
         } catch (Exception e) {
             log.log(Level.WARNING, "No pudimos persistir nuestra transaccion, la excepcion es: {0}", e.getMessage());
@@ -706,7 +723,6 @@ public class OnDeployBootstraping {
             return null;
         }
     }
-    
 
     private Broker getUniqueBroker() {
         try {

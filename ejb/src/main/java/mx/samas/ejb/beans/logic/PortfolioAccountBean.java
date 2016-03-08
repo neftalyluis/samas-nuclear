@@ -6,6 +6,9 @@
 package mx.samas.ejb.beans.logic;
 
 import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import mx.samas.ejb.beans.exceptions.AppException;
 import mx.samas.ejb.entities.PortfolioAccount;
 
 /**
@@ -13,14 +16,19 @@ import mx.samas.ejb.entities.PortfolioAccount;
  * @author neftaly
  */
 @Stateless
-public class PortfolioAccountBean{
+public class PortfolioAccountBean {
 
-    public PortfolioAccount findByAccountNumber(String accountNumber) {
-        return null;
+    @PersistenceContext(unitName = "mx_samas_ejb_1.0PU")
+    private EntityManager em;
+
+    public PortfolioAccount findByAccountNumber(String accountNumber) throws AppException {
+        try {
+            return (PortfolioAccount) em.createNamedQuery("PortfolioAccount.findByAccountNumber").setParameter("account", accountNumber).getSingleResult();
+        } catch (Exception e) {
+            throw new AppException();
+        }
     }
+    
+    
 
-    // Add business logic below. (Right-click in editor and choose
-    // "Insert Code > Add Business Method")
-    
-    
 }

@@ -11,6 +11,7 @@ import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import mx.samas.ejb.beans.exceptions.AppException;
 import mx.samas.ejb.entities.SliceVector;
 import mx.samas.ejb.entities.Strategy;
 
@@ -53,13 +54,12 @@ public class StrategyBean {
     }
 
     
-    public Strategy getStrategyByName(String name) {
+    public Strategy getStrategyByName(String name) throws AppException {
         try {
             return (Strategy) em.createNamedQuery("Strategy.findByName").setParameter("name", name).getSingleResult();
         } catch (Exception e) {
             LOG.log(Level.WARNING, "No pudimos obtener la estrategia, la excepcion es: {0}", e.getMessage());
-            e.printStackTrace();
-            return null;
+            throw new AppException();
         }
     }
 }

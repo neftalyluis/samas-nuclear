@@ -14,7 +14,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import mx.samas.ejb.entities.Client;
 import mx.samas.ejb.entities.User;
-import mx.samas.web.errorhandling.AppException;
+import mx.samas.ejb.beans.exceptions.AppException;
 
 /**
  *

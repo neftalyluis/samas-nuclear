@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mx.samas.web.errorhandling;
+package mx.samas.web.service.errorhandling;
 
+import mx.samas.ejb.beans.exceptions.AppException;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
