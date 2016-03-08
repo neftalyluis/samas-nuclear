@@ -6,6 +6,8 @@
 package mx.samas.ejb.beans.logic;
 
 import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 /**
  *
@@ -14,6 +16,9 @@ import javax.ejb.Stateless;
 @Stateless
 public class UserBean {
 
-    // Add business logic below. (Right-click in editor and choose
-    // "Insert Code > Add Business Method")
+    @PersistenceContext(unitName = "mx_samas_ejb_1.0PU")
+    private EntityManager em;
+    
+    
+    
 }

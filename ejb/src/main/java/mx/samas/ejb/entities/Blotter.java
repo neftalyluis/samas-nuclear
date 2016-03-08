@@ -45,7 +45,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     //Aplica para todos 
     //Todo lo que opere hoy, traeme todo lo que opere hoy que me liquide siguiente dia, 
     //
-    @NamedQuery(name = "Blotter.flujosInternosPorDia", query = "SELECT Blotter b WHERE b.inputDate= :date")
+    @NamedQuery(name = "Blotter.flujosInternosPorDia", query = "SELECT b FROM Blotter b WHERE b.inputDate= :date")
 
 })
 public class Blotter implements Serializable {
