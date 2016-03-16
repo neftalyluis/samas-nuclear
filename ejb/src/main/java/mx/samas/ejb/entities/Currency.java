@@ -44,6 +44,7 @@ public class Currency extends Asset implements Serializable {
      */
     public Currency(String name, String securityClass, Issuer issuer, String series, Boolean shortSale) {
         super(name, securityClass, issuer, series, shortSale);
+        
     }
 
     public Long getId() {

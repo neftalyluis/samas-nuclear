@@ -24,7 +24,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "Transaction.BuyFromPortfolio", query = "SELECT t FROM Transaction t WHERE t.transactionSource.name='Portfolio' AND t.name= 'Compra'"),
     @NamedQuery(name = "Transaction.SellFromPortfolio", query = "SELECT t FROM Transaction t WHERE t.transactionSource.name='Portfolio' AND t.name= 'Venta'"),
-    @NamedQuery(name = "Transaction.findByNameAndOwner", query = "SELECT t FROM Transaction t WHERE t.transactionSource.name= :nameOwner AND t.name= :nameTransaction")
+    @NamedQuery(name = "Transaction.findByNameAndOwner", query = "SELECT t FROM Transaction t WHERE t.transactionSource.name= :nameOwner AND t.name= :nameTransaction"),
+    @NamedQuery(name = "Transaction.findByName", query = "SELECT t FROM Transaction t WHERE t.name= :nameTransaction")
 })
 public class Transaction implements Serializable {
 

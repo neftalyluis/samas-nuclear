@@ -14,26 +14,25 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import mx.samas.ejb.beans.exceptions.AppException;
 import mx.samas.ejb.entities.Blotter;
-import mx.samas.ejb.entities.BlotterChild;
 
 /**
  *
  * @author neftaly
  */
 @Stateless
-public class BlotterRegistrer{
-    
+public class BlotterRegistrer {
+
     private static final Logger LOG = Logger.getLogger(BlotterRegistrer.class.getName());
-    
+
     @PersistenceContext(unitName = "mx_samas_ejb_1.0PU")
     private EntityManager em;
-    
+
     @EJB
     private PortfolioAccountBean pab;
-    
+
     @EJB
     private TransactionBean tb;
-    
+
     @EJB
     private AssetBean ab;
 
@@ -58,36 +57,22 @@ public class BlotterRegistrer{
             b.setSettlementDate(sameDate);
             b.setTradeDate(sameDate);
             //Falta denominar con transaction source
-            b.setTransaction(tb.findBySourceAndName(contract, contract));
+            b.setTransaction(tb.findByName("Deposito en efectivo del Cliente"));
             em.persist(b);
             return true;
         } catch (Exception e) {
             return false;
         }
     }
-    
-    public boolean sellEquity() throws AppException{
-        try {
-//            Blotter b = new Blotter(Double.NaN, asset, account, inputDate, market, Double.NaN, Long.MIN_VALUE, Double.NaN, settlementDate, tradeDate, transaction)
-            
-            return false;
-        } catch (Exception e) {
-            throw new AppException();
-        }
-    }
-    
-    public boolean buyEquity(String ticker, Double price, Long quantity, String contract) {
-        try {
-            //
-            //No discrecional, checar la comisión
-//        PortfolioAccount pa = new PortfolioAccount();
-            Date hoy = new Date();
 
+    public boolean sellEquity(String ticker, Double price, Long quantity, String contract) throws AppException {
+        try {
+            Date hoy = new Date();
             //Tres dias para settlementDate
             Calendar c = Calendar.getInstance();
             c.setTime(hoy);
             c.add(Calendar.DATE, 3);
-            
+
             Blotter compra = new Blotter();
             compra.setAmount(price / quantity);
             compra.setPrice(price);
@@ -100,28 +85,72 @@ public class BlotterRegistrer{
             //No aplicable en sociedades de inversion
             compra.setTradeDate(hoy);
             compra.setInputDate(hoy);
-            
+
             compra.setAsset(ab.findByTicker(ticker));
             compra.setContract(pab.findByAccountNumber(contract));
-            compra.setTransaction(tb.findBySourceAndName(ticker, contract));
-            
-            BlotterChild comision = new BlotterChild();
-            comision.setFather(compra);
-            
+            compra.setTransaction(tb.findByName("Venta"));
+
+            em.persist(compra);
+            return false;
+        } catch (Exception e) {
+            throw new AppException();
+        }
+    }
+
+    public boolean buyEquity(String ticker, Double price, Long quantity, String contract) throws AppException {
+        try {
+            Date hoy = new Date();
+            //Tres dias para settlementDate
+            Calendar c = Calendar.getInstance();
+            c.setTime(hoy);
+            c.add(Calendar.DATE, 3);
+
+            Blotter compra = new Blotter();
+            compra.setAmount(price / quantity);
+            compra.setPrice(price);
+            compra.setQuantity(quantity);
+            //No existe tasa
+            compra.setRate(0.0);
+
+            //entrega de titulos, mas 3 dias
+            compra.setSettlementDate(c.getTime());
+            //No aplicable en sociedades de inversion
+            compra.setTradeDate(hoy);
+            compra.setInputDate(hoy);
+
+            compra.setAsset(ab.findByTicker(ticker));
+            compra.setContract(pab.findByAccountNumber(contract));
+            compra.setTransaction(tb.findByName("Compra"));
+
+            em.persist(compra);
+
             return true;
         } catch (Exception e) {
-            return false;
+            throw new AppException();
+        }
+    }
+
+    public boolean inicioReporto(String ticker, Double price, Long quantity, String contract) throws AppException {
+        try {
+            Blotter b = new Blotter();
+            return true;
+        } catch (Exception e) {
+            throw new AppException();
         }
     }
     
-
-    public boolean reporto() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean finReporto() throws AppException{
+        try {
+            Blotter b = new Blotter();
+            return true;
+        } catch (Exception e) {
+            throw new AppException();
+        }
+        
     }
-    
 
     public boolean buyBond() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }

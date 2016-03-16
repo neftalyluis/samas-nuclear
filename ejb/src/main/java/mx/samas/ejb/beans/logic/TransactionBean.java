@@ -22,9 +22,17 @@ public class TransactionBean{
     private EntityManager em;
 
     
-    public Transaction findBySourceAndName(String sourceOwner, String transactionName) throws AppException {
+    public Transaction findByNameAndOwner(String sourceOwner, String transactionName) throws AppException {
         try {
             return (Transaction) em.createNamedQuery("Transaction.findByNameAndOwner").setParameter("nameOwner", sourceOwner).setParameter("nameTransaction", transactionName).getSingleResult();
+        } catch (Exception e) {
+            throw new AppException();
+        }
+    }
+    
+    public Transaction findByName(String transactionName) throws AppException{
+        try {
+            return (Transaction) em.createNamedQuery("Transaction.findByName").setParameter("transactionName", transactionName).getSingleResult();
         } catch (Exception e) {
             throw new AppException();
         }
