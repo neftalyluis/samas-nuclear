@@ -31,15 +31,15 @@ import javax.xml.bind.annotation.XmlRootElement;
             query = "SELECT b FROM Blotter b JOIN b.transaction t WHERE "
             + "b.contract= :account "
             + "AND b.inputDate= :input "
-            + "AND t.transactionSource.name= 'Portfolio' "
+            // + "AND t.transactionSource.name= 'Portfolio' "
             + "AND (t.name= 'Compra' OR t.name= 'Venta'"
             + "AND b.asset= :asset)"),
 
-    @NamedQuery(name = "Blotter.BuyAndSellFromDateAndAccountWith",
+    @NamedQuery(name = "Blotter.BuyAndSellFromDateAndAccount",
             query = "SELECT b FROM Blotter b JOIN b.transaction t WHERE "
             + "b.contract= :account "
             + "AND b.inputDate= :input "
-            + "AND t.transactionSource.name= 'Portfolio' "
+            //  + "AND t.transactionSource.name= 'Portfolio' "
             + "AND (t.name= 'Compra' OR t.name= 'Venta'"
             + "AND b.asset= :asset)"),
     //Aplica para todos 

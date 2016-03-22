@@ -12,6 +12,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Temporal;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -21,6 +23,12 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @Entity
 @XmlRootElement
+@NamedQueries({
+    @NamedQuery(name = "PositionVector.findNotInCreditWithAccount", query = "SELECT pv FROM PositionVector pv JOIN pv.portfolioVector pov "
+            + "WHERE pv.dateTime= :date "
+            + "AND pv.collateral= FALSE "
+            + "AND pov.account= :accountNumber")
+})
 public class PositionVector implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -28,7 +36,7 @@ public class PositionVector implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date dateTime;
 
     @ManyToOne
@@ -42,7 +50,7 @@ public class PositionVector implements Serializable {
     /**
      * Si es collateral esta posicion es la prenda que respalda el credito; de
      * no existir prenda en un credito en un quirografario
-     *  
+     *
      */
     private Boolean collateral;
 

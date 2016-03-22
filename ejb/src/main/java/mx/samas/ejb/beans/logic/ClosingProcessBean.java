@@ -8,12 +8,14 @@ package mx.samas.ejb.beans.logic;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.TemporalType;
+import mx.samas.ejb.beans.exceptions.AppException;
 import mx.samas.ejb.entities.Blotter;
 import mx.samas.ejb.entities.PortfolioAccount;
+import mx.samas.ejb.entities.PositionVector;
 
 /**
  *
@@ -21,29 +23,49 @@ import mx.samas.ejb.entities.PortfolioAccount;
  */
 @Stateless
 public class ClosingProcessBean {
-    
+
     @PersistenceContext(unitName = "mx_samas_ejb_1.0PU")
     private EntityManager em;
+
     private static final Logger LOG = Logger.getLogger(ClosingProcessBean.class.getName());
+
+    @EJB
+    private AssetBean ab;
+
+    @EJB
+    private BlotterRegistrer br;
+
+    @EJB
+    private PositionVectorBean pvb;
 
     /**
      * Posiciones en Directo
      *
-     * Directos son titulo personal, titular el portafolio
+     * Directos son titulo personal, dicese que el titular es el portafolio
      *
      * SELECT POSITION VECTOR WHERE DATE= Día anterior AND NOT COLLATERAL
      * cotejar con el Blotter los flujos de titulos
      *
      *
-     * @param pa
+     * @param accountNumber
+     * @param ticker
      * @param d
+     * @throws mx.samas.ejb.beans.exceptions.AppException
      */
-    public void onDirect(PortfolioAccount pa, Date d) {
-        
-        List<Blotter> lb = em.createNamedQuery("Blotter.BuyAndSellFromDateAndAccountWithAsset")
-                .setParameter("account", pa)
-                .setParameter("input", d, TemporalType.DATE)
-                .getResultList();
+    public void onDirect(String accountNumber, Date d, String ticker) throws AppException {
+
+        try {
+            List<Blotter> lb = br.getBuyAndSellTransactions(accountNumber, d, ticker);
+            List<PositionVector> lpv = pvb.getNotInCredit();
+
+            for (Blotter b : lb) {
+
+            }
+
+        } catch (Exception e) {
+            throw new AppException();
+        }
+
     }
 
     /**
@@ -54,7 +76,7 @@ public class ClosingProcessBean {
      * @param pa
      */
     public void onCredit(PortfolioAccount pa) {
-        
+
     }
 
     /**
@@ -63,19 +85,19 @@ public class ClosingProcessBean {
      * @param pa
      */
     public void onFlux(PortfolioAccount pa) {
-        
+
     }
-    
+
     public void accrualByServices(PortfolioAccount pa) {
-        
+
     }
-    
+
     public void accrualByPosition(PortfolioAccount pa) {
-        
+
     }
-    
+
     public void accrualByCredit(PortfolioAccount pa) {
-        
+
     }
 
     /**
@@ -83,6 +105,6 @@ public class ClosingProcessBean {
      * Se alimenta PriceVector
      */
     public void genericValuation() {
-        
+
     }
 }

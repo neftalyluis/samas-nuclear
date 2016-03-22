@@ -32,8 +32,9 @@ public class TransactionBean{
     
     public Transaction findByName(String transactionName) throws AppException{
         try {
-            return (Transaction) em.createNamedQuery("Transaction.findByName").setParameter("transactionName", transactionName).getSingleResult();
+            return (Transaction) em.createNamedQuery("Transaction.findByName").setParameter("nameTransaction", transactionName).getSingleResult();
         } catch (Exception e) {
+            e.printStackTrace();
             throw new AppException();
         }
     }

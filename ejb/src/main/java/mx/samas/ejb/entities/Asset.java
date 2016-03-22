@@ -59,7 +59,7 @@ public abstract class Asset implements Serializable {
         this.securityClass = securityClass;
         this.issuer = issuer;
         this.series = series;
-        this.ticker = securityClass + "_" + issuer + "_" + series;
+        this.ticker = securityClass + "_" + issuer.getCode()+ "_" + series;
         this.shortSale = shortSale;
     }
 

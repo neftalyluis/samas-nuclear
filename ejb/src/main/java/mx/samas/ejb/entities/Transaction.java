@@ -22,12 +22,32 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Entity
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Transaction.BuyFromPortfolio", query = "SELECT t FROM Transaction t WHERE t.transactionSource.name='Portfolio' AND t.name= 'Compra'"),
-    @NamedQuery(name = "Transaction.SellFromPortfolio", query = "SELECT t FROM Transaction t WHERE t.transactionSource.name='Portfolio' AND t.name= 'Venta'"),
-    @NamedQuery(name = "Transaction.findByNameAndOwner", query = "SELECT t FROM Transaction t WHERE t.transactionSource.name= :nameOwner AND t.name= :nameTransaction"),
-    @NamedQuery(name = "Transaction.findByName", query = "SELECT t FROM Transaction t WHERE t.name= :nameTransaction")
+    @NamedQuery(name = "Transaction.BuyFromPortfolio", query = "SELECT t FROM Transaction t "
+            + "WHERE t.transactionSource.name='Portfolio' AND t.name= 'Compra'"),
+    @NamedQuery(name = "Transaction.SellFromPortfolio", query = "SELECT t FROM Transaction t "
+            + "WHERE t.transactionSource.name='Portfolio' AND t.name= 'Venta'"),
+    @NamedQuery(name = "Transaction.findByNameAndOwner", query = "SELECT t FROM Transaction t "
+            + "WHERE t.transactionSource.name= :nameOwner AND t.name= :nameTransaction"),
+    @NamedQuery(name = "Transaction.findByName", query = "SELECT t FROM Transaction t "
+            + "WHERE t.name= :nameTransaction"),
+    @NamedQuery(name = "Transaction.findByOperationAndOwner", query = "SELECT t "
+            + "FROM Transaction t WHERE t.opCash= :cash "
+            + "AND t.opQuantity= :quantity AND t.transactionSource.name= :source")
 })
 public class Transaction implements Serializable {
+
+    public Transaction() {
+
+    }
+
+    public Transaction(SourceOwner owner, String name, Boolean isCredit, Long quantity, Long cash) {
+        this.credit = isCredit;
+        this.name = name;
+        this.opCash = cash;
+        this.opQuantity = quantity;
+        this.transactionSource = owner;
+
+    }
 
     private static final long serialVersionUID = 1L;
     @Id

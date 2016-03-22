@@ -42,7 +42,7 @@
                         <webModule>
                             <groupId>mx.samas</groupId>
                             <artifactId>web</artifactId>
-                            <contextRoot>samas</contextRoot>
+                            <contextRoot>/samas</contextRoot>
                         </webModule>
                         <ejbModule>
                             <groupId>${project.groupId}</groupId>

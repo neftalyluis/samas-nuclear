@@ -7,11 +7,13 @@ package mx.samas.ejb.beans.logic;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TemporalType;
 import mx.samas.ejb.beans.exceptions.AppException;
 import mx.samas.ejb.entities.Blotter;
 
@@ -42,7 +44,7 @@ public class BlotterRegistrer {
      * @param contract La cuenta a donde se va a depositar
      * @return Si la entrada fue o no persistida en la DB
      */
-    public boolean depositMoney(Double amount, String contract) {
+    public boolean depositMoney(Double amount, String contract) throws AppException {
         try {
             Date sameDate = new Date();
             Blotter b = new Blotter();
@@ -61,7 +63,8 @@ public class BlotterRegistrer {
             em.persist(b);
             return true;
         } catch (Exception e) {
-            return false;
+            e.printStackTrace();
+            throw new AppException();
         }
     }
 
@@ -130,27 +133,81 @@ public class BlotterRegistrer {
         }
     }
 
-    public boolean inicioReporto(String ticker, Double price, Long quantity, String contract) throws AppException {
+    public boolean inicioReporto(String ticker, Double price, Long quantity, String contract, Double rate) throws AppException {
         try {
+
             Blotter b = new Blotter();
+
+            Date d = new Date();
+
+            Calendar c = Calendar.getInstance();
+            c.setTime(d);
+            c.add(Calendar.DATE, 1);
+
+            b.setAmount(price);
+            b.setAsset(ab.findByTicker(ticker));
+            b.setContract(pab.findByAccountNumber(contract));
+
+            b.setPrice(price);
+            b.setQuantity(quantity);
+            b.setRate(rate);
+
+            b.setSettlementDate(c.getTime());
+            b.setTradeDate(d);
+            b.setInputDate(d);
+
+            b.setTransaction(tb.findByName("Inicio de Reporto"));
+
+            em.persist(b);
             return true;
         } catch (Exception e) {
             throw new AppException();
         }
     }
-    
-    public boolean finReporto() throws AppException{
+
+    public boolean finReporto(String ticker, Double price, Long quantity, String contract, Double rate) throws AppException {
         try {
             Blotter b = new Blotter();
+
+            Date d = new Date();
+
+            b.setAmount(price);
+            b.setAsset(ab.findByTicker(ticker));
+            b.setContract(pab.findByAccountNumber(contract));
+
+            b.setPrice(price);
+            b.setQuantity(quantity);
+            b.setRate(rate);
+
+            b.setSettlementDate(d);
+            b.setTradeDate(d);
+            b.setInputDate(d);
+
+            b.setTransaction(tb.findByName("Fin de Reporto"));
+
+            em.persist(b);
+
             return true;
         } catch (Exception e) {
             throw new AppException();
         }
-        
+
     }
 
     public boolean buyBond() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public List<Blotter> getBuyAndSellTransactions(String account, Date inputDate, String ticker) throws AppException {
+        try {
+            return (List<Blotter>) em.createNamedQuery("Blotter.BuyAndSellFromDateAndAccountWithAsset")
+                    .setParameter("account", account)
+                    .setParameter("input", inputDate, TemporalType.DATE)
+                    .setParameter("asset", ab.findByTicker(ticker))
+                    .getResultList();
+        } catch (Exception e) {
+            throw new AppException();
+        }
     }
 
 }

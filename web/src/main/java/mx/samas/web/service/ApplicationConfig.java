@@ -43,11 +43,7 @@ public class ApplicationConfig extends Application {
      */
     private void addRestResourceClasses(Set<Class<?>> resources) {
         resources.add(mx.samas.web.service.Authentication.class);
-        resources.add(mx.samas.web.service.CORSFilter.class);
-        resources.add(mx.samas.web.service.CORSRequestFilter.class);
-        resources.add(mx.samas.web.service.ClientService.class);
-        resources.add(mx.samas.web.service.entries.RiskProfileFacadeREST.class);
-        resources.add(mx.samas.web.service.entries.StrategyService.class);
+        resources.add(mx.samas.web.service.PoweredByResponseFilter.class);
         resources.add(mx.samas.web.service.errorhandling.AppExceptionMapper.class);
     }
 
