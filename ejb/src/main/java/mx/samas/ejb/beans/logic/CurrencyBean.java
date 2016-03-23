@@ -10,6 +10,8 @@ import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import mx.samas.ejb.beans.exceptions.AppException;
+import mx.samas.ejb.entities.Currency;
 import mx.samas.ejb.entities.DenominatorCurrency;
 
 /**
@@ -33,6 +35,22 @@ public class CurrencyBean {
             LOG.log(Level.WARNING, "No pudimos obtener el Denominator Currency, la excepcion es: {0}", e.getMessage());
 
             return null;
+        }
+    }
+
+    public void persistCurrency(Currency c) throws AppException {
+        try {
+            em.persist(c);
+        } catch (Exception e) {
+            throw new AppException();
+        }
+    }
+
+    public void persistDenominator(DenominatorCurrency c) throws AppException {
+        try {
+            em.persist(c);
+        } catch (Exception e) {
+            throw new AppException();
         }
     }
 

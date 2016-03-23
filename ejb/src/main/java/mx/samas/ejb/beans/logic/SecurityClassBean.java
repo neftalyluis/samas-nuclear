@@ -5,42 +5,33 @@
  */
 package mx.samas.ejb.beans.logic;
 
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.annotation.Resource;
 import javax.ejb.Stateless;
+import javax.ejb.LocalBean;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import mx.samas.ejb.beans.exceptions.AppException;
-import mx.samas.ejb.entities.Client;
+import mx.samas.ejb.entities.SecurityClass;
 
 /**
  *
  * @author neftaly
  */
 @Stateless
-public class ClientBean {
-
-    private static final Logger LOG = Logger.getLogger(ClientBean.class.getName());
+public class SecurityClassBean {
 
     @PersistenceContext(unitName = "mx_samas_ejb_1.0PU")
     private EntityManager em;
 
-    public List<Client> getAllClients() {
+    private static final Logger LOG = Logger.getLogger(SecurityClassBean.class.getName());
+
+    public void persistSecurityClass(SecurityClass sc) throws AppException {
         try {
-            return em.createQuery("SELECT c FROM Client c").getResultList();
-        } catch (Exception e) {
-            LOG.log(Level.WARNING, "No pudimos obtener la lista de clientes, la excepcion es: {0}", e.getMessage());
-            return null;
-        }
-    }
-    
-    public void persistClient(Client c) throws AppException{
-        try {
-            em.persist(c);
+           em.persist(sc);
         } catch (Exception e) {
             throw new AppException();
         }
     }
-
 }

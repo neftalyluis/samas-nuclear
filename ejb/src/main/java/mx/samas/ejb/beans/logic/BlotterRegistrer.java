@@ -89,7 +89,7 @@ public class BlotterRegistrer {
             compra.setTradeDate(hoy);
             compra.setInputDate(hoy);
 
-            compra.setAsset(ab.findByTicker(ticker));
+            compra.setAsset(ab.findAssetByTicker(ticker));
             compra.setContract(pab.findByAccountNumber(contract));
             compra.setTransaction(tb.findByName("Venta"));
 
@@ -121,7 +121,7 @@ public class BlotterRegistrer {
             compra.setTradeDate(hoy);
             compra.setInputDate(hoy);
 
-            compra.setAsset(ab.findByTicker(ticker));
+            compra.setAsset(ab.findAssetByTicker(ticker));
             compra.setContract(pab.findByAccountNumber(contract));
             compra.setTransaction(tb.findByName("Compra"));
 
@@ -145,7 +145,7 @@ public class BlotterRegistrer {
             c.add(Calendar.DATE, 1);
 
             b.setAmount(price);
-            b.setAsset(ab.findByTicker(ticker));
+            b.setAsset(ab.findAssetByTicker(ticker));
             b.setContract(pab.findByAccountNumber(contract));
 
             b.setPrice(price);
@@ -172,7 +172,7 @@ public class BlotterRegistrer {
             Date d = new Date();
 
             b.setAmount(price);
-            b.setAsset(ab.findByTicker(ticker));
+            b.setAsset(ab.findAssetByTicker(ticker));
             b.setContract(pab.findByAccountNumber(contract));
 
             b.setPrice(price);
@@ -210,4 +210,11 @@ public class BlotterRegistrer {
         }
     }
 
+    //VectorPasivo
+    /**
+     * 
+     */
+    public void conciliacion (){
+        
+    }
 }

@@ -21,11 +21,27 @@ public class AssetBean {
     @PersistenceContext(unitName = "mx_samas_ejb_1.0PU")
     private EntityManager em;
 
-    public Asset findByTicker(String ticker) throws AppException {
+    public Object findByTicker(String ticker) throws AppException {
+        try {
+            return em.createNamedQuery("Asset.findByTicker").setParameter("ticker", ticker).getSingleResult();
+        } catch (Exception e) {
+            throw new AppException(404, 404, "Asset no encontrado por el ticker", "", "");
+        }
+    }
+
+    public Asset findAssetByTicker(String ticker) throws AppException {
         try {
             return (Asset) em.createNamedQuery("Asset.findByTicker").setParameter("ticker", ticker).getSingleResult();
         } catch (Exception e) {
             throw new AppException(404, 404, "Asset no encontrado por el ticker", "", "");
+        }
+    }
+
+    public void persistAsset(Asset a) throws AppException {
+        try {
+            em.persist(a);
+        } catch (Exception e) {
+            throw new AppException();
         }
     }
 

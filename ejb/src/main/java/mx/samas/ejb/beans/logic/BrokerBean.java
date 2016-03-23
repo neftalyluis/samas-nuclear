@@ -7,42 +7,42 @@ package mx.samas.ejb.beans.logic;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.annotation.Resource;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import mx.samas.ejb.beans.exceptions.AppException;
-import mx.samas.ejb.entities.Issuer;
+import mx.samas.ejb.entities.Broker;
 
 /**
  *
  * @author neftaly
  */
 @Stateless
-public class IssuerBean {
+public class BrokerBean {
 
     @PersistenceContext(unitName = "mx_samas_ejb_1.0PU")
     private EntityManager em;
 
-    private static final Logger LOG = Logger.getLogger(IssuerBean.class.getName());
+    private static final Logger LOG = Logger.getLogger(BrokerBean.class.getName());
 
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
-    public Issuer getIssuerByCode(String code) {
+    public Broker getUniqueBroker() {
         try {
-            return (Issuer) em.createNamedQuery("Issuer.findByCode").setParameter("code", code).getSingleResult();
+            return (Broker) em.createNamedQuery("Broker.getByName").setParameter("name", "HSBC").getSingleResult();
         } catch (Exception e) {
-            LOG.log(Level.WARNING, "No pudimos obtener el Issuer, la excepcion es: {0}", e.getMessage());
+            LOG.log(Level.WARNING, "No pudimos obtener nuestro broker, la excepcion es: {0}", e.getMessage());
             return null;
         }
     }
     
-    public void persistIssuer(Issuer i) throws AppException{
+    public void persistBroker(Broker b) throws AppException{
         try {
-            em.persist(i);
+            em.persist(b);
         } catch (Exception e) {
             throw new AppException();
         }
     }
-
 
 }
