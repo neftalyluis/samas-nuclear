@@ -5,8 +5,11 @@
  */
 package mx.samas.ejb.beans.logic;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -55,13 +58,22 @@ public class ClosingProcessBean {
     public void onDirect(String accountNumber, Date d, String ticker) throws AppException {
 
         try {
-            List<Blotter> lb = br.getBuyAndSellTransactions(accountNumber, d, ticker);
-            List<PositionVector> lpv = pvb.getNotInCredit();
+//            Igual, Buggy
+//            List<Blotter> lb = br.getBuyAndSellTransactions(accountNumber, d, ticker);
+            //Query Buggy, checarla mañana
+//            List<PositionVector> lpv = pvb.getNotInCredit(d, accountNumber);
 
-            for (Blotter b : lb) {
+//            for (Blotter b : lb) {
+//                LOG.log(Level.INFO, b.getAsset().getName());
+//            }
 
-            }
-
+//            HashMap<String, ArrayList<PositionVector>> mewDay = new HashMap<>();
+//            
+//            if (lpv.isEmpty()) {
+//                for (Blotter b : lb) {
+//
+//                }
+//            }
         } catch (Exception e) {
             throw new AppException();
         }

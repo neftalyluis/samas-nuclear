@@ -206,6 +206,7 @@ public class BlotterRegistrer {
                     .setParameter("asset", ab.findByTicker(ticker))
                     .getResultList();
         } catch (Exception e) {
+            e.printStackTrace();
             throw new AppException();
         }
     }

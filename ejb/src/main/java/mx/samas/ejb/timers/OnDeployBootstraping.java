@@ -22,6 +22,7 @@ import mx.samas.ejb.beans.logic.BankBean;
 import mx.samas.ejb.beans.logic.BlotterRegistrer;
 import mx.samas.ejb.beans.logic.BrokerBean;
 import mx.samas.ejb.beans.logic.ClientBean;
+import mx.samas.ejb.beans.logic.ClosingProcessBean;
 import mx.samas.ejb.beans.logic.CurrencyBean;
 import mx.samas.ejb.beans.logic.IssuerBean;
 import mx.samas.ejb.beans.logic.PortfolioAccountBean;
@@ -106,6 +107,9 @@ public class OnDeployBootstraping {
     @EJB
     private TermStructureBean tsb;
 
+    @EJB
+    private ClosingProcessBean cpb;
+
     private static final Logger LOG = Logger.getLogger(OnDeployBootstraping.class.getName());
 
     @Schedule(hour = "*", minute = "*", persistent = false)
@@ -127,7 +131,7 @@ public class OnDeployBootstraping {
         createBrokersAndCommisions();
         persistTransactions();
         blotterEntries();
-
+        closingDay();
         LOG.info("=================SAMAS Bootstrap=================");
         timer.cancel();
     }
@@ -784,8 +788,12 @@ public class OnDeployBootstraping {
             LOG.log(Level.WARNING, "No pudimos persistir los registros de la Bitacora, la excepcion es: {0}", ex.getMessage());
         }
     }
-    
-    private void closingDay(){
-        
+
+    private void closingDay() {
+        try {
+            cpb.onDirect("GYRFEMK_87654", new Date(), "1A_AMZN_*");
+        } catch (AppException ex) {
+            Logger.getLogger(OnDeployBootstraping.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

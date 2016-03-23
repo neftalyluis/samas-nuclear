@@ -29,7 +29,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "Blotter.BuyAndSellFromDateAndAccountWithAsset",
             query = "SELECT b FROM Blotter b JOIN b.transaction t WHERE "
-            + "b.contract= :account "
+            + "b.contract.accountNumber= :account "
             + "AND b.inputDate= :input "
             // + "AND t.transactionSource.name= 'Portfolio' "
             + "AND (t.name= 'Compra' OR t.name= 'Venta'"

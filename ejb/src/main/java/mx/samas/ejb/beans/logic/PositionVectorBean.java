@@ -5,11 +5,13 @@
  */
 package mx.samas.ejb.beans.logic;
 
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import mx.samas.ejb.beans.exceptions.AppException;
 import mx.samas.ejb.entities.PositionVector;
 
 /**
@@ -24,11 +26,11 @@ public class PositionVectorBean {
     @PersistenceContext(unitName = "mx_samas_ejb_1.0PU")
     private EntityManager em;
 
-    public List<PositionVector> getNotInCredit() {
+    public List<PositionVector> getNotInCredit(Date d, String number) throws AppException {
         try {
-            return null;
+            return em.createNamedQuery("PositionVector.findNotInCreditWithAccount").setParameter("date", d).setParameter("accountNumber", number).getResultList();
         } catch (Exception e) {
-            return null;
+            throw new AppException();
         }
 
     }
