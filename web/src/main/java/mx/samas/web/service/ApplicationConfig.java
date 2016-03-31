@@ -44,6 +44,8 @@ public class ApplicationConfig extends Application {
     private void addRestResourceClasses(Set<Class<?>> resources) {
         resources.add(mx.samas.web.service.Authentication.class);
         resources.add(mx.samas.web.service.PoweredByResponseFilter.class);
+        resources.add(mx.samas.web.service.TestingSuite.class);
+        resources.add(mx.samas.web.service.TransactionService.class);
         resources.add(mx.samas.web.service.errorhandling.AppExceptionMapper.class);
     }
 
