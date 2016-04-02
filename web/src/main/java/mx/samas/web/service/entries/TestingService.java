@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mx.samas.web.service;
+package mx.samas.web.service.entries;
 
 import javax.ejb.EJB;
 import javax.ws.rs.Consumes;
@@ -25,7 +25,7 @@ import mx.samas.web.service.dto.TestTransactionDTO;
 @Path("/test")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-public class TestingSuite {
+public class TestingService {
 
 
     @EJB
