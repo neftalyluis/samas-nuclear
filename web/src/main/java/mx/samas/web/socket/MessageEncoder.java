@@ -5,45 +5,29 @@
  */
 package mx.samas.web.socket;
 
-import java.io.StringWriter;
 import javax.websocket.EncodeException;
 import javax.websocket.Encoder;
 import javax.websocket.EndpointConfig;
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.Marshaller;
 
 /**
  *
  * @author neftaly
  */
-public class MessageEncoder implements Encoder.Text<Message> {
+public class MessageEncoder implements Encoder.Text<Message>{
 
     @Override
     public String encode(Message arg0) throws EncodeException {
-        JAXBContext jaxbContext = null;
-        StringWriter st = null;
-        try {
-            jaxbContext = JAXBContext.newInstance(Message.class);
-
-            Marshaller marshaller = jaxbContext.createMarshaller();
-            st = new StringWriter();
-            marshaller.marshal(arg0, st);
-            System.out.println("OutGoing XML " + st.toString());
-
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-        return st.toString();
+        return arg0.getJson().toString();
     }
 
     @Override
     public void init(EndpointConfig config) {
-        System.out.println("init encode");
+        System.out.println("Init Encode");
     }
 
     @Override
     public void destroy() {
-        System.out.println("destroy enconde");
+        System.out.println("Destroy Encode");
     }
-
+    
 }

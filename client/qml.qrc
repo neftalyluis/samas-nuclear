@@ -1,19 +1,10 @@
 <RCC>
     <qresource prefix="/">
         <file>main.qml</file>
-        <file>MainForm.ui.qml</file>
-        <file>Dashboard.qml</file>
-        <file>DashboardForm.ui.qml</file>
-        <file>IDE.qml</file>
-        <file>IDEForm.ui.qml</file>
-        <file>DashboardView.qml</file>
-        <file>DashboardViewForm.ui.qml</file>
-        <file>Contract.qml</file>
-        <file>ContractForm.ui.qml</file>
-        <file>controls/Variables.qml</file>
-        <file>controls/Text.qml</file>
-        <file>controls/Loader.qml</file>
-        <file>controls/Button.qml</file>
-        <file>FontAwesome.qml</file>
+        <file>Label.qml</file>
+        <file>ChatView.qml</file>
+        <file>ChatInput.qml</file>
+        <file>GenericService.js</file>
+        <file>TestService.qml</file>
     </qresource>
 </RCC>

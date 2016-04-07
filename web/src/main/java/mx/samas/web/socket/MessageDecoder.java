@@ -6,11 +6,12 @@
 package mx.samas.web.socket;
 
 import java.io.StringReader;
+import javax.json.Json;
+import javax.json.JsonException;
+import javax.json.JsonObject;
 import javax.websocket.DecodeException;
 import javax.websocket.Decoder;
 import javax.websocket.EndpointConfig;
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.Unmarshaller;
 
 /**
  *
@@ -20,33 +21,28 @@ public class MessageDecoder implements Decoder.Text<Message> {
 
     @Override
     public Message decode(String arg0) throws DecodeException {
-        Message m = null;
-        JAXBContext jaxbContext;
-        try {
-            jaxbContext = JAXBContext.newInstance(Message.class);
-            Unmarshaller unmarsh = jaxbContext.createUnmarshaller();
-
-            StringReader sr = new StringReader(arg0);
-            m = (Message) unmarsh.unmarshal(sr);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return m;
+        JsonObject jsonObject = Json.createReader(new StringReader(arg0)).readObject();
+        return new Message(jsonObject);
     }
 
     @Override
     public boolean willDecode(String arg0) {
-        return (arg0 != null);
+        try {
+            Json.createReader(new StringReader(arg0)).readObject();
+            return true;
+        } catch (JsonException e) {
+            return false;
+        }
     }
 
     @Override
     public void init(EndpointConfig config) {
-        System.out.println("init decode");
+        System.out.println("Init Decode");
     }
 
     @Override
     public void destroy() {
-        System.out.println("destroy decode");
+        System.out.println("Destroy Decode");
     }
 
 }

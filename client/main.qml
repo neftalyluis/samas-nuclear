@@ -1,126 +1,55 @@
-import QtQuick 2.5
-import QtQuick.Controls 1.4
-import QtQuick.Extras 1.4
-import QtQuick.Layouts 1.2
-import QtQuick.Window 2.2
+import QtQuick 2.6
+import QtQuick.Controls 1.5
 import QtQuick.Dialogs 1.2
+import QtWebSockets 1.0
+ApplicationWindow{
 
-
-ApplicationWindow {
     visible: true
+    Rectangle {
+        width: 360
+        height: 360
+        color: '#000'
 
-    minimumHeight: 780
-    maximumHeight: 780
-    minimumWidth: 1024
-    maximumWidth: 1024
-    width: 1024
-    height: 780
+        ChatView {
+            id: box
+            anchors.left: parent.left
+            anchors.right: parent.right
+            anchors.top: parent.top
+            anchors.bottom: input.top
+        }
 
-    title: qsTr("SAMAS")
-
-    Loader { id: pageLoader }
-
-    MessageDialog {
-        id: aboutDialog
-        icon: StandardIcon.Information
-        title: qsTr("Acerca de")
-        text: "SAMAS"
-        informativeText: qsTr("Holi :)")
-    }
-
-    DashboardForm {
-        id: dash
-    }
-
-    menuBar: MenuBar {
-        Menu {
-            title: qsTr("Portafolios")
-            MenuItem {
-                text: qsTr("Crear")
-                onTriggered: console.log("Open action triggered");
-            }
-            MenuItem {
-                text: qsTr("Ver")
-                onTriggered: console.log("Open action triggered");
-            }
-            MenuItem {
-                text: qsTr("Editar")
-                onTriggered: console.log("Open action triggered");
+        ChatInput {
+            id: input
+            anchors.left: parent.left
+            anchors.right: parent.right
+            anchors.bottom: parent.bottom
+            focus: true
+            onAccepted: {
+                print('send message: ' + text)
+                socket.sendTextMessage(text)
+                box.append('>', text)
+                text = ''
             }
         }
 
-        Menu {
-            title: qsTr("Activos")
-            MenuItem {
-                text: qsTr("Crear")
-                onTriggered: console.log("Open action triggered");
-            }
-            MenuItem {
-                text: qsTr("Ver")
-                onTriggered: console.log("Open action triggered");
-            }
-            MenuItem {
-                text: qsTr("Editar")
-                onTriggered: console.log("Open action triggered");
-            }
-        }
+        WebSocket {
+            id: socket
 
-        Menu {
-            title: qsTr("Clientes")
-            MenuItem {
-                text: qsTr("Crear")
-                onTriggered: console.log("Open action triggered");
+            url: "ws://localhost:8080/web-alpha/notifications"
+            active: true
+            onTextMessageReceived: {
+                box.append('<', message)
             }
-            MenuItem {
-                text: qsTr("Ver")
-                onTriggered: console.log("Open action triggered");
-            }
-            MenuItem {
-                text: qsTr("Editar")
-                onTriggered: console.log("Open action triggered");
-            }
-        }
-
-        Menu {
-            title: qsTr("Ayuda")
-            MenuItem {
-                text: qsTr("Acerca de")
-                onTriggered: aboutDialog.open();
-            }
-        }
-    }
-
-    toolBar:ToolBar {
-            RowLayout {
-                anchors.fill: parent
-                ToolButton {
-                    text: "Boton inutil"
+            onStatusChanged: {
+                if (socket.status == WebSocket.Error) {
+                    box.append('#', 'socket error ' + socket.errorString)
+                } else if (socket.status == WebSocket.Open) {
+                    box.append('#', 'socket open')
+                } else if (socket.status == WebSocket.Closed) {
+                    box.append('#', 'socket closed')
                 }
-                ToolButton {
-                    text: "Otro Boton inutil"
-                }
-                Item { Layout.fillWidth: true }
-
-
             }
         }
 
-
-
-    statusBar: StatusBar {
-        RowLayout {
-            anchors.fill: parent
-            Label{
-                text: "test"
-            }
-            /*
-            BusyIndicator {
-                running: true
-                anchors.right: parent.right
-            }
-            */
-        }
     }
-
-
 }

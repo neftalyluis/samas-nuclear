@@ -7,12 +7,12 @@ package mx.samas.web.socket;
 
 import java.io.IOException;
 import java.io.Serializable;
-import java.nio.ByteBuffer;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 import javax.websocket.EncodeException;
 import javax.websocket.OnClose;
+import javax.websocket.OnError;
 import javax.websocket.OnMessage;
 import javax.websocket.OnOpen;
 import javax.websocket.Session;
@@ -27,28 +27,34 @@ public class NotifyEndpoint implements Serializable {
 
     private static Set<Session> peers = Collections.synchronizedSet(new HashSet<Session>());
 
+    @OnOpen
+    public void onOpen(Session peer) {
+        peers.add(peer);
+    }
+
+    @OnClose
+    public void onClose(Session peer) {
+        peers.remove(peer);
+    }
+
     @OnMessage
-    public void broadcastFigure(Message msg, Session session) throws IOException, EncodeException {
-        System.out.println("broadcastFigure: " + msg);
+    public void broadcastFigure(Message figure, Session session) throws IOException, EncodeException {
+        System.out.println("broadcastFigure: " + figure);
         for (Session peer : peers) {
             if (!peer.equals(session)) {
-                peer.getBasicRemote().sendObject(msg);
+                peer.getBasicRemote().sendObject(figure);
             }
         }
     }
 
-    @OnOpen
-    public Message onOpen(Session peer) throws IOException, EncodeException {
-        peers.add(peer);
-        Message a = new Message("gbhnj", 0, true);
-        System.out.println(peer.getId());
-        peer.getBasicRemote().sendObject(a);
-        return a;
+    @OnError
+    public void error(Session session, Throwable t) throws IOException {
+        System.out.println("Error");
+        for (Session peer : peers) {
+            if (!peer.equals(session)) {
+                peer.getBasicRemote().sendText("Error" + t.toString());
+            }
+        }
     }
 
-    @OnClose
-    private void onClose(Session peer) {
-        peers.remove(peer);
-        System.out.println("Adios: "+peer.getId());
-    }
 }

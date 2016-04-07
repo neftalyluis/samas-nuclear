@@ -5,54 +5,34 @@
  */
 package mx.samas.web.socket;
 
-import javax.xml.bind.annotation.XmlRootElement;
+import java.io.StringWriter;
+import javax.json.Json;
+import javax.json.JsonObject;
 
 /**
  *
  * @author neftaly
  */
-@XmlRootElement
 public class Message {
 
-    private String name;
-    private int number;
-    private boolean isCool;
-    
-    public Message(){
-        this.name = "TEST";
-        this.number = 13;
-        this.isCool = true;
+    private JsonObject json;
+
+    public Message(JsonObject json) {
+        this.json = json;
     }
 
-    public Message(String newName, int number, boolean isCool) {
-        this.name = newName;
-        this.number = number;
-        this.isCool = isCool;
+    public JsonObject getJson() {
+        return json;
     }
 
-
-    public String getName() {
-        return name;
+    public void setJson(JsonObject json) {
+        this.json = json;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    @Override
+    public String toString() {
+        StringWriter writer = new StringWriter();
+        Json.createWriter(writer).write(json);
+        return writer.toString();
     }
-
-    public int getNumber() {
-        return number;
-    }
-
-    public void setNumber(int number) {
-        this.number = number;
-    }
-
-    public boolean isIsCool() {
-        return isCool;
-    }
-
-    public void setIsCool(boolean isCool) {
-        this.isCool = isCool;
-    }
-
 }
