@@ -15,6 +15,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import mx.samas.ejb.beans.logic.TestSuiteBean;
+import mx.samas.ejb.entities.Test;
 import mx.samas.web.service.dto.TestEntryDTO;
 import mx.samas.web.service.dto.TestTransactionDTO;
 
@@ -38,6 +39,7 @@ public class TestingService {
      */
     @POST
     public Response newTest(TestEntryDTO te) {
+        Test t = new Test();
         return Response.ok().build();
     }
 

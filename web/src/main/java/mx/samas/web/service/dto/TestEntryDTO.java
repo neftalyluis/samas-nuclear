@@ -13,7 +13,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  *
  * @author neftaly
  */
-@XmlRootElement(name = "Entry")
+@XmlRootElement(name = "Test")
 public class TestEntryDTO {
 
     private Long id;

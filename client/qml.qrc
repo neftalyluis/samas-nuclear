@@ -1,10 +1,8 @@
 <RCC>
     <qresource prefix="/">
         <file>main.qml</file>
-        <file>Label.qml</file>
-        <file>ChatView.qml</file>
-        <file>ChatInput.qml</file>
-        <file>GenericService.js</file>
-        <file>TestService.qml</file>
+        <file>MenuForm.qml</file>
+        <file>DataTable.qml</file>
+        <file>ToolbarForm.qml</file>
     </qresource>
 </RCC>

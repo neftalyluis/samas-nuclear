@@ -2,54 +2,46 @@ import QtQuick 2.6
 import QtQuick.Controls 1.5
 import QtQuick.Dialogs 1.2
 import QtWebSockets 1.0
+import QtQuick.Layouts 1.3
+
 ApplicationWindow{
 
     visible: true
-    Rectangle {
-        width: 360
-        height: 360
-        color: '#000'
 
-        ChatView {
-            id: box
-            anchors.left: parent.left
-            anchors.right: parent.right
+    width: 1280
+    height: 800
+
+        ToolbarForm{
+            id: toolbar
+
+            width:parent.width
+            height: parent.height*0.10
             anchors.top: parent.top
-            anchors.bottom: input.top
         }
 
-        ChatInput {
-            id: input
-            anchors.left: parent.left
-            anchors.right: parent.right
+        Rectangle{
+            id: space
+
+            width: parent.width
+            height: parent.height*0.90
             anchors.bottom: parent.bottom
-            focus: true
-            onAccepted: {
-                print('send message: ' + text)
-                socket.sendTextMessage(text)
-                box.append('>', text)
-                text = ''
+
+            MenuForm{
+                id: menu
+
+                width: space.width*0.1
+                height: space.height
+                anchors.left:parent.left
             }
+
+            TableTest{
+                id: operation
+
+                width: space.width*0.9
+                height: space.height
+                anchors.right: parent.right
+            }
+
+
         }
-
-        WebSocket {
-            id: socket
-
-            url: "ws://localhost:8080/web-alpha/notifications"
-            active: true
-            onTextMessageReceived: {
-                box.append('<', message)
-            }
-            onStatusChanged: {
-                if (socket.status == WebSocket.Error) {
-                    box.append('#', 'socket error ' + socket.errorString)
-                } else if (socket.status == WebSocket.Open) {
-                    box.append('#', 'socket open')
-                } else if (socket.status == WebSocket.Closed) {
-                    box.append('#', 'socket closed')
-                }
-            }
-        }
-
-    }
 }
