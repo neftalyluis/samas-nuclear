@@ -1,7 +1,6 @@
 import QtQuick 2.6
 import QtQuick.Controls 1.5
 import QtQuick.Dialogs 1.2
-import QtWebSockets 1.0
 import QtQuick.Layouts 1.3
 
 ApplicationWindow{
@@ -19,7 +18,7 @@ ApplicationWindow{
             anchors.top: parent.top
         }
 
-        Rectangle{
+        Item{
             id: space
 
             width: parent.width
@@ -34,7 +33,7 @@ ApplicationWindow{
                 anchors.left:parent.left
             }
 
-            TableTest{
+            Terminal{
                 id: operation
 
                 width: space.width*0.9

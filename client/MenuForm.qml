@@ -5,75 +5,93 @@ ColumnLayout{
     id: bar
     spacing: 0
 
-    Rectangle {
+    ButtonMenu {
         Layout.alignment: Qt.AlignCenter
         color: "#00796B"
-
-        Layout.preferredHeight: bar.height*0.05
-        Layout.preferredWidth: bar.width
-    }
-
-    Rectangle {
-        Layout.alignment: Qt.AlignCenter
-        color: "#00796B"
-
+        text: "Terminal"
         Layout.preferredHeight: bar.height*0.1
         Layout.preferredWidth: bar.width
+        onClicked: {
+            var component = Qt.createComponent("Child.qml")
+            var window    = component.createObject(bar)
+            window.show()
+        }
     }
-    Rectangle {
+
+    ButtonMenu {
         Layout.alignment: Qt.AlignCenter
         color: "#00796B"
-
-        Layout.preferredHeight: bar.height*0.15
+        text: "Login"
+        Layout.preferredHeight: bar.height*0.1
         Layout.preferredWidth: bar.width
+        onClicked: {
+            var component = Qt.createComponent("Login.qml")
+            var window    = component.createObject(bar)
+            window.show()
+        }
     }
-    Rectangle {
+    ButtonMenu {
         Layout.alignment: Qt.AlignCenter
         color: "#00796B"
-
-        Layout.preferredHeight: bar.height*0.05
+        text: "Terminal"
+        Layout.preferredHeight: bar.height*0.1
         Layout.preferredWidth: bar.width
+        onClicked: {print("holi")}
     }
-    Rectangle {
+    ButtonMenu {
         Layout.alignment: Qt.AlignCenter
         color: "#00796B"
-
-        Layout.preferredHeight: bar.height*0.05
+        text: "Terminal"
+        Layout.preferredHeight: bar.height*0.1
         Layout.preferredWidth: bar.width
+        onClicked: {print("holi")}
     }
-    Rectangle {
+    ButtonMenu {
         Layout.alignment: Qt.AlignCenter
         color: "#00796B"
-
-        Layout.preferredHeight: bar.height*0.05
+        text: "Terminal"
+        Layout.preferredHeight: bar.height*0.1
         Layout.preferredWidth: bar.width
+        onClicked: {print("holi")}
     }
-    Rectangle {
+    ButtonMenu {
         Layout.alignment: Qt.AlignCenter
         color: "#00796B"
-
-        Layout.preferredHeight: bar.height*0.05
+        text: "Terminal"
+        Layout.preferredHeight: bar.height*0.1
         Layout.preferredWidth: bar.width
+        onClicked: {print("holi")}
     }
-    Rectangle {
+    ButtonMenu {
         Layout.alignment: Qt.AlignCenter
         color: "#00796B"
-
-        Layout.preferredHeight: bar.height*0.05
+        text: "Terminal"
+        Layout.preferredHeight: bar.height*0.1
         Layout.preferredWidth: bar.width
+        onClicked: {print("holi")}
     }
-    Rectangle {
+    ButtonMenu {
         Layout.alignment: Qt.AlignCenter
         color: "#00796B"
-
-        Layout.preferredHeight: bar.height*0.05
+        text: "Terminal"
+        Layout.preferredHeight: bar.height*0.1
         Layout.preferredWidth: bar.width
+        onClicked: {print("holi")}
     }
-    Rectangle {
+    ButtonMenu {
         Layout.alignment: Qt.AlignCenter
         color: "#00796B"
-
-        Layout.preferredHeight: bar.height*0.4
+        text: "Terminal"
+        Layout.preferredHeight: bar.height*0.1
         Layout.preferredWidth: bar.width
+        onClicked: {print("holi")}
+    }
+    ButtonMenu {
+        Layout.alignment: Qt.AlignCenter
+        color: "#00796B"
+        text: "Terminal"
+        Layout.preferredHeight: bar.height*0.1
+        Layout.preferredWidth: bar.width
+        onClicked: {print("holi")}
     }
 }
