@@ -11,6 +11,7 @@ import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import mx.samas.ejb.beans.exceptions.AppException;
 import mx.samas.ejb.entities.SliceVector;
 import mx.samas.ejb.entities.Strategy;
@@ -30,7 +31,6 @@ public class StrategyBean {
     private static final Logger LOG = Logger.getLogger(StrategyBean.class.getName());
 
 //Solo se puede aplicar cuando no existen fungibilidades, o de menos Liquidez
-    
     public boolean persistStrategy(Strategy s) {
         List<SliceVector> lsv = s.getSlices();
         Double full = 0.0;
@@ -53,10 +53,37 @@ public class StrategyBean {
         }
     }
 
-    
     public Strategy getStrategyByName(String name) throws AppException {
         try {
             return (Strategy) em.createNamedQuery("Strategy.findByName").setParameter("name", name).getSingleResult();
+        } catch (Exception e) {
+            LOG.log(Level.WARNING, "No pudimos obtener la estrategia, la excepcion es: {0}", e.getMessage());
+            throw new AppException();
+        }
+    }
+
+    public List<Strategy> getAllStrategies() {
+        try {
+            Query q = em.createQuery("SELECT s FROM Strategy s");
+            return q.getResultList();
+        } catch (Exception e) {
+            System.out.println(e.getStackTrace());
+            return null;
+        }
+    }
+
+    public List<SliceVector> getSlicesFromID(long id) throws AppException {
+        try {
+            Query q = em.createNamedQuery("SliceVector.getSlicesFromStrategy").setParameter("id", id);
+            return q.getResultList();
+        } catch (Exception e) {
+            throw new AppException();
+        }
+    }
+
+    public Strategy getStrategyByID(long id) throws AppException {
+        try {
+            return (Strategy) em.createNamedQuery("Strategy.findByID").setParameter("id", id).getSingleResult();
         } catch (Exception e) {
             LOG.log(Level.WARNING, "No pudimos obtener la estrategia, la excepcion es: {0}", e.getMessage());
             throw new AppException();

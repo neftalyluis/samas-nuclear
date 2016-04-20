@@ -18,7 +18,6 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -264,7 +263,6 @@ public abstract class Asset implements Serializable {
     /**
      * @return the vectors
      */
-    @XmlTransient
     public List<AssetVector> getVectors() {
         return vectors;
     }

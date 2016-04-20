@@ -5,9 +5,12 @@
  */
 package mx.samas.ejb.beans.logic;
 
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import mx.samas.ejb.entities.User;
 
 /**
  *
@@ -19,6 +22,9 @@ public class UserBean {
     @PersistenceContext(unitName = "mx_samas_ejb_1.0PU")
     private EntityManager em;
     
-    
+    public List<User> getAllUsers(){
+        Query q = em.createQuery("SELECT u FROM User u");
+        return q.getResultList();
+    }
     
 }

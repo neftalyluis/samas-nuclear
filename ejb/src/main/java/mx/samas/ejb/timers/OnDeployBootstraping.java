@@ -32,6 +32,7 @@ import mx.samas.ejb.beans.logic.SecurityClassBean;
 import mx.samas.ejb.beans.logic.StrategyBean;
 import mx.samas.ejb.beans.logic.TermStructureBean;
 import mx.samas.ejb.beans.logic.TransactionBean;
+import mx.samas.ejb.beans.logic.UserBean;
 import mx.samas.ejb.entities.Bank;
 import mx.samas.ejb.entities.Bond;
 import mx.samas.ejb.entities.Broker;
@@ -50,6 +51,7 @@ import mx.samas.ejb.entities.SourceOwner;
 import mx.samas.ejb.entities.Strategy;
 import mx.samas.ejb.entities.TermStructure;
 import mx.samas.ejb.entities.Transaction;
+import mx.samas.ejb.entities.User;
 
 /**
  *
@@ -110,6 +112,9 @@ public class OnDeployBootstraping {
     @EJB
     private ClosingProcessBean cpb;
 
+    @EJB
+    private UserBean ub;
+    
     private static final Logger LOG = Logger.getLogger(OnDeployBootstraping.class.getName());
 
     @Schedule(hour = "*", minute = "*", persistent = false)
@@ -132,6 +137,8 @@ public class OnDeployBootstraping {
         persistTransactions();
         blotterEntries();
         closingDay();
+        
+        users();
         LOG.info("=================SAMAS Bootstrap=================");
         timer.cancel();
     }
@@ -795,5 +802,15 @@ public class OnDeployBootstraping {
         } catch (AppException ex) {
             Logger.getLogger(OnDeployBootstraping.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    private void users() {
+        User u = new User();
+        u.setActive(Boolean.TRUE);
+        u.setEmail("tgyhbnj@ftgybn.com");
+        u.setName("TEST");
+        u.setPassword("drftgyhujn");
+        
+        em.persist(u);
     }
 }

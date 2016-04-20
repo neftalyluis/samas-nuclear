@@ -21,19 +21,20 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * Esta entidad se encarga de agrupar los objetivos de uno o mas portafolios: 
- * - Lista de Activos
- * - Perfil de Riesgo (TBD)
- * 
- * 
- *  
- * Boolean ShortSale 
+ * Esta entidad se encarga de agrupar los objetivos de uno o mas portafolios: -
+ * Lista de Activos - Perfil de Riesgo (TBD)
+ *
+ *
+ *
+ * Boolean ShortSale
+ *
  * @author alfonso
  */
 @Entity
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Strategy.findByName", query = "SELECT s FROM Strategy s WHERE s.name = :name")
+    @NamedQuery(name = "Strategy.findByName", query = "SELECT s FROM Strategy s WHERE s.name = :name"),
+    @NamedQuery(name = "Strategy.findByID", query = "SELECT s FROM Strategy s WHERE s.id = :id")
 
 })
 public class Strategy implements Serializable {
