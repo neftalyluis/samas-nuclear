@@ -31,10 +31,10 @@ public class LegalEntity implements Serializable {
 
     private String name;
 //    private String fiscalDomicile; // Por ahora no lo usemos
-    
+
     @OneToMany
     private List<RatingGrade> rating;
-    
+
     @OneToMany
     private List<Issuer> issuers;
 

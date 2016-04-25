@@ -13,6 +13,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -23,6 +25,7 @@ import javax.persistence.OneToMany;
  *
  */
 @Entity
+@XmlRootElement
 public class AssetType implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -88,6 +91,7 @@ public class AssetType implements Serializable {
     /**
      * @return the asset
      */
+    @XmlTransient
     public List<Asset> getAsset() {
         return asset;
     }
@@ -102,6 +106,7 @@ public class AssetType implements Serializable {
     /**
      * @return the propertyList
      */
+    @XmlTransient
     public List<AssetPropertyType> getPropertyList() {
         return propertyList;
     }

@@ -15,7 +15,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Temporal;
+import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -24,7 +26,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Entity
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "SliceVector.getSlicesFromStrategy", query = "SELECT s FROM SliceVector s WHERE s.strategy.id = :id")
+    @NamedQuery(name = "SliceVector.getSlicesFromStrategy", query = "SELECT s FROM SliceVector s WHERE s.strategy.id = :id"),
+    @NamedQuery(name = "SliceVector.getSliceWithIdAndStrategyId", query = "SELECT s FROM SliceVector s WHERE s.id= :sliceId AND s.strategy.id= :strategyId")
 })
 public class SliceVector implements Serializable {
 
@@ -34,26 +37,38 @@ public class SliceVector implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotNull
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Date dateTime;
 
+    @NotNull
     @ManyToOne
     private Asset asset;
 
     @ManyToOne
     private Fungibility fungibility;
 
+    @NotNull
     @ManyToOne
     private Strategy strategy;
 
+    @NotNull
     private Double targetAllocation;
 
     public SliceVector() {
+        this.dateTime = new Date();
+    }
+
+    public SliceVector(Asset a, Double target) {
+        this.dateTime = new Date();
+        this.asset = a;
+        this.targetAllocation = target;
+
     }
 
     public SliceVector(Date d, Asset a, Strategy s, Double target) {
         this.asset = a;
-        this.dateTime = d;
+        this.dateTime = new Date();
         this.strategy = s;
         this.targetAllocation = target;
     }
@@ -108,6 +123,7 @@ public class SliceVector implements Serializable {
     /**
      * @return the strategy
      */
+    @XmlTransient
     public Strategy getStrategy() {
         return strategy;
     }

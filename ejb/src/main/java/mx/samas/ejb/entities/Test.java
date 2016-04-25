@@ -16,6 +16,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -25,6 +27,7 @@ import javax.persistence.Temporal;
 @NamedQueries({
     @NamedQuery(name="Test.findAll", query="SELECT t FROM Test t")
 })
+@XmlRootElement
 public class Test implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -106,6 +109,7 @@ public class Test implements Serializable {
     /**
      * @return the accounts
      */
+    @XmlTransient
     public List<PortfolioAccount> getAccounts() {
         return accounts;
     }
@@ -148,6 +152,7 @@ public class Test implements Serializable {
     /**
      * @return the results
      */
+    @XmlTransient
     public List<TestPositionVector> getResults() {
         return results;
     }

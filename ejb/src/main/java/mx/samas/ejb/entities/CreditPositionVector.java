@@ -14,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
@@ -21,6 +22,7 @@ import javax.persistence.TemporalType;
  */
 ///TBD como PositionVector
 @Entity
+@XmlRootElement
 public class CreditPositionVector implements Serializable {
 
     private static final long serialVersionUID = 1L;

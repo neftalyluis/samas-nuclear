@@ -15,6 +15,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -98,6 +99,7 @@ public class Broker implements Serializable {
     /**
      * @return the commisions
      */
+    @XmlTransient
     public List<BrokerCommission> getCommisions() {
         return commisions;
     }

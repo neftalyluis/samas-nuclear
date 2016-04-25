@@ -9,6 +9,7 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -39,19 +40,37 @@ public class StrategyService {
         };
         return Response.ok(list).build();
     }
-    
+
     @GET
     @Path("/{id}")
-    public Response getStrategyByID(@PathParam("id") long id) throws AppException{
+    public Response getStrategyByID(@PathParam("id") long id) throws AppException {
         Strategy s = sb.getStrategyByID(id);
         return Response.ok(s).build();
     }
 
+    @POST
+    public Response createStrategy(Strategy s) {
+        if (sb.persistStrategy(s)) {
+            return Response.ok().build();
+        } else {
+            return Response.serverError().build();
+        }
+    }
+
     @GET
     @Path("/{id}/slice")
-    public List<SliceVector> getSliceVectorFromID(@PathParam("id") long id) throws AppException{
+    public Response getSliceVectorFromID(@PathParam("id") long id) throws AppException {
         List<SliceVector> lsv = sb.getSlicesFromID(id);
-        return lsv;
+        GenericEntity<List<SliceVector>> list = new GenericEntity<List<SliceVector>>(lsv) {
+        };
+        return Response.ok(list).build();
+    }
+
+    @GET
+    @Path("/{id}/slice/{sliceID}/")
+    public Response getSliceFromStrategy(@PathParam("id") long id, @PathParam("sliceID") long sliceId) throws AppException {
+        SliceVector sv = sb.getSliceFromStrategyAndId(id, sliceId);
+        return Response.ok(sv).build();
     }
 
 }

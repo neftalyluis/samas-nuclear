@@ -32,25 +32,28 @@ public class StrategyBean {
 
 //Solo se puede aplicar cuando no existen fungibilidades, o de menos Liquidez
     public boolean persistStrategy(Strategy s) {
-        List<SliceVector> lsv = s.getSlices();
-        Double full = 0.0;
-        for (SliceVector slice : lsv) {
-            full += slice.getTargetAllocation();
-        }
+//        List<SliceVector> lsv = s.getSlices();
+//        Double full = 0.0;
+//        for (SliceVector slice : lsv) {
+//            full += slice.getTargetAllocation();
+//        }
+//
+//        if (full == 100.0) {
+//            try {
+//                em.persist(s);
+//
+//                return true;
+//            } catch (Exception e) {
+//                LOG.log(Level.WARNING, "No pudimos persistir, la excepcion es: {0}", e.getMessage());
+//
+//                return false;
+//            }
+//        } else {
+//            return false;
+//        }
 
-        if (full == 100.0) {
-            try {
-                em.persist(s);
-
-                return true;
-            } catch (Exception e) {
-                LOG.log(Level.WARNING, "No pudimos persistir, la excepcion es: {0}", e.getMessage());
-
-                return false;
-            }
-        } else {
-            return false;
-        }
+        em.persist(s);
+        return true;
     }
 
     public Strategy getStrategyByName(String name) throws AppException {
@@ -74,7 +77,16 @@ public class StrategyBean {
 
     public List<SliceVector> getSlicesFromID(long id) throws AppException {
         try {
-            Query q = em.createNamedQuery("SliceVector.getSlicesFromStrategy").setParameter("id", id);
+            Strategy s = em.find(Strategy.class, id);
+            return s.getSlices();
+        } catch (Exception e) {
+            throw new AppException();
+        }
+    }
+
+    public List<SliceVector> getAllSlices() throws AppException {
+        try {
+            Query q = em.createQuery("SELECT s FROM SliceVector s");
             return q.getResultList();
         } catch (Exception e) {
             throw new AppException();
@@ -86,6 +98,18 @@ public class StrategyBean {
             return (Strategy) em.createNamedQuery("Strategy.findByID").setParameter("id", id).getSingleResult();
         } catch (Exception e) {
             LOG.log(Level.WARNING, "No pudimos obtener la estrategia, la excepcion es: {0}", e.getMessage());
+            throw new AppException();
+        }
+    }
+    
+    public SliceVector getSliceFromStrategyAndId(long strategyId, long sliceId) throws AppException{
+        try {
+            return (SliceVector) em.createNamedQuery("SliceVector."
+                    + "getSliceWithIdAndStrategyId")
+                    .setParameter("sliceId", sliceId)
+                    .setParameter("strategyId", strategyId)
+                    .getSingleResult();
+        } catch (Exception e) {
             throw new AppException();
         }
     }

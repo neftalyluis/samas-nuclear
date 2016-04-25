@@ -17,7 +17,6 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -101,7 +100,6 @@ public class Strategy implements Serializable {
     /**
      * @return the slices
      */
-    @XmlTransient
     public List<SliceVector> getSlices() {
         return slices;
     }

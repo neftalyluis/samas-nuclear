@@ -119,7 +119,7 @@ public class Market implements Serializable {
     /**
      * @return the brokers
      */
-    @XmlTransient
+    @XmlTransient   
     public List<Broker> getBrokers() {
         return brokers;
     }
