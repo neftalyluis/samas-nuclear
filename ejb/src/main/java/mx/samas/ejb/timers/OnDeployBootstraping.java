@@ -5,6 +5,8 @@
  */
 package mx.samas.ejb.timers;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -114,7 +116,7 @@ public class OnDeployBootstraping {
 
     @EJB
     private UserBean ub;
-    
+
     private static final Logger LOG = Logger.getLogger(OnDeployBootstraping.class.getName());
 
     @Schedule(hour = "*", minute = "*", persistent = false)
@@ -137,7 +139,7 @@ public class OnDeployBootstraping {
         persistTransactions();
         blotterEntries();
         closingDay();
-        
+
         users();
         LOG.info("=================SAMAS Bootstrap=================");
         timer.cancel();
@@ -378,6 +380,7 @@ public class OnDeployBootstraping {
         bonos42.setSeries("421113");
         bonos42.setName("SECRETARÍA DE HACIENDA Y CRÉDITO PÚBLICO");
         bonos42.setTicker("M_BONOS_421113");
+        bonos42.setMaturityDate(new Date());
 
         Bond bonos24 = new Bond();
         bonos24.setCurrencyDenomination(cb.getMXPCurrency());
@@ -386,6 +389,7 @@ public class OnDeployBootstraping {
         bonos24.setSeries("241205");
         bonos24.setName("SECRETARÍA DE HACIENDA Y CRÉDITO PÚBLICO");
         bonos24.setTicker("M_BONOS_241205");
+        bonos24.setMaturityDate(new Date());
 
         Bond bonos16 = new Bond();
         bonos16.setCurrencyDenomination(cb.getMXPCurrency());
@@ -487,17 +491,25 @@ public class OnDeployBootstraping {
             lqs.setRiskProfile(rpb.findByName("Agresivo"));
 
             lsv.clear();
-            lsv.add(new SliceVector(new Date(), (Equity) ab.findByTicker("1A_AMZN_*"), divydeu, 15.0));
-            lsv.add(new SliceVector(new Date(), (Equity) ab.findByTicker("1A_TSLA_*"), divydeu, 15.0));
-            lsv.add(new SliceVector(new Date(), (Equity) ab.findByTicker("1A_F_*"), divydeu, 15.0));
-            lsv.add(new SliceVector(new Date(), (Equity) ab.findByTicker("1_GFREGIO_O"), divydeu, 15.0));
-            lsv.add(new SliceVector(new Date(), (Equity) ab.findByTicker("1A_AMD_*"), divydeu, 15.0));
-            lsv.add(new SliceVector(new Date(), (Equity) ab.findByTicker("1A_BRFS_N"), divydeu, 20.0));
-            lsv.add(new SliceVector(new Date(), (Bond) ab.findByTicker("M_BONOS_421113"), divydeu, 5.0));
+            lsv.add(new SliceVector(new Date(), (Equity) ab.findByTicker("1A_AMZN_*"), lqs, 15.0));
+            lsv.add(new SliceVector(new Date(), (Equity) ab.findByTicker("1A_TSLA_*"), lqs, 15.0));
+            lsv.add(new SliceVector(new Date(), (Equity) ab.findByTicker("1A_F_*"), lqs, 15.0));
+            lsv.add(new SliceVector(new Date(), (Equity) ab.findByTicker("1_GFREGIO_O"), lqs, 15.0));
+            lsv.add(new SliceVector(new Date(), (Equity) ab.findByTicker("1A_AMD_*"), lqs, 15.0));
+            lsv.add(new SliceVector(new Date(), (Equity) ab.findByTicker("1A_BRFS_N"), lqs, 20.0));
+            lsv.add(new SliceVector(new Date(), (Bond) ab.findByTicker("M_BONOS_421113"), lqs, 5.0));
             lqs.setSlices(lsv);
             if (sgl.persistStrategy(lqs)) {
                 LOG.log(Level.INFO, "Estrategia: {0}", lqs.getName());
             }
+
+            lsv.clear();
+
+            Calendar c = Calendar.getInstance();
+            c.add(Calendar.MONTH, 10);
+            lsv.add(new SliceVector(c.getTime(), (Equity) ab.findByTicker("1A_AMZN_*"), lqs, 100.0));
+            sgl.updateStrategy(lqs.getId(), lsv);
+
             return true;
         } catch (Exception e) {
             LOG.log(Level.WARNING, "No pudimos persistir los Strategies y Slices, la excepcion es: {0} ", e.getMessage());
@@ -810,7 +822,7 @@ public class OnDeployBootstraping {
         u.setEmail("tgyhbnj@ftgybn.com");
         u.setName("TEST");
         u.setPassword("drftgyhujn");
-        
+
         em.persist(u);
     }
 }

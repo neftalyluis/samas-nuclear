@@ -17,7 +17,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
@@ -28,7 +27,7 @@ import javax.xml.bind.annotation.XmlTransient;
  *
  */
 @Entity
-@XmlRootElement
+@XmlTransient
 @NamedQueries({
     @NamedQuery(name = "Asset.findByTicker", query = "SELECT a FROM Asset a WHERE a.ticker = :ticker")
 

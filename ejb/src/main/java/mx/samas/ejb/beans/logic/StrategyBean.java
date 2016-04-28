@@ -101,14 +101,41 @@ public class StrategyBean {
             throw new AppException();
         }
     }
-    
-    public SliceVector getSliceFromStrategyAndId(long strategyId, long sliceId) throws AppException{
+
+    public SliceVector getSliceFromStrategyAndId(long strategyId, long sliceId) throws AppException {
         try {
             return (SliceVector) em.createNamedQuery("SliceVector."
                     + "getSliceWithIdAndStrategyId")
                     .setParameter("sliceId", sliceId)
                     .setParameter("strategyId", strategyId)
                     .getSingleResult();
+        } catch (Exception e) {
+            throw new AppException();
+        }
+    }
+
+    public List<SliceVector> getActiveSlicesFromStrategy(long strategyId) throws AppException {
+        try {
+            List<SliceVector> lsv = em.createNamedQuery("SliceVector.getLastSlicesFromStrategy")
+                    .setParameter("strategyId", strategyId)
+                    .getResultList();
+
+            return lsv;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new AppException();
+        }
+    }
+
+    public Strategy updateStrategy(long id, List<SliceVector> lsv) throws AppException {
+        try {
+            Strategy s = em.find(Strategy.class, id);
+            List<SliceVector> old = s.getSlices();
+            old.addAll(lsv);
+            s.setSlices(old);
+            em.persist(s);
+            return s;
         } catch (Exception e) {
             throw new AppException();
         }
