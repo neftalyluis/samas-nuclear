@@ -10,20 +10,24 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.xml.bind.annotation.XmlRootElement;
+import javax.persistence.ManyToOne;
 
 /**
  *
- * @author neftaly
+ * @author abimael
  */
 @Entity
-@XmlRootElement
-public class CurrencyVector extends AssetVector implements Serializable {
+public class AssetVectorPropertyValue implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @ManyToOne
+    private AssetPropertyType property;
+
+    private String objectValue;
 
     public Long getId() {
         return id;
@@ -43,10 +47,10 @@ public class CurrencyVector extends AssetVector implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof CurrencyVector)) {
+        if (!(object instanceof AssetVectorPropertyValue)) {
             return false;
         }
-        CurrencyVector other = (CurrencyVector) object;
+        AssetVectorPropertyValue other = (AssetVectorPropertyValue) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -55,7 +59,35 @@ public class CurrencyVector extends AssetVector implements Serializable {
 
     @Override
     public String toString() {
-        return "mx.samas.entities.CurrencyVector[ id=" + id + " ]";
+        return "mx.samas.ejb.entities.AssetVectorPropertyValue[ id=" + id + " ]";
+    }
+
+    /**
+     * @return the property
+     */
+    public AssetPropertyType getProperty() {
+        return property;
+    }
+
+    /**
+     * @param property the property to set
+     */
+    public void setProperty(AssetPropertyType property) {
+        this.property = property;
+    }
+
+    /**
+     * @return the objectValue
+     */
+    public String getObjectValue() {
+        return objectValue;
+    }
+
+    /**
+     * @param objectValue the objectValue to set
+     */
+    public void setObjectValue(String objectValue) {
+        this.objectValue = objectValue;
     }
 
 }

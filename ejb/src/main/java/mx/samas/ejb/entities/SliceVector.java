@@ -29,7 +29,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "SliceVector.getSlicesFromStrategy", query = "SELECT s FROM SliceVector s WHERE s.strategy.id = :id"),
     @NamedQuery(name = "SliceVector.getSliceWithIdAndStrategyId", query = "SELECT s FROM SliceVector s WHERE s.id= :sliceId AND s.strategy.id= :strategyId"),
     @NamedQuery(name = "SliceVector.getLastSlicesFromStrategy", query = "SELECT s FROM SliceVector s WHERE s.dateTime="
-            + "(SELECT MAX(md.dateTime) FROM SliceVector md) "
+            + "(SELECT MAX(md.dateTime) FROM SliceVector md WHERE md.strategy.id= :strategyId) "
             + "AND s.strategy.id= :strategyId")
 })
 public class SliceVector implements Serializable {

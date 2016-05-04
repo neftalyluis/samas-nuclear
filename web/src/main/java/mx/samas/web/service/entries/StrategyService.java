@@ -19,8 +19,6 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import mx.samas.ejb.beans.exceptions.AppException;
 import mx.samas.ejb.beans.logic.StrategyBean;
-import mx.samas.ejb.entities.Bond;
-import mx.samas.ejb.entities.Equity;
 import mx.samas.ejb.entities.SliceVector;
 import mx.samas.ejb.entities.Strategy;
 
@@ -73,14 +71,6 @@ public class StrategyService {
     @Path("/{id}/slice/active")
     public Response getActiveSliceVectorFromID(@PathParam("id") long id) throws AppException {
         List<SliceVector> lsv = sb.getActiveSlicesFromStrategy(id);
-        for(SliceVector sv : lsv ){
-            if (sv.getAsset() instanceof Bond){
-                System.out.println(sv.getAsset().getTicker());
-                Bond e = (Bond) sv.getAsset();
-                System.out.println(e.getMaturityDate());
-                sv.setAsset(e);
-            }
-        }
         GenericEntity<List<SliceVector>> list = new GenericEntity<List<SliceVector>>(lsv) {
         };
         return Response.ok(list).build();
@@ -96,13 +86,8 @@ public class StrategyService {
     @PUT
     @Path("/{id}/slice/")
     public Response updateSlices(@PathParam("id") long id, List<SliceVector> lsv) throws AppException {
-        
-        for(SliceVector sv : lsv){
-            System.out.println(sv.getAsset().getName());
-        }
         Strategy s = sb.getStrategyByID(id);
-        s.setSlices(lsv);
-        
+        s.setSlices(lsv);    
         sb.updateStrategy(id, lsv);
         return Response.ok().build();
     }

@@ -5,18 +5,16 @@
  */
 package mx.samas.ejb.entities;
 
-
 /**
  *
- * @author neftaly
- *
- * Esta entidad se encarga de hacer un agrupamiento de Activos por sus
- * propiedades, muy importante para las fungibilidades
- *
+ * @author abimael
  */
-public enum AssetType {
-    EQUITY,
-    BOND,
-    DERIVATIVE,
-    CURRENCY
+public enum AssetDataType {
+    
+    BOOLEAN,
+    STRING,
+    INTEGER,
+    DOUBLE,
+    DATE
+    
 }

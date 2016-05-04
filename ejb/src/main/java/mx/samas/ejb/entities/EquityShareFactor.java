@@ -32,7 +32,7 @@ public class EquityShareFactor implements Serializable {
     private Long id;
 
     @ManyToOne
-    private Equity equity;
+    private Asset equity;
 
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date dateTime;
@@ -106,14 +106,14 @@ public class EquityShareFactor implements Serializable {
     /**
      * @return the equity
      */
-    public Equity getEquity() {
+    public Asset getEquity() {
         return equity;
     }
 
     /**
      * @param equity the equity to set
      */
-    public void setEquity(Equity equity) {
+    public void setEquity(Asset equity) {
         this.equity = equity;
     }
 

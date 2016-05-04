@@ -11,7 +11,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import mx.samas.ejb.beans.exceptions.AppException;
-import mx.samas.ejb.entities.Currency;
+import mx.samas.ejb.entities.Asset;
 import mx.samas.ejb.entities.DenominatorCurrency;
 
 /**
@@ -38,7 +38,7 @@ public class CurrencyBean {
         }
     }
 
-    public void persistCurrency(Currency c) throws AppException {
+    public void persistCurrency(Asset c) throws AppException {
         try {
             em.persist(c);
         } catch (Exception e) {

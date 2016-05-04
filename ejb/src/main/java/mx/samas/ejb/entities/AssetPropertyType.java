@@ -7,6 +7,8 @@ package mx.samas.ejb.entities;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -36,11 +38,13 @@ public class AssetPropertyType implements Serializable {
      * Descripcion de la propiedad
      */
     private String description;
+    
     /**
      * El tipo de dato que va a manejar esta propiedad: - Boolean -
      * String - Integer - Double - Date
      */
-    private String type;
+    @Enumerated(EnumType.STRING)
+    private AssetDataType type;
 
     public Long getId() {
         return id;
@@ -106,14 +110,14 @@ public class AssetPropertyType implements Serializable {
     /**
      * @return the type
      */
-    public String getType() {
+    public AssetDataType getType() {
         return type;
     }
 
     /**
      * @param type the type to set
      */
-    public void setType(String type) {
+    public void setType(AssetDataType type) {
         this.type = type;
     }
 

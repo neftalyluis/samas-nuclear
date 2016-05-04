@@ -36,13 +36,13 @@ public class DenominatorCurrency implements Serializable {
     private Long id;
 
     @OneToOne
-    private Currency currency;
+    private Asset currency;
 
     public DenominatorCurrency() {
 
     }
 
-    public DenominatorCurrency(Currency currency) {
+    public DenominatorCurrency(Asset currency) {
         this.currency = currency;
     }
 
@@ -82,14 +82,14 @@ public class DenominatorCurrency implements Serializable {
     /**
      * @return the currency
      */
-    public Currency getCurrency() {
+    public Asset getCurrency() {
         return currency;
     }
 
     /**
      * @param currency the currency to set
      */
-    public void setCurrency(Currency currency) {
+    public void setCurrency(Asset currency) {
         this.currency = currency;
     }
 

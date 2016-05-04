@@ -35,9 +35,6 @@ public class AssetPropertyValue implements Serializable {
     @ManyToOne
     private AssetPropertyType property;
 
-    @ManyToOne
-    private Asset asset;
-
     private String objectValue;
 
     public Long getId() {
@@ -87,19 +84,6 @@ public class AssetPropertyValue implements Serializable {
         this.property = property;
     }
 
-    /**
-     * @return the asset
-     */
-    public Asset getAsset() {
-        return asset;
-    }
-
-    /**
-     * @param asset the asset to set
-     */
-    public void setAsset(Asset asset) {
-        this.asset = asset;
-    }
 
     /**
      * @return the objectValue

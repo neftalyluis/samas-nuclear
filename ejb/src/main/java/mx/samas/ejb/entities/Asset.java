@@ -10,6 +10,8 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -17,22 +19,25 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author neftaly Entidad padre en la que se basan los cuatro tipos de activos,
+ * @author neftaly 
+ * 
+ * Entidad padre en la que se basan los cuatro tipos de activos,
  * esta incluyen las propiedades que tienen todos los Activos.
  *
  *
  */
 @Entity
-@XmlTransient
+@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Asset.findByTicker", query = "SELECT a FROM Asset a WHERE a.ticker = :ticker")
 
 })
-public abstract class Asset implements Serializable {
+public class Asset implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -126,9 +131,24 @@ public abstract class Asset implements Serializable {
      */
     private Boolean shortSale;
 
+    
     @OneToMany(mappedBy = "asset", cascade = CascadeType.ALL)
     private List<AssetVector> vectors;
 
+    @OneToMany
+    private List<AssetPropertyValue> properties;
+    
+    /**
+     * Tipo de activo:
+     * 
+     * -Equity
+     * -Bond
+     * -Currency
+     * -Derivative
+     */
+    @Enumerated(EnumType.STRING)
+    private AssetType type;
+    
     public Long getId() {
         return id;
     }
@@ -316,6 +336,35 @@ public abstract class Asset implements Serializable {
      */
     public void setShortSale(Boolean shortSale) {
         this.shortSale = shortSale;
+    }
+
+    /**
+     * @return the properties
+     */
+    @XmlTransient
+    public List<AssetPropertyValue> getProperties() {
+        return properties;
+    }
+
+    /**
+     * @param properties the properties to set
+     */
+    public void setProperties(List<AssetPropertyValue> properties) {
+        this.properties = properties;
+    }
+
+    /**
+     * @return the type
+     */
+    public AssetType getType() {
+        return type;
+    }
+
+    /**
+     * @param type the type to set
+     */
+    public void setType(AssetType type) {
+        this.type = type;
     }
 
 }

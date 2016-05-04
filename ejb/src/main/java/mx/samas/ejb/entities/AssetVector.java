@@ -24,7 +24,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @Entity
 @XmlRootElement
-public abstract class AssetVector implements Serializable {
+public class AssetVector implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -36,8 +36,34 @@ public abstract class AssetVector implements Serializable {
 
     @ManyToOne
     private Asset asset;
+    
     private Double cleanPrice;
 
+// BONDVECTOR    
+//    
+//    private Double dirtyPrice;
+//    private Double yield;
+//    private Double couponRate;
+//    /**
+//     * "Spread" significa sobretasa versus tasa de referencia en bonos
+//     * revisables; para bonos tasa fija es = 0.0 .
+//     */
+//    private Double spread;
+//    private Double amountOutstanding;
+//
+//    /**
+//     * Checar la migracion de calificaciones a Entidades, tucán
+//     */
+//    private String gradeMoodys;
+//    private String gradeSP;
+//    private String gradeHR;
+//    private String gradeFitch;
+//
+//    @ManyToMany
+//    private List<RatingGrade> ratings;
+//
+//    private Double faceValue;
+    
     public Long getId() {
         return id;
     }
