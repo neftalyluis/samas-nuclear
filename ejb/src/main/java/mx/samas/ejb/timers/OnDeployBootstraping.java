@@ -148,34 +148,34 @@ public class OnDeployBootstraping {
     private boolean persistSecurityClasses() {
         try {
             TipoValor s = new TipoValor();
-            s.setAssetType("Bond");
-            s.setCode("S");
-            s.setDescription("Udibonos");
+            s.setTipoActivo("Bond");
+            s.setCodigo("S");
+            s.setDescripcion("Udibonos");
 
             TipoValor m = new TipoValor();
-            m.setAssetType("Bond");
-            m.setCode("M");
-            m.setDescription("Bonos de Gobierno Federal Tasa Fija");
+            m.setTipoActivo("Bond");
+            m.setCodigo("M");
+            m.setDescripcion("Bonos de Gobierno Federal Tasa Fija");
 
             TipoValor unoi = new TipoValor();
-            unoi.setAssetType("Equity");
-            unoi.setCode("1I");
-            unoi.setDescription("Tracks Extranjeros");
+            unoi.setTipoActivo("Equity");
+            unoi.setCodigo("1I");
+            unoi.setDescripcion("Tracks Extranjeros");
 
             TipoValor uno = new TipoValor();
-            uno.setAssetType("Equity");
-            uno.setCode("1");
-            uno.setDescription("Acciones Industriales, Comerico y de Servicios");
+            uno.setTipoActivo("Equity");
+            uno.setCodigo("1");
+            uno.setDescripcion("Acciones Industriales, Comerico y de Servicios");
 
             TipoValor unoa = new TipoValor();
-            unoa.setAssetType("Equity");
-            unoa.setCode("1A");
-            unoa.setDescription("Acciones del sistema Internal. de cotizaciones");
+            unoa.setTipoActivo("Equity");
+            unoa.setCodigo("1A");
+            unoa.setDescripcion("Acciones del sistema Internal. de cotizaciones");
 
             TipoValor curr = new TipoValor();
-            curr.setAssetType("Currency");
-            curr.setCode("*C");
-            curr.setDescription("Tipos de Cambio");
+            curr.setTipoActivo("Currency");
+            curr.setCodigo("*C");
+            curr.setDescripcion("Tipos de Cambio");
 
             LOG.info("--SecurityClasses");
 
@@ -196,38 +196,38 @@ public class OnDeployBootstraping {
     private boolean persistIssuers() {
         try {
             Emisor bonos = new Emisor();
-            bonos.setCode("BONOS");
+            bonos.setCodigo("BONOS");
 
             Emisor udibono = new Emisor();
-            udibono.setCode("UDIBONO");
+            udibono.setCodigo("UDIBONO");
 
             Emisor ivv = new Emisor();
-            ivv.setCode("IVV");
+            ivv.setCodigo("IVV");
 
             Emisor kimber = new Emisor();
-            kimber.setCode("KIMBER");
+            kimber.setCodigo("KIMBER");
 
             Emisor amd = new Emisor();
-            amd.setCode("AMD");
+            amd.setCodigo("AMD");
 
             Emisor gfregio = new Emisor();
-            gfregio.setCode("GFREGIO");
+            gfregio.setCodigo("GFREGIO");
 
             Emisor f = new Emisor();
-            f.setCode("F");
+            f.setCodigo("F");
 
             Emisor tsla = new Emisor();
-            tsla.setCode("TSLA");
+            tsla.setCodigo("TSLA");
 
             Emisor amzn = new Emisor();
-            amzn.setCode("AMZN");
+            amzn.setCodigo("AMZN");
 
             ///Prueba 
             Emisor mxpi = new Emisor();
-            mxpi.setCode("MXP");
+            mxpi.setCodigo("MXP");
 
             Emisor brsf = new Emisor();
-            brsf.setCode("BRFS");
+            brsf.setCodigo("BRFS");
 
             Emisor lqd = new Emisor("LQS");
             LOG.info("--Issuers");
@@ -272,15 +272,15 @@ public class OnDeployBootstraping {
         DenominacionMoneda mxpcd = new DenominacionMoneda();
 
         Activo mxpeso = new Activo();
-        mxpeso.setType(TipoActivo.CURRENCY);
-        mxpeso.setCurrencyDenomination(mxpcd);
-        mxpeso.setName("Peso Mexicano");
-        mxpeso.setSecurityClass("*C");
-        mxpeso.setIssuer(ib.getIssuerByCode("MXP"));
-        mxpeso.setSeries("");
-        mxpeso.setTicker("*C_MXP_");
+        mxpeso.setTipo(TipoActivo.MONEDA);
+        mxpeso.setMonedaDenominacion(mxpcd);
+        mxpeso.setNombre("Peso Mexicano");
+        mxpeso.setTipoValor("*C");
+        mxpeso.setEmisora(ib.getIssuerByCode("MXP"));
+        mxpeso.setSerie("");
+        mxpeso.setClavePizarra("*C_MXP_");
 
-        mxpcd.setCurrency(mxpeso);
+        mxpcd.setMoneda(mxpeso);
 
         try {
             LOG.info("--Asset MXP");
@@ -295,134 +295,133 @@ public class OnDeployBootstraping {
     private boolean persistAssets() {
 
         Activo amzn = new Activo();
-        amzn.setType(TipoActivo.EQUITY);
-        amzn.setCurrencyDenomination(cb.getMXPCurrency());
-        amzn.setSecurityClass("1A");
-        LOG.info("KHE");
-        amzn.setIssuer(ib.getIssuerByCode("AMZN"));
-        amzn.setSeries("*");
-        amzn.setName("AMAZON COM INC");
-        amzn.setTicker("1A_AMZN_*");
+        amzn.setTipo(TipoActivo.ACCION);
+        amzn.setMonedaDenominacion(cb.getMXPCurrency());
+        amzn.setTipoValor("1A");
+        amzn.setEmisora(ib.getIssuerByCode("AMZN"));
+        amzn.setSerie("*");
+        amzn.setNombre("AMAZON COM INC");
+        amzn.setClavePizarra("1A_AMZN_*");
 
         Activo tsla = new Activo();
-        tsla.setType(TipoActivo.EQUITY);
-        tsla.setCurrencyDenomination(cb.getMXPCurrency());
-        tsla.setSecurityClass("1A");
-        tsla.setIssuer(ib.getIssuerByCode("TSLA"));
-        tsla.setSeries("*");
-        tsla.setName("TESLA INC");
-        tsla.setTicker("1A_TSLA_*");
+        tsla.setTipo(TipoActivo.ACCION);
+        tsla.setMonedaDenominacion(cb.getMXPCurrency());
+        tsla.setTipoValor("1A");
+        tsla.setEmisora(ib.getIssuerByCode("TSLA"));
+        tsla.setSerie("*");
+        tsla.setNombre("TESLA INC");
+        tsla.setClavePizarra("1A_TSLA_*");
 
         Activo fiat = new Activo();
-        fiat.setType(TipoActivo.EQUITY);
-        fiat.setCurrencyDenomination(cb.getMXPCurrency());
-        fiat.setSecurityClass("1A");
-        fiat.setIssuer(ib.getIssuerByCode("F"));
-        fiat.setSeries("*");
-        fiat.setName("FIAT SPA");
-        fiat.setTicker("1A_F_*");
+        fiat.setTipo(TipoActivo.ACCION);
+        fiat.setMonedaDenominacion(cb.getMXPCurrency());
+        fiat.setTipoValor("1A");
+        fiat.setEmisora(ib.getIssuerByCode("F"));
+        fiat.setSerie("*");
+        fiat.setNombre("FIAT SPA");
+        fiat.setClavePizarra("1A_F_*");
 
         Activo gfr = new Activo();
-        gfr.setType(TipoActivo.EQUITY);
-        gfr.setCurrencyDenomination(cb.getMXPCurrency());
-        gfr.setSecurityClass("1");
-        gfr.setIssuer(ib.getIssuerByCode("GFREGIO"));
-        gfr.setSeries("O");
-        gfr.setName("AF BANREGIO  S.A. DE C.V. SOFOM");
-        gfr.setTicker("1_GFREGIO_O");
+        gfr.setTipo(TipoActivo.ACCION);
+        gfr.setMonedaDenominacion(cb.getMXPCurrency());
+        gfr.setTipoValor("1");
+        gfr.setEmisora(ib.getIssuerByCode("GFREGIO"));
+        gfr.setSerie("O");
+        gfr.setNombre("AF BANREGIO  S.A. DE C.V. SOFOM");
+        gfr.setClavePizarra("1_GFREGIO_O");
 
         Activo amd = new Activo();
-        amd.setType(TipoActivo.EQUITY);
-        amd.setCurrencyDenomination(cb.getMXPCurrency());
-        amd.setSecurityClass("1A");
-        amd.setIssuer(ib.getIssuerByCode("AMD"));
-        amd.setSeries("*");
-        amd.setName("AMD");
-        amd.setTicker("1A_AMD_*");
+        amd.setTipo(TipoActivo.ACCION);
+        amd.setMonedaDenominacion(cb.getMXPCurrency());
+        amd.setTipoValor("1A");
+        amd.setEmisora(ib.getIssuerByCode("AMD"));
+        amd.setSerie("*");
+        amd.setNombre("AMD");
+        amd.setClavePizarra("1A_AMD_*");
 
         Activo kimber = new Activo();
-        kimber.setType(TipoActivo.EQUITY);
-        kimber.setCurrencyDenomination(cb.getMXPCurrency());
-        kimber.setSecurityClass("1");
-        kimber.setIssuer(ib.getIssuerByCode("KIMBER"));
-        kimber.setSeries("A");
-        kimber.setName("KIMBERLY-CLARK DE MÉXICO S. A. B. DE C. V.");
-        kimber.setTicker("1_KIMBER_A");
+        kimber.setTipo(TipoActivo.ACCION);
+        kimber.setMonedaDenominacion(cb.getMXPCurrency());
+        kimber.setTipoValor("1");
+        kimber.setEmisora(ib.getIssuerByCode("KIMBER"));
+        kimber.setSerie("A");
+        kimber.setNombre("KIMBERLY-CLARK DE MÉXICO S. A. B. DE C. V.");
+        kimber.setClavePizarra("1_KIMBER_A");
 
         Activo ivv = new Activo();
-        ivv.setType(TipoActivo.EQUITY);
-        ivv.setCurrencyDenomination(cb.getMXPCurrency());
-        ivv.setSecurityClass("1I");
-        ivv.setIssuer(ib.getIssuerByCode("IVV"));
-        ivv.setSeries("*");
-        ivv.setName("ISHARES CORE S&P 500 ETF");
-        ivv.setTicker("1I_IVV_*");
+        ivv.setTipo(TipoActivo.ACCION);
+        ivv.setMonedaDenominacion(cb.getMXPCurrency());
+        ivv.setTipoValor("1I");
+        ivv.setEmisora(ib.getIssuerByCode("IVV"));
+        ivv.setSerie("*");
+        ivv.setNombre("ISHARES CORE S&P 500 ETF");
+        ivv.setClavePizarra("1I_IVV_*");
 
         Activo udibono40 = new Activo();
-        udibono40.setType(TipoActivo.BOND);
-        udibono40.setCurrencyDenomination(cb.getMXPCurrency());
-        udibono40.setSecurityClass("S");
-        udibono40.setIssuer(ib.getIssuerByCode("UDIBONO"));
-        udibono40.setSeries("401115");
-        udibono40.setName("SECRETARÍA DE HACIENDA Y CRÉDITO PÚBLICO");
-        udibono40.setTicker("S_UDIBONO_401115");
+        udibono40.setTipo(TipoActivo.BONO);
+        udibono40.setMonedaDenominacion(cb.getMXPCurrency());
+        udibono40.setTipoValor("S");
+        udibono40.setEmisora(ib.getIssuerByCode("UDIBONO"));
+        udibono40.setSerie("401115");
+        udibono40.setNombre("SECRETARÍA DE HACIENDA Y CRÉDITO PÚBLICO");
+        udibono40.setClavePizarra("S_UDIBONO_401115");
 
         Activo udibono22 = new Activo();
-        udibono22.setType(TipoActivo.BOND);
-        udibono22.setCurrencyDenomination(cb.getMXPCurrency());
-        udibono22.setSecurityClass("S");
-        udibono22.setIssuer(ib.getIssuerByCode("UDIBONO"));
-        udibono22.setSeries("220609");
-        udibono22.setName("SECRETARÍA DE HACIENDA Y CRÉDITO PÚBLICO");
-        udibono22.setTicker("S_UDIBONO_220609");
+        udibono22.setTipo(TipoActivo.BONO);
+        udibono22.setMonedaDenominacion(cb.getMXPCurrency());
+        udibono22.setTipoValor("S");
+        udibono22.setEmisora(ib.getIssuerByCode("UDIBONO"));
+        udibono22.setSerie("220609");
+        udibono22.setNombre("SECRETARÍA DE HACIENDA Y CRÉDITO PÚBLICO");
+        udibono22.setClavePizarra("S_UDIBONO_220609");
 
         Activo udibono16 = new Activo();
-        udibono16.setType(TipoActivo.BOND);
-        udibono16.setCurrencyDenomination(cb.getMXPCurrency());
-        udibono16.setSecurityClass("S");
-        udibono16.setIssuer(ib.getIssuerByCode("UDIBONO"));
-        udibono16.setSeries("161215");
-        udibono16.setName("SECRETARÍA DE HACIENDA Y CRÉDITO PÚBLICO");
-        udibono16.setTicker("S_UDIBONO_160616");
+        udibono16.setTipo(TipoActivo.BONO);
+        udibono16.setMonedaDenominacion(cb.getMXPCurrency());
+        udibono16.setTipoValor("S");
+        udibono16.setEmisora(ib.getIssuerByCode("UDIBONO"));
+        udibono16.setSerie("161215");
+        udibono16.setNombre("SECRETARÍA DE HACIENDA Y CRÉDITO PÚBLICO");
+        udibono16.setClavePizarra("S_UDIBONO_160616");
 
         Activo bonos42 = new Activo();
-        bonos42.setType(TipoActivo.BOND);
-        bonos42.setCurrencyDenomination(cb.getMXPCurrency());
-        bonos42.setSecurityClass("M");
-        bonos42.setIssuer(ib.getIssuerByCode("BONOS"));
-        bonos42.setSeries("421113");
-        bonos42.setName("SECRETARÍA DE HACIENDA Y CRÉDITO PÚBLICO");
-        bonos42.setTicker("M_BONOS_421113");
+        bonos42.setTipo(TipoActivo.BONO);
+        bonos42.setMonedaDenominacion(cb.getMXPCurrency());
+        bonos42.setTipoValor("M");
+        bonos42.setEmisora(ib.getIssuerByCode("BONOS"));
+        bonos42.setSerie("421113");
+        bonos42.setNombre("SECRETARÍA DE HACIENDA Y CRÉDITO PÚBLICO");
+        bonos42.setClavePizarra("M_BONOS_421113");
 
         Activo bonos24 = new Activo();
-        bonos24.setType(TipoActivo.BOND);
-        bonos24.setCurrencyDenomination(cb.getMXPCurrency());
-        bonos24.setSecurityClass("M");
-        bonos24.setIssuer(ib.getIssuerByCode("BONOS"));
-        bonos24.setSeries("241205");
-        bonos24.setName("SECRETARÍA DE HACIENDA Y CRÉDITO PÚBLICO");
-        bonos24.setTicker("M_BONOS_241205");
+        bonos24.setTipo(TipoActivo.BONO);
+        bonos24.setMonedaDenominacion(cb.getMXPCurrency());
+        bonos24.setTipoValor("M");
+        bonos24.setEmisora(ib.getIssuerByCode("BONOS"));
+        bonos24.setSerie("241205");
+        bonos24.setNombre("SECRETARÍA DE HACIENDA Y CRÉDITO PÚBLICO");
+        bonos24.setClavePizarra("M_BONOS_241205");
 
         Activo bonos16 = new Activo();
-        bonos16.setType(TipoActivo.BOND);
-        bonos16.setCurrencyDenomination(cb.getMXPCurrency());
-        bonos16.setSecurityClass("M");
-        bonos16.setIssuer(ib.getIssuerByCode("BONOS"));
-        bonos16.setSeries("161215");
-        bonos16.setName("SECRETARÍA DE HACIENDA Y CRÉDITO PÚBLICO");
-        bonos16.setTicker("M_BONOS_161215");
+        bonos16.setTipo(TipoActivo.BONO);
+        bonos16.setMonedaDenominacion(cb.getMXPCurrency());
+        bonos16.setTipoValor("M");
+        bonos16.setEmisora(ib.getIssuerByCode("BONOS"));
+        bonos16.setSerie("161215");
+        bonos16.setNombre("SECRETARÍA DE HACIENDA Y CRÉDITO PÚBLICO");
+        bonos16.setClavePizarra("M_BONOS_161215");
 
         Activo brfs = new Activo();
-        brfs.setType(TipoActivo.EQUITY);
-        brfs.setCurrencyDenomination(cb.getMXPCurrency());
-        brfs.setSecurityClass("1A");
-        brfs.setIssuer(ib.getIssuerByCode("BRFS"));
-        brfs.setSeries("N");
-        brfs.setName("BRASIL FOODS SA");
-        brfs.setTicker("1A_BRFS_N");
+        brfs.setTipo(TipoActivo.ACCION);
+        brfs.setMonedaDenominacion(cb.getMXPCurrency());
+        brfs.setTipoValor("1A");
+        brfs.setEmisora(ib.getIssuerByCode("BRFS"));
+        brfs.setSerie("N");
+        brfs.setNombre("BRASIL FOODS SA");
+        brfs.setClavePizarra("1A_BRFS_N");
 
         Activo lqs = new Activo("Liquidez", "1", ib.getIssuerByCode("LQS"), "1", false);
-        lqs.setType(TipoActivo.EQUITY);
+        lqs.setTipo(TipoActivo.ACCION);
 
         try {
 
@@ -456,11 +455,11 @@ public class OnDeployBootstraping {
             LOG.info("--RiskProfiles");
 
             PerfilRiesgo conservador = new PerfilRiesgo();
-            conservador.setName("Conservador");
+            conservador.setNombre("Conservador");
             PerfilRiesgo balanceado = new PerfilRiesgo();
-            balanceado.setName("Balanceado");
+            balanceado.setNombre("Balanceado");
             PerfilRiesgo agresivo = new PerfilRiesgo();
-            agresivo.setName("Agresivo");
+            agresivo.setNombre("Agresivo");
 
             rpb.persistRiskProfile(conservador);
             rpb.persistRiskProfile(balanceado);
@@ -477,8 +476,8 @@ public class OnDeployBootstraping {
         try {
             //Estrategia Dividendo y Deuda
             Estrategia divydeu = new Estrategia();
-            divydeu.setName("Dividendo y Deuda");
-            divydeu.setRiskProfile(rpb.findByName("Balanceado"));
+            divydeu.setNombre("Dividendo y Deuda");
+            divydeu.setPerfilRiesgo(rpb.findByName("Balanceado"));
             List<VectorPortafolioModelo> lsv = new LinkedList<>();
             lsv.add(new VectorPortafolioModelo(new Date(), ab.findByTicker("1A_AMZN_*"), divydeu, 4.0));
             lsv.add(new VectorPortafolioModelo(new Date(), ab.findByTicker("1A_TSLA_*"), divydeu, 4.0));
@@ -495,15 +494,15 @@ public class OnDeployBootstraping {
             lsv.add(new VectorPortafolioModelo(new Date(), ab.findByTicker("S_UDIBONO_401115"), divydeu, 5.0));
             lsv.add(new VectorPortafolioModelo(new Date(), ab.findByTicker("1_LQS_1"), divydeu, 5.0));
 
-            divydeu.setSlices(lsv);
+            divydeu.setEstrategiaModelo(lsv);
             if (sgl.persistStrategy(divydeu)) {
-                LOG.log(Level.INFO, "Estrategia :{0}", divydeu.getName());
+                LOG.log(Level.INFO, "Estrategia :{0}", divydeu.getNombre());
             }
 
             //Estrategia Liquidez
             Estrategia lqs = new Estrategia();
-            lqs.setName("Liquidez");
-            lqs.setRiskProfile(rpb.findByName("Agresivo"));
+            lqs.setNombre("Liquidez");
+            lqs.setPerfilRiesgo(rpb.findByName("Agresivo"));
 
             lsv.clear();
             lsv.add(new VectorPortafolioModelo(new Date(), ab.findByTicker("1A_AMZN_*"), lqs, 15.0));
@@ -513,9 +512,9 @@ public class OnDeployBootstraping {
             lsv.add(new VectorPortafolioModelo(new Date(), ab.findByTicker("1A_AMD_*"), lqs, 15.0));
             lsv.add(new VectorPortafolioModelo(new Date(), ab.findByTicker("1A_BRFS_N"), lqs, 20.0));
             lsv.add(new VectorPortafolioModelo(new Date(), ab.findByTicker("M_BONOS_421113"), lqs, 5.0));
-            lqs.setSlices(lsv);
+            lqs.setEstrategiaModelo(lsv);
             if (sgl.persistStrategy(lqs)) {
-                LOG.log(Level.INFO, "Estrategia: {0}", lqs.getName());
+                LOG.log(Level.INFO, "Estrategia: {0}", lqs.getNombre());
             }
 
             lsv.clear();
@@ -579,7 +578,7 @@ public class OnDeployBootstraping {
 
     private boolean persistBank() {
         Banco b = new Banco();
-        b.setName("HSBC");
+        b.setNombre("HSBC");
         try {
             bb.persistBank(b);
             return true;
@@ -591,13 +590,13 @@ public class OnDeployBootstraping {
 
     private boolean persistPortfolioStatuses() {
         PortafolioEstatus ps = new PortafolioEstatus();
-        ps.setName("Active");
+        ps.setNombre("Active");
 
         PortafolioEstatus ps1 = new PortafolioEstatus();
-        ps1.setName("Suspended");
+        ps1.setNombre("Suspended");
 
         PortafolioEstatus ps2 = new PortafolioEstatus();
-        ps2.setName("Liquidation");
+        ps2.setNombre("Liquidation");
 
         try {
             pab.persistPortfolioStatus(ps);
@@ -614,30 +613,30 @@ public class OnDeployBootstraping {
 
         try {
             PortafolioCuenta pa = new PortafolioCuenta();
-            pa.setAccountNumber("GYRFEMK_87654");
-            pa.setActiveCommission(0.0);
-            pa.setBank(bb.getBankByName("HSBC"));
-            pa.setDiscretionary(Boolean.FALSE);
+            pa.setNumeroCuenta("GYRFEMK_87654");
+            pa.setComisionActiva(0.0);
+            pa.setBanco(bb.getBankByName("HSBC"));
+            pa.setComisionDiscrecional(Boolean.FALSE);
 
             VectorPortafolio pv = new VectorPortafolio();
-            pv.setAccount(pa);
-            pv.setClients(clb.getAllClients());
-            pv.setDateTime(new Date());
-            pv.setPortfolioStatus(pab.getActiveStatus());
-            pv.setStrategy(sgl.getStrategyByName("Dividendo y Deuda"));
+            pv.setCuenta(pa);
+            pv.setClientes(clb.getAllClients());
+            pv.setFecha(new Date());
+            pv.setEstatus(pab.getActiveStatus());
+            pv.setEstrategia(sgl.getStrategyByName("Dividendo y Deuda"));
 
             PortafolioCuenta pal = new PortafolioCuenta();
-            pal.setAccountNumber("HGRFD_7654GHJ");
-            pal.setActiveCommission(0.0);
-            pal.setBank(bb.getBankByName("HSBC"));
-            pal.setDiscretionary(Boolean.FALSE);
+            pal.setNumeroCuenta("HGRFD_7654GHJ");
+            pal.setComisionActiva(0.0);
+            pal.setBanco(bb.getBankByName("HSBC"));
+            pal.setComisionDiscrecional(Boolean.FALSE);
 
             VectorPortafolio pvl = new VectorPortafolio();
-            pvl.setAccount(pal);
-            pvl.setClients(clb.getAllClients());
-            pvl.setDateTime(new Date());
-            pvl.setPortfolioStatus(pab.getActiveStatus());
-            pvl.setStrategy(sgl.getStrategyByName("Liquidez"));
+            pvl.setCuenta(pal);
+            pvl.setClientes(clb.getAllClients());
+            pvl.setFecha(new Date());
+            pvl.setEstatus(pab.getActiveStatus());
+            pvl.setEstrategia(sgl.getStrategyByName("Liquidez"));
 
             pab.persistPortfolioAccount(pa);
             pve.persistPortfolioVector(pv);
@@ -671,124 +670,124 @@ public class OnDeployBootstraping {
         List<Transaccion> tl = new LinkedList<>();
 //////////////////////////////////////////////CLIENT
         Transaccion depositMoneyFromClient = new Transaccion();
-        depositMoneyFromClient.setName("Deposito en efectivo del Cliente");
-        depositMoneyFromClient.setOpCash(new Long(1));
-        depositMoneyFromClient.setOpQuantity(new Long(0));
-        depositMoneyFromClient.setCredit(false);
+        depositMoneyFromClient.setNombre("Deposito en efectivo del Cliente");
+        depositMoneyFromClient.setFlujoEfectivo(new Long(1));
+        depositMoneyFromClient.setFlujoTitulos(new Long(0));
+        depositMoneyFromClient.setCredito(false);
         tl.add(depositMoneyFromClient);
 
         Transaccion depositTitlesFromClient = new Transaccion();
-        depositTitlesFromClient.setName("Deposito en titulos del Cliente");
-        depositTitlesFromClient.setOpCash(new Long(0));
-        depositTitlesFromClient.setOpQuantity(new Long(1));
-        depositTitlesFromClient.setCredit(false);
+        depositTitlesFromClient.setNombre("Deposito en titulos del Cliente");
+        depositTitlesFromClient.setFlujoEfectivo(new Long(0));
+        depositTitlesFromClient.setFlujoTitulos(new Long(1));
+        depositTitlesFromClient.setCredito(false);
         tl.add(depositTitlesFromClient);
 
         Transaccion withdrawalMoneyFromClient = new Transaccion();
-        withdrawalMoneyFromClient.setName("Retiro de Efectivo del Cliente");
-        withdrawalMoneyFromClient.setOpCash(new Long(-1));
-        withdrawalMoneyFromClient.setOpQuantity(new Long(0));
-        withdrawalMoneyFromClient.setCredit(false);
+        withdrawalMoneyFromClient.setNombre("Retiro de Efectivo del Cliente");
+        withdrawalMoneyFromClient.setFlujoEfectivo(new Long(-1));
+        withdrawalMoneyFromClient.setFlujoTitulos(new Long(0));
+        withdrawalMoneyFromClient.setCredito(false);
         tl.add(withdrawalMoneyFromClient);
 
         Transaccion withdrawalTitlesFromClient = new Transaccion();
-        withdrawalTitlesFromClient.setName("Retiro en titulos del Cliente");
-        withdrawalTitlesFromClient.setOpCash(new Long(0));
-        withdrawalTitlesFromClient.setOpQuantity(new Long(-1));
-        withdrawalTitlesFromClient.setCredit(false);
+        withdrawalTitlesFromClient.setNombre("Retiro en titulos del Cliente");
+        withdrawalTitlesFromClient.setFlujoEfectivo(new Long(0));
+        withdrawalTitlesFromClient.setFlujoTitulos(new Long(-1));
+        withdrawalTitlesFromClient.setCredito(false);
         tl.add(withdrawalTitlesFromClient);
 
 //////////////////////////////////////////////BUSINESS
         Transaccion refundFromBusiness = new Transaccion();
-        refundFromBusiness.setName("Reembolso");
-        refundFromBusiness.setOpCash(new Long(1));
-        refundFromBusiness.setOpQuantity(new Long(0));
-        refundFromBusiness.setCredit(false);
+        refundFromBusiness.setNombre("Reembolso");
+        refundFromBusiness.setFlujoEfectivo(new Long(1));
+        refundFromBusiness.setFlujoTitulos(new Long(0));
+        refundFromBusiness.setCredito(false);
         tl.add(refundFromBusiness);
 
         Transaccion comissionFromBusiness = new Transaccion();
-        comissionFromBusiness.setName("Comisión");
-        comissionFromBusiness.setOpCash(new Long(-1));
-        comissionFromBusiness.setOpQuantity(new Long(0));
-        comissionFromBusiness.setCredit(false);
+        comissionFromBusiness.setNombre("Comisión");
+        comissionFromBusiness.setFlujoEfectivo(new Long(-1));
+        comissionFromBusiness.setFlujoTitulos(new Long(0));
+        comissionFromBusiness.setCredito(false);
         tl.add(comissionFromBusiness);
 
         Transaccion marginCallFromBusiness = new Transaccion();
-        marginCallFromBusiness.setName("Llamada de Margen");
-        marginCallFromBusiness.setOpCash(new Long(0));
-        marginCallFromBusiness.setOpQuantity(new Long(-1));
-        marginCallFromBusiness.setCredit(false);
+        marginCallFromBusiness.setNombre("Llamada de Margen");
+        marginCallFromBusiness.setFlujoEfectivo(new Long(0));
+        marginCallFromBusiness.setFlujoTitulos(new Long(-1));
+        marginCallFromBusiness.setCredito(false);
         tl.add(marginCallFromBusiness);
 
         Transaccion marginCreditFromBusiness = new Transaccion();
-        marginCreditFromBusiness.setName("Credito Margen");
-        marginCreditFromBusiness.setOpCash(new Long(1));
-        marginCreditFromBusiness.setOpQuantity(new Long(0));
-        marginCreditFromBusiness.setCredit(true);
+        marginCreditFromBusiness.setNombre("Credito Margen");
+        marginCreditFromBusiness.setFlujoEfectivo(new Long(1));
+        marginCreditFromBusiness.setFlujoTitulos(new Long(0));
+        marginCreditFromBusiness.setCredito(true);
         tl.add(marginCreditFromBusiness);
 
         Transaccion incomingSecurityLendingFromBusiness = new Transaccion();
-        incomingSecurityLendingFromBusiness.setName("Prestamo de Valores Entrante");
-        incomingSecurityLendingFromBusiness.setOpCash(new Long(0));
-        incomingSecurityLendingFromBusiness.setOpQuantity(new Long(1));
-        incomingSecurityLendingFromBusiness.setCredit(true);
+        incomingSecurityLendingFromBusiness.setNombre("Prestamo de Valores Entrante");
+        incomingSecurityLendingFromBusiness.setFlujoEfectivo(new Long(0));
+        incomingSecurityLendingFromBusiness.setFlujoTitulos(new Long(1));
+        incomingSecurityLendingFromBusiness.setCredito(true);
         tl.add(incomingSecurityLendingFromBusiness);
 
         Transaccion outgoingSecurityLendingFromBusiness = new Transaccion();
-        outgoingSecurityLendingFromBusiness.setName("Pestamo de valores Saliente");
-        outgoingSecurityLendingFromBusiness.setOpCash(new Long(0));
-        outgoingSecurityLendingFromBusiness.setOpQuantity(new Long(-1));
-        outgoingSecurityLendingFromBusiness.setCredit(true);
+        outgoingSecurityLendingFromBusiness.setNombre("Pestamo de valores Saliente");
+        outgoingSecurityLendingFromBusiness.setFlujoEfectivo(new Long(0));
+        outgoingSecurityLendingFromBusiness.setFlujoTitulos(new Long(-1));
+        outgoingSecurityLendingFromBusiness.setCredito(true);
         tl.add(outgoingSecurityLendingFromBusiness);
 
         Transaccion amortizationMarginFromBusiness = new Transaccion();
-        amortizationMarginFromBusiness.setName("Amortización Margen");
-        amortizationMarginFromBusiness.setOpCash(new Long(-1));
-        amortizationMarginFromBusiness.setOpQuantity(new Long(0));
-        amortizationMarginFromBusiness.setCredit(true);
+        amortizationMarginFromBusiness.setNombre("Amortización Margen");
+        amortizationMarginFromBusiness.setFlujoEfectivo(new Long(-1));
+        amortizationMarginFromBusiness.setFlujoTitulos(new Long(0));
+        amortizationMarginFromBusiness.setCredito(true);
         tl.add(amortizationMarginFromBusiness);
 //////////////////////////////////////////////////////////////// BROKER
 
         Transaccion refundFromBroker = new Transaccion();
-        refundFromBroker.setName("Reembolso de Correduría");
-        refundFromBroker.setOpCash(new Long(1));
-        refundFromBroker.setOpQuantity(new Long(0));
-        refundFromBroker.setCredit(false);
+        refundFromBroker.setNombre("Reembolso de Correduría");
+        refundFromBroker.setFlujoEfectivo(new Long(1));
+        refundFromBroker.setFlujoTitulos(new Long(0));
+        refundFromBroker.setCredito(false);
         tl.add(refundFromBroker);
 
         Transaccion refund2FromBroker = new Transaccion();
-        refund2FromBroker.setName("Reembolso");
-        refund2FromBroker.setOpCash(new Long(0));
-        refund2FromBroker.setOpQuantity(new Long(1));
-        refund2FromBroker.setCredit(false);
+        refund2FromBroker.setNombre("Reembolso");
+        refund2FromBroker.setFlujoEfectivo(new Long(0));
+        refund2FromBroker.setFlujoTitulos(new Long(1));
+        refund2FromBroker.setCredito(false);
         tl.add(refund2FromBroker);
 
         Transaccion buyAsset = new Transaccion();
-        buyAsset.setName("Compra");
-        buyAsset.setOpCash(new Long(-1));
-        buyAsset.setOpQuantity(new Long(1));
-        buyAsset.setCredit(false);
+        buyAsset.setNombre("Compra");
+        buyAsset.setFlujoEfectivo(new Long(-1));
+        buyAsset.setFlujoTitulos(new Long(1));
+        buyAsset.setCredito(false);
         tl.add(buyAsset);
 
         Transaccion sellAsset = new Transaccion();
-        sellAsset.setName("Venta");
-        sellAsset.setOpCash(new Long(1));
-        sellAsset.setOpQuantity(new Long(-1));
-        sellAsset.setCredit(false);
+        sellAsset.setNombre("Venta");
+        sellAsset.setFlujoEfectivo(new Long(1));
+        sellAsset.setFlujoTitulos(new Long(-1));
+        sellAsset.setCredito(false);
         tl.add(sellAsset);
 
         Transaccion inicioReporto = new Transaccion();
-        inicioReporto.setOpQuantity(new Long(1));
-        inicioReporto.setOpCash(new Long(-1));
-        inicioReporto.setName("Inicio de Reporto");
-        inicioReporto.setCredit(true);
+        inicioReporto.setFlujoTitulos(new Long(1));
+        inicioReporto.setFlujoEfectivo(new Long(-1));
+        inicioReporto.setNombre("Inicio de Reporto");
+        inicioReporto.setCredito(true);
         tl.add(inicioReporto);
 
         Transaccion finReporto = new Transaccion();
-        finReporto.setCredit(true);
-        finReporto.setName("Fin de Reporto");
-        finReporto.setOpCash(new Long(1));
-        finReporto.setOpQuantity(new Long(-1));
+        finReporto.setCredito(true);
+        finReporto.setNombre("Fin de Reporto");
+        finReporto.setFlujoEfectivo(new Long(1));
+        finReporto.setFlujoTitulos(new Long(-1));
         tl.add(finReporto);
 
         try {
@@ -835,7 +834,7 @@ public class OnDeployBootstraping {
         Usuario u = new Usuario();
         u.setActive(Boolean.TRUE);
         u.setEmail("tgyhbnj@ftgybn.com");
-        u.setName("TEST");
+        u.setNombre("TEST");
         u.setPassword("drftgyhujn");
 
         em.persist(u);
@@ -844,8 +843,8 @@ public class OnDeployBootstraping {
     private void test() {
         LOG.info("Prueba de que voy a hjacer el objeto");
         Activo a = new Activo();
-        a.setName("PRUBEAAAAA");
-        a.setType(TipoActivo.BOND);
+        a.setNombre("PRUBEAAAAA");
+        a.setTipo(TipoActivo.BONO);
         LOG.info("Prueba de que persiste");
         em.persist(a);
     }

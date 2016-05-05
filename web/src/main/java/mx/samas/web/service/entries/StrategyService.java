@@ -87,7 +87,7 @@ public class StrategyService {
     @Path("/{id}/slice/")
     public Response updateSlices(@PathParam("id") long id, List<VectorPortafolioModelo> lsv) throws AppException {
         Estrategia s = sb.getStrategyByID(id);
-        s.setSlices(lsv);    
+        s.setEstrategiaModelo(lsv);    
         sb.updateStrategy(id, lsv);
         return Response.ok().build();
     }

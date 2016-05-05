@@ -79,4 +79,12 @@ public class DenominacionMoneda implements Serializable {
         return "mx.samas.ejb.entities.DenominatorCurrency[ id=" + id + " ]";
     }
 
+    public Activo getMoneda() {
+        return moneda;
+    }
+
+    public void setMoneda(Activo moneda) {
+        this.moneda = moneda;
+    }
+
 }

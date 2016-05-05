@@ -27,26 +27,26 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Entity
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Blotter.BuyAndSellFromDateAndAccountWithAsset",
-            query = "SELECT b FROM Blotter b JOIN b.transaction t WHERE "
-            + "b.contract.accountNumber= :account "
+    @NamedQuery(name = "Bitacora.BuyAndSellFromDateAndAccountWithAsset",
+            query = "SELECT b FROM Bitacora b JOIN b.transaccion t WHERE "
+            + "b.contrato.accountNumber= :account "
             + "AND b.inputDate= :input "
-            // + "AND t.transactionSource.name= 'Portfolio' "
+            // + "AND t.transaccionSource.name= 'Portfolio' "
             + "AND (t.name= 'Compra' OR t.name= 'Venta'"
             + "AND b.asset= :asset)"),
 
-    @NamedQuery(name = "Blotter.BuyAndSellFromDateAndAccount",
-            query = "SELECT b FROM Blotter b JOIN b.transaction t WHERE "
-            + "b.contract= :account "
-            + "AND b.inputDate= :input "
-            //  + "AND t.transactionSource.name= 'Portfolio' "
-            + "AND (t.name= 'Compra' OR t.name= 'Venta'"
-            + "AND b.asset= :asset)"),
+    @NamedQuery(name = "Bitacora.CompraYVentaConFechayCuenta",
+            query = "SELECT b FROM Bitacora b JOIN b.contrato t WHERE "
+            + "b.contrato= :cuenta "
+            + "AND b.fechaIngreso= :ingreso "
+            //  + "AND t.transaccionSource.name= 'Portfolio' "
+            + "AND (t.numeroContrato= 'Compra' OR t.nombre= 'Venta'"
+            + "AND b.activo= :activo)"),
     //Aplica para todos 
     //Todo lo que opere hoy, traeme todo lo que opere hoy que me liquide siguiente dia, 
     //
-    @NamedQuery(name = "Blotter.flujosInternosPorDia", query = "SELECT b FROM Blotter b"
-            + " WHERE b.inputDate= :date")
+    @NamedQuery(name = "Bitacora.flujosInternosPorDia", query = "SELECT b FROM Bitacora b"
+            + " WHERE b.fechaIngreso= :date")
 
 })
 public class Bitacora implements Serializable {

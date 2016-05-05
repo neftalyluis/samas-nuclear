@@ -21,7 +21,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Entity
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Banco.findByName", query = "SELECT b FROM Banco b WHERE b.nombre= :nombre")
+    @NamedQuery(name = "Banco.findByNombre", query = "SELECT b FROM Banco b WHERE b.nombre= :nombre")
 
 })
 public class Banco implements Serializable {

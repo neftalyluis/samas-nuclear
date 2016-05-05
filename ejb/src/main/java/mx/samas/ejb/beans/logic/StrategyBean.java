@@ -78,7 +78,7 @@ public class StrategyBean {
     public List<VectorPortafolioModelo> getSlicesFromID(long id) throws AppException {
         try {
             Estrategia s = em.find(Estrategia.class, id);
-            return s.getSlices();
+            return s.getEstrategiaModelo();
         } catch (Exception e) {
             throw new AppException();
         }
@@ -131,9 +131,9 @@ public class StrategyBean {
     public Estrategia updateStrategy(long id, List<VectorPortafolioModelo> lsv) throws AppException {
         try {
             Estrategia s = em.find(Estrategia.class, id);
-            List<VectorPortafolioModelo> old = s.getSlices();
+            List<VectorPortafolioModelo> old = s.getEstrategiaModelo();
             old.addAll(lsv);
-            s.setSlices(old);
+            s.setEstrategiaModelo(old);
             em.persist(s);
             return s;
         } catch (Exception e) {

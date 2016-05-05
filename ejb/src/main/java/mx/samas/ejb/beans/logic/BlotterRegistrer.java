@@ -48,18 +48,18 @@ public class BlotterRegistrer {
         try {
             Date sameDate = new Date();
             Bitacora b = new Bitacora();
-            b.setAmount(amount);
-            b.setAsset(null);
-            b.setContract(pab.findByAccountNumber(contract));
-            b.setInputDate(sameDate);
-            b.setMarket(null);
-            b.setPrice(amount);
-            b.setQuantity(new Long(0));
-            b.setRate(0.0);
-            b.setSettlementDate(sameDate);
-            b.setTradeDate(sameDate);
+            b.setFlujoEfectivo(amount);
+            b.setActivo(null);
+            b.setContrato(pab.findByAccountNumber(contract));
+            b.setFechaIngreso(sameDate);
+            b.setMercado(null);
+            b.setPrecio(amount);
+            b.setFlujoTitulos(new Long(0));
+            b.setTasa(0.0);
+            b.setFechaLiquidacion(sameDate);
+            b.setFechaEjecucion(sameDate);
             //Falta denominar con transaction source
-            b.setTransaction(tb.findByName("Deposito en efectivo del Cliente"));
+            b.setTransaccion(tb.findByName("Deposito en efectivo del Cliente"));
             em.persist(b);
             return true;
         } catch (Exception e) {
@@ -77,21 +77,21 @@ public class BlotterRegistrer {
             c.add(Calendar.DATE, 3);
 
             Bitacora compra = new Bitacora();
-            compra.setAmount(price / quantity);
-            compra.setPrice(price);
-            compra.setQuantity(quantity);
+            compra.setFlujoEfectivo(price / quantity);
+            compra.setPrecio(price);
+            compra.setFlujoTitulos(quantity);
             //No existe tasa
-            compra.setRate(0.0);
+            compra.setTasa(0.0);
 
             //entrega de titulos, mas 3 dias
-            compra.setSettlementDate(c.getTime());
+            compra.setFechaLiquidacion(c.getTime());
             //No aplicable en sociedades de inversion
-            compra.setTradeDate(hoy);
-            compra.setInputDate(hoy);
+            compra.setFechaEjecucion(hoy);
+            compra.setFechaIngreso(hoy);
 
-            compra.setAsset(ab.findAssetByTicker(ticker));
-            compra.setContract(pab.findByAccountNumber(contract));
-            compra.setTransaction(tb.findByName("Venta"));
+            compra.setActivo(ab.findAssetByTicker(ticker));
+            compra.setContrato(pab.findByAccountNumber(contract));
+            compra.setTransaccion(tb.findByName("Venta"));
 
             em.persist(compra);
             return false;
@@ -109,21 +109,21 @@ public class BlotterRegistrer {
             c.add(Calendar.DATE, 3);
 
             Bitacora compra = new Bitacora();
-            compra.setAmount(price / quantity);
-            compra.setPrice(price);
-            compra.setQuantity(quantity);
+            compra.setFlujoEfectivo(price / quantity);
+            compra.setPrecio(price);
+            compra.setFlujoTitulos(quantity);
             //No existe tasa
-            compra.setRate(0.0);
+            compra.setTasa(0.0);
 
             //entrega de titulos, mas 3 dias
-            compra.setSettlementDate(c.getTime());
+            compra.setFechaLiquidacion(c.getTime());
             //No aplicable en sociedades de inversion
-            compra.setTradeDate(hoy);
-            compra.setInputDate(hoy);
+            compra.setFechaEjecucion(hoy);
+            compra.setFechaIngreso(hoy);
 
-            compra.setAsset(ab.findAssetByTicker(ticker));
-            compra.setContract(pab.findByAccountNumber(contract));
-            compra.setTransaction(tb.findByName("Compra"));
+            compra.setActivo(ab.findAssetByTicker(ticker));
+            compra.setContrato(pab.findByAccountNumber(contract));
+            compra.setTransaccion(tb.findByName("Compra"));
 
             em.persist(compra);
 
@@ -144,19 +144,19 @@ public class BlotterRegistrer {
             c.setTime(d);
             c.add(Calendar.DATE, 1);
 
-            b.setAmount(price);
-            b.setAsset(ab.findAssetByTicker(ticker));
-            b.setContract(pab.findByAccountNumber(contract));
+            b.setFlujoEfectivo(price);
+            b.setActivo(ab.findAssetByTicker(ticker));
+            b.setContrato(pab.findByAccountNumber(contract));
 
-            b.setPrice(price);
-            b.setQuantity(quantity);
-            b.setRate(rate);
+            b.setPrecio(price);
+            b.setFlujoTitulos(quantity);
+            b.setTasa(rate);
 
-            b.setSettlementDate(c.getTime());
-            b.setTradeDate(d);
-            b.setInputDate(d);
+            b.setFechaLiquidacion(c.getTime());
+            b.setFechaEjecucion(d);
+            b.setFechaIngreso(d);
 
-            b.setTransaction(tb.findByName("Inicio de Reporto"));
+            b.setTransaccion(tb.findByName("Inicio de Reporto"));
 
             em.persist(b);
             return true;
@@ -171,19 +171,19 @@ public class BlotterRegistrer {
 
             Date d = new Date();
 
-            b.setAmount(price);
-            b.setAsset(ab.findAssetByTicker(ticker));
-            b.setContract(pab.findByAccountNumber(contract));
+            b.setFlujoEfectivo(price);
+            b.setActivo(ab.findAssetByTicker(ticker));
+            b.setContrato(pab.findByAccountNumber(contract));
 
-            b.setPrice(price);
-            b.setQuantity(quantity);
-            b.setRate(rate);
+            b.setPrecio(price);
+            b.setFlujoTitulos(quantity);
+            b.setTasa(rate);
 
-            b.setSettlementDate(d);
-            b.setTradeDate(d);
-            b.setInputDate(d);
+            b.setFechaLiquidacion(d);
+            b.setFechaEjecucion(d);
+            b.setFechaIngreso(d);
 
-            b.setTransaction(tb.findByName("Fin de Reporto"));
+            b.setTransaccion(tb.findByName("Fin de Reporto"));
 
             em.persist(b);
 

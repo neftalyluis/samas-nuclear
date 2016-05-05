@@ -70,7 +70,7 @@ public class CheckAssets {
 
                             String sc = record.get(1);
                             for (TipoValor s : lsc) {
-                                if (s.getCode().equals(sc)) {
+                                if (s.getCodigo().equals(sc)) {
 
                                 }
                             }
@@ -293,9 +293,9 @@ public class CheckAssets {
                     count++;
                     try {
                         TipoValor sc = new TipoValor();
-                        sc.setCode(record.get(0).replaceAll("\\s+", ""));
+                        sc.setCodigo(record.get(0).replaceAll("\\s+", ""));
 //                        sc.setKind(record.get(2));
-                        sc.setDescription(record.get(1));
+                        sc.setDescripcion(record.get(1));
                         em.persist(sc);
                     } catch (NullPointerException e) {
                         System.out.println("Linea en blanco " + count);
