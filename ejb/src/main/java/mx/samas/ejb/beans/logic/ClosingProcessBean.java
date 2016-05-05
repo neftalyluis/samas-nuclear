@@ -16,9 +16,9 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import mx.samas.ejb.beans.exceptions.AppException;
-import mx.samas.ejb.entities.Blotter;
-import mx.samas.ejb.entities.PortfolioAccount;
-import mx.samas.ejb.entities.PositionVector;
+import mx.samas.ejb.entities.Bitacora;
+import mx.samas.ejb.entities.PortafolioCuenta;
+import mx.samas.ejb.entities.VectorPosicion;
 
 /**
  *
@@ -43,11 +43,11 @@ public class ClosingProcessBean {
 
     /**
      * Posiciones en Directo
-     *
-     * Directos son titulo personal, dicese que el titular es el portafolio
-     *
-     * SELECT POSITION VECTOR WHERE DATE= Día anterior AND NOT COLLATERAL
-     * cotejar con el Blotter los flujos de titulos
+
+ Directos son titulo personal, dicese que el titular es el portafolio
+
+ SELECT POSITION VECTOR WHERE DATE= Día anterior AND NOT COLLATERAL
+ cotejar con el Bitacora los flujos de titulos
      *
      *
      * @param accountNumber
@@ -63,14 +63,14 @@ public class ClosingProcessBean {
             //Query Buggy, checarla mañana
 //            List<PositionVector> lpv = pvb.getNotInCredit(d, accountNumber);
 
-//            for (Blotter b : lb) {
+//            for (Bitacora b : lb) {
 //                LOG.log(Level.INFO, b.getAsset().getName());
 //            }
 
 //            HashMap<String, ArrayList<PositionVector>> mewDay = new HashMap<>();
 //            
 //            if (lpv.isEmpty()) {
-//                for (Blotter b : lb) {
+//                for (Bitacora b : lb) {
 //
 //                }
 //            }
@@ -87,7 +87,7 @@ public class ClosingProcessBean {
      *
      * @param pa
      */
-    public void onCredit(PortfolioAccount pa) {
+    public void onCredit(PortafolioCuenta pa) {
 
     }
 
@@ -96,19 +96,19 @@ public class ClosingProcessBean {
      *
      * @param pa
      */
-    public void onFlux(PortfolioAccount pa) {
+    public void onFlux(PortafolioCuenta pa) {
 
     }
 
-    public void accrualByServices(PortfolioAccount pa) {
+    public void accrualByServices(PortafolioCuenta pa) {
 
     }
 
-    public void accrualByPosition(PortfolioAccount pa) {
+    public void accrualByPosition(PortafolioCuenta pa) {
 
     }
 
-    public void accrualByCredit(PortfolioAccount pa) {
+    public void accrualByCredit(PortafolioCuenta pa) {
 
     }
 

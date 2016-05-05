@@ -12,7 +12,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import mx.samas.ejb.beans.exceptions.AppException;
-import mx.samas.ejb.entities.Broker;
+import mx.samas.ejb.entities.Corredor;
 
 /**
  *
@@ -28,16 +28,16 @@ public class BrokerBean {
 
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
-    public Broker getUniqueBroker() {
+    public Corredor getUniqueBroker() {
         try {
-            return (Broker) em.createNamedQuery("Broker.getByName").setParameter("name", "HSBC").getSingleResult();
+            return (Corredor) em.createNamedQuery("Broker.getByName").setParameter("name", "HSBC").getSingleResult();
         } catch (Exception e) {
             LOG.log(Level.WARNING, "No pudimos obtener nuestro broker, la excepcion es: {0}", e.getMessage());
             return null;
         }
     }
     
-    public void persistBroker(Broker b) throws AppException{
+    public void persistBroker(Corredor b) throws AppException{
         try {
             em.persist(b);
         } catch (Exception e) {

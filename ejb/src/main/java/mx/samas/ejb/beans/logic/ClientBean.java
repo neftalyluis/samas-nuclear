@@ -12,7 +12,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import mx.samas.ejb.beans.exceptions.AppException;
-import mx.samas.ejb.entities.Client;
+import mx.samas.ejb.entities.Cliente;
 
 /**
  *
@@ -26,7 +26,7 @@ public class ClientBean {
     @PersistenceContext(unitName = "mx_samas_ejb_1.0PU")
     private EntityManager em;
 
-    public List<Client> getAllClients() {
+    public List<Cliente> getAllClients() {
         try {
             return em.createQuery("SELECT c FROM Client c").getResultList();
         } catch (Exception e) {
@@ -35,7 +35,7 @@ public class ClientBean {
         }
     }
     
-    public void persistClient(Client c) throws AppException{
+    public void persistClient(Cliente c) throws AppException{
         try {
             em.persist(c);
         } catch (Exception e) {

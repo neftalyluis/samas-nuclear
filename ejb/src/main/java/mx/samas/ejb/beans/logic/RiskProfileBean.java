@@ -10,7 +10,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import mx.samas.ejb.beans.exceptions.AppException;
-import mx.samas.ejb.entities.RiskProfile;
+import mx.samas.ejb.entities.PerfilRiesgo;
 
 /**
  *
@@ -24,7 +24,7 @@ public class RiskProfileBean {
 
     private static final Logger LOG = Logger.getLogger(RiskProfileBean.class.getName());
 
-    public void persistRiskProfile(RiskProfile rk) throws AppException {
+    public void persistRiskProfile(PerfilRiesgo rk) throws AppException {
         try {
             em.persist(rk);
         } catch (Exception e) {
@@ -32,9 +32,9 @@ public class RiskProfileBean {
         }
     }
 
-    public RiskProfile findByName(String name) throws AppException {
+    public PerfilRiesgo findByName(String name) throws AppException {
         try {
-            return (RiskProfile) em.createNamedQuery("RiskProfile.findByName").setParameter("name", "Balanceado").getSingleResult();
+            return (PerfilRiesgo) em.createNamedQuery("RiskProfile.findByName").setParameter("name", "Balanceado").getSingleResult();
         } catch (Exception e) {
             throw new AppException();
         }

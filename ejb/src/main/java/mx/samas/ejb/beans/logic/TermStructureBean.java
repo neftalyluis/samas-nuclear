@@ -13,8 +13,8 @@ import javax.ejb.LocalBean;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import mx.samas.ejb.beans.exceptions.AppException;
-import mx.samas.ejb.entities.RiskProfile;
-import mx.samas.ejb.entities.TermStructure;
+import mx.samas.ejb.entities.PerfilRiesgo;
+import mx.samas.ejb.entities.EstructuraTasas;
 
 /**
  *
@@ -28,7 +28,7 @@ public class TermStructureBean {
 
     private static final Logger LOG = Logger.getLogger(TermStructureBean.class.getName());
 
-    public void persistTermStructure(TermStructure ts) throws AppException {
+    public void persistTermStructure(EstructuraTasas ts) throws AppException {
         try {
             em.persist(ts);
         } catch (Exception e) {

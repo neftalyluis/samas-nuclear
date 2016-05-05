@@ -11,7 +11,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import mx.samas.ejb.beans.exceptions.AppException;
-import mx.samas.ejb.entities.Test;
+import mx.samas.ejb.entities.Prueba;
 
 /**
  *
@@ -27,7 +27,7 @@ public class TestSuiteBean {
     private EntityManager em;
 //    public createTestFromDTO(TestEntryDTO t)
 
-    public List<Test> findAll() throws AppException{
+    public List<Prueba> findAll() throws AppException{
         return em.createNamedQuery("Test.findAll").getResultList();
 
     }

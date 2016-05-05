@@ -11,7 +11,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import mx.samas.ejb.beans.exceptions.AppException;
-import mx.samas.ejb.entities.Issuer;
+import mx.samas.ejb.entities.Emisor;
 
 /**
  *
@@ -27,16 +27,16 @@ public class IssuerBean {
 
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
-    public Issuer getIssuerByCode(String code) {
+    public Emisor getIssuerByCode(String code) {
         try {
-            return (Issuer) em.createNamedQuery("Issuer.findByCode").setParameter("code", code).getSingleResult();
+            return (Emisor) em.createNamedQuery("Issuer.findByCode").setParameter("code", code).getSingleResult();
         } catch (Exception e) {
             LOG.log(Level.WARNING, "No pudimos obtener el Issuer, la excepcion es: {0}", e.getMessage());
             return null;
         }
     }
     
-    public void persistIssuer(Issuer i) throws AppException{
+    public void persistIssuer(Emisor i) throws AppException{
         try {
             em.persist(i);
         } catch (Exception e) {

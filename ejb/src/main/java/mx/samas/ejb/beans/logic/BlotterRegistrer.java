@@ -15,7 +15,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TemporalType;
 import mx.samas.ejb.beans.exceptions.AppException;
-import mx.samas.ejb.entities.Blotter;
+import mx.samas.ejb.entities.Bitacora;
 
 /**
  *
@@ -47,7 +47,7 @@ public class BlotterRegistrer {
     public boolean depositMoney(Double amount, String contract) throws AppException {
         try {
             Date sameDate = new Date();
-            Blotter b = new Blotter();
+            Bitacora b = new Bitacora();
             b.setAmount(amount);
             b.setAsset(null);
             b.setContract(pab.findByAccountNumber(contract));
@@ -76,7 +76,7 @@ public class BlotterRegistrer {
             c.setTime(hoy);
             c.add(Calendar.DATE, 3);
 
-            Blotter compra = new Blotter();
+            Bitacora compra = new Bitacora();
             compra.setAmount(price / quantity);
             compra.setPrice(price);
             compra.setQuantity(quantity);
@@ -108,7 +108,7 @@ public class BlotterRegistrer {
             c.setTime(hoy);
             c.add(Calendar.DATE, 3);
 
-            Blotter compra = new Blotter();
+            Bitacora compra = new Bitacora();
             compra.setAmount(price / quantity);
             compra.setPrice(price);
             compra.setQuantity(quantity);
@@ -136,7 +136,7 @@ public class BlotterRegistrer {
     public boolean inicioReporto(String ticker, Double price, Long quantity, String contract, Double rate) throws AppException {
         try {
 
-            Blotter b = new Blotter();
+            Bitacora b = new Bitacora();
 
             Date d = new Date();
 
@@ -167,7 +167,7 @@ public class BlotterRegistrer {
 
     public boolean finReporto(String ticker, Double price, Long quantity, String contract, Double rate) throws AppException {
         try {
-            Blotter b = new Blotter();
+            Bitacora b = new Bitacora();
 
             Date d = new Date();
 
@@ -198,9 +198,9 @@ public class BlotterRegistrer {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public List<Blotter> getBuyAndSellTransactions(String account, Date inputDate, String ticker) throws AppException {
+    public List<Bitacora> getBuyAndSellTransactions(String account, Date inputDate, String ticker) throws AppException {
         try {
-            return (List<Blotter>) em.createNamedQuery("Blotter.BuyAndSellFromDateAndAccountWithAsset")
+            return (List<Bitacora>) em.createNamedQuery("Blotter.BuyAndSellFromDateAndAccountWithAsset")
                     .setParameter("account", account)
                     .setParameter("input", inputDate, TemporalType.DATE)
                     .setParameter("asset", ab.findByTicker(ticker))

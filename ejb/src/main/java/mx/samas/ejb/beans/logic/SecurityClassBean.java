@@ -13,7 +13,7 @@ import javax.ejb.LocalBean;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import mx.samas.ejb.beans.exceptions.AppException;
-import mx.samas.ejb.entities.SecurityClass;
+import mx.samas.ejb.entities.TipoValor;
 
 /**
  *
@@ -27,7 +27,7 @@ public class SecurityClassBean {
 
     private static final Logger LOG = Logger.getLogger(SecurityClassBean.class.getName());
 
-    public void persistSecurityClass(SecurityClass sc) throws AppException {
+    public void persistSecurityClass(TipoValor sc) throws AppException {
         try {
            em.persist(sc);
         } catch (Exception e) {

@@ -11,8 +11,8 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import mx.samas.ejb.beans.exceptions.AppException;
-import mx.samas.ejb.entities.Asset;
-import mx.samas.ejb.entities.DenominatorCurrency;
+import mx.samas.ejb.entities.Activo;
+import mx.samas.ejb.entities.DenominacionMoneda;
 
 /**
  *
@@ -28,9 +28,9 @@ public class CurrencyBean {
 
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
-    public DenominatorCurrency getMXPCurrency() {
+    public DenominacionMoneda getMXPCurrency() {
         try {
-            return (DenominatorCurrency) em.createNamedQuery("DenominatorCurrency.findByTicker").setParameter("ticker", "*C_MXP_").getSingleResult();
+            return (DenominacionMoneda) em.createNamedQuery("DenominatorCurrency.findByTicker").setParameter("ticker", "*C_MXP_").getSingleResult();
         } catch (Exception e) {
             LOG.log(Level.WARNING, "No pudimos obtener el Denominator Currency, la excepcion es: {0}", e.getMessage());
 
@@ -38,7 +38,7 @@ public class CurrencyBean {
         }
     }
 
-    public void persistCurrency(Asset c) throws AppException {
+    public void persistCurrency(Activo c) throws AppException {
         try {
             em.persist(c);
         } catch (Exception e) {
@@ -46,7 +46,7 @@ public class CurrencyBean {
         }
     }
 
-    public void persistDenominator(DenominatorCurrency c) throws AppException {
+    public void persistDenominator(DenominacionMoneda c) throws AppException {
         try {
             em.persist(c);
         } catch (Exception e) {

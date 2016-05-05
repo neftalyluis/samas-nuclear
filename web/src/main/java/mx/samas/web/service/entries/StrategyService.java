@@ -19,8 +19,8 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import mx.samas.ejb.beans.exceptions.AppException;
 import mx.samas.ejb.beans.logic.StrategyBean;
-import mx.samas.ejb.entities.SliceVector;
-import mx.samas.ejb.entities.Strategy;
+import mx.samas.ejb.entities.VectorPortafolioModelo;
+import mx.samas.ejb.entities.Estrategia;
 
 /**
  *
@@ -36,8 +36,8 @@ public class StrategyService {
 
     @GET
     public Response getAllStrategies() {
-        List<Strategy> ls = sb.getAllStrategies();
-        GenericEntity<List<Strategy>> list = new GenericEntity<List<Strategy>>(ls) {
+        List<Estrategia> ls = sb.getAllStrategies();
+        GenericEntity<List<Estrategia>> list = new GenericEntity<List<Estrategia>>(ls) {
         };
         return Response.ok(list).build();
     }
@@ -45,12 +45,12 @@ public class StrategyService {
     @GET
     @Path("/{id}")
     public Response getStrategyByID(@PathParam("id") long id) throws AppException {
-        Strategy s = sb.getStrategyByID(id);
+        Estrategia s = sb.getStrategyByID(id);
         return Response.ok(s).build();
     }
 
     @POST
-    public Response createStrategy(Strategy s) {
+    public Response createStrategy(Estrategia s) {
         if (sb.persistStrategy(s)) {
             return Response.ok().build();
         } else {
@@ -61,8 +61,8 @@ public class StrategyService {
     @GET
     @Path("/{id}/slice")
     public Response getSliceVectorFromID(@PathParam("id") long id) throws AppException {
-        List<SliceVector> lsv = sb.getSlicesFromID(id);
-        GenericEntity<List<SliceVector>> list = new GenericEntity<List<SliceVector>>(lsv) {
+        List<VectorPortafolioModelo> lsv = sb.getSlicesFromID(id);
+        GenericEntity<List<VectorPortafolioModelo>> list = new GenericEntity<List<VectorPortafolioModelo>>(lsv) {
         };
         return Response.ok(list).build();
     }
@@ -70,8 +70,8 @@ public class StrategyService {
     @GET
     @Path("/{id}/slice/active")
     public Response getActiveSliceVectorFromID(@PathParam("id") long id) throws AppException {
-        List<SliceVector> lsv = sb.getActiveSlicesFromStrategy(id);
-        GenericEntity<List<SliceVector>> list = new GenericEntity<List<SliceVector>>(lsv) {
+        List<VectorPortafolioModelo> lsv = sb.getActiveSlicesFromStrategy(id);
+        GenericEntity<List<VectorPortafolioModelo>> list = new GenericEntity<List<VectorPortafolioModelo>>(lsv) {
         };
         return Response.ok(list).build();
     }
@@ -79,14 +79,14 @@ public class StrategyService {
     @GET
     @Path("/{id}/slice/{sliceID}/")
     public Response getSliceFromStrategy(@PathParam("id") long id, @PathParam("sliceID") long sliceId) throws AppException {
-        SliceVector sv = sb.getSliceFromStrategyAndId(id, sliceId);
+        VectorPortafolioModelo sv = sb.getSliceFromStrategyAndId(id, sliceId);
         return Response.ok(sv).build();
     }
 
     @PUT
     @Path("/{id}/slice/")
-    public Response updateSlices(@PathParam("id") long id, List<SliceVector> lsv) throws AppException {
-        Strategy s = sb.getStrategyByID(id);
+    public Response updateSlices(@PathParam("id") long id, List<VectorPortafolioModelo> lsv) throws AppException {
+        Estrategia s = sb.getStrategyByID(id);
         s.setSlices(lsv);    
         sb.updateStrategy(id, lsv);
         return Response.ok().build();

@@ -10,7 +10,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import mx.samas.ejb.beans.exceptions.AppException;
-import mx.samas.ejb.entities.PortfolioVector;
+import mx.samas.ejb.entities.VectorPortafolio;
 
 /**
  *
@@ -24,7 +24,7 @@ public class PortfolioVectorBean {
 
     private static final Logger LOG = Logger.getLogger(PortfolioVectorBean.class.getName());
 
-    public void persistPortfolioVector(PortfolioVector pv) throws AppException {
+    public void persistPortfolioVector(VectorPortafolio pv) throws AppException {
         try {
             em.persist(pv);
         } catch (Exception e) {

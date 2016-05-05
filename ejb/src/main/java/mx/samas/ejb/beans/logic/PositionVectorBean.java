@@ -12,7 +12,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import mx.samas.ejb.beans.exceptions.AppException;
-import mx.samas.ejb.entities.PositionVector;
+import mx.samas.ejb.entities.VectorPosicion;
 
 /**
  *
@@ -26,7 +26,7 @@ public class PositionVectorBean {
     @PersistenceContext(unitName = "mx_samas_ejb_1.0PU")
     private EntityManager em;
 
-    public List<PositionVector> getNotInCredit(Date d, String number) throws AppException {
+    public List<VectorPosicion> getNotInCredit(Date d, String number) throws AppException {
         try {
             return em.createNamedQuery("PositionVector.findNotInCreditWithAccount").setParameter("date", d).setParameter("accountNumber", number).getResultList();
         } catch (Exception e) {

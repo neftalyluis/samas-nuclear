@@ -25,8 +25,8 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import mx.samas.ejb.entities.Asset;
-import mx.samas.ejb.entities.SecurityClass;
+import mx.samas.ejb.entities.Activo;
+import mx.samas.ejb.entities.TipoValor;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
@@ -40,7 +40,7 @@ import org.apache.commons.io.input.BOMInputStream;
 public class CheckAssets {
 
     Map<String, String> assetType;
-    Map<String, Asset> assetProps;
+    Map<String, Activo> assetProps;
     SimpleDateFormat formatterTyC = new SimpleDateFormat("yyyy/MM/dd");
     //SimpleDateFormat formatterTyC = new SimpleDateFormat("MM/dd/yyyy");
     DateFormat format = new SimpleDateFormat("yyyyMMdd HH:mm:ss");
@@ -50,12 +50,12 @@ public class CheckAssets {
     Calendar cal = Calendar.getInstance();
 
     public void getAssetFromCSV() {
-        Map<String, Asset> listAssets = new HashMap<>();
+        Map<String, Activo> listAssets = new HashMap<>();
         DocumentConnection dc = new DocumentConnection();
         List<String> routes;
         char delimiter = '\'';
         routes = dc.listAllCSVFiles();
-        List<SecurityClass> lsc = getSecurityList();
+        List<TipoValor> lsc = getSecurityList();
         for (String r : routes) {
             System.out.println(r);
             Reader reader = null;
@@ -69,7 +69,7 @@ public class CheckAssets {
                         try {
 
                             String sc = record.get(1);
-                            for (SecurityClass s : lsc) {
+                            for (TipoValor s : lsc) {
                                 if (s.getCode().equals(sc)) {
 
                                 }
@@ -81,7 +81,7 @@ public class CheckAssets {
 //                            System.out.println(record.get(3).replace("\"", "").replace("\'", ""));
                             System.out.println(record.get(18).replace("\"", "").replace("\'", ""));
 
-//                            Asset value;
+//                            Activo value;
 //                            String key = record.get(1) + "_" + record.get(2) + "_" + record.get(3).replace("\"", "").replace("\'", "");
 //                            String tipovalor = record.get(1).replace("\"", "").replace("\'", "");
 //
@@ -126,16 +126,16 @@ public class CheckAssets {
 //        listAssets.clear();
     }
 
-    private List<SecurityClass> getSecurityList() {
+    private List<TipoValor> getSecurityList() {
         Query q = em.createQuery("SELECT s FROM SecurityClass s");
         return q.getResultList();
     }
 
-    private Map<String, Asset> getAssetMap() {
-        Map<String, Asset> ma = new HashMap<>();
+    private Map<String, Activo> getAssetMap() {
+        Map<String, Activo> ma = new HashMap<>();
         Query q = em.createQuery("SELECT a FROM Asset a");
-        List<Asset> la = q.getResultList();
-        for (Asset a : la) {
+        List<Activo> la = q.getResultList();
+        for (Activo a : la) {
 //            ma.put(a.getTicker().getTickerValue(), a);
         }
         return ma;
@@ -147,7 +147,7 @@ public class CheckAssets {
         return pattern.matcher(nfdNormalizedString).replaceAll("");
     }
 //
-//    public Map<String, Asset> getAssetPropertiesFromTyC(Map<String, Asset> ma) {
+//    public Map<String, Activo> getAssetPropertiesFromTyC(Map<String, Activo> ma) {
 //        assetType = getAssetType();
 //
 ////        MySQLConnection samas = new MySQLConnection("samas", "127.0.0.1", 3306, "samas", "test");
@@ -197,7 +197,7 @@ public class CheckAssets {
 //                    try {
 //                        String key = record.get(0) + "_" + record.get(2) + "_" + record.get(3).replace("\"", "").replace("\'", "").replace(" ", "");
 //                        String replace = key.replace(" ", "");
-//                        Asset va = ma.get(replace);
+//                        Activo va = ma.get(replace);
 //                        if (va != null) {
 //                            if (va.getType().equals("Bond")) {
 //
@@ -292,7 +292,7 @@ public class CheckAssets {
                 for (final CSVRecord record : parser) {
                     count++;
                     try {
-                        SecurityClass sc = new SecurityClass();
+                        TipoValor sc = new TipoValor();
                         sc.setCode(record.get(0).replaceAll("\\s+", ""));
 //                        sc.setKind(record.get(2));
                         sc.setDescription(record.get(1));
@@ -327,7 +327,7 @@ public class CheckAssets {
         }
     }
 ////
-//    private boolean pushAssetsToDB(Map<String, Asset> assets) {
+//    private boolean pushAssetsToDB(Map<String, Activo> assets) {
 //        String query = "INSERT INTO ASSET( "
 //                + " DTYPE,"
 //                + " TICKER,"
@@ -347,8 +347,8 @@ public class CheckAssets {
 //        MySQLConnection samas = new MySQLConnection("samas", "127.0.0.1", 3306, "samas", "test");
 //        samas.setQuery(query);
 //
-//        for (Map.Entry<String, Asset> entry : assets.entrySet()) {
-//            Asset assetValue = entry.getValue();
+//        for (Map.Entry<String, Activo> entry : assets.entrySet()) {
+//            Activo assetValue = entry.getValue();
 //            samas.insertAssetToBatch(assetValue);
 //        }
 //

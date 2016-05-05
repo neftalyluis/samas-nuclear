@@ -11,7 +11,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import mx.samas.ejb.beans.exceptions.AppException;
-import mx.samas.ejb.entities.Bank;
+import mx.samas.ejb.entities.Banco;
 
 /**
  *
@@ -25,16 +25,16 @@ public class BankBean {
     @PersistenceContext(unitName = "mx_samas_ejb_1.0PU")
     private EntityManager em;
 
-    public Bank getBankByName(String name) throws AppException {
+    public Banco getBankByName(String name) throws AppException {
         try {
-            return (Bank) em.createNamedQuery("Bank.findByName").setParameter("name", name).getSingleResult();
+            return (Banco) em.createNamedQuery("Bank.findByName").setParameter("name", name).getSingleResult();
         } catch (Exception e) {
             LOG.log(Level.WARNING, "No pudimos obtener el bank, la excepcion es: {0}", e.getMessage());
             throw new AppException();
         }
     }
 
-    public void persistBank(Bank b) throws AppException {
+    public void persistBank(Banco b) throws AppException {
         try {
             em.persist(b);
         } catch (Exception e) {

@@ -15,7 +15,7 @@ import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import mx.samas.ejb.beans.logic.UserBean;
-import mx.samas.ejb.entities.User;
+import mx.samas.ejb.entities.Usuario;
 
 /**
  *
@@ -32,8 +32,8 @@ public class UserService {
     
     @GET
     public Response getAllUsers(){
-        List<User> lu = ub.getAllUsers();
-        GenericEntity<List<User>> list = new GenericEntity<List<User>>(lu){};
+        List<Usuario> lu = ub.getAllUsers();
+        GenericEntity<List<Usuario>> list = new GenericEntity<List<Usuario>>(lu){};
         return Response.ok(list).build();
         
     }

@@ -11,8 +11,8 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import mx.samas.ejb.beans.exceptions.AppException;
-import mx.samas.ejb.entities.PortfolioAccount;
-import mx.samas.ejb.entities.PortfolioStatus;
+import mx.samas.ejb.entities.PortafolioCuenta;
+import mx.samas.ejb.entities.PortafolioEstatus;
 
 /**
  *
@@ -26,24 +26,24 @@ public class PortfolioAccountBean {
     @PersistenceContext(unitName = "mx_samas_ejb_1.0PU")
     private EntityManager em;
 
-    public PortfolioAccount findByAccountNumber(String accountNumber) throws AppException {
+    public PortafolioCuenta findByAccountNumber(String accountNumber) throws AppException {
         try {
-            return (PortfolioAccount) em.createNamedQuery("PortfolioAccount.findByAccountNumber").setParameter("account", accountNumber).getSingleResult();
+            return (PortafolioCuenta) em.createNamedQuery("PortfolioAccount.findByAccountNumber").setParameter("account", accountNumber).getSingleResult();
         } catch (Exception e) {
             throw new AppException();
         }
     }
 
-    public PortfolioStatus getActiveStatus() throws AppException {
+    public PortafolioEstatus getActiveStatus() throws AppException {
         try {
-            return (PortfolioStatus) em.createNamedQuery("PortfolioStatus.active").setMaxResults(1).getSingleResult();
+            return (PortafolioEstatus) em.createNamedQuery("PortfolioStatus.active").setMaxResults(1).getSingleResult();
         } catch (Exception e) {
             LOG.log(Level.WARNING, "No pudimos obetener el estatus Activo, la excepcion es: {0}", e.getMessage());
             throw new AppException();
         }
     }
     
-    public void persistPortfolioStatus(PortfolioStatus ps) throws AppException{
+    public void persistPortfolioStatus(PortafolioEstatus ps) throws AppException{
         try {
             em.persist(ps);
         } catch (Exception e) {
@@ -52,7 +52,7 @@ public class PortfolioAccountBean {
         
     }
     
-    public void persistPortfolioAccount(PortfolioAccount pa) throws AppException{
+    public void persistPortfolioAccount(PortafolioCuenta pa) throws AppException{
         try {
             em.persist(pa);
         } catch (Exception e) {
