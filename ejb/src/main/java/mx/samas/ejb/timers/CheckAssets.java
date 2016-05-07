@@ -5,32 +5,7 @@
  */
 package mx.samas.ejb.timers;
 
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.Reader;
-import java.io.UnsupportedEncodingException;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.text.DateFormat;
-import java.text.Normalizer;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import java.util.regex.Pattern;
 import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
-import mx.samas.ejb.entities.Activo;
-import mx.samas.ejb.entities.TipoValor;
-import org.apache.commons.csv.CSVFormat;
-import org.apache.commons.csv.CSVParser;
-import org.apache.commons.csv.CSVRecord;
-import org.apache.commons.io.input.BOMInputStream;
 
 /**
  *
@@ -38,49 +13,48 @@ import org.apache.commons.io.input.BOMInputStream;
  */
 @Stateless
 public class CheckAssets {
-
-    Map<String, String> assetType;
-    Map<String, Activo> assetProps;
-    SimpleDateFormat formatterTyC = new SimpleDateFormat("yyyy/MM/dd");
-    //SimpleDateFormat formatterTyC = new SimpleDateFormat("MM/dd/yyyy");
-    DateFormat format = new SimpleDateFormat("yyyyMMdd HH:mm:ss");
-    java.util.Date date = new java.util.Date();
-    @PersistenceContext(unitName = "mx_samas_ejb_1.0PU")
-    private EntityManager em;
-    Calendar cal = Calendar.getInstance();
-
-    public void getAssetFromCSV() {
-        Map<String, Activo> listAssets = new HashMap<>();
-        DocumentConnection dc = new DocumentConnection();
-        List<String> routes;
-        char delimiter = '\'';
-        routes = dc.listAllCSVFiles();
-        List<TipoValor> lsc = getSecurityList();
-        for (String r : routes) {
-            System.out.println(r);
-            Reader reader = null;
-            try {
-                final URL url = new URL("file://" + r);
-                reader = new InputStreamReader(new BOMInputStream(url.openStream()), "UTF-8");
-                final CSVParser parser = new CSVParser(reader, CSVFormat.EXCEL.withHeader().withQuote(delimiter));
-                try {
-                    int count = 0;
-                    for (final CSVRecord record : parser) {
-                        try {
-
-                            String sc = record.get(1);
-                            for (TipoValor s : lsc) {
-                                if (s.getCodigo().equals(sc)) {
-
-                                }
-                            }
+//
+//    Map<String, String> assetType;
+//    Map<String, Activo> assetProps;
+//    SimpleDateFormat formatterTyC = new SimpleDateFormat("yyyy/MM/dd");
+//    SimpleDateFormat formatterTyC = new SimpleDateFormat("MM/dd/yyyy");
+//    DateFormat format = new SimpleDateFormat("yyyyMMdd HH:mm:ss");
+//    java.util.Date date = new java.util.Date();
+//    @PersistenceContext(unitName = "mx_samas_ejb_1.0PU")
+//    private EntityManager em;
+//    Calendar cal = Calendar.getInstance();
+//
+//    public void getAssetFromCSV() {
+//        Map<String, Activo> listAssets = new HashMap<>();
+//        List<String> routes;
+//        char delimiter = '\'';
+//        routes = dc.listAllCSVFiles();
+//        List<TipoValor> lsc = getSecurityList();
+//        for (String r : routes) {
+//            System.out.println(r);
+//            Reader reader = null;
+//            try {
+//                final URL url = new URL("file://" + r);
+//                reader = new InputStreamReader(new BOMInputStream(url.openStream()), "UTF-8");
+//                final CSVParser parser = new CSVParser(reader, CSVFormat.EXCEL.withHeader().withQuote(delimiter));
+//                try {
+//                    int count = 0;
+//                    for (final CSVRecord record : parser) {
+//                        try {
+//
+//                            String sc = record.get(1);
+//                            for (TipoValor s : lsc) {
+//                                if (s.getCodigo().equals(sc)) {
+//
+//                                }
+//                            }
 //                            System.out.println(record.get(1) + "_" + record.get(2) + "_" + record.get(3).replace("\"", "").replace("\'", ""));
 //                            System.out.println(record.get(9).replace("\"", "").replace("\'", ""));
 //                            System.out.println(record.get(1).replace("\"", "").replace("\'", ""));
 //                            System.out.println(record.get(2).replace("\"", "").replace("\'", ""));
 //                            System.out.println(record.get(3).replace("\"", "").replace("\'", ""));
-                            System.out.println(record.get(18).replace("\"", "").replace("\'", ""));
-
+//                            System.out.println(record.get(18).replace("\"", "").replace("\'", ""));
+//
 //                            Activo value;
 //                            String key = record.get(1) + "_" + record.get(2) + "_" + record.get(3).replace("\"", "").replace("\'", "");
 //                            String tipovalor = record.get(1).replace("\"", "").replace("\'", "");
@@ -98,25 +72,25 @@ public class CheckAssets {
 //                                }
 //                            }
 //                            listAssets.put(key, value);
-                        } catch (NullPointerException e) {
-                        } catch (ArrayIndexOutOfBoundsException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                } finally {
-                    parser.close();
-                    reader.close();
-                }
-            } catch (Exception ex) {
-                Logger.getLogger(PrecioTimer.class.getName()).log(Level.SEVERE, null, ex);
-            } finally {
-                try {
-                    reader.close();
-                } catch (IOException ex) {
-                    Logger.getLogger(PrecioTimer.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        }
+//                        } catch (NullPointerException e) {
+//                        } catch (ArrayIndexOutOfBoundsException e) {
+//                            e.printStackTrace();
+//                        }
+//                    }
+//                } finally {
+//                    parser.close();
+//                    reader.close();
+//                }
+//            } catch (Exception ex) {
+//                Logger.getLogger(CheckAssets.class.getName()).log(Level.SEVERE, null, ex);
+//            } finally {
+//                try {
+//                    reader.close();
+//                } catch (IOException ex) {
+//                    Logger.getLogger(CheckAssets.class.getName()).log(Level.SEVERE, null, ex);
+//                }
+//            }
+//        }
 //        getAssetPropertiesFromTyC(listAssets);
 //        if (pushAssetsToDB(listAssets)) {
 //            System.out.println("Assets en DB");
@@ -124,28 +98,28 @@ public class CheckAssets {
 //            System.out.println("Nope");
 //        }
 //        listAssets.clear();
-    }
-
-    private List<TipoValor> getSecurityList() {
-        Query q = em.createQuery("SELECT s FROM SecurityClass s");
-        return q.getResultList();
-    }
-
-    private Map<String, Activo> getAssetMap() {
-        Map<String, Activo> ma = new HashMap<>();
-        Query q = em.createQuery("SELECT a FROM Asset a");
-        List<Activo> la = q.getResultList();
-        for (Activo a : la) {
+//    }
+//
+//    private List<TipoValor> getSecurityList() {
+//        Query q = em.createQuery("SELECT s FROM SecurityClass s");
+//        return q.getResultList();
+//    }
+//
+//    private Map<String, Activo> getAssetMap() {
+//        Map<String, Activo> ma = new HashMap<>();
+//        Query q = em.createQuery("SELECT a FROM Asset a");
+//        List<Activo> la = q.getResultList();
+//        for (Activo a : la) {
 //            ma.put(a.getTicker().getTickerValue(), a);
-        }
-        return ma;
-    }
-
-    private String deAccent(String str) {
-        String nfdNormalizedString = Normalizer.normalize(str, Normalizer.Form.NFD);
-        Pattern pattern = Pattern.compile("\\p{InCombiningDiacriticalMarks}+");
-        return pattern.matcher(nfdNormalizedString).replaceAll("");
-    }
+//        }
+//        return ma;
+//    }
+//
+//    private String deAccent(String str) {
+//        String nfdNormalizedString = Normalizer.normalize(str, Normalizer.Form.NFD);
+//        Pattern pattern = Pattern.compile("\\p{InCombiningDiacriticalMarks}+");
+//        return pattern.matcher(nfdNormalizedString).replaceAll("");
+//    }
 //
 //    public Map<String, Activo> getAssetPropertiesFromTyC(Map<String, Activo> ma) {
 //        assetType = getAssetType();
@@ -279,53 +253,53 @@ public class CheckAssets {
 //        }
 //        return ma;
 //    }
-
-    public void persistSecurityClassFromCSV() {
-        String r = "/home/neftaly/samasDocs/types.csv";
-        Reader reader = null;
-        try {
-            final URL url = new URL("file://" + r);
-            reader = new InputStreamReader(new BOMInputStream(url.openStream()), "UTF-8");
-            final CSVParser parser = new CSVParser(reader, CSVFormat.EXCEL);
-            try {
-                int count = 0;
-                for (final CSVRecord record : parser) {
-                    count++;
-                    try {
-                        TipoValor sc = new TipoValor();
-                        sc.setCodigo(record.get(0).replaceAll("\\s+", ""));
+//
+//    public void persistSecurityClassFromCSV() {
+//        String r = "/home/neftaly/samasDocs/types.csv";
+//        Reader reader = null;
+//        try {
+//            final URL url = new URL("file://" + r);
+//            reader = new InputStreamReader(new BOMInputStream(url.openStream()), "UTF-8");
+//            final CSVParser parser = new CSVParser(reader, CSVFormat.EXCEL);
+//            try {
+//                int count = 0;
+//                for (final CSVRecord record : parser) {
+//                    count++;
+//                    try {
+//                        TipoValor sc = new TipoValor();
+//                        sc.setCodigo(record.get(0).replaceAll("\\s+", ""));
 //                        sc.setKind(record.get(2));
-                        sc.setDescripcion(record.get(1));
-                        em.persist(sc);
-                    } catch (NullPointerException e) {
-                        System.out.println("Linea en blanco " + count);
-                    } catch (ArrayIndexOutOfBoundsException e) {
-                        System.out.println("Malformado " + count);
-                    } catch (Exception e) {
-                        System.out.println("Encontramos un Security Class con el mismo codigo");
-                        e.printStackTrace();
-                    }
-                }
-            } finally {
-                parser.close();
-                reader.close();
-            }
-        } catch (UnsupportedEncodingException ex) {
-            Logger.getLogger(CheckAssets.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (MalformedURLException ex) {
-            Logger.getLogger(CheckAssets.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(CheckAssets.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (Exception ex) {
-            System.out.println("Excepcion de escape en CSV o una cosa rara que hace PIP");
-        } finally {
-            try {
-                reader.close();
-            } catch (IOException ex) {
-                Logger.getLogger(CheckAssets.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-    }
+//                        sc.setDescripcion(record.get(1));
+//                        em.persist(sc);
+//                    } catch (NullPointerException e) {
+//                        System.out.println("Linea en blanco " + count);
+//                    } catch (ArrayIndexOutOfBoundsException e) {
+//                        System.out.println("Malformado " + count);
+//                    } catch (Exception e) {
+//                        System.out.println("Encontramos un Security Class con el mismo codigo");
+//                        e.printStackTrace();
+//                    }
+//                }
+//            } finally {
+//                parser.close();
+//                reader.close();
+//            }
+//        } catch (UnsupportedEncodingException ex) {
+//            Logger.getLogger(CheckAssets.class.getName()).log(Level.SEVERE, null, ex);
+//        } catch (MalformedURLException ex) {
+//            Logger.getLogger(CheckAssets.class.getName()).log(Level.SEVERE, null, ex);
+//        } catch (IOException ex) {
+//            Logger.getLogger(CheckAssets.class.getName()).log(Level.SEVERE, null, ex);
+//        } catch (Exception ex) {
+//            System.out.println("Excepcion de escape en CSV o una cosa rara que hace PIP");
+//        } finally {
+//            try {
+//                reader.close();
+//            } catch (IOException ex) {
+//                Logger.getLogger(CheckAssets.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//        }
+//    }
 ////
 //    private boolean pushAssetsToDB(Map<String, Activo> assets) {
 //        String query = "INSERT INTO ASSET( "

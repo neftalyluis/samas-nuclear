@@ -32,10 +32,8 @@ public class ApplicationConfig extends Application {
      * out calling this method in getClasses().
      */
     private void addRestResourceClasses(Set<Class<?>> resources) {
-        resources.add(mx.samas.web.service.Authentication.class);
         resources.add(mx.samas.web.service.PoweredByResponseFilter.class);
         resources.add(mx.samas.web.service.entries.StrategyService.class);
-        resources.add(mx.samas.web.service.entries.TestingService.class);
         resources.add(mx.samas.web.service.entries.TransactionService.class);
         resources.add(mx.samas.web.service.entries.UserService.class);
         resources.add(mx.samas.web.service.errorhandling.AppExceptionMapper.class);
