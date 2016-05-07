@@ -23,7 +23,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Entity
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "RiskProfile.findByName", query = "SELECT rk FROM RiskProfile rk WHERE rk.name = :name")
+    @NamedQuery(name = "PerfilRiesgo.buscarPorNombre", query = "SELECT rk FROM PerfilRiesgo rk WHERE rk.nombre = :nombre")
 
 })
 public class PerfilRiesgo implements Serializable {

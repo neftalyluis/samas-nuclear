@@ -21,18 +21,19 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @Entity
 @XmlRootElement
+//TBD
 @NamedQueries({
-    @NamedQuery(name = "Transaction.BuyFromPortfolio", query = "SELECT t FROM Transaction t "
-            + "WHERE t.transactionSource.name='Portfolio' AND t.name= 'Compra'"),
-    @NamedQuery(name = "Transaction.SellFromPortfolio", query = "SELECT t FROM Transaction t "
-            + "WHERE t.transactionSource.name='Portfolio' AND t.name= 'Venta'"),
-    @NamedQuery(name = "Transaction.findByNameAndOwner", query = "SELECT t FROM Transaction t "
-            + "WHERE t.transactionSource.name= :nameOwner AND t.name= :nameTransaction"),
-    @NamedQuery(name = "Transaction.findByName", query = "SELECT t FROM Transaction t "
-            + "WHERE t.name= :nameTransaction"),
-    @NamedQuery(name = "Transaction.findByOperationAndOwner", query = "SELECT t "
-            + "FROM Transaction t WHERE t.opCash= :cash "
-            + "AND t.opQuantity= :quantity AND t.transactionSource.name= :source")
+    @NamedQuery(name = "Transaccion.comprasDesdePortafolio", query = "SELECT t FROM Transaccion t "
+            + "WHERE t.fuenteTransaccion.nombre='Portfolio' AND t.nombre= 'Compra'"),
+    @NamedQuery(name = "Transaccion.ventasDesdePortafolio", query = "SELECT t FROM Transaccion t "
+            + "WHERE t.fuenteTransaccion.nombre='Portfolio' AND t.nombre= 'Venta'"),
+    @NamedQuery(name = "Transaccion.buscarPorNombreyDueno", query = "SELECT t FROM Transaccion t "
+            + "WHERE t.fuenteTransaccion.nombre= :nombreDueno AND t.nombre= :nombreTransaccion"),
+    @NamedQuery(name = "Transaccion.buscarPorNombre", query = "SELECT t FROM Transaccion t "
+            + "WHERE t.nombre= :nombre"),
+    @NamedQuery(name = "Transaccion.buscarPorFlujosyDueno", query = "SELECT t "
+            + "FROM Transaccion t WHERE t.flujoEfectivo= :efectivo "
+            + "AND t.flujoTitulos= :titulos AND t.fuenteTransaccion.nombre= :nombre")
 })
 public class Transaccion implements Serializable {
 

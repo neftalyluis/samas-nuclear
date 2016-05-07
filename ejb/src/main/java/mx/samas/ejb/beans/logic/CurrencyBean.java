@@ -30,7 +30,7 @@ public class CurrencyBean {
     // "Insert Code > Add Business Method")
     public DenominacionMoneda getMXPCurrency() {
         try {
-            return (DenominacionMoneda) em.createNamedQuery("DenominatorCurrency.findByTicker").setParameter("ticker", "*C_MXP_").getSingleResult();
+            return (DenominacionMoneda) em.createNamedQuery("DenominacionMoneda.buscarPorTicker").setParameter("clavePizarra", "*C_MXP_").getSingleResult();
         } catch (Exception e) {
             LOG.log(Level.WARNING, "No pudimos obtener el Denominator Currency, la excepcion es: {0}", e.getMessage());
 

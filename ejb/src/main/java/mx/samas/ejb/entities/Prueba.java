@@ -25,7 +25,7 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 @Entity
 @NamedQueries({
-    @NamedQuery(name="Test.findAll", query="SELECT t FROM Test t")
+    @NamedQuery(name="Prueba.buscarTodos", query="SELECT t FROM Prueba t")
 })
 @XmlRootElement
 public class Prueba implements Serializable {

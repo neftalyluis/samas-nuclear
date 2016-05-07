@@ -200,10 +200,10 @@ public class BlotterRegistrer {
 
     public List<Bitacora> getBuyAndSellTransactions(String account, Date inputDate, String ticker) throws AppException {
         try {
-            return (List<Bitacora>) em.createNamedQuery("Blotter.BuyAndSellFromDateAndAccountWithAsset")
-                    .setParameter("account", account)
-                    .setParameter("input", inputDate, TemporalType.DATE)
-                    .setParameter("asset", ab.findByTicker(ticker))
+            return (List<Bitacora>) em.createNamedQuery("Bitacora.CompraYVentaConFechayCuenta")
+                    .setParameter("cuenta", account)
+                    .setParameter("ingreso", inputDate, TemporalType.DATE)
+                    .setParameter("activo", ab.findByTicker(ticker))
                     .getResultList();
         } catch (Exception e) {
             e.printStackTrace();

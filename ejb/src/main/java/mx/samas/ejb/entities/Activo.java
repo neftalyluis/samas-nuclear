@@ -33,7 +33,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Entity
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Activo.findByclavePizarra", query = "SELECT a FROM Activo a WHERE a.clavePizarra = :clavePizarra")
+    @NamedQuery(name = "Activo.buscarPorClavePizarra", query = "SELECT a FROM Activo a WHERE a.clavePizarra = :clavePizarra")
 
 })
 public class Activo implements Serializable {
@@ -131,7 +131,7 @@ public class Activo implements Serializable {
     private Boolean ventaEnCorto;
 
     
-    @OneToMany(mappedBy = "asset", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "activo", cascade = CascadeType.ALL)
     private List<VectorActivo> vectores;
 
     @OneToMany

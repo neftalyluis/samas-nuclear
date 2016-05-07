@@ -28,7 +28,7 @@ public class ClientBean {
 
     public List<Cliente> getAllClients() {
         try {
-            return em.createQuery("SELECT c FROM Client c").getResultList();
+            return em.createQuery("SELECT c FROM Cliente c").getResultList();
         } catch (Exception e) {
             LOG.log(Level.WARNING, "No pudimos obtener la lista de clientes, la excepcion es: {0}", e.getMessage());
             return null;

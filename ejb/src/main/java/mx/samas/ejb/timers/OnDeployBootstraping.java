@@ -527,6 +527,7 @@ public class OnDeployBootstraping {
             return true;
         } catch (Exception e) {
             LOG.log(Level.WARNING, "No pudimos persistir los Strategies y Slices, la excepcion es: {0} ", e.getMessage());
+            e.printStackTrace();
             return false;
         }
     }

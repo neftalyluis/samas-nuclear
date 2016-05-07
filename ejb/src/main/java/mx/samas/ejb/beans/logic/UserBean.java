@@ -23,7 +23,7 @@ public class UserBean {
     private EntityManager em;
     
     public List<Usuario> getAllUsers(){
-        Query q = em.createQuery("SELECT u FROM User u");
+        Query q = em.createQuery("SELECT u FROM Usuario u");
         return q.getResultList();
     }
     

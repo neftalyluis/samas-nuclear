@@ -58,7 +58,7 @@ public class StrategyBean {
 
     public Estrategia getStrategyByName(String name) throws AppException {
         try {
-            return (Estrategia) em.createNamedQuery("Strategy.findByName").setParameter("name", name).getSingleResult();
+            return (Estrategia) em.createNamedQuery("Estrategia.buscarPorNombre").setParameter("nombre", name).getSingleResult();
         } catch (Exception e) {
             LOG.log(Level.WARNING, "No pudimos obtener la estrategia, la excepcion es: {0}", e.getMessage());
             throw new AppException();
@@ -67,7 +67,7 @@ public class StrategyBean {
 
     public List<Estrategia> getAllStrategies() {
         try {
-            Query q = em.createQuery("SELECT s FROM Strategy s");
+            Query q = em.createQuery("SELECT s FROM Estrategia s");
             return q.getResultList();
         } catch (Exception e) {
             System.out.println(e.getStackTrace());
@@ -86,7 +86,7 @@ public class StrategyBean {
 
     public List<VectorPortafolioModelo> getAllSlices() throws AppException {
         try {
-            Query q = em.createQuery("SELECT s FROM SliceVector s");
+            Query q = em.createQuery("SELECT s FROM VectorPortafolioModelo s");
             return q.getResultList();
         } catch (Exception e) {
             throw new AppException();
@@ -95,7 +95,7 @@ public class StrategyBean {
 
     public Estrategia getStrategyByID(long id) throws AppException {
         try {
-            return (Estrategia) em.createNamedQuery("Strategy.findByID").setParameter("id", id).getSingleResult();
+            return (Estrategia) em.createNamedQuery("Estrategia.buscarPorID").setParameter("id", id).getSingleResult();
         } catch (Exception e) {
             LOG.log(Level.WARNING, "No pudimos obtener la estrategia, la excepcion es: {0}", e.getMessage());
             throw new AppException();
@@ -104,8 +104,7 @@ public class StrategyBean {
 
     public VectorPortafolioModelo getSliceFromStrategyAndId(long strategyId, long sliceId) throws AppException {
         try {
-            return (VectorPortafolioModelo) em.createNamedQuery("SliceVector."
-                    + "getSliceWithIdAndStrategyId")
+            return (VectorPortafolioModelo) em.createNamedQuery("VectorPortafolioModelo.obtenerModeloPorIDyEstrategia")
                     .setParameter("sliceId", sliceId)
                     .setParameter("strategyId", strategyId)
                     .getSingleResult();
@@ -116,8 +115,8 @@ public class StrategyBean {
 
     public List<VectorPortafolioModelo> getActiveSlicesFromStrategy(long strategyId) throws AppException {
         try {
-            List<VectorPortafolioModelo> lsv = em.createNamedQuery("SliceVector.getLastSlicesFromStrategy")
-                    .setParameter("strategyId", strategyId)
+            List<VectorPortafolioModelo> lsv = em.createNamedQuery("VectorPortafolioModelo.obtenerTodosLosModelosPorEstrategia")
+                    .setParameter("id", strategyId)
                     .getResultList();
 
             return lsv;

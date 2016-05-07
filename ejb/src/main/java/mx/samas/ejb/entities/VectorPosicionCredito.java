@@ -236,5 +236,19 @@ public class VectorPosicionCredito implements Serializable {
         this.monto = monto;
     }
 
+    /**
+     * @return the moneda
+     */
+    public DenominacionMoneda getMoneda() {
+        return moneda;
+    }
+
+    /**
+     * @param moneda the moneda to set
+     */
+    public void setMoneda(DenominacionMoneda moneda) {
+        this.moneda = moneda;
+    }
+
 
 }

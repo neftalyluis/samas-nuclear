@@ -30,7 +30,7 @@ public class BrokerBean {
     // "Insert Code > Add Business Method")
     public Corredor getUniqueBroker() {
         try {
-            return (Corredor) em.createNamedQuery("Broker.getByName").setParameter("name", "HSBC").getSingleResult();
+            return (Corredor) em.createNamedQuery("Corredor.buscarPorNombre").setParameter("nombre", "HSBC").getSingleResult();
         } catch (Exception e) {
             LOG.log(Level.WARNING, "No pudimos obtener nuestro broker, la excepcion es: {0}", e.getMessage());
             return null;

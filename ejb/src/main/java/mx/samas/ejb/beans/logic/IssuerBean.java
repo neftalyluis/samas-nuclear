@@ -29,7 +29,7 @@ public class IssuerBean {
     // "Insert Code > Add Business Method")
     public Emisor getIssuerByCode(String code) {
         try {
-            return (Emisor) em.createNamedQuery("Issuer.findByCode").setParameter("code", code).getSingleResult();
+            return (Emisor) em.createNamedQuery("Emisor.buscarPorCodigo").setParameter("codigo", code).getSingleResult();
         } catch (Exception e) {
             LOG.log(Level.WARNING, "No pudimos obtener el Issuer, la excepcion es: {0}", e.getMessage());
             return null;

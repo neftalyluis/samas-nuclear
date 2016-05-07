@@ -34,7 +34,7 @@ public class RiskProfileBean {
 
     public PerfilRiesgo findByName(String name) throws AppException {
         try {
-            return (PerfilRiesgo) em.createNamedQuery("RiskProfile.findByName").setParameter("name", "Balanceado").getSingleResult();
+            return (PerfilRiesgo) em.createNamedQuery("PerfilRiesgo.buscarPorNombre").setParameter("nombre", "Balanceado").getSingleResult();
         } catch (Exception e) {
             throw new AppException();
         }

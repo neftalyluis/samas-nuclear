@@ -25,7 +25,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Entity
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "DenominatorCurrency.findByTicker", query = "SELECT dc FROM DenominatorCurrency dc WHERE dc.currency.ticker= :ticker")
+    @NamedQuery(name = "DenominacionMoneda.buscarPorTicker", query = "SELECT dc FROM DenominacionMoneda dc WHERE dc.moneda.clavePizarra= :clavePizarra")
 
 })
 public class DenominacionMoneda implements Serializable {

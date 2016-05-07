@@ -23,7 +23,7 @@ public class AssetBean {
 
     public Activo findByTicker(String ticker) throws AppException {
         try {
-            return (Activo) em.createNamedQuery("Asset.findByTicker").setParameter("ticker", ticker).getSingleResult();
+            return (Activo) em.createNamedQuery("Activo.buscarPorClavePizarra").setParameter("clavePizarra", ticker).getSingleResult();
         } catch (Exception e) {
             throw new AppException(404, 404, "Asset no encontrado por el ticker", "", "");
         }
@@ -31,7 +31,7 @@ public class AssetBean {
 
     public Activo findAssetByTicker(String ticker) throws AppException {
         try {
-            return (Activo) em.createNamedQuery("Asset.findByTicker").setParameter("ticker", ticker).getSingleResult();
+            return (Activo) em.createNamedQuery("Activo.buscarPorClavePizarra").setParameter("clavePizarra", ticker).getSingleResult();
         } catch (Exception e) {
             throw new AppException(404, 404, "Asset no encontrado por el ticker", "", "");
         }

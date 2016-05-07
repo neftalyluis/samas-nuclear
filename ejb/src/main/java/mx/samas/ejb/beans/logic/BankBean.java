@@ -27,7 +27,7 @@ public class BankBean {
 
     public Banco getBankByName(String name) throws AppException {
         try {
-            return (Banco) em.createNamedQuery("Bank.findByName").setParameter("name", name).getSingleResult();
+            return (Banco) em.createNamedQuery("Banco.buscarPorNombre").setParameter("nombre", name).getSingleResult();
         } catch (Exception e) {
             LOG.log(Level.WARNING, "No pudimos obtener el bank, la excepcion es: {0}", e.getMessage());
             throw new AppException();

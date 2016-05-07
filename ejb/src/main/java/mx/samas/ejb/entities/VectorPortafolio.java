@@ -43,7 +43,7 @@ public class VectorPortafolio implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToMany(mappedBy = "portfolios")
+    @ManyToMany(mappedBy = "portafolios")
     private List<Cliente> clientes;
 
     @ManyToOne

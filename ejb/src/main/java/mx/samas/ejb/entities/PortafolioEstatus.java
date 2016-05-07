@@ -21,7 +21,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Entity
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "PortfolioStatus.active", query = "SELECT ps FROM PortfolioStatus ps WHERE ps.name LIKE 'Active'")
+    @NamedQuery(name = "PortafolioEstatus.activo", query = "SELECT ps FROM PortafolioEstatus ps WHERE ps.nombre LIKE 'Active'")
 
 })
 public class PortafolioEstatus implements Serializable {

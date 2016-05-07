@@ -32,8 +32,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Entity
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Strategy.findByName", query = "SELECT s FROM Strategy s WHERE s.name = :name"),
-    @NamedQuery(name = "Strategy.findByID", query = "SELECT s FROM Strategy s WHERE s.id = :id")
+    @NamedQuery(name = "Estrategia.buscarPorNombre", query = "SELECT s FROM Estrategia s WHERE s.nombre = :nombre"),
+    @NamedQuery(name = "Estrategia.buscarPorID", query = "SELECT s FROM Estrategia s WHERE s.id = :id")
 
 })
 public class Estrategia implements Serializable {
@@ -44,7 +44,7 @@ public class Estrategia implements Serializable {
     private Long id;
     private String nombre;
 
-    @OneToMany(mappedBy = "strategy", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "estrategia", cascade = CascadeType.ALL)
     private List<VectorPortafolioModelo> estrategiaModelo;
 
     @ManyToOne

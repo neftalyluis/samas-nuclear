@@ -26,7 +26,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @Entity
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Broker.getByName", query = "SELECT b FROM Broker b WHERE b.name = :name")
+    @NamedQuery(name = "Corredor.buscarPorNombre", query = "SELECT b FROM Corredor b WHERE b.nombre = :nombre")
 
 })
 public class Corredor implements Serializable {

@@ -25,7 +25,7 @@ public class TransactionBean {
 
     public Transaccion findByNameAndOwner(String sourceOwner, String transactionName) throws AppException {
         try {
-            return (Transaccion) em.createNamedQuery("Transaction.findByNameAndOwner").setParameter("nameOwner", sourceOwner).setParameter("nameTransaction", transactionName).getSingleResult();
+            return (Transaccion) em.createNamedQuery("Transaccion.buscarPorNombreyDueno").setParameter("nombreDueno", sourceOwner).setParameter("nombreTransaccion", transactionName).getSingleResult();
         } catch (Exception e) {
             throw new AppException();
         }
@@ -33,7 +33,7 @@ public class TransactionBean {
 
     public Transaccion findByName(String transactionName) throws AppException {
         try {
-            return (Transaccion) em.createNamedQuery("Transaction.findByName").setParameter("nameTransaction", transactionName).getSingleResult();
+            return (Transaccion) em.createNamedQuery("Transaccion.buscarPorNombre").setParameter("nombre", transactionName).getSingleResult();
         } catch (Exception e) {
             e.printStackTrace();
             throw new AppException();

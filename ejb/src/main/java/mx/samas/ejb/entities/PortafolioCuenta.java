@@ -25,7 +25,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Entity
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "PortfolioAccount.findByAccountNumber", query = "SELECT pa FROM PortfolioAccount pa WHERE pa.accountNumber= :account")
+    @NamedQuery(name = "PortafolioCuenta.buscarPorNumerodeCuenta", query = "SELECT pa FROM PortafolioCuenta pa WHERE pa.numeroCuenta= :cuenta")
 })
 public class PortafolioCuenta implements Serializable {
 

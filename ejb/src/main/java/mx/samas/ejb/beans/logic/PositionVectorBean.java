@@ -28,7 +28,10 @@ public class PositionVectorBean {
 
     public List<VectorPosicion> getNotInCredit(Date d, String number) throws AppException {
         try {
-            return em.createNamedQuery("PositionVector.findNotInCreditWithAccount").setParameter("date", d).setParameter("accountNumber", number).getResultList();
+            return em.createNamedQuery("VectorPosicion.buscarNoEnCreditoParaCuenta")
+                    .setParameter("fecha", d)
+                    .setParameter("cuenta", number)
+                    .getResultList();
         } catch (Exception e) {
             throw new AppException();
         }

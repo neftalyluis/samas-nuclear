@@ -25,11 +25,11 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Entity
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "SliceVector.getSlicesFromStrategy", query = "SELECT s FROM SliceVector s WHERE s.strategy.id = :id"),
-    @NamedQuery(name = "SliceVector.getSliceWithIdAndStrategyId", query = "SELECT s FROM SliceVector s WHERE s.id= :sliceId AND s.strategy.id= :strategyId"),
-    @NamedQuery(name = "SliceVector.getLastSlicesFromStrategy", query = "SELECT s FROM SliceVector s WHERE s.dateTime="
-            + "(SELECT MAX(md.dateTime) FROM SliceVector md WHERE md.strategy.id= :strategyId) "
-            + "AND s.strategy.id= :strategyId")
+    @NamedQuery(name = "VectorPortafolioModelo.obtenerTodosLosModelosPorEstrategia", query = "SELECT s FROM VectorPortafolioModelo s WHERE s.estrategia.id = :id"),
+    @NamedQuery(name = "VectorPortafolioModelo.obtenerModeloPorIDyEstrategia", query = "SELECT s FROM VectorPortafolioModelo s WHERE s.id= :modeloid AND s.estrategia.id= :estrategia"),
+    @NamedQuery(name = "VectorPortafolioModelo.obtenerModeloActivoDeEstrategia", query = "SELECT s FROM VectorPortafolioModelo s WHERE s.fecha="
+            + "(SELECT MAX(md.fecha) FROM VectorPortafolioModelo md WHERE md.estrategia.id= :estrategia) "
+            + "AND s.estrategia.id= :estrategia")
 })
 public class VectorPortafolioModelo implements Serializable {
 
@@ -105,7 +105,7 @@ public class VectorPortafolioModelo implements Serializable {
 
     @Override
     public String toString() {
-        return "mx.samas.SliceVector[ id=" + getId() + " ]";
+        return "mx.samas.VectorPortafolioModelo[ id=" + getId() + " ]";
     }
 
     /**
@@ -177,6 +177,5 @@ public class VectorPortafolioModelo implements Serializable {
     public void setDiana(Double diana) {
         this.diana = diana;
     }
-
 
 }

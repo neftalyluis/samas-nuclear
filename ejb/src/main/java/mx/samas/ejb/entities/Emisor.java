@@ -21,7 +21,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Entity
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Issuer.findByCode", query = "SELECT i FROM Issuer i WHERE i.code = :code")
+    @NamedQuery(name = "Emisor.buscarPorCodigo", query = "SELECT i FROM Emisor i WHERE i.codigo= :codigo")
 
 })
 public class Emisor implements Serializable {

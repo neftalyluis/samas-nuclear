@@ -28,7 +28,7 @@ public class PortfolioAccountBean {
 
     public PortafolioCuenta findByAccountNumber(String accountNumber) throws AppException {
         try {
-            return (PortafolioCuenta) em.createNamedQuery("PortfolioAccount.findByAccountNumber").setParameter("account", accountNumber).getSingleResult();
+            return (PortafolioCuenta) em.createNamedQuery("PortafolioCuenta.buscarPorNumerodeCuenta").setParameter("cuenta", accountNumber).getSingleResult();
         } catch (Exception e) {
             throw new AppException();
         }
@@ -36,7 +36,7 @@ public class PortfolioAccountBean {
 
     public PortafolioEstatus getActiveStatus() throws AppException {
         try {
-            return (PortafolioEstatus) em.createNamedQuery("PortfolioStatus.active").setMaxResults(1).getSingleResult();
+            return (PortafolioEstatus) em.createNamedQuery("PortafolioEstatus.activo").setMaxResults(1).getSingleResult();
         } catch (Exception e) {
             LOG.log(Level.WARNING, "No pudimos obetener el estatus Activo, la excepcion es: {0}", e.getMessage());
             throw new AppException();

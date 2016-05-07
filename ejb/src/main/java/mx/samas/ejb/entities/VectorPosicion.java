@@ -24,10 +24,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Entity
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "PositionVector.findNotInCreditWithAccount", query = "SELECT pv FROM PositionVector pv JOIN pv.portfolioVector pov "
-            + "WHERE pv.dateTime= :date "
-            + "AND pv.collateral= FALSE "
-            + "AND pov.account= :accountNumber")
+    @NamedQuery(name= "VectorPosicion.buscarNoEnCreditoParaCuenta", query= "SELECT vp FROM VectorPosicion vp JOIN vp.portafolio po"
+            + " WHERE vp.fecha= :fecha"
+            + " AND vp.colateral= FALSE "
+            + "AND po.cuenta= :cuenta ")
 })
 public class VectorPosicion implements Serializable {
 

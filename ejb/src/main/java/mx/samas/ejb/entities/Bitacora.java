@@ -27,21 +27,21 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Entity
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Bitacora.BuyAndSellFromDateAndAccountWithAsset",
+    ////TBD  
+   @NamedQuery(name = "Bitacora.CompraYVentaDesdeFechaYCuentaConActivo",
             query = "SELECT b FROM Bitacora b JOIN b.transaccion t WHERE "
-            + "b.contrato.accountNumber= :account "
-            + "AND b.inputDate= :input "
-            // + "AND t.transaccionSource.name= 'Portfolio' "
-            + "AND (t.name= 'Compra' OR t.name= 'Venta'"
-            + "AND b.asset= :asset)"),
-
+                    + "b.contrato.numeroCuenta= :numeroCuenta "
+                    + "AND b.fechaIngreso= :ingreso "
+                    + "AND (t.nombre= 'Compra' OR t.nombre='Venta' "
+                    + "AND b.activo= :activo) "),
+    
     @NamedQuery(name = "Bitacora.CompraYVentaConFechayCuenta",
             query = "SELECT b FROM Bitacora b JOIN b.contrato t WHERE "
             + "b.contrato= :cuenta "
             + "AND b.fechaIngreso= :ingreso "
             //  + "AND t.transaccionSource.name= 'Portfolio' "
-            + "AND (t.numeroContrato= 'Compra' OR t.nombre= 'Venta'"
-            + "AND b.activo= :activo)"),
+            + "AND (t.numeroCuenta= 'Compra' OR t.numeroCuenta= 'Venta' "
+            + "AND b.activo= :activo) "),
     //Aplica para todos 
     //Todo lo que opere hoy, traeme todo lo que opere hoy que me liquide siguiente dia, 
     //
@@ -63,7 +63,6 @@ public class Bitacora implements Serializable {
 
     }
 
-
     public Bitacora(Date fechaEjecucion, Date fechaLiquidacion, Date fechaIngreso, Activo activo, Transaccion transaccion, Double precio, Double tasa, Double flujoEfectivo, Long flujoTitulos, PortafolioCuenta contrato, Mercado mercado) {
         this.fechaEjecucion = fechaEjecucion;
         this.fechaLiquidacion = fechaLiquidacion;
@@ -78,8 +77,6 @@ public class Bitacora implements Serializable {
         this.mercado = mercado;
     }
 
-    
-    
     /**
      * 2.- Momento en el que se ejecuta la orden
      */

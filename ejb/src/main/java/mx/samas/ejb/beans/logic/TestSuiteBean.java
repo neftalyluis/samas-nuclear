@@ -28,7 +28,7 @@ public class TestSuiteBean {
 //    public createTestFromDTO(TestEntryDTO t)
 
     public List<Prueba> findAll() throws AppException{
-        return em.createNamedQuery("Test.findAll").getResultList();
+        return em.createNamedQuery("Prueba.buscarTodos").getResultList();
 
     }
 
