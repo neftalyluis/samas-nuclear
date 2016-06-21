@@ -1,5 +1,6 @@
 package mx.samas;
 
+import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.SpringApplicationConfiguration;
@@ -13,6 +14,9 @@ public class WebApplicationTests {
 
 	@Test
 	public void contextLoads() {
+            int a = 3;
+            int b = 3;
+            assertEquals(a, b);
 	}
 
 }
