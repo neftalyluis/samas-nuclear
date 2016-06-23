@@ -19,6 +19,7 @@ public class WebApplicationTests {
         int b = 3;
         assertEquals(a, b);
         assertNotEquals(2, 1);
+        assertEquals(b, a);
     }
 
 }
