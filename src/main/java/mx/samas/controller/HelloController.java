@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RestController
 public class HelloController {
 
-    @RequestMapping("/")
+    @RequestMapping("/hello")
     public String index() {
         return "Greetings from SAMAS, And Openshift";
     }
