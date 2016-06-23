@@ -13,7 +13,7 @@ public class HelloController {
 
     @RequestMapping("/")
     public String index() {
-        return "Greetings from SAMAS, fellow dudes";
+        return "Greetings from SAMAS, And Openshift";
     }
 
 }
