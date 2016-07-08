@@ -27,6 +27,7 @@ import javax.persistence.TemporalType;
 public abstract class ParentModel implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
     private Long id;
@@ -37,8 +38,8 @@ public abstract class ParentModel implements Serializable {
     
     @PrePersist
     public void onCreate(){
-        if (creado == null){
-            creado = new Date();
+        if (getCreado() == null){
+            setCreado(new Date());
         }
     }
     
@@ -73,6 +74,20 @@ public abstract class ParentModel implements Serializable {
     @Override
     public String toString() {
         return "mx.samas.domain.ParentModel[ id=" + id + " ]";
+    }
+
+    /**
+     * @return the creado
+     */
+    public Date getCreado() {
+        return creado;
+    }
+
+    /**
+     * @param creado the creado to set
+     */
+    public void setCreado(Date creado) {
+        this.creado = creado;
     }
     
 }

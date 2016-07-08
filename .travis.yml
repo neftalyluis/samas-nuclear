@@ -9,7 +9,7 @@ test:
   encoding: utf8
 before_script:
 - mysql -e 'create database samas;'
-- echo "CREATE USER 'samas'@'localhost' IDENTIFIED BY 'samas';\nGRANT ALL PRIVILEGES
+- echo "CREATE USER 'samas'@'localhost' IDENTIFIED BY 'test';\nGRANT ALL PRIVILEGES
   ON *.* TO 'samas'@'localhost';\n" | mysql -u root
 - echo "USE mysql;\nUPDATE user SET password=PASSWORD('samas') WHERE user='samas';\nFLUSH
   PRIVILEGES;\n" | mysql -u root
