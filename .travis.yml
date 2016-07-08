@@ -11,7 +11,7 @@ before_script:
 - mysql -e 'create database samas;'
 - echo "CREATE USER 'samas'@'localhost' IDENTIFIED BY 'test';\nGRANT ALL PRIVILEGES
   ON *.* TO 'samas'@'localhost';\n" | mysql -u root
-- echo "USE mysql;\nUPDATE user SET password=PASSWORD('samas') WHERE user='samas';\nFLUSH
+- echo "USE mysql;\nUPDATE user SET password=PASSWORD('test') WHERE user='samas';\nFLUSH
   PRIVILEGES;\n" | mysql -u root
 after_success:
 - bash <(curl -s https://codecov.io/bash) -t c40f0969-f6ec-4c50-bc86-a369613ce30e
