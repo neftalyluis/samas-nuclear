@@ -1,7 +1,7 @@
 package mx.samas;
 
 import mx.samas.domain.Activo;
-import mx.samas.repositories.ActivoRepository;
+import mx.samas.repository.ActivoRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

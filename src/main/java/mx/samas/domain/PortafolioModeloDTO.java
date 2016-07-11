@@ -5,13 +5,14 @@
  */
 package mx.samas.domain;
 
-import javax.persistence.Entity;
+import java.util.HashMap;
 
 /**
  *
  * @author samas
  */
-@Entity
-public class DenominacionMoneda extends ParentModel{
-    
+public class PortafolioModeloDTO {
+
+    private HashMap<String, Double> modelo;
+
 }

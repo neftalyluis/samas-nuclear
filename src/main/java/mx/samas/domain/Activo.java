@@ -12,8 +12,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotNull;
 
 /**
  *
@@ -30,6 +30,7 @@ public class Activo extends ParentModel {
     /**
      * Identificador de un activo, es la concatenacion de TV, Emisora y Serie
      */
+    @NotNull
     @Column(unique = true)
     private String clavePizarra;
 
@@ -41,8 +42,7 @@ public class Activo extends ParentModel {
     /**
      * Emisora
      */
-    @ManyToOne
-    private Emisor emisora;
+    private String emisora;
 
     /**
      * Serie
@@ -56,10 +56,6 @@ public class Activo extends ParentModel {
     @Column(unique = true)
     private String isin;
 
-    @JsonIgnore
-    @ManyToOne
-    private DenominacionMoneda monedaDenominacion;
-
     /**
      * "pujaMinima" es lo que viene siendo la "puja"
      *
@@ -69,34 +65,15 @@ public class Activo extends ParentModel {
      */
     private Double pujaMinima;
 
-    /* Si «fechaLiquidacion» a ser constante, no va aquí; este es un campo
-     relevante para operar en mercado (un método). Si es variable -- esto es, aquí
-     sólo de define el valor por defecto -- puede caber en «Activo». No obstante,
-     existe el riesgo de generar un comportamiento indeseado por la comodiad de
-     de evitar declarar explícitamente la fecha valor  -- «fechaLiquidacion» -- para
-     cada operación. Quizás se le puede dar al usuario la opción -- de pedir su
-     declaración explícita; esto sería por activo.    
-     */
-    /**
-     * Tiempo en que liquida
-     */
-    @JsonIgnore
-    @ManyToOne
-    private FechaValor fechaLiquidacion;
-
     /**
      * Este valor indica si se puede usar este Activo para ventas en corto
      */
     private Boolean ventaEnCorto;
 
     @JsonIgnore
-//    @OneToMany(mappedBy = "activo", cascade = CascadeType.ALL)
-    @OneToMany
+    @OneToMany(mappedBy = "activo", cascade = CascadeType.ALL)
+//    @OneToMany
     private List<VectorActivo> vectores;
-
-    @JsonIgnore
-    @OneToMany
-    private List<ActivoPropiedadValor> propiedades;
 
     /**
      * Tipo de activo:
@@ -105,6 +82,26 @@ public class Activo extends ParentModel {
      */
     @Enumerated(EnumType.ORDINAL)
     private TipoActivo tipo;
+
+    public Activo() {
+
+    }
+
+    public Activo(String tipoValor, String emisora, String serie, String isin,
+            String nombre, TipoActivo tipo, Boolean ventaEnCorto,
+            Double pujaMinima) {
+
+        this.clavePizarra = tipoValor + "_" + emisora + "_" + serie;
+        this.tipoValor = tipoValor;
+        this.emisora = emisora;
+        this.serie = serie;
+        this.isin = isin;
+        this.nombre = nombre;
+        this.tipo = tipo;
+        this.ventaEnCorto = ventaEnCorto;
+        this.pujaMinima = pujaMinima;
+
+    }
 
     /**
      * @return the nombre
@@ -149,20 +146,6 @@ public class Activo extends ParentModel {
     }
 
     /**
-     * @return the emisora
-     */
-    public Emisor getEmisora() {
-        return emisora;
-    }
-
-    /**
-     * @param emisora the emisora to set
-     */
-    public void setEmisora(Emisor emisora) {
-        this.emisora = emisora;
-    }
-
-    /**
      * @return the serie
      */
     public String getSerie() {
@@ -191,20 +174,6 @@ public class Activo extends ParentModel {
     }
 
     /**
-     * @return the monedaDenominacion
-     */
-    public DenominacionMoneda getMonedaDenominacion() {
-        return monedaDenominacion;
-    }
-
-    /**
-     * @param monedaDenominacion the monedaDenominacion to set
-     */
-    public void setMonedaDenominacion(DenominacionMoneda monedaDenominacion) {
-        this.monedaDenominacion = monedaDenominacion;
-    }
-
-    /**
      * @return the pujaMinima
      */
     public Double getPujaMinima() {
@@ -216,20 +185,6 @@ public class Activo extends ParentModel {
      */
     public void setPujaMinima(Double pujaMinima) {
         this.pujaMinima = pujaMinima;
-    }
-
-    /**
-     * @return the fechaLiquidacion
-     */
-    public FechaValor getFechaLiquidacion() {
-        return fechaLiquidacion;
-    }
-
-    /**
-     * @param fechaLiquidacion the fechaLiquidacion to set
-     */
-    public void setFechaLiquidacion(FechaValor fechaLiquidacion) {
-        this.fechaLiquidacion = fechaLiquidacion;
     }
 
     /**
@@ -261,20 +216,6 @@ public class Activo extends ParentModel {
     }
 
     /**
-     * @return the propiedades
-     */
-    public List<ActivoPropiedadValor> getPropiedades() {
-        return propiedades;
-    }
-
-    /**
-     * @param propiedades the propiedades to set
-     */
-    public void setPropiedades(List<ActivoPropiedadValor> propiedades) {
-        this.propiedades = propiedades;
-    }
-
-    /**
      * @return the tipo
      */
     public TipoActivo getTipo() {
@@ -286,6 +227,20 @@ public class Activo extends ParentModel {
      */
     public void setTipo(TipoActivo tipo) {
         this.tipo = tipo;
+    }
+
+    /**
+     * @return the emisora
+     */
+    public String getEmisora() {
+        return emisora;
+    }
+
+    /**
+     * @param emisora the emisora to set
+     */
+    public void setEmisora(String emisora) {
+        this.emisora = emisora;
     }
 
 }

@@ -13,12 +13,15 @@ import javax.persistence.ManyToOne;
  * @author samas
  */
 @Entity
-public class VectorActivo extends ParentModel {
+public class PortafolioModelo extends ParentModel {
 
     @ManyToOne
     private Activo activo;
-
-    private Double precioLimpio;
+    
+    @ManyToOne
+    private Estrategia estrategia;
+    
+    private Double diana;
 
     /**
      * @return the activo
@@ -35,17 +38,31 @@ public class VectorActivo extends ParentModel {
     }
 
     /**
-     * @return the precioLimpio
+     * @return the estrategia
      */
-    public Double getPrecioLimpio() {
-        return precioLimpio;
+    public Estrategia getEstrategia() {
+        return estrategia;
     }
 
     /**
-     * @param precioLimpio the precioLimpio to set
+     * @param estrategia the estrategia to set
      */
-    public void setPrecioLimpio(Double precioLimpio) {
-        this.precioLimpio = precioLimpio;
+    public void setEstrategia(Estrategia estrategia) {
+        this.estrategia = estrategia;
     }
 
+    /**
+     * @return the diana
+     */
+    public Double getDiana() {
+        return diana;
+    }
+
+    /**
+     * @param diana the diana to set
+     */
+    public void setDiana(Double diana) {
+        this.diana = diana;
+    }
+    
 }
