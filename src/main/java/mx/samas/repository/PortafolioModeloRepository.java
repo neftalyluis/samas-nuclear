@@ -5,8 +5,7 @@
  */
 package mx.samas.repository;
 
-import java.util.List;
-import mx.samas.domain.Activo;
+import mx.samas.domain.PortafolioModelo;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
@@ -15,12 +14,6 @@ import org.springframework.stereotype.Repository;
  * @author samas
  */
 @Repository
-public interface ActivoRepository extends PagingAndSortingRepository<Activo, Long> {
-
-    public List<Activo> findByNombre(String nombre);
-
-    public List<Activo> findByClavePizarra(String clavePizarra);
-
-    public Activo findFirstByClavePizarra(String clavePizarra);
-
+public interface PortafolioModeloRepository extends PagingAndSortingRepository<PortafolioModelo, Long>{
+    
 }

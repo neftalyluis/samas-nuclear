@@ -17,11 +17,28 @@ public class PortafolioModelo extends ParentModel {
 
     @ManyToOne
     private Activo activo;
-    
+
     @ManyToOne
     private Estrategia estrategia;
-    
+
     private Double diana;
+
+    public PortafolioModelo() {
+
+    }
+
+    public PortafolioModelo(Activo a, Double diana) {
+        this.activo = a;
+        this.diana = diana;
+
+    }
+
+    public PortafolioModelo(Activo a, Double diana, Estrategia e) {
+        this.activo = a;
+        this.diana = diana;
+        this.estrategia = e;
+
+    }
 
     /**
      * @return the activo
@@ -64,5 +81,5 @@ public class PortafolioModelo extends ParentModel {
     public void setDiana(Double diana) {
         this.diana = diana;
     }
-    
+
 }

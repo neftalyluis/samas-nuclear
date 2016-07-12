@@ -5,11 +5,10 @@
  */
 package mx.samas.controllers;
 
-import java.util.Collection;
 import java.util.List;
 import mx.samas.domain.Activo;
-import mx.samas.repository.ActivoRepository;
 import mx.samas.service.ActivoService;
+import mx.samas.service.VectorActivoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,43 +28,43 @@ import org.springframework.web.bind.annotation.RestController;
 public class ActivoController {
 
     @Autowired
-    private ActivoRepository activoRepository;
-
-    @Autowired
     private ActivoService activoService;
+    
+    @Autowired
+    private VectorActivoService vectorActivoService;
 
     @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<Collection<Activo>> getAllActivos() {
-        return new ResponseEntity<>((Collection<Activo>) activoRepository.findAll(), HttpStatus.OK);
+    public ResponseEntity<List<Activo>> getAllActivos() {
+        return new ResponseEntity<>(activoService.getAllActivos(), HttpStatus.OK);
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
     public ResponseEntity<Activo> getActivoWithId(@PathVariable Long id) {
-        return new ResponseEntity<>(activoRepository.findOne(id), HttpStatus.OK);
+        return new ResponseEntity<>(activoService.getById(id), HttpStatus.OK);
     }
 
     @RequestMapping(method = RequestMethod.GET, params = {"name"})
     public ResponseEntity<List<Activo>> findActivoWithName(@RequestParam(value = "name") String name) {
-        return new ResponseEntity<>(activoRepository.findByNombre(name), HttpStatus.OK);
+        return new ResponseEntity<>(activoService.getByNombre(name), HttpStatus.OK);
     }
 
     @RequestMapping(method = RequestMethod.GET, params = {"clavePizarra"})
     public ResponseEntity<List<Activo>> findActivoWithClavePizarra(@RequestParam(value = "clavePizarra") String clavePizarra) {
-        return new ResponseEntity<>(activoRepository.findByClavePizarra(clavePizarra), HttpStatus.OK);
+        return new ResponseEntity<>(activoService.getByClavePizarra(clavePizarra), HttpStatus.OK);
     }
 
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<?> addActivo(@RequestBody Activo input) {
-        return new ResponseEntity<>(activoRepository.save(input), HttpStatus.CREATED);
+        return new ResponseEntity<>(activoService.createActivo(input), HttpStatus.CREATED);
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/{id}/vector")
     public ResponseEntity<?> getVectorFromActivo(@PathVariable Long id) {
-        return new ResponseEntity<>(activoService.getVectorFromActivo(id), HttpStatus.OK);
+        return new ResponseEntity<>(vectorActivoService.getVectorFromActivo(id), HttpStatus.OK);
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/vector")
     public ResponseEntity<?> getVectorFromActivo(@RequestParam(value = "clavePizarra") String clavePizarra) {
-        return new ResponseEntity<>(activoService.getVectorFromActivo(clavePizarra), HttpStatus.OK);
+        return new ResponseEntity<>(vectorActivoService.getVectorFromActivo(clavePizarra), HttpStatus.OK);
     }
 }

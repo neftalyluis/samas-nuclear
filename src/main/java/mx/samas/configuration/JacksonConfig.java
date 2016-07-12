@@ -18,11 +18,12 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 public class JacksonConfig {
+
     @Autowired
     private ObjectMapper objectMapper;
-    
+
     @PostConstruct
-    public void init(){
+    public void init() {
         objectMapper.setSerializationInclusion(JsonInclude.Include.ALWAYS);
         objectMapper.setVisibility(objectMapper.getVisibilityChecker().withFieldVisibility(Visibility.DEFAULT));
     }

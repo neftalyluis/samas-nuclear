@@ -6,16 +6,22 @@
 package mx.samas.service;
 
 import java.util.List;
-import mx.samas.domain.VectorActivo;
+import mx.samas.domain.Activo;
 
 /**
  *
  * @author samas
  */
 public interface ActivoService {
-
-    public List<VectorActivo> getVectorFromActivo(Long id);
-
-    public List<VectorActivo> getVectorFromActivo(String clavePizarra);
+    
+    public List<Activo> getAllActivos();
+    
+    public Activo getById(Long id);
+    
+    public List<Activo> getByNombre(String nombre);
+    
+    public List<Activo> getByClavePizarra(String clavePizarra);
+    
+    public Activo createActivo(Activo input);
 
 }

@@ -6,13 +6,20 @@
 package mx.samas.domain;
 
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  *
  * @author samas
  */
-public class PortafolioModeloDTO {
+public class PortafolioModeloDTO extends HashMap<String, Double> {
 
-    private HashMap<String, Double> modelo;
-
+    public boolean validate() {
+        Double total = 0.0;
+        for (Map.Entry<String, Double> entry : this.entrySet()) {
+            total += entry.getValue();
+        }
+        
+        return total == 100.0;
+    }
 }

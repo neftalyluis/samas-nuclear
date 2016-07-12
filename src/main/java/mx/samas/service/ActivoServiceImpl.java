@@ -7,28 +7,42 @@ package mx.samas.service;
 
 import java.util.List;
 import mx.samas.domain.Activo;
-import mx.samas.domain.VectorActivo;
 import mx.samas.repository.ActivoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
  *
  * @author samas
  */
+@Service
 public class ActivoServiceImpl implements ActivoService {
 
     @Autowired
     private ActivoRepository activoRepository;
 
     @Override
-    public List<VectorActivo> getVectorFromActivo(Long id) {
-        Activo u = activoRepository.findOne(id);
-        return u.getVectores();
+    public List<Activo> getAllActivos() {
+        return (List<Activo>) activoRepository.findAll();
     }
 
     @Override
-    public List<VectorActivo> getVectorFromActivo(String clavePizarra) {
-        Activo u = activoRepository.findFirstByClavePizarra(clavePizarra);
-        return u.getVectores();
+    public Activo getById(Long id) {
+        return (Activo) activoRepository.findOne(id);
+    }
+
+    @Override
+    public List<Activo> getByNombre(String nombre) {
+        return activoRepository.findByNombre(nombre);
+    }
+
+    @Override
+    public List<Activo> getByClavePizarra(String clavePizarra) {
+        return activoRepository.findByClavePizarra(clavePizarra);
+    }
+
+    @Override
+    public Activo createActivo(Activo input) {
+        return activoRepository.save(input);
     }
 }

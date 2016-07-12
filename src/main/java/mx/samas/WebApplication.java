@@ -32,6 +32,7 @@ public class WebApplication extends SpringBootServletInitializer {
                 test.setTipoValor("yrgfbhunj");
                 test.setSerie("urfbnf");
                 test.setVentaEnCorto(Boolean.TRUE);
+                test.setClavePizarra("1A_ASDF_*");
                 activoRepository.save(test);
                 System.out.println("I'm Ok");
             }
