@@ -6,6 +6,7 @@
 package mx.samas.domain;
 
 import javax.persistence.Entity;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 
 /**
@@ -19,6 +20,9 @@ public class VectorActivo extends ParentModel {
     private Activo activo;
 
     private Double precioLimpio;
+    
+    @Lob
+    private String propiedades;
 
     /**
      * @return the activo

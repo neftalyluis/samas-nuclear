@@ -12,6 +12,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
@@ -82,6 +83,9 @@ public class Activo extends ParentModel {
      */
     @Enumerated(EnumType.ORDINAL)
     private TipoActivo tipo;
+    
+    @Lob
+    private String propiedades;
 
     public Activo() {
 

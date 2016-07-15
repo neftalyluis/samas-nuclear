@@ -24,16 +24,23 @@ public class WebApplication extends SpringBootServletInitializer {
     @Bean
     public CommandLineRunner initializeDb(final ActivoRepository activoRepository) {
         return new CommandLineRunner() {
+
+            private static final String TICKER = "1A_ASDF_*";
+
             @Override
             public void run(String[] args) throws Exception {
-                Activo test = new Activo();
-                test.setNombre("ASDF");
-                test.setPujaMinima(45678.0);
-                test.setTipoValor("yrgfbhunj");
-                test.setSerie("urfbnf");
-                test.setVentaEnCorto(Boolean.TRUE);
-                test.setClavePizarra("1A_ASDF_*");
-                activoRepository.save(test);
+
+                Activo test = activoRepository.findFirstByClavePizarra(TICKER);
+                if (test == null) {
+                    test.setNombre("ASDF");
+                    test.setPujaMinima(45678.0);
+                    test.setTipoValor("yrgfbhunj");
+                    test.setSerie("urfbnf");
+                    test.setVentaEnCorto(Boolean.TRUE);
+                    test.setClavePizarra("1A_ASDF_*");
+                    activoRepository.save(test);
+                }
+
                 System.out.println("I'm Ok");
             }
         };
