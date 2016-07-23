@@ -34,4 +34,11 @@ public class VectorActivoServiceImpl implements VectorActivoService {
         return u.getVectores();
     }
 
+    @Override
+    public VectorActivo addVectorToActivo(Long id, VectorActivo vector) {
+        Activo u = activoRepository.findOne(id);
+        u.getVectores().add(vector);
+        return vector;
+    }
+
 }

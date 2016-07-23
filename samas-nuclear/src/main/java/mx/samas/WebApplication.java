@@ -1,6 +1,5 @@
 package mx.samas;
 
-import mx.samas.domain.Activo;
 import mx.samas.repository.ActivoRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -29,19 +28,6 @@ public class WebApplication extends SpringBootServletInitializer {
 
             @Override
             public void run(String[] args) throws Exception {
-
-                Activo test = activoRepository.findFirstByClavePizarra(TICKER);
-                if (test == null) {
-                    test.setNombre("ASDF");
-                    test.setPujaMinima(45678.0);
-                    test.setTipoValor("yrgfbhunj");
-                    test.setSerie("urfbnf");
-                    test.setVentaEnCorto(Boolean.TRUE);
-                    test.setClavePizarra("1A_ASDF_*");
-                    activoRepository.save(test);
-                }
-
-                System.out.println("I'm Ok");
             }
         };
     }

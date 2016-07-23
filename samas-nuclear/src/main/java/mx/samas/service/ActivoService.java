@@ -20,7 +20,7 @@ public interface ActivoService {
     
     public List<Activo> getByNombre(String nombre);
     
-    public List<Activo> getByClavePizarra(String clavePizarra);
+    public Activo getByClavePizarra(String clavePizarra);
     
     public Activo createActivo(Activo input);
 

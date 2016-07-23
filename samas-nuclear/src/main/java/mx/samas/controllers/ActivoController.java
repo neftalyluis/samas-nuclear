@@ -7,6 +7,8 @@ package mx.samas.controllers;
 
 import java.util.List;
 import mx.samas.domain.Activo;
+import mx.samas.domain.ActivoPropiedad;
+import mx.samas.domain.VectorActivo;
 import mx.samas.service.ActivoService;
 import mx.samas.service.VectorActivoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +31,7 @@ public class ActivoController {
 
     @Autowired
     private ActivoService activoService;
-    
+
     @Autowired
     private VectorActivoService vectorActivoService;
 
@@ -49,7 +51,7 @@ public class ActivoController {
     }
 
     @RequestMapping(method = RequestMethod.GET, params = {"clavePizarra"})
-    public ResponseEntity<List<Activo>> findActivoWithClavePizarra(@RequestParam(value = "clavePizarra") String clavePizarra) {
+    public ResponseEntity<Activo> findActivoWithClavePizarra(@RequestParam(value = "clavePizarra") String clavePizarra) {
         return new ResponseEntity<>(activoService.getByClavePizarra(clavePizarra), HttpStatus.OK);
     }
 
@@ -66,5 +68,15 @@ public class ActivoController {
     @RequestMapping(method = RequestMethod.GET, value = "/vector")
     public ResponseEntity<?> getVectorFromActivo(@RequestParam(value = "clavePizarra") String clavePizarra) {
         return new ResponseEntity<>(vectorActivoService.getVectorFromActivo(clavePizarra), HttpStatus.OK);
+    }
+
+    @RequestMapping(method = RequestMethod.POST, value = "/{id}/vector")
+    public ResponseEntity<?> addVectorToActivo(@PathVariable Long id, @RequestBody VectorActivo vector) {
+        return new ResponseEntity<>(vectorActivoService.addVectorToActivo(id, vector), HttpStatus.CREATED);
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/{id}/propiedades")
+    public ResponseEntity<List<ActivoPropiedad>> getPropiedadesFromActivo(@PathVariable Long id) {
+        return new ResponseEntity<>( HttpStatus.OK);
     }
 }

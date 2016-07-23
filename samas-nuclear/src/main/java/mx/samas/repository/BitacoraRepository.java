@@ -7,6 +7,7 @@ package mx.samas.repository;
 
 import java.util.List;
 import mx.samas.domain.Activo;
+import mx.samas.domain.Bitacora;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
@@ -15,12 +16,8 @@ import org.springframework.stereotype.Repository;
  * @author samas
  */
 @Repository
-public interface ActivoRepository extends PagingAndSortingRepository<Activo, Long> {
+public interface BitacoraRepository extends PagingAndSortingRepository<Bitacora, Long> {
 
-    public List<Activo> findByNombre(String nombre);
-
-    public Activo findTopByClavePizarra(String clavePizarra);
-
-    public Activo findFirstByClavePizarra(String clavePizarra);
+    public List<Bitacora> findByActivo(Activo activo);
 
 }

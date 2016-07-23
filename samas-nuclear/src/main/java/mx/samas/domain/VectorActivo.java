@@ -5,6 +5,7 @@
  */
 package mx.samas.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.Entity;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
@@ -16,6 +17,7 @@ import javax.persistence.ManyToOne;
 @Entity
 public class VectorActivo extends ParentModel {
 
+    @JsonIgnore
     @ManyToOne
     private Activo activo;
 

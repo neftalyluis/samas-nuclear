@@ -17,4 +17,6 @@ public interface VectorActivoService {
     public List<VectorActivo> getVectorFromActivo(Long id);
 
     public List<VectorActivo> getVectorFromActivo(String clavePizarra);
+
+    public VectorActivo addVectorToActivo(Long id, VectorActivo vector);
 }

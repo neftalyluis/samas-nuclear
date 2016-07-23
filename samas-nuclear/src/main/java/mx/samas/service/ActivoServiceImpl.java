@@ -37,8 +37,8 @@ public class ActivoServiceImpl implements ActivoService {
     }
 
     @Override
-    public List<Activo> getByClavePizarra(String clavePizarra) {
-        return activoRepository.findByClavePizarra(clavePizarra);
+    public Activo getByClavePizarra(String clavePizarra) {
+        return activoRepository.findTopByClavePizarra(clavePizarra);
     }
 
     @Override
