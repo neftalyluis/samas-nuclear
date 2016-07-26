@@ -23,9 +23,6 @@ public class WebApplication extends SpringBootServletInitializer {
     @Bean
     public CommandLineRunner initializeDb(final ActivoRepository activoRepository) {
         return new CommandLineRunner() {
-
-            private static final String TICKER = "1A_ASDF_*";
-
             @Override
             public void run(String[] args) throws Exception {
             }

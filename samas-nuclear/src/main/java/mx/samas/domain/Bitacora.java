@@ -26,7 +26,7 @@ public class Bitacora extends ParentModel {
 
     }
 
-    public Bitacora(Date fechaEjecucion, Date fechaLiquidacion, Date fechaIngreso, Activo activo, Transaccion transaccion, Double precio, Double tasa, Double flujoEfectivo, Long flujoTitulos, PortafolioCuenta contrato, Mercado mercado) {
+    public Bitacora(Date fechaEjecucion, Date fechaLiquidacion, Date fechaIngreso, Activo activo, Transaccion transaccion, Double precio, Double tasa, Double flujoEfectivo, Long flujoTitulos, Portafolio contrato, Mercado mercado) {
         this.fechaEjecucion = fechaEjecucion;
         this.fechaLiquidacion = fechaLiquidacion;
         this.fechaIngreso = fechaIngreso;
@@ -96,7 +96,7 @@ public class Bitacora extends ParentModel {
      * Contrato del que deriva esta entrada
      */
     @ManyToOne
-    private PortafolioCuenta contrato;
+    private Portafolio contrato;
 
     /**
      * Mercado en el cual se operó esta transaccion
@@ -218,14 +218,14 @@ public class Bitacora extends ParentModel {
     /**
      * @return the contrato
      */
-    public PortafolioCuenta getContrato() {
+    public Portafolio getContrato() {
         return contrato;
     }
 
     /**
      * @param contrato the contrato to set
      */
-    public void setContrato(PortafolioCuenta contrato) {
+    public void setContrato(Portafolio contrato) {
         this.contrato = contrato;
     }
 

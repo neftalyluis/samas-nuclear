@@ -12,6 +12,6 @@ import javax.persistence.Entity;
  * @author samas
  */
 @Entity
-public class PortafolioCuenta extends ParentModel{
+public class Banco extends ParentModel{
     
 }
