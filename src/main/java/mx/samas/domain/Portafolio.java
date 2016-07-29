@@ -6,7 +6,7 @@
 package mx.samas.domain;
 
 import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToOne;
 
 /**
  *
@@ -15,7 +15,7 @@ import javax.persistence.OneToMany;
 @Entity
 public class Portafolio extends ParentModel {
 
-    @OneToMany
+    @ManyToOne
     private Estrategia estrategia;
 
     /**
