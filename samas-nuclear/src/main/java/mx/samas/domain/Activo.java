@@ -15,6 +15,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
+import mx.samas.domain.dto.ActivoPropiedadValor;
 
 /**
  *
@@ -85,7 +86,7 @@ public class Activo extends ParentModel {
     private TipoActivo tipo;
     
     @Lob
-    private String propiedades;
+    private List<ActivoPropiedadValor> propiedades;
 
     public Activo() {
 
@@ -245,6 +246,20 @@ public class Activo extends ParentModel {
      */
     public void setEmisora(String emisora) {
         this.emisora = emisora;
+    }
+
+    /**
+     * @return the propiedades
+     */
+    public List<ActivoPropiedadValor> getPropiedades() {
+        return propiedades;
+    }
+
+    /**
+     * @param propiedades the propiedades to set
+     */
+    public void setPropiedades(List<ActivoPropiedadValor> propiedades) {
+        this.propiedades = propiedades;
     }
 
 }

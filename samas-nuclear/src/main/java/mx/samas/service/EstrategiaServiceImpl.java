@@ -7,8 +7,8 @@ package mx.samas.service;
 
 import java.util.List;
 import mx.samas.domain.Estrategia;
-import mx.samas.domain.EstrategiaDTO;
-import mx.samas.domain.PortafolioModeloDTO;
+import mx.samas.domain.dto.EstrategiaDTO;
+import mx.samas.domain.dto.PortafolioModeloDTO;
 import mx.samas.repository.ActivoRepository;
 import mx.samas.repository.EstrategiaRepository;
 import org.springframework.beans.factory.annotation.Autowired;

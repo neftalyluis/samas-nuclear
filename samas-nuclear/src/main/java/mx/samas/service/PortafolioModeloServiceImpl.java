@@ -12,7 +12,7 @@ import java.util.Map;
 import mx.samas.domain.Activo;
 import mx.samas.domain.Estrategia;
 import mx.samas.domain.PortafolioModelo;
-import mx.samas.domain.PortafolioModeloDTO;
+import mx.samas.domain.dto.PortafolioModeloDTO;
 import mx.samas.repository.ActivoRepository;
 import mx.samas.repository.EstrategiaRepository;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -7,7 +7,7 @@ package mx.samas.service;
 
 import java.util.List;
 import mx.samas.domain.Estrategia;
-import mx.samas.domain.EstrategiaDTO;
+import mx.samas.domain.dto.EstrategiaDTO;
 
 /**
  *

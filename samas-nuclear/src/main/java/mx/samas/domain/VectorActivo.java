@@ -6,9 +6,11 @@
 package mx.samas.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
+import mx.samas.domain.dto.ActivoPropiedadValor;
 
 /**
  *
@@ -24,7 +26,7 @@ public class VectorActivo extends ParentModel {
     private Double precioLimpio;
     
     @Lob
-    private String propiedades;
+    private List<ActivoPropiedadValor> propiedades;
 
     /**
      * @return the activo
@@ -52,6 +54,20 @@ public class VectorActivo extends ParentModel {
      */
     public void setPrecioLimpio(Double precioLimpio) {
         this.precioLimpio = precioLimpio;
+    }
+
+    /**
+     * @return the propiedades
+     */
+    public List<ActivoPropiedadValor> getPropiedades() {
+        return propiedades;
+    }
+
+    /**
+     * @param propiedades the propiedades to set
+     */
+    public void setPropiedades(List<ActivoPropiedadValor> propiedades) {
+        this.propiedades = propiedades;
     }
 
 }
