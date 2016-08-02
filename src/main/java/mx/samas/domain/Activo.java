@@ -5,13 +5,16 @@
  */
 package mx.samas.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.io.Serializable;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
@@ -22,7 +25,12 @@ import mx.samas.domain.dto.ActivoPropiedadValor;
  * @author samas
  */
 @Entity
-public class Activo extends ParentModel {
+public class Activo implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
     /**
      * Nombre del Activo
@@ -72,9 +80,7 @@ public class Activo extends ParentModel {
      */
     private Boolean ventaEnCorto;
 
-    @JsonIgnore
     @OneToMany(mappedBy = "activo", cascade = CascadeType.ALL)
-//    @OneToMany
     private List<VectorActivo> vectores;
 
     /**
@@ -84,7 +90,7 @@ public class Activo extends ParentModel {
      */
     @Enumerated(EnumType.ORDINAL)
     private TipoActivo tipo;
-    
+
     @Lob
     private List<ActivoPropiedadValor> propiedades;
 
@@ -106,6 +112,39 @@ public class Activo extends ParentModel {
         this.ventaEnCorto = ventaEnCorto;
         this.pujaMinima = pujaMinima;
 
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (id != null ? id.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof Activo)) {
+            return false;
+        }
+        Activo other = (Activo) object;
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "mx.samas.newdomain.Activo[ id=" + id + " ]";
     }
 
     /**
@@ -148,6 +187,20 @@ public class Activo extends ParentModel {
      */
     public void setTipoValor(String tipoValor) {
         this.tipoValor = tipoValor;
+    }
+
+    /**
+     * @return the emisora
+     */
+    public String getEmisora() {
+        return emisora;
+    }
+
+    /**
+     * @param emisora the emisora to set
+     */
+    public void setEmisora(String emisora) {
+        this.emisora = emisora;
     }
 
     /**
@@ -232,20 +285,6 @@ public class Activo extends ParentModel {
      */
     public void setTipo(TipoActivo tipo) {
         this.tipo = tipo;
-    }
-
-    /**
-     * @return the emisora
-     */
-    public String getEmisora() {
-        return emisora;
-    }
-
-    /**
-     * @param emisora the emisora to set
-     */
-    public void setEmisora(String emisora) {
-        this.emisora = emisora;
     }
 
     /**

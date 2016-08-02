@@ -8,6 +8,7 @@ test:
   username: samas
   encoding: utf8
 before_script:
+- chmod +x mvnw
 - mysql -e 'create database samas;'
 - echo "CREATE USER 'samas'@'localhost' IDENTIFIED BY 'test';\nGRANT ALL PRIVILEGES
   ON *.* TO 'samas'@'localhost';\n" | mysql -u root
