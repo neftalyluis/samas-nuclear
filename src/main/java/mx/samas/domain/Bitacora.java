@@ -5,9 +5,12 @@
  */
 package mx.samas.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.validation.constraints.NotNull;
@@ -17,28 +20,12 @@ import javax.validation.constraints.NotNull;
  * @author samas
  */
 @Entity
-public class Bitacora extends ParentModel {
+public class Bitacora implements Serializable {
 
-    /**
-     * Contructor generico
-     */
-    public Bitacora() {
-
-    }
-
-    public Bitacora(Date fechaEjecucion, Date fechaLiquidacion, Date fechaIngreso, Activo activo, Transaccion transaccion, Double precio, Double tasa, Double flujoEfectivo, Long flujoTitulos, Portafolio contrato, Mercado mercado) {
-        this.fechaEjecucion = fechaEjecucion;
-        this.fechaLiquidacion = fechaLiquidacion;
-        this.fechaIngreso = fechaIngreso;
-        this.activo = activo;
-        this.transaccion = transaccion;
-        this.precio = precio;
-        this.tasa = tasa;
-        this.flujoEfectivo = flujoEfectivo;
-        this.flujoTitulos = flujoTitulos;
-        this.contrato = contrato;
-        this.mercado = mercado;
-    }
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
     /**
      * 2.- Momento en el que se ejecuta la orden
@@ -62,7 +49,6 @@ public class Bitacora extends ParentModel {
     /**
      * Activo al cual se le esta registrando, si es que existe alguna
      */
-    @JsonIgnore
     @ManyToOne
     private Activo activo;
 
@@ -103,6 +89,40 @@ public class Bitacora extends ParentModel {
      */
     @ManyToOne
     private Mercado mercado;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (id != null ? id.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof Bitacora)) {
+            return false;
+        }
+        Bitacora other = (Bitacora) object;
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "mx.samas.newdomain.Bitacora[ id=" + id + " ]";
+    }
+
     /**
      * @return the fechaEjecucion
      */
@@ -157,6 +177,20 @@ public class Bitacora extends ParentModel {
      */
     public void setActivo(Activo activo) {
         this.activo = activo;
+    }
+
+    /**
+     * @return the transaccion
+     */
+    public Transaccion getTransaccion() {
+        return transaccion;
+    }
+
+    /**
+     * @param transaccion the transaccion to set
+     */
+    public void setTransaccion(Transaccion transaccion) {
+        this.transaccion = transaccion;
     }
 
     /**
@@ -241,20 +275,6 @@ public class Bitacora extends ParentModel {
      */
     public void setMercado(Mercado mercado) {
         this.mercado = mercado;
-    }
-
-    /**
-     * @return the transaccion
-     */
-    public Transaccion getTransaccion() {
-        return transaccion;
-    }
-
-    /**
-     * @param transaccion the transaccion to set
-     */
-    public void setTransaccion(Transaccion transaccion) {
-        this.transaccion = transaccion;
     }
 
 }

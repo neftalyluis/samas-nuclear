@@ -5,15 +5,29 @@
  */
 package mx.samas.domain;
 
+import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
 
 /**
  *
  * @author samas
  */
 @Entity
-public class PortafolioModelo extends ParentModel {
+public class PortafolioModelo implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+    
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Date creado;
 
     @ManyToOne
     private Activo activo;
@@ -38,6 +52,39 @@ public class PortafolioModelo extends ParentModel {
         this.diana = diana;
         this.estrategia = e;
 
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (id != null ? id.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof PortafolioModelo)) {
+            return false;
+        }
+        PortafolioModelo other = (PortafolioModelo) object;
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "mx.samas.newdomain.PortafolioModelo[ id=" + id + " ]";
     }
 
     /**
@@ -80,6 +127,20 @@ public class PortafolioModelo extends ParentModel {
      */
     public void setDiana(Double diana) {
         this.diana = diana;
+    }
+
+    /**
+     * @return the creado
+     */
+    public Date getCreado() {
+        return creado;
+    }
+
+    /**
+     * @param creado the creado to set
+     */
+    public void setCreado(Date creado) {
+        this.creado = creado;
     }
 
 }
