@@ -28,7 +28,7 @@ public class Portafolio implements Serializable {
     @ManyToOne
     private Estrategia estrategia;
     
-    @OneToMany
+    @ManyToOne
     private TipoServicio tipoServicio;
 
     public Long getId() {
