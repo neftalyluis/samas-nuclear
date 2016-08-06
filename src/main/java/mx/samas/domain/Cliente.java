@@ -5,6 +5,7 @@
  */
 package mx.samas.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Entity;
@@ -12,6 +13,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.validation.constraints.NotNull;
 
 /**
  *
@@ -25,13 +27,39 @@ public class Cliente implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @NotNull
     private String nombre;
 
+    @NotNull
     private Boolean sofisticado;
+
+    @NotNull
     private Boolean elegible;
 
+    @JsonIgnore
     @ManyToMany
     private List<Cuenta> cuentas;
+
+    public Cliente() {
+    }
+
+    public Cliente(String nombre) {
+        this.nombre = nombre;
+        this.elegible = false;
+        this.sofisticado = false;
+    }
+
+    public Cliente(String nombre, Boolean elegible, Boolean sofisticado) {
+        this.nombre = nombre;
+        this.elegible = elegible;
+        this.sofisticado = sofisticado;
+    }
+
+    public Cliente(String nombre, Boolean elegible) {
+        this.nombre = nombre;
+        this.elegible = elegible;
+        this.sofisticado = false;
+    }
 
     public Long getId() {
         return id;
