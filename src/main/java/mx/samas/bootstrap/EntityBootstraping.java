@@ -5,6 +5,11 @@
  */
 package mx.samas.bootstrap;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import mx.samas.domain.Cliente;
+import mx.samas.repository.ClienteRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Component;
@@ -15,7 +20,12 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class EntityBootstraping implements ApplicationListener<ApplicationReadyEvent> {
-
+    
+    private static final Logger LOG = Logger.getLogger(EntityBootstraping.class.getName());
+    
+    @Autowired
+    private ClienteRepository clienteRepository;
+    
     @Override
     public void onApplicationEvent(ApplicationReadyEvent event) {
         
@@ -26,7 +36,26 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
                 + "  ____) / ____ \\| |  | |/ ____ \\ ____) |\n"
                 + " |_____/_/    \\_\\_|  |_/_/    \\_\\_____/");
         System.out.println("========================================");
-        return;
+        persistClientes();
+        
     }
-
+    
+    private boolean persistClientes() {
+        try {
+            LOG.info("Persistimos Clientes");
+            
+            Cliente j = new Cliente("Juan");
+            Cliente a = new Cliente("Eduardo");
+            Cliente e = new Cliente("Ricardo");
+            
+            clienteRepository.save(e);
+            clienteRepository.save(a);
+            clienteRepository.save(j);
+            return true;
+        } catch (Exception e) {
+            LOG.log(Level.WARNING, "No pudimos persistir los Clientes, la excepcion es: {0}", e.getMessage());
+            return false;
+        }
+    }
+    
 }

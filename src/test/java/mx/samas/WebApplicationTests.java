@@ -23,6 +23,8 @@ import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.logging.Logger;
+import mx.samas.repository.ClienteRepository;
 
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
@@ -36,6 +38,8 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppC
 @WebAppConfiguration
 public class WebApplicationTests {
 
+    private static final Logger LOG = Logger.getLogger(WebApplicationTests.class.getName());
+
     private MediaType contentType = new MediaType(MediaType.APPLICATION_JSON.getType(),
             MediaType.APPLICATION_JSON.getSubtype(),
             Charset.forName("utf8"));
@@ -48,6 +52,9 @@ public class WebApplicationTests {
 
     @Autowired
     private WebApplicationContext webApplicationContext;
+    
+    @Autowired
+    private ClienteRepository clienteRepository;
 
     @Autowired
     void setConverters(HttpMessageConverter<?>[] converters) {
@@ -77,5 +84,11 @@ public class WebApplicationTests {
         String b = a;
         Assert.assertEquals(a, b);
 
+    }
+    
+    @Test
+    public void testBootstraping(){
+        LOG.info("Testing Bootstraping it's OK!");
+        Assert.assertEquals(3, clienteRepository.count());
     }
 }

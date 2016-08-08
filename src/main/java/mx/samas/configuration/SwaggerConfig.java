@@ -10,6 +10,7 @@ import static com.google.common.collect.Lists.newArrayList;
 import java.lang.reflect.WildcardType;
 import java.time.LocalDate;
 import mx.samas.controllers.ActivoController;
+import mx.samas.controllers.ClienteController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.Bean;
@@ -38,7 +39,10 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
  */
 @Configuration
 @EnableSwagger2
-@ComponentScan(basePackageClasses = {ActivoController.class})
+@ComponentScan(basePackageClasses = {
+    ClienteController.class
+
+})
 @EnableAutoConfiguration
 public class SwaggerConfig {
 
@@ -65,15 +69,7 @@ public class SwaggerConfig {
                                 .responseModel(new ModelRef("Error"))
                                 .build()))
                 .enableUrlTemplating(true)
-                .globalOperationParameters(
-                        newArrayList(new ParameterBuilder()
-                                .name("someGlobalParameter")
-                                .description("Description of someGlobalParameter")
-                                .modelRef(new ModelRef("string"))
-                                .parameterType("query")
-                                .required(true)
-                                .build()))
-                .tags(new Tag("Pet Service", "All apis relating to pets"));
+                .tags(new Tag("SAMAS", "All apis relating to pets"));
     }
 
     @Autowired
