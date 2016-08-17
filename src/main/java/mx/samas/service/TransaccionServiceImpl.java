@@ -5,6 +5,7 @@
  */
 package mx.samas.service;
 
+import java.util.List;
 import mx.samas.domain.Transaccion;
 import mx.samas.repository.TransaccionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,11 @@ public class TransaccionServiceImpl implements TransaccionService {
     @Override
     public Transaccion findByNombre(String nombre) {
         return transaccionRepository.getByNombre(nombre);
+    }
+
+    @Override
+    public void createTransaccionesFromList(List<Transaccion> transacciones) {
+        transaccionRepository.save(transacciones);
     }
 
 }

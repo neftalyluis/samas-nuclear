@@ -5,6 +5,7 @@
  */
 package mx.samas.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Entity;
@@ -27,6 +28,7 @@ public class Cuenta implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     
+    @JsonIgnore
     @ManyToMany
     private List<Cliente> titular;
 
@@ -35,6 +37,7 @@ public class Cuenta implements Serializable {
     @ManyToOne
     private Banco banco;
 
+    @JsonIgnore
     @OneToMany
     private List<Portafolio> portafolios;
 

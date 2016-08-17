@@ -44,4 +44,9 @@ public class EstrategiaServiceImpl implements EstrategiaService {
         return e;
     }
 
+    @Override
+    public void createEstrategia(Estrategia e) {
+        estrategiaRepository.save(e);
+    }
+
 }

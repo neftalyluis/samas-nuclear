@@ -25,7 +25,7 @@ public class PortafolioModelo implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    
+
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date creado;
 
@@ -38,19 +38,29 @@ public class PortafolioModelo implements Serializable {
     private Double diana;
 
     public PortafolioModelo() {
+        this.creado = new Date();
 
     }
 
     public PortafolioModelo(Activo a, Double diana) {
         this.activo = a;
         this.diana = diana;
-
+        this.creado = new Date();
     }
 
     public PortafolioModelo(Activo a, Double diana, Estrategia e) {
         this.activo = a;
         this.diana = diana;
         this.estrategia = e;
+        this.creado = new Date();
+
+    }
+
+    public PortafolioModelo(Date d, Activo a, Estrategia e, Double diana) {
+        this.activo = a;
+        this.diana = diana;
+        this.estrategia = e;
+        this.creado = d;
 
     }
 

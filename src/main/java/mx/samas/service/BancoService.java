@@ -5,15 +5,14 @@
  */
 package mx.samas.service;
 
-import java.util.List;
-import mx.samas.domain.Transaccion;
+import mx.samas.domain.Banco;
 
 /**
  *
  * @author samas
  */
-public interface TransaccionService {
-
-    public Transaccion findByNombre(String nombre);
-    public void createTransaccionesFromList(List<Transaccion> transacciones);
+public interface BancoService {
+    
+    public void createBanco(Banco b);
+    
 }
