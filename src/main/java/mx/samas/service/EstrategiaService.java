@@ -18,5 +18,7 @@ public interface EstrategiaService {
     public List<Estrategia> getAll();
 
     public Estrategia createFromDTO(EstrategiaDTO estrategia);
+    
+    public void createEstrategia(Estrategia e);
 
 }

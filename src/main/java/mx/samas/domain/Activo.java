@@ -5,6 +5,7 @@
  */
 package mx.samas.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.CascadeType;
@@ -80,6 +81,7 @@ public class Activo implements Serializable {
      */
     private Boolean ventaEnCorto;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "activo", cascade = CascadeType.ALL)
     private List<VectorActivo> vectores;
 
@@ -91,6 +93,7 @@ public class Activo implements Serializable {
     @Enumerated(EnumType.ORDINAL)
     private TipoActivo tipo;
 
+    @JsonIgnore
     @Lob
     private List<ActivoPropiedadValor> propiedades;
 
@@ -112,6 +115,13 @@ public class Activo implements Serializable {
         this.ventaEnCorto = ventaEnCorto;
         this.pujaMinima = pujaMinima;
 
+    }
+
+    public Activo(String nombre, String tipoValor, String emisora, String serie) {
+        this.clavePizarra = tipoValor + "_" + emisora + "_" + serie;
+        this.tipoValor = tipoValor;
+        this.emisora = emisora;
+        this.serie = serie;
     }
 
     public Long getId() {
