@@ -9,6 +9,7 @@ import java.util.List;
 import mx.samas.domain.Activo;
 import mx.samas.domain.ActivoPropiedad;
 import mx.samas.domain.VectorActivo;
+import mx.samas.domain.dto.ActivoPropiedadValor;
 import mx.samas.service.ActivoService;
 import mx.samas.service.VectorActivoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -76,7 +77,12 @@ public class ActivoController {
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/{id}/propiedades")
-    public ResponseEntity<List<ActivoPropiedad>> getPropiedadesFromActivo(@PathVariable Long id) {
-        return new ResponseEntity<>( HttpStatus.OK);
+    public ResponseEntity<List<ActivoPropiedadValor>> getPropiedadesFromActivo(@PathVariable Long id) {
+        return new ResponseEntity<>(activoService.getPropiedadesFromActivo(id), HttpStatus.OK);
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/{id}/vector/last/propiedades")
+    public ResponseEntity<List<ActivoPropiedad>> getPropiedadesFromVectorActivo(@PathVariable Long id) {
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

@@ -7,6 +7,7 @@ package mx.samas.service;
 
 import java.util.List;
 import mx.samas.domain.Activo;
+import mx.samas.domain.dto.ActivoPropiedadValor;
 import mx.samas.repository.ActivoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -44,5 +45,11 @@ public class ActivoServiceImpl implements ActivoService {
     @Override
     public Activo createActivo(Activo input) {
         return activoRepository.save(input);
+    }
+
+    @Override
+    public List<ActivoPropiedadValor> getPropiedadesFromActivo(Long id) {
+        Activo a = getById(id);
+        return a.getPropiedades();
     }
 }

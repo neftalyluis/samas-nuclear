@@ -6,12 +6,13 @@
 package mx.samas.domain;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
 
 /**
  *
@@ -27,9 +28,15 @@ public class Portafolio implements Serializable {
 
     @ManyToOne
     private Estrategia estrategia;
-    
+
     @ManyToOne
     private TipoServicio tipoServicio;
+
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Date fecha;
+
+    @ManyToOne
+    private PortafolioEstatus estatus;
 
     public Long getId() {
         return id;
@@ -90,6 +97,34 @@ public class Portafolio implements Serializable {
      */
     public void setTipoServicio(TipoServicio tipoServicio) {
         this.tipoServicio = tipoServicio;
+    }
+
+    /**
+     * @return the fecha
+     */
+    public Date getFecha() {
+        return fecha;
+    }
+
+    /**
+     * @param fecha the fecha to set
+     */
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
+    }
+
+    /**
+     * @return the estatus
+     */
+    public PortafolioEstatus getEstatus() {
+        return estatus;
+    }
+
+    /**
+     * @param estatus the estatus to set
+     */
+    public void setEstatus(PortafolioEstatus estatus) {
+        this.estatus = estatus;
     }
 
 }
