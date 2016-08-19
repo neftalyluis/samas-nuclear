@@ -34,13 +34,13 @@ public class ActivoPropiedadController {
         return new ResponseEntity<>(activoPropiedadService.getPropiedades(), HttpStatus.OK);
     }
     
-    @RequestMapping(method = RequestMethod.GET, value = "/{name}")
-    public ResponseEntity<ActivoPropiedad> getPropiedadWithName(@PathVariable String name) {
-        return new ResponseEntity<>(activoPropiedadService.getPropiedadWithNombre(name), HttpStatus.OK);
+    @RequestMapping(method = RequestMethod.GET, value = "/{nombre}")
+    public ResponseEntity<ActivoPropiedad> getPropiedadWithName(@PathVariable String nombre) {
+        return new ResponseEntity<>(activoPropiedadService.getPropiedadWithNombre(nombre), HttpStatus.OK);
     }
     
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<?> createNewPropiedad(@RequestBody ActivoPropiedad prop) {
+    public ResponseEntity<ActivoPropiedad> createNewPropiedad(@RequestBody ActivoPropiedad prop) {
         return new ResponseEntity<>(activoPropiedadService.createPropiedad(prop), HttpStatus.CREATED);
     }
 }

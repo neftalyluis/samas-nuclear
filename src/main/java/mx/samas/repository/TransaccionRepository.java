@@ -7,11 +7,13 @@ package mx.samas.repository;
 
 import mx.samas.domain.Transaccion;
 import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author samas
  */
+@Repository
 public interface TransaccionRepository extends PagingAndSortingRepository<Transaccion, Long> {
 
     public Transaccion getByNombre(String nombre);

@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  *
@@ -46,8 +47,8 @@ public class ActivoController {
         return new ResponseEntity<>(activoService.getById(id), HttpStatus.OK);
     }
 
-    @RequestMapping(method = RequestMethod.GET, params = {"name"})
-    public ResponseEntity<List<Activo>> findActivoWithName(@RequestParam(value = "name") String name) {
+    @RequestMapping(method = RequestMethod.GET, params = {"nombre"})
+    public ResponseEntity<List<Activo>> findActivoWithName(@RequestParam(value = "nombre") String name) {
         return new ResponseEntity<>(activoService.getByNombre(name), HttpStatus.OK);
     }
 
@@ -82,7 +83,13 @@ public class ActivoController {
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/{id}/vector/last/propiedades")
-    public ResponseEntity<List<ActivoPropiedad>> getPropiedadesFromVectorActivo(@PathVariable Long id) {
+    public ResponseEntity<List<ActivoPropiedadValor>> getPropiedadesFromVectorActivo(@PathVariable Long id) {
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    @RequestMapping(value = "/vector/file", method = RequestMethod.POST)
+    public ResponseEntity<?> uploadVectorActivoFile(@RequestParam MultipartFile file) {
+        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
 }
