@@ -25,6 +25,14 @@ public class DuenoFuente implements Serializable {
 
     private String nombre;
 
+    public DuenoFuente() {
+
+    }
+
+    public DuenoFuente(String name) {
+        this.nombre = name;
+    }
+
     public Long getId() {
         return id;
     }

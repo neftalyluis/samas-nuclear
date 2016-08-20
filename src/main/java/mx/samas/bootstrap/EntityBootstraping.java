@@ -13,6 +13,7 @@ import java.util.logging.Logger;
 import mx.samas.domain.Activo;
 import mx.samas.domain.Banco;
 import mx.samas.domain.Cliente;
+import mx.samas.domain.DuenoFuente;
 import mx.samas.domain.Estrategia;
 import mx.samas.domain.PortafolioModelo;
 import mx.samas.domain.TipoActivo;
@@ -20,6 +21,7 @@ import mx.samas.domain.Transaccion;
 import mx.samas.service.ActivoService;
 import mx.samas.service.BancoService;
 import mx.samas.service.ClienteService;
+import mx.samas.service.DuenoFuenteService;
 import mx.samas.service.EstrategiaService;
 import mx.samas.service.TransaccionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,6 +53,9 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
     @Autowired
     private TransaccionService transaccionService;
 
+    @Autowired
+    private DuenoFuenteService duenoFuenteService;
+
     @Override
     public void onApplicationEvent(ApplicationReadyEvent event) {
 
@@ -66,7 +71,7 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
         persistEstrategiasAndPortafolioModelo();
         persistBancos();
         persistTransacciones();
-
+        persistSourceOwners();
     }
 
     private boolean persistClientes() {
@@ -302,6 +307,7 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
         b.setNombre("HSBC");
         try {
             bancoService.createBanco(b);
+            LOG.info("--Bancos");
             return true;
         } catch (Exception e) {
             LOG.log(Level.WARNING, "No pudimos persistir el Bank, la excepcion es: {0}", e.getMessage());
@@ -436,6 +442,7 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
 
         try {
             transaccionService.createTransaccionesFromList(tl);
+            LOG.info("--Transacciones");
             return true;
         } catch (Exception e) {
             LOG.log(Level.WARNING, "No pudimos persistir nuestra transaccion, la excepcion es: {0}", e.getMessage());
@@ -444,4 +451,25 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
 
     }
 
+    private boolean persistSourceOwners() {
+        try {
+            DuenoFuente bu = new DuenoFuente("Business");
+            DuenoFuente cl = new DuenoFuente("Client");
+            DuenoFuente po = new DuenoFuente("Portfolio");
+            DuenoFuente br = new DuenoFuente("Broker");
+            DuenoFuente ha = new DuenoFuente("Treasury");
+
+            duenoFuenteService.createDuenoFuente(bu);
+            duenoFuenteService.createDuenoFuente(cl);
+            duenoFuenteService.createDuenoFuente(po);
+            duenoFuenteService.createDuenoFuente(br);
+            duenoFuenteService.createDuenoFuente(ha);
+            LOG.info("--DuenosFuente");
+
+            return true;
+        } catch (Exception e) {
+            LOG.log(Level.WARNING, "No pudimos persistir los SourceOwners, la excepcion es: {0}", e.getMessage());
+            return false;
+        }
+    }
 }
