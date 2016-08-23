@@ -76,7 +76,6 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
         persistEstrategiasAndPortafolioModelo();
         persistBancos();
         persistTransacciones();
-        persistSourceOwners();
         persistPortfolioEstatus();
     }
 
@@ -323,6 +322,12 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
 
     private boolean persistTransacciones() {
 
+        DuenoFuente bu = new DuenoFuente("Business");
+        DuenoFuente cl = new DuenoFuente("Client");
+        DuenoFuente po = new DuenoFuente("Portfolio");
+        DuenoFuente br = new DuenoFuente("Broker");
+        DuenoFuente ha = new DuenoFuente("Treasury");
+
         List<Transaccion> tl = new ArrayList<>();
 //////////////////////////////////////////////CLIENT
         Transaccion depositMoneyFromClient = new Transaccion();
@@ -330,6 +335,7 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
         depositMoneyFromClient.setFlujoEfectivo(new Long(1));
         depositMoneyFromClient.setFlujoTitulos(new Long(0));
         depositMoneyFromClient.setCredito(false);
+        depositMoneyFromClient.setFuenteTransaccion(cl);
         tl.add(depositMoneyFromClient);
 
         Transaccion depositTitlesFromClient = new Transaccion();
@@ -337,6 +343,7 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
         depositTitlesFromClient.setFlujoEfectivo(new Long(0));
         depositTitlesFromClient.setFlujoTitulos(new Long(1));
         depositTitlesFromClient.setCredito(false);
+        depositTitlesFromClient.setFuenteTransaccion(cl);
         tl.add(depositTitlesFromClient);
 
         Transaccion withdrawalMoneyFromClient = new Transaccion();
@@ -344,6 +351,7 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
         withdrawalMoneyFromClient.setFlujoEfectivo(new Long(-1));
         withdrawalMoneyFromClient.setFlujoTitulos(new Long(0));
         withdrawalMoneyFromClient.setCredito(false);
+        withdrawalMoneyFromClient.setFuenteTransaccion(cl);
         tl.add(withdrawalMoneyFromClient);
 
         Transaccion withdrawalTitlesFromClient = new Transaccion();
@@ -351,6 +359,7 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
         withdrawalTitlesFromClient.setFlujoEfectivo(new Long(0));
         withdrawalTitlesFromClient.setFlujoTitulos(new Long(-1));
         withdrawalTitlesFromClient.setCredito(false);
+        withdrawalTitlesFromClient.setFuenteTransaccion(cl);
         tl.add(withdrawalTitlesFromClient);
 
 //////////////////////////////////////////////BUSINESS
@@ -359,6 +368,7 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
         refundFromBusiness.setFlujoEfectivo(new Long(1));
         refundFromBusiness.setFlujoTitulos(new Long(0));
         refundFromBusiness.setCredito(false);
+        refundFromBusiness.setFuenteTransaccion(bu);
         tl.add(refundFromBusiness);
 
         Transaccion comissionFromBusiness = new Transaccion();
@@ -366,6 +376,7 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
         comissionFromBusiness.setFlujoEfectivo(new Long(-1));
         comissionFromBusiness.setFlujoTitulos(new Long(0));
         comissionFromBusiness.setCredito(false);
+        comissionFromBusiness.setFuenteTransaccion(bu);
         tl.add(comissionFromBusiness);
 
         Transaccion marginCallFromBusiness = new Transaccion();
@@ -373,6 +384,7 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
         marginCallFromBusiness.setFlujoEfectivo(new Long(0));
         marginCallFromBusiness.setFlujoTitulos(new Long(-1));
         marginCallFromBusiness.setCredito(false);
+        marginCallFromBusiness.setFuenteTransaccion(bu);
         tl.add(marginCallFromBusiness);
 
         Transaccion marginCreditFromBusiness = new Transaccion();
@@ -380,6 +392,7 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
         marginCreditFromBusiness.setFlujoEfectivo(new Long(1));
         marginCreditFromBusiness.setFlujoTitulos(new Long(0));
         marginCreditFromBusiness.setCredito(true);
+        marginCreditFromBusiness.setFuenteTransaccion(bu);
         tl.add(marginCreditFromBusiness);
 
         Transaccion incomingSecurityLendingFromBusiness = new Transaccion();
@@ -387,6 +400,7 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
         incomingSecurityLendingFromBusiness.setFlujoEfectivo(new Long(0));
         incomingSecurityLendingFromBusiness.setFlujoTitulos(new Long(1));
         incomingSecurityLendingFromBusiness.setCredito(true);
+        incomingSecurityLendingFromBusiness.setFuenteTransaccion(bu);
         tl.add(incomingSecurityLendingFromBusiness);
 
         Transaccion outgoingSecurityLendingFromBusiness = new Transaccion();
@@ -394,6 +408,7 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
         outgoingSecurityLendingFromBusiness.setFlujoEfectivo(new Long(0));
         outgoingSecurityLendingFromBusiness.setFlujoTitulos(new Long(-1));
         outgoingSecurityLendingFromBusiness.setCredito(true);
+        outgoingSecurityLendingFromBusiness.setFuenteTransaccion(bu);
         tl.add(outgoingSecurityLendingFromBusiness);
 
         Transaccion amortizationMarginFromBusiness = new Transaccion();
@@ -401,6 +416,7 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
         amortizationMarginFromBusiness.setFlujoEfectivo(new Long(-1));
         amortizationMarginFromBusiness.setFlujoTitulos(new Long(0));
         amortizationMarginFromBusiness.setCredito(true);
+        amortizationMarginFromBusiness.setFuenteTransaccion(bu);
         tl.add(amortizationMarginFromBusiness);
 //////////////////////////////////////////////////////////////// BROKER
 
@@ -409,6 +425,7 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
         refundFromBroker.setFlujoEfectivo(new Long(1));
         refundFromBroker.setFlujoTitulos(new Long(0));
         refundFromBroker.setCredito(false);
+        refundFromBroker.setFuenteTransaccion(br);
         tl.add(refundFromBroker);
 
         Transaccion refund2FromBroker = new Transaccion();
@@ -416,6 +433,7 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
         refund2FromBroker.setFlujoEfectivo(new Long(0));
         refund2FromBroker.setFlujoTitulos(new Long(1));
         refund2FromBroker.setCredito(false);
+        refund2FromBroker.setFuenteTransaccion(br);
         tl.add(refund2FromBroker);
 
         Transaccion buyAsset = new Transaccion();
@@ -423,6 +441,7 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
         buyAsset.setFlujoEfectivo(new Long(-1));
         buyAsset.setFlujoTitulos(new Long(1));
         buyAsset.setCredito(false);
+        buyAsset.setFuenteTransaccion(br);
         tl.add(buyAsset);
 
         Transaccion sellAsset = new Transaccion();
@@ -430,6 +449,7 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
         sellAsset.setFlujoEfectivo(new Long(1));
         sellAsset.setFlujoTitulos(new Long(-1));
         sellAsset.setCredito(false);
+        sellAsset.setFuenteTransaccion(br);
         tl.add(sellAsset);
 
         Transaccion inicioReporto = new Transaccion();
@@ -437,6 +457,7 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
         inicioReporto.setFlujoEfectivo(new Long(-1));
         inicioReporto.setNombre("Inicio de Reporto");
         inicioReporto.setCredito(true);
+        inicioReporto.setFuenteTransaccion(br);
         tl.add(inicioReporto);
 
         Transaccion finReporto = new Transaccion();
@@ -444,27 +465,11 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
         finReporto.setNombre("Fin de Reporto");
         finReporto.setFlujoEfectivo(new Long(1));
         finReporto.setFlujoTitulos(new Long(-1));
+        finReporto.setFuenteTransaccion(br);
+
         tl.add(finReporto);
 
         try {
-            transaccionService.createTransaccionesFromList(tl);
-            LOG.info("--Transacciones");
-            return true;
-        } catch (Exception e) {
-            LOG.log(Level.WARNING, "No pudimos persistir nuestra transaccion, la excepcion es: {0}", e.getMessage());
-            return false;
-        }
-
-    }
-
-    private boolean persistSourceOwners() {
-        try {
-            DuenoFuente bu = new DuenoFuente("Business");
-            DuenoFuente cl = new DuenoFuente("Client");
-            DuenoFuente po = new DuenoFuente("Portfolio");
-            DuenoFuente br = new DuenoFuente("Broker");
-            DuenoFuente ha = new DuenoFuente("Treasury");
-
             duenoFuenteService.createDuenoFuente(bu);
             duenoFuenteService.createDuenoFuente(cl);
             duenoFuenteService.createDuenoFuente(po);
@@ -472,11 +477,14 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
             duenoFuenteService.createDuenoFuente(ha);
             LOG.info("--DuenosFuente");
 
+            transaccionService.createTransaccionesFromList(tl);
+            LOG.info("--Transacciones");
             return true;
         } catch (Exception e) {
-            LOG.log(Level.WARNING, "No pudimos persistir los SourceOwners, la excepcion es: {0}", e.getMessage());
+            LOG.log(Level.WARNING, "No pudimos persistir nuestras transacciones, la excepcion es: {0}", e.getMessage());
             return false;
         }
+
     }
 
     private boolean persistPortfolioEstatus() {
@@ -494,7 +502,7 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
             portafolioEstatusService.createPortafolioEstatus(ps1);
             portafolioEstatusService.createPortafolioEstatus(ps2);
             LOG.info("--PortafolioEstatus");
-            
+
             return true;
         } catch (Exception e) {
             LOG.log(Level.WARNING, "No pudimos persistir los PortfolioStatus, la excepcion es: {0}", e.getMessage());
