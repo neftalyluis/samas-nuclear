@@ -6,38 +6,43 @@
 package mx.samas.domain;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Lob;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import mx.samas.domain.dto.ActivoPropiedadValor;
+import javax.persistence.Temporal;
 
 /**
  *
  * @author samas
  */
 @Entity
-public class VectorActivo implements Serializable {
+public class VectorPosicion implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Date fecha;
+
+    @ManyToOne
+    private Portafolio portafolio;
+
     @ManyToOne
     private Activo activo;
 
-    private Double precioLimpio;
+    private Long cantidad;
 
-    @Lob
-    private List<ActivoPropiedadValor> propiedadesValor;
-    
-    @ManyToMany
-    private List<ActivoPropiedad> propiedades;
+    /**
+     * Si es collateral esta posicion es la prenda que respalda el credito; de
+     * no existir prenda en un credito en un quirografario
+     *
+     */
+    private Boolean colateral;
 
     public Long getId() {
         return id;
@@ -57,10 +62,10 @@ public class VectorActivo implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof VectorActivo)) {
+        if (!(object instanceof VectorPosicion)) {
             return false;
         }
-        VectorActivo other = (VectorActivo) object;
+        VectorPosicion other = (VectorPosicion) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -69,8 +74,23 @@ public class VectorActivo implements Serializable {
 
     @Override
     public String toString() {
-        return "mx.samas.newdomain.VectorActivo[ id=" + id + " ]";
+        return "mx.samas.domain.VectorPosicion[ id=" + id + " ]";
     }
+
+    /**
+     * @return the fecha
+     */
+    public Date getFecha() {
+        return fecha;
+    }
+
+    /**
+     * @param fecha the fecha to set
+     */
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
+    }
+
 
     /**
      * @return the activo
@@ -87,45 +107,45 @@ public class VectorActivo implements Serializable {
     }
 
     /**
-     * @return the precioLimpio
+     * @return the cantidad
      */
-    public Double getPrecioLimpio() {
-        return precioLimpio;
+    public Long getCantidad() {
+        return cantidad;
     }
 
     /**
-     * @param precioLimpio the precioLimpio to set
+     * @param cantidad the cantidad to set
      */
-    public void setPrecioLimpio(Double precioLimpio) {
-        this.precioLimpio = precioLimpio;
+    public void setCantidad(Long cantidad) {
+        this.cantidad = cantidad;
     }
 
     /**
-     * @return the propiedadesValor
+     * @return the colateral
      */
-    public List<ActivoPropiedadValor> getPropiedadesValor() {
-        return propiedadesValor;
+    public Boolean getColateral() {
+        return colateral;
     }
 
     /**
-     * @param propiedadesValor the propiedadesValor to set
+     * @param colateral the colateral to set
      */
-    public void setPropiedadesValor(List<ActivoPropiedadValor> propiedadesValor) {
-        this.propiedadesValor = propiedadesValor;
+    public void setColateral(Boolean colateral) {
+        this.colateral = colateral;
     }
 
     /**
-     * @return the propiedades
+     * @return the portafolio
      */
-    public List<ActivoPropiedad> getPropiedades() {
-        return propiedades;
+    public Portafolio getPortafolio() {
+        return portafolio;
     }
 
     /**
-     * @param propiedades the propiedades to set
+     * @param portafolio the portafolio to set
      */
-    public void setPropiedades(List<ActivoPropiedad> propiedades) {
-        this.propiedades = propiedades;
+    public void setPortafolio(Portafolio portafolio) {
+        this.portafolio = portafolio;
     }
 
 }

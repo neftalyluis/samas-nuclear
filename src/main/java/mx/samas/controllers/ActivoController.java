@@ -9,6 +9,7 @@ import java.util.List;
 import mx.samas.domain.Activo;
 import mx.samas.domain.ActivoPropiedad;
 import mx.samas.domain.VectorActivo;
+import mx.samas.domain.dto.ActivoPropiedadValor;
 import mx.samas.service.ActivoService;
 import mx.samas.service.VectorActivoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  *
@@ -45,8 +47,8 @@ public class ActivoController {
         return new ResponseEntity<>(activoService.getById(id), HttpStatus.OK);
     }
 
-    @RequestMapping(method = RequestMethod.GET, params = {"name"})
-    public ResponseEntity<List<Activo>> findActivoWithName(@RequestParam(value = "name") String name) {
+    @RequestMapping(method = RequestMethod.GET, params = {"nombre"})
+    public ResponseEntity<List<Activo>> findActivoWithName(@RequestParam(value = "nombre") String name) {
         return new ResponseEntity<>(activoService.getByNombre(name), HttpStatus.OK);
     }
 
@@ -76,7 +78,18 @@ public class ActivoController {
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/{id}/propiedades")
-    public ResponseEntity<List<ActivoPropiedad>> getPropiedadesFromActivo(@PathVariable Long id) {
-        return new ResponseEntity<>( HttpStatus.OK);
+    public ResponseEntity<List<ActivoPropiedadValor>> getPropiedadesFromActivo(@PathVariable Long id) {
+        return new ResponseEntity<>(activoService.getPropiedadesFromActivo(id), HttpStatus.OK);
     }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/{id}/vector/last/propiedades")
+    public ResponseEntity<List<ActivoPropiedadValor>> getPropiedadesFromVectorActivo(@PathVariable Long id) {
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/vector/file", method = RequestMethod.POST)
+    public ResponseEntity<?> uploadVectorActivoFile(@RequestParam MultipartFile file) {
+        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
 }

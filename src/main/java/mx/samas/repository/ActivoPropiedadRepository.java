@@ -5,7 +5,7 @@
  */
 package mx.samas.repository;
 
-import mx.samas.domain.Banco;
+import mx.samas.domain.ActivoPropiedad;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
@@ -14,6 +14,8 @@ import org.springframework.stereotype.Repository;
  * @author samas
  */
 @Repository
-public interface BancoRepository extends PagingAndSortingRepository<Banco, Long> {
-
+public interface ActivoPropiedadRepository extends PagingAndSortingRepository<ActivoPropiedad, Long>{
+    
+    public ActivoPropiedad findByNombre(String nombre);
+    
 }

@@ -9,11 +9,13 @@ import java.util.List;
 import mx.samas.domain.Transaccion;
 import mx.samas.repository.TransaccionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
  *
  * @author samas
  */
+@Service
 public class TransaccionServiceImpl implements TransaccionService {
 
     @Autowired

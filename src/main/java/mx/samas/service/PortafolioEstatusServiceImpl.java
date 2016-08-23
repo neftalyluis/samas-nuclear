@@ -5,8 +5,8 @@
  */
 package mx.samas.service;
 
-import mx.samas.domain.Banco;
-import mx.samas.repository.BancoRepository;
+import mx.samas.domain.PortafolioEstatus;
+import mx.samas.repository.PortafolioEstatusRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,14 +15,14 @@ import org.springframework.stereotype.Service;
  * @author samas
  */
 @Service
-public class BancoServiceImpl implements BancoService{
-    
+public class PortafolioEstatusServiceImpl implements PortafolioEstatusService {
+
     @Autowired
-    private BancoRepository bancoRepository;
+    private PortafolioEstatusRepository portafolioEstatusRepository;
 
     @Override
-    public void createBanco(Banco b) {
-        bancoRepository.save(b);
+    public void createPortafolioEstatus(PortafolioEstatus pe) {
+        portafolioEstatusRepository.save(pe);
     }
-    
+
 }

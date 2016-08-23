@@ -7,6 +7,7 @@ package mx.samas.service;
 
 import java.util.List;
 import mx.samas.domain.Activo;
+import mx.samas.domain.dto.ActivoPropiedadValor;
 
 /**
  *
@@ -23,5 +24,7 @@ public interface ActivoService {
     public Activo getByClavePizarra(String clavePizarra);
     
     public Activo createActivo(Activo input);
+    
+    public List<ActivoPropiedadValor> getPropiedadesFromActivo(Long id);
 
 }
