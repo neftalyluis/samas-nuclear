@@ -50,6 +50,6 @@ public class ActivoServiceImpl implements ActivoService {
     @Override
     public List<ActivoPropiedadValor> getPropiedadesFromActivo(Long id) {
         Activo a = getById(id);
-        return a.getPropiedades();
+        return a.getPropiedadesValor();
     }
 }

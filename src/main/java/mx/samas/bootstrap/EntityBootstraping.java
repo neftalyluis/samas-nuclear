@@ -15,6 +15,7 @@ import mx.samas.domain.Banco;
 import mx.samas.domain.Cliente;
 import mx.samas.domain.DuenoFuente;
 import mx.samas.domain.Estrategia;
+import mx.samas.domain.PortafolioEstatus;
 import mx.samas.domain.PortafolioModelo;
 import mx.samas.domain.TipoActivo;
 import mx.samas.domain.Transaccion;
@@ -23,6 +24,7 @@ import mx.samas.service.BancoService;
 import mx.samas.service.ClienteService;
 import mx.samas.service.DuenoFuenteService;
 import mx.samas.service.EstrategiaService;
+import mx.samas.service.PortafolioEstatusService;
 import mx.samas.service.TransaccionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
@@ -56,6 +58,9 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
     @Autowired
     private DuenoFuenteService duenoFuenteService;
 
+    @Autowired
+    private PortafolioEstatusService portafolioEstatusService;
+
     @Override
     public void onApplicationEvent(ApplicationReadyEvent event) {
 
@@ -72,6 +77,7 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
         persistBancos();
         persistTransacciones();
         persistSourceOwners();
+        persistPortfolioEstatus();
     }
 
     private boolean persistClientes() {
@@ -469,6 +475,29 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
             return true;
         } catch (Exception e) {
             LOG.log(Level.WARNING, "No pudimos persistir los SourceOwners, la excepcion es: {0}", e.getMessage());
+            return false;
+        }
+    }
+
+    private boolean persistPortfolioEstatus() {
+        PortafolioEstatus ps = new PortafolioEstatus();
+        ps.setNombre("Active");
+
+        PortafolioEstatus ps1 = new PortafolioEstatus();
+        ps1.setNombre("Suspended");
+
+        PortafolioEstatus ps2 = new PortafolioEstatus();
+        ps2.setNombre("Liquidation");
+
+        try {
+            portafolioEstatusService.createPortafolioEstatus(ps);
+            portafolioEstatusService.createPortafolioEstatus(ps1);
+            portafolioEstatusService.createPortafolioEstatus(ps2);
+            LOG.info("--PortafolioEstatus");
+            
+            return true;
+        } catch (Exception e) {
+            LOG.log(Level.WARNING, "No pudimos persistir los PortfolioStatus, la excepcion es: {0}", e.getMessage());
             return false;
         }
     }

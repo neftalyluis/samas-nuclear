@@ -27,7 +27,7 @@ public class DuenoFuenteServiceImpl implements DuenoFuenteService {
 
     @Override
     public DuenoFuente findDuenoFuenteByName(String name) {
-        return duenoFuenteRepository.findByName(name);
+        return duenoFuenteRepository.findByNombre(name);
     }
 
 }

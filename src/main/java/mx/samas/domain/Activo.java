@@ -17,6 +17,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 import mx.samas.domain.dto.ActivoPropiedadValor;
@@ -95,7 +96,10 @@ public class Activo implements Serializable {
 
     @JsonIgnore
     @Lob
-    private List<ActivoPropiedadValor> propiedades;
+    private List<ActivoPropiedadValor> propiedadesValor;
+    
+    @ManyToMany
+    private List<ActivoPropiedad> propiedades;
 
     public Activo() {
 
@@ -298,16 +302,30 @@ public class Activo implements Serializable {
     }
 
     /**
+     * @return the propiedadesValor
+     */
+    public List<ActivoPropiedadValor> getPropiedadesValor() {
+        return propiedadesValor;
+    }
+
+    /**
+     * @param propiedadesValor the propiedadesValor to set
+     */
+    public void setPropiedadesValor(List<ActivoPropiedadValor> propiedadesValor) {
+        this.propiedadesValor = propiedadesValor;
+    }
+
+    /**
      * @return the propiedades
      */
-    public List<ActivoPropiedadValor> getPropiedades() {
+    public List<ActivoPropiedad> getPropiedades() {
         return propiedades;
     }
 
     /**
      * @param propiedades the propiedades to set
      */
-    public void setPropiedades(List<ActivoPropiedadValor> propiedades) {
+    public void setPropiedades(List<ActivoPropiedad> propiedades) {
         this.propiedades = propiedades;
     }
 
