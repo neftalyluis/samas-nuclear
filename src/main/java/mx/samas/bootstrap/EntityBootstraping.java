@@ -29,6 +29,7 @@ import mx.samas.service.EstrategiaService;
 import mx.samas.service.PerfilService;
 import mx.samas.service.PortafolioEstatusService;
 import mx.samas.service.TransaccionService;
+import mx.samas.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.ApplicationListener;
@@ -66,6 +67,9 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
 
     @Autowired
     private PerfilService perfilService;
+
+    @Autowired
+    private UsuarioService usuarioService;
 
     @Override
     public void onApplicationEvent(ApplicationReadyEvent event) {
@@ -119,6 +123,7 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
             samas.setNombreUsuario("samas");
             samas.setPassword("test");
             samas.setPerfiles(perfiles);
+            usuarioService.createUsuario(samas);
             LOG.info("--Usuario SAMAS");
 
             return true;
