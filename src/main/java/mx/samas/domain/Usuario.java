@@ -8,6 +8,7 @@ package mx.samas.domain;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -33,7 +34,7 @@ public class Usuario implements Serializable {
     @NotNull
     private String nombreCompleto;
     
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<Perfil> perfiles;
 
     public Long getId() {

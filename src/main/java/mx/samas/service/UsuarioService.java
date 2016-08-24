@@ -12,5 +12,8 @@ import mx.samas.domain.Usuario;
  * @author samas
  */
 public interface UsuarioService {
+
     public Usuario getByUsername(String username);
+
+    public Usuario createUsuario(Usuario u);
 }
