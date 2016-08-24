@@ -5,7 +5,7 @@
  */
 package mx.samas.repository;
 
-import mx.samas.domain.PortafolioModelo;
+import mx.samas.domain.VectorPortafolioModelo;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
@@ -14,6 +14,6 @@ import org.springframework.stereotype.Repository;
  * @author samas
  */
 @Repository
-public interface PortafolioModeloRepository extends PagingAndSortingRepository<PortafolioModelo, Long>{
+public interface PortafolioModeloRepository extends PagingAndSortingRepository<VectorPortafolioModelo, Long>{
     
 }

@@ -29,7 +29,7 @@ public class Estrategia implements Serializable {
     private String nombre;
 
     @OneToMany(mappedBy = "estrategia", cascade = CascadeType.ALL)
-    private List<PortafolioModelo> estrategiaModelo;
+    private List<VectorPortafolioModelo> estrategiaModelo;
 
     //    @ManyToOne
 //    private PerfilRiesgo perfilRiesgo;
@@ -38,7 +38,7 @@ public class Estrategia implements Serializable {
 
     }
 
-    public Estrategia(String nombre, List<PortafolioModelo> modelo) {
+    public Estrategia(String nombre, List<VectorPortafolioModelo> modelo) {
         this.nombre = nombre;
         this.estrategiaModelo = modelo;
 
@@ -99,14 +99,14 @@ public class Estrategia implements Serializable {
     /**
      * @return the estrategiaModelo
      */
-    public List<PortafolioModelo> getEstrategiaModelo() {
+    public List<VectorPortafolioModelo> getEstrategiaModelo() {
         return estrategiaModelo;
     }
 
     /**
      * @param estrategiaModelo the estrategiaModelo to set
      */
-    public void setEstrategiaModelo(List<PortafolioModelo> estrategiaModelo) {
+    public void setEstrategiaModelo(List<VectorPortafolioModelo> estrategiaModelo) {
         this.estrategiaModelo = estrategiaModelo;
     }
 

@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Map;
 import mx.samas.domain.Activo;
 import mx.samas.domain.Estrategia;
-import mx.samas.domain.PortafolioModelo;
+import mx.samas.domain.VectorPortafolioModelo;
 import mx.samas.domain.dto.PortafolioModeloDTO;
 import mx.samas.repository.ActivoRepository;
 import mx.samas.repository.EstrategiaRepository;
@@ -23,7 +23,7 @@ import org.springframework.stereotype.Service;
  * @author samas
  */
 @Service
-public class PortafolioModeloServiceImpl implements PortafolioModeloService {
+public class VectorPortafolioModeloServiceImpl implements VectorPortafolioModeloService {
 
     @Autowired
     private EstrategiaRepository estrategiaRepository;
@@ -32,21 +32,21 @@ public class PortafolioModeloServiceImpl implements PortafolioModeloService {
     private ActivoRepository activoRepository;
 
     @Override
-    public List<PortafolioModelo> getLastPortafolioModeloFromEstrategia(Long id) {
+    public List<VectorPortafolioModelo> getLastPortafolioModeloFromEstrategia(Long id) {
 
         Estrategia estrategia = estrategiaRepository.findOne(id);
-        List<PortafolioModelo> modelos = estrategia.getEstrategiaModelo();
-        List<PortafolioModelo> lastModel = getModelosWithDate(getMaxDate(modelos), modelos);
+        List<VectorPortafolioModelo> modelos = estrategia.getEstrategiaModelo();
+        List<VectorPortafolioModelo> lastModel = getModelosWithDate(getMaxDate(modelos), modelos);
 
         return lastModel;
     }
 
     @Override
-    public List<PortafolioModelo> createNewPortafolioModeloListForEstrategia(Long id, PortafolioModeloDTO model) {
+    public List<VectorPortafolioModelo> createNewPortafolioModeloListForEstrategia(Long id, PortafolioModeloDTO model) {
 
         Estrategia e = estrategiaRepository.findOne(id);
-        List<PortafolioModelo> fromDTO = createPortafolioModeloListFromDTO(model, e);
-        List<PortafolioModelo> fromEstrategia = e.getEstrategiaModelo();
+        List<VectorPortafolioModelo> fromDTO = createPortafolioModeloListFromDTO(model, e);
+        List<VectorPortafolioModelo> fromEstrategia = e.getEstrategiaModelo();
         fromEstrategia.addAll(fromDTO);
         e.setEstrategiaModelo(fromEstrategia);
         estrategiaRepository.save(e);
@@ -55,13 +55,13 @@ public class PortafolioModeloServiceImpl implements PortafolioModeloService {
     }
 
     @Override
-    public List<PortafolioModelo> getAllModelosFromEstrategia(Long id) {
+    public List<VectorPortafolioModelo> getAllModelosFromEstrategia(Long id) {
         return estrategiaRepository.findOne(id).getEstrategiaModelo();
     }
 
-    private Date getMaxDate(List<PortafolioModelo> list) {
+    private Date getMaxDate(List<VectorPortafolioModelo> list) {
         Date maxDate = null;
-        for (PortafolioModelo model : list) {
+        for (VectorPortafolioModelo model : list) {
             Date dateFromEntity = model.getCreado();
             if (maxDate == null) {
                 maxDate = dateFromEntity;
@@ -73,9 +73,9 @@ public class PortafolioModeloServiceImpl implements PortafolioModeloService {
         return maxDate;
     }
 
-    private List<PortafolioModelo> getModelosWithDate(Date date, List<PortafolioModelo> modelList) {
-        List<PortafolioModelo> newList = new ArrayList<>();
-        for (PortafolioModelo pm : modelList) {
+    private List<VectorPortafolioModelo> getModelosWithDate(Date date, List<VectorPortafolioModelo> modelList) {
+        List<VectorPortafolioModelo> newList = new ArrayList<>();
+        for (VectorPortafolioModelo pm : modelList) {
             if (pm.getCreado().compareTo(date) == 0) {
                 newList.add(pm);
             }
@@ -83,13 +83,13 @@ public class PortafolioModeloServiceImpl implements PortafolioModeloService {
         return newList;
     }
 
-    public List<PortafolioModelo> createPortafolioModeloListFromDTO(PortafolioModeloDTO models, Estrategia e) {
-        List<PortafolioModelo> newList = new ArrayList<>();
+    public List<VectorPortafolioModelo> createPortafolioModeloListFromDTO(PortafolioModeloDTO models, Estrategia e) {
+        List<VectorPortafolioModelo> newList = new ArrayList<>();
         for (Map.Entry<String, Double> entry : models.entrySet()) {
             String key = entry.getKey();
             Double value = entry.getValue();
             Activo a = activoRepository.findFirstByClavePizarra(key);
-            PortafolioModelo pm = new PortafolioModelo(a, value, e);
+            VectorPortafolioModelo pm = new VectorPortafolioModelo(a, value, e);
             newList.add(pm);
         }
         return newList;

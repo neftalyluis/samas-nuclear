@@ -28,7 +28,7 @@ public class EstrategiaServiceImpl implements EstrategiaService {
     private ActivoRepository activoRepository;
 
     @Autowired
-    private PortafolioModeloService portafolioModeloService;
+    private VectorPortafolioModeloService portafolioModeloService;
 
     @Override
     public List<Estrategia> getAll() {

@@ -19,7 +19,7 @@ import javax.persistence.Temporal;
  * @author samas
  */
 @Entity
-public class PortafolioModelo implements Serializable {
+public class VectorPortafolioModelo implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -37,18 +37,18 @@ public class PortafolioModelo implements Serializable {
 
     private Double diana;
 
-    public PortafolioModelo() {
+    public VectorPortafolioModelo() {
         this.creado = new Date();
 
     }
 
-    public PortafolioModelo(Activo a, Double diana) {
+    public VectorPortafolioModelo(Activo a, Double diana) {
         this.activo = a;
         this.diana = diana;
         this.creado = new Date();
     }
 
-    public PortafolioModelo(Activo a, Double diana, Estrategia e) {
+    public VectorPortafolioModelo(Activo a, Double diana, Estrategia e) {
         this.activo = a;
         this.diana = diana;
         this.estrategia = e;
@@ -56,7 +56,7 @@ public class PortafolioModelo implements Serializable {
 
     }
 
-    public PortafolioModelo(Date d, Activo a, Estrategia e, Double diana) {
+    public VectorPortafolioModelo(Date d, Activo a, Estrategia e, Double diana) {
         this.activo = a;
         this.diana = diana;
         this.estrategia = e;
@@ -82,10 +82,10 @@ public class PortafolioModelo implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof PortafolioModelo)) {
+        if (!(object instanceof VectorPortafolioModelo)) {
             return false;
         }
-        PortafolioModelo other = (PortafolioModelo) object;
+        VectorPortafolioModelo other = (VectorPortafolioModelo) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
