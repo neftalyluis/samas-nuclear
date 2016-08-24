@@ -5,6 +5,7 @@
  */
 package mx.samas.controllers;
 
+import java.util.Date;
 import java.util.List;
 import mx.samas.domain.VectorPortafolioModelo;
 import mx.samas.domain.dto.PortafolioModeloDTO;
@@ -17,6 +18,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import mx.samas.service.VectorPortafolioModeloService;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  *
@@ -25,7 +29,7 @@ import mx.samas.service.VectorPortafolioModeloService;
 @RestController
 @RequestMapping("/estrategia")
 public class VectorPortafolioModeloController {
-    
+
     @Autowired
     private VectorPortafolioModeloService portafolioModeloService;
 
@@ -43,8 +47,21 @@ public class VectorPortafolioModeloController {
         }
     }
 
+    //No hace nada porque no hay formato para el Archivo, pero se pone aqui el metodo
+    @RequestMapping(value = "/{id}/modelo/actual", method = RequestMethod.POST)
+    public ResponseEntity<?> uploadVectorActivoFile(@RequestParam MultipartFile file) {
+        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
     @RequestMapping(method = RequestMethod.GET, value = "/{id}/modelo/")
     public ResponseEntity<List<VectorPortafolioModelo>> getAllModels(@PathVariable Long id) {
         return new ResponseEntity<>(portafolioModeloService.getAllModelosFromEstrategia(id), HttpStatus.OK);
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/{fecha}/modelo/{fecha}")
+    public ResponseEntity<List<VectorPortafolioModelo>> getModelosWithDate(
+            @PathVariable Long id,
+            @PathVariable @DateTimeFormat(pattern = "ddMMyyyy") Date fromDate) {
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }
