@@ -98,6 +98,7 @@ public class Activo implements Serializable {
     @Lob
     private List<ActivoPropiedadValor> propiedadesValor;
     
+    @JsonIgnore
     @ManyToMany
     private List<ActivoPropiedad> propiedades;
 

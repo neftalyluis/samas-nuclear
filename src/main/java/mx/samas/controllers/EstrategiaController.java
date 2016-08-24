@@ -8,15 +8,10 @@ package mx.samas.controllers;
 import java.util.List;
 import mx.samas.domain.Estrategia;
 import mx.samas.domain.dto.EstrategiaDTO;
-import mx.samas.domain.PortafolioModelo;
-import mx.samas.domain.dto.PortafolioModeloDTO;
 import mx.samas.service.EstrategiaService;
-import mx.samas.service.PortafolioModeloService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -30,29 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class EstrategiaController {
 
     @Autowired
-    private PortafolioModeloService portafolioModeloService;
-
-    @Autowired
     private EstrategiaService estrategiaService;
-
-    @RequestMapping(method = RequestMethod.GET, value = "/{id}/modelo/actual")
-    public ResponseEntity<List<PortafolioModelo>> getActualModel(@PathVariable Long id) {
-        return new ResponseEntity<>(portafolioModeloService.getLastPortafolioModeloFromEstrategia(id), HttpStatus.OK);
-    }
-
-    @RequestMapping(method = RequestMethod.POST, value = "/{id}/modelo/actual")
-    public ResponseEntity<List<PortafolioModelo>> createNewModel(@PathVariable Long id, @RequestBody PortafolioModeloDTO modelo) {
-        if (modelo.validate()) {
-            return new ResponseEntity<>(portafolioModeloService.createNewPortafolioModeloListForEstrategia(id, modelo), HttpStatus.CREATED);
-        } else {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
-    }
-
-    @RequestMapping(method = RequestMethod.GET, value = "/{id}/modelo/")
-    public ResponseEntity<List<PortafolioModelo>> getAllModels(@PathVariable Long id) {
-        return new ResponseEntity<>(portafolioModeloService.getAllModelosFromEstrategia(id), HttpStatus.OK);
-    }
 
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<List<Estrategia>> getAllEstrategias() {

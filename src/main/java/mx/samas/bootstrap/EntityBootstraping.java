@@ -15,15 +15,18 @@ import mx.samas.domain.Banco;
 import mx.samas.domain.Cliente;
 import mx.samas.domain.DuenoFuente;
 import mx.samas.domain.Estrategia;
+import mx.samas.domain.Perfil;
 import mx.samas.domain.PortafolioEstatus;
-import mx.samas.domain.PortafolioModelo;
+import mx.samas.domain.VectorPortafolioModelo;
 import mx.samas.domain.TipoActivo;
 import mx.samas.domain.Transaccion;
+import mx.samas.domain.Usuario;
 import mx.samas.service.ActivoService;
 import mx.samas.service.BancoService;
 import mx.samas.service.ClienteService;
 import mx.samas.service.DuenoFuenteService;
 import mx.samas.service.EstrategiaService;
+import mx.samas.service.PerfilService;
 import mx.samas.service.PortafolioEstatusService;
 import mx.samas.service.TransaccionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,6 +64,9 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
     @Autowired
     private PortafolioEstatusService portafolioEstatusService;
 
+    @Autowired
+    private PerfilService perfilService;
+
     @Override
     public void onApplicationEvent(ApplicationReadyEvent event) {
 
@@ -71,12 +77,55 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
                 + "  ____) / ____ \\| |  | |/ ____ \\ ____) |\n"
                 + " |_____/_/    \\_\\_|  |_/_/    \\_\\_____/");
         System.out.println("========================================");
+        persistPerfiles();
         persistClientes();
         persistActivos();
         persistEstrategiasAndPortafolioModelo();
         persistBancos();
         persistTransacciones();
         persistPortfolioEstatus();
+    }
+
+    private boolean persistPerfiles() {
+        try {
+
+            ArrayList<Perfil> perfiles = new ArrayList();
+
+            Perfil fo = new Perfil();
+            fo.setNombre("FrontOffice");
+
+            Perfil bo = new Perfil();
+            fo.setNombre("BackOffice");
+
+            Perfil mo = new Perfil();
+            fo.setNombre("MiddleOffice");
+
+            Perfil com = new Perfil();
+            fo.setNombre("Complaiants");
+
+            Perfil adm = new Perfil();
+            fo.setNombre("Admin");
+
+            perfiles.add(fo);
+            perfiles.add(bo);
+            perfiles.add(mo);
+            perfiles.add(com);
+            perfiles.add(adm);
+            perfilService.createPerfilesFromList(perfiles);
+            LOG.info("--PerfilesDeUsuario");
+
+            Usuario samas = new Usuario();
+            samas.setNombreCompleto("SAMAS Admin");
+            samas.setNombreUsuario("samas");
+            samas.setPassword("test");
+            samas.setPerfiles(perfiles);
+            LOG.info("--Usuario SAMAS");
+
+            return true;
+        } catch (Exception e) {
+            LOG.log(Level.WARNING, "No pudimos persistir los Perfiles de Usuario, la excepcion es: {0}", e.getMessage());
+            return false;
+        }
     }
 
     private boolean persistClientes() {
@@ -262,21 +311,21 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
             Estrategia divydeu = new Estrategia();
             divydeu.setNombre("Dividendo y Deuda");
 //            divydeu.setPerfilRiesgo(rpb.findByName("Balanceado"));
-            List<PortafolioModelo> lsv = new ArrayList<>();
-            lsv.add(new PortafolioModelo(new Date(), activoService.getByClavePizarra("1A_AMZN_*"), divydeu, 4.0));
-            lsv.add(new PortafolioModelo(new Date(), activoService.getByClavePizarra("1A_TSLA_*"), divydeu, 4.0));
-            lsv.add(new PortafolioModelo(new Date(), activoService.getByClavePizarra("1A_F_*"), divydeu, 4.0));
-            lsv.add(new PortafolioModelo(new Date(), activoService.getByClavePizarra("1_GFREGIO_O"), divydeu, 4.0));
-            lsv.add(new PortafolioModelo(new Date(), activoService.getByClavePizarra("1A_AMD_*"), divydeu, 4.0));
-            lsv.add(new PortafolioModelo(new Date(), activoService.getByClavePizarra("1_KIMBER_A"), divydeu, 7.5));
-            lsv.add(new PortafolioModelo(new Date(), activoService.getByClavePizarra("1I_IVV_*"), divydeu, 7.5));
-            lsv.add(new PortafolioModelo(new Date(), activoService.getByClavePizarra("M_BONOS_161215"), divydeu, 15.0));
-            lsv.add(new PortafolioModelo(new Date(), activoService.getByClavePizarra("M_BONOS_241205"), divydeu, 10.0));
-            lsv.add(new PortafolioModelo(new Date(), activoService.getByClavePizarra("M_BONOS_421113"), divydeu, 5.0));
-            lsv.add(new PortafolioModelo(new Date(), activoService.getByClavePizarra("S_UDIBONO_160616"), divydeu, 15.0));
-            lsv.add(new PortafolioModelo(new Date(), activoService.getByClavePizarra("S_UDIBONO_220609"), divydeu, 10.0));
-            lsv.add(new PortafolioModelo(new Date(), activoService.getByClavePizarra("S_UDIBONO_401115"), divydeu, 5.0));
-            lsv.add(new PortafolioModelo(new Date(), activoService.getByClavePizarra("1_LQS_1"), divydeu, 5.0));
+            List<VectorPortafolioModelo> lsv = new ArrayList<>();
+            lsv.add(new VectorPortafolioModelo(new Date(), activoService.getByClavePizarra("1A_AMZN_*"), divydeu, 4.0));
+            lsv.add(new VectorPortafolioModelo(new Date(), activoService.getByClavePizarra("1A_TSLA_*"), divydeu, 4.0));
+            lsv.add(new VectorPortafolioModelo(new Date(), activoService.getByClavePizarra("1A_F_*"), divydeu, 4.0));
+            lsv.add(new VectorPortafolioModelo(new Date(), activoService.getByClavePizarra("1_GFREGIO_O"), divydeu, 4.0));
+            lsv.add(new VectorPortafolioModelo(new Date(), activoService.getByClavePizarra("1A_AMD_*"), divydeu, 4.0));
+            lsv.add(new VectorPortafolioModelo(new Date(), activoService.getByClavePizarra("1_KIMBER_A"), divydeu, 7.5));
+            lsv.add(new VectorPortafolioModelo(new Date(), activoService.getByClavePizarra("1I_IVV_*"), divydeu, 7.5));
+            lsv.add(new VectorPortafolioModelo(new Date(), activoService.getByClavePizarra("M_BONOS_161215"), divydeu, 15.0));
+            lsv.add(new VectorPortafolioModelo(new Date(), activoService.getByClavePizarra("M_BONOS_241205"), divydeu, 10.0));
+            lsv.add(new VectorPortafolioModelo(new Date(), activoService.getByClavePizarra("M_BONOS_421113"), divydeu, 5.0));
+            lsv.add(new VectorPortafolioModelo(new Date(), activoService.getByClavePizarra("S_UDIBONO_160616"), divydeu, 15.0));
+            lsv.add(new VectorPortafolioModelo(new Date(), activoService.getByClavePizarra("S_UDIBONO_220609"), divydeu, 10.0));
+            lsv.add(new VectorPortafolioModelo(new Date(), activoService.getByClavePizarra("S_UDIBONO_401115"), divydeu, 5.0));
+            lsv.add(new VectorPortafolioModelo(new Date(), activoService.getByClavePizarra("1_LQS_1"), divydeu, 5.0));
 
             divydeu.setEstrategiaModelo(lsv);
             estrategiaService.createEstrategia(divydeu);
@@ -287,13 +336,13 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
 //            lqs.setPerfilRiesgo(rpb.findByName("Agresivo"));
 
             lsv.clear();
-            lsv.add(new PortafolioModelo(new Date(), activoService.getByClavePizarra("1A_AMZN_*"), lqs, 15.0));
-            lsv.add(new PortafolioModelo(new Date(), activoService.getByClavePizarra("1A_TSLA_*"), lqs, 15.0));
-            lsv.add(new PortafolioModelo(new Date(), activoService.getByClavePizarra("1A_F_*"), lqs, 15.0));
-            lsv.add(new PortafolioModelo(new Date(), activoService.getByClavePizarra("1_GFREGIO_O"), lqs, 15.0));
-            lsv.add(new PortafolioModelo(new Date(), activoService.getByClavePizarra("1A_AMD_*"), lqs, 15.0));
-            lsv.add(new PortafolioModelo(new Date(), activoService.getByClavePizarra("1A_BRFS_N"), lqs, 20.0));
-            lsv.add(new PortafolioModelo(new Date(), activoService.getByClavePizarra("M_BONOS_421113"), lqs, 5.0));
+            lsv.add(new VectorPortafolioModelo(new Date(), activoService.getByClavePizarra("1A_AMZN_*"), lqs, 15.0));
+            lsv.add(new VectorPortafolioModelo(new Date(), activoService.getByClavePizarra("1A_TSLA_*"), lqs, 15.0));
+            lsv.add(new VectorPortafolioModelo(new Date(), activoService.getByClavePizarra("1A_F_*"), lqs, 15.0));
+            lsv.add(new VectorPortafolioModelo(new Date(), activoService.getByClavePizarra("1_GFREGIO_O"), lqs, 15.0));
+            lsv.add(new VectorPortafolioModelo(new Date(), activoService.getByClavePizarra("1A_AMD_*"), lqs, 15.0));
+            lsv.add(new VectorPortafolioModelo(new Date(), activoService.getByClavePizarra("1A_BRFS_N"), lqs, 20.0));
+            lsv.add(new VectorPortafolioModelo(new Date(), activoService.getByClavePizarra("M_BONOS_421113"), lqs, 5.0));
             lqs.setEstrategiaModelo(lsv);
             estrategiaService.createEstrategia(lqs);
             LOG.info("--Estrategias");

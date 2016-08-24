@@ -7,47 +7,28 @@ package mx.samas.domain;
 
 import java.io.Serializable;
 import java.util.List;
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 
 /**
  *
  * @author samas
  */
 @Entity
-public class Estrategia implements Serializable {
+public class Perfil implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
-    private String nombre;
-
-    @OneToMany(mappedBy = "estrategia", cascade = CascadeType.ALL)
-    private List<VectorPortafolioModelo> estrategiaModelo;
-
-    //    @ManyToOne
-//    private PerfilRiesgo perfilRiesgo;
     
-    public Estrategia() {
-
-    }
-
-    public Estrategia(String nombre, List<VectorPortafolioModelo> modelo) {
-        this.nombre = nombre;
-        this.estrategiaModelo = modelo;
-
-    }
-
-    public Estrategia(String nombre) {
-        this.nombre = nombre;
-
-    }
+    private String nombre;
+    
+    @ManyToMany
+    private List<Usuario> usuarios;
 
     public Long getId() {
         return id;
@@ -67,10 +48,10 @@ public class Estrategia implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Estrategia)) {
+        if (!(object instanceof Perfil)) {
             return false;
         }
-        Estrategia other = (Estrategia) object;
+        Perfil other = (Perfil) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -79,7 +60,7 @@ public class Estrategia implements Serializable {
 
     @Override
     public String toString() {
-        return "mx.samas.newdomain.Estrategia[ id=" + id + " ]";
+        return "mx.samas.domain.Perfil[ id=" + id + " ]";
     }
 
     /**
@@ -97,17 +78,17 @@ public class Estrategia implements Serializable {
     }
 
     /**
-     * @return the estrategiaModelo
+     * @return the usuarios
      */
-    public List<VectorPortafolioModelo> getEstrategiaModelo() {
-        return estrategiaModelo;
+    public List<Usuario> getUsuarios() {
+        return usuarios;
     }
 
     /**
-     * @param estrategiaModelo the estrategiaModelo to set
+     * @param usuarios the usuarios to set
      */
-    public void setEstrategiaModelo(List<VectorPortafolioModelo> estrategiaModelo) {
-        this.estrategiaModelo = estrategiaModelo;
+    public void setUsuarios(List<Usuario> usuarios) {
+        this.usuarios = usuarios;
     }
-
+    
 }
