@@ -48,7 +48,7 @@ public class VectorPortafolioModeloController {
     }
 
     //No hace nada porque no hay formato para el Archivo, pero se pone aqui el metodo
-    @RequestMapping(value = "/{id}/modelo/actual", method = RequestMethod.POST)
+    @RequestMapping(value = "/{id}/modelo/actual/", method = RequestMethod.PUT)
     public ResponseEntity<?> uploadVectorActivoFile(@RequestParam MultipartFile file) {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
@@ -59,7 +59,7 @@ public class VectorPortafolioModeloController {
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/{fecha}/modelo/{fecha}")
-    public ResponseEntity<List<VectorPortafolioModelo>> getModelosWithDate(
+    public ResponseEntity<?> getModelosWithDate(
             @PathVariable Long id,
             @PathVariable @DateTimeFormat(pattern = "ddMMyyyy") Date fromDate) {
         return new ResponseEntity<>(HttpStatus.OK);

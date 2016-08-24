@@ -15,15 +15,18 @@ import mx.samas.domain.Banco;
 import mx.samas.domain.Cliente;
 import mx.samas.domain.DuenoFuente;
 import mx.samas.domain.Estrategia;
+import mx.samas.domain.Perfil;
 import mx.samas.domain.PortafolioEstatus;
 import mx.samas.domain.VectorPortafolioModelo;
 import mx.samas.domain.TipoActivo;
 import mx.samas.domain.Transaccion;
+import mx.samas.domain.Usuario;
 import mx.samas.service.ActivoService;
 import mx.samas.service.BancoService;
 import mx.samas.service.ClienteService;
 import mx.samas.service.DuenoFuenteService;
 import mx.samas.service.EstrategiaService;
+import mx.samas.service.PerfilService;
 import mx.samas.service.PortafolioEstatusService;
 import mx.samas.service.TransaccionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,6 +64,9 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
     @Autowired
     private PortafolioEstatusService portafolioEstatusService;
 
+    @Autowired
+    private PerfilService perfilService;
+
     @Override
     public void onApplicationEvent(ApplicationReadyEvent event) {
 
@@ -71,12 +77,55 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
                 + "  ____) / ____ \\| |  | |/ ____ \\ ____) |\n"
                 + " |_____/_/    \\_\\_|  |_/_/    \\_\\_____/");
         System.out.println("========================================");
+        persistPerfiles();
         persistClientes();
         persistActivos();
         persistEstrategiasAndPortafolioModelo();
         persistBancos();
         persistTransacciones();
         persistPortfolioEstatus();
+    }
+
+    private boolean persistPerfiles() {
+        try {
+
+            ArrayList<Perfil> perfiles = new ArrayList();
+
+            Perfil fo = new Perfil();
+            fo.setNombre("FrontOffice");
+
+            Perfil bo = new Perfil();
+            fo.setNombre("BackOffice");
+
+            Perfil mo = new Perfil();
+            fo.setNombre("MiddleOffice");
+
+            Perfil com = new Perfil();
+            fo.setNombre("Complaiants");
+
+            Perfil adm = new Perfil();
+            fo.setNombre("Admin");
+
+            perfiles.add(fo);
+            perfiles.add(bo);
+            perfiles.add(mo);
+            perfiles.add(com);
+            perfiles.add(adm);
+            perfilService.createPerfilesFromList(perfiles);
+            LOG.info("--PerfilesDeUsuario");
+
+            Usuario samas = new Usuario();
+            samas.setNombreCompleto("SAMAS Admin");
+            samas.setNombreUsuario("samas");
+            samas.setPassword("test");
+            samas.setPerfiles(perfiles);
+            LOG.info("--Usuario SAMAS");
+
+            return true;
+        } catch (Exception e) {
+            LOG.log(Level.WARNING, "No pudimos persistir los Perfiles de Usuario, la excepcion es: {0}", e.getMessage());
+            return false;
+        }
     }
 
     private boolean persistClientes() {
