@@ -15,5 +15,8 @@ import mx.samas.domain.Transaccion;
 public interface TransaccionService {
 
     public Transaccion findByNombre(String nombre);
+
     public void createTransaccionesFromList(List<Transaccion> transacciones);
+
+    public Transaccion findById(Long id);
 }

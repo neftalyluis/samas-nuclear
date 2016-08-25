@@ -31,4 +31,9 @@ public class TransaccionServiceImpl implements TransaccionService {
         transaccionRepository.save(transacciones);
     }
 
+    @Override
+    public Transaccion findById(Long id) {
+        return transaccionRepository.findOne(id);
+    }
+
 }
