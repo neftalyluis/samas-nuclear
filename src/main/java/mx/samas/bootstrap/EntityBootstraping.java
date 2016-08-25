@@ -99,16 +99,16 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
             fo.setNombre("FrontOffice");
 
             Perfil bo = new Perfil();
-            fo.setNombre("BackOffice");
+            bo.setNombre("BackOffice");
 
             Perfil mo = new Perfil();
-            fo.setNombre("MiddleOffice");
+            mo.setNombre("MiddleOffice");
 
             Perfil com = new Perfil();
-            fo.setNombre("Complaiants");
+            com.setNombre("Complaiants");
 
             Perfil adm = new Perfil();
-            fo.setNombre("Admin");
+            adm.setNombre("Admin");
 
             perfiles.add(fo);
             perfiles.add(bo);
