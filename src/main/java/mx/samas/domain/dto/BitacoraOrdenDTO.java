@@ -18,6 +18,10 @@ public class BitacoraOrdenDTO {
 
     @NotNull
     private String nombre;
+    
+    @NotNull
+    private Boolean usaActivo;
+    
     @NotNull
     private List<Long> transacciones;
 
@@ -47,5 +51,19 @@ public class BitacoraOrdenDTO {
      */
     public void setTransacciones(List<Long> transacciones) {
         this.transacciones = transacciones;
+    }
+
+    /**
+     * @return the usaActivo
+     */
+    public Boolean getUsaActivo() {
+        return usaActivo;
+    }
+
+    /**
+     * @param usaActivo the usaActivo to set
+     */
+    public void setUsaActivo(Boolean usaActivo) {
+        this.usaActivo = usaActivo;
     }
 }

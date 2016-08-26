@@ -5,7 +5,10 @@
  */
 package mx.samas.domain.dto;
 
+import java.util.Date;
 import java.util.List;
+import javax.persistence.Temporal;
+import javax.validation.constraints.NotNull;
 
 /**
  * Objeto que alberga la ejecucion de una Orden, con una Lista de Transacciones
@@ -15,7 +18,21 @@ import java.util.List;
  */
 public class BitacoraOrdenEjecutorDTO {
 
+    @NotNull
     private Long idOperacion;
+    @NotNull
+    private String folioOperacion;
+    private String clavePizarra;
+    @NotNull
+    private String numeroContrato;
+    /**
+     * 3.- Dia que se Liquida
+     */
+    @NotNull
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Date fechaLiquidacion;
+
+    @NotNull
     private List<BitacoraOrdenValorDTO> valorTransacciones;
 
     /**
@@ -46,4 +63,59 @@ public class BitacoraOrdenEjecutorDTO {
         this.valorTransacciones = valorTransacciones;
     }
 
+    /**
+     * @return the clavePizarra
+     */
+    public String getClavePizarra() {
+        return clavePizarra;
+    }
+
+    /**
+     * @param clavePizarra the clavePizarra to set
+     */
+    public void setClavePizarra(String clavePizarra) {
+        this.clavePizarra = clavePizarra;
+    }
+
+    /**
+     * @return the folioOperacion
+     */
+    public String getFolioOperacion() {
+        return folioOperacion;
+    }
+
+    /**
+     * @param folioOperacion the folioOperacion to set
+     */
+    public void setFolioOperacion(String folioOperacion) {
+        this.folioOperacion = folioOperacion;
+    }
+
+    /**
+     * @return the numeroContrato
+     */
+    public String getNumeroContrato() {
+        return numeroContrato;
+    }
+
+    /**
+     * @param numeroContrato the numeroContrato to set
+     */
+    public void setNumeroContrato(String numeroContrato) {
+        this.numeroContrato = numeroContrato;
+    }
+
+    /**
+     * @return the fechaLiquidacion
+     */
+    public Date getFechaLiquidacion() {
+        return fechaLiquidacion;
+    }
+
+    /**
+     * @param fechaLiquidacion the fechaLiquidacion to set
+     */
+    public void setFechaLiquidacion(Date fechaLiquidacion) {
+        this.fechaLiquidacion = fechaLiquidacion;
+    }
 }

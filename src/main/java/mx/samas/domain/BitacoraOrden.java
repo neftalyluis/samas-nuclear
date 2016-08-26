@@ -28,6 +28,8 @@ public class BitacoraOrden implements Serializable {
     private Long id;
 
     private String nombre;
+    
+    private Boolean usaActivo;
 
     @ManyToMany
     private List<Transaccion> transacciones;
@@ -91,6 +93,20 @@ public class BitacoraOrden implements Serializable {
      */
     public void setTransacciones(List<Transaccion> transacciones) {
         this.transacciones = transacciones;
+    }
+
+    /**
+     * @return the usaActivo
+     */
+    public Boolean getUsaActivo() {
+        return usaActivo;
+    }
+
+    /**
+     * @param usaActivo the usaActivo to set
+     */
+    public void setUsaActivo(Boolean usaActivo) {
+        this.usaActivo = usaActivo;
     }
 
 }
