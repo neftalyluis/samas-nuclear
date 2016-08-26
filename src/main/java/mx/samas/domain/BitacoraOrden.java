@@ -6,6 +6,7 @@
 package mx.samas.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -28,11 +29,15 @@ public class BitacoraOrden implements Serializable {
     private Long id;
 
     private String nombre;
-    
+
     private Boolean usaActivo;
 
     @ManyToMany
     private List<Transaccion> transacciones;
+
+    public BitacoraOrden() {
+        this.transacciones = new ArrayList<>();
+    }
 
     public Long getId() {
         return id;

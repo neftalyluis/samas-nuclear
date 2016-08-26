@@ -7,19 +7,19 @@ package mx.samas.service;
 
 import java.util.ArrayList;
 import java.util.List;
-import mx.samas.domain.Bitacora;
 import mx.samas.domain.BitacoraOrden;
 import mx.samas.domain.Transaccion;
 import mx.samas.domain.dto.BitacoraOrdenDTO;
 import mx.samas.domain.dto.BitacoraOrdenEjecutorDTO;
-import mx.samas.domain.dto.BitacoraOrdenValorDTO;
 import mx.samas.repository.BitacoraOrdenRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
  *
  * @author samas
  */
+@Service
 public class BitacoraOrdenServiceImpl implements BitacoraOrdenService {
 
     @Autowired
@@ -75,6 +75,11 @@ public class BitacoraOrdenServiceImpl implements BitacoraOrdenService {
 //                }
 //            }
 //        }
+    }
+
+    @Override
+    public BitacoraOrden createOrden(BitacoraOrden dto) {
+        return bitacoraOrdenRepository.save(dto);
     }
 
 }

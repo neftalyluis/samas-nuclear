@@ -17,6 +17,8 @@ public interface BitacoraOrdenService {
 
     public BitacoraOrden createOrden(BitacoraOrdenDTO dto);
 
+    public BitacoraOrden createOrden(BitacoraOrden dto);
+
     public BitacoraOrden findOrdenByNombre(String nombre);
 
     public BitacoraOrden findOrdenById(Long id);

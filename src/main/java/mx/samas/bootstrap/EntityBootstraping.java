@@ -12,6 +12,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import mx.samas.domain.Activo;
 import mx.samas.domain.Banco;
+import mx.samas.domain.BitacoraOrden;
 import mx.samas.domain.Cliente;
 import mx.samas.domain.DuenoFuente;
 import mx.samas.domain.Estrategia;
@@ -23,6 +24,7 @@ import mx.samas.domain.Transaccion;
 import mx.samas.domain.Usuario;
 import mx.samas.service.ActivoService;
 import mx.samas.service.BancoService;
+import mx.samas.service.BitacoraOrdenService;
 import mx.samas.service.ClienteService;
 import mx.samas.service.DuenoFuenteService;
 import mx.samas.service.EstrategiaService;
@@ -71,6 +73,9 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
     @Autowired
     private UsuarioService usuarioService;
 
+    @Autowired
+    private BitacoraOrdenService bitacoraOrdenService;
+
     @Override
     public void onApplicationEvent(ApplicationReadyEvent event) {
 
@@ -88,6 +93,7 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
         persistBancos();
         persistTransacciones();
         persistPortfolioEstatus();
+        useOperationDeposito();
     }
 
     private boolean persistPerfiles() {
@@ -520,8 +526,33 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
         finReporto.setFlujoEfectivo(new Long(1));
         finReporto.setFlujoTitulos(new Long(-1));
         finReporto.setFuenteTransaccion(br);
-
         tl.add(finReporto);
+
+//////////////////////////////////////////////////////////////////GOBIERNO
+        Transaccion isr = new Transaccion();
+        isr.setCredito(false);
+        isr.setNombre("ISR");
+        isr.setFlujoEfectivo(new Long(-1));
+        isr.setFlujoTitulos(new Long(0));
+        isr.setFuenteTransaccion(ha);
+        tl.add(isr);
+
+        Transaccion iva = new Transaccion();
+        iva.setCredito(false);
+        iva.setNombre("IVA");
+        iva.setFlujoEfectivo(new Long(-1));
+        iva.setFlujoTitulos(new Long(0));
+        iva.setFuenteTransaccion(ha);
+        tl.add(iva);
+//////////////////////////////////////////////////////////////////Portafolio
+
+        Transaccion redito = new Transaccion();
+        redito.setCredito(false);
+        redito.setNombre("Reditos");
+        redito.setFlujoEfectivo(new Long(1));
+        redito.setFlujoTitulos(new Long(0));
+        redito.setFuenteTransaccion(po);
+        tl.add(redito);
 
         try {
             duenoFuenteService.createDuenoFuente(bu);
@@ -533,6 +564,46 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
 
             transaccionService.createTransaccionesFromList(tl);
             LOG.info("--Transacciones");
+
+            BitacoraOrden ordenCompra = new BitacoraOrden();
+            List<Transaccion> listaOrden = new ArrayList<>();
+            listaOrden.add(comissionFromBusiness);
+            listaOrden.add(buyAsset);
+            listaOrden.add(iva);
+            ordenCompra.setNombre("Compra");
+            ordenCompra.setUsaActivo(Boolean.TRUE);
+            ordenCompra.setTransacciones(listaOrden);
+            bitacoraOrdenService.createOrden(ordenCompra);
+
+            BitacoraOrden ordenVenta = new BitacoraOrden();
+            listaOrden.clear();
+            listaOrden.add(comissionFromBusiness);
+            listaOrden.add(sellAsset);
+            listaOrden.add(iva);
+            ordenVenta.setNombre("Venta");
+            ordenVenta.setUsaActivo(Boolean.TRUE);
+            ordenVenta.setTransacciones(listaOrden);
+            bitacoraOrdenService.createOrden(ordenVenta);
+
+            BitacoraOrden ordenDeposito = new BitacoraOrden();
+            listaOrden.clear();
+            listaOrden.add(depositMoneyFromClient);
+            ordenDeposito.setNombre("Deposito de Efectivo");
+            ordenDeposito.setUsaActivo(Boolean.FALSE);
+            ordenDeposito.setTransacciones(listaOrden);
+            bitacoraOrdenService.createOrden(ordenDeposito);
+
+            BitacoraOrden ordenRedito = new BitacoraOrden();
+            listaOrden.clear();
+            listaOrden.add(isr);
+            listaOrden.add(redito);
+            ordenRedito.setNombre("Reditos");
+            ordenRedito.setUsaActivo(Boolean.FALSE);
+            ordenRedito.setTransacciones(listaOrden);
+            bitacoraOrdenService.createOrden(ordenRedito);
+
+            LOG.info("--Ordenes");
+
             return true;
         } catch (Exception e) {
             LOG.log(Level.WARNING, "No pudimos persistir nuestras transacciones, la excepcion es: {0}", e.getMessage());
@@ -562,5 +633,9 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
             LOG.log(Level.WARNING, "No pudimos persistir los PortfolioStatus, la excepcion es: {0}", e.getMessage());
             return false;
         }
+    }
+
+    private void useOperationDeposito() {
+        LOG.info("--Operaciones Ejemplo");
     }
 }
