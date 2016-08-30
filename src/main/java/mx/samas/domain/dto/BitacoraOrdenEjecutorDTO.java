@@ -25,12 +25,6 @@ public class BitacoraOrdenEjecutorDTO {
     private String clavePizarra;
     @NotNull
     private String numeroContrato;
-    /**
-     * 3.- Dia que se Liquida
-     */
-    @NotNull
-    @Temporal(javax.persistence.TemporalType.DATE)
-    private Date fechaLiquidacion;
 
     @NotNull
     private List<BitacoraOrdenValorDTO> valorTransacciones;
@@ -105,17 +99,4 @@ public class BitacoraOrdenEjecutorDTO {
         this.numeroContrato = numeroContrato;
     }
 
-    /**
-     * @return the fechaLiquidacion
-     */
-    public Date getFechaLiquidacion() {
-        return fechaLiquidacion;
-    }
-
-    /**
-     * @param fechaLiquidacion the fechaLiquidacion to set
-     */
-    public void setFechaLiquidacion(Date fechaLiquidacion) {
-        this.fechaLiquidacion = fechaLiquidacion;
-    }
 }

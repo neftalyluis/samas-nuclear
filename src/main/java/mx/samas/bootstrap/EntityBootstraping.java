@@ -652,7 +652,6 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
         valores.add(depo);
         BitacoraOrdenEjecutorDTO exec = new BitacoraOrdenEjecutorDTO();
         exec.setClavePizarra("NOPË");
-        exec.setFechaLiquidacion(a);
         exec.setFolioOperacion("asdfg2345");
         exec.setIdOperacion(orden.getId());
         exec.setNumeroContrato("ggtrfe");
