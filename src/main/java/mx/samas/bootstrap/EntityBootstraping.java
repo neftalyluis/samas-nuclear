@@ -22,6 +22,8 @@ import mx.samas.domain.VectorPortafolioModelo;
 import mx.samas.domain.TipoActivo;
 import mx.samas.domain.Transaccion;
 import mx.samas.domain.Usuario;
+import mx.samas.domain.dto.BitacoraOrdenEjecutorDTO;
+import mx.samas.domain.dto.BitacoraOrdenValorDTO;
 import mx.samas.service.ActivoService;
 import mx.samas.service.BancoService;
 import mx.samas.service.BitacoraOrdenService;
@@ -111,7 +113,7 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
             mo.setNombre("MiddleOffice");
 
             Perfil com = new Perfil();
-            com.setNombre("Complaiants");
+            com.setNombre("Complaints");
 
             Perfil adm = new Perfil();
             adm.setNombre("Admin");
@@ -636,6 +638,27 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
     }
 
     private void useOperationDeposito() {
+        BitacoraOrden orden = bitacoraOrdenService.findOrdenByNombre("Deposito de Efectivo");
+        Transaccion desposito = transaccionService.findByNombre("Deposito en efectivo del Cliente");
+        List<BitacoraOrdenValorDTO> valores = new ArrayList<>();
+        Date a = new Date();
+        BitacoraOrdenValorDTO depo = new BitacoraOrdenValorDTO();
+        depo.setEfectivo(76543.200);
+        depo.setTitulos(0L);
+        depo.setTransaccionId(desposito.getId());
+        depo.setFechaEjecucion(a);
+        depo.setFechaIngreso(a);
+        depo.setFechaLiquidacion(a);
+        valores.add(depo);
+        BitacoraOrdenEjecutorDTO exec = new BitacoraOrdenEjecutorDTO();
+        exec.setClavePizarra("NOPË");
+        exec.setFechaLiquidacion(a);
+        exec.setFolioOperacion("asdfg2345");
+        exec.setIdOperacion(orden.getId());
+        exec.setNumeroContrato("ggtrfe");
+        exec.setValorTransacciones(valores);
+
+        bitacoraOrdenService.executeOrden(exec);
         LOG.info("--Operaciones Ejemplo");
     }
 }

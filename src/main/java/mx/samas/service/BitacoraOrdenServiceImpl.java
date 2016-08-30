@@ -7,10 +7,14 @@ package mx.samas.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import mx.samas.domain.Bitacora;
 import mx.samas.domain.BitacoraOrden;
 import mx.samas.domain.Transaccion;
 import mx.samas.domain.dto.BitacoraOrdenDTO;
 import mx.samas.domain.dto.BitacoraOrdenEjecutorDTO;
+import mx.samas.domain.dto.BitacoraOrdenValorDTO;
 import mx.samas.repository.BitacoraOrdenRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,6 +26,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class BitacoraOrdenServiceImpl implements BitacoraOrdenService {
 
+    private static final Logger LOG = Logger.getLogger(BitacoraOrdenServiceImpl.class.getName());
+
     @Autowired
     private BitacoraOrdenRepository bitacoraOrdenRepository;
 
@@ -30,6 +36,12 @@ public class BitacoraOrdenServiceImpl implements BitacoraOrdenService {
 
     @Autowired
     private BitacoraService bitacoraService;
+
+    @Autowired
+    private ActivoService activoService;
+
+    @Autowired
+    private CuentaService cuentaService;
 
     @Override
     public BitacoraOrden createOrden(BitacoraOrdenDTO dto) {
@@ -61,20 +73,48 @@ public class BitacoraOrdenServiceImpl implements BitacoraOrdenService {
     }
 
     @Override
-    public void executeOrden(BitacoraOrdenEjecutorDTO ordenDto) {
-//        BitacoraOrden ordenEntidad = findOrdenById(ordenDto.getIdOperacion());
-//        List<Transaccion> listaTransacciones = ordenEntidad.getTransacciones();
-//
-//        List<Bitacora> listaTransaccionesABitacora = new ArrayList<>();
-//        
-//        for (BitacoraOrdenValorDTO bov : ordenDto.getValorTransacciones()) {
-//            for (Transaccion t : listaTransacciones) {
-//                if (t.getId().equals(bov.getTransaccionId())) {
-//                    Bitacora b = new Bitacora();
-//                    b.se
-//                }
-//            }
-//        }
+    public List<Bitacora> executeOrden(BitacoraOrdenEjecutorDTO ordenDto) {
+        //Buscamos la Orden en la DB por el Id
+        BitacoraOrden ordenEntidad = findOrdenById(ordenDto.getIdOperacion());
+        //Obtenemos las transacciones que componen esa orden
+        List<Transaccion> listaTransacciones = ordenEntidad.getTransacciones();
+        //Instaciamos nuestra lista de entradas de la Bitacora, por si acaso... :D
+        List<Bitacora> listaTransaccionesABitacora = new ArrayList<>();
+
+        //Iteramos en todos los valores
+        for (BitacoraOrdenValorDTO bov : ordenDto.getValorTransacciones()) {
+            //Buscamos una Transaccion que sea la misma con la del Valor
+            for (Transaccion t : listaTransacciones) {
+                if (t.getId().equals(bov.getTransaccionId())) {
+                    try {
+
+                        Bitacora b = new Bitacora();
+                        b.setTransaccion(t);
+                        b.setFechaEjecucion(bov.getFechaEjecucion());
+                        b.setFechaIngreso(bov.getFechaIngreso());
+                        b.setFechaLiquidacion(bov.getFechaLiquidacion());
+                        b.setFolioOperacion(ordenDto.getFolioOperacion());
+                        if (ordenEntidad.getUsaActivo()) {
+                            b.setActivo(activoService.getByClavePizarra(ordenDto.getClavePizarra()));
+                        }
+                        b.setContrato(cuentaService.getCuentaByCadena(ordenDto.getNumeroContrato()));
+//                    ///MMMMMM, hay que checar que ondas con la tasa
+//                    b.setTasa(Double.NaN);
+//                    Por ahora no pelamos el mercado, pero no es tan dificil hecharlo a andar
+//                    b.setMercado(mercado);
+                        //Validamos que el flujo de titulos y efectivo concuerde con el de la transaccion
+                        //ToDo: La validacion y sus excepciones
+                        b.setTitulos(bov.getTitulos());
+                        b.setPrecio(bov.getEfectivo());
+
+                        listaTransaccionesABitacora.add(b);
+                    } catch (Exception e) {
+                        LOG.log(Level.INFO, "Error en la construccion de la orden: {0}", e.getMessage());
+                    }
+                }
+            }
+        }
+        return bitacoraService.saveBitacoraEntries(listaTransaccionesABitacora);
     }
 
     @Override

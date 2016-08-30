@@ -76,7 +76,7 @@ public class Bitacora implements Serializable {
      * Contrato del que deriva esta entrada
      */
     @ManyToOne
-    private Portafolio contrato;
+    private Cuenta contrato;
 
     /**
      * Mercado en el cual se operó esta transaccion
@@ -220,14 +220,14 @@ public class Bitacora implements Serializable {
     /**
      * @return the contrato
      */
-    public Portafolio getContrato() {
+    public Cuenta getContrato() {
         return contrato;
     }
 
     /**
      * @param contrato the contrato to set
      */
-    public void setContrato(Portafolio contrato) {
+    public void setContrato(Cuenta contrato) {
         this.contrato = contrato;
     }
 

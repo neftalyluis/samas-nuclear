@@ -5,6 +5,9 @@
  */
 package mx.samas.service;
 
+
+import java.util.List;
+import mx.samas.domain.Bitacora;
 import mx.samas.domain.BitacoraOrden;
 import mx.samas.domain.dto.BitacoraOrdenDTO;
 import mx.samas.domain.dto.BitacoraOrdenEjecutorDTO;
@@ -23,5 +26,5 @@ public interface BitacoraOrdenService {
 
     public BitacoraOrden findOrdenById(Long id);
 
-    public void executeOrden(BitacoraOrdenEjecutorDTO orden);
+    public List<Bitacora> executeOrden(BitacoraOrdenEjecutorDTO orden);
 }
