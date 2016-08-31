@@ -16,9 +16,13 @@ import mx.samas.domain.Bitacora;
 public interface BitacoraService {
 
     public List<Bitacora> getBitacoraListWithOperationDate(Date operationDate);
-    
+
     public List<Bitacora> getBitacoraListWithContractNumber(Long contratoNumero);
-    
+
     public List<Bitacora> getBitacoraListForActivoWithClavePizarra(String clavePizarra);
+
+    public Bitacora saveBitacoraEntry(Bitacora entry);
+
+    public List<Bitacora> saveBitacoraEntries(List<Bitacora> bitacoraList);
 
 }

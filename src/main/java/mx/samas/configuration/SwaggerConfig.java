@@ -8,8 +8,7 @@ package mx.samas.configuration;
 import com.fasterxml.classmate.TypeResolver;
 import static com.google.common.collect.Lists.newArrayList;
 import java.lang.reflect.WildcardType;
-import java.time.LocalDate;
-import mx.samas.controllers.ActivoController;
+import java.util.Date;
 import mx.samas.controllers.ClienteController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -20,7 +19,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.context.request.async.DeferredResult;
 import springfox.documentation.builders.ApiInfoBuilder;
-import springfox.documentation.builders.ParameterBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.builders.ResponseMessageBuilder;
@@ -54,7 +52,7 @@ public class SwaggerConfig {
                 .paths(PathSelectors.any())
                 .build()
                 .pathMapping("/")
-                .directModelSubstitute(LocalDate.class,
+                .directModelSubstitute(Date.class,
                         String.class)
                 .genericModelSubstitutes(ResponseEntity.class)
                 .alternateTypeRules(

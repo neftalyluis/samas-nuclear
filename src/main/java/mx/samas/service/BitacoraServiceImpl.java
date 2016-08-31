@@ -42,4 +42,14 @@ public class BitacoraServiceImpl implements BitacoraService {
         return bitacoraRepository.findByActivo(a);
     }
 
+    @Override
+    public Bitacora saveBitacoraEntry(Bitacora entry) {
+        return bitacoraRepository.save(entry);
+    }
+
+    @Override
+    public List<Bitacora> saveBitacoraEntries(List<Bitacora> bitacoraList) {
+        return (List<Bitacora>) bitacoraRepository.save(bitacoraList);
+    }
+
 }

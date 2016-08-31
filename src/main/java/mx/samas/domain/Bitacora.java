@@ -61,7 +61,11 @@ public class Bitacora implements Serializable {
      * Precio total
      */
     private Double precio;
-
+    
+    /**
+     * Titulos totales
+     */
+    private Long titulos;
     /**
      * Tasa: Como precio en operacion en directo Tasa: Como tasa a devengar en
      * operaciones a credito
@@ -69,26 +73,18 @@ public class Bitacora implements Serializable {
     private Double tasa;
 
     /**
-     * Es el flujo de efectivo de la operación
-     */
-    private Double flujoEfectivo;
-
-    /**
-     * Flujo de titulos
-     */
-    private Long flujoTitulos;
-
-    /**
      * Contrato del que deriva esta entrada
      */
     @ManyToOne
-    private Portafolio contrato;
+    private Cuenta contrato;
 
     /**
      * Mercado en el cual se operó esta transaccion
      */
     @ManyToOne
     private Mercado mercado;
+    
+    private String folioOperacion;
 
     public Long getId() {
         return id;
@@ -222,44 +218,16 @@ public class Bitacora implements Serializable {
     }
 
     /**
-     * @return the flujoEfectivo
-     */
-    public Double getFlujoEfectivo() {
-        return flujoEfectivo;
-    }
-
-    /**
-     * @param flujoEfectivo the flujoEfectivo to set
-     */
-    public void setFlujoEfectivo(Double flujoEfectivo) {
-        this.flujoEfectivo = flujoEfectivo;
-    }
-
-    /**
-     * @return the flujoTitulos
-     */
-    public Long getFlujoTitulos() {
-        return flujoTitulos;
-    }
-
-    /**
-     * @param flujoTitulos the flujoTitulos to set
-     */
-    public void setFlujoTitulos(Long flujoTitulos) {
-        this.flujoTitulos = flujoTitulos;
-    }
-
-    /**
      * @return the contrato
      */
-    public Portafolio getContrato() {
+    public Cuenta getContrato() {
         return contrato;
     }
 
     /**
      * @param contrato the contrato to set
      */
-    public void setContrato(Portafolio contrato) {
+    public void setContrato(Cuenta contrato) {
         this.contrato = contrato;
     }
 
@@ -275,6 +243,34 @@ public class Bitacora implements Serializable {
      */
     public void setMercado(Mercado mercado) {
         this.mercado = mercado;
+    }
+
+    /**
+     * @return the titulos
+     */
+    public Long getTitulos() {
+        return titulos;
+    }
+
+    /**
+     * @param titulos the titulos to set
+     */
+    public void setTitulos(Long titulos) {
+        this.titulos = titulos;
+    }
+
+    /**
+     * @return the folioOperacion
+     */
+    public String getFolioOperacion() {
+        return folioOperacion;
+    }
+
+    /**
+     * @param folioOperacion the folioOperacion to set
+     */
+    public void setFolioOperacion(String folioOperacion) {
+        this.folioOperacion = folioOperacion;
     }
 
 }
