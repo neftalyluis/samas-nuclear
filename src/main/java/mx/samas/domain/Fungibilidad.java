@@ -6,30 +6,23 @@
 package mx.samas.domain;
 
 import java.io.Serializable;
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 
 /**
  *
  * @author samas
  */
 @Entity
-public class Mercado implements Serializable {
+public class Fungibilidad implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
-    private String nombre;
     
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private Activo monedaDenominacion;
 
     public Long getId() {
         return id;
@@ -49,10 +42,10 @@ public class Mercado implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Mercado)) {
+        if (!(object instanceof Fungibilidad)) {
             return false;
         }
-        Mercado other = (Mercado) object;
+        Fungibilidad other = (Fungibilidad) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -61,35 +54,7 @@ public class Mercado implements Serializable {
 
     @Override
     public String toString() {
-        return "mx.samas.newdomain.Mercado[ id=" + id + " ]";
+        return "mx.samas.domain.Fungibilidad[ id=" + id + " ]";
     }
-
-    /**
-     * @return the nombre
-     */
-    public String getNombre() {
-        return nombre;
-    }
-
-    /**
-     * @param nombre the nombre to set
-     */
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    /**
-     * @return the monedaDenominacion
-     */
-    public Activo getMonedaDenominacion() {
-        return monedaDenominacion;
-    }
-
-    /**
-     * @param monedaDenominacion the monedaDenominacion to set
-     */
-    public void setMonedaDenominacion(Activo monedaDenominacion) {
-        this.monedaDenominacion = monedaDenominacion;
-    }
-
+    
 }

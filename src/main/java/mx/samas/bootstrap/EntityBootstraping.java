@@ -96,6 +96,7 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
         persistTransacciones();
         persistPortfolioEstatus();
         useOperationDeposito();
+        useOperationCompraAccion();
     }
 
     private boolean persistPerfiles() {
@@ -658,6 +659,54 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
         exec.setValorTransacciones(valores);
 
         bitacoraOrdenService.executeOrden(exec);
-        LOG.info("--Operaciones Ejemplo");
+        LOG.info("--Operacion Deposito");
+    }
+
+    private void useOperationCompraAccion() {
+        BitacoraOrden orden = bitacoraOrdenService.findOrdenByNombre("Compra");
+
+        Transaccion compraActivo = transaccionService.findByNombre("Compra");
+        Transaccion comision = transaccionService.findByNombre("Comisión");
+        Transaccion iva = transaccionService.findByNombre("IVA");
+
+        List<BitacoraOrdenValorDTO> valores = new ArrayList<>();
+        Date a = new Date();
+
+        BitacoraOrdenValorDTO comp = new BitacoraOrdenValorDTO();
+        comp.setEfectivo(-399839.05);
+        comp.setTitulos(121L);
+        comp.setTransaccionId(compraActivo.getId());
+        comp.setFechaEjecucion(a);
+        comp.setFechaIngreso(a);
+        comp.setFechaLiquidacion(a);
+        valores.add(comp);
+
+        BitacoraOrdenValorDTO comi = new BitacoraOrdenValorDTO();
+        comi.setEfectivo(-319.87);
+        comi.setTitulos(0L);
+        comi.setTransaccionId(comision.getId());
+        comi.setFechaEjecucion(a);
+        comi.setFechaIngreso(a);
+        comi.setFechaLiquidacion(a);
+        valores.add(comi);
+
+        BitacoraOrdenValorDTO iv = new BitacoraOrdenValorDTO();
+        iv.setEfectivo(-5412.25);
+        iv.setTitulos(0L);
+        iv.setTransaccionId(iva.getId());
+        iv.setFechaEjecucion(a);
+        iv.setFechaIngreso(a);
+        iv.setFechaLiquidacion(a);
+        valores.add(iv);
+
+        BitacoraOrdenEjecutorDTO exec = new BitacoraOrdenEjecutorDTO();
+        exec.setClavePizarra("1A_AMZN_*");
+        exec.setFolioOperacion("asdfg2654345");
+        exec.setIdOperacion(orden.getId());
+        exec.setNumeroContrato("ggtrfe");
+        exec.setValorTransacciones(valores);
+
+        bitacoraOrdenService.executeOrden(exec);
+        LOG.info("--Operacion Compra");
     }
 }

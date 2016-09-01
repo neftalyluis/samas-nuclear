@@ -36,6 +36,11 @@ public class VectorPosicion implements Serializable {
     private Activo activo;
 
     private Long cantidad;
+    private Double valuacion;
+    private Boolean enPrenda;
+    private Boolean reporto;
+    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
+    private Date fechaVencimiento;
 
     /**
      * Si es collateral esta posicion es la prenda que respalda el credito; de
@@ -91,7 +96,6 @@ public class VectorPosicion implements Serializable {
         this.fecha = fecha;
     }
 
-
     /**
      * @return the activo
      */
@@ -146,6 +150,62 @@ public class VectorPosicion implements Serializable {
      */
     public void setPortafolio(Portafolio portafolio) {
         this.portafolio = portafolio;
+    }
+
+    /**
+     * @return the valuacion
+     */
+    public Double getValuacion() {
+        return valuacion;
+    }
+
+    /**
+     * @param valuacion the valuacion to set
+     */
+    public void setValuacion(Double valuacion) {
+        this.valuacion = valuacion;
+    }
+
+    /**
+     * @return the enPrenda
+     */
+    public Boolean getEnPrenda() {
+        return enPrenda;
+    }
+
+    /**
+     * @param enPrenda the enPrenda to set
+     */
+    public void setEnPrenda(Boolean enPrenda) {
+        this.enPrenda = enPrenda;
+    }
+
+    /**
+     * @return the reporto
+     */
+    public Boolean getReporto() {
+        return reporto;
+    }
+
+    /**
+     * @param reporto the reporto to set
+     */
+    public void setReporto(Boolean reporto) {
+        this.reporto = reporto;
+    }
+
+    /**
+     * @return the fechaVencimiento
+     */
+    public Date getFechaVencimiento() {
+        return fechaVencimiento;
+    }
+
+    /**
+     * @param fechaVencimiento the fechaVencimiento to set
+     */
+    public void setFechaVencimiento(Date fechaVencimiento) {
+        this.fechaVencimiento = fechaVencimiento;
     }
 
 }
