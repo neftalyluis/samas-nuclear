@@ -19,4 +19,6 @@ public interface TransaccionService {
     public void createTransaccionesFromList(List<Transaccion> transacciones);
 
     public Transaccion findById(Long id);
+    
+    public List<Transaccion> getAllTransacciones();
 }

@@ -105,7 +105,7 @@ public class BitacoraOrdenServiceImpl implements BitacoraOrdenService {
                         //Validamos que el flujo de titulos y efectivo concuerde con el de la transaccion
                         //ToDo: La validacion y sus excepciones
                         b.setTitulos(bov.getTitulos());
-                        b.setPrecio(bov.getEfectivo());
+                        b.setImporte(bov.getEfectivo());
 
                         listaTransaccionesABitacora.add(b);
                     } catch (Exception e) {

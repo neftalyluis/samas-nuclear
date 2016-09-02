@@ -60,7 +60,7 @@ public class Bitacora implements Serializable {
     /**
      * Precio total
      */
-    private Double precio;
+    private Double importe;
     
     /**
      * Titulos totales
@@ -189,19 +189,6 @@ public class Bitacora implements Serializable {
         this.transaccion = transaccion;
     }
 
-    /**
-     * @return the precio
-     */
-    public Double getPrecio() {
-        return precio;
-    }
-
-    /**
-     * @param precio the precio to set
-     */
-    public void setPrecio(Double precio) {
-        this.precio = precio;
-    }
 
     /**
      * @return the tasa
@@ -271,6 +258,20 @@ public class Bitacora implements Serializable {
      */
     public void setFolioOperacion(String folioOperacion) {
         this.folioOperacion = folioOperacion;
+    }
+
+    /**
+     * @return the importe
+     */
+    public Double getImporte() {
+        return importe;
+    }
+
+    /**
+     * @param importe the importe to set
+     */
+    public void setImporte(Double importe) {
+        this.importe = importe;
     }
 
 }
