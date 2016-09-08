@@ -12,7 +12,8 @@ import mx.samas.domain.Cuenta;
  * @author samas
  */
 public interface CuentaService {
-    
+
     public Cuenta getCuentaByCadena(String cadena);
-    
+
+    public Cuenta createOrUpdateCuenta(Cuenta c);
 }

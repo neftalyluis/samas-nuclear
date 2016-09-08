@@ -25,4 +25,9 @@ public class PortafolioEstatusServiceImpl implements PortafolioEstatusService {
         portafolioEstatusRepository.save(pe);
     }
 
+    @Override
+    public PortafolioEstatus getPortafolioEstatusByNombre(String nombre) {
+        return portafolioEstatusRepository.findOneByNombre(nombre);
+    }
+
 }

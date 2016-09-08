@@ -5,16 +5,13 @@
  */
 package mx.samas.service;
 
-import mx.samas.domain.PortafolioEstatus;
+import mx.samas.domain.Portafolio;
 
 /**
  *
  * @author samas
  */
-public interface PortafolioEstatusService {
+public interface PortafolioService {
 
-    public void createPortafolioEstatus(PortafolioEstatus pe);
-    
-    public PortafolioEstatus getPortafolioEstatusByNombre(String nombre);
-
+    public Portafolio createPortafolio(Portafolio p);
 }

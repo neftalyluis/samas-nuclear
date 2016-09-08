@@ -37,7 +37,7 @@ public class Cliente implements Serializable {
     private Boolean elegible;
 
     @JsonIgnore
-    @ManyToMany
+    @ManyToMany(mappedBy = "clientes")
     private List<Cuenta> cuentas;
 
     public Cliente() {

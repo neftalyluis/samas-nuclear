@@ -14,6 +14,7 @@ import org.springframework.stereotype.Repository;
  * @author samas
  */
 @Repository
-public interface PortafolioEstatusRepository extends PagingAndSortingRepository<PortafolioEstatus, Long>{
-    
+public interface PortafolioEstatusRepository extends PagingAndSortingRepository<PortafolioEstatus, Long> {
+
+    public PortafolioEstatus findOneByNombre(String nombre);
 }

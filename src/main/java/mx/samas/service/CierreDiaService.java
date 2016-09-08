@@ -5,16 +5,17 @@
  */
 package mx.samas.service;
 
-import mx.samas.domain.PortafolioEstatus;
-
 /**
  *
  * @author samas
  */
-public interface PortafolioEstatusService {
+public interface CierreDiaService {
 
-    public void createPortafolioEstatus(PortafolioEstatus pe);
+    public void sumatoriaPosiciones();
+
+    public void valuacionActivos();
     
-    public PortafolioEstatus getPortafolioEstatusByNombre(String nombre);
-
+    public void devengos();
+    
+    public void precioPortafolios();
 }

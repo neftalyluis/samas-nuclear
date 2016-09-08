@@ -25,4 +25,9 @@ public class CuentaServiceImpl implements CuentaService {
         return cuentaRepository.getCuentaByCadena(cadena);
     }
 
+    @Override
+    public Cuenta createOrUpdateCuenta(Cuenta c) {
+        return cuentaRepository.save(c);
+    }
+
 }
