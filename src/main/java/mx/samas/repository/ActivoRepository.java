@@ -23,4 +23,6 @@ public interface ActivoRepository extends PagingAndSortingRepository<Activo, Lon
 
     public Activo findFirstByClavePizarra(String clavePizarra);
 
+    public Boolean existWithClavePizarra(String clavePizarra);
+
 }

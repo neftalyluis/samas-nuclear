@@ -9,8 +9,11 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
-import java.util.logging.Level;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.logging.Logger;
+import mx.samas.domain.Activo;
+import mx.samas.domain.VectorActivo;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
@@ -29,19 +32,32 @@ public class PipParser {
 
     private static final char PIP_DELIMITER = '\'';
 
-    public PipParser(String url) {
+    private final ActivoBuilder activoBuilder;
+
+    private final VectorActivoBuilder vectorActivoBuilder;
+
+    public PipParser(String url, Date fecha) throws IOException {
         this.urlFile = url;
-        LOG.log(Level.INFO, "Inicializamos PipReader para el archivo: {0}", url);
+        this.activoBuilder = new ActivoBuilder();
+        this.vectorActivoBuilder = new VectorActivoBuilder(fecha);
     }
 
-    public void printNombres() throws FileNotFoundException, IOException {
+    public void execute() throws FileNotFoundException, IOException {
 
         ClassLoader classLoader = getClass().getClassLoader();
         Reader in = new FileReader(classLoader.getResource(PIP_LOCATION + urlFile).getFile());
         final CSVParser parser = new CSVParser(in, CSVFormat.EXCEL.withHeader().withQuote(PIP_DELIMITER));
-        LOG.info("Imprimimos nombres de activos en vector para debug");
         for (CSVRecord record : parser) {
-            LOG.info(record.get(9));
+            activoBuilder.addActivo(record);
+            vectorActivoBuilder.addVectorActivo(record);
         }
+    }
+
+    public HashMap<String, Activo> getActivoMap() {
+        return activoBuilder.getActivos();
+    }
+
+    public HashMap<String, VectorActivo> getVectorActivoMap() {
+        return vectorActivoBuilder.getVectorActivos();
     }
 }

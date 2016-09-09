@@ -6,8 +6,11 @@
 package mx.samas.bootstrap;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -100,12 +103,7 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
                 + "  ____) / ____ \\| |  | |/ ____ \\ ____) |\n"
                 + " |_____/_/    \\_\\_|  |_/_/    \\_\\_____/");
         System.out.println("========================================");
-        try {
-            PipParser p = new PipParser("VectorTest.csv");
-            p.printNombres();
-        } catch (IOException ex) {
-            Logger.getLogger(EntityBootstraping.class.getName()).log(Level.SEVERE, null, ex);
-        }
+
         persistPerfiles();
         persistBancos();
         persistClientesAndCuenta();
@@ -333,10 +331,18 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
         brfs.setSerie("N");
         brfs.setNombre("BRASIL FOODS SA");
         brfs.setClavePizarra("1A_BRFS_N");
-
         Activo lqs = new Activo("Liquidez", "1", "LQS", "1");
         lqs.setTipo(TipoActivo.ACCION);
 
+//        PipParser p = new PipParser("VectorTest.csv", parseDateFromString("20130227"));
+//        p.execute();
+//        HashMap<String, Activo> mapActivo = p.getActivoMap();
+//        LOG.log(Level.INFO, "--Total PIP Activo: {0}", mapActivo.size());
+//        for (Activo value : mapActivo.values()) {
+//            activoService.createActivo(value);
+//        }
+//
+//        LOG.info("--Activos From PIP");
         try {
 
             activoService.createActivo(amzn);
@@ -761,5 +767,10 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
 
         bitacoraOrdenService.executeOrden(exec);
         LOG.info("--Operacion Compra");
+    }
+
+    private Date parseDateFromString(String d) throws ParseException {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd");
+        return formatter.parse(d);
     }
 }

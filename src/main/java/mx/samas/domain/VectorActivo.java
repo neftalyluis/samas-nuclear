@@ -6,6 +6,7 @@
 package mx.samas.domain;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,6 +15,8 @@ import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import mx.samas.domain.dto.ActivoPropiedadValor;
 
 /**
@@ -27,6 +30,9 @@ public class VectorActivo implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    
+    @Temporal(TemporalType.DATE)
+    private Date fecha;
 
     @ManyToOne
     private Activo activo;
@@ -126,6 +132,20 @@ public class VectorActivo implements Serializable {
      */
     public void setPropiedades(List<ActivoPropiedad> propiedades) {
         this.propiedades = propiedades;
+    }
+
+    /**
+     * @return the fecha
+     */
+    public Date getFecha() {
+        return fecha;
+    }
+
+    /**
+     * @param fecha the fecha to set
+     */
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
     }
 
 }

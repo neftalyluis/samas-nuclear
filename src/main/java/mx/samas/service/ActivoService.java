@@ -26,5 +26,5 @@ public interface ActivoService {
     public Activo createActivo(Activo input);
     
     public List<ActivoPropiedadValor> getPropiedadesFromActivo(Long id);
-
+    
 }

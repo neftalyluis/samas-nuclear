@@ -18,6 +18,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 import mx.samas.domain.dto.ActivoPropiedadValor;
@@ -27,6 +28,9 @@ import mx.samas.domain.dto.ActivoPropiedadValor;
  * @author samas
  */
 @Entity
+@NamedQuery(name = "Activo.existWithClavePizarra", 
+        query = "SELECT CASE WHEN (count(act) > 0) THEN TRUE ELSE FALSE END "
+                + "FROM Activo act WHERE act.clavePizarra = :clavePizarra")
 public class Activo implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -97,7 +101,7 @@ public class Activo implements Serializable {
     @JsonIgnore
     @Lob
     private List<ActivoPropiedadValor> propiedadesValor;
-    
+
     @JsonIgnore
     @ManyToMany
     private List<ActivoPropiedad> propiedades;

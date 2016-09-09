@@ -6,12 +6,14 @@
 package mx.samas.domain;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 /**
  *
@@ -40,6 +42,11 @@ public class ActivoPropiedad implements Serializable {
      */
     @Enumerated(EnumType.ORDINAL)
     private TipoDato tipoDato;
+    
+    private String indice;
+    
+    @OneToMany
+    private List<FuenteDatos> fuenteInformacion;
 
     public Long getId() {
         return id;
@@ -114,6 +121,34 @@ public class ActivoPropiedad implements Serializable {
      */
     public void setTipoDato(TipoDato tipoDato) {
         this.tipoDato = tipoDato;
+    }
+
+    /**
+     * @return the indice
+     */
+    public String getIndice() {
+        return indice;
+    }
+
+    /**
+     * @param indice the indice to set
+     */
+    public void setIndice(String indice) {
+        this.indice = indice;
+    }
+
+    /**
+     * @return the fuenteInformacion
+     */
+    public List<FuenteDatos> getFuenteInformacion() {
+        return fuenteInformacion;
+    }
+
+    /**
+     * @param fuenteInformacion the fuenteInformacion to set
+     */
+    public void setFuenteInformacion(List<FuenteDatos> fuenteInformacion) {
+        this.fuenteInformacion = fuenteInformacion;
     }
 
 }
