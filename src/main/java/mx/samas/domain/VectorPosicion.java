@@ -13,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
@@ -36,10 +37,14 @@ public class VectorPosicion implements Serializable {
     private Activo activo;
 
     private Long cantidad;
+    
     private Double valuacion;
+    
     private Boolean enPrenda;
+    
     private Boolean reporto;
-    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
+    
+    @Temporal(TemporalType.TIMESTAMP)
     private Date fechaVencimiento;
 
     /**

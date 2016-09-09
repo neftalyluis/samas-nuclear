@@ -15,8 +15,8 @@ import org.springframework.stereotype.Service;
  * @author samas
  */
 @Service
-public class BancoServiceImpl implements BancoService{
-    
+public class BancoServiceImpl implements BancoService {
+
     @Autowired
     private BancoRepository bancoRepository;
 
@@ -24,5 +24,10 @@ public class BancoServiceImpl implements BancoService{
     public void createBanco(Banco b) {
         bancoRepository.save(b);
     }
-    
+
+    @Override
+    public Banco getByNombre(String nombre) {
+        return bancoRepository.findByNombre(nombre);
+    }
+
 }

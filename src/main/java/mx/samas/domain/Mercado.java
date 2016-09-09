@@ -27,9 +27,17 @@ public class Mercado implements Serializable {
     private Long id;
 
     private String nombre;
-    
+
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Activo monedaDenominacion;
+
+    private Long fechaValorAccion;
+
+    private Long fechaValorBono;
+
+    private Long fechaValorDerivado;
+
+    private Long fechaValorMoneda;
 
     public Long getId() {
         return id;
@@ -90,6 +98,62 @@ public class Mercado implements Serializable {
      */
     public void setMonedaDenominacion(Activo monedaDenominacion) {
         this.monedaDenominacion = monedaDenominacion;
+    }
+
+    /**
+     * @return the fechaValorAccion
+     */
+    public Long getFechaValorAccion() {
+        return fechaValorAccion;
+    }
+
+    /**
+     * @param fechaValorAccion the fechaValorAccion to set
+     */
+    public void setFechaValorAccion(Long fechaValorAccion) {
+        this.fechaValorAccion = fechaValorAccion;
+    }
+
+    /**
+     * @return the fechaValorBono
+     */
+    public Long getFechaValorBono() {
+        return fechaValorBono;
+    }
+
+    /**
+     * @param fechaValorBono the fechaValorBono to set
+     */
+    public void setFechaValorBono(Long fechaValorBono) {
+        this.fechaValorBono = fechaValorBono;
+    }
+
+    /**
+     * @return the fechaValorDerivado
+     */
+    public Long getFechaValorDerivado() {
+        return fechaValorDerivado;
+    }
+
+    /**
+     * @param fechaValorDerivado the fechaValorDerivado to set
+     */
+    public void setFechaValorDerivado(Long fechaValorDerivado) {
+        this.fechaValorDerivado = fechaValorDerivado;
+    }
+
+    /**
+     * @return the fechaValorMoneda
+     */
+    public Long getFechaValorMoneda() {
+        return fechaValorMoneda;
+    }
+
+    /**
+     * @param fechaValorMoneda the fechaValorMoneda to set
+     */
+    public void setFechaValorMoneda(Long fechaValorMoneda) {
+        this.fechaValorMoneda = fechaValorMoneda;
     }
 
 }

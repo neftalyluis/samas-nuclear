@@ -5,6 +5,7 @@
  */
 package mx.samas.bootstrap;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -38,6 +39,7 @@ import mx.samas.service.PortafolioEstatusService;
 import mx.samas.service.PortafolioService;
 import mx.samas.service.TransaccionService;
 import mx.samas.service.UsuarioService;
+import mx.samas.util.PipParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.ApplicationListener;
@@ -49,48 +51,48 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class EntityBootstraping implements ApplicationListener<ApplicationReadyEvent> {
-    
+
     private static final Logger LOG = Logger.getLogger(EntityBootstraping.class.getName());
-    
+
     @Autowired
     private ClienteService clienteService;
-    
+
     @Autowired
     private ActivoService activoService;
-    
+
     @Autowired
     private EstrategiaService estrategiaService;
-    
+
     @Autowired
     private BancoService bancoService;
-    
+
     @Autowired
     private TransaccionService transaccionService;
-    
+
     @Autowired
     private DuenoFuenteService duenoFuenteService;
-    
+
     @Autowired
     private PortafolioEstatusService portafolioEstatusService;
-    
+
     @Autowired
     private PerfilService perfilService;
-    
+
     @Autowired
     private UsuarioService usuarioService;
-    
+
     @Autowired
     private CuentaService cuentaService;
-    
+
     @Autowired
     private BitacoraOrdenService bitacoraOrdenService;
-    
+
     @Autowired
     private PortafolioService portafolioService;
-    
+
     @Override
     public void onApplicationEvent(ApplicationReadyEvent event) {
-        
+
         System.out.println("========================================");
         System.out.println("  / ____|  /\\   |  \\/  |   /\\    / ____|\n"
                 + " | (___   /  \\  | \\  / |  /  \\  | (___  \n"
@@ -98,37 +100,43 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
                 + "  ____) / ____ \\| |  | |/ ____ \\ ____) |\n"
                 + " |_____/_/    \\_\\_|  |_/_/    \\_\\_____/");
         System.out.println("========================================");
+        try {
+            PipParser p = new PipParser("VectorTest.csv");
+            p.printNombres();
+        } catch (IOException ex) {
+            Logger.getLogger(EntityBootstraping.class.getName()).log(Level.SEVERE, null, ex);
+        }
         persistPerfiles();
+        persistBancos();
         persistClientesAndCuenta();
         persistActivos();
-        persistEstrategiasAndPortafolioModelo();
-        persistBancos();
-        persistTransacciones();
         persistPortfolioEstatus();
+        persistEstrategiasAndPortafolioModelo();
+        persistTransacciones();
         useOperationDeposito();
         useOperationCompraAccion();
     }
-    
+
     private boolean persistPerfiles() {
         try {
-            
+
             ArrayList<Perfil> perfiles = new ArrayList();
-            
+
             Perfil fo = new Perfil();
             fo.setNombre("FrontOffice");
-            
+
             Perfil bo = new Perfil();
             bo.setNombre("BackOffice");
-            
+
             Perfil mo = new Perfil();
             mo.setNombre("MiddleOffice");
-            
+
             Perfil com = new Perfil();
             com.setNombre("Complaints");
-            
+
             Perfil adm = new Perfil();
             adm.setNombre("Admin");
-            
+
             perfiles.add(fo);
             perfiles.add(bo);
             perfiles.add(mo);
@@ -136,7 +144,7 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
             perfiles.add(adm);
             perfilService.createPerfilesFromList(perfiles);
             LOG.info("--PerfilesDeUsuario");
-            
+
             Usuario samas = new Usuario();
             samas.setNombreCompleto("SAMAS Admin");
             samas.setNombreUsuario("samas");
@@ -144,48 +152,62 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
             samas.setPerfiles(perfiles);
             usuarioService.createUsuario(samas);
             LOG.info("--Usuario SAMAS");
-            
+
             return true;
         } catch (Exception e) {
             LOG.log(Level.WARNING, "No pudimos persistir los Perfiles de Usuario, la excepcion es: {0}", e.getMessage());
             return false;
         }
     }
-    
+
+    private boolean persistBancos() {
+        Banco b = new Banco();
+        b.setNombre("HSBC");
+        try {
+            bancoService.createBanco(b);
+            LOG.info("--Bancos");
+            return true;
+        } catch (Exception e) {
+            LOG.log(Level.WARNING, "No pudimos persistir el Bank, la excepcion es: {0}", e.getMessage());
+            return false;
+        }
+    }
+
     private boolean persistClientesAndCuenta() {
         try {
-            
+
             Cliente j = new Cliente("Juan");
             Cliente a = new Cliente("Eduardo");
             Cliente e = new Cliente("Ricardo");
-            
+
             clienteService.createCliente(e);
             clienteService.createCliente(a);
             clienteService.createCliente(j);
-            
+
             LOG.info("--Clientes");
-            
+
             Cuenta c = new Cuenta();
             c.setCadena("ABCD_1234");
-            
+
             List<Cliente> clientes = new ArrayList<>();
             clientes.add(e);
             clientes.add(a);
             clientes.add(j);
-            
+
             c.setClientes(clientes);
+            c.setBanco(bancoService.getByNombre("HSBC"));
             cuentaService.createOrUpdateCuenta(c);
             LOG.info("--Cuenta");
-            
+
             return true;
         } catch (Exception e) {
             LOG.log(Level.WARNING, "No pudimos persistir los Clientes, la excepcion es: {0}", e.getMessage());
             return false;
         }
     }
-    
+
     private boolean persistActivos() {
-        
+
         Activo amzn = new Activo();
         amzn.setTipo(TipoActivo.ACCION);
 //        amzn.setMonedaDenominacion(cb.getMXPCurrency());
@@ -194,7 +216,7 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
         amzn.setSerie("*");
         amzn.setNombre("AMAZON COM INC");
         amzn.setClavePizarra("1A_AMZN_*");
-        
+
         Activo tsla = new Activo();
         tsla.setTipo(TipoActivo.ACCION);
 //        tsla.setMonedaDenominacion(cb.getMXPCurrency());
@@ -203,7 +225,7 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
         tsla.setSerie("*");
         tsla.setNombre("TESLA INC");
         tsla.setClavePizarra("1A_TSLA_*");
-        
+
         Activo fiat = new Activo();
         fiat.setTipo(TipoActivo.ACCION);
 //        fiat.setMonedaDenominacion(cb.getMXPCurrency());
@@ -212,7 +234,7 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
         fiat.setSerie("*");
         fiat.setNombre("FIAT SPA");
         fiat.setClavePizarra("1A_F_*");
-        
+
         Activo gfr = new Activo();
         gfr.setTipo(TipoActivo.ACCION);
 //        gfr.setMonedaDenominacion(cb.getMXPCurrency());
@@ -221,7 +243,7 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
         gfr.setSerie("O");
         gfr.setNombre("AF BANREGIO  S.A. DE C.V. SOFOM");
         gfr.setClavePizarra("1_GFREGIO_O");
-        
+
         Activo amd = new Activo();
         amd.setTipo(TipoActivo.ACCION);
 //        amd.setMonedaDenominacion(cb.getMXPCurrency());
@@ -230,7 +252,7 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
         amd.setSerie("*");
         amd.setNombre("AMD");
         amd.setClavePizarra("1A_AMD_*");
-        
+
         Activo kimber = new Activo();
         kimber.setTipo(TipoActivo.ACCION);
 //        kimber.setMonedaDenominacion(cb.getMXPCurrency());
@@ -239,7 +261,7 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
         kimber.setSerie("A");
         kimber.setNombre("KIMBERLY-CLARK DE MÉXICO S. A. B. DE C. V.");
         kimber.setClavePizarra("1_KIMBER_A");
-        
+
         Activo ivv = new Activo();
         ivv.setTipo(TipoActivo.ACCION);
 //        ivv.setMonedaDenominacion(cb.getMXPCurrency());
@@ -248,7 +270,7 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
         ivv.setSerie("*");
         ivv.setNombre("ISHARES CORE S&P 500 ETF");
         ivv.setClavePizarra("1I_IVV_*");
-        
+
         Activo udibono40 = new Activo();
         udibono40.setTipo(TipoActivo.BONO);
 //        udibono40.setMonedaDenominacion(cb.getMXPCurrency());
@@ -257,7 +279,7 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
         udibono40.setSerie("401115");
         udibono40.setNombre("SECRETARÍA DE HACIENDA Y CRÉDITO PÚBLICO");
         udibono40.setClavePizarra("S_UDIBONO_401115");
-        
+
         Activo udibono22 = new Activo();
         udibono22.setTipo(TipoActivo.BONO);
 //        udibono22.setMonedaDenominacion(cb.getMXPCurrency());
@@ -266,7 +288,7 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
         udibono22.setSerie("220609");
         udibono22.setNombre("SECRETARÍA DE HACIENDA Y CRÉDITO PÚBLICO");
         udibono22.setClavePizarra("S_UDIBONO_220609");
-        
+
         Activo udibono16 = new Activo();
         udibono16.setTipo(TipoActivo.BONO);
 //        udibono16.setMonedaDenominacion(cb.getMXPCurrency());
@@ -275,7 +297,7 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
         udibono16.setSerie("161215");
         udibono16.setNombre("SECRETARÍA DE HACIENDA Y CRÉDITO PÚBLICO");
         udibono16.setClavePizarra("S_UDIBONO_160616");
-        
+
         Activo bonos42 = new Activo();
         bonos42.setTipo(TipoActivo.BONO);
 //        bonos42.setMonedaDenominacion(cb.getMXPCurrency());
@@ -284,7 +306,7 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
         bonos42.setSerie("421113");
         bonos42.setNombre("SECRETARÍA DE HACIENDA Y CRÉDITO PÚBLICO");
         bonos42.setClavePizarra("M_BONOS_421113");
-        
+
         Activo bonos24 = new Activo();
         bonos24.setTipo(TipoActivo.BONO);
 //        bonos24.setMonedaDenominacion(cb.getMXPCurrency());
@@ -293,7 +315,7 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
         bonos24.setSerie("241205");
         bonos24.setNombre("SECRETARÍA DE HACIENDA Y CRÉDITO PÚBLICO");
         bonos24.setClavePizarra("M_BONOS_241205");
-        
+
         Activo bonos16 = new Activo();
         bonos16.setTipo(TipoActivo.BONO);
 //        bonos16.setMonedaDenominacion(cb.getMXPCurrency());
@@ -302,7 +324,7 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
         bonos16.setSerie("161215");
         bonos16.setNombre("SECRETARÍA DE HACIENDA Y CRÉDITO PÚBLICO");
         bonos16.setClavePizarra("M_BONOS_161215");
-        
+
         Activo brfs = new Activo();
         brfs.setTipo(TipoActivo.ACCION);
 //        brfs.setMonedaDenominacion(cb.getMXPCurrency());
@@ -311,12 +333,12 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
         brfs.setSerie("N");
         brfs.setNombre("BRASIL FOODS SA");
         brfs.setClavePizarra("1A_BRFS_N");
-        
+
         Activo lqs = new Activo("Liquidez", "1", "LQS", "1");
         lqs.setTipo(TipoActivo.ACCION);
-        
+
         try {
-            
+
             activoService.createActivo(amzn);
             activoService.createActivo(tsla);
             activoService.createActivo(fiat);
@@ -332,16 +354,16 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
             activoService.createActivo(bonos42);
             activoService.createActivo(brfs);
             activoService.createActivo(lqs);
-            
+
             LOG.info("--Activos");
             return true;
         } catch (Exception e) {
             LOG.log(Level.WARNING, "No pudimos persistir los Assets iniciales, la excepcion es: {0}", e.getMessage());
             return false;
         }
-        
+
     }
-    
+
     private boolean persistEstrategiasAndPortafolioModelo() {
         try {
             ///Cuenta Padre(?)
@@ -365,10 +387,10 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
             lsv.add(new VectorPortafolioModelo(new Date(), activoService.getByClavePizarra("S_UDIBONO_220609"), divydeu, 10.0));
             lsv.add(new VectorPortafolioModelo(new Date(), activoService.getByClavePizarra("S_UDIBONO_401115"), divydeu, 5.0));
             lsv.add(new VectorPortafolioModelo(new Date(), activoService.getByClavePizarra("1_LQS_1"), divydeu, 5.0));
-            
+
             divydeu.setEstrategiaModelo(lsv);
             estrategiaService.createEstrategia(divydeu);
-            
+
             Portafolio p1 = new Portafolio();
             p1.setEstrategia(divydeu);
             p1.setFecha(new Date());
@@ -390,51 +412,38 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
             lsv.add(new VectorPortafolioModelo(new Date(), activoService.getByClavePizarra("M_BONOS_421113"), lqs, 5.0));
             lqs.setEstrategiaModelo(lsv);
             estrategiaService.createEstrategia(lqs);
-            
+
             Portafolio p2 = new Portafolio();
             p2.setEstrategia(lqs);
             p2.setFecha(new Date());
             p2.setEstatus(portafolioEstatusService.getPortafolioEstatusByNombre("Active"));
             portafolioService.createPortafolio(p2);
             LOG.info("--Estrategias y Portafolios");
-            
+
             List<Portafolio> pl = new ArrayList();
             pl.add(p2);
             pl.add(p1);
             c.setPortafolios(pl);
             cuentaService.createOrUpdateCuenta(c);
             LOG.info("--Actualizamos Cuenta");
-            
+
             return true;
         } catch (Exception e) {
             LOG.log(Level.WARNING, "No pudimos persistir las Estrategias y sus Modelos, la excepcion es: {0} ", e.getMessage());
             e.printStackTrace();
             return false;
         }
-        
+
     }
-    
-    private boolean persistBancos() {
-        Banco b = new Banco();
-        b.setNombre("HSBC");
-        try {
-            bancoService.createBanco(b);
-            LOG.info("--Bancos");
-            return true;
-        } catch (Exception e) {
-            LOG.log(Level.WARNING, "No pudimos persistir el Bank, la excepcion es: {0}", e.getMessage());
-            return false;
-        }
-    }
-    
+
     private boolean persistTransacciones() {
-        
+
         DuenoFuente bu = new DuenoFuente("Business");
         DuenoFuente cl = new DuenoFuente("Client");
         DuenoFuente po = new DuenoFuente("Portfolio");
         DuenoFuente br = new DuenoFuente("Broker");
         DuenoFuente ha = new DuenoFuente("Treasury");
-        
+
         List<Transaccion> tl = new ArrayList<>();
 //////////////////////////////////////////////CLIENT
         Transaccion depositMoneyFromClient = new Transaccion();
@@ -444,7 +453,7 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
         depositMoneyFromClient.setCredito(false);
         depositMoneyFromClient.setFuenteTransaccion(cl);
         tl.add(depositMoneyFromClient);
-        
+
         Transaccion depositTitlesFromClient = new Transaccion();
         depositTitlesFromClient.setNombre("Deposito en titulos del Cliente");
         depositTitlesFromClient.setFlujoEfectivo(new Long(0));
@@ -452,7 +461,7 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
         depositTitlesFromClient.setCredito(false);
         depositTitlesFromClient.setFuenteTransaccion(cl);
         tl.add(depositTitlesFromClient);
-        
+
         Transaccion withdrawalMoneyFromClient = new Transaccion();
         withdrawalMoneyFromClient.setNombre("Retiro de Efectivo del Cliente");
         withdrawalMoneyFromClient.setFlujoEfectivo(new Long(-1));
@@ -460,7 +469,7 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
         withdrawalMoneyFromClient.setCredito(false);
         withdrawalMoneyFromClient.setFuenteTransaccion(cl);
         tl.add(withdrawalMoneyFromClient);
-        
+
         Transaccion withdrawalTitlesFromClient = new Transaccion();
         withdrawalTitlesFromClient.setNombre("Retiro en titulos del Cliente");
         withdrawalTitlesFromClient.setFlujoEfectivo(new Long(0));
@@ -477,7 +486,7 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
         refundFromBusiness.setCredito(false);
         refundFromBusiness.setFuenteTransaccion(bu);
         tl.add(refundFromBusiness);
-        
+
         Transaccion comissionFromBusiness = new Transaccion();
         comissionFromBusiness.setNombre("Comisión");
         comissionFromBusiness.setFlujoEfectivo(new Long(-1));
@@ -485,7 +494,7 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
         comissionFromBusiness.setCredito(false);
         comissionFromBusiness.setFuenteTransaccion(bu);
         tl.add(comissionFromBusiness);
-        
+
         Transaccion marginCallFromBusiness = new Transaccion();
         marginCallFromBusiness.setNombre("Llamada de Margen");
         marginCallFromBusiness.setFlujoEfectivo(new Long(0));
@@ -493,7 +502,7 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
         marginCallFromBusiness.setCredito(false);
         marginCallFromBusiness.setFuenteTransaccion(bu);
         tl.add(marginCallFromBusiness);
-        
+
         Transaccion marginCreditFromBusiness = new Transaccion();
         marginCreditFromBusiness.setNombre("Credito Margen");
         marginCreditFromBusiness.setFlujoEfectivo(new Long(1));
@@ -501,7 +510,7 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
         marginCreditFromBusiness.setCredito(true);
         marginCreditFromBusiness.setFuenteTransaccion(bu);
         tl.add(marginCreditFromBusiness);
-        
+
         Transaccion incomingSecurityLendingFromBusiness = new Transaccion();
         incomingSecurityLendingFromBusiness.setNombre("Prestamo de Valores Entrante");
         incomingSecurityLendingFromBusiness.setFlujoEfectivo(new Long(0));
@@ -509,7 +518,7 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
         incomingSecurityLendingFromBusiness.setCredito(true);
         incomingSecurityLendingFromBusiness.setFuenteTransaccion(bu);
         tl.add(incomingSecurityLendingFromBusiness);
-        
+
         Transaccion outgoingSecurityLendingFromBusiness = new Transaccion();
         outgoingSecurityLendingFromBusiness.setNombre("Pestamo de valores Saliente");
         outgoingSecurityLendingFromBusiness.setFlujoEfectivo(new Long(0));
@@ -517,7 +526,7 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
         outgoingSecurityLendingFromBusiness.setCredito(true);
         outgoingSecurityLendingFromBusiness.setFuenteTransaccion(bu);
         tl.add(outgoingSecurityLendingFromBusiness);
-        
+
         Transaccion amortizationMarginFromBusiness = new Transaccion();
         amortizationMarginFromBusiness.setNombre("Amortización Margen");
         amortizationMarginFromBusiness.setFlujoEfectivo(new Long(-1));
@@ -534,7 +543,7 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
         refundFromBroker.setCredito(false);
         refundFromBroker.setFuenteTransaccion(br);
         tl.add(refundFromBroker);
-        
+
         Transaccion refund2FromBroker = new Transaccion();
         refund2FromBroker.setNombre("Reembolso");
         refund2FromBroker.setFlujoEfectivo(new Long(0));
@@ -542,7 +551,7 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
         refund2FromBroker.setCredito(false);
         refund2FromBroker.setFuenteTransaccion(br);
         tl.add(refund2FromBroker);
-        
+
         Transaccion buyAsset = new Transaccion();
         buyAsset.setNombre("Compra");
         buyAsset.setFlujoEfectivo(new Long(-1));
@@ -550,7 +559,7 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
         buyAsset.setCredito(false);
         buyAsset.setFuenteTransaccion(br);
         tl.add(buyAsset);
-        
+
         Transaccion sellAsset = new Transaccion();
         sellAsset.setNombre("Venta");
         sellAsset.setFlujoEfectivo(new Long(1));
@@ -558,7 +567,7 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
         sellAsset.setCredito(false);
         sellAsset.setFuenteTransaccion(br);
         tl.add(sellAsset);
-        
+
         Transaccion inicioReporto = new Transaccion();
         inicioReporto.setFlujoTitulos(new Long(1));
         inicioReporto.setFlujoEfectivo(new Long(-1));
@@ -566,7 +575,7 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
         inicioReporto.setCredito(true);
         inicioReporto.setFuenteTransaccion(br);
         tl.add(inicioReporto);
-        
+
         Transaccion finReporto = new Transaccion();
         finReporto.setCredito(true);
         finReporto.setNombre("Fin de Reporto");
@@ -583,7 +592,7 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
         isr.setFlujoTitulos(new Long(0));
         isr.setFuenteTransaccion(ha);
         tl.add(isr);
-        
+
         Transaccion iva = new Transaccion();
         iva.setCredito(false);
         iva.setNombre("IVA");
@@ -600,7 +609,7 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
         redito.setFlujoTitulos(new Long(0));
         redito.setFuenteTransaccion(po);
         tl.add(redito);
-        
+
         try {
             duenoFuenteService.createDuenoFuente(bu);
             duenoFuenteService.createDuenoFuente(cl);
@@ -608,10 +617,10 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
             duenoFuenteService.createDuenoFuente(br);
             duenoFuenteService.createDuenoFuente(ha);
             LOG.info("--DuenosFuente");
-            
+
             transaccionService.createTransaccionesFromList(tl);
             LOG.info("--Transacciones");
-            
+
             BitacoraOrden ordenCompra = new BitacoraOrden();
             List<Transaccion> listaOrden = new ArrayList<>();
             listaOrden.add(comissionFromBusiness);
@@ -621,7 +630,7 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
             ordenCompra.setUsaActivo(Boolean.TRUE);
             ordenCompra.setTransacciones(listaOrden);
             bitacoraOrdenService.createOrden(ordenCompra);
-            
+
             BitacoraOrden ordenVenta = new BitacoraOrden();
             listaOrden.clear();
             listaOrden.add(comissionFromBusiness);
@@ -631,7 +640,7 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
             ordenVenta.setUsaActivo(Boolean.TRUE);
             ordenVenta.setTransacciones(listaOrden);
             bitacoraOrdenService.createOrden(ordenVenta);
-            
+
             BitacoraOrden ordenDeposito = new BitacoraOrden();
             listaOrden.clear();
             listaOrden.add(depositMoneyFromClient);
@@ -639,7 +648,7 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
             ordenDeposito.setUsaActivo(Boolean.FALSE);
             ordenDeposito.setTransacciones(listaOrden);
             bitacoraOrdenService.createOrden(ordenDeposito);
-            
+
             BitacoraOrden ordenRedito = new BitacoraOrden();
             listaOrden.clear();
             listaOrden.add(isr);
@@ -648,40 +657,40 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
             ordenRedito.setUsaActivo(Boolean.FALSE);
             ordenRedito.setTransacciones(listaOrden);
             bitacoraOrdenService.createOrden(ordenRedito);
-            
+
             LOG.info("--Ordenes");
-            
+
             return true;
         } catch (Exception e) {
             LOG.log(Level.WARNING, "No pudimos persistir nuestras transacciones, la excepcion es: {0}", e.getMessage());
             return false;
         }
-        
+
     }
-    
+
     private boolean persistPortfolioEstatus() {
         PortafolioEstatus ps = new PortafolioEstatus();
         ps.setNombre("Active");
-        
+
         PortafolioEstatus ps1 = new PortafolioEstatus();
         ps1.setNombre("Suspended");
-        
+
         PortafolioEstatus ps2 = new PortafolioEstatus();
         ps2.setNombre("Liquidation");
-        
+
         try {
             portafolioEstatusService.createPortafolioEstatus(ps);
             portafolioEstatusService.createPortafolioEstatus(ps1);
             portafolioEstatusService.createPortafolioEstatus(ps2);
             LOG.info("--PortafolioEstatus");
-            
+
             return true;
         } catch (Exception e) {
             LOG.log(Level.WARNING, "No pudimos persistir los PortfolioStatus, la excepcion es: {0}", e.getMessage());
             return false;
         }
     }
-    
+
     private void useOperationDeposito() {
         BitacoraOrden orden = bitacoraOrdenService.findOrdenByNombre("Deposito de Efectivo");
         Transaccion desposito = transaccionService.findByNombre("Deposito en efectivo del Cliente");
@@ -701,21 +710,21 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
         exec.setIdOperacion(orden.getId());
         exec.setNumeroContrato("ggtrfe");
         exec.setValorTransacciones(valores);
-        
+
         bitacoraOrdenService.executeOrden(exec);
         LOG.info("--Operacion Deposito");
     }
-    
+
     private void useOperationCompraAccion() {
         BitacoraOrden orden = bitacoraOrdenService.findOrdenByNombre("Compra");
-        
+
         Transaccion compraActivo = transaccionService.findByNombre("Compra");
         Transaccion comision = transaccionService.findByNombre("Comisión");
         Transaccion iva = transaccionService.findByNombre("IVA");
-        
+
         List<BitacoraOrdenValorDTO> valores = new ArrayList<>();
         Date a = new Date();
-        
+
         BitacoraOrdenValorDTO comp = new BitacoraOrdenValorDTO();
         comp.setEfectivo(-399839.05);
         comp.setTitulos(121L);
@@ -724,7 +733,7 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
         comp.setFechaIngreso(a);
         comp.setFechaLiquidacion(a);
         valores.add(comp);
-        
+
         BitacoraOrdenValorDTO comi = new BitacoraOrdenValorDTO();
         comi.setEfectivo(-319.87);
         comi.setTitulos(0L);
@@ -733,7 +742,7 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
         comi.setFechaIngreso(a);
         comi.setFechaLiquidacion(a);
         valores.add(comi);
-        
+
         BitacoraOrdenValorDTO iv = new BitacoraOrdenValorDTO();
         iv.setEfectivo(-5412.25);
         iv.setTitulos(0L);
@@ -742,14 +751,14 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
         iv.setFechaIngreso(a);
         iv.setFechaLiquidacion(a);
         valores.add(iv);
-        
+
         BitacoraOrdenEjecutorDTO exec = new BitacoraOrdenEjecutorDTO();
         exec.setClavePizarra("1A_AMZN_*");
         exec.setFolioOperacion("asdfg2654345");
         exec.setIdOperacion(orden.getId());
         exec.setNumeroContrato("ggtrfe");
         exec.setValorTransacciones(valores);
-        
+
         bitacoraOrdenService.executeOrden(exec);
         LOG.info("--Operacion Compra");
     }
