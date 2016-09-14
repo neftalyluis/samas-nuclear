@@ -7,7 +7,7 @@ package mx.samas.service;
 
 import java.util.List;
 import mx.samas.domain.VectorActivo;
-import mx.samas.domain.dto.ActivoPropiedadValor;
+import mx.samas.domain.ActivoPropiedadValor;
 
 /**
  *

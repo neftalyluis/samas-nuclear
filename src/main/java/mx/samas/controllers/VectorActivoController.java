@@ -8,7 +8,7 @@ package mx.samas.controllers;
 import java.util.Date;
 import java.util.List;
 import mx.samas.domain.VectorActivo;
-import mx.samas.domain.dto.ActivoPropiedadValor;
+import mx.samas.domain.ActivoPropiedadValor;
 import mx.samas.service.VectorActivoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;

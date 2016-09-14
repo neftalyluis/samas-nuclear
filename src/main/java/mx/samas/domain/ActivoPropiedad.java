@@ -6,14 +6,14 @@
 package mx.samas.domain;
 
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
+import java.util.List;
 
 /**
  *
@@ -43,10 +43,12 @@ public class ActivoPropiedad implements Serializable {
     @Enumerated(EnumType.ORDINAL)
     private TipoDato tipoDato;
     
-    private String indice;
+    private String fuente;
     
-    @OneToMany
-    private List<FuenteDatos> fuenteInformacion;
+    private FuenteDatos origenDatos;
+    
+    @ManyToMany
+    private List<Activo> activos;
 
     public Long getId() {
         return id;
@@ -124,31 +126,44 @@ public class ActivoPropiedad implements Serializable {
     }
 
     /**
-     * @return the indice
+     * @return the fuente
      */
-    public String getIndice() {
-        return indice;
+    public String getFuente() {
+        return fuente;
     }
 
     /**
-     * @param indice the indice to set
+     * @param fuente the fuente to set
      */
-    public void setIndice(String indice) {
-        this.indice = indice;
+    public void setFuente(String fuente) {
+        this.fuente = fuente;
     }
 
     /**
-     * @return the fuenteInformacion
+     * @return the origenDatos
      */
-    public List<FuenteDatos> getFuenteInformacion() {
-        return fuenteInformacion;
+    public FuenteDatos getOrigenDatos() {
+        return origenDatos;
     }
 
     /**
-     * @param fuenteInformacion the fuenteInformacion to set
+     * @param origenDatos the origenDatos to set
      */
-    public void setFuenteInformacion(List<FuenteDatos> fuenteInformacion) {
-        this.fuenteInformacion = fuenteInformacion;
+    public void setOrigenDatos(FuenteDatos origenDatos) {
+        this.origenDatos = origenDatos;
     }
 
+    /**
+     * @return the activos
+     */
+    public List<Activo> getActivos() {
+        return activos;
+    }
+
+    /**
+     * @param activos the activos to set
+     */
+    public void setActivos(List<Activo> activos) {
+        this.activos = activos;
+    }
 }

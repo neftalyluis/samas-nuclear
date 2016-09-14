@@ -7,7 +7,7 @@ package mx.samas.controllers;
 
 import java.util.List;
 import mx.samas.domain.Activo;
-import mx.samas.domain.dto.ActivoPropiedadValor;
+import mx.samas.domain.ActivoPropiedadValor;
 import mx.samas.service.ActivoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

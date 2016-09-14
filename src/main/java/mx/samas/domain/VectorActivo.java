@@ -12,12 +12,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Lob;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import mx.samas.domain.dto.ActivoPropiedadValor;
 
 /**
  *
@@ -39,11 +37,9 @@ public class VectorActivo implements Serializable {
 
     private Double precioLimpio;
 
-    @Lob
+    @OneToMany
     private List<ActivoPropiedadValor> propiedadesValor;
     
-    @ManyToMany
-    private List<ActivoPropiedad> propiedades;
 
     public Long getId() {
         return id;
@@ -118,20 +114,6 @@ public class VectorActivo implements Serializable {
      */
     public void setPropiedadesValor(List<ActivoPropiedadValor> propiedadesValor) {
         this.propiedadesValor = propiedadesValor;
-    }
-
-    /**
-     * @return the propiedades
-     */
-    public List<ActivoPropiedad> getPropiedades() {
-        return propiedades;
-    }
-
-    /**
-     * @param propiedades the propiedades to set
-     */
-    public void setPropiedades(List<ActivoPropiedad> propiedades) {
-        this.propiedades = propiedades;
     }
 
     /**

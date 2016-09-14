@@ -3,15 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mx.samas.domain;
+package mx.samas.job;
 
 /**
  *
  * @author samas
  */
-public enum FuenteDatos {
-    VECTOR_PIP,
-    TERMINOS_PIP,
-    CSV_USUARIO,
-    JULIA
+public final class SAMASJobs {
+
+    public static String CIERRE_DIA = "valuacionJob";
+    public static String BOOTSTRAP_ACTIVO = "agregarActivosJob";
+
 }

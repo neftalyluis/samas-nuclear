@@ -3,15 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mx.samas.domain;
+package mx.samas.domain.dto;
+
+import mx.samas.domain.Activo;
+import mx.samas.domain.VectorActivo;
 
 /**
  *
  * @author samas
  */
-public enum FuenteDatos {
-    VECTOR_PIP,
-    TERMINOS_PIP,
-    CSV_USUARIO,
-    JULIA
+public class ActivoMasVectorActivoDTO {
+
+    private Activo activo;
+    private VectorActivo vector;
+
 }

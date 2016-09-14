@@ -30,6 +30,7 @@ import mx.samas.domain.Transaccion;
 import mx.samas.domain.Usuario;
 import mx.samas.domain.dto.BitacoraOrdenEjecutorDTO;
 import mx.samas.domain.dto.BitacoraOrdenValorDTO;
+import mx.samas.job.SAMASJobs;
 import mx.samas.service.ActivoService;
 import mx.samas.service.BancoService;
 import mx.samas.service.BitacoraOrdenService;
@@ -42,9 +43,20 @@ import mx.samas.service.PortafolioEstatusService;
 import mx.samas.service.PortafolioService;
 import mx.samas.service.TransaccionService;
 import mx.samas.service.UsuarioService;
-import mx.samas.util.PipParser;
+import mx.samas.util.VectorPipParser;
+import org.springframework.batch.core.Job;
+import org.springframework.batch.core.JobExecution;
+import org.springframework.batch.core.JobParameter;
+import org.springframework.batch.core.JobParameters;
+import org.springframework.batch.core.JobParametersBuilder;
+import org.springframework.batch.core.JobParametersInvalidException;
+import org.springframework.batch.core.launch.JobLauncher;
+import org.springframework.batch.core.repository.JobExecutionAlreadyRunningException;
+import org.springframework.batch.core.repository.JobInstanceAlreadyCompleteException;
+import org.springframework.batch.core.repository.JobRestartException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Component;
 
@@ -93,6 +105,12 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
     @Autowired
     private PortafolioService portafolioService;
 
+    @Autowired
+    private JobLauncher jobLauncher;
+
+    @Autowired
+    private ApplicationContext appContext;
+
     @Override
     public void onApplicationEvent(ApplicationReadyEvent event) {
 
@@ -104,10 +122,11 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
                 + " |_____/_/    \\_\\_|  |_/_/    \\_\\_____/");
         System.out.println("========================================");
 
+        testBatch();
         persistPerfiles();
         persistBancos();
         persistClientesAndCuenta();
-        persistActivos();
+//        persistActivos();
         persistPortfolioEstatus();
         persistEstrategiasAndPortafolioModelo();
         persistTransacciones();
@@ -334,7 +353,7 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
         Activo lqs = new Activo("Liquidez", "1", "LQS", "1");
         lqs.setTipo(TipoActivo.ACCION);
 
-//        PipParser p = new PipParser("VectorTest.csv", parseDateFromString("20130227"));
+//        VectorPipParser p = new VectorPipParser("VectorTest.csv", parseDateFromString("20130227"));
 //        p.execute();
 //        HashMap<String, Activo> mapActivo = p.getActivoMap();
 //        LOG.log(Level.INFO, "--Total PIP Activo: {0}", mapActivo.size());
@@ -772,5 +791,21 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
     private Date parseDateFromString(String d) throws ParseException {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd");
         return formatter.parse(d);
+    }
+
+    private void testBatch() {
+        LOG.info("Hacemos Batch :b");
+        Job job = (Job) appContext.getBean(SAMASJobs.BOOTSTRAP_ACTIVO);
+        
+        JobParameters jpb = new JobParameters();
+        
+        try {
+            JobExecution a = jobLauncher.run(job, jpb);
+        } catch (JobExecutionAlreadyRunningException 
+                | JobRestartException
+                | JobInstanceAlreadyCompleteException 
+                | JobParametersInvalidException ex) {
+            Logger.getLogger(EntityBootstraping.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

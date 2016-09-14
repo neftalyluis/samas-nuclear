@@ -16,6 +16,10 @@ import javax.persistence.OneToMany;
 /**
  *
  * @author samas
+ *
+ * Declarar el Servicio;
+ * Definir quien tiene decision de inversion
+ *
  */
 @Entity
 public class TipoServicio implements Serializable {

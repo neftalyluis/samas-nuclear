@@ -22,9 +22,9 @@ import org.apache.commons.csv.CSVRecord;
  *
  * @author samas
  */
-public class PipParser {
+public class TerminosPipParser {
 
-    private static final Logger LOG = Logger.getLogger(PipParser.class.getName());
+    private static final Logger LOG = Logger.getLogger(VectorPipParser.class.getName());
 
     private final String urlFile;
 
@@ -36,7 +36,7 @@ public class PipParser {
 
     private final VectorActivoBuilder vectorActivoBuilder;
 
-    public PipParser(String url, Date fecha) throws IOException {
+    public TerminosPipParser(String url, Date fecha) throws IOException {
         this.urlFile = url;
         this.activoBuilder = new ActivoBuilder();
         this.vectorActivoBuilder = new VectorActivoBuilder(fecha);

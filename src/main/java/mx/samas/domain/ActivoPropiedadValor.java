@@ -10,24 +10,24 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 /**
  *
  * @author samas
  */
 @Entity
-public class TipoFuenteDatos implements Serializable {
+public class ActivoPropiedadValor implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private String nombre;
-    
-    private String parametros;
-    
-    private String claseImplementacion;
+    private String valor;
+
+    @ManyToOne
+    private ActivoPropiedad propiedad;
 
     public Long getId() {
         return id;
@@ -47,10 +47,10 @@ public class TipoFuenteDatos implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof TipoFuenteDatos)) {
+        if (!(object instanceof ActivoPropiedadValor)) {
             return false;
         }
-        TipoFuenteDatos other = (TipoFuenteDatos) object;
+        ActivoPropiedadValor other = (ActivoPropiedadValor) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -59,49 +59,35 @@ public class TipoFuenteDatos implements Serializable {
 
     @Override
     public String toString() {
-        return "mx.samas.domain.TipoFuenteDatos[ id=" + id + " ]";
+        return "mx.samas.domain.ActivoPropiedadValor[ id=" + id + " ]";
     }
 
     /**
-     * @return the nombre
+     * @return the valor
      */
-    public String getNombre() {
-        return nombre;
+    public String getValor() {
+        return valor;
     }
 
     /**
-     * @param nombre the nombre to set
+     * @param valor the valor to set
      */
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setValor(String valor) {
+        this.valor = valor;
     }
 
     /**
-     * @return the parametros
+     * @return the propiedad
      */
-    public String getParametros() {
-        return parametros;
+    public ActivoPropiedad getPropiedad() {
+        return propiedad;
     }
 
     /**
-     * @param parametros the parametros to set
+     * @param propiedad the propiedad to set
      */
-    public void setParametros(String parametros) {
-        this.parametros = parametros;
+    public void setPropiedad(ActivoPropiedad propiedad) {
+        this.propiedad = propiedad;
     }
 
-    /**
-     * @return the claseImplementacion
-     */
-    public String getClaseImplementacion() {
-        return claseImplementacion;
-    }
-
-    /**
-     * @param claseImplementacion the claseImplementacion to set
-     */
-    public void setClaseImplementacion(String claseImplementacion) {
-        this.claseImplementacion = claseImplementacion;
-    }
-    
 }

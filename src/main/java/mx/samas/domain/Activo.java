@@ -5,7 +5,6 @@
  */
 package mx.samas.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.CascadeType;
@@ -16,12 +15,9 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Lob;
-import javax.persistence.ManyToMany;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
-import mx.samas.domain.dto.ActivoPropiedadValor;
 
 /**
  *
@@ -86,7 +82,6 @@ public class Activo implements Serializable {
      */
     private Boolean ventaEnCorto;
 
-    @JsonIgnore
     @OneToMany(mappedBy = "activo", cascade = CascadeType.ALL)
     private List<VectorActivo> vectores;
 
@@ -98,13 +93,10 @@ public class Activo implements Serializable {
     @Enumerated(EnumType.ORDINAL)
     private TipoActivo tipo;
 
-    @JsonIgnore
-    @Lob
+    @OneToMany
     private List<ActivoPropiedadValor> propiedadesValor;
 
-    @JsonIgnore
-    @ManyToMany
-    private List<ActivoPropiedad> propiedades;
+
 
     public Activo() {
 
@@ -320,18 +312,5 @@ public class Activo implements Serializable {
         this.propiedadesValor = propiedadesValor;
     }
 
-    /**
-     * @return the propiedades
-     */
-    public List<ActivoPropiedad> getPropiedades() {
-        return propiedades;
-    }
-
-    /**
-     * @param propiedades the propiedades to set
-     */
-    public void setPropiedades(List<ActivoPropiedad> propiedades) {
-        this.propiedades = propiedades;
-    }
 
 }
