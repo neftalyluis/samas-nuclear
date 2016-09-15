@@ -28,7 +28,7 @@ public class VectorActivo implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    
+
     @Temporal(TemporalType.DATE)
     private Date fecha;
 
@@ -39,7 +39,16 @@ public class VectorActivo implements Serializable {
 
     @OneToMany
     private List<ActivoPropiedadValor> propiedadesValor;
-    
+
+    public VectorActivo() {
+
+    }
+
+    public VectorActivo(Date fecha, Double precioLimpio) {
+        this.fecha = fecha;
+        this.precioLimpio = precioLimpio;
+
+    }
 
     public Long getId() {
         return id;

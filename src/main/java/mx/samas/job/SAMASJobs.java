@@ -11,7 +11,7 @@ package mx.samas.job;
  */
 public final class SAMASJobs {
 
-    public static String CIERRE_DIA = "valuacionJob";
+    public static String VALUACION = "valuacionJob";
     public static String BOOTSTRAP_ACTIVO = "agregarActivosJob";
 
 }

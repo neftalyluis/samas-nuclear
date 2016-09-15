@@ -43,7 +43,7 @@ public class ActivoPropiedad implements Serializable {
     @Enumerated(EnumType.ORDINAL)
     private TipoDato tipoDato;
     
-    private String fuente;
+    private Boolean vectorial;
     
     private FuenteDatos origenDatos;
     
@@ -126,20 +126,6 @@ public class ActivoPropiedad implements Serializable {
     }
 
     /**
-     * @return the fuente
-     */
-    public String getFuente() {
-        return fuente;
-    }
-
-    /**
-     * @param fuente the fuente to set
-     */
-    public void setFuente(String fuente) {
-        this.fuente = fuente;
-    }
-
-    /**
      * @return the origenDatos
      */
     public FuenteDatos getOrigenDatos() {
@@ -165,5 +151,19 @@ public class ActivoPropiedad implements Serializable {
      */
     public void setActivos(List<Activo> activos) {
         this.activos = activos;
+    }
+
+    /**
+     * @return the vectorial
+     */
+    public Boolean getVectorial() {
+        return vectorial;
+    }
+
+    /**
+     * @param vectorial the vectorial to set
+     */
+    public void setVectorial(Boolean vectorial) {
+        this.vectorial = vectorial;
     }
 }
