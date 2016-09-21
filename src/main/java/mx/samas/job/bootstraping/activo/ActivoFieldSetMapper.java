@@ -21,12 +21,6 @@ public class ActivoFieldSetMapper implements FieldSetMapper<Activo> {
 
         Activo activo = new Activo(fieldSet.readString(1), fieldSet.readString(2),
                 fieldSet.readString(3), null, fieldSet.readString(9), null, Boolean.FALSE, null);
-
-//        Activo a = new Activo(clean(record.get(1)), clean(record.get(2)),
-//                clean(record.get(3)), null, clean(record.get(9)),
-//                tipoActivoResolver.resolveFromTipoValor(clean(record.get(1))),
-//                Boolean.FALSE, null);
-//        		suggestedPodcast.setCategories(fieldSet.readString("CATEGORIES"));
         return activo;
     }
 }

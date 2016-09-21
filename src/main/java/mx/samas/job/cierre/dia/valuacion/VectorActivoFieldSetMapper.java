@@ -5,7 +5,8 @@
  */
 package mx.samas.job.cierre.dia.valuacion;
 
-import mx.samas.domain.VectorActivo;
+import java.util.Date;
+import mx.samas.domain.dto.VectorActivoDTO;
 import org.springframework.batch.item.file.mapping.FieldSetMapper;
 import org.springframework.batch.item.file.transform.FieldSet;
 import org.springframework.validation.BindException;
@@ -14,24 +15,20 @@ import org.springframework.validation.BindException;
  *
  * @author samas
  */
-public class VectorActivoFieldSetMapper implements FieldSetMapper<VectorActivo>{
-/**
- * FALTA CAMBIAR VECTOR ACTIVO POR EL DTO!!!!
- * @param fieldSet
- * @return
- * @throws BindException 
- */
-    @Override
-    public VectorActivo mapFieldSet(FieldSet fieldSet) throws BindException {
-        VectorActivo activo = new VectorActivo();
-//        (fieldSet.readString(1), fieldSet.readString(2),
-//                fieldSet.readString(3), null, fieldSet.readString(9), null, Boolean.FALSE, null);
+public class VectorActivoFieldSetMapper implements FieldSetMapper<VectorActivoDTO> {
 
-//        Activo a = new Activo(clean(record.get(1)), clean(record.get(2)),
-//                clean(record.get(3)), null, clean(record.get(9)),
-//                tipoActivoResolver.resolveFromTipoValor(clean(record.get(1))),
-//                Boolean.FALSE, null);
-//        		suggestedPodcast.setCategories(fieldSet.readString("CATEGORIES"));
-        return activo;    }
-    
+    /**
+     * FALTA CAMBIAR VECTOR ACTIVO POR EL DTO!!!!
+     *
+     * @param fieldSet
+     * @return
+     * @throws BindException
+     */
+    @Override
+    public VectorActivoDTO mapFieldSet(FieldSet fieldSet) throws BindException {
+        String clavePizarra = fieldSet.readString(1) + "_" + fieldSet.readString(2) + "_" + fieldSet.readString(3);
+        VectorActivoDTO activo = new VectorActivoDTO(clavePizarra, new Date(), fieldSet.readDouble(5));
+        return activo;
+    }
+
 }

@@ -10,6 +10,7 @@ import mx.samas.domain.Activo;
 import mx.samas.domain.VectorActivo;
 import mx.samas.domain.ActivoPropiedadValor;
 import mx.samas.repository.ActivoRepository;
+import mx.samas.repository.VectorActivoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +23,9 @@ public class VectorActivoServiceImpl implements VectorActivoService {
 
     @Autowired
     private ActivoRepository activoRepository;
+
+    @Autowired
+    private VectorActivoRepository vectorActivoRepository;
 
     @Override
     public List<VectorActivo> getVectorFromActivo(Long id) {
@@ -45,6 +49,16 @@ public class VectorActivoServiceImpl implements VectorActivoService {
     @Override
     public List<ActivoPropiedadValor> getPropiedadesFromVectorActivo(Long id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void createVectorActivoFromList(List<VectorActivo> lva) {
+        vectorActivoRepository.save(lva);
+    }
+
+    @Override
+    public VectorActivo createVectorActivo(VectorActivo va) {
+        return vectorActivoRepository.save(va);
     }
 
 }

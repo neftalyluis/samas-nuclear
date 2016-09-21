@@ -23,4 +23,8 @@ public interface VectorActivoService {
 
     public List<ActivoPropiedadValor> getPropiedadesFromVectorActivo(Long id);
 
+    public void createVectorActivoFromList(List<VectorActivo> lva);
+    
+    public VectorActivo createVectorActivo(VectorActivo va);
+
 }

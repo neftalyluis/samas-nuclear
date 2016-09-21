@@ -126,6 +126,7 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
         persistPerfiles();
         persistBancos();
         persistClientesAndCuenta();
+        testVectorActivoBatch();
 //        persistActivos();
         persistPortfolioEstatus();
         persistEstrategiasAndPortafolioModelo();
@@ -794,18 +795,29 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
     }
 
     private void testBatch() {
-        LOG.info("Hacemos Batch :b");
+        LOG.info("Batch Activo");
         Job job = (Job) appContext.getBean(SAMASJobs.BOOTSTRAP_ACTIVO);
-        
+
         JobParameters jpb = new JobParameters();
-        
+
         try {
             JobExecution a = jobLauncher.run(job, jpb);
-        } catch (JobExecutionAlreadyRunningException 
-                | JobRestartException
-                | JobInstanceAlreadyCompleteException 
-                | JobParametersInvalidException ex) {
+        } catch (JobExecutionAlreadyRunningException | JobRestartException | JobInstanceAlreadyCompleteException | JobParametersInvalidException ex) {
             Logger.getLogger(EntityBootstraping.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    private void testVectorActivoBatch() {
+        LOG.info("Batch VectorActivo");
+        Job job = (Job) appContext.getBean(SAMASJobs.VALUACION);
+
+        JobParameters jpb = new JobParameters();
+
+        try {
+            JobExecution a = jobLauncher.run(job, jpb);
+        } catch (JobExecutionAlreadyRunningException | JobRestartException | JobInstanceAlreadyCompleteException | JobParametersInvalidException ex) {
+            Logger.getLogger(EntityBootstraping.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 }

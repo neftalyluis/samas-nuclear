@@ -8,6 +8,7 @@ package mx.samas.job.cierre.dia.valuacion;
 import java.io.File;
 import java.io.IOException;
 import mx.samas.domain.VectorActivo;
+import mx.samas.domain.dto.VectorActivoDTO;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
@@ -32,7 +33,6 @@ import org.springframework.core.io.Resource;
  * @author samas
  */
 @Configuration
-@EnableBatchProcessing
 public class ValuacionJobConfiguration {
 
     @Autowired
@@ -55,9 +55,9 @@ public class ValuacionJobConfiguration {
     @Bean
     public Step vectorActivoStep() {
         return stepBuilderFactory.get("vectorActivoStep")
-                .<VectorActivo, VectorActivo>chunk(1000)
-                .reader(reader())
-                .writer(writer())
+                .<VectorActivoDTO, VectorActivoDTO>chunk(1000)
+                .reader(vectorActivoReader())
+                .writer(vectorActivoWriter())
                 .faultTolerant()
                 .build();
     }
@@ -102,11 +102,11 @@ public class ValuacionJobConfiguration {
 //    }
     @Bean
     @StepScope
-    public FlatFileItemReader<VectorActivo> reader() {
-        FlatFileItemReader<VectorActivo> reader = new FlatFileItemReader<>();
+    public FlatFileItemReader<VectorActivoDTO> vectorActivoReader() {
+        FlatFileItemReader<VectorActivoDTO> reader = new FlatFileItemReader<>();
         reader.setLinesToSkip(1);//first line is title definition 
         reader.setResource(getFileFromDirectory());
-        reader.setLineMapper(lineMapper());
+        reader.setLineMapper(vectorActivoLineMapper());
 
         return reader;
     }
@@ -121,16 +121,16 @@ public class ValuacionJobConfiguration {
     }
 
     @Bean
-    public LineMapper<VectorActivo> lineMapper() {
-        DefaultLineMapper<VectorActivo> lineMapper = new DefaultLineMapper<>();
+    public LineMapper<VectorActivoDTO> vectorActivoLineMapper() {
+        DefaultLineMapper<VectorActivoDTO> lineMapper = new DefaultLineMapper<>();
 
         DelimitedLineTokenizer lineTokenizer = new DelimitedLineTokenizer();
         lineTokenizer.setDelimiter(",");
         lineTokenizer.setQuoteCharacter('"');
         lineTokenizer.setStrict(true);
 
-        BeanWrapperFieldSetMapper<VectorActivo> fieldSetMapper = new BeanWrapperFieldSetMapper<>();
-        fieldSetMapper.setTargetType(VectorActivo.class);
+        BeanWrapperFieldSetMapper<VectorActivoDTO> fieldSetMapper = new BeanWrapperFieldSetMapper<>();
+        fieldSetMapper.setTargetType(VectorActivoDTO.class);
 
         lineMapper.setLineTokenizer(lineTokenizer);
         lineMapper.setFieldSetMapper(vectorActivoFieldSetMapper());
@@ -144,12 +144,12 @@ public class ValuacionJobConfiguration {
     }
 
     @Bean
-    public ItemProcessor<VectorActivo, VectorActivo> processor() throws IOException {
+    public ItemProcessor<VectorActivo, VectorActivo> vectorActivoProcessor() throws IOException {
         return new VectorActivoItemProcessor();
     }
 
     @Bean
-    public ItemWriter<VectorActivo> writer() {
+    public ItemWriter<VectorActivoDTO> vectorActivoWriter() {
         return new VectorActivoItemWriter();
     }
 

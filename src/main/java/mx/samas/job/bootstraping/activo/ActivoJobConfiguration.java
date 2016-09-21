@@ -44,27 +44,27 @@ public class ActivoJobConfiguration {
     @Bean
     public Job agregarActivosJob() {
         return jobs.get("agregarActivosJob")
-                .start(step())
+                .start(agregarActivosStep())
                 .build();
     }
 
     @Bean
-    public Step step() {
+    public Step agregarActivosStep() {
         return stepBuilderFactory.get("agregarActivosStep")
                 .<Activo, Activo>chunk(1000)
-                .reader(reader())
-                .writer(writer())
+                .reader(activoReader())
+                .writer(activoWriter())
                 .faultTolerant()
                 .build();
     }
 
     @Bean
     @StepScope
-    public FlatFileItemReader<Activo> reader() {
+    public FlatFileItemReader<Activo> activoReader() {
         FlatFileItemReader<Activo> reader = new FlatFileItemReader<>();
         reader.setLinesToSkip(1);//first line is title definition 
         reader.setResource(getFileFromDirectory());
-        reader.setLineMapper(lineMapper());
+        reader.setLineMapper(activoLineMapper());
 
         return reader;
     }
@@ -82,7 +82,7 @@ public class ActivoJobConfiguration {
     }
 
     @Bean
-    public LineMapper<Activo> lineMapper() {
+    public LineMapper<Activo> activoLineMapper() {
         DefaultLineMapper<Activo> lineMapper = new DefaultLineMapper<Activo>();
 
         DelimitedLineTokenizer lineTokenizer = new DelimitedLineTokenizer();
@@ -105,12 +105,12 @@ public class ActivoJobConfiguration {
     }
 
     @Bean
-    public ItemProcessor<Activo, Activo> processor() throws IOException {
+    public ItemProcessor<Activo, Activo> activoProcessor() throws IOException {
         return new ActivoItemProcessor();
     }
 
     @Bean
-    public ItemWriter<Activo> writer() {
+    public ItemWriter<Activo> activoWriter() {
         return new ActivoItemWriter();
     }
 
