@@ -5,16 +5,17 @@
  */
 package mx.samas.util;
 
-import java.io.InputStream;
-import org.springframework.stereotype.Component;
+import mx.samas.domain.ActivoPropiedad;
+import mx.samas.domain.ActivoPropiedadValor;
 
 /**
  *
  * @author samas
  */
-@Component
-public class UserDefinedParser {
-
-    private InputStream in;
-
+public class ActivoPropiedadValidator {
+    
+    public Boolean validate(ActivoPropiedadValor apv, ActivoPropiedad ap){
+        return true;
+    }
+    
 }

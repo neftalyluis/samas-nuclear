@@ -15,6 +15,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
@@ -95,8 +96,9 @@ public class Activo implements Serializable {
 
     @OneToMany
     private List<ActivoPropiedadValor> propiedadesValor;
-
-
+    
+    @ManyToMany
+    private List<ActivoPropiedad> propiedades;
 
     public Activo() {
 
@@ -310,6 +312,20 @@ public class Activo implements Serializable {
      */
     public void setPropiedadesValor(List<ActivoPropiedadValor> propiedadesValor) {
         this.propiedadesValor = propiedadesValor;
+    }
+
+    /**
+     * @return the propiedades
+     */
+    public List<ActivoPropiedad> getPropiedades() {
+        return propiedades;
+    }
+
+    /**
+     * @param propiedades the propiedades to set
+     */
+    public void setPropiedades(List<ActivoPropiedad> propiedades) {
+        this.propiedades = propiedades;
     }
 
 

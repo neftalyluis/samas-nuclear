@@ -41,4 +41,19 @@ public class ActivoPropiedadServiceImpl implements ActivoPropiedadService {
         return activoPropiedadRepository.save(a);
     }
 
+//    @Override
+//    public List<ActivoPropiedad> getAllPropiedadesInActivoWithClavePizarra(String clave) {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//    }
+//
+//    @Override
+//    public List<ActivoPropiedad> getVectorialPropiedadesInActivoWithClavePizarra(String clave) {
+//        return 
+//    }
+//
+//    @Override
+//    public List<ActivoPropiedad> getPropiedadesInActivoWithClavePizarra(String clave) {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//    }
+
 }

@@ -11,7 +11,9 @@ package mx.samas.job;
  */
 public final class SAMASJobs {
 
-    public static String VALUACION = "valuacionJob";
+    public static String VALUACION_VECTOR = "valuacionJob";
     public static String BOOTSTRAP_ACTIVO = "agregarActivosJob";
+    public static String POSICION_PORTAFOLIO = "sumatoriaPosicionJob";
+    
 
 }

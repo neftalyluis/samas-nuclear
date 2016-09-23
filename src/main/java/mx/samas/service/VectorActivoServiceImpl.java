@@ -61,4 +61,15 @@ public class VectorActivoServiceImpl implements VectorActivoService {
         return vectorActivoRepository.save(va);
     }
 
+    @Override
+    public VectorActivo getLastVectorFromActivo(Activo a) {
+//        return vectorActivoRepository.findFirstByActivoAndOrderByFechaDesc(a);
+        return null;
+    }
+
+    @Override
+    public VectorActivo getLastVectorFromActivo(String clavePizarra) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

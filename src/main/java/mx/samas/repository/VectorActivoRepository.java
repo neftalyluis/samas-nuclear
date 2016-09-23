@@ -5,6 +5,7 @@
  */
 package mx.samas.repository;
 
+import mx.samas.domain.Activo;
 import mx.samas.domain.VectorActivo;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
@@ -16,4 +17,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface VectorActivoRepository extends PagingAndSortingRepository<VectorActivo, Long> {
 
+//    public VectorActivo findFirstByActivoAndOrderByFechaDesc(Activo a);
 }

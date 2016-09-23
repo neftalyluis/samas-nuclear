@@ -6,6 +6,7 @@
 package mx.samas.service;
 
 import java.util.List;
+import mx.samas.domain.Activo;
 import mx.samas.domain.VectorActivo;
 import mx.samas.domain.ActivoPropiedadValor;
 
@@ -19,12 +20,16 @@ public interface VectorActivoService {
 
     public List<VectorActivo> getVectorFromActivo(String clavePizarra);
 
+    public VectorActivo getLastVectorFromActivo(Activo a);
+    
+    public VectorActivo getLastVectorFromActivo(String clavePizarra);
+
     public VectorActivo addVectorToActivo(Long id, VectorActivo vector);
 
     public List<ActivoPropiedadValor> getPropiedadesFromVectorActivo(Long id);
 
     public void createVectorActivoFromList(List<VectorActivo> lva);
-    
+
     public VectorActivo createVectorActivo(VectorActivo va);
 
 }

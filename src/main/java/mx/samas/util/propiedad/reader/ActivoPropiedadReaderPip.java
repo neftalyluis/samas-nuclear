@@ -3,18 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mx.samas.domain.dto;
-
-import mx.samas.domain.Activo;
-import mx.samas.domain.ActivoPropiedad;
+package mx.samas.util.propiedad.reader;
 
 /**
  *
  * @author samas
  */
-public class ActivoMasPropiedadesDTO {
-    
-    private Activo activo;
-    private ActivoPropiedad propiedades;
+public class ActivoPropiedadReaderPip {
     
 }

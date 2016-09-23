@@ -5,12 +5,8 @@
  */
 package mx.samas.bootstrap;
 
-import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -43,12 +39,9 @@ import mx.samas.service.PortafolioEstatusService;
 import mx.samas.service.PortafolioService;
 import mx.samas.service.TransaccionService;
 import mx.samas.service.UsuarioService;
-import mx.samas.util.VectorPipParser;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.JobExecution;
-import org.springframework.batch.core.JobParameter;
 import org.springframework.batch.core.JobParameters;
-import org.springframework.batch.core.JobParametersBuilder;
 import org.springframework.batch.core.JobParametersInvalidException;
 import org.springframework.batch.core.launch.JobLauncher;
 import org.springframework.batch.core.repository.JobExecutionAlreadyRunningException;
@@ -127,7 +120,6 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
         persistBancos();
         persistClientesAndCuenta();
         testVectorActivoBatch();
-//        persistActivos();
         persistPortfolioEstatus();
         persistEstrategiasAndPortafolioModelo();
         persistTransacciones();
@@ -354,15 +346,6 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
         Activo lqs = new Activo("Liquidez", "1", "LQS", "1");
         lqs.setTipo(TipoActivo.ACCION);
 
-//        VectorPipParser p = new VectorPipParser("VectorTest.csv", parseDateFromString("20130227"));
-//        p.execute();
-//        HashMap<String, Activo> mapActivo = p.getActivoMap();
-//        LOG.log(Level.INFO, "--Total PIP Activo: {0}", mapActivo.size());
-//        for (Activo value : mapActivo.values()) {
-//            activoService.createActivo(value);
-//        }
-//
-//        LOG.info("--Activos From PIP");
         try {
 
             activoService.createActivo(amzn);
@@ -789,11 +772,6 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
         LOG.info("--Operacion Compra");
     }
 
-    private Date parseDateFromString(String d) throws ParseException {
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd");
-        return formatter.parse(d);
-    }
-
     private void testBatch() {
         LOG.info("Batch Activo");
         Job job = (Job) appContext.getBean(SAMASJobs.BOOTSTRAP_ACTIVO);
@@ -809,7 +787,7 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
 
     private void testVectorActivoBatch() {
         LOG.info("Batch VectorActivo");
-        Job job = (Job) appContext.getBean(SAMASJobs.VALUACION);
+        Job job = (Job) appContext.getBean(SAMASJobs.VALUACION_VECTOR);
 
         JobParameters jpb = new JobParameters();
 

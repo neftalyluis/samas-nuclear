@@ -5,16 +5,10 @@
  */
 package mx.samas.domain.dto;
 
-import mx.samas.domain.Activo;
-import mx.samas.domain.VectorActivo;
-
 /**
  *
  * @author samas
  */
-public class ActivoMasVectorActivoDTO {
-
-    private Activo activo;
-    private VectorActivo vector;
-
+public class VectorActivoPropiedadesDTO {
+    
 }

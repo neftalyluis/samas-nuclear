@@ -12,8 +12,6 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import java.util.List;
 
 /**
  *
@@ -43,12 +41,11 @@ public class ActivoPropiedad implements Serializable {
     @Enumerated(EnumType.ORDINAL)
     private TipoDato tipoDato;
     
+    private Integer indice;
+    
     private Boolean vectorial;
     
     private FuenteDatos origenDatos;
-    
-    @ManyToMany
-    private List<Activo> activos;
 
     public Long getId() {
         return id;
@@ -140,20 +137,6 @@ public class ActivoPropiedad implements Serializable {
     }
 
     /**
-     * @return the activos
-     */
-    public List<Activo> getActivos() {
-        return activos;
-    }
-
-    /**
-     * @param activos the activos to set
-     */
-    public void setActivos(List<Activo> activos) {
-        this.activos = activos;
-    }
-
-    /**
      * @return the vectorial
      */
     public Boolean getVectorial() {
@@ -165,5 +148,19 @@ public class ActivoPropiedad implements Serializable {
      */
     public void setVectorial(Boolean vectorial) {
         this.vectorial = vectorial;
+    }
+
+    /**
+     * @return the indice
+     */
+    public Integer getIndice() {
+        return indice;
+    }
+
+    /**
+     * @param indice the indice to set
+     */
+    public void setIndice(Integer indice) {
+        this.indice = indice;
     }
 }
