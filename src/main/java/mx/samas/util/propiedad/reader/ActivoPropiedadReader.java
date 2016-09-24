@@ -5,10 +5,13 @@
  */
 package mx.samas.util.propiedad.reader;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import mx.samas.domain.ActivoPropiedad;
+import mx.samas.domain.ActivoPropiedadValor;
 
 /**
  *
@@ -18,7 +21,7 @@ public abstract class ActivoPropiedadReader {
 
     private final String clavePizarra;
     private final List<ActivoPropiedad> indexList = new ArrayList<>();
-    private final HashMap<Integer, String> propiedadMap = new HashMap<Integer, String>();
+    private final HashMap<ActivoPropiedad, ActivoPropiedadValor> propiedadMap = new HashMap<>();
 
     public ActivoPropiedadReader(String clavePizarra) {
         this.clavePizarra = clavePizarra;
@@ -31,11 +34,11 @@ public abstract class ActivoPropiedadReader {
     public void addPropiedadesIndiceFromList(List<ActivoPropiedad> list) {
         indexList.addAll(list);
     }
-    
-    public String getPropiedadValor(int indice) {
+
+    public ActivoPropiedadValor getPropiedadValor(ActivoPropiedad indice) {
         return propiedadMap.get(indice);
     }
 
-    public abstract void execute();
+    public abstract void execute() throws FileNotFoundException, IOException;
 
 }

@@ -16,7 +16,7 @@ import org.springframework.batch.item.ItemProcessor;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
- *
+ * METEMOS LECTURA DE PROPIEDADES EN EL WRITER, USAMOS SINGLETON
  * @author samas
  */
 public class VectorPropiedadesItemProcessor implements ItemProcessor<Activo, VectorActivo> {

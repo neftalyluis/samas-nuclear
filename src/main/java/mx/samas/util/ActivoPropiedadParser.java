@@ -12,10 +12,11 @@ import mx.samas.domain.ActivoPropiedadValor;
  *
  * @author samas
  */
-public class ActivoPropiedadValidator {
+public class ActivoPropiedadParser {
     
     public Boolean validate(ActivoPropiedadValor apv, ActivoPropiedad ap){
         return true;
     }
     
+
 }
