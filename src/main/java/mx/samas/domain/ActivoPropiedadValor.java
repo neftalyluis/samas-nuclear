@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotNull;
 
 /**
  *
@@ -24,10 +25,21 @@ public class ActivoPropiedadValor implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @NotNull
     private String valor;
 
+    @NotNull
     @ManyToOne
     private ActivoPropiedad propiedad;
+
+    public ActivoPropiedadValor() {
+
+    }
+
+    public ActivoPropiedadValor(String valor, ActivoPropiedad propiedad) {
+        this.valor = valor;
+        this.propiedad = propiedad;
+    }
 
     public Long getId() {
         return id;

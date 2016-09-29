@@ -18,6 +18,7 @@ import org.springframework.batch.core.configuration.annotation.StepBuilderFactor
 import org.springframework.batch.core.configuration.annotation.StepScope;
 import org.springframework.batch.item.ItemProcessor;
 import org.springframework.batch.item.ItemWriter;
+import org.springframework.batch.item.database.JpaItemWriter;
 import org.springframework.batch.item.database.JpaPagingItemReader;
 import org.springframework.batch.item.file.FlatFileItemReader;
 import org.springframework.batch.item.file.LineMapper;
@@ -50,7 +51,7 @@ public class ValuacionJobConfiguration {
     public Job valuacionJob() {
         return jobs.get("valuacionJob")
                 .start(vectorActivoStep())
-//                .next(vectorPropiedadesStep())
+                .next(vectorPropiedadesStep())
                 //                .next(propiedadesTerminosPIPStep())
                 //                .next(propiedadesUsuarioCSVStep())
                 //                .next(propiedadesJuliaStep())
@@ -73,55 +74,17 @@ public class ValuacionJobConfiguration {
                 .<Activo, VectorActivo>chunk(1000)
                 .reader(vectorPropiedadesReader())
                 .processor(vectorPropiedadesProcessor())
+                .writer(vectorPropiedadesWriter())
                 .build();
     }
-//    @Bean
-//    public Step propiedadesVectorPIPStep() {
-//        return stepBuilderFactory.get("propiedadesVectorPIPStep")
-//                .<VectorActivo, VectorActivo>chunk(1000)
-//                .reader(reader())
-//                .writer(writer())
-//                .faultTolerant()
-//                .build();
-//    }
-//
-//    @Bean
-//    public Step propiedadesTerminosPIPStep() {
-//        return stepBuilderFactory.get("propiedadesTerminosPIPStep")
-//                .<VectorActivo, VectorActivo>chunk(1000)
-//                .reader(reader())
-//                .writer(writer())
-//                .faultTolerant()
-//                .build();
-//    }
-//    @Bean
-//    public Step propiedadesUsuarioCSVStep() {
-//        return stepBuilderFactory.get("propiedadesUsuarioCSVStep")
-//                .<VectorActivo, VectorActivo>chunk(1000)
-//                .reader(reader())
-//                .writer(writer())
-//                .faultTolerant()
-//                .build();
-//    }
-//
-//    @Bean
-//    public Step propiedadesJuliaStep() {
-//        return stepBuilderFactory.get("propiedadesJuliaStep")
-//                .<VectorActivo, VectorActivo>chunk(1000)
-//                .reader(reader())
-//                .writer(writer())
-//                .faultTolerant()
-//                .build();
-//    }
 
     @Bean(destroyMethod = "")
     @StepScope
     public JpaPagingItemReader<Activo> vectorPropiedadesReader() {
         JpaPagingItemReader<Activo> reader = new JpaPagingItemReader<>();
         reader.setEntityManagerFactory(emFactory);
-        reader.setQueryString("SELECT a FROM Activo a JOIN FETCH e.propiedades p "
-                + "WHERE p.vectorial = TRUE"
-                + "AND p.origenDatos = mx.samas.domain.FuenteDatos.VECTOR_PIP");
+        reader.setQueryString("SELECT a FROM Activo a JOIN FETCH a.propiedades p "
+                + "WHERE p.vectorial = TRUE");
         return reader;
     }
 
@@ -182,4 +145,10 @@ public class ValuacionJobConfiguration {
         return new VectorPropiedadesItemProcessor();
     }
 
+    @Bean
+    public JpaItemWriter<VectorActivo> vectorPropiedadesWriter() {
+        JpaItemWriter<VectorActivo> writer = new JpaItemWriter<>();
+        writer.setEntityManagerFactory(emFactory);
+        return writer;
+    }
 }

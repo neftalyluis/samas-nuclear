@@ -55,7 +55,7 @@ public class PortafolioPosicionJobConfiguration {
     public JpaPagingItemReader<Bitacora> bitacoraReader(){
         JpaPagingItemReader<Bitacora> reader = new JpaPagingItemReader<>();
         reader.setEntityManagerFactory(emFactory);
-        reader.setQueryString("");
+        reader.setQueryString("SELECT");
         return reader;
     }
 }

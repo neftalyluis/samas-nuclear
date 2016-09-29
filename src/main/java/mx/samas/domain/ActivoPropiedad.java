@@ -45,6 +45,7 @@ public class ActivoPropiedad implements Serializable {
     
     private Boolean vectorial;
     
+    @Enumerated(EnumType.ORDINAL)
     private FuenteDatos origenDatos;
 
     public Long getId() {

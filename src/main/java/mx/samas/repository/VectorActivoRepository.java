@@ -17,5 +17,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface VectorActivoRepository extends PagingAndSortingRepository<VectorActivo, Long> {
 
-//    public VectorActivo findFirstByActivoAndOrderByFechaDesc(Activo a);
+    public VectorActivo findFirstByActivoOrderByFechaDesc(Activo a);
 }

@@ -63,8 +63,7 @@ public class VectorActivoServiceImpl implements VectorActivoService {
 
     @Override
     public VectorActivo getLastVectorFromActivo(Activo a) {
-//        return vectorActivoRepository.findFirstByActivoAndOrderByFechaDesc(a);
-        return null;
+        return vectorActivoRepository.findFirstByActivoOrderByFechaDesc(a);
     }
 
     @Override
