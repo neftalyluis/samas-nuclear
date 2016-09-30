@@ -19,7 +19,11 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
- *
+ * Cuenta->VectorPosicion
+ * Para cada cuenta, buscar las entradas de Bitacora que sean de Esa Cuenta y ese dia
+ * Juntar con los POrtafolios y sus respectivas posiciones del dia anterior para crear los del dia
+ * 
+ * 
  * @author samas
  */
 @Configuration
