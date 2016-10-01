@@ -15,6 +15,7 @@ import org.springframework.batch.core.configuration.annotation.JobBuilderFactory
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepScope;
 import org.springframework.batch.item.ItemProcessor;
+import org.springframework.batch.item.ItemWriter;
 import org.springframework.batch.item.database.JpaPagingItemReader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -70,4 +71,9 @@ public class PortafolioPosicionJobConfiguration {
     public ItemProcessor<Cuenta, List<VectorPosicion>> vectorPosicionProcessor(){
         return new VectorPosicionProcessor();
     } 
+    
+    @Bean
+    public ItemWriter<List<VectorPosicion>> vectorPosicionWriter(){
+      return new VectorPosicionWriter();
+    }
 }

@@ -16,4 +16,5 @@ import mx.samas.domain.VectorPosicion;
 public interface VectorPosicionService {
 
     public List<VectorPosicion> getLastPosicionesFromPortafolio(Portafolio p);
+    public void persistPosiciones(List<VectorPosicion> listVector);
 }

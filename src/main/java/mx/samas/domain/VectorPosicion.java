@@ -37,13 +37,13 @@ public class VectorPosicion implements Serializable {
     private Activo activo;
 
     private Long cantidad;
-    
+
     private Double valuacion;
-    
+
     private Boolean enPrenda;
-    
+
     private Boolean reporto;
-    
+
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaVencimiento;
 
@@ -53,12 +53,12 @@ public class VectorPosicion implements Serializable {
      *
      */
     private Boolean colateral;
-    
-    public VectorPosicion(){
-        
+
+    public VectorPosicion() {
+
     }
-    
-    public VectorPosicion(VectorPosicion v){
+
+    public VectorPosicion(VectorPosicion v) {
         this.activo = v.getActivo();
         this.cantidad = v.getCantidad();
         this.fecha = new Date();
