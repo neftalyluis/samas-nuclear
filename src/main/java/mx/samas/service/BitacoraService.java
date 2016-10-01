@@ -8,6 +8,8 @@ package mx.samas.service;
 import java.util.Date;
 import java.util.List;
 import mx.samas.domain.Bitacora;
+import mx.samas.domain.Cuenta;
+import mx.samas.domain.Portafolio;
 
 /**
  *
@@ -24,5 +26,9 @@ public interface BitacoraService {
     public Bitacora saveBitacoraEntry(Bitacora entry);
 
     public List<Bitacora> saveBitacoraEntries(List<Bitacora> bitacoraList);
+
+    public List<Bitacora> getBitacoraListFromLastDay(Cuenta item);
+    
+    public List<Bitacora> getBitacoraListFromLastDay(Portafolio item);
 
 }

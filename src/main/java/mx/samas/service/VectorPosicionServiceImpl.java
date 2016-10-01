@@ -5,6 +5,11 @@
  */
 package mx.samas.service;
 
+import java.util.List;
+import mx.samas.domain.Portafolio;
+import mx.samas.domain.VectorPosicion;
+import mx.samas.repository.VectorPosicionRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -13,5 +18,13 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class VectorPosicionServiceImpl implements VectorPosicionService{
+
+    @Autowired
+    private VectorPosicionRepository vectorPosicionRepository;
+    
+    @Override
+    public List<VectorPosicion> getLastPosicionesFromPortafolio(Portafolio p) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

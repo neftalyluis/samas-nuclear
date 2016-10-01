@@ -5,10 +5,15 @@
  */
 package mx.samas.service;
 
+import java.util.List;
+import mx.samas.domain.Portafolio;
+import mx.samas.domain.VectorPosicion;
+
 /**
  *
  * @author samas
  */
 public interface VectorPosicionService {
-    
+
+    public List<VectorPosicion> getLastPosicionesFromPortafolio(Portafolio p);
 }

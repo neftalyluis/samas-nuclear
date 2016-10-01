@@ -53,6 +53,22 @@ public class VectorPosicion implements Serializable {
      *
      */
     private Boolean colateral;
+    
+    public VectorPosicion(){
+        
+    }
+    
+    public VectorPosicion(VectorPosicion v){
+        this.activo = v.getActivo();
+        this.cantidad = v.getCantidad();
+        this.fecha = new Date();
+        this.colateral = v.getColateral();
+        this.enPrenda = v.getEnPrenda();
+        this.fechaVencimiento = v.getFechaVencimiento();
+        this.portafolio = v.getPortafolio();
+        this.reporto = v.getReporto();
+        this.valuacion = v.getValuacion();
+    }
 
     public Long getId() {
         return id;

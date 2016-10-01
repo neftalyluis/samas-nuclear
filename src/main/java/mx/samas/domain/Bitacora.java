@@ -61,7 +61,7 @@ public class Bitacora implements Serializable {
      * Precio total
      */
     private Double importe;
-    
+
     /**
      * Titulos totales
      */
@@ -75,15 +75,14 @@ public class Bitacora implements Serializable {
     /**
      * Contrato del que deriva esta entrada
      */
-    @ManyToOne
-    private Cuenta contrato;
+    private String contratoServicio;
 
     /**
      * Mercado en el cual se operó esta transaccion
      */
     @ManyToOne
     private Mercado mercado;
-    
+
     private String folioOperacion;
 
     public Long getId() {
@@ -116,7 +115,7 @@ public class Bitacora implements Serializable {
 
     @Override
     public String toString() {
-        return "mx.samas.newdomain.Bitacora[ id=" + id + " ]";
+        return "mx.samas.domain.Bitacora[ id=" + id + " ]";
     }
 
     /**
@@ -189,7 +188,6 @@ public class Bitacora implements Serializable {
         this.transaccion = transaccion;
     }
 
-
     /**
      * @return the tasa
      */
@@ -202,20 +200,6 @@ public class Bitacora implements Serializable {
      */
     public void setTasa(Double tasa) {
         this.tasa = tasa;
-    }
-
-    /**
-     * @return the contrato
-     */
-    public Cuenta getContrato() {
-        return contrato;
-    }
-
-    /**
-     * @param contrato the contrato to set
-     */
-    public void setContrato(Cuenta contrato) {
-        this.contrato = contrato;
     }
 
     /**
@@ -272,6 +256,30 @@ public class Bitacora implements Serializable {
      */
     public void setImporte(Double importe) {
         this.importe = importe;
+    }
+
+    /**
+     * @return the contratoServicio
+     */
+    public String getContratoServicio() {
+        return contratoServicio;
+    }
+
+    /**
+     * @param contratoServicio the contratoServicio to set
+     */
+    public void setContratoServicio(String contratoServicio) {
+        this.contratoServicio = contratoServicio;
+    }
+
+    public String getContrato() {
+        return contratoServicio.substring(0,
+                contratoServicio.indexOf('-'));
+    }
+
+    public String getServicio() {
+        return contratoServicio.substring(
+                contratoServicio.indexOf('-') + 1);
     }
 
 }
