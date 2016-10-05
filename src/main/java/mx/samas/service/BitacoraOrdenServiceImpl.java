@@ -97,7 +97,11 @@ public class BitacoraOrdenServiceImpl implements BitacoraOrdenService {
                         if (ordenEntidad.getUsaActivo()) {
                             b.setActivo(activoService.getByClavePizarra(ordenDto.getClavePizarra()));
                         }
-                        b.setContrato(cuentaService.getCuentaByCadena(ordenDto.getNumeroContrato()));
+                        
+                        /**
+                         * TODO: Checa estoooo!!
+//                         */
+//                        b.setContratoServicio(cuentaService.getCuentaByCadena(ordenDto.getNumeroContrato()));
 //                    ///MMMMMM, hay que checar que ondas con la tasa
 //                    b.setTasa(Double.NaN);
 //                    Por ahora no pelamos el mercado, pero no es tan dificil hecharlo a andar

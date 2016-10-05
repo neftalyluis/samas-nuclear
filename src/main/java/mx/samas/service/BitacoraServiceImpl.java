@@ -10,6 +10,7 @@ import java.util.List;
 import mx.samas.domain.Activo;
 import mx.samas.domain.Bitacora;
 import mx.samas.domain.Cuenta;
+import mx.samas.domain.Portafolio;
 import mx.samas.repository.BitacoraRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -55,6 +56,11 @@ public class BitacoraServiceImpl implements BitacoraService {
 
     @Override
     public List<Bitacora> getBitacoraListFromLastDay(Cuenta item) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<Bitacora> getBitacoraListFromLastDay(Portafolio item) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
