@@ -891,6 +891,5 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
     }
 
     private void batchPropiedades() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
