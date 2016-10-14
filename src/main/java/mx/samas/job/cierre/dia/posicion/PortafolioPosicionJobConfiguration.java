@@ -53,6 +53,8 @@ public class PortafolioPosicionJobConfiguration {
         return stepBuilderFactory.get("sumatoriaPosicionStep")
                 .<Cuenta, List<VectorPosicion>>chunk(1000)
                 .reader(bitacoraReader())
+                .processor(vectorPosicionProcessor())
+                .writer(vectorPosicionWriter())
                 .faultTolerant()
                 .build();
     }

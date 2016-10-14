@@ -11,22 +11,26 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import mx.samas.domain.Activo;
+import mx.samas.domain.ActivoPropiedad;
 import mx.samas.domain.Banco;
 import mx.samas.domain.BitacoraOrden;
 import mx.samas.domain.Cliente;
 import mx.samas.domain.Cuenta;
 import mx.samas.domain.DuenoFuente;
 import mx.samas.domain.Estrategia;
+import mx.samas.domain.FuenteDatos;
 import mx.samas.domain.Perfil;
 import mx.samas.domain.Portafolio;
 import mx.samas.domain.PortafolioEstatus;
 import mx.samas.domain.VectorPortafolioModelo;
 import mx.samas.domain.TipoActivo;
+import mx.samas.domain.TipoDato;
 import mx.samas.domain.Transaccion;
 import mx.samas.domain.Usuario;
 import mx.samas.domain.dto.BitacoraOrdenEjecutorDTO;
 import mx.samas.domain.dto.BitacoraOrdenValorDTO;
 import mx.samas.job.SAMASJobs;
+import mx.samas.service.ActivoPropiedadService;
 import mx.samas.service.ActivoService;
 import mx.samas.service.BancoService;
 import mx.samas.service.BitacoraOrdenService;
@@ -99,6 +103,9 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
     private PortafolioService portafolioService;
 
     @Autowired
+    private ActivoPropiedadService activoPropiedadService;
+
+    @Autowired
     private JobLauncher jobLauncher;
 
     @Autowired
@@ -116,6 +123,8 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
         System.out.println("========================================");
 
         testBatch();
+        activoPropiedades();
+        batchPropiedades();
         persistPerfiles();
         persistBancos();
         persistClientesAndCuenta();
@@ -781,7 +790,7 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
         try {
             JobExecution a = jobLauncher.run(job, jpb);
         } catch (JobExecutionAlreadyRunningException | JobRestartException | JobInstanceAlreadyCompleteException | JobParametersInvalidException ex) {
-            Logger.getLogger(EntityBootstraping.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(EntityBootstraping.class.getName()).log(Level.SEVERE, "El Batch De Activos falló", ex);
         }
     }
 
@@ -794,8 +803,94 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
         try {
             JobExecution a = jobLauncher.run(job, jpb);
         } catch (JobExecutionAlreadyRunningException | JobRestartException | JobInstanceAlreadyCompleteException | JobParametersInvalidException ex) {
-            Logger.getLogger(EntityBootstraping.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(EntityBootstraping.class.getName()).log(Level.SEVERE, "El Batch de Vector falló", ex);
         }
 
+    }
+
+    private void activoPropiedades() {
+
+        //Equity 
+        //Distintivas Normativas
+        ActivoPropiedad priv = new ActivoPropiedad();
+        priv.setNombre("Privado");
+        priv.setDescripcion("Bolsa Privada");
+        priv.setNormativa(Boolean.TRUE);
+        priv.setImperativa(Boolean.FALSE);
+
+        priv.setOrigenDatos(FuenteDatos.CSV_USUARIO);
+        priv.setIndice(null);
+        priv.setTipoActivo(TipoActivo.ACCION);
+        priv.setTipoDato(TipoDato.BOOLEAN);
+
+        ActivoPropiedad fund = new ActivoPropiedad();
+        fund.setNombre("Fund");
+        fund.setDescripcion("Fund");
+        fund.setNormativa(Boolean.TRUE);
+        fund.setImperativa(Boolean.FALSE);
+
+        fund.setOrigenDatos(FuenteDatos.CSV_USUARIO);
+        fund.setIndice(null);
+        fund.setTipoActivo(TipoActivo.ACCION);
+        fund.setTipoDato(TipoDato.BOOLEAN);
+
+        ActivoPropiedad fee = new ActivoPropiedad();
+        fee.setNombre("Fee");
+        fee.setDescripcion("Fee");
+        fee.setNormativa(Boolean.TRUE);
+        fee.setImperativa(Boolean.FALSE);
+
+        fee.setOrigenDatos(FuenteDatos.CSV_USUARIO);
+        fee.setIndice(null);
+        fee.setTipoActivo(TipoActivo.ACCION);
+        fee.setTipoDato(TipoDato.DOUBLE);
+
+        ///Bonos
+        ///Normativas Imperativas
+        ActivoPropiedad vencimiento = new ActivoPropiedad();
+        vencimiento.setNombre("FechaVencimiento");
+        vencimiento.setDescripcion("Fecha de Vencimiento del Bono");
+        vencimiento.setNormativa(Boolean.TRUE);
+        vencimiento.setImperativa(Boolean.TRUE);
+
+        vencimiento.setOrigenDatos(FuenteDatos.CSV_USUARIO);
+        vencimiento.setIndice(null);
+        vencimiento.setTipoActivo(TipoActivo.BONO);
+        vencimiento.setTipoDato(TipoDato.DATE);
+
+        ActivoPropiedad tasaReferencia = new ActivoPropiedad();
+        tasaReferencia.setNombre("TasaReferencia");
+        tasaReferencia.setDescripcion("Tasa de Referencia del Bono");
+        tasaReferencia.setNormativa(Boolean.TRUE);
+        tasaReferencia.setImperativa(Boolean.TRUE);
+
+        tasaReferencia.setOrigenDatos(FuenteDatos.CSV_USUARIO);
+        tasaReferencia.setIndice(null);
+        tasaReferencia.setTipoActivo(TipoActivo.BONO);
+        tasaReferencia.setTipoDato(TipoDato.DOUBLE);
+
+        ///Normativas Distintivas
+        ActivoPropiedad amortizable = new ActivoPropiedad();
+        amortizable.setNombre("Amortizable?");
+        amortizable.setDescripcion("Define si el Bono Amortiza");
+        amortizable.setNormativa(Boolean.TRUE);
+        amortizable.setImperativa(Boolean.FALSE);
+
+        amortizable.setOrigenDatos(FuenteDatos.CSV_USUARIO);
+        amortizable.setIndice(null);
+        amortizable.setTipoActivo(TipoActivo.BONO);
+        amortizable.setTipoDato(TipoDato.BOOLEAN);
+
+        activoPropiedadService.createPropiedad(priv);
+        activoPropiedadService.createPropiedad(fund);
+        activoPropiedadService.createPropiedad(fee);
+        activoPropiedadService.createPropiedad(vencimiento);
+        activoPropiedadService.createPropiedad(tasaReferencia);
+        activoPropiedadService.createPropiedad(amortizable);
+
+    }
+
+    private void batchPropiedades() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
