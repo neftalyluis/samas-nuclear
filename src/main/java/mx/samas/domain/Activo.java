@@ -5,6 +5,7 @@
  */
 package mx.samas.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.CascadeType;
@@ -83,6 +84,7 @@ public class Activo implements Serializable {
      */
     private Boolean ventaEnCorto;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "activo", cascade = CascadeType.ALL)
     private List<VectorActivo> vectores;
 

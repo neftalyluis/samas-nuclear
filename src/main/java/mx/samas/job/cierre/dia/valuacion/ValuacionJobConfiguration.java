@@ -84,7 +84,7 @@ public class ValuacionJobConfiguration {
         JpaPagingItemReader<Activo> reader = new JpaPagingItemReader<>();
         reader.setEntityManagerFactory(emFactory);
         reader.setQueryString("SELECT a FROM Activo a JOIN FETCH a.propiedades p "
-                + "WHERE p.vectorial = TRUE");
+                + "WHERE p.normativa = TRUE");
         return reader;
     }
 

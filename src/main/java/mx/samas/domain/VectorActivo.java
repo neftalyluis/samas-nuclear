@@ -5,6 +5,7 @@
  */
 package mx.samas.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -32,6 +33,7 @@ public class VectorActivo implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date fecha;
 
+    @JsonIgnore
     @ManyToOne
     private Activo activo;
 
