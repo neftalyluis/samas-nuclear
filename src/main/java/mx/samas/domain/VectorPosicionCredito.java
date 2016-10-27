@@ -41,6 +41,10 @@ public class VectorPosicionCredito implements Serializable {
 
     @ManyToOne
     private Activo activo;
+    
+    
+    @ManyToOne
+    private Portafolio portafolio;
 
     private Double tasa;
 

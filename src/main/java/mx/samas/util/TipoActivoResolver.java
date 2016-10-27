@@ -22,14 +22,18 @@ import org.apache.commons.csv.CSVRecord;
  * @author samas
  */
 public class TipoActivoResolver {
-    
+
     private static final Logger LOG = Logger.getLogger(TipoActivoResolver.class.getName());
-    
+
     private HashMap<String, TipoActivo> resolver;
-    
+
     private static final String ROUTE = "vector/pip/TipoActivo.csv";
+
+    private static TipoActivoResolver instance = null;
+
     
-    public TipoActivoResolver() throws FileNotFoundException, IOException {
+    //La neta, me la hipermame con este singleton express lmao
+    protected TipoActivoResolver() throws FileNotFoundException, IOException {
         resolver = new HashMap<>();
         ClassLoader classLoader = getClass().getClassLoader();
         Reader in = new FileReader(classLoader.getResource(ROUTE).getFile());
@@ -38,7 +42,18 @@ public class TipoActivoResolver {
             resolver.put(record.get(1).trim(), resolveFromCSV(record.get(0)));
         }
     }
-    
+
+    public static TipoActivoResolver getInstance() {
+        if (instance == null) {
+            try {
+                instance = new TipoActivoResolver();
+            } catch (IOException ex) {
+                Logger.getLogger(TipoActivoResolver.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return instance;
+    }
+
     public TipoActivo resolveFromTipoValor(String tipo) {
         TipoActivo tip = resolver.get(tipo);
         if (tip == null) {
@@ -48,7 +63,7 @@ public class TipoActivoResolver {
             return tip;
         }
     }
-    
+
     private TipoActivo resolveFromCSV(String entry) {
         switch (entry) {
             case "Equity":
@@ -63,5 +78,5 @@ public class TipoActivoResolver {
                 return TipoActivo.ACCION;
         }
     }
-    
+
 }

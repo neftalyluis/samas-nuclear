@@ -5,7 +5,13 @@
  */
 package mx.samas.job.bootstraping.activo;
 
+import mx.samas.domain.Accion;
 import mx.samas.domain.Activo;
+import mx.samas.domain.Bono;
+import mx.samas.domain.Derivado;
+import mx.samas.domain.Moneda;
+import mx.samas.domain.TipoActivo;
+import mx.samas.util.TipoActivoResolver;
 import org.springframework.batch.item.file.mapping.FieldSetMapper;
 import org.springframework.batch.item.file.transform.FieldSet;
 import org.springframework.validation.BindException;
@@ -16,11 +22,46 @@ import org.springframework.validation.BindException;
  */
 public class ActivoFieldSetMapper implements FieldSetMapper<Activo> {
 
+    private TipoActivoResolver tipoActivoResolver;
+
     @Override
     public Activo mapFieldSet(FieldSet fieldSet) throws BindException {
 
-        Activo activo = new Activo(fieldSet.readString(1), fieldSet.readString(2),
-                fieldSet.readString(3), null, fieldSet.readString(9), null, Boolean.FALSE, null);
-        return activo;
+        tipoActivoResolver = TipoActivoResolver.getInstance();
+
+//Perdoname madre por mi vida loca        
+        Activo a = null;
+        switch (tipoActivoResolver.resolveFromTipoValor(fieldSet.readString(1))) {
+            case ACCION:
+                a = new Accion(fieldSet.readString(1), fieldSet.readString(2),
+                        fieldSet.readString(3), null, fieldSet.readString(9), null, Boolean.FALSE, null);
+                a.setTipo(TipoActivo.ACCION);
+                break;
+            case BONO:
+                a = new Bono(fieldSet.readString(1), fieldSet.readString(2),
+                        fieldSet.readString(3), null, fieldSet.readString(9), null, Boolean.FALSE, null);
+                a.setTipo(TipoActivo.BONO);
+
+                break;
+            case DERIVADO:
+                a = new Derivado(fieldSet.readString(1), fieldSet.readString(2),
+                        fieldSet.readString(3), null, fieldSet.readString(9), null, Boolean.FALSE, null);
+                a.setTipo(TipoActivo.DERIVADO);
+
+                break;
+            case MONEDA:
+                a = new Moneda(fieldSet.readString(1), fieldSet.readString(2),
+                        fieldSet.readString(3), null, fieldSet.readString(9), null, Boolean.FALSE, null);
+                a.setTipo(TipoActivo.MONEDA);
+
+                break;
+            case ACTIVO:
+                a = new Activo(fieldSet.readString(1), fieldSet.readString(2),
+                        fieldSet.readString(3), null, fieldSet.readString(9), null, Boolean.FALSE, null);
+                a.setTipo(TipoActivo.ACTIVO);
+
+                break;
+        }
+        return a;
     }
 }

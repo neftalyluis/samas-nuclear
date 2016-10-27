@@ -8,7 +8,6 @@ package mx.samas.job.bootstraping.activo;
 import java.util.List;
 import mx.samas.domain.Activo;
 import mx.samas.service.ActivoService;
-import mx.samas.util.TipoActivoResolver;
 import org.springframework.batch.item.ItemWriter;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -17,18 +16,13 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @author samas
  */
 public class ActivoItemWriter implements ItemWriter<Activo> {
-
-    private TipoActivoResolver tipoActivoResolver;
     
     @Autowired
     private ActivoService activoService;
 
     @Override
     public void write(List<? extends Activo> list) throws Exception {
-        tipoActivoResolver = new TipoActivoResolver();
         for (Activo a : list) {
-           a.setTipo(tipoActivoResolver.resolveFromTipoValor(a.getTipoValor()));
-           
            activoService.createActivo(a);
         }
     }
