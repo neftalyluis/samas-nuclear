@@ -9,6 +9,8 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
@@ -33,6 +35,9 @@ public class Bono extends Activo implements Serializable {
     private Boolean amortizable;
     @OneToMany
     private List<GradoCrediticio> grados;
+    
+    @Enumerated(EnumType.STRING)
+    private AnoComercial anoComercial;
 
     public Bono() {
 
@@ -129,4 +134,31 @@ public class Bono extends Activo implements Serializable {
         this.tasaReferencia = tasaReferencia;
     }
 
+    /**
+     * @return the grados
+     */
+    public List<GradoCrediticio> getGrados() {
+        return grados;
+    }
+
+    /**
+     * @param grados the grados to set
+     */
+    public void setGrados(List<GradoCrediticio> grados) {
+        this.grados = grados;
+    }
+
+    /**
+     * @return the anoComercial
+     */
+    public AnoComercial getAnoComercial() {
+        return anoComercial;
+    }
+
+    /**
+     * @param anoComercial the anoComercial to set
+     */
+    public void setAnoComercial(AnoComercial anoComercial) {
+        this.anoComercial = anoComercial;
+    }
 }

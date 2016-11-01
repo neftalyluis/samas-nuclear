@@ -13,6 +13,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 /**
  *
@@ -38,6 +39,9 @@ public class Mercado implements Serializable {
     private Long fechaValorDerivado;
 
     private Long fechaValorMoneda;
+    
+    @OneToMany
+    private CalendarioComercial calendario;
 
     public Long getId() {
         return id;
@@ -154,6 +158,20 @@ public class Mercado implements Serializable {
      */
     public void setFechaValorMoneda(Long fechaValorMoneda) {
         this.fechaValorMoneda = fechaValorMoneda;
+    }
+
+    /**
+     * @return the calendario
+     */
+    public CalendarioComercial getCalendario() {
+        return calendario;
+    }
+
+    /**
+     * @param calendario the calendario to set
+     */
+    public void setCalendario(CalendarioComercial calendario) {
+        this.calendario = calendario;
     }
 
 }

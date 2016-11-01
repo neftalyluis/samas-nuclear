@@ -17,6 +17,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
@@ -101,6 +102,9 @@ public class Activo implements Serializable {
     
     @ManyToMany
     private List<ActivoPropiedad> propiedades;
+    
+    @ManyToOne
+    private Mercado mercado;
 
     public Activo() {
 
@@ -328,6 +332,20 @@ public class Activo implements Serializable {
      */
     public void setPropiedades(List<ActivoPropiedad> propiedades) {
         this.propiedades = propiedades;
+    }
+
+    /**
+     * @return the mercado
+     */
+    public Mercado getMercado() {
+        return mercado;
+    }
+
+    /**
+     * @param mercado the mercado to set
+     */
+    public void setMercado(Mercado mercado) {
+        this.mercado = mercado;
     }
 
 

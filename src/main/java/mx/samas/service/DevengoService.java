@@ -5,6 +5,11 @@
  */
 package mx.samas.service;
 
+import java.time.LocalDate;
+import java.util.Date;
+import mx.samas.domain.Bono;
+import mx.samas.domain.CalendarioComercial;
+
 /**
  *
  * @author samas
@@ -13,4 +18,9 @@ public interface DevengoService {
     
     //Donde dias es division entre plazo comercial y año comercial
     public Double calculate(Double tipoDeCambio, Long posicion, Double unitario, Double tasa, Double dias);
+    
+    public Long calculaPlazoComercial(LocalDate fechaInicio, LocalDate fechaTermino, CalendarioComercial calendario);
+    
+    public Double calculaDevengo(Bono bono, LocalDate dia, Long posicion, Double valorNominal, Double tipoDeCambio, LocalDate inicioBono);
+
 }
