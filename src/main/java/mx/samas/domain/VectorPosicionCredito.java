@@ -26,39 +26,25 @@ public class VectorPosicionCredito implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    
+    @Temporal(TemporalType.DATE)
+    private Date fecha;
 
+    private Double valuacion;
+    
     @ManyToOne
     private Portafolio cuenta;
 
-    @Temporal(TemporalType.DATE)
-    private Date fechaLiquidacion;
-
-    @Temporal(TemporalType.DATE)
-    private Date fechaOperacion;
-
-    @Temporal(TemporalType.DATE)
-    private Date fechaVencimiento;
-
     @ManyToOne
     private Activo activo;
-    
-    
-    @ManyToOne
-    private Portafolio portafolio;
-
-    private Double tasa;
 
     /**
-     * Reporto y en Prenda, si es verdadero entonces existe un Activo quen los
+     * Reporto y en Prenda, si es verdadero entonces existe un Activo que los
      * respalda de lo contrario es quirografario
      */
     private Boolean bursatilizado;
-
-    private Double precio;
-
-    private Long cantidad;
-
-    private Double monto;
+    
+    private Boolean impuesto;
 
     @ManyToOne
     private Activo moneda;
@@ -97,6 +83,34 @@ public class VectorPosicionCredito implements Serializable {
     }
 
     /**
+     * @return the fecha
+     */
+    public Date getFecha() {
+        return fecha;
+    }
+
+    /**
+     * @param fecha the fecha to set
+     */
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
+    }
+
+    /**
+     * @return the valuacion
+     */
+    public Double getValuacion() {
+        return valuacion;
+    }
+
+    /**
+     * @param valuacion the valuacion to set
+     */
+    public void setValuacion(Double valuacion) {
+        this.valuacion = valuacion;
+    }
+
+    /**
      * @return the cuenta
      */
     public Portafolio getCuenta() {
@@ -108,48 +122,6 @@ public class VectorPosicionCredito implements Serializable {
      */
     public void setCuenta(Portafolio cuenta) {
         this.cuenta = cuenta;
-    }
-
-    /**
-     * @return the fechaLiquidacion
-     */
-    public Date getFechaLiquidacion() {
-        return fechaLiquidacion;
-    }
-
-    /**
-     * @param fechaLiquidacion the fechaLiquidacion to set
-     */
-    public void setFechaLiquidacion(Date fechaLiquidacion) {
-        this.fechaLiquidacion = fechaLiquidacion;
-    }
-
-    /**
-     * @return the fechaOperacion
-     */
-    public Date getFechaOperacion() {
-        return fechaOperacion;
-    }
-
-    /**
-     * @param fechaOperacion the fechaOperacion to set
-     */
-    public void setFechaOperacion(Date fechaOperacion) {
-        this.fechaOperacion = fechaOperacion;
-    }
-
-    /**
-     * @return the fechaVencimiento
-     */
-    public Date getFechaVencimiento() {
-        return fechaVencimiento;
-    }
-
-    /**
-     * @param fechaVencimiento the fechaVencimiento to set
-     */
-    public void setFechaVencimiento(Date fechaVencimiento) {
-        this.fechaVencimiento = fechaVencimiento;
     }
 
     /**
@@ -167,20 +139,6 @@ public class VectorPosicionCredito implements Serializable {
     }
 
     /**
-     * @return the tasa
-     */
-    public Double getTasa() {
-        return tasa;
-    }
-
-    /**
-     * @param tasa the tasa to set
-     */
-    public void setTasa(Double tasa) {
-        this.tasa = tasa;
-    }
-
-    /**
      * @return the bursatilizado
      */
     public Boolean getBursatilizado() {
@@ -195,45 +153,17 @@ public class VectorPosicionCredito implements Serializable {
     }
 
     /**
-     * @return the precio
+     * @return the impuesto
      */
-    public Double getPrecio() {
-        return precio;
+    public Boolean getImpuesto() {
+        return impuesto;
     }
 
     /**
-     * @param precio the precio to set
+     * @param impuesto the impuesto to set
      */
-    public void setPrecio(Double precio) {
-        this.precio = precio;
-    }
-
-    /**
-     * @return the cantidad
-     */
-    public Long getCantidad() {
-        return cantidad;
-    }
-
-    /**
-     * @param cantidad the cantidad to set
-     */
-    public void setCantidad(Long cantidad) {
-        this.cantidad = cantidad;
-    }
-
-    /**
-     * @return the monto
-     */
-    public Double getMonto() {
-        return monto;
-    }
-
-    /**
-     * @param monto the monto to set
-     */
-    public void setMonto(Double monto) {
-        this.monto = monto;
+    public void setImpuesto(Boolean impuesto) {
+        this.impuesto = impuesto;
     }
 
     /**
@@ -249,5 +179,4 @@ public class VectorPosicionCredito implements Serializable {
     public void setMoneda(Activo moneda) {
         this.moneda = moneda;
     }
-
 }

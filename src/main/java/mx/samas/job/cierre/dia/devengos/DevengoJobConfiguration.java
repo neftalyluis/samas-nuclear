@@ -5,7 +5,9 @@
  */
 package mx.samas.job.cierre.dia.devengos;
 
+import java.util.List;
 import javax.persistence.EntityManagerFactory;
+import mx.samas.domain.Cuenta;
 import mx.samas.domain.VectorPosicion;
 import mx.samas.domain.VectorPosicionCredito;
 import org.springframework.batch.core.Job;
@@ -36,41 +38,42 @@ public class DevengoJobConfiguration {
     @Autowired
     private EntityManagerFactory emFactory;
 
-//    @Bean
-//    public Job devengoJob() {
-//        return jobs.get("devengoJob")
-//                .start(devengoStep())
-//                .build();
-//    }
-//
-//    @Bean
-//    public Step devengoStep() {
-//        return stepBuilderFactory.get("devengosPosicionStep")
-//                .<VectorPosicion, VectorPosicionCredito>chunk(1000)
-//                .reader(posicionReader())
-//                .processor(posicionProcessor())
-//                .writer(posicionWriter())
-//                .faultTolerant()
-//                .build();
-//
-//    }
-//
-//    @Bean(destroyMethod = "")
-//    @StepScope
-//    public JpaPagingItemReader<VectorPosicion> posicionReader() {
-//        JpaPagingItemReader<VectorPosicion> reader = new JpaPagingItemReader<>();
-//        reader.setEntityManagerFactory(emFactory);
-//        reader.setQueryString("");
-//        return null;
-//    }
-//
-//    @Bean
-//    public ItemProcessor<VectorPosicion, VectorPosicionCredito> posicionProcessor() {
-//        return null;
-//    }
-//
-//    @Bean
-//    public ItemWriter<VectorPosicionCredito> posicionWriter() {
-//        return null;
-//    }
+    @Bean
+    public Job devengoJob() {
+        return jobs.get("devengoJob")
+                .start(devengoStep())
+                .build();
+    }
+
+    @Bean
+    public Step devengoStep() {
+        return stepBuilderFactory.get("devengosPosicionStep")
+                .<Cuenta, List<VectorPosicionCredito>>chunk(1000)
+                .reader(posicionReader())
+                .processor(posicionProcessor())
+                .writer(posicionWriter())
+                .faultTolerant()
+                .build();
+
+    }
+
+    @Bean(destroyMethod = "")
+    @StepScope
+    public JpaPagingItemReader<Cuenta> posicionReader() {
+        JpaPagingItemReader<Cuenta> reader = new JpaPagingItemReader<>();
+        reader.setEntityManagerFactory(emFactory);
+        reader.setQueryString("SELECT c FROM Cuenta c "
+                + "JOIN FETCH a.portafolios p");
+        return reader;
+    }
+
+    @Bean
+    public ItemProcessor<Cuenta, List<VectorPosicionCredito>> posicionProcessor() {
+        return null;
+    }
+
+    @Bean
+    public ItemWriter<List<VectorPosicionCredito>> posicionWriter() {
+        return null;
+    }
 }
