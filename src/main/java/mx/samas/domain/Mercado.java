@@ -6,10 +6,14 @@
 package mx.samas.domain;
 
 import java.io.Serializable;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 /**
  *
@@ -22,6 +26,22 @@ public class Mercado implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
+    private String nombre;
+
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Activo monedaDenominacion;
+
+    private Long fechaValorAccion;
+
+    private Long fechaValorBono;
+
+    private Long fechaValorDerivado;
+
+    private Long fechaValorMoneda;
+    
+    @OneToMany
+    private CalendarioComercial calendario;
 
     public Long getId() {
         return id;
@@ -55,5 +75,103 @@ public class Mercado implements Serializable {
     public String toString() {
         return "mx.samas.newdomain.Mercado[ id=" + id + " ]";
     }
-    
+
+    /**
+     * @return the nombre
+     */
+    public String getNombre() {
+        return nombre;
+    }
+
+    /**
+     * @param nombre the nombre to set
+     */
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    /**
+     * @return the monedaDenominacion
+     */
+    public Activo getMonedaDenominacion() {
+        return monedaDenominacion;
+    }
+
+    /**
+     * @param monedaDenominacion the monedaDenominacion to set
+     */
+    public void setMonedaDenominacion(Activo monedaDenominacion) {
+        this.monedaDenominacion = monedaDenominacion;
+    }
+
+    /**
+     * @return the fechaValorAccion
+     */
+    public Long getFechaValorAccion() {
+        return fechaValorAccion;
+    }
+
+    /**
+     * @param fechaValorAccion the fechaValorAccion to set
+     */
+    public void setFechaValorAccion(Long fechaValorAccion) {
+        this.fechaValorAccion = fechaValorAccion;
+    }
+
+    /**
+     * @return the fechaValorBono
+     */
+    public Long getFechaValorBono() {
+        return fechaValorBono;
+    }
+
+    /**
+     * @param fechaValorBono the fechaValorBono to set
+     */
+    public void setFechaValorBono(Long fechaValorBono) {
+        this.fechaValorBono = fechaValorBono;
+    }
+
+    /**
+     * @return the fechaValorDerivado
+     */
+    public Long getFechaValorDerivado() {
+        return fechaValorDerivado;
+    }
+
+    /**
+     * @param fechaValorDerivado the fechaValorDerivado to set
+     */
+    public void setFechaValorDerivado(Long fechaValorDerivado) {
+        this.fechaValorDerivado = fechaValorDerivado;
+    }
+
+    /**
+     * @return the fechaValorMoneda
+     */
+    public Long getFechaValorMoneda() {
+        return fechaValorMoneda;
+    }
+
+    /**
+     * @param fechaValorMoneda the fechaValorMoneda to set
+     */
+    public void setFechaValorMoneda(Long fechaValorMoneda) {
+        this.fechaValorMoneda = fechaValorMoneda;
+    }
+
+    /**
+     * @return the calendario
+     */
+    public CalendarioComercial getCalendario() {
+        return calendario;
+    }
+
+    /**
+     * @param calendario the calendario to set
+     */
+    public void setCalendario(CalendarioComercial calendario) {
+        this.calendario = calendario;
+    }
+
 }

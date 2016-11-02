@@ -60,8 +60,8 @@ public class Bitacora implements Serializable {
     /**
      * Precio total
      */
-    private Double precio;
-    
+    private Double importe;
+
     /**
      * Titulos totales
      */
@@ -76,14 +76,14 @@ public class Bitacora implements Serializable {
      * Contrato del que deriva esta entrada
      */
     @ManyToOne
-    private Cuenta contrato;
+    private Portafolio contratoServicio;
 
     /**
      * Mercado en el cual se operó esta transaccion
      */
     @ManyToOne
     private Mercado mercado;
-    
+
     private String folioOperacion;
 
     public Long getId() {
@@ -116,7 +116,7 @@ public class Bitacora implements Serializable {
 
     @Override
     public String toString() {
-        return "mx.samas.newdomain.Bitacora[ id=" + id + " ]";
+        return "mx.samas.domain.Bitacora[ id=" + id + " ]";
     }
 
     /**
@@ -190,20 +190,6 @@ public class Bitacora implements Serializable {
     }
 
     /**
-     * @return the precio
-     */
-    public Double getPrecio() {
-        return precio;
-    }
-
-    /**
-     * @param precio the precio to set
-     */
-    public void setPrecio(Double precio) {
-        this.precio = precio;
-    }
-
-    /**
      * @return the tasa
      */
     public Double getTasa() {
@@ -215,20 +201,6 @@ public class Bitacora implements Serializable {
      */
     public void setTasa(Double tasa) {
         this.tasa = tasa;
-    }
-
-    /**
-     * @return the contrato
-     */
-    public Cuenta getContrato() {
-        return contrato;
-    }
-
-    /**
-     * @param contrato the contrato to set
-     */
-    public void setContrato(Cuenta contrato) {
-        this.contrato = contrato;
     }
 
     /**
@@ -271,6 +243,34 @@ public class Bitacora implements Serializable {
      */
     public void setFolioOperacion(String folioOperacion) {
         this.folioOperacion = folioOperacion;
+    }
+
+    /**
+     * @return the importe
+     */
+    public Double getImporte() {
+        return importe;
+    }
+
+    /**
+     * @param importe the importe to set
+     */
+    public void setImporte(Double importe) {
+        this.importe = importe;
+    }
+
+    /**
+     * @return the contratoServicio
+     */
+    public Portafolio getContratoServicio() {
+        return contratoServicio;
+    }
+
+    /**
+     * @param contratoServicio the contratoServicio to set
+     */
+    public void setContratoServicio(Portafolio contratoServicio) {
+        this.contratoServicio = contratoServicio;
     }
 
 }

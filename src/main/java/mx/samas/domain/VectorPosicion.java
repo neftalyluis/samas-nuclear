@@ -13,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
@@ -37,12 +38,37 @@ public class VectorPosicion implements Serializable {
 
     private Long cantidad;
 
+    private Double valuacion;
+
+    private Boolean enPrenda;
+
+    private Boolean reporto;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date fechaVencimiento;
+
     /**
      * Si es collateral esta posicion es la prenda que respalda el credito; de
      * no existir prenda en un credito en un quirografario
      *
      */
     private Boolean colateral;
+
+    public VectorPosicion() {
+
+    }
+
+    public VectorPosicion(VectorPosicion v) {
+        this.activo = v.getActivo();
+        this.cantidad = v.getCantidad();
+        this.fecha = new Date();
+        this.colateral = v.getColateral();
+        this.enPrenda = v.getEnPrenda();
+        this.fechaVencimiento = v.getFechaVencimiento();
+        this.portafolio = v.getPortafolio();
+        this.reporto = v.getReporto();
+        this.valuacion = v.getValuacion();
+    }
 
     public Long getId() {
         return id;
@@ -90,7 +116,6 @@ public class VectorPosicion implements Serializable {
     public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
-
 
     /**
      * @return the activo
@@ -146,6 +171,62 @@ public class VectorPosicion implements Serializable {
      */
     public void setPortafolio(Portafolio portafolio) {
         this.portafolio = portafolio;
+    }
+
+    /**
+     * @return the valuacion
+     */
+    public Double getValuacion() {
+        return valuacion;
+    }
+
+    /**
+     * @param valuacion the valuacion to set
+     */
+    public void setValuacion(Double valuacion) {
+        this.valuacion = valuacion;
+    }
+
+    /**
+     * @return the enPrenda
+     */
+    public Boolean getEnPrenda() {
+        return enPrenda;
+    }
+
+    /**
+     * @param enPrenda the enPrenda to set
+     */
+    public void setEnPrenda(Boolean enPrenda) {
+        this.enPrenda = enPrenda;
+    }
+
+    /**
+     * @return the reporto
+     */
+    public Boolean getReporto() {
+        return reporto;
+    }
+
+    /**
+     * @param reporto the reporto to set
+     */
+    public void setReporto(Boolean reporto) {
+        this.reporto = reporto;
+    }
+
+    /**
+     * @return the fechaVencimiento
+     */
+    public Date getFechaVencimiento() {
+        return fechaVencimiento;
+    }
+
+    /**
+     * @param fechaVencimiento the fechaVencimiento to set
+     */
+    public void setFechaVencimiento(Date fechaVencimiento) {
+        this.fechaVencimiento = fechaVencimiento;
     }
 
 }

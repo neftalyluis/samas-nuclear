@@ -21,4 +21,11 @@ public interface ActivoPropiedadService {
     public ActivoPropiedad getPropiedadWithId(Long id);
     
     public ActivoPropiedad createPropiedad(ActivoPropiedad a);
+//    
+//    public List<ActivoPropiedad> getAllPropiedadesInActivoWithClavePizarra(String clave);
+//    
+//    public List<ActivoPropiedad> getVectorialPropiedadesInActivoWithClavePizarra(String clave);
+//    
+//    public List<ActivoPropiedad> getPropiedadesInActivoWithClavePizarra(String clave);
+    
 }

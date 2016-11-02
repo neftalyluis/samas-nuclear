@@ -34,7 +34,7 @@ public class Usuario implements Serializable {
     @NotNull
     private String nombreCompleto;
     
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "usuarios")
     private List<Perfil> perfiles;
 
     public Long getId() {

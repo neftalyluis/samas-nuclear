@@ -97,7 +97,11 @@ public class BitacoraOrdenServiceImpl implements BitacoraOrdenService {
                         if (ordenEntidad.getUsaActivo()) {
                             b.setActivo(activoService.getByClavePizarra(ordenDto.getClavePizarra()));
                         }
-                        b.setContrato(cuentaService.getCuentaByCadena(ordenDto.getNumeroContrato()));
+                        
+                        /**
+                         * TODO: Checa estoooo!!
+//                         */
+//                        b.setContratoServicio(cuentaService.getCuentaByCadena(ordenDto.getNumeroContrato()));
 //                    ///MMMMMM, hay que checar que ondas con la tasa
 //                    b.setTasa(Double.NaN);
 //                    Por ahora no pelamos el mercado, pero no es tan dificil hecharlo a andar
@@ -105,7 +109,7 @@ public class BitacoraOrdenServiceImpl implements BitacoraOrdenService {
                         //Validamos que el flujo de titulos y efectivo concuerde con el de la transaccion
                         //ToDo: La validacion y sus excepciones
                         b.setTitulos(bov.getTitulos());
-                        b.setPrecio(bov.getEfectivo());
+                        b.setImporte(bov.getEfectivo());
 
                         listaTransaccionesABitacora.add(b);
                     } catch (Exception e) {

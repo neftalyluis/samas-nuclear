@@ -36,4 +36,9 @@ public class TransaccionServiceImpl implements TransaccionService {
         return transaccionRepository.findOne(id);
     }
 
+    @Override
+    public List<Transaccion> getAllTransacciones() {
+        return (List<Transaccion>) transaccionRepository.findAll();
+    }
+
 }

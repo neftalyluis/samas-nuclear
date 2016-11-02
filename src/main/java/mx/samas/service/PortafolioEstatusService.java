@@ -14,5 +14,7 @@ import mx.samas.domain.PortafolioEstatus;
 public interface PortafolioEstatusService {
 
     public void createPortafolioEstatus(PortafolioEstatus pe);
+    
+    public PortafolioEstatus getPortafolioEstatusByNombre(String nombre);
 
 }

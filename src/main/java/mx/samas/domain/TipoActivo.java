@@ -17,6 +17,7 @@ public enum TipoActivo {
     ACCION,
     BONO,
     DERIVADO,
-    MONEDA
+    MONEDA,
+    ACTIVO
 
 }

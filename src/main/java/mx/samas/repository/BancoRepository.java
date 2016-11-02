@@ -16,4 +16,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface BancoRepository extends PagingAndSortingRepository<Banco, Long> {
 
+    public Banco findByNombre(String nombre);
 }

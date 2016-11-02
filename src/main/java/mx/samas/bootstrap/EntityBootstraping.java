@@ -11,31 +11,49 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import mx.samas.domain.Activo;
+import mx.samas.domain.ActivoPropiedad;
 import mx.samas.domain.Banco;
 import mx.samas.domain.BitacoraOrden;
 import mx.samas.domain.Cliente;
+import mx.samas.domain.Cuenta;
 import mx.samas.domain.DuenoFuente;
 import mx.samas.domain.Estrategia;
+import mx.samas.domain.FuenteDatos;
 import mx.samas.domain.Perfil;
+import mx.samas.domain.Portafolio;
 import mx.samas.domain.PortafolioEstatus;
 import mx.samas.domain.VectorPortafolioModelo;
 import mx.samas.domain.TipoActivo;
+import mx.samas.domain.TipoDato;
 import mx.samas.domain.Transaccion;
 import mx.samas.domain.Usuario;
 import mx.samas.domain.dto.BitacoraOrdenEjecutorDTO;
 import mx.samas.domain.dto.BitacoraOrdenValorDTO;
+import mx.samas.job.SAMASJobs;
+import mx.samas.service.ActivoPropiedadService;
 import mx.samas.service.ActivoService;
 import mx.samas.service.BancoService;
 import mx.samas.service.BitacoraOrdenService;
 import mx.samas.service.ClienteService;
+import mx.samas.service.CuentaService;
 import mx.samas.service.DuenoFuenteService;
 import mx.samas.service.EstrategiaService;
 import mx.samas.service.PerfilService;
 import mx.samas.service.PortafolioEstatusService;
+import mx.samas.service.PortafolioService;
 import mx.samas.service.TransaccionService;
 import mx.samas.service.UsuarioService;
+import org.springframework.batch.core.Job;
+import org.springframework.batch.core.JobExecution;
+import org.springframework.batch.core.JobParameters;
+import org.springframework.batch.core.JobParametersInvalidException;
+import org.springframework.batch.core.launch.JobLauncher;
+import org.springframework.batch.core.repository.JobExecutionAlreadyRunningException;
+import org.springframework.batch.core.repository.JobInstanceAlreadyCompleteException;
+import org.springframework.batch.core.repository.JobRestartException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Component;
 
@@ -76,7 +94,22 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
     private UsuarioService usuarioService;
 
     @Autowired
+    private CuentaService cuentaService;
+
+    @Autowired
     private BitacoraOrdenService bitacoraOrdenService;
+
+    @Autowired
+    private PortafolioService portafolioService;
+
+    @Autowired
+    private ActivoPropiedadService activoPropiedadService;
+
+    @Autowired
+    private JobLauncher jobLauncher;
+
+    @Autowired
+    private ApplicationContext appContext;
 
     @Override
     public void onApplicationEvent(ApplicationReadyEvent event) {
@@ -88,14 +121,19 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
                 + "  ____) / ____ \\| |  | |/ ____ \\ ____) |\n"
                 + " |_____/_/    \\_\\_|  |_/_/    \\_\\_____/");
         System.out.println("========================================");
+
+        testBatch();
+        activoPropiedades();
+        batchPropiedades();
         persistPerfiles();
-        persistClientes();
-        persistActivos();
-        persistEstrategiasAndPortafolioModelo();
         persistBancos();
-        persistTransacciones();
+        persistClientesAndCuenta();
+        testVectorActivoBatch();
         persistPortfolioEstatus();
+        persistEstrategiasAndPortafolioModelo();
+        persistTransacciones();
         useOperationDeposito();
+        useOperationCompraAccion();
     }
 
     private boolean persistPerfiles() {
@@ -141,7 +179,20 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
         }
     }
 
-    private boolean persistClientes() {
+    private boolean persistBancos() {
+        Banco b = new Banco();
+        b.setNombre("HSBC");
+        try {
+            bancoService.createBanco(b);
+            LOG.info("--Bancos");
+            return true;
+        } catch (Exception e) {
+            LOG.log(Level.WARNING, "No pudimos persistir el Bank, la excepcion es: {0}", e.getMessage());
+            return false;
+        }
+    }
+
+    private boolean persistClientesAndCuenta() {
         try {
 
             Cliente j = new Cliente("Juan");
@@ -153,6 +204,20 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
             clienteService.createCliente(j);
 
             LOG.info("--Clientes");
+
+            Cuenta c = new Cuenta();
+            c.setCadena("ABCD_1234");
+
+            List<Cliente> clientes = new ArrayList<>();
+            clientes.add(e);
+            clientes.add(a);
+            clientes.add(j);
+
+            c.setClientes(clientes);
+            c.setBanco(bancoService.getByNombre("HSBC"));
+            cuentaService.createOrUpdateCuenta(c);
+            LOG.info("--Cuenta");
+
             return true;
         } catch (Exception e) {
             LOG.log(Level.WARNING, "No pudimos persistir los Clientes, la excepcion es: {0}", e.getMessage());
@@ -160,166 +225,167 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
         }
     }
 
-    private boolean persistActivos() {
-
-        Activo amzn = new Activo();
-        amzn.setTipo(TipoActivo.ACCION);
-//        amzn.setMonedaDenominacion(cb.getMXPCurrency());
-        amzn.setTipoValor("1A");
-        amzn.setEmisora("AMZN");
-        amzn.setSerie("*");
-        amzn.setNombre("AMAZON COM INC");
-        amzn.setClavePizarra("1A_AMZN_*");
-
-        Activo tsla = new Activo();
-        tsla.setTipo(TipoActivo.ACCION);
-//        tsla.setMonedaDenominacion(cb.getMXPCurrency());
-        tsla.setTipoValor("1A");
-        tsla.setEmisora("TSLA");
-        tsla.setSerie("*");
-        tsla.setNombre("TESLA INC");
-        tsla.setClavePizarra("1A_TSLA_*");
-
-        Activo fiat = new Activo();
-        fiat.setTipo(TipoActivo.ACCION);
-//        fiat.setMonedaDenominacion(cb.getMXPCurrency());
-        fiat.setTipoValor("1A");
-        fiat.setEmisora("F");
-        fiat.setSerie("*");
-        fiat.setNombre("FIAT SPA");
-        fiat.setClavePizarra("1A_F_*");
-
-        Activo gfr = new Activo();
-        gfr.setTipo(TipoActivo.ACCION);
-//        gfr.setMonedaDenominacion(cb.getMXPCurrency());
-        gfr.setTipoValor("1");
-        gfr.setEmisora("GFREGIO");
-        gfr.setSerie("O");
-        gfr.setNombre("AF BANREGIO  S.A. DE C.V. SOFOM");
-        gfr.setClavePizarra("1_GFREGIO_O");
-
-        Activo amd = new Activo();
-        amd.setTipo(TipoActivo.ACCION);
-//        amd.setMonedaDenominacion(cb.getMXPCurrency());
-        amd.setTipoValor("1A");
-        amd.setEmisora("AMD");
-        amd.setSerie("*");
-        amd.setNombre("AMD");
-        amd.setClavePizarra("1A_AMD_*");
-
-        Activo kimber = new Activo();
-        kimber.setTipo(TipoActivo.ACCION);
-//        kimber.setMonedaDenominacion(cb.getMXPCurrency());
-        kimber.setTipoValor("1");
-        kimber.setEmisora("KIMBER");
-        kimber.setSerie("A");
-        kimber.setNombre("KIMBERLY-CLARK DE MÉXICO S. A. B. DE C. V.");
-        kimber.setClavePizarra("1_KIMBER_A");
-
-        Activo ivv = new Activo();
-        ivv.setTipo(TipoActivo.ACCION);
-//        ivv.setMonedaDenominacion(cb.getMXPCurrency());
-        ivv.setTipoValor("1I");
-        ivv.setEmisora("IVV");
-        ivv.setSerie("*");
-        ivv.setNombre("ISHARES CORE S&P 500 ETF");
-        ivv.setClavePizarra("1I_IVV_*");
-
-        Activo udibono40 = new Activo();
-        udibono40.setTipo(TipoActivo.BONO);
-//        udibono40.setMonedaDenominacion(cb.getMXPCurrency());
-        udibono40.setTipoValor("S");
-        udibono40.setEmisora("UDIBONO");
-        udibono40.setSerie("401115");
-        udibono40.setNombre("SECRETARÍA DE HACIENDA Y CRÉDITO PÚBLICO");
-        udibono40.setClavePizarra("S_UDIBONO_401115");
-
-        Activo udibono22 = new Activo();
-        udibono22.setTipo(TipoActivo.BONO);
-//        udibono22.setMonedaDenominacion(cb.getMXPCurrency());
-        udibono22.setTipoValor("S");
-        udibono22.setEmisora("UDIBONO");
-        udibono22.setSerie("220609");
-        udibono22.setNombre("SECRETARÍA DE HACIENDA Y CRÉDITO PÚBLICO");
-        udibono22.setClavePizarra("S_UDIBONO_220609");
-
-        Activo udibono16 = new Activo();
-        udibono16.setTipo(TipoActivo.BONO);
-//        udibono16.setMonedaDenominacion(cb.getMXPCurrency());
-        udibono16.setTipoValor("S");
-        udibono16.setEmisora("UDIBONO");
-        udibono16.setSerie("161215");
-        udibono16.setNombre("SECRETARÍA DE HACIENDA Y CRÉDITO PÚBLICO");
-        udibono16.setClavePizarra("S_UDIBONO_160616");
-
-        Activo bonos42 = new Activo();
-        bonos42.setTipo(TipoActivo.BONO);
-//        bonos42.setMonedaDenominacion(cb.getMXPCurrency());
-        bonos42.setTipoValor("M");
-        bonos42.setEmisora("BONOS");
-        bonos42.setSerie("421113");
-        bonos42.setNombre("SECRETARÍA DE HACIENDA Y CRÉDITO PÚBLICO");
-        bonos42.setClavePizarra("M_BONOS_421113");
-
-        Activo bonos24 = new Activo();
-        bonos24.setTipo(TipoActivo.BONO);
-//        bonos24.setMonedaDenominacion(cb.getMXPCurrency());
-        bonos24.setTipoValor("M");
-        bonos24.setEmisora("BONOS");
-        bonos24.setSerie("241205");
-        bonos24.setNombre("SECRETARÍA DE HACIENDA Y CRÉDITO PÚBLICO");
-        bonos24.setClavePizarra("M_BONOS_241205");
-
-        Activo bonos16 = new Activo();
-        bonos16.setTipo(TipoActivo.BONO);
-//        bonos16.setMonedaDenominacion(cb.getMXPCurrency());
-        bonos16.setTipoValor("M");
-        bonos16.setEmisora("BONOS");
-        bonos16.setSerie("161215");
-        bonos16.setNombre("SECRETARÍA DE HACIENDA Y CRÉDITO PÚBLICO");
-        bonos16.setClavePizarra("M_BONOS_161215");
-
-        Activo brfs = new Activo();
-        brfs.setTipo(TipoActivo.ACCION);
-//        brfs.setMonedaDenominacion(cb.getMXPCurrency());
-        brfs.setTipoValor("1A");
-        brfs.setEmisora("BRFS");
-        brfs.setSerie("N");
-        brfs.setNombre("BRASIL FOODS SA");
-        brfs.setClavePizarra("1A_BRFS_N");
-
-        Activo lqs = new Activo("Liquidez", "1", "LQS", "1");
-        lqs.setTipo(TipoActivo.ACCION);
-
-        try {
-
-            activoService.createActivo(amzn);
-            activoService.createActivo(tsla);
-            activoService.createActivo(fiat);
-            activoService.createActivo(gfr);
-            activoService.createActivo(amd);
-            activoService.createActivo(kimber);
-            activoService.createActivo(ivv);
-            activoService.createActivo(udibono16);
-            activoService.createActivo(udibono22);
-            activoService.createActivo(udibono40);
-            activoService.createActivo(bonos16);
-            activoService.createActivo(bonos24);
-            activoService.createActivo(bonos42);
-            activoService.createActivo(brfs);
-            activoService.createActivo(lqs);
-
-            LOG.info("--Activos");
-            return true;
-        } catch (Exception e) {
-            LOG.log(Level.WARNING, "No pudimos persistir los Assets iniciales, la excepcion es: {0}", e.getMessage());
-            return false;
-        }
-
-    }
+//    private boolean persistActivos() {
+//
+//        Activo amzn = new Activo();
+//        amzn.setTipo(TipoActivo.ACCION);
+////        amzn.setMonedaDenominacion(cb.getMXPCurrency());
+//        amzn.setTipoValor("1A");
+//        amzn.setEmisora("AMZN");
+//        amzn.setSerie("*");
+//        amzn.setNombre("AMAZON COM INC");
+//        amzn.setClavePizarra("1A_AMZN_*");
+//
+//        Activo tsla = new Activo();
+//        tsla.setTipo(TipoActivo.ACCION);
+////        tsla.setMonedaDenominacion(cb.getMXPCurrency());
+//        tsla.setTipoValor("1A");
+//        tsla.setEmisora("TSLA");
+//        tsla.setSerie("*");
+//        tsla.setNombre("TESLA INC");
+//        tsla.setClavePizarra("1A_TSLA_*");
+//
+//        Activo fiat = new Activo();
+//        fiat.setTipo(TipoActivo.ACCION);
+////        fiat.setMonedaDenominacion(cb.getMXPCurrency());
+//        fiat.setTipoValor("1A");
+//        fiat.setEmisora("F");
+//        fiat.setSerie("*");
+//        fiat.setNombre("FIAT SPA");
+//        fiat.setClavePizarra("1A_F_*");
+//
+//        Activo gfr = new Activo();
+//        gfr.setTipo(TipoActivo.ACCION);
+////        gfr.setMonedaDenominacion(cb.getMXPCurrency());
+//        gfr.setTipoValor("1");
+//        gfr.setEmisora("GFREGIO");
+//        gfr.setSerie("O");
+//        gfr.setNombre("AF BANREGIO  S.A. DE C.V. SOFOM");
+//        gfr.setClavePizarra("1_GFREGIO_O");
+//
+//        Activo amd = new Activo();
+//        amd.setTipo(TipoActivo.ACCION);
+////        amd.setMonedaDenominacion(cb.getMXPCurrency());
+//        amd.setTipoValor("1A");
+//        amd.setEmisora("AMD");
+//        amd.setSerie("*");
+//        amd.setNombre("AMD");
+//        amd.setClavePizarra("1A_AMD_*");
+//
+//        Activo kimber = new Activo();
+//        kimber.setTipo(TipoActivo.ACCION);
+////        kimber.setMonedaDenominacion(cb.getMXPCurrency());
+//        kimber.setTipoValor("1");
+//        kimber.setEmisora("KIMBER");
+//        kimber.setSerie("A");
+//        kimber.setNombre("KIMBERLY-CLARK DE MÉXICO S. A. B. DE C. V.");
+//        kimber.setClavePizarra("1_KIMBER_A");
+//
+//        Activo ivv = new Activo();
+//        ivv.setTipo(TipoActivo.ACCION);
+////        ivv.setMonedaDenominacion(cb.getMXPCurrency());
+//        ivv.setTipoValor("1I");
+//        ivv.setEmisora("IVV");
+//        ivv.setSerie("*");
+//        ivv.setNombre("ISHARES CORE S&P 500 ETF");
+//        ivv.setClavePizarra("1I_IVV_*");
+//
+//        Activo udibono40 = new Activo();
+//        udibono40.setTipo(TipoActivo.BONO);
+////        udibono40.setMonedaDenominacion(cb.getMXPCurrency());
+//        udibono40.setTipoValor("S");
+//        udibono40.setEmisora("UDIBONO");
+//        udibono40.setSerie("401115");
+//        udibono40.setNombre("SECRETARÍA DE HACIENDA Y CRÉDITO PÚBLICO");
+//        udibono40.setClavePizarra("S_UDIBONO_401115");
+//
+//        Activo udibono22 = new Activo();
+//        udibono22.setTipo(TipoActivo.BONO);
+////        udibono22.setMonedaDenominacion(cb.getMXPCurrency());
+//        udibono22.setTipoValor("S");
+//        udibono22.setEmisora("UDIBONO");
+//        udibono22.setSerie("220609");
+//        udibono22.setNombre("SECRETARÍA DE HACIENDA Y CRÉDITO PÚBLICO");
+//        udibono22.setClavePizarra("S_UDIBONO_220609");
+//
+//        Activo udibono16 = new Activo();
+//        udibono16.setTipo(TipoActivo.BONO);
+////        udibono16.setMonedaDenominacion(cb.getMXPCurrency());
+//        udibono16.setTipoValor("S");
+//        udibono16.setEmisora("UDIBONO");
+//        udibono16.setSerie("161215");
+//        udibono16.setNombre("SECRETARÍA DE HACIENDA Y CRÉDITO PÚBLICO");
+//        udibono16.setClavePizarra("S_UDIBONO_160616");
+//
+//        Activo bonos42 = new Activo();
+//        bonos42.setTipo(TipoActivo.BONO);
+////        bonos42.setMonedaDenominacion(cb.getMXPCurrency());
+//        bonos42.setTipoValor("M");
+//        bonos42.setEmisora("BONOS");
+//        bonos42.setSerie("421113");
+//        bonos42.setNombre("SECRETARÍA DE HACIENDA Y CRÉDITO PÚBLICO");
+//        bonos42.setClavePizarra("M_BONOS_421113");
+//
+//        Activo bonos24 = new Activo();
+//        bonos24.setTipo(TipoActivo.BONO);
+////        bonos24.setMonedaDenominacion(cb.getMXPCurrency());
+//        bonos24.setTipoValor("M");
+//        bonos24.setEmisora("BONOS");
+//        bonos24.setSerie("241205");
+//        bonos24.setNombre("SECRETARÍA DE HACIENDA Y CRÉDITO PÚBLICO");
+//        bonos24.setClavePizarra("M_BONOS_241205");
+//
+//        Activo bonos16 = new Activo();
+//        bonos16.setTipo(TipoActivo.BONO);
+////        bonos16.setMonedaDenominacion(cb.getMXPCurrency());
+//        bonos16.setTipoValor("M");
+//        bonos16.setEmisora("BONOS");
+//        bonos16.setSerie("161215");
+//        bonos16.setNombre("SECRETARÍA DE HACIENDA Y CRÉDITO PÚBLICO");
+//        bonos16.setClavePizarra("M_BONOS_161215");
+//
+//        Activo brfs = new Activo();
+//        brfs.setTipo(TipoActivo.ACCION);
+////        brfs.setMonedaDenominacion(cb.getMXPCurrency());
+//        brfs.setTipoValor("1A");
+//        brfs.setEmisora("BRFS");
+//        brfs.setSerie("N");
+//        brfs.setNombre("BRASIL FOODS SA");
+//        brfs.setClavePizarra("1A_BRFS_N");
+//        Activo lqs = new Activo("Liquidez", "1", "LQS", "1");
+//        lqs.setTipo(TipoActivo.ACCION);
+//
+//        try {
+//
+//            activoService.createActivo(amzn);
+//            activoService.createActivo(tsla);
+//            activoService.createActivo(fiat);
+//            activoService.createActivo(gfr);
+//            activoService.createActivo(amd);
+//            activoService.createActivo(kimber);
+//            activoService.createActivo(ivv);
+//            activoService.createActivo(udibono16);
+//            activoService.createActivo(udibono22);
+//            activoService.createActivo(udibono40);
+//            activoService.createActivo(bonos16);
+//            activoService.createActivo(bonos24);
+//            activoService.createActivo(bonos42);
+//            activoService.createActivo(brfs);
+//            activoService.createActivo(lqs);
+//
+//            LOG.info("--Activos");
+//            return true;
+//        } catch (Exception e) {
+//            LOG.log(Level.WARNING, "No pudimos persistir los Assets iniciales, la excepcion es: {0}", e.getMessage());
+//            return false;
+//        }
+//
+//    }
 
     private boolean persistEstrategiasAndPortafolioModelo() {
         try {
+            ///Cuenta Padre(?)
+            Cuenta c = cuentaService.getCuentaByCadena("ABCD_1234");
             //Estrategia Dividendo y Deuda
             Estrategia divydeu = new Estrategia();
             divydeu.setNombre("Dividendo y Deuda");
@@ -343,6 +409,12 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
             divydeu.setEstrategiaModelo(lsv);
             estrategiaService.createEstrategia(divydeu);
 
+            Portafolio p1 = new Portafolio();
+            p1.setEstrategia(divydeu);
+            p1.setFecha(new Date());
+            p1.setEstatus(portafolioEstatusService.getPortafolioEstatusByNombre("Active"));
+            portafolioService.createPortafolio(p1);
+
             //Estrategia Liquidez
             Estrategia lqs = new Estrategia();
             lqs.setNombre("Liquidez");
@@ -358,7 +430,20 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
             lsv.add(new VectorPortafolioModelo(new Date(), activoService.getByClavePizarra("M_BONOS_421113"), lqs, 5.0));
             lqs.setEstrategiaModelo(lsv);
             estrategiaService.createEstrategia(lqs);
-            LOG.info("--Estrategias");
+
+            Portafolio p2 = new Portafolio();
+            p2.setEstrategia(lqs);
+            p2.setFecha(new Date());
+            p2.setEstatus(portafolioEstatusService.getPortafolioEstatusByNombre("Active"));
+            portafolioService.createPortafolio(p2);
+            LOG.info("--Estrategias y Portafolios");
+
+            List<Portafolio> pl = new ArrayList();
+            pl.add(p2);
+            pl.add(p1);
+            c.setPortafolios(pl);
+            cuentaService.createOrUpdateCuenta(c);
+            LOG.info("--Actualizamos Cuenta");
 
             return true;
         } catch (Exception e) {
@@ -367,19 +452,6 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
             return false;
         }
 
-    }
-
-    private boolean persistBancos() {
-        Banco b = new Banco();
-        b.setNombre("HSBC");
-        try {
-            bancoService.createBanco(b);
-            LOG.info("--Bancos");
-            return true;
-        } catch (Exception e) {
-            LOG.log(Level.WARNING, "No pudimos persistir el Bank, la excepcion es: {0}", e.getMessage());
-            return false;
-        }
     }
 
     private boolean persistTransacciones() {
@@ -658,6 +730,166 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
         exec.setValorTransacciones(valores);
 
         bitacoraOrdenService.executeOrden(exec);
-        LOG.info("--Operaciones Ejemplo");
+        LOG.info("--Operacion Deposito");
+    }
+
+    private void useOperationCompraAccion() {
+        BitacoraOrden orden = bitacoraOrdenService.findOrdenByNombre("Compra");
+
+        Transaccion compraActivo = transaccionService.findByNombre("Compra");
+        Transaccion comision = transaccionService.findByNombre("Comisión");
+        Transaccion iva = transaccionService.findByNombre("IVA");
+
+        List<BitacoraOrdenValorDTO> valores = new ArrayList<>();
+        Date a = new Date();
+
+        BitacoraOrdenValorDTO comp = new BitacoraOrdenValorDTO();
+        comp.setEfectivo(-399839.05);
+        comp.setTitulos(121L);
+        comp.setTransaccionId(compraActivo.getId());
+        comp.setFechaEjecucion(a);
+        comp.setFechaIngreso(a);
+        comp.setFechaLiquidacion(a);
+        valores.add(comp);
+
+        BitacoraOrdenValorDTO comi = new BitacoraOrdenValorDTO();
+        comi.setEfectivo(-319.87);
+        comi.setTitulos(0L);
+        comi.setTransaccionId(comision.getId());
+        comi.setFechaEjecucion(a);
+        comi.setFechaIngreso(a);
+        comi.setFechaLiquidacion(a);
+        valores.add(comi);
+
+        BitacoraOrdenValorDTO iv = new BitacoraOrdenValorDTO();
+        iv.setEfectivo(-5412.25);
+        iv.setTitulos(0L);
+        iv.setTransaccionId(iva.getId());
+        iv.setFechaEjecucion(a);
+        iv.setFechaIngreso(a);
+        iv.setFechaLiquidacion(a);
+        valores.add(iv);
+
+        BitacoraOrdenEjecutorDTO exec = new BitacoraOrdenEjecutorDTO();
+        exec.setClavePizarra("1A_AMZN_*");
+        exec.setFolioOperacion("asdfg2654345");
+        exec.setIdOperacion(orden.getId());
+        exec.setNumeroContrato("ggtrfe");
+        exec.setValorTransacciones(valores);
+
+        bitacoraOrdenService.executeOrden(exec);
+        LOG.info("--Operacion Compra");
+    }
+
+    private void testBatch() {
+        LOG.info("Batch Activo");
+        Job job = (Job) appContext.getBean(SAMASJobs.BOOTSTRAP_ACTIVO);
+
+        JobParameters jpb = new JobParameters();
+
+        try {
+            JobExecution a = jobLauncher.run(job, jpb);
+        } catch (JobExecutionAlreadyRunningException | JobRestartException | JobInstanceAlreadyCompleteException | JobParametersInvalidException ex) {
+            Logger.getLogger(EntityBootstraping.class.getName()).log(Level.SEVERE, "El Batch De Activos falló", ex);
+        }
+    }
+
+    private void testVectorActivoBatch() {
+        LOG.info("Batch VectorActivo");
+        Job job = (Job) appContext.getBean(SAMASJobs.VALUACION_VECTOR);
+
+        JobParameters jpb = new JobParameters();
+
+        try {
+            JobExecution a = jobLauncher.run(job, jpb);
+        } catch (JobExecutionAlreadyRunningException | JobRestartException | JobInstanceAlreadyCompleteException | JobParametersInvalidException ex) {
+            Logger.getLogger(EntityBootstraping.class.getName()).log(Level.SEVERE, "El Batch de Vector falló", ex);
+        }
+
+    }
+
+    private void activoPropiedades() {
+
+        //Equity 
+        //Distintivas Normativas
+        ActivoPropiedad priv = new ActivoPropiedad();
+        priv.setNombre("Privado");
+        priv.setDescripcion("Bolsa Privada");
+        priv.setNormativa(Boolean.TRUE);
+        priv.setImperativa(Boolean.FALSE);
+
+        priv.setOrigenDatos(FuenteDatos.CSV_USUARIO);
+        priv.setIndice(null);
+        priv.setTipoActivo(TipoActivo.ACCION);
+        priv.setTipoDato(TipoDato.BOOLEAN);
+
+        ActivoPropiedad fund = new ActivoPropiedad();
+        fund.setNombre("Fund");
+        fund.setDescripcion("Fund");
+        fund.setNormativa(Boolean.TRUE);
+        fund.setImperativa(Boolean.FALSE);
+
+        fund.setOrigenDatos(FuenteDatos.CSV_USUARIO);
+        fund.setIndice(null);
+        fund.setTipoActivo(TipoActivo.ACCION);
+        fund.setTipoDato(TipoDato.BOOLEAN);
+
+        ActivoPropiedad fee = new ActivoPropiedad();
+        fee.setNombre("Fee");
+        fee.setDescripcion("Fee");
+        fee.setNormativa(Boolean.TRUE);
+        fee.setImperativa(Boolean.FALSE);
+
+        fee.setOrigenDatos(FuenteDatos.CSV_USUARIO);
+        fee.setIndice(null);
+        fee.setTipoActivo(TipoActivo.ACCION);
+        fee.setTipoDato(TipoDato.DOUBLE);
+
+        ///Bonos
+        ///Normativas Imperativas
+        ActivoPropiedad vencimiento = new ActivoPropiedad();
+        vencimiento.setNombre("FechaVencimiento");
+        vencimiento.setDescripcion("Fecha de Vencimiento del Bono");
+        vencimiento.setNormativa(Boolean.TRUE);
+        vencimiento.setImperativa(Boolean.TRUE);
+
+        vencimiento.setOrigenDatos(FuenteDatos.CSV_USUARIO);
+        vencimiento.setIndice(null);
+        vencimiento.setTipoActivo(TipoActivo.BONO);
+        vencimiento.setTipoDato(TipoDato.DATE);
+
+        ActivoPropiedad tasaReferencia = new ActivoPropiedad();
+        tasaReferencia.setNombre("TasaReferencia");
+        tasaReferencia.setDescripcion("Tasa de Referencia del Bono");
+        tasaReferencia.setNormativa(Boolean.TRUE);
+        tasaReferencia.setImperativa(Boolean.TRUE);
+
+        tasaReferencia.setOrigenDatos(FuenteDatos.CSV_USUARIO);
+        tasaReferencia.setIndice(null);
+        tasaReferencia.setTipoActivo(TipoActivo.BONO);
+        tasaReferencia.setTipoDato(TipoDato.DOUBLE);
+
+        ///Normativas Distintivas
+        ActivoPropiedad amortizable = new ActivoPropiedad();
+        amortizable.setNombre("Amortizable?");
+        amortizable.setDescripcion("Define si el Bono Amortiza");
+        amortizable.setNormativa(Boolean.TRUE);
+        amortizable.setImperativa(Boolean.FALSE);
+
+        amortizable.setOrigenDatos(FuenteDatos.CSV_USUARIO);
+        amortizable.setIndice(null);
+        amortizable.setTipoActivo(TipoActivo.BONO);
+        amortizable.setTipoDato(TipoDato.BOOLEAN);
+
+        activoPropiedadService.createPropiedad(priv);
+        activoPropiedadService.createPropiedad(fund);
+        activoPropiedadService.createPropiedad(fee);
+        activoPropiedadService.createPropiedad(vencimiento);
+        activoPropiedadService.createPropiedad(tasaReferencia);
+        activoPropiedadService.createPropiedad(amortizable);
+
+    }
+
+    private void batchPropiedades() {
     }
 }

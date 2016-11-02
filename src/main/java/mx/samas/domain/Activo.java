@@ -16,17 +16,20 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
-import mx.samas.domain.dto.ActivoPropiedadValor;
 
 /**
  *
  * @author samas
  */
 @Entity
+@NamedQuery(name = "Activo.existWithClavePizarra", 
+        query = "SELECT CASE WHEN (count(act) > 0) THEN TRUE ELSE FALSE END "
+                + "FROM Activo act WHERE act.clavePizarra = :clavePizarra")
 public class Activo implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -94,13 +97,14 @@ public class Activo implements Serializable {
     @Enumerated(EnumType.ORDINAL)
     private TipoActivo tipo;
 
-    @JsonIgnore
-    @Lob
+    @OneToMany
     private List<ActivoPropiedadValor> propiedadesValor;
     
-    @JsonIgnore
     @ManyToMany
     private List<ActivoPropiedad> propiedades;
+    
+    @ManyToOne
+    private Mercado mercado;
 
     public Activo() {
 
@@ -329,5 +333,20 @@ public class Activo implements Serializable {
     public void setPropiedades(List<ActivoPropiedad> propiedades) {
         this.propiedades = propiedades;
     }
+
+    /**
+     * @return the mercado
+     */
+    public Mercado getMercado() {
+        return mercado;
+    }
+
+    /**
+     * @param mercado the mercado to set
+     */
+    public void setMercado(Mercado mercado) {
+        this.mercado = mercado;
+    }
+
 
 }

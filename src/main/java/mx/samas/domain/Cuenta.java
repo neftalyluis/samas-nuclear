@@ -7,6 +7,7 @@ package mx.samas.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -30,7 +31,7 @@ public class Cuenta implements Serializable {
     
     @JsonIgnore
     @ManyToMany
-    private List<Cliente> titular;
+    private List<Cliente> clientes;
 
     private String cadena;
 
@@ -40,6 +41,11 @@ public class Cuenta implements Serializable {
     @JsonIgnore
     @OneToMany
     private List<Portafolio> portafolios;
+    
+    public Cuenta(){
+        this.portafolios = new ArrayList<>();
+        this.clientes = new ArrayList<>();
+    }
 
     public Long getId() {
         return id;
@@ -72,20 +78,6 @@ public class Cuenta implements Serializable {
     @Override
     public String toString() {
         return "mx.samas.newdomain.Cuenta[ id=" + id + " ]";
-    }
-
-    /**
-     * @return the titular
-     */
-    public List<Cliente> getTitular() {
-        return titular;
-    }
-
-    /**
-     * @param titular the titular to set
-     */
-    public void setTitular(List<Cliente> titular) {
-        this.titular = titular;
     }
 
     /**
@@ -128,6 +120,20 @@ public class Cuenta implements Serializable {
      */
     public void setPortafolios(List<Portafolio> portafolios) {
         this.portafolios = portafolios;
+    }
+
+    /**
+     * @return the clientes
+     */
+    public List<Cliente> getClientes() {
+        return clientes;
+    }
+
+    /**
+     * @param clientes the clientes to set
+     */
+    public void setClientes(List<Cliente> clientes) {
+        this.clientes = clientes;
     }
 
 }

@@ -8,11 +8,13 @@ package mx.samas.domain;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
@@ -32,11 +34,14 @@ public class Portafolio implements Serializable {
     @ManyToOne
     private TipoServicio tipoServicio;
 
-    @Temporal(javax.persistence.TemporalType.DATE)
+    @Temporal(TemporalType.DATE)
     private Date fecha;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private PortafolioEstatus estatus;
+    
+    @ManyToOne
+    private Activo monedaDenominacion;
 
     public Long getId() {
         return id;
@@ -125,6 +130,20 @@ public class Portafolio implements Serializable {
      */
     public void setEstatus(PortafolioEstatus estatus) {
         this.estatus = estatus;
+    }
+
+    /**
+     * @return the monedaDenominacion
+     */
+    public Activo getMonedaDenominacion() {
+        return monedaDenominacion;
+    }
+
+    /**
+     * @param monedaDenominacion the monedaDenominacion to set
+     */
+    public void setMonedaDenominacion(Activo monedaDenominacion) {
+        this.monedaDenominacion = monedaDenominacion;
     }
 
 }

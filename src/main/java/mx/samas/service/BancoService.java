@@ -12,7 +12,9 @@ import mx.samas.domain.Banco;
  * @author samas
  */
 public interface BancoService {
-    
+
     public void createBanco(Banco b);
-    
+
+    public Banco getByNombre(String nombre);
+
 }

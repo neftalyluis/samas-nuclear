@@ -5,16 +5,18 @@
  */
 package mx.samas.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Lob;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import mx.samas.domain.dto.ActivoPropiedadValor;
+import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
@@ -28,16 +30,27 @@ public class VectorActivo implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @Temporal(TemporalType.DATE)
+    private Date fecha;
+
+    @JsonIgnore
     @ManyToOne
     private Activo activo;
 
     private Double precioLimpio;
 
-    @Lob
+    @OneToMany
     private List<ActivoPropiedadValor> propiedadesValor;
-    
-    @ManyToMany
-    private List<ActivoPropiedad> propiedades;
+
+    public VectorActivo() {
+
+    }
+
+    public VectorActivo(Date fecha, Double precioLimpio) {
+        this.fecha = fecha;
+        this.precioLimpio = precioLimpio;
+
+    }
 
     public Long getId() {
         return id;
@@ -115,17 +128,17 @@ public class VectorActivo implements Serializable {
     }
 
     /**
-     * @return the propiedades
+     * @return the fecha
      */
-    public List<ActivoPropiedad> getPropiedades() {
-        return propiedades;
+    public Date getFecha() {
+        return fecha;
     }
 
     /**
-     * @param propiedades the propiedades to set
+     * @param fecha the fecha to set
      */
-    public void setPropiedades(List<ActivoPropiedad> propiedades) {
-        this.propiedades = propiedades;
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
     }
 
 }

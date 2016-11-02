@@ -41,6 +41,48 @@ public class ActivoPropiedad implements Serializable {
     @Enumerated(EnumType.ORDINAL)
     private TipoDato tipoDato;
 
+    /**
+     * En que indice del CSV se va a leer esta propiedad
+     */
+    private Integer indice;
+
+    /**
+     * Su valor va definido forzosamente con el Tipo de Activo; 
+     * 
+     * Por ejemplo: 
+     * 
+     * Para un Bono la fecha de Vencimiento es una propiedad imperativa porque todos
+     * los Bonos deben tener esa propiedad.
+     * 
+     * En caso de que no lo sea, esta propiedad seria Distintiva
+     */
+    private Boolean imperativa;
+
+    /**
+     * Normativa: Su valor no cambia con el tiempo 
+     * 
+     * !Normativa=Positiva: Su valor cambia con el tiempo
+     * 
+     * TL;DR Si esta propiedad se va a registrar diariamente en el VectorActivo
+     */
+    private Boolean normativa;
+
+    /**
+     * En que archivo se van a leer estas propiedades
+     */
+    @Enumerated(EnumType.ORDINAL)
+    private FuenteDatos origenDatos;
+
+    /**
+     * A que tipo de Activo 
+     */
+    @Enumerated(EnumType.ORDINAL)
+    private TipoActivo tipoActivo;
+
+    public ActivoPropiedad() {
+
+    }
+
     public Long getId() {
         return id;
     }
@@ -116,4 +158,73 @@ public class ActivoPropiedad implements Serializable {
         this.tipoDato = tipoDato;
     }
 
+    /**
+     * @return the origenDatos
+     */
+    public FuenteDatos getOrigenDatos() {
+        return origenDatos;
+    }
+
+    /**
+     * @param origenDatos the origenDatos to set
+     */
+    public void setOrigenDatos(FuenteDatos origenDatos) {
+        this.origenDatos = origenDatos;
+    }
+
+    /**
+     * @return the indice
+     */
+    public Integer getIndice() {
+        return indice;
+    }
+
+    /**
+     * @param indice the indice to set
+     */
+    public void setIndice(Integer indice) {
+        this.indice = indice;
+    }
+
+    /**
+     * @return the imperativa
+     */
+    public Boolean getImperativa() {
+        return imperativa;
+    }
+
+    /**
+     * @param imperativa the imperativa to set
+     */
+    public void setImperativa(Boolean imperativa) {
+        this.imperativa = imperativa;
+    }
+
+    /**
+     * @return the normativa
+     */
+    public Boolean getNormativa() {
+        return normativa;
+    }
+
+    /**
+     * @param normativa the normativa to set
+     */
+    public void setNormativa(Boolean normativa) {
+        this.normativa = normativa;
+    }
+
+    /**
+     * @return the tipoActivo
+     */
+    public TipoActivo getTipoActivo() {
+        return tipoActivo;
+    }
+
+    /**
+     * @param tipoActivo the tipoActivo to set
+     */
+    public void setTipoActivo(TipoActivo tipoActivo) {
+        this.tipoActivo = tipoActivo;
+    }
 }
