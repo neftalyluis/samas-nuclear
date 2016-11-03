@@ -79,7 +79,7 @@ public class Estrategia implements Serializable {
 
     @Override
     public String toString() {
-        return "mx.samas.newdomain.Estrategia[ id=" + id + " ]";
+        return "mx.samas.domain.Estrategia[ id=" + id + " ]";
     }
 
     /**

@@ -73,7 +73,7 @@ public class Mercado implements Serializable {
 
     @Override
     public String toString() {
-        return "mx.samas.newdomain.Mercado[ id=" + id + " ]";
+        return "mx.samas.domain.Mercado[ id=" + id + " ]";
     }
 
     /**

@@ -13,7 +13,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 /**
  *
@@ -40,19 +39,12 @@ public class VectorPosicion implements Serializable {
 
     private Double valuacion;
 
-    private Boolean enPrenda;
+    /**
+     * No se puede Operar
+     */
+    private Boolean prendado;
 
     private Boolean reporto;
-
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date fechaVencimiento;
-
-    /**
-     * Si es collateral esta posicion es la prenda que respalda el credito; de
-     * no existir prenda en un credito en un quirografario
-     *
-     */
-    private Boolean colateral;
 
     public VectorPosicion() {
 
@@ -62,9 +54,7 @@ public class VectorPosicion implements Serializable {
         this.activo = v.getActivo();
         this.cantidad = v.getCantidad();
         this.fecha = new Date();
-        this.colateral = v.getColateral();
-        this.enPrenda = v.getEnPrenda();
-        this.fechaVencimiento = v.getFechaVencimiento();
+        this.prendado = v.getPrendado();
         this.portafolio = v.getPortafolio();
         this.reporto = v.getReporto();
         this.valuacion = v.getValuacion();
@@ -146,20 +136,6 @@ public class VectorPosicion implements Serializable {
     }
 
     /**
-     * @return the colateral
-     */
-    public Boolean getColateral() {
-        return colateral;
-    }
-
-    /**
-     * @param colateral the colateral to set
-     */
-    public void setColateral(Boolean colateral) {
-        this.colateral = colateral;
-    }
-
-    /**
      * @return the portafolio
      */
     public Portafolio getPortafolio() {
@@ -187,19 +163,6 @@ public class VectorPosicion implements Serializable {
         this.valuacion = valuacion;
     }
 
-    /**
-     * @return the enPrenda
-     */
-    public Boolean getEnPrenda() {
-        return enPrenda;
-    }
-
-    /**
-     * @param enPrenda the enPrenda to set
-     */
-    public void setEnPrenda(Boolean enPrenda) {
-        this.enPrenda = enPrenda;
-    }
 
     /**
      * @return the reporto
@@ -216,17 +179,17 @@ public class VectorPosicion implements Serializable {
     }
 
     /**
-     * @return the fechaVencimiento
+     * @return the prendado
      */
-    public Date getFechaVencimiento() {
-        return fechaVencimiento;
+    public Boolean getPrendado() {
+        return prendado;
     }
 
     /**
-     * @param fechaVencimiento the fechaVencimiento to set
+     * @param prendado the prendado to set
      */
-    public void setFechaVencimiento(Date fechaVencimiento) {
-        this.fechaVencimiento = fechaVencimiento;
+    public void setPrendado(Boolean prendado) {
+        this.prendado = prendado;
     }
 
 }

@@ -94,7 +94,7 @@ public class VectorPortafolioModelo implements Serializable {
 
     @Override
     public String toString() {
-        return "mx.samas.newdomain.PortafolioModelo[ id=" + id + " ]";
+        return "mx.samas.domain.PortafolioModelo[ id=" + id + " ]";
     }
 
     /**
