@@ -14,6 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 /**
  *
@@ -40,7 +41,7 @@ public class Mercado implements Serializable {
 
     private Long fechaValorMoneda;
     
-    @OneToMany
+    @OneToOne
     private CalendarioComercial calendario;
 
     public Long getId() {

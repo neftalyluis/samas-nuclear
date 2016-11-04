@@ -50,6 +50,9 @@ public class Portafolio implements Serializable {
     private Activo monedaDenominacion;
     
     @ManyToMany
+    private List<Cliente> clientes;
+    
+    @ManyToMany
     private List<Cuenta> corredores;
 
     public Long getId() {
@@ -182,6 +185,20 @@ public class Portafolio implements Serializable {
      */
     public void setCorredores(List<Cuenta> corredores) {
         this.corredores = corredores;
+    }
+
+    /**
+     * @return the clientes
+     */
+    public List<Cliente> getClientes() {
+        return clientes;
+    }
+
+    /**
+     * @param clientes the clientes to set
+     */
+    public void setClientes(List<Cliente> clientes) {
+        this.clientes = clientes;
     }
 
 }

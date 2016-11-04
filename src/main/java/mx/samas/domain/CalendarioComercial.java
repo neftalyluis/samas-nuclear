@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -28,6 +29,7 @@ public class CalendarioComercial implements Serializable {
     
     private String nombre;
     //Los dias que no hay operacion
+    @ElementCollection
     private List<LocalDate> noHabiles;
 
     public Long getId() {
