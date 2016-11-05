@@ -10,6 +10,7 @@ import java.time.ZoneId;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import mx.samas.domain.Activo;
 import mx.samas.domain.Portafolio;
 import mx.samas.domain.VectorPortafolioModelo;
 import mx.samas.domain.VectorPosicion;
@@ -32,35 +33,56 @@ public class RebalanceoServiceImpl implements RebalanceoService {
     private PortafolioModeloRepository portafolioModeloRepository;
 
     @Override
-    public List<Double> presupuestoParaPortafolio(Portafolio p) {
+    public HashMap<String, Double> presupuestoParaPortafolio(Portafolio p) {
 
-        //pi*qi
-        HashMap<String, Double> mapPrecioPorPosicion = new HashMap<>();
-        //ai
-        HashMap<String, Double> mapDianas = new HashMap<>();
-        //vj
-        HashMap<String, Double> mapVj = new HashMap<>();
-        //Delta vi
-        HashMap<String, Double> mapPresupuesto = new HashMap<>();
-
+        ///y Vt? D:
         //Suponiendo que no es sabado o domingo o dia inhabil, hay que optimizar esto
         LocalDate hoy = LocalDate.now().minusDays(1);
         Date hoyDate = Date.from(hoy.atStartOfDay(ZoneId.systemDefault()).toInstant());
 
+        //pi*qi
+        HashMap<String, Double> mapPrecioPorPosicion = new HashMap<>();
         //Obtenemos las posiciones del dia anterior
         List<VectorPosicion> posicionesAyer = vectorPosicionRepository.findByPortafolioAndFecha(p, hoyDate);
-        if (posicionesAyer.isEmpty()) {
-            //Esta virgen el portafolio
-            
-        } else {
-            //No lo esta, LMAO
+        for (VectorPosicion vp : posicionesAyer) {
+            mapPrecioPorPosicion.put(vp.getActivo().getClavePizarra(), vp.getValuacion() * vp.getCantidad());
         }
-        
-        
+
+        //ai
+        HashMap<String, Double> mapDianas = new HashMap<>();
         //Obtenemos las dianas del Portafolio
         List<VectorPortafolioModelo> dianas = portafolioModeloRepository.findByEstrategiaAndCreado(p.getEstrategia(), hoyDate);
+        for (VectorPortafolioModelo vpm : dianas) {
+            mapDianas.put(vpm.getActivo().getClavePizarra(), vpm.getDiana());
+        }
 
-        return null;
+        //vj
+        HashMap<String, Double> mapVj = new HashMap<>();
+        for (VectorPortafolioModelo vpm : dianas) {
+            Double vj = dianas.stream()
+                    .filter(v -> !v.getActivo().getClavePizarra()
+                            .equalsIgnoreCase(vpm.getActivo().getClavePizarra()))
+                    .mapToDouble(VectorPortafolioModelo::getDiana)
+                    .sum();
+            mapVj.put(vpm.getActivo().getClavePizarra(), vj);
+        }
+
+        //Delta vi
+        HashMap<String, Double> mapPresupuesto = new HashMap<>();
+        //Llamamos presupuesto() 
+        for (String clavePizarra : mapDianas.keySet()) {
+            mapPresupuesto.put(
+                    clavePizarra,
+                    presupuesto(
+                            mapPrecioPorPosicion.get(clavePizarra),
+                            mapDianas.get(clavePizarra),
+                            mapVj.get(clavePizarra
+                            )));
+        }
+
+        Activo m = p.getMonedaDenominacion();
+
+        return mapPresupuesto;
 
     }
 

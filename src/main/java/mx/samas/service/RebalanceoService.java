@@ -5,7 +5,7 @@
  */
 package mx.samas.service;
 
-import java.util.List;
+import java.util.HashMap;
 import mx.samas.domain.Portafolio;
 
 /**
@@ -13,5 +13,5 @@ import mx.samas.domain.Portafolio;
  * @author samas
  */
 public interface RebalanceoService {
-    public List<Double> presupuestoParaPortafolio(Portafolio p);
+    public HashMap<String, Double> presupuestoParaPortafolio(Portafolio p);
 }
