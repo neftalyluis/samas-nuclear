@@ -14,17 +14,21 @@ import mx.samas.domain.ActivoPropiedadValor;
  * @author samas
  */
 public interface ActivoService {
-    
+
     public List<Activo> getAllActivos();
-    
+
     public Activo getById(Long id);
-    
+
     public List<Activo> getByNombre(String nombre);
-    
+
     public Activo getByClavePizarra(String clavePizarra);
-    
+
     public Activo createActivo(Activo input);
-    
+
     public List<ActivoPropiedadValor> getPropiedadesFromActivo(Long id);
-    
+
+    public void deleteActivo(Activo a);
+
+    public void deleteActivo(Long id);
+
 }
