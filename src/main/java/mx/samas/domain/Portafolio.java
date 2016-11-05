@@ -54,6 +54,8 @@ public class Portafolio implements Serializable {
     
     @ManyToMany
     private List<Cuenta> corredores;
+    
+    private Double margen;
 
     public Long getId() {
         return id;
@@ -199,6 +201,20 @@ public class Portafolio implements Serializable {
      */
     public void setClientes(List<Cliente> clientes) {
         this.clientes = clientes;
+    }
+
+    /**
+     * @return the margen
+     */
+    public Double getMargen() {
+        return margen;
+    }
+
+    /**
+     * @param margen the margen to set
+     */
+    public void setMargen(Double margen) {
+        this.margen = margen;
     }
 
 }

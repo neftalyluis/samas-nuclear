@@ -11,9 +11,11 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import mx.samas.domain.Activo;
+import mx.samas.domain.Bitacora;
 import mx.samas.domain.Portafolio;
 import mx.samas.domain.VectorPortafolioModelo;
 import mx.samas.domain.VectorPosicion;
+import mx.samas.repository.BitacoraRepository;
 import mx.samas.repository.PortafolioModeloRepository;
 import mx.samas.repository.VectorPosicionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +33,9 @@ public class RebalanceoServiceImpl implements RebalanceoService {
 
     @Autowired
     private PortafolioModeloRepository portafolioModeloRepository;
+
+    @Autowired
+    private BitacoraRepository bitacoraRepository;
 
     @Override
     public HashMap<String, Double> presupuestoParaPortafolio(Portafolio p) {
@@ -88,6 +93,20 @@ public class RebalanceoServiceImpl implements RebalanceoService {
 
     private Double presupuesto(Double piqi, Double ai, Double vj) {
         return (ai / 1 - ai) * vj - piqi;
+    }
+
+    @Override
+    public Double poderDeCompra(Portafolio p, Date fechaValor) {
+
+        LocalDate hoy = LocalDate.now();
+        Date hoyDate = Date.from(hoy.atStartOfDay(ZoneId.systemDefault()).toInstant());
+
+        List<Bitacora> lb = bitacoraRepository
+                .findByPortafolioAndOperacionAndLiquidacion(p, hoyDate, fechaValor);
+
+        Double flujoEntreDias = lb.stream().mapToDouble(Bitacora::getPrecio).sum();
+
+        return flujoEntreDias;
     }
 
 }
