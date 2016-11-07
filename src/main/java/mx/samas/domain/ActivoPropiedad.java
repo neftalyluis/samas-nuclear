@@ -113,7 +113,7 @@ public class ActivoPropiedad implements Serializable {
 
     @Override
     public String toString() {
-        return "mx.samas.newdomain.ActivoPropiedad[ id=" + id + " ]";
+        return "mx.samas.domain.ActivoPropiedad[ id=" + id + " ]";
     }
 
     /**

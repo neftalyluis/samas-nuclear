@@ -163,7 +163,7 @@ public class Activo implements Serializable {
 
     @Override
     public String toString() {
-        return "mx.samas.newdomain.Activo[ id=" + id + " ]";
+        return "mx.samas.domain.Activo[ id=" + id + " ]";
     }
 
     /**

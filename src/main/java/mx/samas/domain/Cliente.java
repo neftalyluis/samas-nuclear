@@ -35,10 +35,10 @@ public class Cliente implements Serializable {
 
     @NotNull
     private Boolean elegible;
-
+    
     @JsonIgnore
-    @ManyToMany(mappedBy = "clientes")
-    private List<Cuenta> cuentas;
+    @ManyToMany
+    private List<Portafolio> portafolios;
 
     public Cliente() {
     }
@@ -91,7 +91,7 @@ public class Cliente implements Serializable {
 
     @Override
     public String toString() {
-        return "mx.samas.newdomain.Cliente[ id=" + id + " ]";
+        return "mx.samas.domain.Cliente[ id=" + id + " ]";
     }
 
     /**
@@ -137,17 +137,17 @@ public class Cliente implements Serializable {
     }
 
     /**
-     * @return the cuentas
+     * @return the portafolios
      */
-    public List<Cuenta> getCuentas() {
-        return cuentas;
+    public List<Portafolio> getPortafolios() {
+        return portafolios;
     }
 
     /**
-     * @param cuentas the cuentas to set
+     * @param portafolios the portafolios to set
      */
-    public void setCuentas(List<Cuenta> cuentas) {
-        this.cuentas = cuentas;
+    public void setPortafolios(List<Portafolio> portafolios) {
+        this.portafolios = portafolios;
     }
 
 }

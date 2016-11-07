@@ -52,4 +52,14 @@ public class ActivoServiceImpl implements ActivoService {
         Activo a = getById(id);
         return a.getPropiedadesValor();
     }
+
+    @Override
+    public void deleteActivo(Activo a) {
+        activoRepository.delete(a);
+    }
+
+    @Override
+    public void deleteActivo(Long id) {
+        activoRepository.delete(id);
+    }
 }

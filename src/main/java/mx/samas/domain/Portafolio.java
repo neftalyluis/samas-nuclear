@@ -7,12 +7,15 @@ package mx.samas.domain;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -27,6 +30,9 @@ public class Portafolio implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    
+    @OneToOne
+    private Cuenta cuentaEje;
 
     @ManyToOne
     private Estrategia estrategia;
@@ -42,6 +48,14 @@ public class Portafolio implements Serializable {
     
     @ManyToOne
     private Activo monedaDenominacion;
+    
+    @ManyToMany
+    private List<Cliente> clientes;
+    
+    @ManyToMany
+    private List<Cuenta> corredores;
+    
+    private Double margen;
 
     public Long getId() {
         return id;
@@ -73,7 +87,7 @@ public class Portafolio implements Serializable {
 
     @Override
     public String toString() {
-        return "mx.samas.newdomain.Portafolio[ id=" + id + " ]";
+        return "mx.samas.domain.Portafolio[ id=" + id + " ]";
     }
 
     /**
@@ -144,6 +158,63 @@ public class Portafolio implements Serializable {
      */
     public void setMonedaDenominacion(Activo monedaDenominacion) {
         this.monedaDenominacion = monedaDenominacion;
+    }
+
+
+    /**
+     * @return the cuentaEje
+     */
+    public Cuenta getCuentaEje() {
+        return cuentaEje;
+    }
+
+    /**
+     * @param cuentaEje the cuentaEje to set
+     */
+    public void setCuentaEje(Cuenta cuentaEje) {
+        this.cuentaEje = cuentaEje;
+    }
+
+    /**
+     * @return the corredores
+     */
+    public List<Cuenta> getCorredores() {
+        return corredores;
+    }
+
+    /**
+     * @param corredores the corredores to set
+     */
+    public void setCorredores(List<Cuenta> corredores) {
+        this.corredores = corredores;
+    }
+
+    /**
+     * @return the clientes
+     */
+    public List<Cliente> getClientes() {
+        return clientes;
+    }
+
+    /**
+     * @param clientes the clientes to set
+     */
+    public void setClientes(List<Cliente> clientes) {
+        this.clientes = clientes;
+    }
+
+    /**
+     * @return the margen
+     */
+    public Double getMargen() {
+        return margen;
+    }
+
+    /**
+     * @param margen the margen to set
+     */
+    public void setMargen(Double margen) {
+        this.margen = margen;
     }
 
 }

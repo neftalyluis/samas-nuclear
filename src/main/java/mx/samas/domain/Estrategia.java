@@ -12,6 +12,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 /**
@@ -31,9 +32,17 @@ public class Estrategia implements Serializable {
     @OneToMany(mappedBy = "estrategia", cascade = CascadeType.ALL)
     private List<VectorPortafolioModelo> estrategiaModelo;
 
+    private Boolean liquidez;
+    private Boolean efectivo;
+    private Boolean grupos;
+    private Boolean margen;
+    
+    @ManyToMany
+    private List<Grupo> grupoLista;
+    
+
     //    @ManyToOne
 //    private PerfilRiesgo perfilRiesgo;
-    
     public Estrategia() {
 
     }
@@ -79,7 +88,7 @@ public class Estrategia implements Serializable {
 
     @Override
     public String toString() {
-        return "mx.samas.newdomain.Estrategia[ id=" + id + " ]";
+        return "mx.samas.domain.Estrategia[ id=" + id + " ]";
     }
 
     /**
@@ -108,6 +117,62 @@ public class Estrategia implements Serializable {
      */
     public void setEstrategiaModelo(List<VectorPortafolioModelo> estrategiaModelo) {
         this.estrategiaModelo = estrategiaModelo;
+    }
+
+    /**
+     * @return the liquidez
+     */
+    public Boolean getLiquidez() {
+        return liquidez;
+    }
+
+    /**
+     * @param liquidez the liquidez to set
+     */
+    public void setLiquidez(Boolean liquidez) {
+        this.liquidez = liquidez;
+    }
+
+    /**
+     * @return the efectivo
+     */
+    public Boolean getEfectivo() {
+        return efectivo;
+    }
+
+    /**
+     * @param efectivo the efectivo to set
+     */
+    public void setEfectivo(Boolean efectivo) {
+        this.efectivo = efectivo;
+    }
+
+    /**
+     * @return the grupos
+     */
+    public Boolean getGrupos() {
+        return grupos;
+    }
+
+    /**
+     * @param grupos the grupos to set
+     */
+    public void setGrupos(Boolean grupos) {
+        this.grupos = grupos;
+    }
+
+    /**
+     * @return the margen
+     */
+    public Boolean getMargen() {
+        return margen;
+    }
+
+    /**
+     * @param margen the margen to set
+     */
+    public void setMargen(Boolean margen) {
+        this.margen = margen;
     }
 
 }

@@ -82,7 +82,7 @@ public class VectorActivo implements Serializable {
 
     @Override
     public String toString() {
-        return "mx.samas.newdomain.VectorActivo[ id=" + id + " ]";
+        return "mx.samas.domain.VectorActivo[ id=" + id + " ]";
     }
 
     /**

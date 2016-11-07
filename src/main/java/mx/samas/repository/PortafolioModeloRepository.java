@@ -5,6 +5,9 @@
  */
 package mx.samas.repository;
 
+import java.util.Date;
+import java.util.List;
+import mx.samas.domain.Estrategia;
 import mx.samas.domain.VectorPortafolioModelo;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
@@ -14,6 +17,7 @@ import org.springframework.stereotype.Repository;
  * @author samas
  */
 @Repository
-public interface PortafolioModeloRepository extends PagingAndSortingRepository<VectorPortafolioModelo, Long>{
-    
+public interface PortafolioModeloRepository extends PagingAndSortingRepository<VectorPortafolioModelo, Long> {
+
+    public List<VectorPortafolioModelo> findByEstrategiaAndCreado(Estrategia estrategia, Date creado);
 }

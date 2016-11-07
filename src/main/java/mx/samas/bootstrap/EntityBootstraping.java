@@ -10,7 +10,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import mx.samas.domain.Activo;
 import mx.samas.domain.ActivoPropiedad;
 import mx.samas.domain.Banco;
 import mx.samas.domain.BitacoraOrden;
@@ -204,16 +203,16 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
             clienteService.createCliente(j);
 
             LOG.info("--Clientes");
-
+//TODO: Limpiar esto
             Cuenta c = new Cuenta();
-            c.setCadena("ABCD_1234");
+//            c.setCadena("ABCD_1234");
 
             List<Cliente> clientes = new ArrayList<>();
             clientes.add(e);
             clientes.add(a);
             clientes.add(j);
 
-            c.setClientes(clientes);
+//            c.setClientes(clientes);
             c.setBanco(bancoService.getByNombre("HSBC"));
             cuentaService.createOrUpdateCuenta(c);
             LOG.info("--Cuenta");
@@ -381,7 +380,6 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
 //        }
 //
 //    }
-
     private boolean persistEstrategiasAndPortafolioModelo() {
         try {
             ///Cuenta Padre(?)
@@ -448,7 +446,6 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
             return true;
         } catch (Exception e) {
             LOG.log(Level.WARNING, "No pudimos persistir las Estrategias y sus Modelos, la excepcion es: {0} ", e.getMessage());
-            e.printStackTrace();
             return false;
         }
 

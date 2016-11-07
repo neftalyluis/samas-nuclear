@@ -80,7 +80,7 @@ public class Transaccion implements Serializable {
 
     @Override
     public String toString() {
-        return "mx.samas.newdomain.Transaccion[ id=" + id + " ]";
+        return "mx.samas.domain.Transaccion[ id=" + id + " ]";
     }
 
     /**

@@ -26,7 +26,6 @@ import org.springframework.context.annotation.Configuration;
  *
  * @author samas
  */
-@Configuration
 public class DevengoJobConfiguration {
 
     @Autowired

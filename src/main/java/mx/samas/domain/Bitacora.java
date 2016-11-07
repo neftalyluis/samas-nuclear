@@ -8,6 +8,7 @@ package mx.samas.domain;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Entity;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -66,11 +67,9 @@ public class Bitacora implements Serializable {
      * Titulos totales
      */
     private Long titulos;
-    /**
-     * Tasa: Como precio en operacion en directo Tasa: Como tasa a devengar en
-     * operaciones a credito
-     */
-    private Double tasa;
+
+    @Enumerated
+    private ConductorRiesgo conductorRiesgo;
 
     /**
      * Contrato del que deriva esta entrada
@@ -85,6 +84,8 @@ public class Bitacora implements Serializable {
     private Mercado mercado;
 
     private String folioOperacion;
+    
+    private Double precio;
 
     public Long getId() {
         return id;
@@ -189,19 +190,6 @@ public class Bitacora implements Serializable {
         this.transaccion = transaccion;
     }
 
-    /**
-     * @return the tasa
-     */
-    public Double getTasa() {
-        return tasa;
-    }
-
-    /**
-     * @param tasa the tasa to set
-     */
-    public void setTasa(Double tasa) {
-        this.tasa = tasa;
-    }
 
     /**
      * @return the mercado
@@ -271,6 +259,34 @@ public class Bitacora implements Serializable {
      */
     public void setContratoServicio(Portafolio contratoServicio) {
         this.contratoServicio = contratoServicio;
+    }
+
+    /**
+     * @return the conductorRiesgo
+     */
+    public ConductorRiesgo getConductorRiesgo() {
+        return conductorRiesgo;
+    }
+
+    /**
+     * @param conductorRiesgo the conductorRiesgo to set
+     */
+    public void setConductorRiesgo(ConductorRiesgo conductorRiesgo) {
+        this.conductorRiesgo = conductorRiesgo;
+    }
+
+    /**
+     * @return the precio
+     */
+    public Double getPrecio() {
+        return precio;
+    }
+
+    /**
+     * @param precio the precio to set
+     */
+    public void setPrecio(Double precio) {
+        this.precio = precio;
     }
 
 }

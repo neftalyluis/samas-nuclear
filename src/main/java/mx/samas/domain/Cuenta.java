@@ -15,7 +15,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 
 /**
  *
@@ -28,23 +27,27 @@ public class Cuenta implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    
-    @JsonIgnore
-    @ManyToMany
-    private List<Cliente> clientes;
 
-    private String cadena;
+    private String idCuenta;
 
     @ManyToOne
     private Banco banco;
 
     @JsonIgnore
-    @OneToMany
+    @ManyToMany
     private List<Portafolio> portafolios;
-    
-    public Cuenta(){
+    /**
+     * Tiene Credito implica que todo el Contrato esta prendado.
+     *
+     * Sacar dinero implica una autorizacion, para evitar llamadas de Margen.
+     */
+    private Boolean tieneCredito;
+    private Boolean operaFlujo;
+    private Boolean operaIndice;
+    private Boolean operaDerivado;
+
+    public Cuenta() {
         this.portafolios = new ArrayList<>();
-        this.clientes = new ArrayList<>();
     }
 
     public Long getId() {
@@ -77,21 +80,7 @@ public class Cuenta implements Serializable {
 
     @Override
     public String toString() {
-        return "mx.samas.newdomain.Cuenta[ id=" + id + " ]";
-    }
-
-    /**
-     * @return the cadena
-     */
-    public String getCadena() {
-        return cadena;
-    }
-
-    /**
-     * @param cadena the cadena to set
-     */
-    public void setCadena(String cadena) {
-        this.cadena = cadena;
+        return "mx.samas.domain.Cuenta[ id=" + id + " ]";
     }
 
     /**
@@ -123,17 +112,73 @@ public class Cuenta implements Serializable {
     }
 
     /**
-     * @return the clientes
+     * @return the idCuenta
      */
-    public List<Cliente> getClientes() {
-        return clientes;
+    public String getIdCuenta() {
+        return idCuenta;
     }
 
     /**
-     * @param clientes the clientes to set
+     * @param idCuenta the idCuenta to set
      */
-    public void setClientes(List<Cliente> clientes) {
-        this.clientes = clientes;
+    public void setIdCuenta(String idCuenta) {
+        this.idCuenta = idCuenta;
+    }
+
+    /**
+     * @return the operaFlujo
+     */
+    public Boolean getOperaFlujo() {
+        return operaFlujo;
+    }
+
+    /**
+     * @param operaFlujo the operaFlujo to set
+     */
+    public void setOperaFlujo(Boolean operaFlujo) {
+        this.operaFlujo = operaFlujo;
+    }
+
+    /**
+     * @return the operaIndice
+     */
+    public Boolean getOperaIndice() {
+        return operaIndice;
+    }
+
+    /**
+     * @param operaIndice the operaIndice to set
+     */
+    public void setOperaIndice(Boolean operaIndice) {
+        this.operaIndice = operaIndice;
+    }
+
+    /**
+     * @return the operaDerivado
+     */
+    public Boolean getOperaDerivado() {
+        return operaDerivado;
+    }
+
+    /**
+     * @param operaDerivado the operaDerivado to set
+     */
+    public void setOperaDerivado(Boolean operaDerivado) {
+        this.operaDerivado = operaDerivado;
+    }
+
+    /**
+     * @return the tieneCredito
+     */
+    public Boolean getTieneCredito() {
+        return tieneCredito;
+    }
+
+    /**
+     * @param tieneCredito the tieneCredito to set
+     */
+    public void setTieneCredito(Boolean tieneCredito) {
+        this.tieneCredito = tieneCredito;
     }
 
 }

@@ -22,7 +22,7 @@ public class CuentaServiceImpl implements CuentaService {
 
     @Override
     public Cuenta getCuentaByCadena(String cadena) {
-        return cuentaRepository.getCuentaByCadena(cadena);
+        throw new UnsupportedOperationException();
     }
 
     @Override

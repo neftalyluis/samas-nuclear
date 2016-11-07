@@ -65,7 +65,7 @@ public class TipoServicio implements Serializable {
 
     @Override
     public String toString() {
-        return "mx.samas.newdomain.TipoServicio[ id=" + id + " ]";
+        return "mx.samas.domain.TipoServicio[ id=" + id + " ]";
     }
 
     /**

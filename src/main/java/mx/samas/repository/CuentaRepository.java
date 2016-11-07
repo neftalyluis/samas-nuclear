@@ -16,6 +16,4 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface CuentaRepository extends PagingAndSortingRepository<Cuenta, Long> {
 
-    public Cuenta getCuentaByCadena(String cadena);
-
 }

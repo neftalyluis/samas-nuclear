@@ -63,7 +63,7 @@ public class DuenoFuente implements Serializable {
 
     @Override
     public String toString() {
-        return "mx.samas.newdomain.DuenoFuente[ id=" + id + " ]";
+        return "mx.samas.domain.DuenoFuente[ id=" + id + " ]";
     }
 
     /**
