@@ -175,4 +175,18 @@ public class Estrategia implements Serializable {
         this.margen = margen;
     }
 
+    /**
+     * @return the grupoLista
+     */
+    public List<Grupo> getGrupoLista() {
+        return grupoLista;
+    }
+
+    /**
+     * @param grupoLista the grupoLista to set
+     */
+    public void setGrupoLista(List<Grupo> grupoLista) {
+        this.grupoLista = grupoLista;
+    }
+
 }

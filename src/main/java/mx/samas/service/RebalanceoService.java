@@ -7,6 +7,7 @@ package mx.samas.service;
 
 import java.util.Date;
 import java.util.HashMap;
+import mx.samas.domain.Grupo;
 import mx.samas.domain.Portafolio;
 
 /**
@@ -15,7 +16,9 @@ import mx.samas.domain.Portafolio;
  */
 public interface RebalanceoService {
 
-    public HashMap<String, Double> presupuestoParaPortafolio(Portafolio p);
+    public HashMap<String, Double> presupuestoParaPortafolio(Portafolio p, Date fechaValor);
 
     public Double poderDeCompra(Portafolio p, Date fechaValor);
+
+    public HashMap<Grupo, Double> balancePorGrupos(Portafolio p, Date fechaValor);
 }

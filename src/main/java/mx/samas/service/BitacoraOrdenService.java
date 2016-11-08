@@ -22,7 +22,7 @@ public interface BitacoraOrdenService {
 
     public BitacoraOrden createOrden(BitacoraOrden dto);
 
-    public BitacoraOrden findOrdenByNombre(String nombre);
+    public BitacoraOrden findOneOrdenByNombre(String nombre);
 
     public BitacoraOrden findOrdenById(Long id);
 

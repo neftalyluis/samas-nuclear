@@ -707,7 +707,7 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
     }
 
     private void useOperationDeposito() {
-        BitacoraOrden orden = bitacoraOrdenService.findOrdenByNombre("Deposito de Efectivo");
+        BitacoraOrden orden = bitacoraOrdenService.findOneOrdenByNombre("Deposito de Efectivo");
         Transaccion desposito = transaccionService.findByNombre("Deposito en efectivo del Cliente");
         List<BitacoraOrdenValorDTO> valores = new ArrayList<>();
         Date a = new Date();
@@ -731,7 +731,7 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
     }
 
     private void useOperationCompraAccion() {
-        BitacoraOrden orden = bitacoraOrdenService.findOrdenByNombre("Compra");
+        BitacoraOrden orden = bitacoraOrdenService.findOneOrdenByNombre("Compra");
 
         Transaccion compraActivo = transaccionService.findByNombre("Compra");
         Transaccion comision = transaccionService.findByNombre("Comisión");
