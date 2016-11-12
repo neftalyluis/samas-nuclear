@@ -21,6 +21,7 @@ import mx.samas.domain.VectorPosicion;
 import mx.samas.repository.BitacoraRepository;
 import mx.samas.repository.PortafolioModeloRepository;
 import mx.samas.repository.VectorPosicionRepository;
+import mx.samas.util.Arbol;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -117,6 +118,11 @@ public class RebalanceoServiceImpl implements RebalanceoService {
 
         //Hay que crear una clase que encapsule esto y te regrese los nodos hijos y padres (:
         List<Grupo> listaGrupos = e.getGrupoLista();
+        for (Grupo gr : listaGrupos) {
+            if (gr.getGrupoPadre() == null) {
+                Arbol<Grupo> arbolGrupos = new Arbol(gr);
+            }
+        }
 
         List<VectorPosicion> posicionesAyer = vectorPosicionRepository.findByPortafolioAndFecha(p, new Date());
 
