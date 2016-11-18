@@ -47,27 +47,6 @@ public class ActivoPropiedad implements Serializable {
     private Integer indice;
 
     /**
-     * Su valor va definido forzosamente con el Tipo de Activo; 
-     * 
-     * Por ejemplo: 
-     * 
-     * Para un Bono la fecha de Vencimiento es una propiedad imperativa porque todos
-     * los Bonos deben tener esa propiedad.
-     * 
-     * En caso de que no lo sea, esta propiedad seria Distintiva
-     */
-    private Boolean imperativa;
-
-    /**
-     * Normativa: Su valor no cambia con el tiempo 
-     * 
-     * !Normativa=Positiva: Su valor cambia con el tiempo
-     * 
-     * TL;DR Si esta propiedad se va a registrar diariamente en el VectorActivo
-     */
-    private Boolean normativa;
-
-    /**
      * En que archivo se van a leer estas propiedades
      */
     @Enumerated(EnumType.ORDINAL)
@@ -78,9 +57,21 @@ public class ActivoPropiedad implements Serializable {
      */
     @Enumerated(EnumType.ORDINAL)
     private TipoActivo tipoActivo;
+    
+    private Boolean vectorial;
 
     public ActivoPropiedad() {
 
+    }
+
+    public ActivoPropiedad(String nombre, String descripcion, TipoDato tipoDato, Integer indice, FuenteDatos origenDatos, TipoActivo tipoActivo, Boolean vectorial) {
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.tipoDato = tipoDato;
+        this.indice = indice;
+        this.origenDatos = origenDatos;
+        this.tipoActivo = tipoActivo;
+        this.vectorial = vectorial;
     }
 
     public Long getId() {
@@ -187,34 +178,6 @@ public class ActivoPropiedad implements Serializable {
     }
 
     /**
-     * @return the imperativa
-     */
-    public Boolean getImperativa() {
-        return imperativa;
-    }
-
-    /**
-     * @param imperativa the imperativa to set
-     */
-    public void setImperativa(Boolean imperativa) {
-        this.imperativa = imperativa;
-    }
-
-    /**
-     * @return the normativa
-     */
-    public Boolean getNormativa() {
-        return normativa;
-    }
-
-    /**
-     * @param normativa the normativa to set
-     */
-    public void setNormativa(Boolean normativa) {
-        this.normativa = normativa;
-    }
-
-    /**
      * @return the tipoActivo
      */
     public TipoActivo getTipoActivo() {
@@ -226,5 +189,19 @@ public class ActivoPropiedad implements Serializable {
      */
     public void setTipoActivo(TipoActivo tipoActivo) {
         this.tipoActivo = tipoActivo;
+    }
+
+    /**
+     * @return the vectorial
+     */
+    public Boolean getVectorial() {
+        return vectorial;
+    }
+
+    /**
+     * @param vectorial the vectorial to set
+     */
+    public void setVectorial(Boolean vectorial) {
+        this.vectorial = vectorial;
     }
 }

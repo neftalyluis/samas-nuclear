@@ -812,8 +812,6 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
         ActivoPropiedad priv = new ActivoPropiedad();
         priv.setNombre("Privado");
         priv.setDescripcion("Bolsa Privada");
-        priv.setNormativa(Boolean.TRUE);
-        priv.setImperativa(Boolean.FALSE);
 
         priv.setOrigenDatos(FuenteDatos.CSV_USUARIO);
         priv.setIndice(null);
@@ -823,8 +821,6 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
         ActivoPropiedad fund = new ActivoPropiedad();
         fund.setNombre("Fund");
         fund.setDescripcion("Fund");
-        fund.setNormativa(Boolean.TRUE);
-        fund.setImperativa(Boolean.FALSE);
 
         fund.setOrigenDatos(FuenteDatos.CSV_USUARIO);
         fund.setIndice(null);
@@ -834,8 +830,6 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
         ActivoPropiedad fee = new ActivoPropiedad();
         fee.setNombre("Fee");
         fee.setDescripcion("Fee");
-        fee.setNormativa(Boolean.TRUE);
-        fee.setImperativa(Boolean.FALSE);
 
         fee.setOrigenDatos(FuenteDatos.CSV_USUARIO);
         fee.setIndice(null);
@@ -847,8 +841,6 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
         ActivoPropiedad vencimiento = new ActivoPropiedad();
         vencimiento.setNombre("FechaVencimiento");
         vencimiento.setDescripcion("Fecha de Vencimiento del Bono");
-        vencimiento.setNormativa(Boolean.TRUE);
-        vencimiento.setImperativa(Boolean.TRUE);
 
         vencimiento.setOrigenDatos(FuenteDatos.CSV_USUARIO);
         vencimiento.setIndice(null);
@@ -858,8 +850,6 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
         ActivoPropiedad tasaReferencia = new ActivoPropiedad();
         tasaReferencia.setNombre("TasaReferencia");
         tasaReferencia.setDescripcion("Tasa de Referencia del Bono");
-        tasaReferencia.setNormativa(Boolean.TRUE);
-        tasaReferencia.setImperativa(Boolean.TRUE);
 
         tasaReferencia.setOrigenDatos(FuenteDatos.CSV_USUARIO);
         tasaReferencia.setIndice(null);
@@ -870,8 +860,6 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
         ActivoPropiedad amortizable = new ActivoPropiedad();
         amortizable.setNombre("Amortizable?");
         amortizable.setDescripcion("Define si el Bono Amortiza");
-        amortizable.setNormativa(Boolean.TRUE);
-        amortizable.setImperativa(Boolean.FALSE);
 
         amortizable.setOrigenDatos(FuenteDatos.CSV_USUARIO);
         amortizable.setIndice(null);
@@ -888,5 +876,57 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
     }
 
     private void batchPropiedades() {
+    }
+
+    private void persistPropiedadesActivo() {
+
+        ActivoPropiedad vna = new ActivoPropiedad("Valor Nominal Actualizado",
+                "ValorNA", TipoDato.DATE, 52, FuenteDatos.VECTOR_PIP,
+                TipoActivo.BONO, Boolean.TRUE);
+
+        ActivoPropiedad preSuc = new ActivoPropiedad("Precio Sucio",
+                "Precio Limpio mas reditos devengados",
+                TipoDato.DATE, 4, FuenteDatos.VECTOR_PIP,
+                TipoActivo.BONO, Boolean.TRUE);
+
+        ActivoPropiedad tasaren = new ActivoPropiedad("Tasa de Rendimiento",
+                "Precio Limpio mas reditos devengados",
+                TipoDato.DATE, 4, FuenteDatos.VECTOR_PIP,
+                TipoActivo.BONO, Boolean.TRUE);
+
+        ActivoPropiedad fechaVen = new ActivoPropiedad("Fecha de Vencimiento",
+                "Precio Limpio mas reditos devengados",
+                TipoDato.DATE, 4, FuenteDatos.VECTOR_PIP,
+                TipoActivo.BONO, Boolean.TRUE);
+
+        ActivoPropiedad sobretasa = new ActivoPropiedad("Sobretasa",
+                "Precio Limpio mas reditos devengados",
+                TipoDato.DATE, 4, FuenteDatos.VECTOR_PIP,
+                TipoActivo.BONO, Boolean.TRUE);
+
+        ActivoPropiedad tasaCupon = new ActivoPropiedad("Tasa Cupon",
+                "Precio Limpio mas reditos devengados",
+                TipoDato.DATE, 4, FuenteDatos.VECTOR_PIP,
+                TipoActivo.BONO, Boolean.TRUE);
+        
+        ActivoPropiedad moodys = new ActivoPropiedad("Precio Sucio",
+                "Precio Limpio mas reditos devengados",
+                TipoDato.DATE, 4, FuenteDatos.VECTOR_PIP,
+                TipoActivo.BONO, Boolean.TRUE);
+        
+        ActivoPropiedad sp = new ActivoPropiedad("Precio Sucio",
+                "Precio Limpio mas reditos devengados",
+                TipoDato.DATE, 4, FuenteDatos.VECTOR_PIP,
+                TipoActivo.BONO, Boolean.TRUE);
+
+        ActivoPropiedad fith = new ActivoPropiedad("Precio Sucio",
+                "Precio Limpio mas reditos devengados",
+                TipoDato.DATE, 4, FuenteDatos.VECTOR_PIP,
+                TipoActivo.BONO, Boolean.TRUE);
+
+        ActivoPropiedad hrRatings = new ActivoPropiedad("Precio Sucio",
+                "Precio Limpio mas reditos devengados",
+                TipoDato.DATE, 4, FuenteDatos.VECTOR_PIP,
+                TipoActivo.BONO, Boolean.TRUE);
     }
 }
