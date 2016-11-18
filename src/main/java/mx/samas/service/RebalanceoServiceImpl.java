@@ -7,17 +7,21 @@ package mx.samas.service;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import mx.samas.domain.Activo;
 import mx.samas.domain.Bitacora;
+import mx.samas.domain.Estrategia;
+import mx.samas.domain.Grupo;
 import mx.samas.domain.Portafolio;
 import mx.samas.domain.VectorPortafolioModelo;
 import mx.samas.domain.VectorPosicion;
 import mx.samas.repository.BitacoraRepository;
 import mx.samas.repository.PortafolioModeloRepository;
 import mx.samas.repository.VectorPosicionRepository;
+import mx.samas.util.Arbol;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -38,17 +42,14 @@ public class RebalanceoServiceImpl implements RebalanceoService {
     private BitacoraRepository bitacoraRepository;
 
     @Override
-    public HashMap<String, Double> presupuestoParaPortafolio(Portafolio p) {
+    public HashMap<String, Double> presupuestoParaPortafolio(Portafolio p, Date fechaValor) {
 
         ///y Vt? D:
         //Suponiendo que no es sabado o domingo o dia inhabil, hay que optimizar esto
-        LocalDate hoy = LocalDate.now().minusDays(1);
-        Date hoyDate = Date.from(hoy.atStartOfDay(ZoneId.systemDefault()).toInstant());
-
         //pi*qi
         HashMap<String, Double> mapPrecioPorPosicion = new HashMap<>();
         //Obtenemos las posiciones del dia anterior
-        List<VectorPosicion> posicionesAyer = vectorPosicionRepository.findByPortafolioAndFecha(p, hoyDate);
+        List<VectorPosicion> posicionesAyer = vectorPosicionRepository.findByPortafolioAndFecha(p, fechaValor);
         for (VectorPosicion vp : posicionesAyer) {
             mapPrecioPorPosicion.put(vp.getActivo().getClavePizarra(), vp.getValuacion() * vp.getCantidad());
         }
@@ -56,7 +57,7 @@ public class RebalanceoServiceImpl implements RebalanceoService {
         //ai
         HashMap<String, Double> mapDianas = new HashMap<>();
         //Obtenemos las dianas del Portafolio
-        List<VectorPortafolioModelo> dianas = portafolioModeloRepository.findByEstrategiaAndCreado(p.getEstrategia(), hoyDate);
+        List<VectorPortafolioModelo> dianas = portafolioModeloRepository.findByEstrategiaAndCreado(p.getEstrategia(), fechaValor);
         for (VectorPortafolioModelo vpm : dianas) {
             mapDianas.put(vpm.getActivo().getClavePizarra(), vpm.getDiana());
         }
@@ -107,6 +108,31 @@ public class RebalanceoServiceImpl implements RebalanceoService {
         Double flujoEntreDias = lb.stream().mapToDouble(Bitacora::getPrecio).sum();
 
         return flujoEntreDias;
+    }
+
+    @Override
+    public HashMap<Grupo, Double> balancePorGrupos(Portafolio p, Date fechaValor) {
+
+        //Hay que buscar que esto la haga la query, me caga que tengas que usar el Eager en la estrategia de fetch
+        Estrategia e = p.getEstrategia();
+
+        //Hay que crear una clase que encapsule esto y te regrese los nodos hijos y padres (:
+        List<Grupo> listaGrupos = e.getGrupoLista();
+        for (Grupo gr : listaGrupos) {
+            if (gr.getGrupoPadre() == null) {
+                Arbol<Grupo> arbolGrupos = new Arbol(gr);
+            }
+        }
+
+        List<VectorPosicion> posicionesAyer = vectorPosicionRepository.findByPortafolioAndFecha(p, new Date());
+
+        //Esto debe de salir en una query de JPQL, paps
+        List<Activo> listActivosEnPosiciones = new ArrayList<>();
+        for (VectorPosicion posicion : posicionesAyer) {
+            listActivosEnPosiciones.add(posicion.getActivo());
+        }
+
+        return null;
     }
 
 }

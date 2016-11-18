@@ -63,8 +63,8 @@ public class BitacoraOrdenServiceImpl implements BitacoraOrdenService {
     }
 
     @Override
-    public BitacoraOrden findOrdenByNombre(String nombre) {
-        return bitacoraOrdenRepository.findByNombre(nombre);
+    public BitacoraOrden findOneOrdenByNombre(String nombre) {
+        return bitacoraOrdenRepository.findOneByNombre(nombre);
     }
 
     @Override

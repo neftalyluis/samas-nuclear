@@ -14,5 +14,5 @@ import org.springframework.data.repository.PagingAndSortingRepository;
  */
 public interface BitacoraOrdenRepository extends PagingAndSortingRepository<BitacoraOrden, Long> {
 
-    public BitacoraOrden findByNombre(String nombre);
+    public BitacoraOrden findOneByNombre(String nombre);
 }
