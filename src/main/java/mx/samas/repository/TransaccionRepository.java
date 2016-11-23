@@ -6,7 +6,8 @@
 package mx.samas.repository;
 
 import mx.samas.domain.Transaccion;
-import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
+
 import org.springframework.stereotype.Repository;
 
 /**
@@ -14,7 +15,7 @@ import org.springframework.stereotype.Repository;
  * @author samas
  */
 @Repository
-public interface TransaccionRepository extends PagingAndSortingRepository<Transaccion, Long> {
+public interface TransaccionRepository extends JpaRepository<Transaccion, Long> {
 
     public Transaccion getByNombre(String nombre);
 }

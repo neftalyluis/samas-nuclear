@@ -6,7 +6,8 @@
 package mx.samas.repository;
 
 import mx.samas.domain.Cuenta;
-import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
+
 import org.springframework.stereotype.Repository;
 
 /**
@@ -14,6 +15,6 @@ import org.springframework.stereotype.Repository;
  * @author samas
  */
 @Repository
-public interface CuentaRepository extends PagingAndSortingRepository<Cuenta, Long> {
+public interface CuentaRepository extends JpaRepository<Cuenta, Long> {
 
 }

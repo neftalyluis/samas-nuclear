@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mx.samas.domain.elastic;
+package mx.samas.elastic.domain;
 
 import java.util.HashMap;
 import org.springframework.data.annotation.Id;

@@ -14,6 +14,6 @@ import org.springframework.stereotype.Repository;
  * @author samas
  */
 @Repository
-public interface PerfilRepository extends  JpaRepository<Perfil, Long>{
+public interface PerfilRepository extends JpaRepository<Perfil, Long> {
 
 }

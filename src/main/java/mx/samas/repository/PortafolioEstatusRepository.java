@@ -6,7 +6,8 @@
 package mx.samas.repository;
 
 import mx.samas.domain.PortafolioEstatus;
-import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
+
 import org.springframework.stereotype.Repository;
 
 /**
@@ -14,7 +15,7 @@ import org.springframework.stereotype.Repository;
  * @author samas
  */
 @Repository
-public interface PortafolioEstatusRepository extends PagingAndSortingRepository<PortafolioEstatus, Long> {
+public interface PortafolioEstatusRepository extends JpaRepository<PortafolioEstatus, Long> {
 
     public PortafolioEstatus findOneByNombre(String nombre);
 }

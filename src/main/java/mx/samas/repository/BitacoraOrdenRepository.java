@@ -6,13 +6,13 @@
 package mx.samas.repository;
 
 import mx.samas.domain.BitacoraOrden;
-import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
  *
  * @author samas
  */
-public interface BitacoraOrdenRepository extends PagingAndSortingRepository<BitacoraOrden, Long> {
+public interface BitacoraOrdenRepository extends JpaRepository<BitacoraOrden, Long> {
 
     public BitacoraOrden findOneByNombre(String nombre);
 }

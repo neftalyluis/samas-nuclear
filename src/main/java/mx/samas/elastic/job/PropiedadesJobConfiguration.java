@@ -6,10 +6,9 @@
 package mx.samas.elastic.job;
 
 import java.io.File;
-import mx.samas.domain.elastic.VectorActivoPropiedadValor;
+import mx.samas.elastic.domain.VectorActivoPropiedadValor;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
-import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepScope;
@@ -30,7 +29,6 @@ import org.springframework.core.io.Resource;
  * @author samas
  */
 @Configuration
-@EnableBatchProcessing
 public class PropiedadesJobConfiguration {
 
     @Autowired
@@ -40,29 +38,29 @@ public class PropiedadesJobConfiguration {
     private StepBuilderFactory stepBuilderFactory;
 
     @Bean
-    public Job agregarVectorActivoPropiedadValorsJob() {
-        return jobs.get("agregarVectorActivoPropiedadValorsJob")
-                .start(agregarVectorActivoPropiedadValorsStep())
+    public Job elasticJob() {
+        return jobs.get("elasticJob")
+                .start(elasticStep())
                 .build();
     }
 
     @Bean
-    public Step agregarVectorActivoPropiedadValorsStep() {
-        return stepBuilderFactory.get("agregarVectorActivoPropiedadValorsStep")
+    public Step elasticStep() {
+        return stepBuilderFactory.get("elasticStep")
                 .<VectorActivoPropiedadValor, VectorActivoPropiedadValor>chunk(1000)
-                .reader(activoReader())
-                .writer(activoWriter())
+                .reader(activoElasticReader())
+                .writer(activoElasticWriter())
                 .faultTolerant()
                 .build();
     }
 
     @Bean
     @StepScope
-    public FlatFileItemReader<VectorActivoPropiedadValor> activoReader() {
+    public FlatFileItemReader<VectorActivoPropiedadValor> activoElasticReader() {
         FlatFileItemReader<VectorActivoPropiedadValor> reader = new FlatFileItemReader<>();
         reader.setLinesToSkip(1);//first line is title definition 
         reader.setResource(getFileFromDirectory());
-        reader.setLineMapper(activoLineMapper());
+        reader.setLineMapper(activoElasticLineMapper());
 
         return reader;
     }
@@ -77,7 +75,7 @@ public class PropiedadesJobConfiguration {
     }
 
     @Bean
-    public LineMapper<VectorActivoPropiedadValor> activoLineMapper() {
+    public LineMapper<VectorActivoPropiedadValor> activoElasticLineMapper() {
         DefaultLineMapper<VectorActivoPropiedadValor> lineMapper = new DefaultLineMapper<VectorActivoPropiedadValor>();
 
         DelimitedLineTokenizer lineTokenizer = new DelimitedLineTokenizer();
@@ -90,18 +88,18 @@ public class PropiedadesJobConfiguration {
         fieldSetMapper.setTargetType(VectorActivoPropiedadValor.class);
 
         lineMapper.setLineTokenizer(lineTokenizer);
-        lineMapper.setFieldSetMapper(activoFieldSetMapper());
+        lineMapper.setFieldSetMapper(activoElasticFieldSetMapper());
 
         return lineMapper;
     }
 
     @Bean
-    public VectorActivoPropiedadValorFieldSetMapper activoFieldSetMapper() {
-        return new VectorActivoPropiedadValorFieldSetMapper();
+    public VectorActivoElasticFieldSetMapper activoElasticFieldSetMapper() {
+        return new VectorActivoElasticFieldSetMapper();
     }
 
     @Bean
-    public ItemWriter<VectorActivoPropiedadValor> activoWriter() {
-        return new VectorActivoPropiedadValorItemWriter();
+    public ItemWriter<VectorActivoPropiedadValor> activoElasticWriter() {
+        return new VectorActivoElasticItemWriter();
     }
 }

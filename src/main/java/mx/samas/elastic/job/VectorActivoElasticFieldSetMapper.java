@@ -6,7 +6,7 @@
 package mx.samas.elastic.job;
 
 import java.util.HashMap;
-import mx.samas.domain.elastic.VectorActivoPropiedadValor;
+import mx.samas.elastic.domain.VectorActivoPropiedadValor;
 import org.springframework.batch.item.file.mapping.FieldSetMapper;
 import org.springframework.batch.item.file.transform.FieldSet;
 import org.springframework.validation.BindException;
@@ -15,7 +15,7 @@ import org.springframework.validation.BindException;
  *
  * @author samas
  */
-class VectorActivoPropiedadValorFieldSetMapper implements FieldSetMapper<VectorActivoPropiedadValor> {
+class VectorActivoElasticFieldSetMapper implements FieldSetMapper<VectorActivoPropiedadValor> {
 
     @Override
     public VectorActivoPropiedadValor mapFieldSet(FieldSet fieldSet) throws BindException {

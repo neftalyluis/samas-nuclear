@@ -15,5 +15,6 @@ public final class SAMASJobs {
     public static final String BOOTSTRAP_ACTIVO = "agregarActivosJob";
     public static final String POSICION_PORTAFOLIO = "sumatoriaPosicionJob";
     public static final String DEVENGOS_PORTAFOLIO = "devengosJob";
+    public static final String ELASTIC_BOOTSTRAP= "elasticJob";
 
 }

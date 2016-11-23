@@ -11,7 +11,8 @@ import mx.samas.domain.Activo;
 import mx.samas.domain.Bitacora;
 import mx.samas.domain.Portafolio;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
+
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
@@ -21,7 +22,7 @@ import org.springframework.stereotype.Repository;
  * @author samas
  */
 @Repository
-public interface BitacoraRepository extends PagingAndSortingRepository<Bitacora, Long> {
+public interface BitacoraRepository extends JpaRepository<Bitacora, Long> {
 
     /**
      * Busca todas las entradas de la Bitacora (sin importar rango de fecha) que
