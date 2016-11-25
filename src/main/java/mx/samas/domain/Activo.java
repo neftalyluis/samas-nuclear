@@ -27,9 +27,9 @@ import javax.validation.constraints.NotNull;
  * @author samas
  */
 @Entity
-@NamedQuery(name = "Activo.existWithClavePizarra", 
+@NamedQuery(name = "Activo.existWithClavePizarra",
         query = "SELECT CASE WHEN (count(act) > 0) THEN TRUE ELSE FALSE END "
-                + "FROM Activo act WHERE act.clavePizarra = :clavePizarra")
+        + "FROM Activo act WHERE act.clavePizarra = :clavePizarra")
 public class Activo implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -99,10 +99,10 @@ public class Activo implements Serializable {
 
     @OneToMany
     private List<ActivoPropiedadValor> propiedadesValor;
-    
+
     @ManyToMany
     private List<ActivoPropiedad> propiedades;
-    
+
     @ManyToOne
     private Mercado mercado;
 
@@ -347,6 +347,5 @@ public class Activo implements Serializable {
     public void setMercado(Mercado mercado) {
         this.mercado = mercado;
     }
-
 
 }

@@ -1,10 +1,10 @@
+package mx.samas.controller;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mx.samas.controllers;
-
 import java.util.Date;
 import java.util.List;
 import mx.samas.domain.Bitacora;
@@ -45,10 +45,9 @@ public class BitacoraController {
         return new ResponseEntity<>(bitacoraService.getBitacoraListForActivoWithClavePizarra(clavePizarra), HttpStatus.OK);
     }
 
-    
     @RequestMapping(method = RequestMethod.POST, value = "/clavepizarra/{clavePizarra}")
-    public ResponseEntity<List<Bitacora>> postNewBitacoraEntry(@RequestBody Bitacora entry){
+    public ResponseEntity<List<Bitacora>> postNewBitacoraEntry(@RequestBody Bitacora entry) {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
-    
+
 }

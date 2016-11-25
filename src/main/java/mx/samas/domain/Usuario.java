@@ -33,7 +33,7 @@ public class Usuario implements Serializable {
     private String password;
     @NotNull
     private String nombreCompleto;
-    
+
     @ManyToMany(fetch = FetchType.EAGER, mappedBy = "usuarios")
     private List<Perfil> perfiles;
 

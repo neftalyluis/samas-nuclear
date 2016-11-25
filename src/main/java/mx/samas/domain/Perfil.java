@@ -24,9 +24,9 @@ public class Perfil implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    
+
     private String nombre;
-    
+
     @ManyToMany
     private List<Usuario> usuarios;
 
@@ -90,5 +90,5 @@ public class Perfil implements Serializable {
     public void setUsuarios(List<Usuario> usuarios) {
         this.usuarios = usuarios;
     }
-    
+
 }

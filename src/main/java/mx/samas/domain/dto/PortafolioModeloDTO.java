@@ -19,7 +19,7 @@ public class PortafolioModeloDTO extends HashMap<String, Double> {
         for (Map.Entry<String, Double> entry : this.entrySet()) {
             total += entry.getValue();
         }
-        
+
         return total == 100.0;
     }
 }

@@ -17,18 +17,18 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class PerfilServiceImpl implements PerfilService {
-    
+
     @Autowired
     private PerfilRepository perfilRepository;
-    
+
     @Override
     public void createPerfil(Perfil p) {
         perfilRepository.save(p);
     }
-    
+
     @Override
     public void createPerfilesFromList(List<Perfil> lp) {
         perfilRepository.save(lp);
     }
-    
+
 }

@@ -10,5 +10,5 @@ package mx.samas.domain.dto;
  * @author samas
  */
 public class VectorActivoPropiedadesDTO {
-    
+
 }

@@ -13,7 +13,7 @@ public enum AnoComercial {
     BISIESTO(366),
     COMERCIAL(360),
     NATURAL(365);
-    
+
     private final int ano;
 
     AnoComercial(int ano) {

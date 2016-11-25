@@ -28,7 +28,7 @@ public interface BitacoraService {
     public List<Bitacora> saveBitacoraEntries(List<Bitacora> bitacoraList);
 
     public List<Bitacora> getBitacoraListFromLastDay(Cuenta item);
-    
+
     public List<Bitacora> getBitacoraListFromLastDay(Portafolio item);
 
 }

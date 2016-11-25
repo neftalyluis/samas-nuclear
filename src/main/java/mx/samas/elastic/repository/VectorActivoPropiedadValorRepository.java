@@ -14,6 +14,6 @@ import org.springframework.stereotype.Repository;
  * @author samas
  */
 @Repository
-public interface VectorActivoPropiedadValorRepository extends ElasticsearchRepository<VectorActivoPropiedadValor, String>{
+public interface VectorActivoPropiedadValorRepository extends ElasticsearchRepository<VectorActivoPropiedadValor, String> {
 
 }

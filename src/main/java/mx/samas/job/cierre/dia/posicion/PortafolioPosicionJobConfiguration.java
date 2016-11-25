@@ -68,14 +68,14 @@ public class PortafolioPosicionJobConfiguration {
                 + "JOIN FETCH a.portafolios p");
         return reader;
     }
-    
+
     @Bean
-    public ItemProcessor<Cuenta, List<VectorPosicion>> vectorPosicionProcessor(){
+    public ItemProcessor<Cuenta, List<VectorPosicion>> vectorPosicionProcessor() {
         return new VectorPosicionProcessor();
-    } 
-    
+    }
+
     @Bean
-    public ItemWriter<List<VectorPosicion>> vectorPosicionWriter(){
-      return new VectorPosicionWriter();
+    public ItemWriter<List<VectorPosicion>> vectorPosicionWriter() {
+        return new VectorPosicionWriter();
     }
 }

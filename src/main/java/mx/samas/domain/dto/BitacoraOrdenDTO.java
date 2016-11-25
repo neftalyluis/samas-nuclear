@@ -18,10 +18,10 @@ public class BitacoraOrdenDTO {
 
     @NotNull
     private String nombre;
-    
+
     @NotNull
     private Boolean usaActivo;
-    
+
     @NotNull
     private List<Long> transacciones;
 

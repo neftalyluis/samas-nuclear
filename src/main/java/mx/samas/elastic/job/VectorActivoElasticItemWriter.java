@@ -17,7 +17,6 @@ import org.springframework.beans.factory.annotation.Autowired;
  */
 class VectorActivoElasticItemWriter implements ItemWriter<VectorActivoPropiedadValor> {
 
-
     @Autowired
     private VectorActivoPropiedadValorRepository vectorService;
 
@@ -25,5 +24,5 @@ class VectorActivoElasticItemWriter implements ItemWriter<VectorActivoPropiedadV
     public void write(List<? extends VectorActivoPropiedadValor> items) throws Exception {
         vectorService.save(items);
     }
-    
+
 }

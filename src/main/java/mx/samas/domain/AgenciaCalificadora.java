@@ -24,9 +24,9 @@ public class AgenciaCalificadora implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    
+
     private String nombre;
-    
+
     @OneToMany
     private List<GradoCrediticio> gradosPropietarios;
 
@@ -90,5 +90,5 @@ public class AgenciaCalificadora implements Serializable {
     public void setGradosPropietarios(List<GradoCrediticio> gradosPropietarios) {
         this.gradosPropietarios = gradosPropietarios;
     }
-    
+
 }

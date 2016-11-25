@@ -1,10 +1,10 @@
+package mx.samas.controller;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mx.samas.controllers;
-
 import java.util.List;
 import mx.samas.domain.Transaccion;
 import mx.samas.service.TransaccionService;
@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/transacciones")
 public class TransaccionController {
-    
+
     @Autowired
     private TransaccionService transaccionService;
 

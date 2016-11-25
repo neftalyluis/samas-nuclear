@@ -13,11 +13,11 @@ import org.springframework.batch.item.ItemWriter;
  *
  * @author samas
  */
-public class VectorPosicionCreditoWriter implements ItemWriter<List<VectorPosicion>>{
+public class VectorPosicionCreditoWriter implements ItemWriter<List<VectorPosicion>> {
 
     @Override
     public void write(List<? extends List<VectorPosicion>> items) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }

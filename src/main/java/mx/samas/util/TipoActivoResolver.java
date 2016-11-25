@@ -31,7 +31,6 @@ public class TipoActivoResolver {
 
     private static TipoActivoResolver instance = null;
 
-    
     //La neta, me la hipermame con este singleton express lmao
     protected TipoActivoResolver() throws FileNotFoundException, IOException {
         resolver = new HashMap<>();

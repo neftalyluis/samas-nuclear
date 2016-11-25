@@ -14,8 +14,8 @@ public interface CierreDiaService {
     public void sumatoriaPosiciones();
 
     public void valuacionActivos();
-    
+
     public void devengos();
-    
+
     public void precioPortafolios();
 }

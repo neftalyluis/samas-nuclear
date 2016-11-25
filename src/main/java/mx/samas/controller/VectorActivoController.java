@@ -1,10 +1,10 @@
+package mx.samas.controller;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mx.samas.controllers;
-
 import java.util.Date;
 import java.util.List;
 import mx.samas.domain.VectorActivo;
@@ -55,12 +55,12 @@ public class VectorActivoController {
 
     @RequestMapping(method = RequestMethod.GET, value = "/{id}/vector/{date}/propiedades")
     public ResponseEntity<List<ActivoPropiedadValor>> getPropiedadesFromVectorActivoWithDate(
-            @PathVariable Long id, 
-            @PathVariable @DateTimeFormat(pattern="ddMMyyyy") Date fromDate) {
-        
+            @PathVariable Long id,
+            @PathVariable @DateTimeFormat(pattern = "ddMMyyyy") Date fromDate) {
+
         return new ResponseEntity<>(HttpStatus.OK);
     }
-    
+
     //No hace nada porque no hay formato para el Archivo, pero se pone aqui el metodo
     @RequestMapping(value = "/vector/file", method = RequestMethod.POST)
     public ResponseEntity<?> uploadVectorActivoFile(@RequestParam MultipartFile file) {

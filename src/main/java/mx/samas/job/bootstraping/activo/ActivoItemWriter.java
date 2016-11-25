@@ -16,14 +16,14 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @author samas
  */
 public class ActivoItemWriter implements ItemWriter<Activo> {
-    
+
     @Autowired
     private ActivoService activoService;
 
     @Override
     public void write(List<? extends Activo> list) throws Exception {
         for (Activo a : list) {
-           activoService.createActivo(a);
+            activoService.createActivo(a);
         }
     }
 

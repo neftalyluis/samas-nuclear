@@ -14,11 +14,11 @@ import org.springframework.batch.item.ItemProcessor;
  *
  * @author samas
  */
-public class VectorPosicionCreditoProcessor implements ItemProcessor<Cuenta, List<VectorPosicion>>{
+public class VectorPosicionCreditoProcessor implements ItemProcessor<Cuenta, List<VectorPosicion>> {
 
     @Override
     public List<VectorPosicion> process(Cuenta item) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }

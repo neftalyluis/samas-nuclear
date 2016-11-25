@@ -443,7 +443,6 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
             List<Portafolio> pl = new ArrayList();
             pl.add(p2);
             pl.add(p1);
-            c.setPortafolios(pl);
             cuentaService.createOrUpdateCuenta(c);
             LOG.info("--Actualizamos Cuenta");
 

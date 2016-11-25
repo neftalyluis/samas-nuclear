@@ -33,9 +33,6 @@ public class Cuenta implements Serializable {
     @ManyToOne
     private Banco banco;
 
-    @JsonIgnore
-    @ManyToMany
-    private List<Portafolio> portafolios;
     /**
      * Tiene Credito implica que todo el Contrato esta prendado.
      *
@@ -47,7 +44,6 @@ public class Cuenta implements Serializable {
     private Boolean operaDerivado;
 
     public Cuenta() {
-        this.portafolios = new ArrayList<>();
     }
 
     public Long getId() {
@@ -95,20 +91,6 @@ public class Cuenta implements Serializable {
      */
     public void setBanco(Banco banco) {
         this.banco = banco;
-    }
-
-    /**
-     * @return the portafolios
-     */
-    public List<Portafolio> getPortafolios() {
-        return portafolios;
-    }
-
-    /**
-     * @param portafolios the portafolios to set
-     */
-    public void setPortafolios(List<Portafolio> portafolios) {
-        this.portafolios = portafolios;
     }
 
     /**

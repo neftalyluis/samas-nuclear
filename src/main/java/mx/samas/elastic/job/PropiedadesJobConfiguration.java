@@ -82,7 +82,6 @@ public class PropiedadesJobConfiguration {
         lineTokenizer.setDelimiter(",");
         lineTokenizer.setQuoteCharacter('"');
         lineTokenizer.setStrict(true);
-        
 
         BeanWrapperFieldSetMapper<VectorActivoPropiedadValor> fieldSetMapper = new BeanWrapperFieldSetMapper<>();
         fieldSetMapper.setTargetType(VectorActivoPropiedadValor.class);

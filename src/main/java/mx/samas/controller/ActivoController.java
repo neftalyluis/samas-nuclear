@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mx.samas.controllers;
+package mx.samas.controller;
 
 import java.util.List;
 import mx.samas.domain.Activo;

@@ -30,7 +30,7 @@ public class Portafolio implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    
+
     @OneToOne
     private Cuenta cuentaEje;
 
@@ -43,18 +43,18 @@ public class Portafolio implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date fecha;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     private PortafolioEstatus estatus;
-    
+
     @ManyToOne
     private Activo monedaDenominacion;
-    
+
     @ManyToMany
     private List<Cliente> clientes;
-    
+
     @ManyToMany
     private List<Cuenta> corredores;
-    
+
     private Double margen;
 
     public Long getId() {
@@ -159,7 +159,6 @@ public class Portafolio implements Serializable {
     public void setMonedaDenominacion(Activo monedaDenominacion) {
         this.monedaDenominacion = monedaDenominacion;
     }
-
 
     /**
      * @return the cuentaEje

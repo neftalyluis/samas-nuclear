@@ -163,7 +163,6 @@ public class VectorPosicion implements Serializable {
         this.valuacion = valuacion;
     }
 
-
     /**
      * @return the reporto
      */

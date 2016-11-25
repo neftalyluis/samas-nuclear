@@ -10,5 +10,5 @@ package mx.samas.domain;
  * @author samas
  */
 public enum ConductorRiesgo {
-       
+
 }

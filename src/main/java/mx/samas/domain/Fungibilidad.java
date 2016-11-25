@@ -22,7 +22,6 @@ public class Fungibilidad implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    
 
     public Long getId() {
         return id;
@@ -56,5 +55,5 @@ public class Fungibilidad implements Serializable {
     public String toString() {
         return "mx.samas.domain.Fungibilidad[ id=" + id + " ]";
     }
-    
+
 }

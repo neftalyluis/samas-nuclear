@@ -5,7 +5,6 @@
  */
 package mx.samas.service;
 
-
 import java.util.List;
 import mx.samas.domain.Bitacora;
 import mx.samas.domain.BitacoraOrden;

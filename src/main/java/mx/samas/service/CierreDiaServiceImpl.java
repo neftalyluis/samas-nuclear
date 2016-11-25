@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
  * @author samas
  */
 @Service
-public class CierreDiaServiceImpl implements CierreDiaService{
+public class CierreDiaServiceImpl implements CierreDiaService {
 
     @Override
     public void sumatoriaPosiciones() {
@@ -33,5 +33,5 @@ public class CierreDiaServiceImpl implements CierreDiaService{
     public void precioPortafolios() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }

@@ -35,7 +35,7 @@ public class Bono extends Activo implements Serializable {
     private Boolean amortizable;
     @OneToMany
     private List<GradoCrediticio> grados;
-    
+
     @Enumerated(EnumType.STRING)
     private AnoComercial anoComercial;
 

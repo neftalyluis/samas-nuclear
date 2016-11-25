@@ -16,6 +16,7 @@ import mx.samas.domain.Cuenta;
 import mx.samas.domain.Portafolio;
 import mx.samas.domain.VectorPosicion;
 import mx.samas.service.BitacoraService;
+import mx.samas.service.PortafolioService;
 import mx.samas.service.VectorPosicionService;
 import org.springframework.batch.item.ItemProcessor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,9 @@ public class VectorPosicionProcessor implements ItemProcessor<Cuenta, List<Vecto
 
     @Autowired
     private BitacoraService bitacoraService;
+    
+    @Autowired
+    private PortafolioService portafolioService;
 
     /**
      * Processor que lee cada cuenta y genera las nuevas posiciones desde la
@@ -48,8 +52,9 @@ public class VectorPosicionProcessor implements ItemProcessor<Cuenta, List<Vecto
          */
         List<VectorPosicion> posicionesNuevas = new ArrayList<>();
 
+        
         //Iteramos en todos los portafolios
-        for (Portafolio p : item.getPortafolios()) {
+        for (Portafolio p : portafolioService.getPortafoliosFromCuenta(item)) {
 
             //Obtenemos las posiciones de ese portafolio y convertimos a un Map
             Map<Activo, VectorPosicion> posicionesActuales

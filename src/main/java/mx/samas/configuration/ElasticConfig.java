@@ -30,13 +30,13 @@ public class ElasticConfig {
     @Value("${elasticsearch.home:/home/samas/elasticsearch}")
     private String elasticsearchHome;
 
-    private static final Logger logger = Logger.getLogger(ElasticConfig.class.getName());
+    private static final Logger LOG = Logger.getLogger(ElasticConfig.class.getName());
 
     @Bean
     public Client client() {
         try {
             final Path tmpDir = Files.createTempDirectory(Paths.get(System.getProperty("java.io.tmpdir")), "elasticsearch_data");
-            logger.log(Level.INFO, "Deploy en: {0}", tmpDir.toAbsolutePath().toString());
+            LOG.log(Level.INFO, "Deploy en: {0}", tmpDir.toAbsolutePath().toString());
 
             final Settings.Builder elasticsearchSettings
                     = Settings.settingsBuilder().put("http.enabled", "true")
@@ -51,7 +51,7 @@ public class ElasticConfig {
                     .client();
 
         } catch (final IOException ioex) {
-            logger.warning("Cannot create temp dir");
+            LOG.warning("Cannot create temp dir");
             throw new RuntimeException();
         }
     }
