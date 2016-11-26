@@ -21,7 +21,7 @@ public interface VectorActivoService {
     public List<VectorActivo> getVectorFromActivo(String clavePizarra);
 
     public VectorActivo getLastVectorFromActivo(Activo a);
-    
+
     public VectorActivo getLastVectorFromActivo(String clavePizarra);
 
     public VectorActivo addVectorToActivo(Long id, VectorActivo vector);

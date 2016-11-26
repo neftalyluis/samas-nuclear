@@ -22,7 +22,7 @@ public class PortafolioEstatus implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    
+
     private String nombre;
 
     public Long getId() {
@@ -71,5 +71,5 @@ public class PortafolioEstatus implements Serializable {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-    
+
 }

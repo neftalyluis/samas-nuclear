@@ -6,7 +6,8 @@
 package mx.samas.repository;
 
 import mx.samas.domain.DuenoFuente;
-import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
+
 import org.springframework.stereotype.Repository;
 
 /**
@@ -14,7 +15,7 @@ import org.springframework.stereotype.Repository;
  * @author samas
  */
 @Repository
-public interface DuenoFuenteRepository extends PagingAndSortingRepository<DuenoFuente, Long> {
+public interface DuenoFuenteRepository extends JpaRepository<DuenoFuente, Long> {
 
     public DuenoFuente findByNombre(String nombre);
 }

@@ -12,7 +12,6 @@ import mx.samas.domain.Perfil;
 import mx.samas.domain.Usuario;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.util.StringUtils;
 
@@ -21,7 +20,7 @@ import org.springframework.util.StringUtils;
  * @author samas
  */
 public class SecurityUser extends Usuario implements UserDetails {
-    
+
     private List<String> usuarioPerfiles;
 
     //Perdoname madre por mi vida loca D;<
@@ -38,39 +37,39 @@ public class SecurityUser extends Usuario implements UserDetails {
             }
         }
     }
-    
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        
+
         String perfiles = StringUtils.collectionToCommaDelimitedString(getUsuarioPerfiles());
         return AuthorityUtils.commaSeparatedStringToAuthorityList(perfiles);
     }
-    
+
     @Override
     public String getPassword() {
         return super.getPassword();
     }
-    
+
     @Override
     public String getUsername() {
         return super.getNombreUsuario();
     }
-    
+
     @Override
     public boolean isAccountNonExpired() {
         return true;
     }
-    
+
     @Override
     public boolean isAccountNonLocked() {
         return true;
     }
-    
+
     @Override
     public boolean isCredentialsNonExpired() {
         return true;
     }
-    
+
     @Override
     public boolean isEnabled() {
         return true;
@@ -89,5 +88,5 @@ public class SecurityUser extends Usuario implements UserDetails {
     public void setUsuarioPerfiles(List<String> usuarioPerfiles) {
         this.usuarioPerfiles = usuarioPerfiles;
     }
-    
+
 }

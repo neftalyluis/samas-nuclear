@@ -35,10 +35,6 @@ public class Cliente implements Serializable {
 
     @NotNull
     private Boolean elegible;
-    
-    @JsonIgnore
-    @ManyToMany
-    private List<Portafolio> portafolios;
 
     public Cliente() {
     }
@@ -134,20 +130,6 @@ public class Cliente implements Serializable {
      */
     public void setElegible(Boolean elegible) {
         this.elegible = elegible;
-    }
-
-    /**
-     * @return the portafolios
-     */
-    public List<Portafolio> getPortafolios() {
-        return portafolios;
-    }
-
-    /**
-     * @param portafolios the portafolios to set
-     */
-    public void setPortafolios(List<Portafolio> portafolios) {
-        this.portafolios = portafolios;
     }
 
 }

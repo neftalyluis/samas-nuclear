@@ -26,7 +26,7 @@ public class CalendarioComercial implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    
+
     private String nombre;
     //Los dias que no hay operacion
     @ElementCollection
@@ -92,6 +92,5 @@ public class CalendarioComercial implements Serializable {
     public void setNoHabiles(List<LocalDate> noHabiles) {
         this.noHabiles = noHabiles;
     }
-
 
 }

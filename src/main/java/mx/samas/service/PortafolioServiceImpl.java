@@ -5,6 +5,8 @@
  */
 package mx.samas.service;
 
+import java.util.List;
+import mx.samas.domain.Cuenta;
 import mx.samas.domain.Portafolio;
 import mx.samas.repository.PortafolioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,10 +21,15 @@ public class PortafolioServiceImpl implements PortafolioService {
 
     @Autowired
     private PortafolioRepository portafolioRepository;
-
+    
     @Override
     public Portafolio createPortafolio(Portafolio p) {
         return portafolioRepository.save(p);
+    }
+
+    @Override
+    public List<Portafolio> getPortafoliosFromCuenta(Cuenta c) {
+        return portafolioRepository.findByCorredores(c);
     }
 
 }

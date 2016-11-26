@@ -20,9 +20,10 @@ public class GrupoPropiedad implements Serializable {
     @ManyToOne
     private ActivoPropiedad propiedad;
     private String valor;
-    
+
     @Enumerated
     private GrupoOperador operador;
+
     /**
      * @return the propiedad
      */

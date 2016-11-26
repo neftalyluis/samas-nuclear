@@ -24,7 +24,7 @@ public class Banco implements Serializable {
     private Long id;
 
     private String nombre;
-    
+
     public Long getId() {
         return id;
     }
@@ -71,5 +71,5 @@ public class Banco implements Serializable {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-    
+
 }

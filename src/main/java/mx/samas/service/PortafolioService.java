@@ -5,6 +5,8 @@
  */
 package mx.samas.service;
 
+import java.util.List;
+import mx.samas.domain.Cuenta;
 import mx.samas.domain.Portafolio;
 
 /**
@@ -14,4 +16,5 @@ import mx.samas.domain.Portafolio;
 public interface PortafolioService {
 
     public Portafolio createPortafolio(Portafolio p);
+    public List<Portafolio> getPortafoliosFromCuenta(Cuenta c);
 }

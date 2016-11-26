@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mx.samas.repository.elastic;
+package mx.samas.elastic.repository;
 
-import mx.samas.domain.elastic.VectorActivoPropiedadValor;
+import mx.samas.elastic.domain.VectorActivoPropiedadValor;
 import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
 import org.springframework.stereotype.Repository;
 
@@ -14,6 +14,6 @@ import org.springframework.stereotype.Repository;
  * @author samas
  */
 @Repository
-public interface VectorActivoPropiedadValorRepository extends ElasticsearchRepository<VectorActivoPropiedadValor, String>{
+public interface VectorActivoPropiedadValorRepository extends ElasticsearchRepository<VectorActivoPropiedadValor, String> {
 
 }

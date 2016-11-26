@@ -15,6 +15,6 @@ import mx.samas.domain.Perfil;
 public interface PerfilService {
 
     public void createPerfil(Perfil p);
-    
+
     public void createPerfilesFromList(List<Perfil> lp);
 }

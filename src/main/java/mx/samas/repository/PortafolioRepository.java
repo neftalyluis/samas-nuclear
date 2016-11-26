@@ -5,8 +5,11 @@
  */
 package mx.samas.repository;
 
+import java.util.List;
+import mx.samas.domain.Cuenta;
 import mx.samas.domain.Portafolio;
-import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
+
 import org.springframework.stereotype.Repository;
 
 /**
@@ -14,6 +17,7 @@ import org.springframework.stereotype.Repository;
  * @author samas
  */
 @Repository
-public interface PortafolioRepository extends PagingAndSortingRepository<Portafolio, Long>{
-    
+public interface PortafolioRepository extends JpaRepository<Portafolio, Long> {
+
+    public List<Portafolio> findByCorredores(Cuenta cuenta);
 }

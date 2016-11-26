@@ -8,7 +8,6 @@ package mx.samas.job.cierre.dia.devengos;
 import java.util.List;
 import javax.persistence.EntityManagerFactory;
 import mx.samas.domain.Cuenta;
-import mx.samas.domain.VectorPosicion;
 import mx.samas.domain.VectorPosicionCredito;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
@@ -20,7 +19,6 @@ import org.springframework.batch.item.ItemWriter;
 import org.springframework.batch.item.database.JpaPagingItemReader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
 /**
  *

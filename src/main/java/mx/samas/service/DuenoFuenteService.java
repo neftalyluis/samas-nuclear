@@ -12,9 +12,9 @@ import mx.samas.domain.DuenoFuente;
  * @author samas
  */
 public interface DuenoFuenteService {
-    
+
     public void createDuenoFuente(DuenoFuente source);
-    
+
     public DuenoFuente findDuenoFuenteByName(String name);
-    
+
 }

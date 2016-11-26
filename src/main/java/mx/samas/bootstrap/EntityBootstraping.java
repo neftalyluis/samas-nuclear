@@ -28,6 +28,7 @@ import mx.samas.domain.Transaccion;
 import mx.samas.domain.Usuario;
 import mx.samas.domain.dto.BitacoraOrdenEjecutorDTO;
 import mx.samas.domain.dto.BitacoraOrdenValorDTO;
+import mx.samas.elastic.repository.VectorActivoPropiedadValorRepository;
 import mx.samas.job.SAMASJobs;
 import mx.samas.service.ActivoPropiedadService;
 import mx.samas.service.ActivoService;
@@ -110,29 +111,32 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
     @Autowired
     private ApplicationContext appContext;
 
+    @Autowired
+    private VectorActivoPropiedadValorRepository propsElastic;
+
     @Override
     public void onApplicationEvent(ApplicationReadyEvent event) {
 
-        System.out.println("========================================");
-        System.out.println("  / ____|  /\\   |  \\/  |   /\\    / ____|\n"
-                + " | (___   /  \\  | \\  / |  /  \\  | (___  \n"
-                + "  \\___ \\ / /\\ \\ | |\\/| | / /\\ \\  \\___ \\ \n"
-                + "  ____) / ____ \\| |  | |/ ____ \\ ____) |\n"
-                + " |_____/_/    \\_\\_|  |_/_/    \\_\\_____/");
-        System.out.println("========================================");
+        LOG.info("========================================");
+        LOG.info("  / ____|  /\\   |  \\/  |   /\\    / ____|\n");
+        LOG.info(" | (___   /  \\  | \\  / |  /  \\  | (___  \n");
+        LOG.info("  \\___ \\ / /\\ \\ | |\\/| | / /\\ \\  \\___ \\ \n");
+        LOG.info("  ____) / ____ \\| |  | |/ ____ \\ ____) |\n");
+        LOG.info(" |_____/_/    \\_\\_|  |_/_/    \\_\\_____/");
+        LOG.info("========================================");
 
         testBatch();
         activoPropiedades();
-        batchPropiedades();
         persistPerfiles();
         persistBancos();
         persistClientesAndCuenta();
         testVectorActivoBatch();
         persistPortfolioEstatus();
-        persistEstrategiasAndPortafolioModelo();
+        //persistEstrategiasAndPortafolioModelo();
         persistTransacciones();
         useOperationDeposito();
         useOperationCompraAccion();
+        elasticBatch();
     }
 
     private boolean persistPerfiles() {
@@ -439,7 +443,6 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
             List<Portafolio> pl = new ArrayList();
             pl.add(p2);
             pl.add(p1);
-            c.setPortafolios(pl);
             cuentaService.createOrUpdateCuenta(c);
             LOG.info("--Actualizamos Cuenta");
 
@@ -875,9 +878,6 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
 
     }
 
-    private void batchPropiedades() {
-    }
-
     private void persistPropiedadesActivo() {
 
         ActivoPropiedad vna = new ActivoPropiedad("Valor Nominal Actualizado",
@@ -908,12 +908,12 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
                 "Precio Limpio mas reditos devengados",
                 TipoDato.DATE, 4, FuenteDatos.VECTOR_PIP,
                 TipoActivo.BONO, Boolean.TRUE);
-        
+
         ActivoPropiedad moodys = new ActivoPropiedad("Precio Sucio",
                 "Precio Limpio mas reditos devengados",
                 TipoDato.DATE, 4, FuenteDatos.VECTOR_PIP,
                 TipoActivo.BONO, Boolean.TRUE);
-        
+
         ActivoPropiedad sp = new ActivoPropiedad("Precio Sucio",
                 "Precio Limpio mas reditos devengados",
                 TipoDato.DATE, 4, FuenteDatos.VECTOR_PIP,
@@ -928,5 +928,23 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
                 "Precio Limpio mas reditos devengados",
                 TipoDato.DATE, 4, FuenteDatos.VECTOR_PIP,
                 TipoActivo.BONO, Boolean.TRUE);
+    }
+
+    private void elasticBatch() {
+        LOG.info("Batch VectorActivo en Elastic");
+        Job job = (Job) appContext.getBean(SAMASJobs.ELASTIC_BOOTSTRAP);
+        JobParameters jpb = new JobParameters();
+
+        try {
+            JobExecution a = jobLauncher.run(job, jpb);
+        } catch (JobExecutionAlreadyRunningException | JobRestartException | JobInstanceAlreadyCompleteException | JobParametersInvalidException ex) {
+            Logger.getLogger(EntityBootstraping.class.getName()).log(Level.SEVERE, "El Batch de Vector falló", ex);
+        }
+//        HashMap propiedadesValor = new HashMap();
+//        propiedadesValor.put("MEMES", "MOMOS");
+//        VectorActivoPropiedadValor vap = new VectorActivoPropiedadValor();
+//        vap.setId("1A_AMZN_*");
+//        vap.setPropiedadesValor(propiedadesValor);
+//        propsElastic.save(vap);
     }
 }

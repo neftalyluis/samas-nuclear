@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mx.samas.service.elastic;
+package mx.samas.elastic.service;
 
-import mx.samas.domain.elastic.VectorActivoPropiedadValor;
+import mx.samas.elastic.domain.VectorActivoPropiedadValor;
 
 /**
  *

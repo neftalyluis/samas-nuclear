@@ -26,12 +26,12 @@ public class VectorPosicionCredito implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    
+
     @Temporal(TemporalType.DATE)
     private Date fecha;
 
     private Double valuacion;
-    
+
     @ManyToOne
     private Portafolio cuenta;
 
@@ -43,7 +43,7 @@ public class VectorPosicionCredito implements Serializable {
      * respalda de lo contrario es quirografario
      */
     private Boolean bursatilizado;
-    
+
     private Boolean impuesto;
 
     @ManyToOne

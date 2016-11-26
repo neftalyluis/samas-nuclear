@@ -56,9 +56,8 @@ public class VectorPropiedadesItemProcessor implements ItemProcessor<Activo, Vec
                 .filter(ap -> ap.getOrigenDatos() == FuenteDatos.TERMINOS_PIP)
                 .collect(Collectors.toList()), '|');
         readerTyc.execute();
-        
-        //Por ahora exceptuamos las propiedades del CSV de Usuario y las de Julia
 
+        //Por ahora exceptuamos las propiedades del CSV de Usuario y las de Julia
         List<ActivoPropiedadValor> lapv = new ArrayList<>();
         lapv.addAll(readerTyc.getPropiedadesValor());
         lapv.addAll(readerPip.getPropiedadesValor());

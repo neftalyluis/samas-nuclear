@@ -15,7 +15,7 @@ import javax.persistence.Entity;
 @Entity
 public class Accion extends Activo implements Serializable {
 
-    private Boolean privada ;
+    private Boolean privada;
     private Boolean fondo;
     private Double comisionAnual;
 
@@ -71,6 +71,5 @@ public class Accion extends Activo implements Serializable {
     public void setComisionAnual(Double comisionAnual) {
         this.comisionAnual = comisionAnual;
     }
-
 
 }

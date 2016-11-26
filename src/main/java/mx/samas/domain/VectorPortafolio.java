@@ -25,11 +25,11 @@ public class VectorPortafolio implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    
+
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date fecha;
     private Double precio;
-    
+
     @ManyToOne
     private Portafolio portafolio;
 
@@ -107,5 +107,5 @@ public class VectorPortafolio implements Serializable {
     public void setPortafolio(Portafolio portafolio) {
         this.portafolio = portafolio;
     }
-    
+
 }

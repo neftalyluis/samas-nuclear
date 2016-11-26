@@ -25,14 +25,14 @@ public class FechaFlujo implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    
+
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date fecha;
     private Boolean amortizacion;
-    
+
     @ManyToOne
     private Bono bono;
-    
+
     public Long getId() {
         return id;
     }
@@ -107,5 +107,5 @@ public class FechaFlujo implements Serializable {
     public void setBono(Bono bono) {
         this.bono = bono;
     }
-    
+
 }

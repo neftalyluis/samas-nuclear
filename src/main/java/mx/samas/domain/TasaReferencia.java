@@ -22,7 +22,7 @@ public class TasaReferencia implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    
+
     private String nombre;
     private Double tasa;
 
@@ -86,5 +86,5 @@ public class TasaReferencia implements Serializable {
     public void setTasa(Double tasa) {
         this.tasa = tasa;
     }
-    
+
 }

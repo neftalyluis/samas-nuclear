@@ -36,10 +36,9 @@ public class Estrategia implements Serializable {
     private Boolean efectivo;
     private Boolean grupos;
     private Boolean margen;
-    
+
     @ManyToMany
     private List<Grupo> grupoLista;
-    
 
     //    @ManyToOne
 //    private PerfilRiesgo perfilRiesgo;

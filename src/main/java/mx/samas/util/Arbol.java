@@ -26,7 +26,6 @@ public class Arbol<T> {
 //    public void agregarHijo(T hijo) {
 //        root.
 //    }
-
     public static class Nodo<T> {
 
         private T data;

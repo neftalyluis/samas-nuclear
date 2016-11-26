@@ -53,11 +53,11 @@ public class ActivoPropiedad implements Serializable {
     private FuenteDatos origenDatos;
 
     /**
-     * A que tipo de Activo 
+     * A que tipo de Activo
      */
     @Enumerated(EnumType.ORDINAL)
     private TipoActivo tipoActivo;
-    
+
     private Boolean vectorial;
 
     public ActivoPropiedad() {

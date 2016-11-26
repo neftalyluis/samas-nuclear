@@ -7,7 +7,7 @@ package mx.samas.repository;
 
 import java.util.List;
 import mx.samas.domain.Activo;
-import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -15,7 +15,7 @@ import org.springframework.stereotype.Repository;
  * @author samas
  */
 @Repository
-public interface ActivoRepository extends PagingAndSortingRepository<Activo, Long> {
+public interface ActivoRepository extends JpaRepository<Activo, Long> {
 
     public List<Activo> findByNombre(String nombre);
 

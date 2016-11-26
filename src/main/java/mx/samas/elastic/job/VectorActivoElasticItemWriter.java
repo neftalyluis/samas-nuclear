@@ -6,8 +6,8 @@
 package mx.samas.elastic.job;
 
 import java.util.List;
-import mx.samas.domain.elastic.VectorActivoPropiedadValor;
-import mx.samas.repository.elastic.VectorActivoPropiedadValorRepository;
+import mx.samas.elastic.domain.VectorActivoPropiedadValor;
+import mx.samas.elastic.repository.VectorActivoPropiedadValorRepository;
 import org.springframework.batch.item.ItemWriter;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -15,8 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  *
  * @author samas
  */
-class VectorActivoPropiedadValorItemWriter implements ItemWriter<VectorActivoPropiedadValor> {
-
+class VectorActivoElasticItemWriter implements ItemWriter<VectorActivoPropiedadValor> {
 
     @Autowired
     private VectorActivoPropiedadValorRepository vectorService;
@@ -25,5 +24,5 @@ class VectorActivoPropiedadValorItemWriter implements ItemWriter<VectorActivoPro
     public void write(List<? extends VectorActivoPropiedadValor> items) throws Exception {
         vectorService.save(items);
     }
-    
+
 }

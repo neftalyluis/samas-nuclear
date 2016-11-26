@@ -84,7 +84,7 @@ public class Bitacora implements Serializable {
     private Mercado mercado;
 
     private String folioOperacion;
-    
+
     private Double precio;
 
     public Long getId() {
@@ -189,7 +189,6 @@ public class Bitacora implements Serializable {
     public void setTransaccion(Transaccion transaccion) {
         this.transaccion = transaccion;
     }
-
 
     /**
      * @return the mercado

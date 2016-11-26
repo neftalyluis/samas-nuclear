@@ -29,7 +29,7 @@ public class Mercado implements Serializable {
 
     private String nombre;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Activo monedaDenominacion;
 
     private Long fechaValorAccion;
@@ -39,7 +39,7 @@ public class Mercado implements Serializable {
     private Long fechaValorDerivado;
 
     private Long fechaValorMoneda;
-    
+
     @OneToOne
     private CalendarioComercial calendario;
 

@@ -73,10 +73,7 @@ public class ActivoJobConfiguration {
         String PIP_LOCATION = "vector/pip/VectorTest.csv";
         ClassLoader classLoader = getClass().getClassLoader();
 
-
         File fl = new File(classLoader.getResource(PIP_LOCATION).getFile());
-
-
 
         return new FileSystemResource(fl);
     }
