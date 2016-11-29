@@ -5,7 +5,7 @@ package mx.samas.controller;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 import mx.samas.domain.Bitacora;
 import mx.samas.service.BitacoraService;
@@ -31,7 +31,7 @@ public class BitacoraController {
     private BitacoraService bitacoraService;
 
     @RequestMapping(method = RequestMethod.GET, value = "/fecha/{operation}")
-    public ResponseEntity<List<Bitacora>> getBitacoraListWithDate(@RequestParam(value = "operation") Date operationDate) {
+    public ResponseEntity<List<Bitacora>> getBitacoraListWithDate(@RequestParam(value = "operation") LocalDate operationDate) {
         return new ResponseEntity<>(bitacoraService.getBitacoraListWithOperationDate(operationDate), HttpStatus.OK);
     }
 

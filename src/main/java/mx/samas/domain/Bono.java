@@ -6,14 +6,13 @@
 package mx.samas.domain;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.Temporal;
 
 /**
  *
@@ -23,8 +22,8 @@ import javax.persistence.Temporal;
 public class Bono extends Activo implements Serializable {
 
     private Double diferencial;
-    @Temporal(javax.persistence.TemporalType.DATE)
-    private Date fechaVencimiento;
+
+    private LocalDate fechaVencimiento;
     @OneToMany
     private List<FechaFlujo> fechasFlujo;
     @ManyToOne
@@ -62,20 +61,6 @@ public class Bono extends Activo implements Serializable {
      */
     public void setDiferencial(Double diferencial) {
         this.diferencial = diferencial;
-    }
-
-    /**
-     * @return the fechaVencimiento
-     */
-    public Date getFechaVencimiento() {
-        return fechaVencimiento;
-    }
-
-    /**
-     * @param fechaVencimiento the fechaVencimiento to set
-     */
-    public void setFechaVencimiento(Date fechaVencimiento) {
-        this.fechaVencimiento = fechaVencimiento;
     }
 
     /**
@@ -160,5 +145,19 @@ public class Bono extends Activo implements Serializable {
      */
     public void setAnoComercial(AnoComercial anoComercial) {
         this.anoComercial = anoComercial;
+    }
+
+    /**
+     * @return the fechaVencimiento
+     */
+    public LocalDate getFechaVencimiento() {
+        return fechaVencimiento;
+    }
+
+    /**
+     * @param fechaVencimiento the fechaVencimiento to set
+     */
+    public void setFechaVencimiento(LocalDate fechaVencimiento) {
+        this.fechaVencimiento = fechaVencimiento;
     }
 }

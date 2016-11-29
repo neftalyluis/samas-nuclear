@@ -6,9 +6,7 @@
 package mx.samas.service;
 
 import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import mx.samas.domain.Activo;
@@ -42,7 +40,7 @@ public class RebalanceoServiceImpl implements RebalanceoService {
     private BitacoraRepository bitacoraRepository;
 
     @Override
-    public HashMap<String, Double> presupuestoParaPortafolio(Portafolio p, Date fechaValor) {
+    public HashMap<String, Double> presupuestoParaPortafolio(Portafolio p, LocalDate fechaValor) {
 
         ///y Vt? D:
         //Suponiendo que no es sabado o domingo o dia inhabil, hay que optimizar esto
@@ -97,13 +95,12 @@ public class RebalanceoServiceImpl implements RebalanceoService {
     }
 
     @Override
-    public Double poderDeCompra(Portafolio p, Date fechaValor) {
+    public Double poderDeCompra(Portafolio p, LocalDate fechaValor) {
 
         LocalDate hoy = LocalDate.now();
-        Date hoyDate = Date.from(hoy.atStartOfDay(ZoneId.systemDefault()).toInstant());
 
         List<Bitacora> lb = bitacoraRepository
-                .findByPortafolioAndOperacionAndLiquidacion(p, hoyDate, fechaValor);
+                .findByPortafolioAndOperacionAndLiquidacion(p, hoy, fechaValor);
 
         Double flujoEntreDias = lb.stream().mapToDouble(Bitacora::getPrecio).sum();
 
@@ -111,7 +108,7 @@ public class RebalanceoServiceImpl implements RebalanceoService {
     }
 
     @Override
-    public HashMap<Grupo, Double> balancePorGrupos(Portafolio p, Date fechaValor) {
+    public HashMap<Grupo, Double> balancePorGrupos(Portafolio p, LocalDate fechaValor) {
 
         //Hay que buscar que esto la haga la query, me caga que tengas que usar el Eager en la estrategia de fetch
         Estrategia e = p.getEstrategia();
@@ -124,7 +121,7 @@ public class RebalanceoServiceImpl implements RebalanceoService {
             }
         }
 
-        List<VectorPosicion> posicionesAyer = vectorPosicionRepository.findByPortafolioAndFecha(p, new Date());
+        List<VectorPosicion> posicionesAyer = vectorPosicionRepository.findByPortafolioAndFecha(p, LocalDate.now());
 
         //Esto debe de salir en una query de JPQL, paps
         List<Activo> listActivosEnPosiciones = new ArrayList<>();

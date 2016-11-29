@@ -7,7 +7,7 @@ package mx.samas.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,8 +15,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 /**
  *
@@ -30,8 +28,7 @@ public class VectorActivo implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Temporal(TemporalType.DATE)
-    private Date fecha;
+    private LocalDate fecha;
 
     @JsonIgnore
     @ManyToOne
@@ -46,7 +43,7 @@ public class VectorActivo implements Serializable {
 
     }
 
-    public VectorActivo(Date fecha, Double precioLimpio) {
+    public VectorActivo(LocalDate fecha, Double precioLimpio) {
         this.fecha = fecha;
         this.precioLimpio = precioLimpio;
 
@@ -130,14 +127,14 @@ public class VectorActivo implements Serializable {
     /**
      * @return the fecha
      */
-    public Date getFecha() {
+    public LocalDate getFecha() {
         return fecha;
     }
 
     /**
      * @param fecha the fecha to set
      */
-    public void setFecha(Date fecha) {
+    public void setFecha(LocalDate fecha) {
         this.fecha = fecha;
     }
 

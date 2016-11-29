@@ -5,7 +5,7 @@
  */
 package mx.samas.job.cierre.dia.valuacion;
 
-import java.util.Date;
+import java.time.LocalDate;
 import mx.samas.domain.dto.VectorActivoDTO;
 import org.springframework.batch.item.file.mapping.FieldSetMapper;
 import org.springframework.batch.item.file.transform.FieldSet;
@@ -27,7 +27,7 @@ public class VectorActivoFieldSetMapper implements FieldSetMapper<VectorActivoDT
     @Override
     public VectorActivoDTO mapFieldSet(FieldSet fieldSet) throws BindException {
         String clavePizarra = fieldSet.readString(1) + "_" + fieldSet.readString(2) + "_" + fieldSet.readString(3);
-        VectorActivoDTO activo = new VectorActivoDTO(clavePizarra, new Date(), fieldSet.readDouble(5));
+        VectorActivoDTO activo = new VectorActivoDTO(clavePizarra, LocalDate.now(), fieldSet.readDouble(5));
         return activo;
     }
 

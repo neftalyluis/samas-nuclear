@@ -6,15 +6,14 @@
 package mx.samas.domain;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.Temporal;
-import javax.validation.constraints.NotNull;
 
 /**
  *
@@ -31,21 +30,15 @@ public class Bitacora implements Serializable {
     /**
      * 2.- Momento en el que se ejecuta la orden
      */
-    @NotNull
-    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
-    private Date fechaEjecucion;
+    private LocalDateTime fechaEjecucion;
     /**
      * 3.- Dia que se Liquida
      */
-    @NotNull
-    @Temporal(javax.persistence.TemporalType.DATE)
-    private Date fechaLiquidacion;
+    private LocalDate fechaLiquidacion;
     /**
      * 1.- Momento que se (asenta) ingresa la orden
      */
-    @NotNull
-    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
-    private Date fechaIngreso;
+    private LocalDateTime fechaIngreso;
 
     /**
      * Activo al cual se le esta registrando, si es que existe alguna
@@ -118,48 +111,6 @@ public class Bitacora implements Serializable {
     @Override
     public String toString() {
         return "mx.samas.domain.Bitacora[ id=" + id + " ]";
-    }
-
-    /**
-     * @return the fechaEjecucion
-     */
-    public Date getFechaEjecucion() {
-        return fechaEjecucion;
-    }
-
-    /**
-     * @param fechaEjecucion the fechaEjecucion to set
-     */
-    public void setFechaEjecucion(Date fechaEjecucion) {
-        this.fechaEjecucion = fechaEjecucion;
-    }
-
-    /**
-     * @return the fechaLiquidacion
-     */
-    public Date getFechaLiquidacion() {
-        return fechaLiquidacion;
-    }
-
-    /**
-     * @param fechaLiquidacion the fechaLiquidacion to set
-     */
-    public void setFechaLiquidacion(Date fechaLiquidacion) {
-        this.fechaLiquidacion = fechaLiquidacion;
-    }
-
-    /**
-     * @return the fechaIngreso
-     */
-    public Date getFechaIngreso() {
-        return fechaIngreso;
-    }
-
-    /**
-     * @param fechaIngreso the fechaIngreso to set
-     */
-    public void setFechaIngreso(Date fechaIngreso) {
-        this.fechaIngreso = fechaIngreso;
     }
 
     /**
@@ -286,6 +237,48 @@ public class Bitacora implements Serializable {
      */
     public void setPrecio(Double precio) {
         this.precio = precio;
+    }
+
+    /**
+     * @return the fechaEjecucion
+     */
+    public LocalDateTime getFechaEjecucion() {
+        return fechaEjecucion;
+    }
+
+    /**
+     * @param fechaEjecucion the fechaEjecucion to set
+     */
+    public void setFechaEjecucion(LocalDateTime fechaEjecucion) {
+        this.fechaEjecucion = fechaEjecucion;
+    }
+
+    /**
+     * @return the fechaLiquidacion
+     */
+    public LocalDate getFechaLiquidacion() {
+        return fechaLiquidacion;
+    }
+
+    /**
+     * @param fechaLiquidacion the fechaLiquidacion to set
+     */
+    public void setFechaLiquidacion(LocalDate fechaLiquidacion) {
+        this.fechaLiquidacion = fechaLiquidacion;
+    }
+
+    /**
+     * @return the fechaIngreso
+     */
+    public LocalDateTime getFechaIngreso() {
+        return fechaIngreso;
+    }
+
+    /**
+     * @param fechaIngreso the fechaIngreso to set
+     */
+    public void setFechaIngreso(LocalDateTime fechaIngreso) {
+        this.fechaIngreso = fechaIngreso;
     }
 
 }

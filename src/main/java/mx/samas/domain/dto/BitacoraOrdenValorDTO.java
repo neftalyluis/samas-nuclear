@@ -5,9 +5,8 @@
  */
 package mx.samas.domain.dto;
 
-import java.util.Date;
-import javax.persistence.Temporal;
-import javax.validation.constraints.NotNull;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 /**
  *
@@ -23,21 +22,15 @@ public class BitacoraOrdenValorDTO {
     /**
      * 2.- Momento en el que se ejecuta la orden
      */
-    @NotNull
-    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
-    private Date fechaEjecucion;
+    private LocalDateTime fechaEjecucion;
     /**
      * 3.- Dia que se Liquida
      */
-    @NotNull
-    @Temporal(javax.persistence.TemporalType.DATE)
-    private Date fechaLiquidacion;
+    private LocalDate fechaLiquidacion;
     /**
      * 1.- Momento que se (asenta) ingresa la orden
      */
-    @NotNull
-    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
-    private Date fechaIngreso;
+    private LocalDateTime fechaIngreso;
 
     /**
      * @return the transaccionId
@@ -84,42 +77,42 @@ public class BitacoraOrdenValorDTO {
     /**
      * @return the fechaEjecucion
      */
-    public Date getFechaEjecucion() {
+    public LocalDateTime getFechaEjecucion() {
         return fechaEjecucion;
     }
 
     /**
      * @param fechaEjecucion the fechaEjecucion to set
      */
-    public void setFechaEjecucion(Date fechaEjecucion) {
+    public void setFechaEjecucion(LocalDateTime fechaEjecucion) {
         this.fechaEjecucion = fechaEjecucion;
     }
 
     /**
      * @return the fechaLiquidacion
      */
-    public Date getFechaLiquidacion() {
+    public LocalDate getFechaLiquidacion() {
         return fechaLiquidacion;
     }
 
     /**
      * @param fechaLiquidacion the fechaLiquidacion to set
      */
-    public void setFechaLiquidacion(Date fechaLiquidacion) {
+    public void setFechaLiquidacion(LocalDate fechaLiquidacion) {
         this.fechaLiquidacion = fechaLiquidacion;
     }
 
     /**
      * @return the fechaIngreso
      */
-    public Date getFechaIngreso() {
+    public LocalDateTime getFechaIngreso() {
         return fechaIngreso;
     }
 
     /**
      * @param fechaIngreso the fechaIngreso to set
      */
-    public void setFechaIngreso(Date fechaIngreso) {
+    public void setFechaIngreso(LocalDateTime fechaIngreso) {
         this.fechaIngreso = fechaIngreso;
     }
 

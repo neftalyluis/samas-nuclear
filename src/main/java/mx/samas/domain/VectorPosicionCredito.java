@@ -6,14 +6,12 @@
 package mx.samas.domain;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 /**
  *
@@ -27,8 +25,7 @@ public class VectorPosicionCredito implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Temporal(TemporalType.DATE)
-    private Date fecha;
+    private LocalDate fecha;
 
     private Double valuacion;
 
@@ -80,20 +77,6 @@ public class VectorPosicionCredito implements Serializable {
     @Override
     public String toString() {
         return "mx.samas.domain.VectorPosicionCredito[ id=" + id + " ]";
-    }
-
-    /**
-     * @return the fecha
-     */
-    public Date getFecha() {
-        return fecha;
-    }
-
-    /**
-     * @param fecha the fecha to set
-     */
-    public void setFecha(Date fecha) {
-        this.fecha = fecha;
     }
 
     /**
@@ -178,5 +161,19 @@ public class VectorPosicionCredito implements Serializable {
      */
     public void setMoneda(Activo moneda) {
         this.moneda = moneda;
+    }
+
+    /**
+     * @return the fecha
+     */
+    public LocalDate getFecha() {
+        return fecha;
+    }
+
+    /**
+     * @param fecha the fecha to set
+     */
+    public void setFecha(LocalDate fecha) {
+        this.fecha = fecha;
     }
 }

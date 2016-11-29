@@ -6,13 +6,12 @@
 package mx.samas.domain;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.Temporal;
 
 /**
  *
@@ -26,8 +25,7 @@ public class FechaFlujo implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Temporal(javax.persistence.TemporalType.DATE)
-    private Date fecha;
+    private LocalDate fecha;
     private Boolean amortizacion;
 
     @ManyToOne
@@ -67,20 +65,6 @@ public class FechaFlujo implements Serializable {
     }
 
     /**
-     * @return the fecha
-     */
-    public Date getFecha() {
-        return fecha;
-    }
-
-    /**
-     * @param fecha the fecha to set
-     */
-    public void setFecha(Date fecha) {
-        this.fecha = fecha;
-    }
-
-    /**
      * @return the amortizacion
      */
     public Boolean getAmortizacion() {
@@ -106,6 +90,20 @@ public class FechaFlujo implements Serializable {
      */
     public void setBono(Bono bono) {
         this.bono = bono;
+    }
+
+    /**
+     * @return the fecha
+     */
+    public LocalDate getFecha() {
+        return fecha;
+    }
+
+    /**
+     * @param fecha the fecha to set
+     */
+    public void setFecha(LocalDate fecha) {
+        this.fecha = fecha;
     }
 
 }

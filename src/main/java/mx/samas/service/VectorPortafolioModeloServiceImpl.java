@@ -5,8 +5,8 @@
  */
 package mx.samas.service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import mx.samas.domain.Activo;
@@ -59,13 +59,14 @@ public class VectorPortafolioModeloServiceImpl implements VectorPortafolioModelo
         return estrategiaRepository.findOne(id).getEstrategiaModelo();
     }
 
-    private Date getMaxDate(List<VectorPortafolioModelo> list) {
-        Date maxDate = null;
+    //TODO: Esta implementacion esta Rota
+    private LocalDate getMaxDate(List<VectorPortafolioModelo> list) {
+        LocalDate maxDate = null;
         for (VectorPortafolioModelo model : list) {
-            Date dateFromEntity = model.getCreado();
+            LocalDate dateFromEntity = model.getCreado();
             if (maxDate == null) {
                 maxDate = dateFromEntity;
-            } else if (dateFromEntity.compareTo(maxDate) > 0) {
+            } else if (dateFromEntity.isAfter(maxDate)) {
                 maxDate = dateFromEntity;
 
             }
@@ -73,7 +74,8 @@ public class VectorPortafolioModeloServiceImpl implements VectorPortafolioModelo
         return maxDate;
     }
 
-    private List<VectorPortafolioModelo> getModelosWithDate(Date date, List<VectorPortafolioModelo> modelList) {
+    //Igual de Rota
+    private List<VectorPortafolioModelo> getModelosWithDate(LocalDate date, List<VectorPortafolioModelo> modelList) {
         List<VectorPortafolioModelo> newList = new ArrayList<>();
         for (VectorPortafolioModelo pm : modelList) {
             if (pm.getCreado().compareTo(date) == 0) {

@@ -6,7 +6,7 @@
 package mx.samas.domain;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -16,8 +16,6 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 /**
  *
@@ -40,8 +38,7 @@ public class Portafolio implements Serializable {
     @ManyToOne
     private TipoServicio tipoServicio;
 
-    @Temporal(TemporalType.DATE)
-    private Date fecha;
+    private LocalDate fecha;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private PortafolioEstatus estatus;
@@ -116,20 +113,6 @@ public class Portafolio implements Serializable {
      */
     public void setTipoServicio(TipoServicio tipoServicio) {
         this.tipoServicio = tipoServicio;
-    }
-
-    /**
-     * @return the fecha
-     */
-    public Date getFecha() {
-        return fecha;
-    }
-
-    /**
-     * @param fecha the fecha to set
-     */
-    public void setFecha(Date fecha) {
-        this.fecha = fecha;
     }
 
     /**
@@ -214,6 +197,20 @@ public class Portafolio implements Serializable {
      */
     public void setMargen(Double margen) {
         this.margen = margen;
+    }
+
+    /**
+     * @return the fecha
+     */
+    public LocalDate getFecha() {
+        return fecha;
+    }
+
+    /**
+     * @param fecha the fecha to set
+     */
+    public void setFecha(LocalDate fecha) {
+        this.fecha = fecha;
     }
 
 }

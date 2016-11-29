@@ -5,7 +5,7 @@
  */
 package mx.samas.domain.dto;
 
-import java.util.Date;
+import java.time.LocalDate;
 import mx.samas.domain.VectorActivo;
 
 /**
@@ -17,7 +17,7 @@ public class VectorActivoDTO {
     private String clavePizarra;
     private VectorActivo vector;
 
-    public VectorActivoDTO(String clavePizarra, Date fecha, Double precioLimpio) {
+    public VectorActivoDTO(String clavePizarra, LocalDate fecha, Double precioLimpio) {
         this.clavePizarra = clavePizarra;
         this.vector = new VectorActivo(fecha, precioLimpio);
     }

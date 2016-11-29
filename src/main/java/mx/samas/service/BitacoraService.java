@@ -5,7 +5,7 @@
  */
 package mx.samas.service;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 import mx.samas.domain.Bitacora;
 import mx.samas.domain.Cuenta;
@@ -17,7 +17,7 @@ import mx.samas.domain.Portafolio;
  */
 public interface BitacoraService {
 
-    public List<Bitacora> getBitacoraListWithOperationDate(Date operationDate);
+    public List<Bitacora> getBitacoraListWithOperationDate(LocalDate operationDate);
 
     public List<Bitacora> getBitacoraListWithContractNumber(Long contratoNumero);
 
