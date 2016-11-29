@@ -5,7 +5,6 @@
  */
 package mx.samas.util;
 
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
@@ -32,13 +31,14 @@ public class TipoActivoResolver {
     private static TipoActivoResolver instance = null;
 
     //La neta, me la hipermame con este singleton express lmao
-    protected TipoActivoResolver() throws FileNotFoundException, IOException {
+    protected TipoActivoResolver() throws IOException {
         resolver = new HashMap<>();
         ClassLoader classLoader = getClass().getClassLoader();
-        Reader in = new FileReader(classLoader.getResource(ROUTE).getFile());
-        final CSVParser parser = new CSVParser(in, CSVFormat.EXCEL);
-        for (CSVRecord record : parser) {
-            resolver.put(record.get(1).trim(), resolveFromCSV(record.get(0)));
+        try (Reader in = new FileReader(classLoader.getResource(ROUTE).getFile())) {
+            final CSVParser parser = new CSVParser(in, CSVFormat.EXCEL);
+            for (CSVRecord record : parser) {
+                resolver.put(record.get(1).trim(), resolveFromCSV(record.get(0)));
+            }
         }
     }
 
@@ -65,6 +65,7 @@ public class TipoActivoResolver {
 
     private TipoActivo resolveFromCSV(String entry) {
         switch (entry) {
+            default:
             case "Equity":
                 return TipoActivo.ACCION;
             case "Bond":
@@ -73,8 +74,6 @@ public class TipoActivoResolver {
                 return TipoActivo.DERIVADO;
             case "Currency":
                 return TipoActivo.MONEDA;
-            default:
-                return TipoActivo.ACCION;
         }
     }
 

@@ -80,14 +80,14 @@ public class ActivoJobConfiguration {
 
     @Bean
     public LineMapper<Activo> activoLineMapper() {
-        DefaultLineMapper<Activo> lineMapper = new DefaultLineMapper<Activo>();
+        DefaultLineMapper<Activo> lineMapper = new DefaultLineMapper<>();
 
         DelimitedLineTokenizer lineTokenizer = new DelimitedLineTokenizer();
         lineTokenizer.setDelimiter(",");
         lineTokenizer.setQuoteCharacter('"');
         lineTokenizer.setStrict(true);
 
-        BeanWrapperFieldSetMapper<Activo> fieldSetMapper = new BeanWrapperFieldSetMapper<Activo>();
+        BeanWrapperFieldSetMapper<Activo> fieldSetMapper = new BeanWrapperFieldSetMapper<>();
         fieldSetMapper.setTargetType(Activo.class);
 
         lineMapper.setLineTokenizer(lineTokenizer);

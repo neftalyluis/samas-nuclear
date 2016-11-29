@@ -27,13 +27,10 @@ public class Cliente implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @NotNull
     private String nombre;
 
-    @NotNull
     private Boolean sofisticado;
 
-    @NotNull
     private Boolean elegible;
 
     public Cliente() {

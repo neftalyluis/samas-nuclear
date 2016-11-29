@@ -25,10 +25,8 @@ public class ActivoPropiedadValor implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @NotNull
     private String valor;
 
-    @NotNull
     @ManyToOne
     private ActivoPropiedad propiedad;
 

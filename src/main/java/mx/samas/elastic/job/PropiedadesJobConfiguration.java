@@ -76,7 +76,7 @@ public class PropiedadesJobConfiguration {
 
     @Bean
     public LineMapper<VectorActivoPropiedadValor> activoElasticLineMapper() {
-        DefaultLineMapper<VectorActivoPropiedadValor> lineMapper = new DefaultLineMapper<VectorActivoPropiedadValor>();
+        DefaultLineMapper<VectorActivoPropiedadValor> lineMapper = new DefaultLineMapper<>();
 
         DelimitedLineTokenizer lineTokenizer = new DelimitedLineTokenizer();
         lineTokenizer.setDelimiter(",");

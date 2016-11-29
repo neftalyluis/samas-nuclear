@@ -11,6 +11,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import mx.samas.exception.ElasticException;
 import org.elasticsearch.client.Client;
 import org.elasticsearch.common.settings.Settings;
 import org.elasticsearch.node.NodeBuilder;
@@ -51,8 +52,8 @@ public class ElasticConfig {
                     .client();
 
         } catch (final IOException ioex) {
-            LOG.warning("Cannot create temp dir");
-            throw new RuntimeException();
+            LOG.log(Level.WARNING, "No se pudo crear el directorio: {0}", ioex);
+            throw new ElasticException(ioex.getMessage());
         }
     }
 

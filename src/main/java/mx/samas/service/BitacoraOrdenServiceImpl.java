@@ -15,6 +15,7 @@ import mx.samas.domain.Transaccion;
 import mx.samas.domain.dto.BitacoraOrdenDTO;
 import mx.samas.domain.dto.BitacoraOrdenEjecutorDTO;
 import mx.samas.domain.dto.BitacoraOrdenValorDTO;
+import mx.samas.exception.NotFoundException;
 import mx.samas.repository.BitacoraOrdenRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -53,7 +54,7 @@ public class BitacoraOrdenServiceImpl implements BitacoraOrdenService {
             if (t != null) {
                 lt.add(t);
             } else {
-                throw new RuntimeException("No se encontro la transaccion con Id: " + idTransaccion);
+                throw new NotFoundException("No se encontro la transaccion con Id: " + idTransaccion);
             }
         }
 
@@ -113,7 +114,7 @@ public class BitacoraOrdenServiceImpl implements BitacoraOrdenService {
 
                         listaTransaccionesABitacora.add(b);
                     } catch (Exception e) {
-                        LOG.log(Level.INFO, "Error en la construccion de la orden: {0}", e.getMessage());
+                        LOG.log(Level.INFO, "Error en la construccion de la orden: {0}", e);
                     }
                 }
             }

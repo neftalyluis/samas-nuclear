@@ -5,7 +5,6 @@
  */
 package mx.samas.util.propiedad.reader;
 
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
@@ -29,11 +28,10 @@ public class ActivoPropiedadReader {
     private String clavePizarra;
     private List<ActivoPropiedad> indexList = new ArrayList<>();
     private HashMap<ActivoPropiedad, ActivoPropiedadValor> propiedadMap = new HashMap<>();
-    private static final Logger LOG = Logger.getLogger(ActivoPropiedadReader.class.getName());
     private String urlFile;
-    private String LOCATION = "vector/pip/";
-    private char QUOTE = '\'';
-    private char DELIMITER = ',';
+    private String location = "vector/pip/";
+    private char quote = '\'';
+    private char delimiter = ',';
 
     public ActivoPropiedadReader(String claveP, String nombreArchivo, List<ActivoPropiedad> list) {
         this.clavePizarra = claveP;
@@ -45,22 +43,28 @@ public class ActivoPropiedadReader {
         this.clavePizarra = claveP;
         this.urlFile = nombreArchivo;
         this.indexList.addAll(list);
-        this.QUOTE = quote;
+        this.quote = quote;
     }
 
     public ActivoPropiedadValor getPropiedadValor(ActivoPropiedad indice) {
         return propiedadMap.get(indice);
     }
 
-    public void execute() throws FileNotFoundException, IOException {
+    public void execute() throws IOException {
         ClassLoader classLoader = getClass().getClassLoader();
-        Reader in = new FileReader(classLoader.getResource(LOCATION + urlFile).getFile());
-        final CSVParser parser = new CSVParser(in, CSVFormat.EXCEL.withHeader().withQuote(QUOTE).withDelimiter(DELIMITER));
-        for (CSVRecord record : parser) {
-            if (sameClavePizarra(record, clavePizarra)) {
-                for (ActivoPropiedad ap : indexList) {
-                    propiedadMap.put(ap, new ActivoPropiedadValor(
-                            record.get(ap.getIndice()), ap));
+        try (Reader in = new FileReader(classLoader.getResource(location + urlFile).getFile())) {
+            final CSVParser parser = new CSVParser(in, 
+                    CSVFormat.EXCEL
+                            .withHeader()
+                            .withQuote(quote)
+                            .withDelimiter(delimiter));
+            
+            for (CSVRecord record : parser) {
+                if (sameClavePizarra(record, clavePizarra)) {
+                    indexList.stream().forEach((ap) -> {
+                        propiedadMap.put(ap, new ActivoPropiedadValor(
+                                record.get(ap.getIndice()), ap));
+                    });
                 }
             }
         }

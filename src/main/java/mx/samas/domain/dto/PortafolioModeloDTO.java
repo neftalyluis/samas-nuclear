@@ -12,14 +12,15 @@ import java.util.Map;
  *
  * @author samas
  */
-public class PortafolioModeloDTO extends HashMap<String, Double> {
+public class PortafolioModeloDTO extends HashMap<String, Long> {
 
     public boolean validate() {
-        Double total = 0.0;
-        for (Map.Entry<String, Double> entry : this.entrySet()) {
+        Long total = 0L;
+        
+        for (Map.Entry<String, Long> entry : this.entrySet()) {
             total += entry.getValue();
         }
 
-        return total == 100.0;
+        return total == 100;
     }
 }

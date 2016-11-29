@@ -15,7 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  *
  * @author samas
  */
-class VectorActivoElasticItemWriter implements ItemWriter<VectorActivoPropiedadValor> {
+public class VectorActivoElasticItemWriter implements ItemWriter<VectorActivoPropiedadValor> {
 
     @Autowired
     private VectorActivoPropiedadValorRepository vectorService;
