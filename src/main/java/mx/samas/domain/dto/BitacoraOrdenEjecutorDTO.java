@@ -5,9 +5,7 @@
  */
 package mx.samas.domain.dto;
 
-import java.util.Date;
 import java.util.List;
-import javax.persistence.Temporal;
 import javax.validation.constraints.NotNull;
 
 /**

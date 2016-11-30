@@ -5,7 +5,7 @@ package mx.samas.controller;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 import mx.samas.domain.VectorPortafolioModelo;
 import mx.samas.domain.dto.PortafolioModeloDTO;
@@ -61,7 +61,7 @@ public class VectorPortafolioModeloController {
     @RequestMapping(method = RequestMethod.GET, value = "/{fecha}/modelo/{fecha}")
     public ResponseEntity<?> getModelosWithDate(
             @PathVariable Long id,
-            @PathVariable @DateTimeFormat(pattern = "ddMMyyyy") Date fromDate) {
+            @PathVariable @DateTimeFormat(pattern = "ddMMyyyy") LocalDate fromDate) {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }

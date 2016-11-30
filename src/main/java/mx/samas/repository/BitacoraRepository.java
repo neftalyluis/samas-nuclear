@@ -5,7 +5,7 @@
  */
 package mx.samas.repository;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 import mx.samas.domain.Activo;
 import mx.samas.domain.Bitacora;
@@ -48,6 +48,6 @@ public interface BitacoraRepository extends JpaRepository<Bitacora, Long> {
             + "AND b.fechaLiquidacion <= :fechaValor")
     public List<Bitacora> findByPortafolioAndOperacionAndLiquidacion(
             @Param("portafolio") Portafolio p,
-            @Param("fechaActual") Date fechaActual,
-            @Param("fechaValor") Date fechaValor);
+            @Param("fechaActual") LocalDate fechaActual,
+            @Param("fechaValor") LocalDate fechaValor);
 }

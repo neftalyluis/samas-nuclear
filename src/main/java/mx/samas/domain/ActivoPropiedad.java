@@ -35,8 +35,7 @@ public class ActivoPropiedad implements Serializable {
     private String descripcion;
 
     /**
-     * El tipo de dato que va a manejar esta propiedad: - Boolean - String -
-     * Integer - Double - Date
+     * El tipo de dato que va a manejar esta propiedad
      */
     @Enumerated(EnumType.ORDINAL)
     private TipoDato tipoDato;

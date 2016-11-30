@@ -5,7 +5,7 @@ package mx.samas.controller;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 import mx.samas.domain.VectorActivo;
 import mx.samas.domain.ActivoPropiedadValor;
@@ -56,7 +56,7 @@ public class VectorActivoController {
     @RequestMapping(method = RequestMethod.GET, value = "/{id}/vector/{date}/propiedades")
     public ResponseEntity<List<ActivoPropiedadValor>> getPropiedadesFromVectorActivoWithDate(
             @PathVariable Long id,
-            @PathVariable @DateTimeFormat(pattern = "ddMMyyyy") Date fromDate) {
+            @PathVariable @DateTimeFormat(pattern = "ddMMyyyy") LocalDate fromDate) {
 
         return new ResponseEntity<>(HttpStatus.OK);
     }

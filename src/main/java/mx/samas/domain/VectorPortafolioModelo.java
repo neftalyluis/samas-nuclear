@@ -6,13 +6,12 @@
 package mx.samas.domain;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.Temporal;
 
 /**
  *
@@ -26,8 +25,7 @@ public class VectorPortafolioModelo implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Temporal(javax.persistence.TemporalType.DATE)
-    private Date creado;
+    private LocalDate creado;
 
     @ManyToOne
     private Activo activo;
@@ -38,25 +36,25 @@ public class VectorPortafolioModelo implements Serializable {
     private Double diana;
 
     public VectorPortafolioModelo() {
-        this.creado = new Date();
+        this.creado = LocalDate.now();
 
     }
 
     public VectorPortafolioModelo(Activo a, Double diana) {
         this.activo = a;
         this.diana = diana;
-        this.creado = new Date();
+        this.creado = LocalDate.now();
     }
 
     public VectorPortafolioModelo(Activo a, Double diana, Estrategia e) {
         this.activo = a;
         this.diana = diana;
         this.estrategia = e;
-        this.creado = new Date();
+        this.creado = LocalDate.now();
 
     }
 
-    public VectorPortafolioModelo(Date d, Activo a, Estrategia e, Double diana) {
+    public VectorPortafolioModelo(LocalDate d, Activo a, Estrategia e, Double diana) {
         this.activo = a;
         this.diana = diana;
         this.estrategia = e;
@@ -142,14 +140,14 @@ public class VectorPortafolioModelo implements Serializable {
     /**
      * @return the creado
      */
-    public Date getCreado() {
+    public LocalDate getCreado() {
         return creado;
     }
 
     /**
      * @param creado the creado to set
      */
-    public void setCreado(Date creado) {
+    public void setCreado(LocalDate creado) {
         this.creado = creado;
     }
 

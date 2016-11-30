@@ -5,7 +5,7 @@
  */
 package mx.samas.service;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 import mx.samas.domain.Activo;
 import mx.samas.domain.Bitacora;
@@ -29,7 +29,7 @@ public class BitacoraServiceImpl implements BitacoraService {
     private ActivoService activoService;
 
     @Override
-    public List<Bitacora> getBitacoraListWithOperationDate(Date operationDate) {
+    public List<Bitacora> getBitacoraListWithOperationDate(LocalDate operationDate) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

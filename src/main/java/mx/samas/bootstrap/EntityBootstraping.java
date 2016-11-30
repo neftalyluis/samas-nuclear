@@ -5,8 +5,9 @@
  */
 package mx.samas.bootstrap;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -393,27 +394,27 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
             divydeu.setNombre("Dividendo y Deuda");
 //            divydeu.setPerfilRiesgo(rpb.findByName("Balanceado"));
             List<VectorPortafolioModelo> lsv = new ArrayList<>();
-            lsv.add(new VectorPortafolioModelo(new Date(), activoService.getByClavePizarra("1A_AMZN_*"), divydeu, 4.0));
-            lsv.add(new VectorPortafolioModelo(new Date(), activoService.getByClavePizarra("1A_TSLA_*"), divydeu, 4.0));
-            lsv.add(new VectorPortafolioModelo(new Date(), activoService.getByClavePizarra("1A_F_*"), divydeu, 4.0));
-            lsv.add(new VectorPortafolioModelo(new Date(), activoService.getByClavePizarra("1_GFREGIO_O"), divydeu, 4.0));
-            lsv.add(new VectorPortafolioModelo(new Date(), activoService.getByClavePizarra("1A_AMD_*"), divydeu, 4.0));
-            lsv.add(new VectorPortafolioModelo(new Date(), activoService.getByClavePizarra("1_KIMBER_A"), divydeu, 7.5));
-            lsv.add(new VectorPortafolioModelo(new Date(), activoService.getByClavePizarra("1I_IVV_*"), divydeu, 7.5));
-            lsv.add(new VectorPortafolioModelo(new Date(), activoService.getByClavePizarra("M_BONOS_161215"), divydeu, 15.0));
-            lsv.add(new VectorPortafolioModelo(new Date(), activoService.getByClavePizarra("M_BONOS_241205"), divydeu, 10.0));
-            lsv.add(new VectorPortafolioModelo(new Date(), activoService.getByClavePizarra("M_BONOS_421113"), divydeu, 5.0));
-            lsv.add(new VectorPortafolioModelo(new Date(), activoService.getByClavePizarra("S_UDIBONO_160616"), divydeu, 15.0));
-            lsv.add(new VectorPortafolioModelo(new Date(), activoService.getByClavePizarra("S_UDIBONO_220609"), divydeu, 10.0));
-            lsv.add(new VectorPortafolioModelo(new Date(), activoService.getByClavePizarra("S_UDIBONO_401115"), divydeu, 5.0));
-            lsv.add(new VectorPortafolioModelo(new Date(), activoService.getByClavePizarra("1_LQS_1"), divydeu, 5.0));
+            lsv.add(new VectorPortafolioModelo(LocalDate.now(), activoService.getByClavePizarra("1A_AMZN_*"), divydeu, 4.0));
+            lsv.add(new VectorPortafolioModelo(LocalDate.now(), activoService.getByClavePizarra("1A_TSLA_*"), divydeu, 4.0));
+            lsv.add(new VectorPortafolioModelo(LocalDate.now(), activoService.getByClavePizarra("1A_F_*"), divydeu, 4.0));
+            lsv.add(new VectorPortafolioModelo(LocalDate.now(), activoService.getByClavePizarra("1_GFREGIO_O"), divydeu, 4.0));
+            lsv.add(new VectorPortafolioModelo(LocalDate.now(), activoService.getByClavePizarra("1A_AMD_*"), divydeu, 4.0));
+            lsv.add(new VectorPortafolioModelo(LocalDate.now(), activoService.getByClavePizarra("1_KIMBER_A"), divydeu, 7.5));
+            lsv.add(new VectorPortafolioModelo(LocalDate.now(), activoService.getByClavePizarra("1I_IVV_*"), divydeu, 7.5));
+            lsv.add(new VectorPortafolioModelo(LocalDate.now(), activoService.getByClavePizarra("M_BONOS_161215"), divydeu, 15.0));
+            lsv.add(new VectorPortafolioModelo(LocalDate.now(), activoService.getByClavePizarra("M_BONOS_241205"), divydeu, 10.0));
+            lsv.add(new VectorPortafolioModelo(LocalDate.now(), activoService.getByClavePizarra("M_BONOS_421113"), divydeu, 5.0));
+            lsv.add(new VectorPortafolioModelo(LocalDate.now(), activoService.getByClavePizarra("S_UDIBONO_160616"), divydeu, 15.0));
+            lsv.add(new VectorPortafolioModelo(LocalDate.now(), activoService.getByClavePizarra("S_UDIBONO_220609"), divydeu, 10.0));
+            lsv.add(new VectorPortafolioModelo(LocalDate.now(), activoService.getByClavePizarra("S_UDIBONO_401115"), divydeu, 5.0));
+            lsv.add(new VectorPortafolioModelo(LocalDate.now(), activoService.getByClavePizarra("1_LQS_1"), divydeu, 5.0));
 
             divydeu.setEstrategiaModelo(lsv);
             estrategiaService.createEstrategia(divydeu);
 
             Portafolio p1 = new Portafolio();
             p1.setEstrategia(divydeu);
-            p1.setFecha(new Date());
+            p1.setFecha(LocalDate.now());
             p1.setEstatus(portafolioEstatusService.getPortafolioEstatusByNombre("Active"));
             portafolioService.createPortafolio(p1);
 
@@ -423,19 +424,19 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
 //            lqs.setPerfilRiesgo(rpb.findByName("Agresivo"));
 
             lsv.clear();
-            lsv.add(new VectorPortafolioModelo(new Date(), activoService.getByClavePizarra("1A_AMZN_*"), lqs, 15.0));
-            lsv.add(new VectorPortafolioModelo(new Date(), activoService.getByClavePizarra("1A_TSLA_*"), lqs, 15.0));
-            lsv.add(new VectorPortafolioModelo(new Date(), activoService.getByClavePizarra("1A_F_*"), lqs, 15.0));
-            lsv.add(new VectorPortafolioModelo(new Date(), activoService.getByClavePizarra("1_GFREGIO_O"), lqs, 15.0));
-            lsv.add(new VectorPortafolioModelo(new Date(), activoService.getByClavePizarra("1A_AMD_*"), lqs, 15.0));
-            lsv.add(new VectorPortafolioModelo(new Date(), activoService.getByClavePizarra("1A_BRFS_N"), lqs, 20.0));
-            lsv.add(new VectorPortafolioModelo(new Date(), activoService.getByClavePizarra("M_BONOS_421113"), lqs, 5.0));
+            lsv.add(new VectorPortafolioModelo(LocalDate.now(), activoService.getByClavePizarra("1A_AMZN_*"), lqs, 15.0));
+            lsv.add(new VectorPortafolioModelo(LocalDate.now(), activoService.getByClavePizarra("1A_TSLA_*"), lqs, 15.0));
+            lsv.add(new VectorPortafolioModelo(LocalDate.now(), activoService.getByClavePizarra("1A_F_*"), lqs, 15.0));
+            lsv.add(new VectorPortafolioModelo(LocalDate.now(), activoService.getByClavePizarra("1_GFREGIO_O"), lqs, 15.0));
+            lsv.add(new VectorPortafolioModelo(LocalDate.now(), activoService.getByClavePizarra("1A_AMD_*"), lqs, 15.0));
+            lsv.add(new VectorPortafolioModelo(LocalDate.now(), activoService.getByClavePizarra("1A_BRFS_N"), lqs, 20.0));
+            lsv.add(new VectorPortafolioModelo(LocalDate.now(), activoService.getByClavePizarra("M_BONOS_421113"), lqs, 5.0));
             lqs.setEstrategiaModelo(lsv);
             estrategiaService.createEstrategia(lqs);
 
             Portafolio p2 = new Portafolio();
             p2.setEstrategia(lqs);
-            p2.setFecha(new Date());
+            p2.setFecha(LocalDate.now());
             p2.setEstatus(portafolioEstatusService.getPortafolioEstatusByNombre("Active"));
             portafolioService.createPortafolio(p2);
             LOG.info("--Estrategias y Portafolios");
@@ -713,13 +714,13 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
         BitacoraOrden orden = bitacoraOrdenService.findOneOrdenByNombre("Deposito de Efectivo");
         Transaccion desposito = transaccionService.findByNombre("Deposito en efectivo del Cliente");
         List<BitacoraOrdenValorDTO> valores = new ArrayList<>();
-        Date a = new Date();
+        LocalDate a = LocalDate.now();
         BitacoraOrdenValorDTO depo = new BitacoraOrdenValorDTO();
         depo.setEfectivo(76543.200);
         depo.setTitulos(0L);
         depo.setTransaccionId(desposito.getId());
-        depo.setFechaEjecucion(a);
-        depo.setFechaIngreso(a);
+        depo.setFechaEjecucion(LocalDateTime.now());
+        depo.setFechaIngreso(LocalDateTime.now());
         depo.setFechaLiquidacion(a);
         valores.add(depo);
         BitacoraOrdenEjecutorDTO exec = new BitacoraOrdenEjecutorDTO();
@@ -741,14 +742,14 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
         Transaccion iva = transaccionService.findByNombre("IVA");
 
         List<BitacoraOrdenValorDTO> valores = new ArrayList<>();
-        Date a = new Date();
+        LocalDate a = LocalDate.now();
 
         BitacoraOrdenValorDTO comp = new BitacoraOrdenValorDTO();
         comp.setEfectivo(-399839.05);
         comp.setTitulos(121L);
         comp.setTransaccionId(compraActivo.getId());
-        comp.setFechaEjecucion(a);
-        comp.setFechaIngreso(a);
+        comp.setFechaEjecucion(LocalDateTime.now());
+        comp.setFechaIngreso(LocalDateTime.now());
         comp.setFechaLiquidacion(a);
         valores.add(comp);
 
@@ -756,8 +757,8 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
         comi.setEfectivo(-319.87);
         comi.setTitulos(0L);
         comi.setTransaccionId(comision.getId());
-        comi.setFechaEjecucion(a);
-        comi.setFechaIngreso(a);
+        comi.setFechaEjecucion(LocalDateTime.now());
+        comi.setFechaIngreso(LocalDateTime.now());
         comi.setFechaLiquidacion(a);
         valores.add(comi);
 
@@ -765,8 +766,8 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
         iv.setEfectivo(-5412.25);
         iv.setTitulos(0L);
         iv.setTransaccionId(iva.getId());
-        iv.setFechaEjecucion(a);
-        iv.setFechaIngreso(a);
+        iv.setFechaEjecucion(LocalDateTime.now());
+        iv.setFechaIngreso(LocalDateTime.now());
         iv.setFechaLiquidacion(a);
         valores.add(iv);
 

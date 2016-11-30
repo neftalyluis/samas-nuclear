@@ -5,7 +5,7 @@
  */
 package mx.samas.job.cierre.dia.posicion;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 import mx.samas.domain.Portafolio;
 import mx.samas.domain.VectorPortafolio;
@@ -44,7 +44,7 @@ public class VectorPosicionWriter implements ItemWriter<List<VectorPosicion>> {
                 }
             }
 
-            vp.setFecha(new Date());
+            vp.setFecha(LocalDate.now());
             vp.setPortafolio(p);
             vp.setPrecio(precio);
 

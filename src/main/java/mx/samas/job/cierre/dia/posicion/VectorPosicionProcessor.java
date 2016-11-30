@@ -5,8 +5,8 @@
  */
 package mx.samas.job.cierre.dia.posicion;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
@@ -73,13 +73,13 @@ public class VectorPosicionProcessor implements ItemProcessor<Cuenta, List<Vecto
                     Double valuacion = modificar.getValuacion() + b.getImporte();
                     modificar.setCantidad(cantidad);
                     modificar.setValuacion(valuacion);
-                    modificar.setFecha(new Date());
+                    modificar.setFecha(LocalDate.now());
                     posicionesActuales.put(b.getActivo(), modificar);
                 } else {
                     VectorPosicion nuevaPosicion = new VectorPosicion();
                     nuevaPosicion.setActivo(b.getActivo());
                     nuevaPosicion.setCantidad(b.getTitulos());
-                    nuevaPosicion.setFecha(new Date());
+                    nuevaPosicion.setFecha(LocalDate.now());
                     nuevaPosicion.setPortafolio(p);
                     nuevaPosicion.setValuacion(b.getImporte());
                     posicionesActuales.put(b.getActivo(), nuevaPosicion);
