@@ -23,5 +23,7 @@ public interface BancoService {
     public Boolean removeBancoById(Long id);
     
     public Banco updateBancoById(Banco b);
+    
+    public Banco getBancoById(Long id);
 
 }

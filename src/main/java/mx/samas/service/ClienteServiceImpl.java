@@ -5,6 +5,7 @@
  */
 package mx.samas.service;
 
+import java.util.LinkedList;
 import java.util.List;
 import mx.samas.domain.Cliente;
 import mx.samas.repository.ClienteRepository;
@@ -40,6 +41,11 @@ public class ClienteServiceImpl implements ClienteService {
     @Override
     public Cliente createCliente(Cliente c) {
         return clienteRepository.save(c);
+    }
+
+    @Override
+    public List<Cliente> getClientesFromIdList(List<Long> idList) {
+        return clienteRepository.findAll(idList);
     }
 
 }

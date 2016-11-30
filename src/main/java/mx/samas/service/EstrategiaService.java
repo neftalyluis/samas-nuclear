@@ -20,5 +20,7 @@ public interface EstrategiaService {
     public Estrategia createFromDTO(EstrategiaDTO estrategia);
 
     public void createEstrategia(Estrategia e);
+    
+    public Estrategia getEstrategiaWithId(Long id);
 
 }

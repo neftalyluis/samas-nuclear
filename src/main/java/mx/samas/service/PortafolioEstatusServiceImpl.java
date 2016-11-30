@@ -30,4 +30,9 @@ public class PortafolioEstatusServiceImpl implements PortafolioEstatusService {
         return portafolioEstatusRepository.findOneByNombre(nombre);
     }
 
+    @Override
+    public PortafolioEstatus getEstatusInicial() {
+        return portafolioEstatusRepository.getEstatusInicial();
+    }
+
 }

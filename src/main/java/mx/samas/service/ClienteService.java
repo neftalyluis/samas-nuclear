@@ -21,5 +21,7 @@ public interface ClienteService {
     public Boolean removeClienteById(Long id);
 
     public Cliente createCliente(Cliente c);
+    
+    public List<Cliente> getClientesFromIdList(List<Long> idList);
 
 }

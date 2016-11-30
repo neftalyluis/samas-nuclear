@@ -16,5 +16,7 @@ public interface PortafolioEstatusService {
     public void createPortafolioEstatus(PortafolioEstatus pe);
 
     public PortafolioEstatus getPortafolioEstatusByNombre(String nombre);
+    
+    public PortafolioEstatus getEstatusInicial();
 
 }

@@ -49,4 +49,9 @@ public class EstrategiaServiceImpl implements EstrategiaService {
         estrategiaRepository.save(e);
     }
 
+    @Override
+    public Estrategia getEstrategiaWithId(Long id) {
+        return estrategiaRepository.findOne(id);
+    }
+
 }

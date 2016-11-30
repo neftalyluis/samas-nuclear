@@ -47,4 +47,9 @@ public class BancoServiceImpl implements BancoService {
         return bancoRepository.save(b);
     }
 
+    @Override
+    public Banco getBancoById(Long id) {
+        return bancoRepository.findOne(id);
+    }
+
 }

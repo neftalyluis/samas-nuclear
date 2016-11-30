@@ -9,7 +9,6 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -40,7 +39,7 @@ public class Portafolio implements Serializable {
 
     private LocalDate fecha;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     private PortafolioEstatus estatus;
 
     @ManyToOne
@@ -53,6 +52,27 @@ public class Portafolio implements Serializable {
     private List<Cuenta> corredores;
 
     private Double margen;
+
+    public Portafolio(Cuenta cuentaEje, Estrategia estrategia,
+            TipoServicio tipoServicio, PortafolioEstatus estatus,
+            Activo monedaDenominacion, List<Cliente> clientes,
+            List<Cuenta> corredores, Double margen) {
+
+        this.cuentaEje = cuentaEje;
+        this.estrategia = estrategia;
+        this.tipoServicio = tipoServicio;
+        this.fecha = LocalDate.now();
+        this.estatus = estatus;
+        this.monedaDenominacion = monedaDenominacion;
+        this.clientes = clientes;
+        corredores.add(cuentaEje);
+        this.corredores = corredores;
+        this.margen = margen;
+    }
+
+    public Portafolio() {
+        this.fecha = LocalDate.now();
+    }
 
     public Long getId() {
         return id;
