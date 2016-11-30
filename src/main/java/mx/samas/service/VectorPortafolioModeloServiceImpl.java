@@ -87,11 +87,11 @@ public class VectorPortafolioModeloServiceImpl implements VectorPortafolioModelo
 
     public List<VectorPortafolioModelo> createPortafolioModeloListFromDTO(PortafolioModeloDTO models, Estrategia e) {
         List<VectorPortafolioModelo> newList = new ArrayList<>();
-        for (Map.Entry<String, Double> entry : models.entrySet()) {
+        for (Map.Entry<String, Long> entry : models.entrySet()) {
             String key = entry.getKey();
-            Double value = entry.getValue();
+            Long value = entry.getValue();
             Activo a = activoRepository.findFirstByClavePizarra(key);
-            VectorPortafolioModelo pm = new VectorPortafolioModelo(a, value, e);
+            VectorPortafolioModelo pm = new VectorPortafolioModelo(a, new Double(value), e);
             newList.add(pm);
         }
         return newList;

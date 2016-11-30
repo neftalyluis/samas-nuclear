@@ -5,6 +5,7 @@
  */
 package mx.samas.service;
 
+import java.util.List;
 import mx.samas.domain.Banco;
 import mx.samas.repository.BancoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,13 +22,29 @@ public class BancoServiceImpl implements BancoService {
     private BancoRepository bancoRepository;
 
     @Override
-    public void createBanco(Banco b) {
-        bancoRepository.save(b);
+    public Banco createBanco(Banco b) {
+        return bancoRepository.save(b);
     }
 
     @Override
     public Banco getByNombre(String nombre) {
-        return bancoRepository.findByNombre(nombre);
+        return bancoRepository.findByNombreContaining(nombre);
+    }
+
+    @Override
+    public List<Banco> getAllBanco() {
+        return bancoRepository.findAll();
+    }
+
+    @Override
+    public Boolean removeBancoById(Long id) {
+        bancoRepository.delete(id);
+        return true;
+    }
+
+    @Override
+    public Banco updateBancoById(Banco b) {
+        return bancoRepository.save(b);
     }
 
 }

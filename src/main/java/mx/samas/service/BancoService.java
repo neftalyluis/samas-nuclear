@@ -5,6 +5,7 @@
  */
 package mx.samas.service;
 
+import java.util.List;
 import mx.samas.domain.Banco;
 
 /**
@@ -13,8 +14,14 @@ import mx.samas.domain.Banco;
  */
 public interface BancoService {
 
-    public void createBanco(Banco b);
+    public Banco createBanco(Banco b);
 
     public Banco getByNombre(String nombre);
+    
+    public List<Banco> getAllBanco();
+    
+    public Boolean removeBancoById(Long id);
+    
+    public Banco updateBancoById(Banco b);
 
 }

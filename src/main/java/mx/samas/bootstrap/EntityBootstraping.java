@@ -708,7 +708,6 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
         ActivoPropiedad amortizable = new ActivoPropiedad();
         amortizable.setNombre("Amortizable?");
         amortizable.setDescripcion("Define si el Bono Amortiza");
-
         amortizable.setOrigenDatos(FuenteDatos.CSV_USUARIO);
         amortizable.setIndice(null);
         amortizable.setTipoActivo(TipoActivo.BONO);
