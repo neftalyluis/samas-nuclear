@@ -35,7 +35,7 @@ public class PortafolioController {
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
-    public ResponseEntity<PortafolioProjection> getPortafolioWithId(@PathVariable Long id) {
+    public ResponseEntity<PortafolioProjection> getPortafolioWithId(@PathVariable(value="id") Long id) {
         return new ResponseEntity<>(portafolioService.getProjectedById(id), HttpStatus.OK);
     }
 

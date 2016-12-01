@@ -5,39 +5,44 @@
  */
 package mx.samas.domain.projection;
 
+import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.List;
-import java.util.Map;
+import javax.validation.constraints.NotNull;
 
 /**
  *
  * @author samas
  */
-public class PortafolioProjection {
+public class PortafolioProjection implements Serializable {
 
+    @NotNull
     private String cuentaEje;
-    private Map<String, String> cuentas;
+    @NotNull
     private String nombreEstrategia;
+    @NotNull
     private String nombreTipoServicio;
-    private LocalDate fecha;
+    @NotNull
     private String monedaDenominacionTicker;
-    private List<String> clientes;
+    @NotNull
     private Double margen;
+    @NotNull
+    private String estatus;
+    @NotNull
+    private LocalDate fecha;
 
-    public PortafolioProjection(String cuentaEje, Map<String, String> cuentas, 
-            String nombreEstrategia, String nombreTipoServicio, LocalDate fecha, 
-            String monedaDenominacionTicker, List<String> clientes, Double margen) {
+    public PortafolioProjection(String cuentaEje,
+            String estrategia, String tipoServicio, LocalDate fecha,
+            String monedaTicker, Double margenActual, String estatus) {
+
         this.cuentaEje = cuentaEje;
-        this.cuentas = cuentas;
-        this.nombreEstrategia = nombreEstrategia;
-        this.nombreTipoServicio = nombreTipoServicio;
+        this.nombreEstrategia = estrategia;
+        this.nombreTipoServicio = tipoServicio;
+        this.monedaDenominacionTicker = monedaTicker;
+        this.margen = margenActual;
+        this.estatus = estatus;
         this.fecha = fecha;
-        this.monedaDenominacionTicker = monedaDenominacionTicker;
-        this.clientes = clientes;
-        this.margen = margen;
+
     }
-    
-    
 
     /**
      * @return the cuentaEje
@@ -51,20 +56,6 @@ public class PortafolioProjection {
      */
     public void setCuentaEje(String cuentaEje) {
         this.cuentaEje = cuentaEje;
-    }
-
-    /**
-     * @return the cuentas
-     */
-    public Map<String, String> getCuentas() {
-        return cuentas;
-    }
-
-    /**
-     * @param cuentas the cuentas to set
-     */
-    public void setCuentas(Map<String, String> cuentas) {
-        this.cuentas = cuentas;
     }
 
     /**
@@ -96,20 +87,6 @@ public class PortafolioProjection {
     }
 
     /**
-     * @return the fecha
-     */
-    public LocalDate getFecha() {
-        return fecha;
-    }
-
-    /**
-     * @param fecha the fecha to set
-     */
-    public void setFecha(LocalDate fecha) {
-        this.fecha = fecha;
-    }
-
-    /**
      * @return the monedaDenominacionTicker
      */
     public String getMonedaDenominacionTicker() {
@@ -121,20 +98,6 @@ public class PortafolioProjection {
      */
     public void setMonedaDenominacionTicker(String monedaDenominacionTicker) {
         this.monedaDenominacionTicker = monedaDenominacionTicker;
-    }
-
-    /**
-     * @return the clientes
-     */
-    public List<String> getClientes() {
-        return clientes;
-    }
-
-    /**
-     * @param clientes the clientes to set
-     */
-    public void setClientes(List<String> clientes) {
-        this.clientes = clientes;
     }
 
     /**
@@ -150,4 +113,33 @@ public class PortafolioProjection {
     public void setMargen(Double margen) {
         this.margen = margen;
     }
+
+    /**
+     * @return the estatus
+     */
+    public String getEstatus() {
+        return estatus;
+    }
+
+    /**
+     * @param estatus the estatus to set
+     */
+    public void setEstatus(String estatus) {
+        this.estatus = estatus;
+    }
+
+    /**
+     * @return the fecha
+     */
+    public LocalDate getFecha() {
+        return fecha;
+    }
+
+    /**
+     * @param fecha the fecha to set
+     */
+    public void setFecha(LocalDate fecha) {
+        this.fecha = fecha;
+    }
+
 }

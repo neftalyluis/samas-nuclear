@@ -9,12 +9,12 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 
 /**
  *
@@ -28,8 +28,7 @@ public class Portafolio implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @OneToOne
-    private Cuenta cuentaEje;
+    private String cuentaEje;
 
     @ManyToOne
     private Estrategia estrategia;
@@ -53,7 +52,7 @@ public class Portafolio implements Serializable {
 
     private Double margen;
 
-    public Portafolio(Cuenta cuentaEje, Estrategia estrategia,
+    public Portafolio(String cuentaEje, Estrategia estrategia,
             TipoServicio tipoServicio, PortafolioEstatus estatus,
             Activo monedaDenominacion, List<Cliente> clientes,
             List<Cuenta> corredores, Double margen) {
@@ -65,7 +64,6 @@ public class Portafolio implements Serializable {
         this.estatus = estatus;
         this.monedaDenominacion = monedaDenominacion;
         this.clientes = clientes;
-        corredores.add(cuentaEje);
         this.corredores = corredores;
         this.margen = margen;
     }
@@ -166,14 +164,14 @@ public class Portafolio implements Serializable {
     /**
      * @return the cuentaEje
      */
-    public Cuenta getCuentaEje() {
+    public String getCuentaEje() {
         return cuentaEje;
     }
 
     /**
      * @param cuentaEje the cuentaEje to set
      */
-    public void setCuentaEje(Cuenta cuentaEje) {
+    public void setCuentaEje(String cuentaEje) {
         this.cuentaEje = cuentaEje;
     }
 

@@ -15,7 +15,7 @@ import mx.samas.domain.dto.CuentaDTO;
  */
 public interface CuentaService {
 
-    public Cuenta getCuentaByCadena(String cadena);
+    public Cuenta getByIdCuenta(String idCuenta);
 
     public Cuenta createOrUpdateCuenta(Cuenta c);
     

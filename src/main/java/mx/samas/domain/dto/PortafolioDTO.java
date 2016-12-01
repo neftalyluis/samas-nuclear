@@ -14,7 +14,7 @@ import java.util.List;
 public class PortafolioDTO {
 
     private Long id;
-    private CuentaDTO cuentaEje;
+    private String cuentaEje;
     private Long estrategiaId;
     private Long tipoServicioId;
     private String monedaDenominacion;
@@ -109,14 +109,14 @@ public class PortafolioDTO {
     /**
      * @return the cuentaEje
      */
-    public CuentaDTO getCuentaEje() {
+    public String getCuentaEje() {
         return cuentaEje;
     }
 
     /**
      * @param cuentaEje the cuentaEje to set
      */
-    public void setCuentaEje(CuentaDTO cuentaEje) {
+    public void setCuentaEje(String cuentaEje) {
         this.cuentaEje = cuentaEje;
     }
 

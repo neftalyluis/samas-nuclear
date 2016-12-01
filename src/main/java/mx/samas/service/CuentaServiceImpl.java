@@ -28,8 +28,8 @@ public class CuentaServiceImpl implements CuentaService {
     private BancoService bancoService;
 
     @Override
-    public Cuenta getCuentaByCadena(String cadena) {
-        throw new UnsupportedOperationException();
+    public Cuenta getByIdCuenta(String cadena) {
+        return cuentaRepository.getByIdCuenta(cadena);
     }
 
     @Override

@@ -8,6 +8,7 @@ package mx.samas.bootstrap;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -126,18 +127,18 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
         LOG.info(" |_____/_/    \\_\\_|  |_/_/    \\_\\_____/");
         LOG.info("========================================");
 
-        testBatch();
-        activoPropiedades();
-        persistPerfiles();
-        persistBancos();
-        persistClientesAndCuenta();
-        testVectorActivoBatch();
-        persistPortfolioEstatus();
-        //persistEstrategiasAndPortafolioModelo();
-        persistTransacciones();
-        useOperationDeposito();
-        useOperationCompraAccion();
-        elasticBatch();
+//        testBatch();
+//        activoPropiedades();
+//        persistPerfiles();
+//        persistBancos();
+//        persistClientesAndCuenta();
+//        testVectorActivoBatch();
+//        persistPortfolioEstatus();
+//        persistEstrategiasAndPortafolioModelo();
+//        persistTransacciones();
+//        useOperationDeposito();
+//        useOperationCompraAccion();
+//        elasticBatch();
     }
 
     private boolean persistPerfiles() {
@@ -186,8 +187,12 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
     private boolean persistBancos() {
         Banco b = new Banco();
         b.setNombre("HSBC");
+
+        Banco ban = new Banco();
+        ban.setNombre("Bancomer");
         try {
             bancoService.createBanco(b);
+            bancoService.createBanco(ban);
             LOG.info("--Bancos");
             return true;
         } catch (Exception e) {
@@ -210,17 +215,16 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
             LOG.info("--Clientes");
 //TODO: Limpiar esto
             Cuenta c = new Cuenta();
-//            c.setCadena("ABCD_1234");
-
-            List<Cliente> clientes = new ArrayList<>();
-            clientes.add(e);
-            clientes.add(a);
-            clientes.add(j);
-
-//            c.setClientes(clientes);
+            c.setIdCuenta("ABCD_1234");
             c.setBanco(bancoService.getByNombre("HSBC"));
+
+            Cuenta ba = new Cuenta();
+            ba.setIdCuenta("LUANDJR_654");
+            ba.setBanco(bancoService.getByNombre("Bancomer"));
+
             cuentaService.createOrUpdateCuenta(c);
-            LOG.info("--Cuenta");
+            cuentaService.createOrUpdateCuenta(ba);
+            LOG.info("--Cuentas");
 
             return true;
         } catch (Exception e) {
@@ -232,11 +236,16 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
     private boolean persistEstrategiasAndPortafolioModelo() {
         try {
             ///Cuenta Padre(?)
-            Cuenta c = cuentaService.getCuentaByCadena("ABCD_1234");
+            Cuenta c = cuentaService.getByIdCuenta("ABCD_1234");
+            Cuenta ba = cuentaService.getByIdCuenta("LUANDJR_654");
+            List<Cuenta> cuentas = new LinkedList<>();
+            cuentas.add(c);
+            cuentas.add(ba);
+            
+            
             //Estrategia Dividendo y Deuda
             Estrategia divydeu = new Estrategia();
             divydeu.setNombre("Dividendo y Deuda");
-//            divydeu.setPerfilRiesgo(rpb.findByName("Balanceado"));
             List<VectorPortafolioModelo> lsv = new ArrayList<>();
             lsv.add(new VectorPortafolioModelo(LocalDate.now(), activoService.getByClavePizarra("1A_AMZN_*"), divydeu, 4.0));
             lsv.add(new VectorPortafolioModelo(LocalDate.now(), activoService.getByClavePizarra("1A_TSLA_*"), divydeu, 4.0));
@@ -250,8 +259,7 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
             lsv.add(new VectorPortafolioModelo(LocalDate.now(), activoService.getByClavePizarra("M_BONOS_421113"), divydeu, 5.0));
             lsv.add(new VectorPortafolioModelo(LocalDate.now(), activoService.getByClavePizarra("S_UDIBONO_160616"), divydeu, 15.0));
             lsv.add(new VectorPortafolioModelo(LocalDate.now(), activoService.getByClavePizarra("S_UDIBONO_220609"), divydeu, 10.0));
-            lsv.add(new VectorPortafolioModelo(LocalDate.now(), activoService.getByClavePizarra("S_UDIBONO_401115"), divydeu, 5.0));
-            lsv.add(new VectorPortafolioModelo(LocalDate.now(), activoService.getByClavePizarra("1_LQS_1"), divydeu, 5.0));
+            lsv.add(new VectorPortafolioModelo(LocalDate.now(), activoService.getByClavePizarra("S_UDIBONO_401115"), divydeu, 10.0));
 
             divydeu.setEstrategiaModelo(lsv);
             estrategiaService.createEstrategia(divydeu);
@@ -260,40 +268,39 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
             p1.setEstrategia(divydeu);
             p1.setFecha(LocalDate.now());
             p1.setEstatus(portafolioEstatusService.getPortafolioEstatusByNombre("Active"));
+            p1.setClientes(clienteService.getAllClientes());
+            p1.setMonedaDenominacion(activoService.getByClavePizarra("1A_AMZN_*"));
+            p1.setCorredores(cuentas);
+            p1.setCuentaEje(ba.getIdCuenta());
             portafolioService.createPortafolio(p1);
 
-            //Estrategia Liquidez
-            Estrategia lqs = new Estrategia();
-            lqs.setNombre("Liquidez");
-//            lqs.setPerfilRiesgo(rpb.findByName("Agresivo"));
-
-            lsv.clear();
-            lsv.add(new VectorPortafolioModelo(LocalDate.now(), activoService.getByClavePizarra("1A_AMZN_*"), lqs, 15.0));
-            lsv.add(new VectorPortafolioModelo(LocalDate.now(), activoService.getByClavePizarra("1A_TSLA_*"), lqs, 15.0));
-            lsv.add(new VectorPortafolioModelo(LocalDate.now(), activoService.getByClavePizarra("1A_F_*"), lqs, 15.0));
-            lsv.add(new VectorPortafolioModelo(LocalDate.now(), activoService.getByClavePizarra("1_GFREGIO_O"), lqs, 15.0));
-            lsv.add(new VectorPortafolioModelo(LocalDate.now(), activoService.getByClavePizarra("1A_AMD_*"), lqs, 15.0));
-            lsv.add(new VectorPortafolioModelo(LocalDate.now(), activoService.getByClavePizarra("1A_BRFS_N"), lqs, 20.0));
-            lsv.add(new VectorPortafolioModelo(LocalDate.now(), activoService.getByClavePizarra("M_BONOS_421113"), lqs, 5.0));
-            lqs.setEstrategiaModelo(lsv);
-            estrategiaService.createEstrategia(lqs);
-
-            Portafolio p2 = new Portafolio();
-            p2.setEstrategia(lqs);
-            p2.setFecha(LocalDate.now());
-            p2.setEstatus(portafolioEstatusService.getPortafolioEstatusByNombre("Active"));
-            portafolioService.createPortafolio(p2);
+//            //Estrategia Liquidez
+//            Estrategia lqs = new Estrategia();
+//            lqs.setNombre("Liquidez");
+////            lqs.setPerfilRiesgo(rpb.findByName("Agresivo"));
+//
+//            lsv.clear();
+//            lsv.add(new VectorPortafolioModelo(LocalDate.now(), activoService.getByClavePizarra("1A_AMZN_*"), lqs, 15.0));
+//            lsv.add(new VectorPortafolioModelo(LocalDate.now(), activoService.getByClavePizarra("1A_TSLA_*"), lqs, 15.0));
+//            lsv.add(new VectorPortafolioModelo(LocalDate.now(), activoService.getByClavePizarra("1A_F_*"), lqs, 15.0));
+//            lsv.add(new VectorPortafolioModelo(LocalDate.now(), activoService.getByClavePizarra("1_GFREGIO_O"), lqs, 15.0));
+//            lsv.add(new VectorPortafolioModelo(LocalDate.now(), activoService.getByClavePizarra("1A_AMD_*"), lqs, 15.0));
+//            lsv.add(new VectorPortafolioModelo(LocalDate.now(), activoService.getByClavePizarra("1A_BRFS_N"), lqs, 20.0));
+//            lsv.add(new VectorPortafolioModelo(LocalDate.now(), activoService.getByClavePizarra("M_BONOS_421113"), lqs, 5.0));
+//            lqs.setEstrategiaModelo(lsv);
+//            estrategiaService.createEstrategia(lqs);
+//
+//            Portafolio p2 = new Portafolio();
+//            p2.setEstrategia(lqs);
+//            p2.setFecha(LocalDate.now());
+//            p2.setEstatus(portafolioEstatusService.getPortafolioEstatusByNombre("Active"));
+//            portafolioService.createPortafolio(p2);
             LOG.info("--Estrategias y Portafolios");
-
-            List<Portafolio> pl = new ArrayList();
-            pl.add(p2);
-            pl.add(p1);
-            cuentaService.createOrUpdateCuenta(c);
             LOG.info("--Actualizamos Cuenta");
 
             return true;
         } catch (Exception e) {
-            LOG.log(Level.WARNING, "No pudimos persistir las Estrategias y sus Modelos, la excepcion es: {0} ", e.getMessage());
+            LOG.log(Level.WARNING, "No pudimos persistir las Estrategias y sus Modelos, la excepcion es: {0} ", e);
             return false;
         }
 

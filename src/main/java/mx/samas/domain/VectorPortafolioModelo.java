@@ -5,6 +5,7 @@
  */
 package mx.samas.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.time.LocalDate;
 import javax.persistence.Entity;
@@ -30,6 +31,7 @@ public class VectorPortafolioModelo implements Serializable {
     @ManyToOne
     private Activo activo;
 
+    @JsonIgnore
     @ManyToOne
     private Estrategia estrategia;
 
