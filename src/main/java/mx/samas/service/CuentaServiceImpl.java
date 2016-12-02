@@ -43,17 +43,33 @@ public class CuentaServiceImpl implements CuentaService {
 
         Cuenta entity = new Cuenta(c.getIdCuenta(), b, c.getTieneCredito(),
                 c.getOperaFlujo(), c.getOperaIndice(), c.getOperaDerivado());
-        
+
         return cuentaRepository.save(entity);
     }
 
     @Override
     public List<Cuenta> createFromDto(List<CuentaDTO> cuentaList) {
         List<Cuenta> createdCuentas = new LinkedList<>();
-        for(CuentaDTO cuenta: cuentaList){
+        for (CuentaDTO cuenta : cuentaList) {
             createdCuentas.add(createFromDto(cuenta));
         }
         return createdCuentas;
+    }
+
+    @Override
+    public List<Cuenta> getAll() {
+        return cuentaRepository.findAll();
+    }
+
+    @Override
+    public Cuenta getById(Long id) {
+        return cuentaRepository.findOne(id);
+    }
+
+    @Override
+    public Boolean removeById(Long id) {
+        cuentaRepository.delete(id);
+        return true;
     }
 
 }

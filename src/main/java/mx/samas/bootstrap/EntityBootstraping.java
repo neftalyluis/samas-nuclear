@@ -132,18 +132,20 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
         LOG.info(" |_____/_/    \\_\\_|  |_/_/    \\_\\_____/");
         LOG.info("========================================");
 
-        testBatch();
-        activoPropiedades();
+//        testBatch();
+//        activoPropiedades();
+        //Se queda
         persistPerfiles();
-        persistBancos();
-        persistClientesAndCuenta();
-        testVectorActivoBatch();
+//        persistBancos();
+//        persistClientesAndCuenta();
+//        testVectorActivoBatch();
+        //Se queda
         persistPortfolioEstatus();
-        persistEstrategiasAndPortafolioModelo();
-        persistTransacciones();
-        useOperationDeposito();
-        useOperationCompraAccion();
-        elasticBatch();
+//        persistEstrategiasAndPortafolioModelo();
+//        persistTransacciones();
+//        useOperationDeposito();
+//        useOperationCompraAccion();
+//        elasticBatch();
     }
 
     private boolean persistPerfiles() {

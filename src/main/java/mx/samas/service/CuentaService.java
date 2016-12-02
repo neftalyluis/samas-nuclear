@@ -22,4 +22,10 @@ public interface CuentaService {
     public Cuenta createFromDto(CuentaDTO c);
     
     public List<Cuenta> createFromDto(List<CuentaDTO> cuentaList);
+    
+    public List<Cuenta> getAll();
+    
+    public Cuenta getById(Long id);
+    
+    public Boolean removeById(Long id);
 }
