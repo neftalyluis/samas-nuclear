@@ -5,6 +5,7 @@
  */
 package mx.samas.service;
 
+import java.util.List;
 import mx.samas.domain.TipoServicio;
 
 /**
@@ -14,4 +15,8 @@ import mx.samas.domain.TipoServicio;
 public interface TipoServicioService {
 
     public TipoServicio getTipoServicioById(Long id);
+    
+    public TipoServicio create(TipoServicio ts);
+    
+    public List<TipoServicio> getAll();
 }

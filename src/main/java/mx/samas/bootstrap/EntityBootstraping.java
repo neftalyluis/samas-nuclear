@@ -26,6 +26,7 @@ import mx.samas.domain.PortafolioEstatus;
 import mx.samas.domain.VectorPortafolioModelo;
 import mx.samas.domain.TipoActivo;
 import mx.samas.domain.TipoDato;
+import mx.samas.domain.TipoServicio;
 import mx.samas.domain.Transaccion;
 import mx.samas.domain.Usuario;
 import mx.samas.domain.dto.BitacoraOrdenEjecutorDTO;
@@ -43,6 +44,7 @@ import mx.samas.service.EstrategiaService;
 import mx.samas.service.PerfilService;
 import mx.samas.service.PortafolioEstatusService;
 import mx.samas.service.PortafolioService;
+import mx.samas.service.TipoServicioService;
 import mx.samas.service.TransaccionService;
 import mx.samas.service.UsuarioService;
 import org.springframework.batch.core.Job;
@@ -115,6 +117,9 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
 
     @Autowired
     private VectorActivoPropiedadValorRepository propsElastic;
+    
+    @Autowired
+    private TipoServicioService tipoServicioService;
 
     @Override
     public void onApplicationEvent(ApplicationReadyEvent event) {
@@ -127,18 +132,18 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
         LOG.info(" |_____/_/    \\_\\_|  |_/_/    \\_\\_____/");
         LOG.info("========================================");
 
-//        testBatch();
-//        activoPropiedades();
-//        persistPerfiles();
-//        persistBancos();
-//        persistClientesAndCuenta();
-//        testVectorActivoBatch();
-//        persistPortfolioEstatus();
-//        persistEstrategiasAndPortafolioModelo();
-//        persistTransacciones();
-//        useOperationDeposito();
-//        useOperationCompraAccion();
-//        elasticBatch();
+        testBatch();
+        activoPropiedades();
+        persistPerfiles();
+        persistBancos();
+        persistClientesAndCuenta();
+        testVectorActivoBatch();
+        persistPortfolioEstatus();
+        persistEstrategiasAndPortafolioModelo();
+        persistTransacciones();
+        useOperationDeposito();
+        useOperationCompraAccion();
+        elasticBatch();
     }
 
     private boolean persistPerfiles() {
@@ -235,6 +240,9 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
 
     private boolean persistEstrategiasAndPortafolioModelo() {
         try {
+            //TipoServicio, no se me ocurre que poner lmao
+            TipoServicio ts = new TipoServicio("No discrecional", Boolean.FALSE);
+            tipoServicioService.create(ts);
             ///Cuenta Padre(?)
             Cuenta c = cuentaService.getByIdCuenta("ABCD_1234");
             Cuenta ba = cuentaService.getByIdCuenta("LUANDJR_654");
@@ -272,29 +280,10 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
             p1.setMonedaDenominacion(activoService.getByClavePizarra("1A_AMZN_*"));
             p1.setCorredores(cuentas);
             p1.setCuentaEje(ba.getIdCuenta());
+            p1.setMargen(12.0);
+            p1.setTipoServicio(ts);
             portafolioService.createPortafolio(p1);
 
-//            //Estrategia Liquidez
-//            Estrategia lqs = new Estrategia();
-//            lqs.setNombre("Liquidez");
-////            lqs.setPerfilRiesgo(rpb.findByName("Agresivo"));
-//
-//            lsv.clear();
-//            lsv.add(new VectorPortafolioModelo(LocalDate.now(), activoService.getByClavePizarra("1A_AMZN_*"), lqs, 15.0));
-//            lsv.add(new VectorPortafolioModelo(LocalDate.now(), activoService.getByClavePizarra("1A_TSLA_*"), lqs, 15.0));
-//            lsv.add(new VectorPortafolioModelo(LocalDate.now(), activoService.getByClavePizarra("1A_F_*"), lqs, 15.0));
-//            lsv.add(new VectorPortafolioModelo(LocalDate.now(), activoService.getByClavePizarra("1_GFREGIO_O"), lqs, 15.0));
-//            lsv.add(new VectorPortafolioModelo(LocalDate.now(), activoService.getByClavePizarra("1A_AMD_*"), lqs, 15.0));
-//            lsv.add(new VectorPortafolioModelo(LocalDate.now(), activoService.getByClavePizarra("1A_BRFS_N"), lqs, 20.0));
-//            lsv.add(new VectorPortafolioModelo(LocalDate.now(), activoService.getByClavePizarra("M_BONOS_421113"), lqs, 5.0));
-//            lqs.setEstrategiaModelo(lsv);
-//            estrategiaService.createEstrategia(lqs);
-//
-//            Portafolio p2 = new Portafolio();
-//            p2.setEstrategia(lqs);
-//            p2.setFecha(LocalDate.now());
-//            p2.setEstatus(portafolioEstatusService.getPortafolioEstatusByNombre("Active"));
-//            portafolioService.createPortafolio(p2);
             LOG.info("--Estrategias y Portafolios");
             LOG.info("--Actualizamos Cuenta");
 

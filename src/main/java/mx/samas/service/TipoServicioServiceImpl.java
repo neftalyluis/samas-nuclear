@@ -5,6 +5,7 @@
  */
 package mx.samas.service;
 
+import java.util.List;
 import mx.samas.domain.TipoServicio;
 import mx.samas.repository.TipoServicioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,16 @@ public class TipoServicioServiceImpl implements TipoServicioService {
     @Override
     public TipoServicio getTipoServicioById(Long id) {
         return tipoServicioRepository.findOne(id);
+    }
+
+    @Override
+    public TipoServicio create(TipoServicio ts) {
+        return tipoServicioRepository.save(ts);
+    }
+
+    @Override
+    public List<TipoServicio> getAll() {
+        return tipoServicioRepository.findAll();
     }
 
 }
