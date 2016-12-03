@@ -9,6 +9,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import mx.samas.domain.Activo;
 import mx.samas.domain.Bitacora;
 import mx.samas.domain.Estrategia;
@@ -40,7 +41,7 @@ public class RebalanceoServiceImpl implements RebalanceoService {
     private BitacoraRepository bitacoraRepository;
 
     @Override
-    public HashMap<String, Double> presupuestoParaPortafolio(Portafolio p, LocalDate fechaValor) {
+    public Map<String, Double> presupuestoParaPortafolio(Portafolio p, LocalDate fechaValor) {
 
         ///y Vt? D:
         //Suponiendo que no es sabado o domingo o dia inhabil, hay que optimizar esto
@@ -108,7 +109,7 @@ public class RebalanceoServiceImpl implements RebalanceoService {
     }
 
     @Override
-    public HashMap<Grupo, Double> balancePorGrupos(Portafolio p, LocalDate fechaValor) {
+    public Map<Grupo, Double> balancePorGrupos(Portafolio p, LocalDate fechaValor) {
 
         //Hay que buscar que esto la haga la query, me caga que tengas que usar el Eager en la estrategia de fetch
         Estrategia e = p.getEstrategia();

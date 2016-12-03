@@ -5,15 +5,11 @@
  */
 package mx.samas.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
 /**
@@ -44,6 +40,16 @@ public class Cuenta implements Serializable {
     private Boolean operaDerivado;
 
     public Cuenta() {
+    }
+
+    public Cuenta(String idCuenta, Banco banco, Boolean tieneCredito,
+            Boolean operaFlujo, Boolean operaIndice, Boolean operaDerivado) {
+        this.idCuenta = idCuenta;
+        this.banco = banco;
+        this.tieneCredito = tieneCredito;
+        this.operaFlujo = operaFlujo;
+        this.operaIndice = operaIndice;
+        this.operaDerivado = operaDerivado;
     }
 
     public Long getId() {

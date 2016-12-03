@@ -5,7 +5,7 @@
  */
 package mx.samas.domain.dto;
 
-import java.util.HashMap;
+import java.util.Map;
 import mx.samas.domain.Activo;
 import mx.samas.domain.ActivoPropiedad;
 import mx.samas.domain.ActivoPropiedadValor;
@@ -17,7 +17,7 @@ import mx.samas.domain.ActivoPropiedadValor;
 public class ActivoPropiedadValorDTO {
 
     private Activo activo;
-    private HashMap<ActivoPropiedad, ActivoPropiedadValor> propiedades;
+    private Map<ActivoPropiedad, ActivoPropiedadValor> propiedades;
 
     /**
      * @return the activo
@@ -36,14 +36,14 @@ public class ActivoPropiedadValorDTO {
     /**
      * @return the propiedades
      */
-    public HashMap<ActivoPropiedad, ActivoPropiedadValor> getPropiedades() {
+    public Map<ActivoPropiedad, ActivoPropiedadValor> getPropiedades() {
         return propiedades;
     }
 
     /**
      * @param propiedades the propiedades to set
      */
-    public void setPropiedades(HashMap<ActivoPropiedad, ActivoPropiedadValor> propiedades) {
+    public void setPropiedades(Map<ActivoPropiedad, ActivoPropiedadValor> propiedades) {
         this.propiedades = propiedades;
     }
 }

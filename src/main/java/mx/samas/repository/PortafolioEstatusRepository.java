@@ -7,6 +7,7 @@ package mx.samas.repository;
 
 import mx.samas.domain.PortafolioEstatus;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 import org.springframework.stereotype.Repository;
 
@@ -18,4 +19,7 @@ import org.springframework.stereotype.Repository;
 public interface PortafolioEstatusRepository extends JpaRepository<PortafolioEstatus, Long> {
 
     public PortafolioEstatus findOneByNombre(String nombre);
+    
+    @Query("SELECT pe FROM PortafolioEstatus pe WHERE pe.orden = 0")
+    public PortafolioEstatus getEstatusInicial();
 }

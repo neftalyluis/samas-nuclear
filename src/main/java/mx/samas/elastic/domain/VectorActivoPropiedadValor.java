@@ -6,6 +6,7 @@
 package mx.samas.elastic.domain;
 
 import java.util.HashMap;
+import java.util.Map;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
@@ -21,7 +22,7 @@ public class VectorActivoPropiedadValor {
     @Id
     private String id;
     @Field(type = FieldType.Nested)
-    private HashMap<String, Object> propiedadesValor;
+    private Map<String, Object> propiedadesValor;
 
     /**
      * @return the idx
@@ -40,14 +41,14 @@ public class VectorActivoPropiedadValor {
     /**
      * @return the propiedadesValor
      */
-    public HashMap<String, Object> getPropiedadesValor() {
+    public Map<String, Object> getPropiedadesValor() {
         return propiedadesValor;
     }
 
     /**
      * @param propiedadesValor the propiedadesValor to set
      */
-    public void setPropiedadesValor(HashMap<String, Object> propiedadesValor) {
+    public void setPropiedadesValor(Map<String, Object> propiedadesValor) {
         this.propiedadesValor = propiedadesValor;
     }
 }

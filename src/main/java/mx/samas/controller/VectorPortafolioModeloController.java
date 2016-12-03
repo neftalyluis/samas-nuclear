@@ -27,9 +27,9 @@ import org.springframework.web.multipart.MultipartFile;
  * @author samas
  */
 @RestController
-@RequestMapping("/estrategia")
+@RequestMapping("/modelo")
 public class VectorPortafolioModeloController {
-
+    //TODO:Checar los metodos de aqui
     @Autowired
     private VectorPortafolioModeloService portafolioModeloService;
 

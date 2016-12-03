@@ -6,12 +6,10 @@
 package mx.samas.domain;
 
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 
 /**
  *
@@ -31,8 +29,14 @@ public class TipoServicio implements Serializable {
     private String nombre;
     private Boolean discrecional;
 
-    @OneToMany
-    private List<Portafolio> portafolios;
+    public TipoServicio() {
+
+    }
+
+    public TipoServicio(String nombre, Boolean discrecional) {
+        this.nombre = nombre;
+        this.discrecional = discrecional;
+    }
 
     public Long getId() {
         return id;
@@ -94,19 +98,4 @@ public class TipoServicio implements Serializable {
     public void setDiscrecional(Boolean discrecional) {
         this.discrecional = discrecional;
     }
-
-    /**
-     * @return the portafolios
-     */
-    public List<Portafolio> getPortafolios() {
-        return portafolios;
-    }
-
-    /**
-     * @param portafolios the portafolios to set
-     */
-    public void setPortafolios(List<Portafolio> portafolios) {
-        this.portafolios = portafolios;
-    }
-
 }

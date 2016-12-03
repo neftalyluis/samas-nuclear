@@ -9,6 +9,8 @@ import java.util.List;
 import mx.samas.domain.Estrategia;
 import mx.samas.domain.dto.EstrategiaDTO;
 import mx.samas.domain.dto.PortafolioModeloDTO;
+import mx.samas.domain.projection.EstrategiaModeloProjection;
+import mx.samas.domain.projection.EstrategiaProjection;
 import mx.samas.repository.ActivoRepository;
 import mx.samas.repository.EstrategiaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,6 +49,21 @@ public class EstrategiaServiceImpl implements EstrategiaService {
     @Override
     public void createEstrategia(Estrategia e) {
         estrategiaRepository.save(e);
+    }
+
+    @Override
+    public Estrategia getEstrategiaWithId(Long id) {
+        return estrategiaRepository.findOne(id);
+    }
+
+    @Override
+    public EstrategiaProjection getEstrategiaProjectedWithId(Long id) {
+        return estrategiaRepository.findOneProjectedById(id);
+    }
+
+    @Override
+    public List<EstrategiaModeloProjection> getLastEstrategiaModeloFromIdEstrategia(Long id) {
+        return estrategiaRepository.getLastModeloWithIdEstrategia(id);
     }
 
 }

@@ -27,11 +27,8 @@ public class Usuario implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @NotNull
     private String nombreUsuario;
-    @NotNull
     private String password;
-    @NotNull
     private String nombreCompleto;
 
     @ManyToMany(fetch = FetchType.EAGER, mappedBy = "usuarios")

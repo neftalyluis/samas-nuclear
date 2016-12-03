@@ -24,6 +24,8 @@ public class PortafolioEstatus implements Serializable {
     private Long id;
 
     private String nombre;
+    
+    private Long orden;
 
     public Long getId() {
         return id;
@@ -70,6 +72,20 @@ public class PortafolioEstatus implements Serializable {
      */
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    /**
+     * @return the orden
+     */
+    public Long getOrden() {
+        return orden;
+    }
+
+    /**
+     * @param orden the orden to set
+     */
+    public void setOrden(Long orden) {
+        this.orden = orden;
     }
 
 }

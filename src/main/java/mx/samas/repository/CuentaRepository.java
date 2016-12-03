@@ -17,4 +17,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface CuentaRepository extends JpaRepository<Cuenta, Long> {
 
+    public Cuenta getByIdCuenta(String idCuenta);
 }

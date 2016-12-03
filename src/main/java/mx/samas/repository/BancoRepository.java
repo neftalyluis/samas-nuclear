@@ -16,5 +16,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface BancoRepository extends JpaRepository<Banco, Long> {
 
-    public Banco findByNombre(String nombre);
+    public Banco findByNombreContaining(String nombre);
 }

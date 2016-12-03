@@ -8,6 +8,7 @@ package mx.samas.bootstrap;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -25,6 +26,7 @@ import mx.samas.domain.PortafolioEstatus;
 import mx.samas.domain.VectorPortafolioModelo;
 import mx.samas.domain.TipoActivo;
 import mx.samas.domain.TipoDato;
+import mx.samas.domain.TipoServicio;
 import mx.samas.domain.Transaccion;
 import mx.samas.domain.Usuario;
 import mx.samas.domain.dto.BitacoraOrdenEjecutorDTO;
@@ -42,6 +44,7 @@ import mx.samas.service.EstrategiaService;
 import mx.samas.service.PerfilService;
 import mx.samas.service.PortafolioEstatusService;
 import mx.samas.service.PortafolioService;
+import mx.samas.service.TipoServicioService;
 import mx.samas.service.TransaccionService;
 import mx.samas.service.UsuarioService;
 import org.springframework.batch.core.Job;
@@ -115,29 +118,38 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
     @Autowired
     private VectorActivoPropiedadValorRepository propsElastic;
 
+    @Autowired
+    private TipoServicioService tipoServicioService;
+
     @Override
     public void onApplicationEvent(ApplicationReadyEvent event) {
 
         LOG.info("========================================");
-        LOG.info("  / ____|  /\\   |  \\/  |   /\\    / ____|\n");
-        LOG.info(" | (___   /  \\  | \\  / |  /  \\  | (___  \n");
-        LOG.info("  \\___ \\ / /\\ \\ | |\\/| | / /\\ \\  \\___ \\ \n");
-        LOG.info("  ____) / ____ \\| |  | |/ ____ \\ ____) |\n");
+        LOG.info("  / ____|  /\\   |  \\/  |   /\\    / ____|");
+        LOG.info(" | (___   /  \\  | \\  / |  /  \\  | (___  ");
+        LOG.info("  \\___ \\ / /\\ \\ | |\\/| | / /\\ \\  \\___ \\ ");
+        LOG.info("  ____) / ____ \\| |  | |/ ____ \\ ____) |");
         LOG.info(" |_____/_/    \\_\\_|  |_/_/    \\_\\_____/");
         LOG.info("========================================");
 
-        testBatch();
-        activoPropiedades();
-        persistPerfiles();
-        persistBancos();
-        persistClientesAndCuenta();
-        testVectorActivoBatch();
-        persistPortfolioEstatus();
-        //persistEstrategiasAndPortafolioModelo();
-        persistTransacciones();
-        useOperationDeposito();
-        useOperationCompraAccion();
-        elasticBatch();
+//        testBatch();
+//        activoPropiedades();
+//
+//        Se queda
+//        persistPerfiles();
+//        
+//        persistBancos();
+//        persistClientesAndCuenta();
+//        testVectorActivoBatch();
+//
+//        Se queda
+//        persistPortfolioEstatus();
+//        
+//        persistEstrategiasAndPortafolioModelo();
+//        persistTransacciones();
+//        useOperationDeposito();
+//        useOperationCompraAccion();
+//        elasticBatch();
     }
 
     private boolean persistPerfiles() {
@@ -186,8 +198,12 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
     private boolean persistBancos() {
         Banco b = new Banco();
         b.setNombre("HSBC");
+
+        Banco ban = new Banco();
+        ban.setNombre("Bancomer");
         try {
             bancoService.createBanco(b);
+            bancoService.createBanco(ban);
             LOG.info("--Bancos");
             return true;
         } catch (Exception e) {
@@ -210,17 +226,16 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
             LOG.info("--Clientes");
 //TODO: Limpiar esto
             Cuenta c = new Cuenta();
-//            c.setCadena("ABCD_1234");
-
-            List<Cliente> clientes = new ArrayList<>();
-            clientes.add(e);
-            clientes.add(a);
-            clientes.add(j);
-
-//            c.setClientes(clientes);
+            c.setIdCuenta("ABCD_1234");
             c.setBanco(bancoService.getByNombre("HSBC"));
+
+            Cuenta ba = new Cuenta();
+            ba.setIdCuenta("LUANDJR_654");
+            ba.setBanco(bancoService.getByNombre("Bancomer"));
+
             cuentaService.createOrUpdateCuenta(c);
-            LOG.info("--Cuenta");
+            cuentaService.createOrUpdateCuenta(ba);
+            LOG.info("--Cuentas");
 
             return true;
         } catch (Exception e) {
@@ -229,170 +244,21 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
         }
     }
 
-//    private boolean persistActivos() {
-//
-//        Activo amzn = new Activo();
-//        amzn.setTipo(TipoActivo.ACCION);
-////        amzn.setMonedaDenominacion(cb.getMXPCurrency());
-//        amzn.setTipoValor("1A");
-//        amzn.setEmisora("AMZN");
-//        amzn.setSerie("*");
-//        amzn.setNombre("AMAZON COM INC");
-//        amzn.setClavePizarra("1A_AMZN_*");
-//
-//        Activo tsla = new Activo();
-//        tsla.setTipo(TipoActivo.ACCION);
-////        tsla.setMonedaDenominacion(cb.getMXPCurrency());
-//        tsla.setTipoValor("1A");
-//        tsla.setEmisora("TSLA");
-//        tsla.setSerie("*");
-//        tsla.setNombre("TESLA INC");
-//        tsla.setClavePizarra("1A_TSLA_*");
-//
-//        Activo fiat = new Activo();
-//        fiat.setTipo(TipoActivo.ACCION);
-////        fiat.setMonedaDenominacion(cb.getMXPCurrency());
-//        fiat.setTipoValor("1A");
-//        fiat.setEmisora("F");
-//        fiat.setSerie("*");
-//        fiat.setNombre("FIAT SPA");
-//        fiat.setClavePizarra("1A_F_*");
-//
-//        Activo gfr = new Activo();
-//        gfr.setTipo(TipoActivo.ACCION);
-////        gfr.setMonedaDenominacion(cb.getMXPCurrency());
-//        gfr.setTipoValor("1");
-//        gfr.setEmisora("GFREGIO");
-//        gfr.setSerie("O");
-//        gfr.setNombre("AF BANREGIO  S.A. DE C.V. SOFOM");
-//        gfr.setClavePizarra("1_GFREGIO_O");
-//
-//        Activo amd = new Activo();
-//        amd.setTipo(TipoActivo.ACCION);
-////        amd.setMonedaDenominacion(cb.getMXPCurrency());
-//        amd.setTipoValor("1A");
-//        amd.setEmisora("AMD");
-//        amd.setSerie("*");
-//        amd.setNombre("AMD");
-//        amd.setClavePizarra("1A_AMD_*");
-//
-//        Activo kimber = new Activo();
-//        kimber.setTipo(TipoActivo.ACCION);
-////        kimber.setMonedaDenominacion(cb.getMXPCurrency());
-//        kimber.setTipoValor("1");
-//        kimber.setEmisora("KIMBER");
-//        kimber.setSerie("A");
-//        kimber.setNombre("KIMBERLY-CLARK DE MÉXICO S. A. B. DE C. V.");
-//        kimber.setClavePizarra("1_KIMBER_A");
-//
-//        Activo ivv = new Activo();
-//        ivv.setTipo(TipoActivo.ACCION);
-////        ivv.setMonedaDenominacion(cb.getMXPCurrency());
-//        ivv.setTipoValor("1I");
-//        ivv.setEmisora("IVV");
-//        ivv.setSerie("*");
-//        ivv.setNombre("ISHARES CORE S&P 500 ETF");
-//        ivv.setClavePizarra("1I_IVV_*");
-//
-//        Activo udibono40 = new Activo();
-//        udibono40.setTipo(TipoActivo.BONO);
-////        udibono40.setMonedaDenominacion(cb.getMXPCurrency());
-//        udibono40.setTipoValor("S");
-//        udibono40.setEmisora("UDIBONO");
-//        udibono40.setSerie("401115");
-//        udibono40.setNombre("SECRETARÍA DE HACIENDA Y CRÉDITO PÚBLICO");
-//        udibono40.setClavePizarra("S_UDIBONO_401115");
-//
-//        Activo udibono22 = new Activo();
-//        udibono22.setTipo(TipoActivo.BONO);
-////        udibono22.setMonedaDenominacion(cb.getMXPCurrency());
-//        udibono22.setTipoValor("S");
-//        udibono22.setEmisora("UDIBONO");
-//        udibono22.setSerie("220609");
-//        udibono22.setNombre("SECRETARÍA DE HACIENDA Y CRÉDITO PÚBLICO");
-//        udibono22.setClavePizarra("S_UDIBONO_220609");
-//
-//        Activo udibono16 = new Activo();
-//        udibono16.setTipo(TipoActivo.BONO);
-////        udibono16.setMonedaDenominacion(cb.getMXPCurrency());
-//        udibono16.setTipoValor("S");
-//        udibono16.setEmisora("UDIBONO");
-//        udibono16.setSerie("161215");
-//        udibono16.setNombre("SECRETARÍA DE HACIENDA Y CRÉDITO PÚBLICO");
-//        udibono16.setClavePizarra("S_UDIBONO_160616");
-//
-//        Activo bonos42 = new Activo();
-//        bonos42.setTipo(TipoActivo.BONO);
-////        bonos42.setMonedaDenominacion(cb.getMXPCurrency());
-//        bonos42.setTipoValor("M");
-//        bonos42.setEmisora("BONOS");
-//        bonos42.setSerie("421113");
-//        bonos42.setNombre("SECRETARÍA DE HACIENDA Y CRÉDITO PÚBLICO");
-//        bonos42.setClavePizarra("M_BONOS_421113");
-//
-//        Activo bonos24 = new Activo();
-//        bonos24.setTipo(TipoActivo.BONO);
-////        bonos24.setMonedaDenominacion(cb.getMXPCurrency());
-//        bonos24.setTipoValor("M");
-//        bonos24.setEmisora("BONOS");
-//        bonos24.setSerie("241205");
-//        bonos24.setNombre("SECRETARÍA DE HACIENDA Y CRÉDITO PÚBLICO");
-//        bonos24.setClavePizarra("M_BONOS_241205");
-//
-//        Activo bonos16 = new Activo();
-//        bonos16.setTipo(TipoActivo.BONO);
-////        bonos16.setMonedaDenominacion(cb.getMXPCurrency());
-//        bonos16.setTipoValor("M");
-//        bonos16.setEmisora("BONOS");
-//        bonos16.setSerie("161215");
-//        bonos16.setNombre("SECRETARÍA DE HACIENDA Y CRÉDITO PÚBLICO");
-//        bonos16.setClavePizarra("M_BONOS_161215");
-//
-//        Activo brfs = new Activo();
-//        brfs.setTipo(TipoActivo.ACCION);
-////        brfs.setMonedaDenominacion(cb.getMXPCurrency());
-//        brfs.setTipoValor("1A");
-//        brfs.setEmisora("BRFS");
-//        brfs.setSerie("N");
-//        brfs.setNombre("BRASIL FOODS SA");
-//        brfs.setClavePizarra("1A_BRFS_N");
-//        Activo lqs = new Activo("Liquidez", "1", "LQS", "1");
-//        lqs.setTipo(TipoActivo.ACCION);
-//
-//        try {
-//
-//            activoService.createActivo(amzn);
-//            activoService.createActivo(tsla);
-//            activoService.createActivo(fiat);
-//            activoService.createActivo(gfr);
-//            activoService.createActivo(amd);
-//            activoService.createActivo(kimber);
-//            activoService.createActivo(ivv);
-//            activoService.createActivo(udibono16);
-//            activoService.createActivo(udibono22);
-//            activoService.createActivo(udibono40);
-//            activoService.createActivo(bonos16);
-//            activoService.createActivo(bonos24);
-//            activoService.createActivo(bonos42);
-//            activoService.createActivo(brfs);
-//            activoService.createActivo(lqs);
-//
-//            LOG.info("--Activos");
-//            return true;
-//        } catch (Exception e) {
-//            LOG.log(Level.WARNING, "No pudimos persistir los Assets iniciales, la excepcion es: {0}", e.getMessage());
-//            return false;
-//        }
-//
-//    }
     private boolean persistEstrategiasAndPortafolioModelo() {
         try {
+            //TipoServicio, no se me ocurre que poner lmao
+            TipoServicio ts = new TipoServicio("No discrecional", Boolean.FALSE);
+            tipoServicioService.create(ts);
             ///Cuenta Padre(?)
-            Cuenta c = cuentaService.getCuentaByCadena("ABCD_1234");
+            Cuenta c = cuentaService.getByIdCuenta("ABCD_1234");
+            Cuenta ba = cuentaService.getByIdCuenta("LUANDJR_654");
+            List<Cuenta> cuentas = new LinkedList<>();
+            cuentas.add(c);
+            cuentas.add(ba);
+
             //Estrategia Dividendo y Deuda
             Estrategia divydeu = new Estrategia();
             divydeu.setNombre("Dividendo y Deuda");
-//            divydeu.setPerfilRiesgo(rpb.findByName("Balanceado"));
             List<VectorPortafolioModelo> lsv = new ArrayList<>();
             lsv.add(new VectorPortafolioModelo(LocalDate.now(), activoService.getByClavePizarra("1A_AMZN_*"), divydeu, 4.0));
             lsv.add(new VectorPortafolioModelo(LocalDate.now(), activoService.getByClavePizarra("1A_TSLA_*"), divydeu, 4.0));
@@ -406,8 +272,7 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
             lsv.add(new VectorPortafolioModelo(LocalDate.now(), activoService.getByClavePizarra("M_BONOS_421113"), divydeu, 5.0));
             lsv.add(new VectorPortafolioModelo(LocalDate.now(), activoService.getByClavePizarra("S_UDIBONO_160616"), divydeu, 15.0));
             lsv.add(new VectorPortafolioModelo(LocalDate.now(), activoService.getByClavePizarra("S_UDIBONO_220609"), divydeu, 10.0));
-            lsv.add(new VectorPortafolioModelo(LocalDate.now(), activoService.getByClavePizarra("S_UDIBONO_401115"), divydeu, 5.0));
-            lsv.add(new VectorPortafolioModelo(LocalDate.now(), activoService.getByClavePizarra("1_LQS_1"), divydeu, 5.0));
+            lsv.add(new VectorPortafolioModelo(LocalDate.now(), activoService.getByClavePizarra("S_UDIBONO_401115"), divydeu, 10.0));
 
             divydeu.setEstrategiaModelo(lsv);
             estrategiaService.createEstrategia(divydeu);
@@ -416,40 +281,20 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
             p1.setEstrategia(divydeu);
             p1.setFecha(LocalDate.now());
             p1.setEstatus(portafolioEstatusService.getPortafolioEstatusByNombre("Active"));
+            p1.setClientes(clienteService.getAllClientes());
+            p1.setMonedaDenominacion(activoService.getByClavePizarra("1A_AMZN_*"));
+            p1.setCorredores(cuentas);
+            p1.setCuentaEje(ba.getIdCuenta());
+            p1.setMargen(12.0);
+            p1.setTipoServicio(ts);
             portafolioService.createPortafolio(p1);
 
-            //Estrategia Liquidez
-            Estrategia lqs = new Estrategia();
-            lqs.setNombre("Liquidez");
-//            lqs.setPerfilRiesgo(rpb.findByName("Agresivo"));
-
-            lsv.clear();
-            lsv.add(new VectorPortafolioModelo(LocalDate.now(), activoService.getByClavePizarra("1A_AMZN_*"), lqs, 15.0));
-            lsv.add(new VectorPortafolioModelo(LocalDate.now(), activoService.getByClavePizarra("1A_TSLA_*"), lqs, 15.0));
-            lsv.add(new VectorPortafolioModelo(LocalDate.now(), activoService.getByClavePizarra("1A_F_*"), lqs, 15.0));
-            lsv.add(new VectorPortafolioModelo(LocalDate.now(), activoService.getByClavePizarra("1_GFREGIO_O"), lqs, 15.0));
-            lsv.add(new VectorPortafolioModelo(LocalDate.now(), activoService.getByClavePizarra("1A_AMD_*"), lqs, 15.0));
-            lsv.add(new VectorPortafolioModelo(LocalDate.now(), activoService.getByClavePizarra("1A_BRFS_N"), lqs, 20.0));
-            lsv.add(new VectorPortafolioModelo(LocalDate.now(), activoService.getByClavePizarra("M_BONOS_421113"), lqs, 5.0));
-            lqs.setEstrategiaModelo(lsv);
-            estrategiaService.createEstrategia(lqs);
-
-            Portafolio p2 = new Portafolio();
-            p2.setEstrategia(lqs);
-            p2.setFecha(LocalDate.now());
-            p2.setEstatus(portafolioEstatusService.getPortafolioEstatusByNombre("Active"));
-            portafolioService.createPortafolio(p2);
             LOG.info("--Estrategias y Portafolios");
-
-            List<Portafolio> pl = new ArrayList();
-            pl.add(p2);
-            pl.add(p1);
-            cuentaService.createOrUpdateCuenta(c);
             LOG.info("--Actualizamos Cuenta");
 
             return true;
         } catch (Exception e) {
-            LOG.log(Level.WARNING, "No pudimos persistir las Estrategias y sus Modelos, la excepcion es: {0} ", e.getMessage());
+            LOG.log(Level.WARNING, "No pudimos persistir las Estrategias y sus Modelos, la excepcion es: {0} ", e);
             return false;
         }
 
@@ -690,12 +535,15 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
     private boolean persistPortfolioEstatus() {
         PortafolioEstatus ps = new PortafolioEstatus();
         ps.setNombre("Active");
+        ps.setOrden(0L);
 
         PortafolioEstatus ps1 = new PortafolioEstatus();
         ps1.setNombre("Suspended");
+        ps1.setOrden(1L);
 
         PortafolioEstatus ps2 = new PortafolioEstatus();
         ps2.setNombre("Liquidation");
+        ps2.setOrden(2L);
 
         try {
             portafolioEstatusService.createPortafolioEstatus(ps);
@@ -864,7 +712,6 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
         ActivoPropiedad amortizable = new ActivoPropiedad();
         amortizable.setNombre("Amortizable?");
         amortizable.setDescripcion("Define si el Bono Amortiza");
-
         amortizable.setOrigenDatos(FuenteDatos.CSV_USUARIO);
         amortizable.setIndice(null);
         amortizable.setTipoActivo(TipoActivo.BONO);
@@ -941,11 +788,5 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
         } catch (JobExecutionAlreadyRunningException | JobRestartException | JobInstanceAlreadyCompleteException | JobParametersInvalidException ex) {
             Logger.getLogger(EntityBootstraping.class.getName()).log(Level.SEVERE, "El Batch de Vector falló", ex);
         }
-//        HashMap propiedadesValor = new HashMap();
-//        propiedadesValor.put("MEMES", "MOMOS");
-//        VectorActivoPropiedadValor vap = new VectorActivoPropiedadValor();
-//        vap.setId("1A_AMZN_*");
-//        vap.setPropiedadesValor(propiedadesValor);
-//        propsElastic.save(vap);
     }
 }

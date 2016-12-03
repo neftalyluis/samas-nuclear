@@ -15,7 +15,7 @@ import org.springframework.validation.BindException;
  *
  * @author samas
  */
-class VectorActivoElasticFieldSetMapper implements FieldSetMapper<VectorActivoPropiedadValor> {
+public class VectorActivoElasticFieldSetMapper implements FieldSetMapper<VectorActivoPropiedadValor> {
 
     @Override
     public VectorActivoPropiedadValor mapFieldSet(FieldSet fieldSet) throws BindException {

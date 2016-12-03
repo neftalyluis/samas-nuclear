@@ -16,7 +16,7 @@ import mx.samas.domain.ActivoPropiedadValor;
 import mx.samas.domain.FuenteDatos;
 import mx.samas.domain.VectorActivo;
 import mx.samas.service.VectorActivoService;
-import mx.samas.util.propiedad.reader.ActivoPropiedadReader;
+import mx.samas.util.ActivoPropiedadReader;
 import org.springframework.batch.item.ItemProcessor;
 import org.springframework.beans.factory.annotation.Autowired;
 

@@ -45,7 +45,6 @@ public class Activo implements Serializable {
     /**
      * Identificador de un activo, es la concatenacion de TV, Emisora y Serie
      */
-    @NotNull
     @Column(unique = true)
     private String clavePizarra;
 

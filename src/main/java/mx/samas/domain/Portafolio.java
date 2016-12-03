@@ -15,7 +15,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 
 /**
  *
@@ -29,8 +28,7 @@ public class Portafolio implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @OneToOne
-    private Cuenta cuentaEje;
+    private String cuentaEje;
 
     @ManyToOne
     private Estrategia estrategia;
@@ -40,7 +38,7 @@ public class Portafolio implements Serializable {
 
     private LocalDate fecha;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     private PortafolioEstatus estatus;
 
     @ManyToOne
@@ -53,6 +51,26 @@ public class Portafolio implements Serializable {
     private List<Cuenta> corredores;
 
     private Double margen;
+
+    public Portafolio(String cuentaEje, Estrategia estrategia,
+            TipoServicio tipoServicio, PortafolioEstatus estatus,
+            Activo monedaDenominacion, List<Cliente> clientes,
+            List<Cuenta> corredores, Double margen) {
+
+        this.cuentaEje = cuentaEje;
+        this.estrategia = estrategia;
+        this.tipoServicio = tipoServicio;
+        this.fecha = LocalDate.now();
+        this.estatus = estatus;
+        this.monedaDenominacion = monedaDenominacion;
+        this.clientes = clientes;
+        this.corredores = corredores;
+        this.margen = margen;
+    }
+
+    public Portafolio() {
+        this.fecha = LocalDate.now();
+    }
 
     public Long getId() {
         return id;
@@ -146,14 +164,14 @@ public class Portafolio implements Serializable {
     /**
      * @return the cuentaEje
      */
-    public Cuenta getCuentaEje() {
+    public String getCuentaEje() {
         return cuentaEje;
     }
 
     /**
      * @param cuentaEje the cuentaEje to set
      */
-    public void setCuentaEje(Cuenta cuentaEje) {
+    public void setCuentaEje(String cuentaEje) {
         this.cuentaEje = cuentaEje;
     }
 
