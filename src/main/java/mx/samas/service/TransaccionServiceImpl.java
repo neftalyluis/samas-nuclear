@@ -7,6 +7,7 @@ package mx.samas.service;
 
 import java.util.List;
 import mx.samas.domain.Transaccion;
+import mx.samas.domain.projection.TransaccionProjection;
 import mx.samas.repository.TransaccionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -39,6 +40,26 @@ public class TransaccionServiceImpl implements TransaccionService {
     @Override
     public List<Transaccion> getAllTransacciones() {
         return (List<Transaccion>) transaccionRepository.findAll();
+    }
+
+    @Override
+    public TransaccionProjection findProjectedByNombre(String nombre) {
+        return transaccionRepository.getProjectedByNombre(nombre);
+    }
+
+    @Override
+    public TransaccionProjection findProjectedById(Long id) {
+        return transaccionRepository.getProjectedById(id);
+    }
+
+    @Override
+    public List<TransaccionProjection> getAllProjectedTransacciones() {
+        return transaccionRepository.getAllProjected();
+    }
+
+    @Override
+    public List<TransaccionProjection> getAllProjectedWithDuenoFuente(String nombre) {
+        return transaccionRepository.getProjectedByDuenoFuenteNombre(nombre);
     }
 
 }

@@ -6,11 +6,12 @@ package mx.samas.controller;
  * and open the template in the editor.
  */
 import java.util.List;
-import mx.samas.domain.Transaccion;
+import mx.samas.domain.projection.TransaccionProjection;
 import mx.samas.service.TransaccionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,7 +28,22 @@ public class TransaccionController {
     private TransaccionService transaccionService;
 
     @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<List<Transaccion>> getTransacciones() {
-        return new ResponseEntity<>(transaccionService.getAllTransacciones(), HttpStatus.OK);
+    public ResponseEntity<List<TransaccionProjection>> getTransacciones() {
+        return new ResponseEntity<>(transaccionService.getAllProjectedTransacciones(), HttpStatus.OK);
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/{id}")
+    public ResponseEntity<TransaccionProjection> getTransaccionWithId(@PathVariable("id") Long id) {
+        return new ResponseEntity<>(transaccionService.findProjectedById(id), HttpStatus.OK);
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/duenofuente/{nombre}")
+    public ResponseEntity<List<TransaccionProjection>> getTransaccionesWithFuenteNombre(@PathVariable("nombre") String duenoFuente) {
+        return new ResponseEntity<>(transaccionService.getAllProjectedWithDuenoFuente(duenoFuente), HttpStatus.OK);
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/{nombre}")
+    public ResponseEntity<TransaccionProjection> getTransaccionWithNombre(@PathVariable("nombre") String nombre) {
+        return new ResponseEntity<>(transaccionService.findProjectedByNombre(nombre), HttpStatus.OK);
     }
 }

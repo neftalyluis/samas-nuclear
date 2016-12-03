@@ -7,6 +7,7 @@ package mx.samas.service;
 
 import java.util.List;
 import mx.samas.domain.Transaccion;
+import mx.samas.domain.projection.TransaccionProjection;
 
 /**
  *
@@ -14,11 +15,20 @@ import mx.samas.domain.Transaccion;
  */
 public interface TransaccionService {
 
-    public Transaccion findByNombre(String nombre);
+    public TransaccionProjection findProjectedByNombre(String nombre);
 
     public void createTransaccionesFromList(List<Transaccion> transacciones);
+
+    public TransaccionProjection findProjectedById(Long id);
+
+    public List<TransaccionProjection> getAllProjectedTransacciones();
+    
+    public List<TransaccionProjection> getAllProjectedWithDuenoFuente(String nombre);
 
     public Transaccion findById(Long id);
 
     public List<Transaccion> getAllTransacciones();
+
+    public Transaccion findByNombre(String nombre);
+
 }
