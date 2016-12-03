@@ -39,7 +39,7 @@ public class TipoServicioController {
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
-    public ResponseEntity<List<TipoServicio>> getById(@PathVariable Long id) {
-        return new ResponseEntity<>(tipoServicioService.getAll(), HttpStatus.OK);
+    public ResponseEntity<TipoServicio> getById(@PathVariable Long id) {
+        return new ResponseEntity<>(tipoServicioService.getTipoServicioById(id), HttpStatus.OK);
     }
 }
