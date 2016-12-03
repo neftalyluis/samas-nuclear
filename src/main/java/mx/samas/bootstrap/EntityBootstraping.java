@@ -117,7 +117,7 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
 
     @Autowired
     private VectorActivoPropiedadValorRepository propsElastic;
-    
+
     @Autowired
     private TipoServicioService tipoServicioService;
 
@@ -134,13 +134,17 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
 
 //        testBatch();
 //        activoPropiedades();
-        //Se queda
-        persistPerfiles();
+//
+//        Se queda
+//        persistPerfiles();
+//        
 //        persistBancos();
 //        persistClientesAndCuenta();
 //        testVectorActivoBatch();
-        //Se queda
-        persistPortfolioEstatus();
+//
+//        Se queda
+//        persistPortfolioEstatus();
+//        
 //        persistEstrategiasAndPortafolioModelo();
 //        persistTransacciones();
 //        useOperationDeposito();
@@ -251,8 +255,7 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
             List<Cuenta> cuentas = new LinkedList<>();
             cuentas.add(c);
             cuentas.add(ba);
-            
-            
+
             //Estrategia Dividendo y Deuda
             Estrategia divydeu = new Estrategia();
             divydeu.setNombre("Dividendo y Deuda");
@@ -532,12 +535,15 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
     private boolean persistPortfolioEstatus() {
         PortafolioEstatus ps = new PortafolioEstatus();
         ps.setNombre("Active");
+        ps.setOrden(0L);
 
         PortafolioEstatus ps1 = new PortafolioEstatus();
         ps1.setNombre("Suspended");
+        ps1.setOrden(1L);
 
         PortafolioEstatus ps2 = new PortafolioEstatus();
         ps2.setNombre("Liquidation");
+        ps2.setOrden(2L);
 
         try {
             portafolioEstatusService.createPortafolioEstatus(ps);
