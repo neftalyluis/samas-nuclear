@@ -26,4 +26,6 @@ public interface BitacoraOrdenService {
     public BitacoraOrden findOrdenById(Long id);
 
     public List<Bitacora> executeOrden(BitacoraOrdenEjecutorDTO orden);
+    
+    public List<BitacoraOrden> getAll();
 }

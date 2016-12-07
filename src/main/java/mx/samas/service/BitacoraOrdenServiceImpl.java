@@ -127,4 +127,9 @@ public class BitacoraOrdenServiceImpl implements BitacoraOrdenService {
         return bitacoraOrdenRepository.save(dto);
     }
 
+    @Override
+    public List<BitacoraOrden> getAll() {
+        return bitacoraOrdenRepository.findAll();
+    }
+
 }
