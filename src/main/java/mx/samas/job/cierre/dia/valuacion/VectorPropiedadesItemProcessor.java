@@ -62,7 +62,6 @@ public class VectorPropiedadesItemProcessor implements ItemProcessor<Activo, Vec
         lapv.addAll(readerTyc.getPropiedadesValor());
         lapv.addAll(readerPip.getPropiedadesValor());
 
-        va.setPropiedadesValor(lapv);
 
         return va;
     }

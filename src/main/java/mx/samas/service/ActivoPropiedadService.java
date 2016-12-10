@@ -25,11 +25,11 @@ public interface ActivoPropiedadService {
     public ActivoPropiedad createPropiedad(ActivoPropiedad a);
 
     public ActivoPropiedadValorDTO extractPropiedadesFromActivo(Activo a);
-//    
-//    public List<ActivoPropiedad> getAllPropiedadesInActivoWithClavePizarra(String clave);
-//    
-//    public List<ActivoPropiedad> getVectorialPropiedadesInActivoWithClavePizarra(String clave);
-//    
-//    public List<ActivoPropiedad> getPropiedadesInActivoWithClavePizarra(String clave);
+    
+    public List<ActivoPropiedad> getAllPropiedadesInActivoWithClavePizarra(String clave);
+    
+    public List<ActivoPropiedad> getVectorialPropiedadesInActivoWithClavePizarra(String clave);
+    
+    public List<ActivoPropiedad> getEstaticaPropiedadesInActivoWithClavePizarra(String clave);
 
 }
