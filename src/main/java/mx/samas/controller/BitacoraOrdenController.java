@@ -6,13 +6,16 @@
 package mx.samas.controller;
 
 import java.util.List;
+import mx.samas.domain.Bitacora;
 import mx.samas.domain.BitacoraOrden;
 import mx.samas.domain.dto.BitacoraOrdenDTO;
+import mx.samas.domain.dto.BitacoraOrdenEjecutorDTO;
 import mx.samas.service.BitacoraOrdenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -47,4 +50,10 @@ public class BitacoraOrdenController {
     public ResponseEntity<BitacoraOrden> getByNombre(@PathVariable(value = "nombre") String nombre) {
         return new ResponseEntity<>(bitacoraOrdenService.findOneOrdenByNombre(nombre), HttpStatus.OK);
     }
+    
+    @RequestMapping(method = RequestMethod.POST, value = "/execute/")
+    public ResponseEntity<List<Bitacora>> execute(@RequestBody BitacoraOrdenEjecutorDTO orden) {
+        return new ResponseEntity<>(bitacoraOrdenService.executeOrden(orden), HttpStatus.OK);
+    }
+
 }

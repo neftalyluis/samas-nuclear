@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
  *
  * @author samas
  */
-public class BitacoraOrdenValorDTO {
+    public class BitacoraOrdenValorDTO {
 
     private Long transaccionId;
     private Long titulos;

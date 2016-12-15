@@ -135,14 +135,14 @@ public class EntityBootstraping implements ApplicationListener<ApplicationReadyE
 //        testBatch();
 //        activoPropiedades();
 //
-//        Se queda
+////        Se queda
 //        persistPerfiles();
 //        
 //        persistBancos();
 //        persistClientesAndCuenta();
 //        testVectorActivoBatch();
 //
-//        Se queda
+////        Se queda
 //        persistPortfolioEstatus();
 //        
 //        persistEstrategiasAndPortafolioModelo();
