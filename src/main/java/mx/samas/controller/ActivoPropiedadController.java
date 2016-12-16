@@ -42,4 +42,19 @@ public class ActivoPropiedadController {
     public ResponseEntity<ActivoPropiedad> createNewPropiedad(@RequestBody ActivoPropiedad prop) {
         return new ResponseEntity<>(activoPropiedadService.createPropiedad(prop), HttpStatus.CREATED);
     }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/activo/{clavePizarra}")
+    public ResponseEntity<List<ActivoPropiedad>> getPropiedadListFromActivo(@PathVariable String clavePizarra) {
+        return new ResponseEntity<>(activoPropiedadService.getAllPropiedadesInActivoWithClavePizarra(clavePizarra), HttpStatus.OK);
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/activo/{clavePizarra}/vectorial")
+    public ResponseEntity<List<ActivoPropiedad>> getVectorialPropiedadListFromActivo(@PathVariable String clavePizarra) {
+        return new ResponseEntity<>(activoPropiedadService.getVectorialPropiedadesInActivoWithClavePizarra(clavePizarra), HttpStatus.OK);
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/activo/{clavePizarra}/estatica")
+    public ResponseEntity<List<ActivoPropiedad>> getEstaticaPropiedadListFromActivo(@PathVariable String clavePizarra) {
+        return new ResponseEntity<>(activoPropiedadService.getEstaticaPropiedadesInActivoWithClavePizarra(clavePizarra), HttpStatus.OK);
+    }
 }

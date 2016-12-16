@@ -43,7 +43,7 @@ public interface TransaccionRepository extends JpaRepository<Transaccion, Long> 
             + "t.flujoTitulos, "
             + "t.flujoEfectivo) "
             + "FROM Transaccion t "
-            + "JOIN t.fuenteTransaccion ft"
+            + "JOIN t.fuenteTransaccion ft "
             + "WHERE t.id= :idTransaccion")
     public TransaccionProjection getProjectedById(@Param("idTransaccion") Long id);
 
