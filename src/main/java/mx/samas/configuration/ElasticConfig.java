@@ -21,8 +21,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
 import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
 
-/**
- *
+/**Esta clase se encarga de la configuracion de Elasticsearch.
+ * 
  * @author samas
  */
 @Configuration
@@ -33,6 +33,7 @@ public class ElasticConfig {
 
     private static final Logger LOG = Logger.getLogger(ElasticConfig.class.getName());
 
+    /** @return  */
     @Bean
     public Client client() {
         try {
@@ -57,6 +58,7 @@ public class ElasticConfig {
         }
     }
 
+    /** @return . Regresa un nuevo modelo de Elasticsearch que contiene un cliente. */
     @Bean
     public ElasticsearchOperations elasticsearchTemplate() {
         return new ElasticsearchTemplate(client());

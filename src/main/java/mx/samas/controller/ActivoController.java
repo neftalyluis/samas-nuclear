@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- *
+ * 
  * @author samas
  */
 @RestController
@@ -35,26 +35,51 @@ public class ActivoController {
         return new ResponseEntity<>(activoService.getAllActivos(), HttpStatus.OK);
     }
 
+    /**
+     * 
+     * @param id
+     * @return 
+     */
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
     public ResponseEntity<Activo> getActivoWithId(@PathVariable Long id) {
         return new ResponseEntity<>(activoService.getById(id), HttpStatus.OK);
     }
 
+    /**
+     * 
+     * @param name
+     * @return 
+     */
     @RequestMapping(method = RequestMethod.GET, params = {"nombre"})
     public ResponseEntity<List<Activo>> findActivoWithName(@RequestParam(value = "nombre") String name) {
         return new ResponseEntity<>(activoService.getByNombre(name), HttpStatus.OK);
     }
 
+    /**
+     * 
+     * @param clavePizarra
+     * @return 
+     */
     @RequestMapping(method = RequestMethod.GET, params = {"clavePizarra"})
     public ResponseEntity<Activo> findActivoWithClavePizarra(@RequestParam(value = "clavePizarra") String clavePizarra) {
         return new ResponseEntity<>(activoService.getByClavePizarra(clavePizarra), HttpStatus.OK);
     }
 
+    /**
+     * 
+     * @param input
+     * @return 
+     */
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<?> addActivo(@RequestBody Activo input) {
+    public ResponseEntity<Activo> addActivo(@RequestBody Activo input) {
         return new ResponseEntity<>(activoService.createActivo(input), HttpStatus.CREATED);
     }
 
+    /**
+     * 
+     * @param id
+     * @return 
+     */
     @RequestMapping(method = RequestMethod.GET, value = "/{id}/propiedades")
     public ResponseEntity<List<ActivoPropiedadValor>> getPropiedadesFromActivo(@PathVariable Long id) {
         return new ResponseEntity<>(activoService.getPropiedadesFromActivo(id), HttpStatus.OK);

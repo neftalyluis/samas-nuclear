@@ -16,7 +16,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.util.StringUtils;
 
 /**
- *
+ * 
  * @author samas
  */
 public class SecurityUser extends Usuario implements UserDetails {
@@ -24,6 +24,8 @@ public class SecurityUser extends Usuario implements UserDetails {
     private List<String> usuarioPerfiles;
 
     //Perdoname madre por mi vida loca D;<
+    
+    /** @param u */
     public SecurityUser(Usuario u) {
         if (u != null) {
             usuarioPerfiles = new ArrayList<>();
@@ -45,6 +47,7 @@ public class SecurityUser extends Usuario implements UserDetails {
         return AuthorityUtils.commaSeparatedStringToAuthorityList(perfiles);
     }
 
+    /** @return */
     @Override
     public String getPassword() {
         return super.getPassword();
@@ -75,16 +78,11 @@ public class SecurityUser extends Usuario implements UserDetails {
         return true;
     }
 
-    /**
-     * @return the usuarioPerfiles
-     */
     public List<String> getUsuarioPerfiles() {
         return usuarioPerfiles;
     }
 
-    /**
-     * @param usuarioPerfiles the usuarioPerfiles to set
-     */
+    /** @param usuarioPerfiles the usuarioPerfiles to set */
     public void setUsuarioPerfiles(List<String> usuarioPerfiles) {
         this.usuarioPerfiles = usuarioPerfiles;
     }

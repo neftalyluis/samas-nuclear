@@ -15,8 +15,8 @@ import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 
-/**
- *
+/** Esta clase se encarga de la configuracion de Jackson's. 
+ * 
  * @author samas
  */
 @Configuration
@@ -25,6 +25,7 @@ public class JacksonConfig {
     @Autowired
     private ObjectMapper objectMapper;
 
+    /** Crea modulos para registrar Jackson's que siempre se incluiran. */
     @PostConstruct
     public void init() {
         objectMapper.setSerializationInclusion(JsonInclude.Include.ALWAYS);

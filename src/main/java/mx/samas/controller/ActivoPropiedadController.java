@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- *
+ * 
  * @author samas
  */
 @RestController
@@ -33,11 +33,21 @@ public class ActivoPropiedadController {
         return new ResponseEntity<>(activoPropiedadService.getPropiedades(), HttpStatus.OK);
     }
 
+    /**
+     * 
+     * @param nombre
+     * @return 
+     */
     @RequestMapping(method = RequestMethod.GET, value = "/{nombre}")
     public ResponseEntity<ActivoPropiedad> getPropiedadWithName(@PathVariable String nombre) {
         return new ResponseEntity<>(activoPropiedadService.getPropiedadWithNombre(nombre), HttpStatus.OK);
     }
 
+    /**
+     * 
+     * @param prop
+     * @return 
+     */
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<ActivoPropiedad> createNewPropiedad(@RequestBody ActivoPropiedad prop) {
         return new ResponseEntity<>(activoPropiedadService.createPropiedad(prop), HttpStatus.CREATED);
