@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-/**
+/**Este es el controlador que se encargara de conectar el modelo con la vista para poder manipular los activos.
  * 
  * @author samas
  */
@@ -36,9 +36,8 @@ public class ActivoController {
     }
 
     /**
-     * 
-     * @param id
-     * @return 
+     * @param id Guardara el id que obtenga de la interfaz.
+     * @return Una respuesta de que todo esta bien cuando se encuentra un activo por su id.
      */
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
     public ResponseEntity<Activo> getActivoWithId(@PathVariable Long id) {
@@ -46,9 +45,8 @@ public class ActivoController {
     }
 
     /**
-     * 
-     * @param name
-     * @return 
+     * @param name Guardara el nombre que obtenga de la interfaz.
+     * @return Una respuesta de que todo esta bien cuando se encuentra un activo por su nombre.
      */
     @RequestMapping(method = RequestMethod.GET, params = {"nombre"})
     public ResponseEntity<List<Activo>> findActivoWithName(@RequestParam(value = "nombre") String name) {
@@ -56,9 +54,8 @@ public class ActivoController {
     }
 
     /**
-     * 
-     * @param clavePizarra
-     * @return 
+     * @param clavePizarra Guardara la clavePizarra que obtenga de la interfaz. 
+     * @return Una respuesta de que todo esta bien cuando se encuentra un activo por su clavePizarra.
      */
     @RequestMapping(method = RequestMethod.GET, params = {"clavePizarra"})
     public ResponseEntity<Activo> findActivoWithClavePizarra(@RequestParam(value = "clavePizarra") String clavePizarra) {
@@ -66,9 +63,8 @@ public class ActivoController {
     }
 
     /**
-     * 
-     * @param input
-     * @return 
+     * @param input Guardara el cuerpo de la request
+     * @return Una respuesta de que se agrego de forma exitosa el input (cuerpo de la request)
      */
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<Activo> addActivo(@RequestBody Activo input) {
@@ -76,9 +72,8 @@ public class ActivoController {
     }
 
     /**
-     * 
-     * @param id
-     * @return 
+     * @param id Guardara el id (propiedades) que obtenga de la interfaz.
+     * @return Una respuesta de que todo esta bien cuando se obtienen Propiedades del Activo (id).
      */
     @RequestMapping(method = RequestMethod.GET, value = "/{id}/propiedades")
     public ResponseEntity<List<ActivoPropiedadValor>> getPropiedadesFromActivo(@PathVariable Long id) {

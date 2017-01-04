@@ -15,7 +15,7 @@ import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.util.StringUtils;
 
-/**
+/**Clase que obtiene cadenas ingresadas por el usuario como seguridad.
  * 
  * @author samas
  */
@@ -25,7 +25,7 @@ public class SecurityUser extends Usuario implements UserDetails {
 
     //Perdoname madre por mi vida loca D;<
     
-    /** @param u */
+    /** @param u Si no es nulo, crea una lista de arreglos que se agrega a usuarioPerfiles */
     public SecurityUser(Usuario u) {
         if (u != null) {
             usuarioPerfiles = new ArrayList<>();
@@ -47,7 +47,7 @@ public class SecurityUser extends Usuario implements UserDetails {
         return AuthorityUtils.commaSeparatedStringToAuthorityList(perfiles);
     }
 
-    /** @return */
+    /** @return La cadena que ingresa el usuario.*/
     @Override
     public String getPassword() {
         return super.getPassword();

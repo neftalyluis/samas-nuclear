@@ -33,7 +33,9 @@ public class ElasticConfig {
 
     private static final Logger LOG = Logger.getLogger(ElasticConfig.class.getName());
 
-    /** @return  */
+    /** @return
+     * Crea un Directorio temporal, lo configura y lo inserta en el cluster,
+     * De no ser asi, manda un mensaje a la terminal confirmando que no se pudo crear.*/
     @Bean
     public Client client() {
         try {

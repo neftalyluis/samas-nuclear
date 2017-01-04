@@ -35,7 +35,7 @@ public class ActivoPropiedadController {
 
     /**
      * 
-     * @param nombre
+     * @param nombre Guarda una propiedad buscandola por su nombre.
      * @return 
      */
     @RequestMapping(method = RequestMethod.GET, value = "/{nombre}")
