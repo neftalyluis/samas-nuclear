@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-/**Este es el controlador que se encargara de conectar el modelo con la vista para poder manipular los activos.
+/**Este es el controlador que se encargara de manipular Activos.
  * 
  * @author samas
  */
@@ -36,8 +36,8 @@ public class ActivoController {
     }
 
     /**
-     * @param id Guardara el id que obtenga de la interfaz.
-     * @return Una respuesta de que todo esta bien cuando se encuentra un activo por su id.
+     * @param id Guardara el id que se ingrese desde la interfaz.
+     * @return Una respuesta de que se encontro con exito un activo por su id.
      */
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
     public ResponseEntity<Activo> getActivoWithId(@PathVariable Long id) {
@@ -45,8 +45,8 @@ public class ActivoController {
     }
 
     /**
-     * @param name Guardara el nombre que obtenga de la interfaz.
-     * @return Una respuesta de que todo esta bien cuando se encuentra un activo por su nombre.
+     * @param name Guardara el nombre que se ingrese desde la interfaz.
+     * @return Una respuesta de que se encontro con exito un activo por su nombre.
      */
     @RequestMapping(method = RequestMethod.GET, params = {"nombre"})
     public ResponseEntity<List<Activo>> findActivoWithName(@RequestParam(value = "nombre") String name) {
@@ -54,8 +54,8 @@ public class ActivoController {
     }
 
     /**
-     * @param clavePizarra Guardara la clavePizarra que obtenga de la interfaz. 
-     * @return Una respuesta de que todo esta bien cuando se encuentra un activo por su clavePizarra.
+     * @param clavePizarra Guardara la clavePizarra que se ingrese desde de la interfaz. 
+     * @return Una respuesta de que se encontro con exito un activo por su clavePizarra.
      */
     @RequestMapping(method = RequestMethod.GET, params = {"clavePizarra"})
     public ResponseEntity<Activo> findActivoWithClavePizarra(@RequestParam(value = "clavePizarra") String clavePizarra) {
@@ -72,7 +72,7 @@ public class ActivoController {
     }
 
     /**
-     * @param id Guardara el id (propiedades) que obtenga de la interfaz.
+     * @param id Guardara el id (propiedades) que se obtenga desde la interfaz.
      * @return Una respuesta de que todo esta bien cuando se obtienen Propiedades del Activo (id).
      */
     @RequestMapping(method = RequestMethod.GET, value = "/{id}/propiedades")

@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-/**
+/**Este es el controlador que se encargara de manipular los Clientes.
  *
  * @author samas
  */
@@ -33,16 +33,28 @@ public class ClienteController {
         return new ResponseEntity<>(clienteService.getAllClientes(), HttpStatus.OK);
     }
 
+    /**
+     * @param id Guardara el Id de Cliente que se ingrese desde la interfaz.
+     * @return Una respuesta de que se encontro con exito el Id del Cliente.
+     */
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
     public ResponseEntity<Cliente> getClienteById(@PathVariable(value = "id") Long id) {
         return new ResponseEntity<>(clienteService.getClienteById(id), HttpStatus.OK);
     }
 
+    /**
+     * @param id Guardara el Id del Cliente que se desea eliminar ingresandolo desde la interfaz.
+     * @return Una respuesta de que se elimino con exito el Cliente usando su Id.
+     */
     @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
     public ResponseEntity<Boolean> deleteClienteWithId(@PathVariable(value = "id") Long id) {
         return new ResponseEntity<>(clienteService.removeClienteById(id), HttpStatus.OK);
     }
 
+    /**
+     * @param c Guardara el cuerpo de la request.
+     * @return Una respuesta de que se creo con exito un nuevo Cliente.
+     */
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<Cliente> createCliente(@RequestBody Cliente c) {
         return new ResponseEntity<>(clienteService.createCliente(c), HttpStatus.CREATED);

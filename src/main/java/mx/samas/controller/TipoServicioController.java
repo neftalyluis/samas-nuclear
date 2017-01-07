@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-/**
+/**Este es el controlador que se encargara de manipular los TipoServicio.
  *
  * @author samas
  */
@@ -33,11 +33,19 @@ public class TipoServicioController {
         return new ResponseEntity<>(tipoServicioService.getAll(), HttpStatus.OK);
     }
 
+    /**
+     * @param ts Variable de tipo TipoServicio compuesta de id, nombre y discresional(booleano). 
+     * @return Una respuesta de que se creo el servicio tipoServicio de manera exitosa.
+     */
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<TipoServicio> createTipoServicio(@RequestBody TipoServicio ts) {
         return new ResponseEntity<>(tipoServicioService.create(ts), HttpStatus.OK);
     }
 
+    /**
+     * @param id Guardara el Id del TipoServicio que se ingresara desde la interfaz.
+     * @return Una respuesta de que se encontro el tipoServicio de manera exitosa.
+     */
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
     public ResponseEntity<TipoServicio> getById(@PathVariable Long id) {
         return new ResponseEntity<>(tipoServicioService.getTipoServicioById(id), HttpStatus.OK);

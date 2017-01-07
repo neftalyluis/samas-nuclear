@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-/**
+/**Este es el controlador que se encargara de manipular ActivosPropiedad.
  * 
  * @author samas
  */
@@ -34,9 +34,8 @@ public class ActivoPropiedadController {
     }
 
     /**
-     * 
-     * @param nombre Guarda una propiedad buscandola por su nombre.
-     * @return 
+     * @param nombre Guardara el nombre de una Propiedad ingresada desde la interfaz.
+     * @return Una respuesta de que se encontro con exito un activoPropiedad por su nombre.
      */
     @RequestMapping(method = RequestMethod.GET, value = "/{nombre}")
     public ResponseEntity<ActivoPropiedad> getPropiedadWithName(@PathVariable String nombre) {
@@ -44,9 +43,8 @@ public class ActivoPropiedadController {
     }
 
     /**
-     * 
-     * @param prop
-     * @return 
+     * @param prop Guardara el cuerpo de la request del ActivoPropiedad.
+     * @return Una respuesta confirmando que se creo con exito la Propiedad.
      */
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<ActivoPropiedad> createNewPropiedad(@RequestBody ActivoPropiedad prop) {

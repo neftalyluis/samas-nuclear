@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-/**
+/**Este es el controlador que se encargara de manipular las Estrategias.
  *
  * @author samas
  */
@@ -35,6 +35,11 @@ public class EstrategiaController {
         return new ResponseEntity<>(estrategiaService.getAll(), HttpStatus.OK);
     }
 
+    /**
+     * @param input Variable de tipo EstrategiaDTO que se compone de nombre y modelos.
+     * @return Si input se valida, tendremos como respuesta que se creo de manera exitosa la Estrategia.
+     *         De lo contrario, la respuesta nos informara de una mala request.
+     */
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<Estrategia> newEstrategia(EstrategiaDTO input) {
         if (input.validate()) {
@@ -44,11 +49,19 @@ public class EstrategiaController {
         }
     }
 
+    /**
+     * @param id Guardara el Id que se ingrese desde la interfaz.
+     * @return Una respuesta de que se encontro con exito la Estrategia por su Id. 
+     */
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
     public ResponseEntity<EstrategiaProjection> getById(@PathVariable Long id) {
         return new ResponseEntity<>(estrategiaService.getEstrategiaProjectedWithId(id), HttpStatus.OK);
     }
 
+    /**
+     * @param id Guardara el Id que se ingrese desde la interfaz.
+     * @return Una respuesta de que se encontro con exito la EstrategiaModelo por su Id. 
+     */
     @RequestMapping(method = RequestMethod.GET, value = "/{id}/modelo/actual")
     public ResponseEntity<List<EstrategiaModeloProjection>> getModeloByEstrategiaId(@PathVariable Long id) {
         return new ResponseEntity<>(estrategiaService.getLastEstrategiaModeloFromIdEstrategia(id), HttpStatus.OK);
