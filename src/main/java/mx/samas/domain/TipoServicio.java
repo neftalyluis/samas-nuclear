@@ -33,6 +33,10 @@ public class TipoServicio implements Serializable {
 
     }
 
+    /**
+     * @param nombre Guardara la cadena que se ingrese desde la interfaz.
+     * @param discrecional Solo acepta como valores verdadero o falso (booleano) el cual guardara.
+     */
     public TipoServicio(String nombre, Boolean discrecional) {
         this.nombre = nombre;
         this.discrecional = discrecional;

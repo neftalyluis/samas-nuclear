@@ -48,6 +48,9 @@ public class VectorPosicion implements Serializable {
 
     }
 
+    /**
+     * @param v Guardara los componentes de un VectorPosicion.
+     */
     public VectorPosicion(VectorPosicion v) {
         this.activo = v.getActivo();
         this.cantidad = v.getCantidad();

@@ -17,6 +17,11 @@ public class VectorActivoDTO {
     private String clavePizarra;
     private VectorActivo vector;
 
+    /**
+     * @param clavePizarra Guardara la cadena que se ingrese desde la interfaz.
+     * @param fecha Guardara la fecha del dia actual.
+     * @param precioLimpio Guardara un numero fraccionario (de hasta 15 digitos) que se ingrese desde la interfaz.
+     */
     public VectorActivoDTO(String clavePizarra, LocalDate fecha, Double precioLimpio) {
         this.clavePizarra = clavePizarra;
         this.vector = new VectorActivo(fecha, precioLimpio);

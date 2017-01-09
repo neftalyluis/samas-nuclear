@@ -53,6 +53,10 @@ public class TipoActivoResolver {
         return instance;
     }
 
+    /**
+     * @param tipo Guardara una cadena.
+     * @return 
+     */
     public TipoActivo resolveFromTipoValor(String tipo) {
         TipoActivo tip = resolver.get(tipo);
         if (tip == null) {

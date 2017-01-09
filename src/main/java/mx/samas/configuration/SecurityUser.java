@@ -48,10 +48,10 @@ public class SecurityUser extends Usuario implements UserDetails {
     }
 
     /** @return La cadena que ingresa el usuario.*/
-    @Override
+    /*@Override
     public String getPassword() {
         return super.getPassword();
-    }
+    } <------Tengo duda. */
 
     @Override
     public String getUsername() {

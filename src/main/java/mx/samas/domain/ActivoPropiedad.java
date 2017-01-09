@@ -63,6 +63,15 @@ public class ActivoPropiedad implements Serializable {
 
     }
 
+    /**
+     * @param nombre Guardara la cadena que se ingrese desde la interfaz.
+     * @param descripcion Guardara la cadena que se ingrese desde la interfaz.
+     * @param tipoDato Guardara el TipoDato que se seleccione desde la interfaz.
+     * @param indice Guardara un valor entre -2147483648 y 2,147,483,647 que se ingrese desde la interfaz.
+     * @param origenDatos Guardara la FuenteDato que se seleccione desde la interfaz.
+     * @param tipoActivo Guardara el TipoActivo que se seleccione desde la interfaz.
+     * @param vectorial Solo acepta como valores verdadero o falso (booleano) el cual guardara.
+     */
     public ActivoPropiedad(String nombre, String descripcion, TipoDato tipoDato, Integer indice, FuenteDatos origenDatos, TipoActivo tipoActivo, Boolean vectorial) {
         this.nombre = nombre;
         this.descripcion = descripcion;

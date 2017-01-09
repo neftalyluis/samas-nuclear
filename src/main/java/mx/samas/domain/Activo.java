@@ -20,7 +20,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-import javax.validation.constraints.NotNull;
+//import javax.validation.constraints.NotNull; <--- Tengo duda aqui.
 
 /**
  *
@@ -109,6 +109,16 @@ public class Activo implements Serializable {
 
     }
 
+    /**
+     * @param tipoValor Guardara la cadena que se ingrese desde la interfaz.
+     * @param emisora Guardara la cadena que se ingrese desde la interfaz.
+     * @param serie Guardara la cadena que se ingrese desde la interfaz.
+     * @param isin Guardara la cadena que se ingrese desde la interfaz.
+     * @param nombre Guardara la cadena que se ingrese desde la interfaz.
+     * @param tipo Guardara el TipoActivo que se seleccione desde la interfaz.
+     * @param ventaEnCorto Solo acepta como valores verdadero o falso (booleano) el cual guardara.
+     * @param pujaMinima Guardara un numero fraccionario (de hasta 15 digitos) que se ingrese desde la interfaz. 
+     */
     public Activo(String tipoValor, String emisora, String serie, String isin,
             String nombre, TipoActivo tipo, Boolean ventaEnCorto,
             Double pujaMinima) {
@@ -125,6 +135,12 @@ public class Activo implements Serializable {
 
     }
 
+    /**
+     * @param nombre Guardara la cadena que se ingrese desde la interfaz.
+     * @param tipoValor Guardara la cadena que se ingrese desde la interfaz.
+     * @param emisora Guardara la cadena que se ingrese desde la interfaz.
+     * @param serie Guardara la cadena que se ingrese desde la interfaz.
+     */
     public Activo(String nombre, String tipoValor, String emisora, String serie) {
         this.clavePizarra = tipoValor + "_" + emisora + "_" + serie;
         this.tipoValor = tipoValor;

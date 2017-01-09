@@ -32,18 +32,30 @@ public class Cliente implements Serializable {
     public Cliente() {
     }
 
+    /**
+     * @param nombre Guardara la cadena que se ingrese desde la interfaz.
+     */
     public Cliente(String nombre) {
         this.nombre = nombre;
         this.elegible = false;
         this.sofisticado = false;
     }
 
+    /**
+     * @param nombre Guardara la cadena que se ingrese desde la interfaz.
+     * @param elegible Solo acepta como valores verdadero o falso (booleano) el cual guardara. 
+     * @param sofisticado Solo acepta como valores verdadero o falso (booleano) el cual guardara. 
+     */
     public Cliente(String nombre, Boolean elegible, Boolean sofisticado) {
         this.nombre = nombre;
         this.elegible = elegible;
         this.sofisticado = sofisticado;
     }
 
+    /**
+     * @param nombre Guardara la cadena que se ingrese desde la interfaz.
+     * @param elegible Solo acepta como valores verdadero o falso (booleano) el cual guardara. 
+     */
     public Cliente(String nombre, Boolean elegible) {
         this.nombre = nombre;
         this.elegible = elegible;

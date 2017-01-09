@@ -30,6 +30,15 @@ public class PortafolioProjection implements Serializable {
     @NotNull
     private LocalDate fecha;
 
+    /**
+     * @param cuentaEje Guardara una cadena.
+     * @param estrategia Guardara una cadena.
+     * @param tipoServicio Guardara una cadena.
+     * @param fecha Guardara la fecha actual.
+     * @param monedaTicker Guardara una cadena.
+     * @param margenActual Guardara un numero entre -2147483648 a 2147483647.
+     * @param estatus Guardara una cadena.
+     */
     public PortafolioProjection(String cuentaEje,
             String estrategia, String tipoServicio, LocalDate fecha,
             String monedaTicker, Double margenActual, String estatus) {
