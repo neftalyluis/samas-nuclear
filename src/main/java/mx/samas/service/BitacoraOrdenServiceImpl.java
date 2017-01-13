@@ -75,6 +75,8 @@ public class BitacoraOrdenServiceImpl implements BitacoraOrdenService {
 
     @Override
     public List<Bitacora> executeOrden(BitacoraOrdenEjecutorDTO ordenDto) {
+        
+        LOG.info(ordenDto.getIdOperacion().toString());
         //Buscamos la Orden en la DB por el Id
         BitacoraOrden ordenEntidad = findOrdenById(ordenDto.getIdOperacion());
         //Obtenemos las transacciones que componen esa orden
@@ -125,6 +127,11 @@ public class BitacoraOrdenServiceImpl implements BitacoraOrdenService {
     @Override
     public BitacoraOrden createOrden(BitacoraOrden dto) {
         return bitacoraOrdenRepository.save(dto);
+    }
+
+    @Override
+    public List<BitacoraOrden> getAll() {
+        return bitacoraOrdenRepository.findAll();
     }
 
 }

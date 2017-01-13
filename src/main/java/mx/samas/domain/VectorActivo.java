@@ -36,9 +36,6 @@ public class VectorActivo implements Serializable {
 
     private Double precioLimpio;
 
-    @OneToMany
-    private List<ActivoPropiedadValor> propiedadesValor;
-
     public VectorActivo() {
 
     }
@@ -113,21 +110,7 @@ public class VectorActivo implements Serializable {
     public void setPrecioLimpio(Double precioLimpio) {
         this.precioLimpio = precioLimpio;
     }
-
-    /**
-     * @return the propiedadesValor
-     */
-    public List<ActivoPropiedadValor> getPropiedadesValor() {
-        return propiedadesValor;
-    }
-
-    /**
-     * @param propiedadesValor the propiedadesValor to set
-     */
-    public void setPropiedadesValor(List<ActivoPropiedadValor> propiedadesValor) {
-        this.propiedadesValor = propiedadesValor;
-    }
-
+    
     /**
      * @return the fecha
      */

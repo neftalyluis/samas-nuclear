@@ -32,8 +32,6 @@ public class Bono extends Activo implements Serializable {
     //Distintivas
     private Boolean llamable;
     private Boolean amortizable;
-    @OneToMany
-    private List<GradoCrediticio> grados;
 
     @Enumerated(EnumType.STRING)
     private AnoComercial anoComercial;
@@ -127,20 +125,6 @@ public class Bono extends Activo implements Serializable {
      */
     public void setTasaReferencia(TasaReferencia tasaReferencia) {
         this.tasaReferencia = tasaReferencia;
-    }
-
-    /**
-     * @return the grados
-     */
-    public List<GradoCrediticio> getGrados() {
-        return grados;
-    }
-
-    /**
-     * @param grados the grados to set
-     */
-    public void setGrados(List<GradoCrediticio> grados) {
-        this.grados = grados;
     }
 
     /**
