@@ -18,6 +18,14 @@ public class EstrategiaProjection {
     private Boolean grupos;
     private Boolean margen;
 
+    /**
+     * @param id Guardara un numero entre -2147483648 a 2147483647.
+     * @param nombre Guardara una cadena.
+     * @param liquidez Solo acepta como valores verdadero o falso (booleano) el cual guardara. 
+     * @param efectivo Solo acepta como valores verdadero o falso (booleano) el cual guardara. 
+     * @param grupos Solo acepta como valores verdadero o falso (booleano) el cual guardara. 
+     * @param margen Solo acepta como valores verdadero o falso (booleano) el cual guardara. 
+     */
     public EstrategiaProjection(Long id, String nombre, Boolean liquidez, Boolean efectivo, Boolean grupos, Boolean margen) {
         this.id = id;
         this.nombre = nombre;

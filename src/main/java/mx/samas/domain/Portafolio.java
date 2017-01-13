@@ -9,7 +9,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
+//import javax.persistence.FetchType; <----- Tengo duda.
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -52,6 +52,16 @@ public class Portafolio implements Serializable {
 
     private Double margen;
 
+    /**
+     * @param cuentaEje Guardara la cadena que se ingrese desde la interfaz.
+     * @param estrategia Guardara la Estrategia que se ingrese desde la interfaz.
+     * @param tipoServicio Giardara el TipoServicio que se ingrese desde la interfaz
+     * @param estatus Guardara el PortafolioEstatus que se ingrese desde la interfaz.
+     * @param monedaDenominacion Guardara un Activo que se ingrese desde la interfaz.
+     * @param clientes Guardara una Lista de Clientes.
+     * @param corredores Guardara una Lista de Cuentas.
+     * @param margen Guardara un numero fraccionario (de hasta 15 digitos) que se ingrese desde la interfaz.  
+     */
     public Portafolio(String cuentaEje, Estrategia estrategia,
             TipoServicio tipoServicio, PortafolioEstatus estatus,
             Activo monedaDenominacion, List<Cliente> clientes,
@@ -68,6 +78,9 @@ public class Portafolio implements Serializable {
         this.margen = margen;
     }
 
+    /**Obtiene la fecha actual.
+     * No hay parametros.
+     */
     public Portafolio() {
         this.fecha = LocalDate.now();
     }

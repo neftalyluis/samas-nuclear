@@ -29,6 +29,9 @@ public class DuenoFuente implements Serializable {
 
     }
 
+    /**
+     * @param name Guardara la cadena que se ingrese desde la interfaz.
+     */
     public DuenoFuente(String name) {
         this.nombre = name;
     }

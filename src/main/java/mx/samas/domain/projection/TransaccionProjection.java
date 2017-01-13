@@ -18,6 +18,14 @@ public class TransaccionProjection {
     private Long flujoTitulos;
     private Long flujoEfectivo;
 
+    /**
+     * @param id Guardara un numero entre -2147483648 a 2147483647.
+     * @param fuenteTransaccion Guardara una cadena.
+     * @param nombre Guardara una cadena.
+     * @param credito Solo acepta como valores verdadero o falso (booleano) el cual guardara. 
+     * @param flujoTitulos Guardara un numero entre -2147483648 a 2147483647.
+     * @param flujoEfectivo Guardara un numero entre -2147483648 a 2147483647.
+     */
     public TransaccionProjection(Long id, String fuenteTransaccion, String nombre, Boolean credito, Long flujoTitulos, Long flujoEfectivo) {
         this.id = id;
         this.fuenteTransaccion = fuenteTransaccion;

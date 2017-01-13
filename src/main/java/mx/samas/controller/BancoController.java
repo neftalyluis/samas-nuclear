@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-/**
+/**Este es el controlador que se encargara de manipular Bancos.
  *
  * @author samas
  */
@@ -34,21 +34,38 @@ public class BancoController {
         return new ResponseEntity<>(bancoService.getAllBanco(), HttpStatus.OK);
     }
 
+    /**
+     * @param b Guardara el cuerpo de la request del Banco.
+     * @return Una respuesta confirmando que se creo con exito el Banco.
+     */
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<Banco> createBanco(@RequestBody Banco b) {
         return new ResponseEntity<>(bancoService.createBanco(b), HttpStatus.CREATED);
     }
 
+    /** 
+     * @param nombre Guardara el nombre que se ingrese desde la interfaz.
+     * @return Una respuesta de que se encontro con exito un Banco por su nombre.
+     */
     @RequestMapping(method = RequestMethod.GET, params = {"nombre"})
     public ResponseEntity<Banco> getBancoByNombre(@RequestParam(value = "nombre") String nombre) {
         return new ResponseEntity<>(bancoService.getByNombre(nombre), HttpStatus.OK);
     }
 
+    /** 
+     * @param id Guardara el Id que se ingrese desde la interfaz del Banco que se desea eliminar.
+     * @return Una respuesta de que se elimino con exito el Banco usando su Id.
+     */
     @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
     public ResponseEntity<Boolean> removeBanco(@PathVariable Long id) {
         return new ResponseEntity<>(bancoService.removeBancoById(id), HttpStatus.OK);
     }
 
+    /** 
+     * @param b Guardara el cuerpo de la request.
+     * @param id Guardara el Id que se ingrese desde la interfaz del Banco que se desea actualizar.
+     * @return Una respuesta de que se actualizo con exito el Id.
+     */
     @RequestMapping(method = RequestMethod.PUT, value = "/{id}")
     public ResponseEntity<Banco> updateBanco(@RequestBody Banco b, @PathVariable Long id) {
         return new ResponseEntity<>(bancoService.updateBancoById(b), HttpStatus.OK);

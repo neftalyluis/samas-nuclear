@@ -19,8 +19,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-/**
- *
+/**Este es el controlador que se encargara de manipular Activos.
+ * 
  * @author samas
  */
 @RestController
@@ -35,26 +35,46 @@ public class ActivoController {
         return new ResponseEntity<>(activoService.getAllActivos(), HttpStatus.OK);
     }
 
+    /**
+     * @param id Guardara el id que se ingrese desde la interfaz.
+     * @return Una respuesta de que se encontro con exito un activo por su id.
+     */
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
     public ResponseEntity<Activo> getActivoWithId(@PathVariable Long id) {
         return new ResponseEntity<>(activoService.getById(id), HttpStatus.OK);
     }
 
+    /**
+     * @param name Guardara el nombre que se ingrese desde la interfaz.
+     * @return Una respuesta de que se encontro con exito un activo por su nombre.
+     */
     @RequestMapping(method = RequestMethod.GET, params = {"nombre"})
     public ResponseEntity<List<Activo>> findActivoWithName(@RequestParam(value = "nombre") String name) {
         return new ResponseEntity<>(activoService.getByNombre(name), HttpStatus.OK);
     }
 
+    /**
+     * @param clavePizarra Guardara la clavePizarra que se ingrese desde de la interfaz. 
+     * @return Una respuesta de que se encontro con exito un activo por su clavePizarra.
+     */
     @RequestMapping(method = RequestMethod.GET, params = {"clavePizarra"})
     public ResponseEntity<Activo> findActivoWithClavePizarra(@RequestParam(value = "clavePizarra") String clavePizarra) {
         return new ResponseEntity<>(activoService.getByClavePizarra(clavePizarra), HttpStatus.OK);
     }
 
+    /**
+     * @param input Guardara el cuerpo de la request
+     * @return Una respuesta de que se agrego de forma exitosa el input (cuerpo de la request)
+     */
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<?> addActivo(@RequestBody Activo input) {
+    public ResponseEntity<Activo> addActivo(@RequestBody Activo input) {
         return new ResponseEntity<>(activoService.createActivo(input), HttpStatus.CREATED);
     }
 
+    /**
+     * @param id Guardara el id (propiedades) que se obtenga desde la interfaz.
+     * @return Una respuesta de que todo esta bien cuando se obtienen Propiedades del Activo (id).
+     */
     @RequestMapping(method = RequestMethod.GET, value = "/{id}/propiedades")
     public ResponseEntity<List<ActivoPropiedadValor>> getPropiedadesFromActivo(@PathVariable Long id) {
         return new ResponseEntity<>(activoService.getPropiedadesFromActivo(id), HttpStatus.OK);

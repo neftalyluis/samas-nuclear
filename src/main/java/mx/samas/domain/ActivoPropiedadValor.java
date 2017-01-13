@@ -33,6 +33,10 @@ public class ActivoPropiedadValor implements Serializable {
 
     }
 
+    /**
+     * @param valor Guardara la cadena que se ingrese desde la interfaz.
+     * @param propiedad Guardara el ActivoPropiedad que se ingrese desde la interfaz.
+     */
     public ActivoPropiedadValor(String valor, ActivoPropiedad propiedad) {
         this.valor = valor;
         this.propiedad = propiedad;

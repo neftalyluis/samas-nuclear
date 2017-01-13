@@ -38,6 +38,9 @@ public class BitacoraOrden implements Serializable {
     @ManyToMany(fetch = FetchType.EAGER)
     private List<Transaccion> transacciones;
 
+    /**Crea una nueva Lista de Arreglos con las Transacciones.
+     * No hay parametros.
+     */
     public BitacoraOrden() {
         this.transacciones = new ArrayList<>();
     }

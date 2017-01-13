@@ -13,8 +13,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
-/**
- *
+/**Esta clase crea un usuario de Spring a partir de la base de datos,
+ *si el nombre ingresado es nulo (null) arrojara un mensaje afirmando que no se encontro el usuario.  
+ * 
  * @author samas
  */
 @Component
@@ -24,7 +25,7 @@ public class CustomUserDetailsService implements UserDetailsService {
     private UsuarioService usuarioService;
 
     @Override
-    public UserDetails loadUserByUsername(String string) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String string) {
         Usuario user = usuarioService.getByUsername(string);
         if (user == null) {
             throw new UsernameNotFoundException("No se encontro el usuario con Nombre: " + string);

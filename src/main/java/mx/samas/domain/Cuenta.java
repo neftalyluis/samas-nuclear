@@ -42,6 +42,14 @@ public class Cuenta implements Serializable {
     public Cuenta() {
     }
 
+    /**
+     * @param idCuenta Guardara la cadena que se ingrese desde la interfaz.
+     * @param banco Guardara el banco que se ingrese desde la interfaz.
+     * @param tieneCredito Solo acepta como valores verdadero o falso (booleano) el cual guardara. 
+     * @param operaFlujo Solo acepta como valores verdadero o falso (booleano) el cual guardara. 
+     * @param operaIndice Solo acepta como valores verdadero o falso (booleano) el cual guardara. 
+     * @param operaDerivado Solo acepta como valores verdadero o falso (booleano) el cual guardara. 
+     */
     public Cuenta(String idCuenta, Banco banco, Boolean tieneCredito,
             Boolean operaFlujo, Boolean operaIndice, Boolean operaDerivado) {
         this.idCuenta = idCuenta;

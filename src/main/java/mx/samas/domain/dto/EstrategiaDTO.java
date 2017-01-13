@@ -19,6 +19,9 @@ public class EstrategiaDTO {
     private String nombre;
     private PortafolioModeloDTO modelos;
 
+    /**
+     * @return Los modelos que han validados.
+     */
     public boolean validate() {
         return modelos.validate();
     }

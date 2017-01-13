@@ -17,6 +17,11 @@ public class EstrategiaModeloProjection {
     private String clavePizarra;
     private Double diana;
 
+    /**
+     * @param fechaCreacion Guardara la fecha actual.
+     * @param clavePizarra Guardara una cadena.
+     * @param diana Guardara un numero fraccionario (de hasta 15 digitos) que se ingrese desde la interfaz.
+     */
     public EstrategiaModeloProjection(LocalDate fechaCreacion, String clavePizarra, Double diana) {
         this.fechaCreacion = fechaCreacion;
         this.clavePizarra = clavePizarra;

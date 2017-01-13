@@ -40,6 +40,10 @@ public class VectorActivo implements Serializable {
 
     }
 
+    /**
+     * @param fecha Guardara la cadena que se ingrese desde la interfaz.
+     * @param precioLimpio Guardara un numero fraccionario (de hasta 15 digitos) que se ingrese desde la interfaz.
+     */
     public VectorActivo(LocalDate fecha, Double precioLimpio) {
         this.fecha = fecha;
         this.precioLimpio = precioLimpio;

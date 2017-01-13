@@ -40,6 +40,16 @@ public class Bono extends Activo implements Serializable {
 
     }
 
+    /**
+     * @param tipoValor Guardara la cadena que se ingrese desde la interfaz.
+     * @param emisora Guardara la cadena que se ingrese desde la interfaz.
+     * @param serie Guardara la cadena que se ingrese desde la interfaz.
+     * @param isin Guardara la cadena que se ingrese desde la interfaz.
+     * @param nombre Guardara la cadena que se ingrese desde la interfaz.
+     * @param tipo Guardara el TipoActivo que se seleccione desde la interfaz.
+     * @param ventaEnCorto Solo acepta como valores verdadero o falso (booleano) el cual guardara. 
+     * @param pujaMinima Guardara un numero fraccionario (de hasta 15 digitos) que se ingrese desde la interfaz.
+     */
     public Bono(String tipoValor, String emisora, String serie, String isin,
             String nombre, TipoActivo tipo, Boolean ventaEnCorto,
             Double pujaMinima) {

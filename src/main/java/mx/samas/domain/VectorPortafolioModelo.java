@@ -37,17 +37,29 @@ public class VectorPortafolioModelo implements Serializable {
 
     private Double diana;
 
+    /**Obtiene la fecha actual.
+     * No hay parametros.
+     */
     public VectorPortafolioModelo() {
         this.creado = LocalDate.now();
 
     }
 
+    /**
+     * @param a Guardara el Activo ingresado desde la interfaz.
+     * @param diana Guardara un numero fraccionario (de hasta 15 digitos) que se ingrese desde la interfaz.
+     */
     public VectorPortafolioModelo(Activo a, Double diana) {
         this.activo = a;
         this.diana = diana;
         this.creado = LocalDate.now();
     }
 
+    /**
+     * @param a Guardara el Activo ingresado desde la interfaz.
+     * @param diana Guardara un numero fraccionario (de hasta 15 digitos) que se ingrese desde la interfaz.
+     * @param e Guardara la Estrategia ingresada desde la interfaz.
+     */
     public VectorPortafolioModelo(Activo a, Double diana, Estrategia e) {
         this.activo = a;
         this.diana = diana;
@@ -56,6 +68,12 @@ public class VectorPortafolioModelo implements Serializable {
 
     }
 
+    /**
+     * @param d Guardara la fecha del dia actual.
+     * @param a Guardara el Activo ingresado desde la interfaz.
+     * @param e Guardara la Estrategia ingresada desde la interfaz.
+     * @param diana Guardara un numero fraccionario (de hasta 15 digitos) que se ingrese desde la interfaz.
+     */
     public VectorPortafolioModelo(LocalDate d, Activo a, Estrategia e, Double diana) {
         this.activo = a;
         this.diana = diana;

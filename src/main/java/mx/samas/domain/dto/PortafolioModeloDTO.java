@@ -14,6 +14,9 @@ import java.util.Map;
  */
 public class PortafolioModeloDTO extends HashMap<String, Long> {
 
+    /**
+     * @return La variable total igual a 100. 
+     */
     public boolean validate() {
         Long total = 0L;
         

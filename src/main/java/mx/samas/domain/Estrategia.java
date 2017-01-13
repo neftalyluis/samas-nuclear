@@ -49,12 +49,19 @@ public class Estrategia implements Serializable {
 
     }
 
+    /**
+     * @param nombre Guardara la cadena que se ingrese desde la interfaz.
+     * @param modelo Guardara el Modelo (Lista de VectoresPortafolioModelo) que se ingrese desde la interfaz.
+     */
     public Estrategia(String nombre, List<VectorPortafolioModelo> modelo) {
         this.nombre = nombre;
         this.estrategiaModelo = modelo;
 
     }
 
+    /**
+     * @param nombre Guardara la cadena que se ingrese desde la interfaz.
+     */
     public Estrategia(String nombre) {
         this.nombre = nombre;
 
