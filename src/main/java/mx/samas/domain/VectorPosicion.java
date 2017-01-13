@@ -189,4 +189,7 @@ public class VectorPosicion implements Serializable {
         this.fecha = fecha;
     }
 
+    public Double getCapital() {
+        return this.valuacion * this.cantidad;
+    }
 }

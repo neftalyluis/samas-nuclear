@@ -30,16 +30,15 @@ public class Estrategia implements Serializable {
 
     private String nombre;
 
-    @JsonIgnore
     @OneToMany(mappedBy = "estrategia", cascade = CascadeType.ALL)
     private List<VectorPortafolioModelo> estrategiaModelo;
 
+    //Eversiones respecto a desbalances
     private Boolean liquidez;
     private Boolean efectivo;
     private Boolean grupos;
     private Boolean margen;
 
-    @JsonIgnore
     @ManyToMany
     private List<Grupo> grupoLista;
 
