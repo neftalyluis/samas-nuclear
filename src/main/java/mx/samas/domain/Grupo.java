@@ -29,6 +29,11 @@ public class Grupo implements Serializable {
 
     private Long piso;
     private Long techo;
+    /**
+     * Abarca desde 0 hasta x
+     * 
+     * Donde 0 es el nodo inicial del arbol
+     */
     private Long grupoPadre;
 
     @ElementCollection

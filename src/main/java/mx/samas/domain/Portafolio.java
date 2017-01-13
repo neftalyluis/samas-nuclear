@@ -50,6 +50,9 @@ public class Portafolio implements Serializable {
     @ManyToMany
     private List<Cuenta> corredores;
 
+    /**
+     * Credito Margen 
+     */
     private Double margen;
 
     /**

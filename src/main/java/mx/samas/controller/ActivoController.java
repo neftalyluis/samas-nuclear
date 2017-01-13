@@ -9,6 +9,8 @@ import java.util.List;
 import mx.samas.domain.Activo;
 import mx.samas.domain.ActivoPropiedadValor;
 import mx.samas.service.ActivoService;
+import org.nd4j.linalg.api.ndarray.INDArray;
+import org.nd4j.linalg.factory.Nd4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,6 +35,12 @@ public class ActivoController {
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<List<Activo>> getAllActivos() {
         return new ResponseEntity<>(activoService.getAllActivos(), HttpStatus.OK);
+    }
+    
+    @RequestMapping(method = RequestMethod.GET, value = "/ayylmao/")
+    public ResponseEntity<String> test(){
+        INDArray nd = Nd4j.create(new float[]{1,2,3,4},new int[]{2,2});
+        return new ResponseEntity<>(nd.toString(), HttpStatus.OK);
     }
 
     /**
