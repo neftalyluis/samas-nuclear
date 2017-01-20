@@ -37,6 +37,9 @@ public class ActivoController {
         return new ResponseEntity<>(activoService.getAllActivos(), HttpStatus.OK);
     }
     
+    /**
+     * @return Una respues de que se creo correctamente el arreglo. 
+     */
     @RequestMapping(method = RequestMethod.GET, value = "/ayylmao/")
     public ResponseEntity<String> test(){
         INDArray nd = Nd4j.create(new float[]{1,2,3,4},new int[]{2,2});
@@ -81,7 +84,7 @@ public class ActivoController {
 
     /**
      * @param id Guardara el id (propiedades) que se obtenga desde la interfaz.
-     * @return Una respuesta de que todo esta bien cuando se obtienen Propiedades del Activo (id).
+     * @return Una respuesta cuando se obtienen Propiedades del Activo (id) correctamente.
      */
     @RequestMapping(method = RequestMethod.GET, value = "/{id}/propiedades")
     public ResponseEntity<List<ActivoPropiedadValor>> getPropiedadesFromActivo(@PathVariable Long id) {

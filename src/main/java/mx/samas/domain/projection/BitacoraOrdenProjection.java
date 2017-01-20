@@ -17,6 +17,11 @@ public class BitacoraOrdenProjection {
     private String usaActivo;
     private List<TransaccionProjection> transacciones;
 
+    /**
+     * @param id Variable de tipo long que almacenara el id de la Orden
+     * @param usaActivo Variable de tipo cadena
+     * @param transacciones Variable que almacenara una lista de transacciones.
+     */
     public BitacoraOrdenProjection(Long id, String usaActivo, List<TransaccionProjection> transacciones) {
         this.id = id;
         this.usaActivo = usaActivo;

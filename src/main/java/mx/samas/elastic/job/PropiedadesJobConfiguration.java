@@ -37,6 +37,9 @@ public class PropiedadesJobConfiguration {
     @Autowired
     private StepBuilderFactory stepBuilderFactory;
 
+    /**
+     * @return 
+     */
     @Bean
     public Job elasticJob() {
         return jobs.get("elasticJob")
@@ -44,6 +47,9 @@ public class PropiedadesJobConfiguration {
                 .build();
     }
 
+    /**
+     * @return 
+     */
     @Bean
     public Step elasticStep() {
         return stepBuilderFactory.get("elasticStep")
@@ -54,6 +60,9 @@ public class PropiedadesJobConfiguration {
                 .build();
     }
 
+    /**
+     * @return 
+     */
     @Bean
     @StepScope
     public FlatFileItemReader<VectorActivoPropiedadValor> activoElasticReader() {
@@ -66,7 +75,7 @@ public class PropiedadesJobConfiguration {
     }
 
     private Resource getFileFromDirectory() {
-        String PIP_LOCATION = "vector/pip/VectorTest.csv";
+        String PIP_LOCATION = "vector/pip/VectorTest.csv"; //Renombrar la variable.
         ClassLoader classLoader = getClass().getClassLoader();
 
         File fl = new File(classLoader.getResource(PIP_LOCATION).getFile());
@@ -74,6 +83,9 @@ public class PropiedadesJobConfiguration {
         return new FileSystemResource(fl);
     }
 
+    /**
+     * @return 
+     */
     @Bean
     public LineMapper<VectorActivoPropiedadValor> activoElasticLineMapper() {
         DefaultLineMapper<VectorActivoPropiedadValor> lineMapper = new DefaultLineMapper<>();
@@ -92,11 +104,17 @@ public class PropiedadesJobConfiguration {
         return lineMapper;
     }
 
+    /**
+     * @return 
+     */
     @Bean
     public VectorActivoElasticFieldSetMapper activoElasticFieldSetMapper() {
         return new VectorActivoElasticFieldSetMapper();
     }
 
+    /**
+     * @return 
+     */
     @Bean
     public ItemWriter<VectorActivoPropiedadValor> activoElasticWriter() {
         return new VectorActivoElasticItemWriter();
