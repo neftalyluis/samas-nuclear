@@ -51,16 +51,28 @@ public class ActivoPropiedadController {
         return new ResponseEntity<>(activoPropiedadService.createPropiedad(prop), HttpStatus.CREATED);
     }
 
+    /**
+     * @param clavePizarra Cadena que obtendra una lista de propiedades de los activos.
+     * @return Una respuesta de que obtivieron todas las propiedades de activos de manera exitosa.
+     */
     @RequestMapping(method = RequestMethod.GET, value = "/activo/{clavePizarra}")
     public ResponseEntity<List<ActivoPropiedad>> getPropiedadListFromActivo(@PathVariable String clavePizarra) {
         return new ResponseEntity<>(activoPropiedadService.getAllPropiedadesInActivoWithClavePizarra(clavePizarra), HttpStatus.OK);
     }
 
+    /**
+     * @param clavePizarra Cadena que obtendra una lista de vectores propiedad de los activos.
+     * @return Una respuesta de que obtuvo la propiedad vector de un activo de manera exitosa.
+     */
     @RequestMapping(method = RequestMethod.GET, value = "/activo/{clavePizarra}/vectorial")
     public ResponseEntity<List<ActivoPropiedad>> getVectorialPropiedadListFromActivo(@PathVariable String clavePizarra) {
         return new ResponseEntity<>(activoPropiedadService.getVectorialPropiedadesInActivoWithClavePizarra(clavePizarra), HttpStatus.OK);
     }
 
+    /**
+     * @param clavePizarra Cadena que obtendra una lista de propiedades estaticas de los activos.
+     * @return Una respuesta de que obtuvo la propiedad estatica de un activo de manera exitosa.
+     */
     @RequestMapping(method = RequestMethod.GET, value = "/activo/{clavePizarra}/estatica")
     public ResponseEntity<List<ActivoPropiedad>> getEstaticaPropiedadListFromActivo(@PathVariable String clavePizarra) {
         return new ResponseEntity<>(activoPropiedadService.getEstaticaPropiedadesInActivoWithClavePizarra(clavePizarra), HttpStatus.OK);

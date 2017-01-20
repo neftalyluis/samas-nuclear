@@ -36,21 +36,39 @@ public class BitacoraOrdenController {
         return new ResponseEntity<>(bitacoraOrdenService.getAll(), HttpStatus.OK);
     }
 
+    /**
+     * @param dto Variable de tipo BitacoraOrdenDTO compuesta por una cadena (nombre), 
+     * un booleano (usaActivo) y una lista de long's (transacciones).
+     * @return Una respuesta de que la Orden se creo con exito.
+     */
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<BitacoraOrden> createFromDTO(BitacoraOrdenDTO dto) {
         return new ResponseEntity<>(bitacoraOrdenService.createOrden(dto), HttpStatus.OK);
     }
 
+    /**
+     * @param id 
+     * @return Una respuesta de que se encontro el id de la orden en la bitacora. 
+     */
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
     public ResponseEntity<BitacoraOrden> getById(@PathVariable(value = "id") Long id) {
         return new ResponseEntity<>(bitacoraOrdenService.findOrdenById(id), HttpStatus.OK);
     }
 
+    /**
+     * @param nombre Variable de tipo cadena que almacenara un nombre.
+     * @return Una respuesta de que se encontro el nombre de la orden en la bitacora. 
+     */
     @RequestMapping(method = RequestMethod.GET, value = "/nombre/{nombre}")
     public ResponseEntity<BitacoraOrden> getByNombre(@PathVariable(value = "nombre") String nombre) {
         return new ResponseEntity<>(bitacoraOrdenService.findOneOrdenByNombre(nombre), HttpStatus.OK);
     }
     
+    /**
+     * @param orden Variable de tipo BitacoraOrdenEjecutorDTO compuesta de un tipo de variable long (idOperacion),
+     * tres cadenas (folioOperacion, clavePizarra y numeroContrato) y una lista (valorTransacciones)
+     * @return Una respuesta de que se encontro la orden en la bitacora. 
+     */
     @RequestMapping(method = RequestMethod.POST, value = "/execute/")
     public ResponseEntity<List<Bitacora>> execute(@RequestBody BitacoraOrdenEjecutorDTO orden) {
         return new ResponseEntity<>(bitacoraOrdenService.executeOrden(orden), HttpStatus.OK);
