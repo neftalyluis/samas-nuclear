@@ -24,7 +24,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
 
-/**
+/**PENDIENTE
  *
  * @author samas
  */
@@ -75,10 +75,10 @@ public class PropiedadesJobConfiguration {
     }
 
     private Resource getFileFromDirectory() {
-        String PIP_LOCATION = "vector/pip/VectorTest.csv"; //Renombrar la variable.
+        String pipLocation = "vector/pip/VectorTest.csv"; //Renombrar la variable.
         ClassLoader classLoader = getClass().getClassLoader();
 
-        File fl = new File(classLoader.getResource(PIP_LOCATION).getFile());
+        File fl = new File(classLoader.getResource(pipLocation).getFile());
 
         return new FileSystemResource(fl);
     }
