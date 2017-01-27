@@ -11,6 +11,9 @@ package mx.samas.exception;
  */
 public class NotFoundException extends RuntimeException {
 
+    /**
+     * @param msg Esta variable guardara una cadena que representa un mensaje de excepcion de Elasticsearch.
+     */
     public NotFoundException(String msg) {
         super(msg);
     }

@@ -11,6 +11,9 @@ package mx.samas.exception;
  */
 public class ElasticException extends RuntimeException {
 
+    /**
+     * @param msg Esta variable guardara una cadena que representa un mensaje de excepcion de Elasticsearch.
+     */
     public ElasticException(String msg) {
         super(msg);
     }
