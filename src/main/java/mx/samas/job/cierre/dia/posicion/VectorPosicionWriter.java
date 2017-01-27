@@ -30,7 +30,7 @@ public class VectorPosicionWriter implements ItemWriter<List<VectorPosicion>> {
     @Override
     public void write(List<? extends List<VectorPosicion>> items) throws Exception {
 
-        items.stream().forEach((listaPosiciones) -> {
+        items.stream().forEach(listaPosiciones -> {
 
             vectorPosicionService.persistPosiciones(listaPosiciones);
 

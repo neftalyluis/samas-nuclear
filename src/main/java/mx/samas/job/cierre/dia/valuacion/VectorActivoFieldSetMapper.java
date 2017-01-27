@@ -18,8 +18,6 @@ import org.springframework.validation.BindException;
 public class VectorActivoFieldSetMapper implements FieldSetMapper<VectorActivoDTO> {
 
     /**
-     * FALTA CAMBIAR VECTOR ACTIVO POR EL DTO!!!!
-     *
      * @param fieldSet
      * @return
      * @throws BindException
@@ -27,8 +25,7 @@ public class VectorActivoFieldSetMapper implements FieldSetMapper<VectorActivoDT
     @Override
     public VectorActivoDTO mapFieldSet(FieldSet fieldSet) throws BindException {
         String clavePizarra = fieldSet.readString(1) + "_" + fieldSet.readString(2) + "_" + fieldSet.readString(3);
-        VectorActivoDTO activo = new VectorActivoDTO(clavePizarra, LocalDate.now(), fieldSet.readDouble(5));
-        return activo;
+        return new VectorActivoDTO(clavePizarra, LocalDate.now(), fieldSet.readDouble(5));
     }
 
 }

@@ -66,7 +66,7 @@ public class VectorPosicionProcessor implements ItemProcessor<Cuenta, List<Vecto
 
             //Hacemos sumatoria con un Lambda
             bitacoraService
-                    .getBitacoraListFromLastDay(p).stream().forEach((b) -> {
+                    .getBitacoraListFromLastDay(p).stream().forEach(b -> {
                 if (posicionesActuales.containsKey(b.getActivo())) {
                     VectorPosicion modificar = posicionesActuales.get(b.getActivo());
                     Long cantidad = modificar.getCantidad() + b.getTitulos();
