@@ -36,6 +36,8 @@ public class VectorPosicion implements Serializable {
     private Long cantidad;
 
     private Double valuacion;
+    
+    private Double porcentajeRespectoPortafolio;
 
     /**
      * No se puede Operar
@@ -194,5 +196,19 @@ public class VectorPosicion implements Serializable {
 
     public Double getCapital() {
         return this.valuacion * this.cantidad;
+    }
+
+    /**
+     * @return the porcentajeRespectoPortafolio
+     */
+    public Double getPorcentajeRespectoPortafolio() {
+        return porcentajeRespectoPortafolio;
+    }
+
+    /**
+     * @param porcentajeRespectoPortafolio the porcentajeRespectoPortafolio to set
+     */
+    public void setPorcentajeRespectoPortafolio(Double porcentajeRespectoPortafolio) {
+        this.porcentajeRespectoPortafolio = porcentajeRespectoPortafolio;
     }
 }

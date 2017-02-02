@@ -23,6 +23,13 @@ public class Presupuesto {
 
     private static final Logger LOG = Logger.getLogger(Presupuesto.class.getName());
 
+    private Map<String, Double> presupuesto;
+    private Map<String, Double> margenReservado;
+    private Map<String, Double> diana;
+    private Map<String, Double> liquidez;
+    private Map<String, Double> efectivo;
+    private Map<String, Double> grupal;
+
     public Presupuesto(List<VectorActivo> precios, Long fechaValor, Estrategia e,
             List<VectorPosicion> ultimasPosiciones, Double gradoBalance,
             Boolean creditoMargen, Double liquidez) {
@@ -31,21 +38,35 @@ public class Presupuesto {
         HashMap<String, TuplePortafolio> mapaTupla = createFromPosicionAndEstrategia(ultimasPosiciones, e.getEstrategiaModelo());
         checarDesbalance(mapaTupla, gradoBalance, liquidez);
 
-        //Lineas 97 a 101 de Julia
+        //Lineas 97 a 101 de Julia: Tipos.jl
 //        if (creditoMargen) {
 //
 //        }
         Double deltaA = null;
     }
 
-    private Double calcularDiana() {
-        
-//        for(){
-//            
-//        }
-        
-        return null;
-    }
+//    private void calcularMargenReservado() {
+//
+//    }
+//
+//    private void calcularLiquidez() {
+//
+//    }
+//
+//    private void calcularEfectivo() {
+//
+//    }
+//
+//    private void calcularGrupos() {
+//
+//    }
+//
+//    private void calcularDiana() {
+//
+////        for(){
+////            
+////        }
+//    }
 
     private HashMap<String, TuplePortafolio> createFromPosicionAndEstrategia(List<VectorPosicion> posiciones, List<VectorPortafolioModelo> modelos) {
         HashMap<String, TuplePortafolio> tuplaMap = new HashMap<>();
@@ -74,5 +95,9 @@ public class Presupuesto {
                 throw new GradoBalanceFueraDeRangoException("Grado Balance fuera de rango para: " + entry.getKey());
             }
         }
+    }
+
+    private void creditoMargen() {
+
     }
 }

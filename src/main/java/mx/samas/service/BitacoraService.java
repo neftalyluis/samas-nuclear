@@ -31,4 +31,5 @@ public interface BitacoraService {
 
     public List<Bitacora> getBitacoraListFromLastDay(Portafolio item);
 
+    public List<Bitacora> getAllEntries();
 }
