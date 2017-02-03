@@ -14,6 +14,10 @@ public class TuplePortafolio {
     private Double posicion;
     private Double diana;
 
+    /** TENGO DUDAS AQUI
+     * @param posicion Variable de tipo Double
+     * @param diana Variable de tipo Double
+     */
     public TuplePortafolio(Double posicion, Double diana) {
         this.posicion = posicion;
         this.diana = diana;

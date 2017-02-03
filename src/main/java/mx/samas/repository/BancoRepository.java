@@ -16,5 +16,9 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface BancoRepository extends JpaRepository<Banco, Long> {
 
+    /**
+     * @param nombre Variable de tipo cadena que almacenara el nombre de un Banco.
+     * @return El nombre del Banco.
+     */
     public Banco findByNombreContaining(String nombre);
 }

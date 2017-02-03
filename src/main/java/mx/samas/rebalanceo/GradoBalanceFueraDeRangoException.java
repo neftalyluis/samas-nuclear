@@ -10,6 +10,10 @@ package mx.samas.rebalanceo;
  * @author samas
  */
 public class GradoBalanceFueraDeRangoException extends RuntimeException{
+    
+    /**
+     * @param causa Variable te tipo String, almacenara un mensaje que se emitira cuando se genere la excepcion. 
+     */
     public GradoBalanceFueraDeRangoException(String causa){
         super(causa);
     }

@@ -15,7 +15,7 @@ import mx.samas.domain.VectorActivo;
 import mx.samas.domain.VectorPortafolioModelo;
 import mx.samas.domain.VectorPosicion;
 
-/**
+/** TENGO DUDAS AQUI
  *
  * @author samas
  */
@@ -23,6 +23,15 @@ public class Presupuesto {
 
     private static final Logger LOG = Logger.getLogger(Presupuesto.class.getName());
 
+    /**
+     * @param precios Variable de tipo List, que almacena una lista de VectoresActivo.
+     * @param fechaValor Variable de tipo Long
+     * @param e Variable de tipo Estrategia
+     * @param ultimasPosiciones Variable de tipo List, que almacena una lista de VectoresPosicion.
+     * @param gradoBalance Variable de tipo Double
+     * @param creditoMargen Variable de tipo Booleano, solo puede tener como valores "verdadero" o "falso".
+     * @param liquidez Variable de tipo Double 
+     */
     public Presupuesto(List<VectorActivo> precios, Long fechaValor, Estrategia e,
             List<VectorPosicion> ultimasPosiciones, Double gradoBalance,
             Boolean creditoMargen, Double liquidez) {
