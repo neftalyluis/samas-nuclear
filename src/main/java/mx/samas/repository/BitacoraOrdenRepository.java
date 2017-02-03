@@ -14,5 +14,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
  */
 public interface BitacoraOrdenRepository extends JpaRepository<BitacoraOrden, Long> {
 
+    /**
+     * @param nombre Variable de tipo cadena que almacenara un nombre.
+     * @return El nombre de la BitacoraOrden.
+     */
     public BitacoraOrden findOneByNombre(String nombre);
 }

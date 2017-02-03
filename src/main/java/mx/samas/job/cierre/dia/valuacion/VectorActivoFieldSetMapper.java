@@ -18,8 +18,8 @@ import org.springframework.validation.BindException;
 public class VectorActivoFieldSetMapper implements FieldSetMapper<VectorActivoDTO> {
 
     /**
-     * @param fieldSet
-     * @return
+     * @param fieldSet Variable de tipo FieldSet que almacenara un conjunto de cadenas y las agrupa.
+     * @return Un nuevo constructor VectorActivoDTO con sus respectivos parametros.
      * @throws BindException
      */
     @Override
