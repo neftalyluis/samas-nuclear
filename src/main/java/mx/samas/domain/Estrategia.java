@@ -37,6 +37,7 @@ public class Estrategia implements Serializable {
     private Boolean efectivo;
     private Boolean grupos;
     private Boolean margen;
+    private Double concentracionPorExposicion;
 
     @ManyToMany
     private List<Grupo> grupoLista;
@@ -49,7 +50,8 @@ public class Estrategia implements Serializable {
 
     /**
      * @param nombre Guardara la cadena que se ingrese desde la interfaz.
-     * @param modelo Guardara el Modelo (Lista de VectoresPortafolioModelo) que se ingrese desde la interfaz.
+     * @param modelo Guardara el Modelo (Lista de VectoresPortafolioModelo) que
+     * se ingrese desde la interfaz.
      */
     public Estrategia(String nombre, List<VectorPortafolioModelo> modelo) {
         this.nombre = nombre;
@@ -194,6 +196,20 @@ public class Estrategia implements Serializable {
      */
     public void setGrupoLista(List<Grupo> grupoLista) {
         this.grupoLista = grupoLista;
+    }
+
+    /**
+     * @return the concentracionPorExposicion
+     */
+    public Double getConcentracionPorExposicion() {
+        return concentracionPorExposicion;
+    }
+
+    /**
+     * @param concentracionPorExposicion the concentracionPorExposicion to set
+     */
+    public void setConcentracionPorExposicion(Double concentracionPorExposicion) {
+        this.concentracionPorExposicion = concentracionPorExposicion;
     }
 
 }
