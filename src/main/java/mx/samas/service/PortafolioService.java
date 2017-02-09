@@ -23,4 +23,5 @@ public interface PortafolioService {
     public List<Portafolio> getPortafoliosFromCuenta(Cuenta c);
     public Portafolio getById(Long id);
     public PortafolioProjection getProjectedById(Long id);
+    public List<Portafolio> getAll();
 }

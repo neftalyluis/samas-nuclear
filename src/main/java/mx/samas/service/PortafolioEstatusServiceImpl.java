@@ -5,6 +5,7 @@
  */
 package mx.samas.service;
 
+import java.util.List;
 import mx.samas.domain.PortafolioEstatus;
 import mx.samas.repository.PortafolioEstatusRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,11 @@ public class PortafolioEstatusServiceImpl implements PortafolioEstatusService {
     @Override
     public PortafolioEstatus getEstatusInicial() {
         return portafolioEstatusRepository.getEstatusInicial();
+    }
+
+    @Override
+    public List<PortafolioEstatus> getAll() {
+        return portafolioEstatusRepository.findAll();
     }
 
 }

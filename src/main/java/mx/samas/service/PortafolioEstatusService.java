@@ -5,6 +5,7 @@
  */
 package mx.samas.service;
 
+import java.util.List;
 import mx.samas.domain.PortafolioEstatus;
 
 /**
@@ -18,5 +19,7 @@ public interface PortafolioEstatusService {
     public PortafolioEstatus getPortafolioEstatusByNombre(String nombre);
     
     public PortafolioEstatus getEstatusInicial();
+    
+    public List<PortafolioEstatus> getAll();
 
 }

@@ -86,4 +86,9 @@ public class PortafolioServiceImpl implements PortafolioService {
         return portafolioRepository.findById(id);
     }
 
+    @Override
+    public List<Portafolio> getAll() {
+        return portafolioRepository.findAll();
+    }
+
 }
