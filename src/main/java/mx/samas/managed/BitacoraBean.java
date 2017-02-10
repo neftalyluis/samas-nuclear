@@ -39,6 +39,9 @@ public class BitacoraBean implements Serializable {
     @Autowired
     private BitacoraService bitacoraService;
 
+    /**
+     * No solicita ningun parametro y no regresa nada.
+     */
     @PostConstruct
     public void init() {
         bitacoraList = bitacoraService.getAllEntries();

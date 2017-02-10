@@ -38,6 +38,13 @@ public class Eversion {
     private Map<String, Double> mapaParticipacion;
     private Map<String, Double> mapaImporteIndeterminado;
 
+    /**
+     * @param e Variable de tipo Estrategia
+     * @param posicionesList Variable de tipo List, que almacena una lista de VectoresPosicion.
+     * @param modeloList Variable de tipo List, que almacena una lista de VectoresPortafolioModelo.
+     * @param preciosList Variable de tipo List, que almacena una lista de VectoresActivo.
+     * @param p Variable de tipo Presupuesto
+     */
     public Eversion(Estrategia e, List<VectorPosicion> posicionesList,
             List<VectorPortafolioModelo> modeloList, List<VectorActivo> preciosList,
             Presupuesto p) {
