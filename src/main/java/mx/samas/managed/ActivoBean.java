@@ -38,6 +38,9 @@ public class ActivoBean {
     @Autowired
     private ActivoService activoService;
 
+    /**
+     * No solicita ningun parametro y no regresa nada.
+     */
     @PostConstruct
     public void init() {
         activoList = activoService.getAllActivos();

@@ -39,6 +39,9 @@ public class TransaccionBean implements Serializable {
     @Autowired
     private TransaccionService transaccionService;
 
+    /**
+     * No solicita ningun parametro y no regresa nada.
+     */
     @PostConstruct
     public void init() {
         transaccionList = transaccionService.getAllTransacciones();

@@ -17,5 +17,9 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface CuentaRepository extends JpaRepository<Cuenta, Long> {
 
+    /**
+     * @param idCuenta Variable de tipo que cadena que almacenara el id de una Cuenta.
+     * @return La cuenta asignada a un id.
+     */
     public Cuenta getByIdCuenta(String idCuenta);
 }
