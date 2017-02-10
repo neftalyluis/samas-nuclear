@@ -32,4 +32,9 @@ public class VectorPosicionServiceImpl implements VectorPosicionService {
         vectorPosicionRepository.save(listVector);
     }
 
+    @Override
+    public List<VectorPosicion> getAllPosiciones() {
+        return vectorPosicionRepository.findAll();
+    }
+
 }
