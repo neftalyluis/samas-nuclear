@@ -18,4 +18,7 @@ public interface VectorPosicionService {
     public List<VectorPosicion> getLastPosicionesFromPortafolio(Portafolio p);
 
     public void persistPosiciones(List<VectorPosicion> listVector);
+    
+    public List<VectorPosicion> getAllPosiciones();
+    
 }

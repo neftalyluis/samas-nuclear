@@ -5,6 +5,7 @@
  */
 package mx.samas.service;
 
+import java.util.List;
 import mx.samas.domain.Usuario;
 import mx.samas.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,11 @@ public class UsuarioServiceImpl implements UsuarioService {
     @Override
     public Usuario createUsuario(Usuario u) {
         return usuarioRepository.save(u);
+    }
+
+    @Override
+    public List<Usuario> getAllUsuarios() {
+        return usuarioRepository.findAll();
     }
 
 }

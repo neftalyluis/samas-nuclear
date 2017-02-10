@@ -7,13 +7,14 @@
         <title>Tabla Usuario</title>
     </h:head>
     <h:body>
-        <p:dataTable var="usuarios" value="">
+        <p:dataTable var="usuario" value="#{usuarioBean.usuarioList}" reflow="true" rows="50" paginator="true">
+            
             <p:column headerText="Nombre de Usuario">
-                <h:outputText value="" />
+                <h:outputText value="#{usuario.nombreUsuario}" />
             </p:column>
- 
+
             <p:column headerText="Nombre Completo">
-                <h:outputText value="" />
+                <h:outputText value="#{usuario.nombreCompleto}" />
             </p:column>
             
         </p:dataTable>
