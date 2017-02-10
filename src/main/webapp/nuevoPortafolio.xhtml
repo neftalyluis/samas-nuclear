@@ -8,38 +8,44 @@
         <title>Nuevo Portafolio</title>
     </h:head>
     <h:body>
-
+<!-- TODO Los managed beans -->
         <h:form>
-            <h:panelGrid columns="2" cellpadding="6">
-                <p:outputLabel for="cuentaEje" value="Cuenta Eje:" /> <p:inputText id="cuentaEje" />
+            <h:panelGrid columns="2" cellpadding="5">
+                <p:outputLabel for="cuentaEje" value="Cuenta Eje:" /> 
+                <p:inputText id="cuentaEje" />
 
                 <p:outputLabel for="estrategia" value="Estrategia:" />   
-                <p:selectOneMenu id="estrategia" value="#{selectOneMenuView.estrategia}" style="width:125px">
+                <p:selectOneMenu id="estrategia" value="#{portafolioCrearBean.nuevo.estrategia}" style="width:125px">
                     <f:selectItem itemLabel="Seleccione una Opcion" itemValue="" />
-                    <f:selectItem itemLabel="1" itemValue="1" />
-                    <f:selectItem itemLabel="2" itemValue="2" />
-                    <f:selectItem itemLabel="3" itemValue="3" />
+                    <f:selectItems value="#{portafolioCrearBean.estrategiaSelectList}" />
                 </p:selectOneMenu>
 
                 <p:outputLabel for="tipoServicio" value="Tipo Servicio:" />
-                <p:selectOneMenu id="tipoServicio" value="#{selectOneMenuView.tipoServicio}" style="width:125px">
+                <p:selectOneMenu id="tipoServicio" value="#{portafolioCrearBean.nuevo.tipoServicio}" style="width:125px">
                     <f:selectItem itemLabel="Seleccione una Opcion" itemValue="" />
-                    <f:selectItem itemLabel="1" itemValue="1" />
-                    <f:selectItem itemLabel="2" itemValue="2" />
-                    <f:selectItem itemLabel="3" itemValue="3" />
+                    <f:selectItems value="#{portafolioCrearBean.tipoServicioSelectList}" />
                 </p:selectOneMenu> 
 
                 <p:outputLabel for="estatus" value="Estatus:" />
-                <p:selectOneMenu id="estatus" value="#{selectOneMenuView.estatus}" style="width:125px">
+                <p:selectOneMenu id="estatus" value="#{portafolioCrearBean.nuevo.estatus}" style="width:125px">
                     <f:selectItem itemLabel="Seleccione una Opcion" itemValue="" />
-                    <f:selectItem itemLabel="1" itemValue="1" />
-                    <f:selectItem itemLabel="2" itemValue="2" />
-                    <f:selectItem itemLabel="3" itemValue="3" />
+                    <f:selectItems value="#{portafolioCrearBean.estatusSelectList}" />
                 </p:selectOneMenu>
 
-                <p:outputLabel for="monedaDenominacion" value="Moneda Denominacion:" /> <p:inputText id="monedaDenominacion" /> 
+                <p:outputLabel for="monedaDenominacion" value="Moneda Denominacion:" /> 
+                <p:inputText id="monedaDenominacion" /> 
 
-                <p:commandButton value="Enviar" icon="ui-icon-check" />
+                <p:commandButton id="submit" value="Submit" update="display" icon="ui-icon-check" oncomplete="PF('dlg').show()" />
+
+                <p:dialog id="dialog" header="Values" modal="true" resizable="false" showEffect="fade" widgetVar="dlg">
+                    <h:panelGrid columns="1" id="display">
+                        <h:outputText value="Value 1: #{portafolioCrearBean.nuevo.cuentaEje}" />
+                        <h:outputText value="Value 2: #{portafolioCrearBean.nuevo.estrategia.nombre}" />
+                        <h:outputText value="Value 3: #{portafolioCrearBean.nuevo.tipoServicio.nombre}" />
+                        <h:outputText value="Value 4: #{portafolioCrearBean.nuevo.estatus.nombre}" />
+
+                    </h:panelGrid>
+                </p:dialog>
 
             </h:panelGrid>
 
