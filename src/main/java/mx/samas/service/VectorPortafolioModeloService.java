@@ -23,4 +23,7 @@ public interface VectorPortafolioModeloService {
     public List<VectorPortafolioModelo> getAllModelosFromEstrategia(Long id);
 
     public List<VectorPortafolioModelo> createPortafolioModeloListFromDTO(PortafolioModeloDTO models, Estrategia e);
+
+    public List<VectorPortafolioModelo> getAll();
+
 }

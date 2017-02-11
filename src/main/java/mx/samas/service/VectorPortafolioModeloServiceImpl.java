@@ -15,6 +15,7 @@ import mx.samas.domain.VectorPortafolioModelo;
 import mx.samas.domain.dto.PortafolioModeloDTO;
 import mx.samas.repository.ActivoRepository;
 import mx.samas.repository.EstrategiaRepository;
+import mx.samas.repository.VectorPortafolioModeloRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,6 +31,9 @@ public class VectorPortafolioModeloServiceImpl implements VectorPortafolioModelo
 
     @Autowired
     private ActivoRepository activoRepository;
+
+    @Autowired
+    private VectorPortafolioModeloRepository vectorPortafolioModeloRepository;
 
     @Override
     public List<VectorPortafolioModelo> getLastPortafolioModeloFromEstrategia(Long id) {
@@ -95,6 +99,11 @@ public class VectorPortafolioModeloServiceImpl implements VectorPortafolioModelo
             newList.add(pm);
         }
         return newList;
+    }
+
+    @Override
+    public List<VectorPortafolioModelo> getAll() {
+        return vectorPortafolioModeloRepository.findAll();
     }
 
 }
