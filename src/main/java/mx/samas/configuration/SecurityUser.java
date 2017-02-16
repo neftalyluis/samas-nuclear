@@ -15,25 +15,29 @@ import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.util.StringUtils;
 
-/**Clase que obtiene cadenas ingresadas por el usuario como seguridad.
- * 
+/**
+ * DTO para unir la entidad Usuario de SAMAS y el UserDetails de Spring Security
+ *
  * @author samas
  */
-public class SecurityUser extends Usuario implements UserDetails {
+public class SecurityUser implements UserDetails {
 
     private List<String> usuarioPerfiles;
+    private String username;
+    private String password;
 
-    //Perdoname madre por mi vida loca D;<
-    
-    /** @param u Si no es nulo, crea una lista de arreglos que se agrega a usuarioPerfiles */
+    /**
+     *
+     * Constructor para crear el DTO apartir de la entidad
+     *
+     * @param u El usuario a convertirse en DTO
+     */
     public SecurityUser(Usuario u) {
         if (u != null) {
+            password = u.getPassword();
+            username = u.getNombreUsuario();
+            
             usuarioPerfiles = new ArrayList<>();
-            this.setId(u.getId());
-            this.setNombreCompleto(u.getNombreCompleto());
-            this.setNombreUsuario(u.getNombreUsuario());
-            this.setPassword(u.getPassword());
-            this.setPerfiles(u.getPerfiles());
             for (Perfil p : u.getPerfiles()) {
                 usuarioPerfiles.add(p.getNombre());
             }
@@ -47,15 +51,14 @@ public class SecurityUser extends Usuario implements UserDetails {
         return AuthorityUtils.commaSeparatedStringToAuthorityList(perfiles);
     }
 
-    /** @return La cadena que ingresa el usuario.*/
-    /*@Override
+    @Override
     public String getPassword() {
-        return super.getPassword();
-    } <------Tengo duda. */
+        return password;
+    }
 
     @Override
     public String getUsername() {
-        return super.getNombreUsuario();
+        return username;
     }
 
     @Override
@@ -82,7 +85,6 @@ public class SecurityUser extends Usuario implements UserDetails {
         return usuarioPerfiles;
     }
 
-    /** @param usuarioPerfiles the usuarioPerfiles to set */
     public void setUsuarioPerfiles(List<String> usuarioPerfiles) {
         this.usuarioPerfiles = usuarioPerfiles;
     }

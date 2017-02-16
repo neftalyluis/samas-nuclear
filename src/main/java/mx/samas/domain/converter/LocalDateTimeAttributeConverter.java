@@ -11,6 +11,7 @@ import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
 
 /**
+ * Converter para poder utilizar la clase LocalDateTime en JPA
  *
  * @author samas
  */

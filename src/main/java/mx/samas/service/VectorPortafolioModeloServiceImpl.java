@@ -95,7 +95,8 @@ public class VectorPortafolioModeloServiceImpl implements VectorPortafolioModelo
             String key = entry.getKey();
             Long value = entry.getValue();
             Activo a = activoRepository.findFirstByClavePizarra(key);
-            VectorPortafolioModelo pm = new VectorPortafolioModelo(a, new Double(value), e);
+            //TODO
+            VectorPortafolioModelo pm = new VectorPortafolioModelo();
             newList.add(pm);
         }
         return newList;

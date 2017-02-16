@@ -7,7 +7,6 @@ package mx.samas.domain.projection;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import javax.validation.constraints.NotNull;
 
 /**
  *
@@ -15,19 +14,12 @@ import javax.validation.constraints.NotNull;
  */
 public class PortafolioProjection implements Serializable {
 
-    @NotNull
     private String cuentaEje;
-    @NotNull
     private String nombreEstrategia;
-    @NotNull
     private String nombreTipoServicio;
-    @NotNull
     private String monedaDenominacionTicker;
-    @NotNull
     private Double margen;
-    @NotNull
     private String estatus;
-    @NotNull
     private LocalDate fecha;
 
     /**

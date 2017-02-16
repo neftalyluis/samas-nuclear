@@ -9,8 +9,6 @@ import java.util.List;
 import mx.samas.domain.Activo;
 import mx.samas.domain.ActivoPropiedadValor;
 import mx.samas.service.ActivoService;
-import org.nd4j.linalg.api.ndarray.INDArray;
-import org.nd4j.linalg.factory.Nd4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,9 +19,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-/**Este es el controlador que se encargara de manipular Activos.
- * 
- * @author samas
+/**
+ * Este es el controlador que se encargara de manipular Activos en la API REST.
+ *
+ * @author Neftaly Luis
  */
 @RestController
 @RequestMapping("/activo")
@@ -36,19 +35,12 @@ public class ActivoController {
     public ResponseEntity<List<Activo>> getAllActivos() {
         return new ResponseEntity<>(activoService.getAllActivos(), HttpStatus.OK);
     }
-    
-    /**
-     * @return Una respues de que se creo correctamente el arreglo. 
-     */
-    @RequestMapping(method = RequestMethod.GET, value = "/ayylmao/")
-    public ResponseEntity<String> test(){
-        INDArray nd = Nd4j.create(new float[]{1,2,3,4},new int[]{2,2});
-        return new ResponseEntity<>(nd.toString(), HttpStatus.OK);
-    }
 
     /**
-     * @param id Guardara el id que se ingrese desde la interfaz.
-     * @return Una respuesta de que se encontro con exito un activo por su id.
+     * Obtenemos el Activo por su ID
+     *
+     * @param id El ID del Activo
+     * @return Las propiedades del activo especificado, en caso de que exista.
      */
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
     public ResponseEntity<Activo> getActivoWithId(@PathVariable Long id) {
@@ -56,8 +48,11 @@ public class ActivoController {
     }
 
     /**
-     * @param name Guardara el nombre que se ingrese desde la interfaz.
-     * @return Una respuesta de que se encontro con exito un activo por su nombre.
+     * Buscamos Activos por su nombre, puede salir mas de un resultado
+     *
+     * @param name El nombre por el cual se va a buscar el activo
+     * @return Uno o varios activos que cumplan con la condicion del nombre
+     *
      */
     @RequestMapping(method = RequestMethod.GET, params = {"nombre"})
     public ResponseEntity<List<Activo>> findActivoWithName(@RequestParam(value = "nombre") String name) {
@@ -65,8 +60,11 @@ public class ActivoController {
     }
 
     /**
-     * @param clavePizarra Guardara la clavePizarra que se ingrese desde de la interfaz. 
-     * @return Una respuesta de que se encontro con exito un activo por su clavePizarra.
+     *
+     * Busca un Activo por su Clave Pizarra
+     *
+     * @param clavePizarra La clave pizarra en formato XX_XX_XX
+     * @return El activo que tenga esa clave pizarra, en caso de que exista
      */
     @RequestMapping(method = RequestMethod.GET, params = {"clavePizarra"})
     public ResponseEntity<Activo> findActivoWithClavePizarra(@RequestParam(value = "clavePizarra") String clavePizarra) {
@@ -74,8 +72,10 @@ public class ActivoController {
     }
 
     /**
-     * @param input Guardara el cuerpo de la request
-     * @return Una respuesta de que se agrego de forma exitosa el input (cuerpo de la request)
+     * Se crea un nuevo Activo en la DB
+     *
+     * @param input El Activo en JSON a persistir
+     * @return El mismo Activo pero con ya persistido
      */
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<Activo> addActivo(@RequestBody Activo input) {
@@ -83,8 +83,12 @@ public class ActivoController {
     }
 
     /**
-     * @param id Guardara el id (propiedades) que se obtenga desde la interfaz.
-     * @return Una respuesta cuando se obtienen Propiedades del Activo (id) correctamente.
+     * Se obtienen las propiedades y sus valores (no vectoriales) de un Activo
+     * con ID
+     *
+     * @param id El ID del Activo al cual se le quieren obtener las propiedades
+     * @return Todas las propiedades no vectoriales y sus valores que respectan
+     * a ese activo
      */
     @RequestMapping(method = RequestMethod.GET, value = "/{id}/propiedades")
     public ResponseEntity<List<ActivoPropiedadValor>> getPropiedadesFromActivo(@PathVariable Long id) {
