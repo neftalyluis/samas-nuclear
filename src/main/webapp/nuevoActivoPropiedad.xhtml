@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Nuevo ActivoPropiedad</title>
+    </h:head>
+    <h:body>
+        <h:form>
+            <h:panelGrid columns="2" cellpadding="4">
+                <p:outputLabel for="nombre" value="Nombre:" /> 
+                <p:inputText id="nombre" />
+                
+                <p:outputLabel for="descripcion" value="Descripcion:" /> 
+                <p:inputText id="descripcion" />
+
+                <p:outputLabel for="tipoDato" value="Tipo de Dato:" />   
+                <p:selectOneMenu id="tipoDato" value="#{selectOneMenuView.tipoDato}" style="width:125px">
+                    <f:selectItem itemLabel="Seleccione un Tipo de Dato" itemValue="" />
+                    <f:selectItem itemLabel="1" itemValue="1" />
+                    <f:selectItem itemLabel="2" itemValue="2" />
+                    <f:selectItem itemLabel="3" itemValue="3" />
+                </p:selectOneMenu>
+                
+                <p:outputLabel for="indice" value="Indice:" /> 
+                <p:inputText id="indice" />
+                
+                <p:outputLabel for="origenDatos" value="Origen de los Datos:" />   
+                <p:selectOneMenu id="origenDatos" value="#{selectOneMenuView.origenDatos}" style="width:125px">
+                    <f:selectItem itemLabel="Seleccione un Origen" itemValue="" />
+                    <f:selectItem itemLabel="1" itemValue="1" />
+                    <f:selectItem itemLabel="2" itemValue="2" />
+                    <f:selectItem itemLabel="3" itemValue="3" />
+                </p:selectOneMenu>
+                
+                <p:outputLabel for="tipoActivo" value="Tipo de Activo:" />   
+                <p:selectOneMenu id="tipoActivo" value="#{selectOneMenuView.tipoActivo}" style="width:190px">
+                    <f:selectItem itemLabel="Seleccione un tipo de activo" itemValue="" />
+                    <f:selectItem itemLabel="1" itemValue="1" />
+                    <f:selectItem itemLabel="2" itemValue="2" />
+                    <f:selectItem itemLabel="3" itemValue="3" />
+                </p:selectOneMenu>
+                
+                <p:outputLabel for="vectorial" value="Vectorial:" />   
+                <p:selectOneMenu id="vectorial" value="#{selectOneMenuView.vectorial}" style="width:125px">
+                    <f:selectItem itemLabel="Seleccione una Opcion" itemValue="" />
+                    <f:selectItem itemLabel="si" itemValue="Si" />
+                    <f:selectItem itemLabel="no" itemValue="No" />
+                </p:selectOneMenu>
+                
+                <p:commandButton value="Enviar" icon="ui-icon-check" />
+
+            </h:panelGrid>
+
+        </h:form>
+    </h:body>
+</html>
+
