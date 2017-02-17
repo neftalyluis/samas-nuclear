@@ -29,7 +29,7 @@ public class VectorPortafolioModelo implements Serializable {
     private LocalDate creado;
 
     @ManyToOne
-    private Activo activo;
+    private Fungibilidad fungibilidad;
 
     @JsonIgnore
     @ManyToOne
@@ -46,22 +46,22 @@ public class VectorPortafolioModelo implements Serializable {
     }
 
     /**
-     * @param a Guardara el Activo ingresado desde la interfaz.
+     * @param f Guardara la Fungibilidad ingresado desde la interfaz.
      * @param diana Guardara un numero fraccionario (de hasta 15 digitos) que se ingrese desde la interfaz.
      */
-    public VectorPortafolioModelo(Activo a, Double diana) {
-        this.activo = a;
+    public VectorPortafolioModelo(Fungibilidad f, Double diana) {
+        this.fungibilidad = f;
         this.diana = diana;
         this.creado = LocalDate.now();
     }
 
     /**
-     * @param a Guardara el Activo ingresado desde la interfaz.
+     * @param f Guardara la Fungibilidad ingresado desde la interfaz.
      * @param diana Guardara un numero fraccionario (de hasta 15 digitos) que se ingrese desde la interfaz.
      * @param e Guardara la Estrategia ingresada desde la interfaz.
      */
-    public VectorPortafolioModelo(Activo a, Double diana, Estrategia e) {
-        this.activo = a;
+    public VectorPortafolioModelo(Fungibilidad f, Double diana, Estrategia e) {
+        this.fungibilidad = f;
         this.diana = diana;
         this.estrategia = e;
         this.creado = LocalDate.now();
@@ -70,12 +70,12 @@ public class VectorPortafolioModelo implements Serializable {
 
     /**
      * @param d Guardara la fecha del dia actual.
-     * @param a Guardara el Activo ingresado desde la interfaz.
+     * @param f Guardara la Fungibilidad ingresado desde la interfaz.
      * @param e Guardara la Estrategia ingresada desde la interfaz.
      * @param diana Guardara un numero fraccionario (de hasta 15 digitos) que se ingrese desde la interfaz.
      */
-    public VectorPortafolioModelo(LocalDate d, Activo a, Estrategia e, Double diana) {
-        this.activo = a;
+    public VectorPortafolioModelo(LocalDate d, Fungibilidad f, Estrategia e, Double diana) {
+        this.fungibilidad = f;
         this.diana = diana;
         this.estrategia = e;
         this.creado = d;
@@ -113,20 +113,6 @@ public class VectorPortafolioModelo implements Serializable {
     @Override
     public String toString() {
         return "mx.samas.domain.PortafolioModelo[ id=" + id + " ]";
-    }
-
-    /**
-     * @return the activo
-     */
-    public Activo getActivo() {
-        return activo;
-    }
-
-    /**
-     * @param activo the activo to set
-     */
-    public void setActivo(Activo activo) {
-        this.activo = activo;
     }
 
     /**
@@ -169,6 +155,20 @@ public class VectorPortafolioModelo implements Serializable {
      */
     public void setCreado(LocalDate creado) {
         this.creado = creado;
+    }
+
+    /**
+     * @return the fungibilidad
+     */
+    public Fungibilidad getFungibilidad() {
+        return fungibilidad;
+    }
+
+    /**
+     * @param fungibilidad the fungibilidad to set
+     */
+    public void setFungibilidad(Fungibilidad fungibilidad) {
+        this.fungibilidad = fungibilidad;
     }
 
 }

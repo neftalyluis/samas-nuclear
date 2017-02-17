@@ -1,20 +1,41 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package mx.samas.job;
 
 /**
+ * Enumeracion para leer Jobs implementados en SAMAS
  *
  * @author samas
  */
-public final class SAMASJobs {
+public enum SAMASJobs {
 
-    public static final String VALUACION_VECTOR = "valuacionJob";
-    public static final String BOOTSTRAP_ACTIVO = "agregarActivosJob";
-    public static final String POSICION_PORTAFOLIO = "sumatoriaPosicionJob";
-    public static final String DEVENGOS_PORTAFOLIO = "devengosJob";
-    public static final String ELASTIC_BOOTSTRAP = "elasticJob";
+    VALUACION_VECTOR {
+        @Override
+        public String toString() {
+            return "valuacionJob";
+        }
+    },
+    BOOTSTRAP_ACTIVO {
+        @Override
+        public String toString() {
+            return "agregarActivosJob";
+        }
+    },
+    POSICION_PORTAFOLIO {
+        @Override
+        public String toString() {
+            return "sumatoriaPosicionJob";
+        }
+    },
+    DEVENGOS_PORTAFOLIO {
+        @Override
+        public String toString() {
+            return "devengosJob";
+        }
+    },
+    ELASTIC_BOOTSTRAP {
+        @Override
+        public String toString() {
+            return "elasticJob";
+        }
+    },
 
 }

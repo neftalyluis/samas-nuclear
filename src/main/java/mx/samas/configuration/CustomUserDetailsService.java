@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package mx.samas.configuration;
 
 import mx.samas.domain.Usuario;
@@ -13,9 +8,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
-/**Esta clase crea un usuario de Spring a partir de la base de datos,
- *si el nombre ingresado es nulo (null) arrojara un mensaje afirmando que no se encontro el usuario.  
- * 
+/**
+ * Clase contenedor necesaria para aplicar Autorizacion con Spring Security
+ *
  * @author samas
  */
 @Component

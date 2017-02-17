@@ -11,7 +11,7 @@ import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
 
 /**
- *
+ * Converter para poder utilizar la clase LocalDate en JPA
  * @author samas
  */
 @Converter(autoApply = true)

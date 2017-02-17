@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package mx.samas.configuration;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
@@ -15,8 +10,9 @@ import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 
-/** Esta clase se encarga de la configuracion de Jackson's. 
- * 
+/**
+ * Configuracion de Jackson para JSON
+ *
  * @author samas
  */
 @Configuration
@@ -25,7 +21,9 @@ public class JacksonConfig {
     @Autowired
     private ObjectMapper objectMapper;
 
-    /** Crea modulos para registrar Jackson's que siempre se incluiran. */
+    /**
+     * Anexamos los modulos para las nuevas API's de Java 8
+     */
     @PostConstruct
     public void init() {
         objectMapper.setSerializationInclusion(JsonInclude.Include.ALWAYS);

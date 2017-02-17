@@ -1,18 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package mx.samas.exception;
 
 /**
+ * Excepcion que se lanza cuando no se encuentra determinado recurso usando JPA
  *
  * @author samas
  */
 public class NotFoundException extends RuntimeException {
 
     /**
-     * @param msg Esta variable guardara una cadena que representa un mensaje de excepcion de Elasticsearch.
+     * @param msg El mensaje de la causa de la Excepcion
      */
     public NotFoundException(String msg) {
         super(msg);

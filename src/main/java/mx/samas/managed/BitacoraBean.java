@@ -15,7 +15,6 @@
  */
 package mx.samas.managed;
 
-import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.Dependent;
@@ -32,7 +31,7 @@ import org.springframework.stereotype.Component;
 @Component
 @Named(value = "bitacoraBean")
 @Dependent
-public class BitacoraBean implements Serializable {
+public class BitacoraBean {
 
     private List<Bitacora> bitacoraList;
 

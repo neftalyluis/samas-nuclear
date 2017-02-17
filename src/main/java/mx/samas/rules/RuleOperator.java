@@ -13,12 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package mx.samas.rebalanceo;
+package mx.samas.rules;
+
+import org.easyrules.api.RulesEngine;
+import static org.easyrules.core.RulesEngineBuilder.aNewRulesEngine;
 
 /**
  *
  * @author samas
  */
-public class EversionIndeterminada {
-    
+public class RuleOperator {
+
+    public RuleOperator() {
+        RulesEngine rulesEngine = aNewRulesEngine().withSilentMode(true).build();
+        rulesEngine.registerRule(new BooleanEqualsRule(true));
+        rulesEngine.fireRules();
+    }
 }

@@ -15,7 +15,6 @@
  */
 package mx.samas.managed;
 
-import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.inject.Named;
@@ -32,7 +31,7 @@ import org.springframework.stereotype.Component;
 @Component
 @Named(value = "transaccionBean")
 @Dependent
-public class TransaccionBean implements Serializable {
+public class TransaccionBean {
 
     private List<Transaccion> transaccionList;
 

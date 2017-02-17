@@ -67,7 +67,7 @@ public class PropiedadesJobConfiguration {
     @StepScope
     public FlatFileItemReader<VectorActivoPropiedadValor> activoElasticReader() {
         FlatFileItemReader<VectorActivoPropiedadValor> reader = new FlatFileItemReader<>();
-        reader.setLinesToSkip(1);//first line is title definition 
+        reader.setLinesToSkip(1);
         reader.setResource(getFileFromDirectory());
         reader.setLineMapper(activoElasticLineMapper());
 

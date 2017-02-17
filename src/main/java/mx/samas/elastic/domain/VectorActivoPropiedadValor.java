@@ -5,7 +5,6 @@
  */
 package mx.samas.elastic.domain;
 
-//import java.util.HashMap; <---- tengo duda.
 import java.util.Map;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;

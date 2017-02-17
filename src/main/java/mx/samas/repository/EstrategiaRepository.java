@@ -39,11 +39,11 @@ public interface EstrategiaRepository extends JpaRepository<Estrategia, Long> {
      */
     @Query("SELECT NEW mx.samas.domain.projection.EstrategiaModeloProjection("
             + "vpm.creado, "
-            + "a.clavePizarra, "
+            + "f.nombre, "
             + "vpm.diana) "
             + "FROM VectorPortafolioModelo vpm "
             + "JOIN vpm.estrategia es "
-            + "JOIN vpm.activo a "
+            + "JOIN vpm.fungibilidad f "
             + "WHERE es.id= :idEstrategia "
             + "AND vpm.creado= (SELECT MAX(vp.creado) "
             + "FROM VectorPortafolioModelo vp WHERE vp.estrategia.id= :idEstrategia) ")

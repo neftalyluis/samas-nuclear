@@ -13,15 +13,35 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package mx.samas.rebalanceo;
+package mx.samas.rules;
 
-import java.util.List;
+import java.util.logging.Logger;
+import org.easyrules.core.BasicRule;
 
 /**
  *
  * @author samas
  */
-public class Prelacion {
-    List<Double> definida;
-    List<Double> indefinida;
+public class BooleanEqualsRule extends BasicRule {
+
+    private static final Logger LOG = Logger.getLogger(BooleanEqualsRule.class.getName());
+
+    private boolean toTest;
+
+    public BooleanEqualsRule(boolean b) {
+        super("Boolean Equals Rule", "Checks if some boolean is true");
+        toTest = b;
+    }
+
+    @Override
+    public boolean evaluate() {
+        
+        return toTest;
+    }
+
+    @Override
+    public void execute() throws Exception {
+       LOG.info("It's k");
+    }
+
 }

@@ -13,29 +13,29 @@ import mx.samas.elastic.domain.VectorActivoPropiedadValor;
  */
 public interface VectorActivoPropiedadValorService {
 
-    /** 
-     * @param article 
+    /**
+     * @param article
      */
     void save(VectorActivoPropiedadValor article);
 
     /**
      * @param id
-     * @return 
+     * @return
      */
     VectorActivoPropiedadValor findOne(String id);
 
     /**
-     * @return 
+     * @return
      */
     Iterable<VectorActivoPropiedadValor> findAll();
 
     /**
-     * @return 
+     * @return
      */
     long count();
 
     /**
-     * @param article 
+     * @param article
      */
     void delete(VectorActivoPropiedadValor article);
 }
