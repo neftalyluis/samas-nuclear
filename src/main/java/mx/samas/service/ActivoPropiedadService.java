@@ -14,7 +14,7 @@ import mx.samas.domain.dto.ActivoPropiedadValorDTO;
  *
  * @author samas
  */
-public interface ActivoPropiedadService {
+ public interface ActivoPropiedadService {
 
     public List<ActivoPropiedad> getPropiedades();
 
