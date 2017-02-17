@@ -7,17 +7,17 @@
         <title>Facelet Title</title>
     </h:head>
     <h:body>
-        <p:dataTable var="vectores portafolio modelo" value="">
+        <p:dataTable var="vectorPortafolioModelo" value="#{vectorPortafolioModeloBean.vectorPortafolioModeloList}">
             <p:column headerText="Activo">
-                <h:outputText value="" />
+                <h:outputText value="#{vectorPortafolioModelo.activo.clavePizarra}" />
             </p:column>
  
             <p:column headerText="Estrategia">
-                <h:outputText value="" />
+                <h:outputText value="#{vectorPortafolioModelo.estrategia.nombre}" />
             </p:column>
             
             <p:column headerText="Diana">
-                <h:outputText value="" />
+                <h:outputText value="#{vectorPortafolioModelo.diana}" />
             </p:column>
         </p:dataTable>
     </h:body>
