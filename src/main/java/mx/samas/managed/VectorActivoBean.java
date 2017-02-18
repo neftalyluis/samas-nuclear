@@ -43,7 +43,7 @@ public class VectorActivoBean {
 
     @PostConstruct
     public void init() {
-        vectorActivoList = vectorActivoService.getPropiedades();
+        vectorActivoList = vectorActivoService.getAllVectores();
     }
 
     /**
