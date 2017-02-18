@@ -15,6 +15,8 @@ import mx.samas.domain.ActivoPropiedadValor;
  * @author samas
  */
 public interface VectorActivoService {
+    
+    public List<VectorActivo> getAllVectores();
 
     public List<VectorActivo> getVectorFromActivo(Long id);
 
