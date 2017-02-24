@@ -1,0 +1,59 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <h:form>
+            <h:panelGrid columns="2" cellpadding="4">
+                <p:outputLabel for="idCuenta" value="ID de la Cuenta:" /> 
+                <p:inputText id="idCuenta" />
+                
+                <p:outputLabel for="banco" value="Banco:" />   
+                <p:selectOneMenu id="banco" value="" style="width:125px">
+                    <f:selectItem itemLabel="Seleccione un Banco" itemValue="" />
+                    <f:selectItem itemLabel="1" itemValue="1" />
+                    <f:selectItem itemLabel="2" itemValue="2" />
+                    <f:selectItem itemLabel="3" itemValue="3" />
+                </p:selectOneMenu>
+               
+                <p:outputLabel for="tieneCredito" value="Tiene Credito:" />   
+                <p:selectOneMenu id="tieneCredito" value="" style="width:125px">
+                    <f:selectItem itemLabel="Seleccione una Opcion" itemValue="" />
+                    <f:selectItem itemLabel="si" itemValue="Si" />
+                    <f:selectItem itemLabel="no" itemValue="No" />
+                </p:selectOneMenu>
+                
+                <p:outputLabel for="operaFlujo" value="Opera Flujo:" />   
+                <p:selectOneMenu id="operaFlujo" value="" style="width:125px">
+                    <f:selectItem itemLabel="Seleccione una Opcion" itemValue="" />
+                    <f:selectItem itemLabel="si" itemValue="Si" />
+                    <f:selectItem itemLabel="no" itemValue="No" />
+                </p:selectOneMenu>
+                
+                <p:outputLabel for="operaIndice" value="Opera Indice:" />   
+                <p:selectOneMenu id="operaIndice" value="" style="width:125px">
+                    <f:selectItem itemLabel="Seleccione una Opcion" itemValue="" />
+                    <f:selectItem itemLabel="si" itemValue="Si" />
+                    <f:selectItem itemLabel="no" itemValue="No" />
+                </p:selectOneMenu>
+                
+                <p:outputLabel for="operaDerivado" value="Opera Derivado:" />   
+                <p:selectOneMenu id="operaDerivado" value="" style="width:125px">
+                    <f:selectItem itemLabel="Seleccione una Opcion" itemValue="" />
+                    <f:selectItem itemLabel="si" itemValue="Si" />
+                    <f:selectItem itemLabel="no" itemValue="No" />
+                </p:selectOneMenu>
+                
+                <p:commandButton value="Enviar" icon="ui-icon-check" />
+
+            </h:panelGrid>
+
+        </h:form>
+    </h:body>
+</html>
+
