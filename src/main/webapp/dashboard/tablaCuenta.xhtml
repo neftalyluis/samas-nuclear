@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Tabla Cuenta</title>
+    </h:head>
+    <h:body>
+        <p:dataTable var="cuenta" value="#{cuentaBean.cuentaList}" reflow="true" rows="50" paginator="true">
+            
+            <p:column headerText="ID Cuenta">
+                <h:outputText value="#{cuenta.idCuenta}" />
+            </p:column>
+
+            <p:column headerText="Banco">
+                <h:outputText value="#{cuenta.banco.nombre}" />
+            </p:column>
+            
+            <p:column headerText="Tiene Credito">
+                <h:outputText value="#{cuenta.tieneCredito}" />
+            </p:column>
+            
+            <p:column headerText="Opera Flujo">
+                <h:outputText value="#{cuenta.operaFlujo}" />
+            </p:column>
+            
+            <p:column headerText="Opera Indice">
+                <h:outputText value="#{cuenta.operaIndice}" />
+            </p:column>
+            
+            <p:column headerText="Opera Derivado">
+                <h:outputText value="#{cuenta.operaDerivado}" />
+            </p:column>
+           
+        </p:dataTable>
+    </h:body>
+</html>
+

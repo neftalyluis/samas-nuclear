@@ -19,32 +19,33 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.inject.Named;
 import javax.enterprise.context.Dependent;
-import mx.samas.domain.VectorPortafolioModelo;
-import mx.samas.service.VectorPortafolioModeloService;
+import mx.samas.domain.Cuenta;
+import mx.samas.service.CuentaService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 /**
  *
  * @author samas
  */
-@Named(value = "vectorPortafolioModeloBean")
+@Named(value = "cuentaBean")
 @Dependent
-@Component
-public class VectorPortafolioModeloBean {
+public class CuentaBean {
 
-   private List<VectorPortafolioModelo> vectorPortafolioModeloList;
+    /**
+     * Creates a new instance of CuentaBean
+     */
+   private List<Cuenta> cuentaList;
    
    @Autowired
-   private VectorPortafolioModeloService vectorPortafolioModeloService;
+   private CuentaService cuentaService;
    
    @PostConstruct
    public void init(){
-       vectorPortafolioModeloList = vectorPortafolioModeloService.getAll();
+       cuentaList = cuentaService.getAll();
    }
    
-   public List<VectorPortafolioModelo> getVectorPortafolioModeloList(){
-       return vectorPortafolioModeloList;   
+   public List<Cuenta> getCuentaList(){
+       return cuentaList;   
    }
     
 }
