@@ -19,8 +19,8 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.inject.Named;
 import javax.enterprise.context.Dependent;
-import mx.samas.domain.VectorPortafolioModelo;
-import mx.samas.service.VectorPortafolioModeloService;
+import mx.samas.domain.Cliente;
+import mx.samas.service.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -28,23 +28,26 @@ import org.springframework.stereotype.Component;
  *
  * @author samas
  */
-@Named(value = "vectorPortafolioModeloBean")
+@Named(value = "clienteBean")
 @Dependent
 @Component
-public class VectorPortafolioModeloBean {
+public class ClienteBean {
 
-   private List<VectorPortafolioModelo> vectorPortafolioModeloList;
+    /**
+     * Creates a new instance of ClienteBean
+     */
+   private List<Cliente> clienteList;
    
    @Autowired
-   private VectorPortafolioModeloService vectorPortafolioModeloService;
+   private ClienteService clienteService;
    
    @PostConstruct
    public void init(){
-       vectorPortafolioModeloList = vectorPortafolioModeloService.getAll();
+       clienteList = clienteService.getAllClientes();
    }
    
-   public List<VectorPortafolioModelo> getVectorPortafolioModeloList(){
-       return vectorPortafolioModeloList;   
+   public List<Cliente> getClienteList(){
+       return clienteList;   
    }
     
 }
