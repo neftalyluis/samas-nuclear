@@ -22,7 +22,7 @@ public class GrupoPropiedad implements Serializable {
     private String valor;
 
     @Enumerated
-    private GrupoOperador operador;
+    private Operador operador;
 
     /**
      * @return the propiedad
@@ -55,14 +55,14 @@ public class GrupoPropiedad implements Serializable {
     /**
      * @return the operador
      */
-    public GrupoOperador getOperador() {
+    public Operador getOperador() {
         return operador;
     }
 
     /**
      * @param operador the operador to set
      */
-    public void setOperador(GrupoOperador operador) {
+    public void setOperador(Operador operador) {
         this.operador = operador;
     }
 }

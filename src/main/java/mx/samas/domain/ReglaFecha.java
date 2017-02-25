@@ -13,20 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package mx.samas.rules;
+package mx.samas.domain;
 
-import org.easyrules.api.RulesEngine;
-import static org.easyrules.core.RulesEngineBuilder.aNewRulesEngine;
+import javax.persistence.Entity;
 
 /**
  *
  * @author samas
  */
-public class RuleOperator {
-
-    public RuleOperator() {
-        RulesEngine rulesEngine = aNewRulesEngine().withSilentMode(true).build();
-        rulesEngine.registerRule(new BooleanEqualsRule(true));
-        rulesEngine.fireRules();
-    }
+@Entity
+public class ReglaFecha extends Regla{
+    
 }

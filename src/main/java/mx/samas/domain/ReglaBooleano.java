@@ -13,12 +13,32 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package mx.samas.rules;
+package mx.samas.domain;
+
+import javax.persistence.Entity;
+import mx.samas.rule.ReglasOperablesBool;
 
 /**
  *
  * @author samas
  */
-public enum ReglasOperables {
-    
+@Entity
+public class ReglaBooleano extends Regla {
+
+    private ReglasOperablesBool reglaBooleana;
+
+    /**
+     * @return the reglaBooleana
+     */
+    public ReglasOperablesBool getReglaBooleana() {
+        return reglaBooleana;
+    }
+
+    /**
+     * @param reglaBooleana the reglaBooleana to set
+     */
+    public void setReglaBooleana(ReglasOperablesBool reglaBooleana) {
+        this.reglaBooleana = reglaBooleana;
+    }
+
 }

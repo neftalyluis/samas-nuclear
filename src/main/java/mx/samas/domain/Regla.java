@@ -20,13 +20,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 /**
  *
  * @author samas
  */
 @Entity
-public class Regla implements Serializable {
+public abstract class Regla implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -34,6 +35,11 @@ public class Regla implements Serializable {
     private Long id;
     
     private String nombre;
+    
+    @ManyToOne
+    private ActivoPropiedad propiedad;
+    
+    private String valor;
 
     public Long getId() {
         return id;
@@ -67,5 +73,47 @@ public class Regla implements Serializable {
     public String toString() {
         return "mx.samas.domain.Regla[ id=" + id + " ]";
     }
-    
+
+    /**
+     * @return the nombre
+     */
+    public String getNombre() {
+        return nombre;
+    }
+
+    /**
+     * @param nombre the nombre to set
+     */
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    /**
+     * @return the propiedad
+     */
+    public ActivoPropiedad getPropiedad() {
+        return propiedad;
+    }
+
+    /**
+     * @param propiedad the propiedad to set
+     */
+    public void setPropiedad(ActivoPropiedad propiedad) {
+        this.propiedad = propiedad;
+    }
+
+    /**
+     * @return the valor
+     */
+    public String getValor() {
+        return valor;
+    }
+
+    /**
+     * @param valor the valor to set
+     */
+    public void setValor(String valor) {
+        this.valor = valor;
+    }
+
 }
