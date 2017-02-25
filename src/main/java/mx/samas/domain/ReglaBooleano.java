@@ -16,7 +16,7 @@
 package mx.samas.domain;
 
 import javax.persistence.Entity;
-import mx.samas.rule.ReglasOperablesBool;
+import mx.samas.rule.ReglasOperablesBooleano;
 
 /**
  *
@@ -25,19 +25,19 @@ import mx.samas.rule.ReglasOperablesBool;
 @Entity
 public class ReglaBooleano extends Regla {
 
-    private ReglasOperablesBool reglaBooleana;
+    private ReglasOperablesBooleano reglaBooleana;
 
     /**
      * @return the reglaBooleana
      */
-    public ReglasOperablesBool getReglaBooleana() {
+    public ReglasOperablesBooleano getReglaBooleana() {
         return reglaBooleana;
     }
 
     /**
      * @param reglaBooleana the reglaBooleana to set
      */
-    public void setReglaBooleana(ReglasOperablesBool reglaBooleana) {
+    public void setReglaBooleana(ReglasOperablesBooleano reglaBooleana) {
         this.reglaBooleana = reglaBooleana;
     }
 

@@ -19,7 +19,10 @@ package mx.samas.rule;
  *
  * @author samas
  */
-public enum ReglasOperablesStr {
+public enum ReglasOperablesNumero {
+    MORE_THAN,
+    LESS_THAN,
     EQUALS,
     NOT_EQUALS
+
 }

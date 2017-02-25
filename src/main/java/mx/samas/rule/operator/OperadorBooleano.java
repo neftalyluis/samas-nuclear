@@ -13,16 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package mx.samas.rule;
+package mx.samas.rule.operator;
 
 /**
  *
  * @author samas
  */
-public enum ReglasOperablesDate {
-    AFTER_DATE,
-    BEFORE_DATE,
-    EQUALS,
-    NOT_EQUALS
-
+public class OperadorBooleano {
+    
 }
