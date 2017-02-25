@@ -9,10 +9,11 @@ package mx.samas.domain;
  *
  * @author samas
  */
-public enum GrupoOperador {
+public enum Operador {
     MAYOR,
     MENOR,
     MAYOR_IGUAL,
     MENOR_IGUAL,
-    IGUAL
+    IGUAL,
+    NO_IGUAL
 }
