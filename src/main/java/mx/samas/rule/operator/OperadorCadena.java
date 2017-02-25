@@ -13,14 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package mx.samas.rule;
+package mx.samas.rule.operator;
 
 /**
  *
  * @author samas
  */
-public enum ReglasOperablesBool {
-    IS_TRUE,
-    IS_FALSE
-
+public class OperadorCadena {
+    
 }

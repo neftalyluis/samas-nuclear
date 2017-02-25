@@ -13,32 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package mx.samas.domain;
-
-import javax.persistence.Entity;
-import mx.samas.rule.ReglasOperablesNumero;
+package mx.samas.rule;
 
 /**
  *
  * @author samas
  */
-@Entity
-public class ReglaNumero extends Regla {
-
-    private ReglasOperablesNumero reglaNumero;
-
-    /**
-     * @return the reglaNumero
-     */
-    public ReglasOperablesNumero getReglaNumero() {
-        return reglaNumero;
-    }
-
-    /**
-     * @param reglaNumero the reglaNumero to set
-     */
-    public void setReglaNumero(ReglasOperablesNumero reglaNumero) {
-        this.reglaNumero = reglaNumero;
-    }
+public enum ReglasOperablesBooleano {
+    IS_TRUE,
+    IS_FALSE
 
 }
