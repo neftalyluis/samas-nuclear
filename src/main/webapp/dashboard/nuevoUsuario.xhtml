@@ -9,10 +9,10 @@
     <h:body>
        <h:form>
             <h:panelGrid columns="2" cellpadding="4">
-                <p:outputLabel for="nombreUsuario" value="Nombre de Usuario:" /> <p:inputText id="nombreUsuario" />
-                <p:outputLabel for="password" value="Password:" /> <p:inputText id="password" />
-                <p:outputLabel for="nombreCompleto" value="Nombre Completo:" /> <p:inputText id="nombreCompleto" />
-                <p:commandButton value="Enviar" icon="ui-icon-check" />
+                <p:outputLabel value="Nombre de Usuario:" /> <p:inputText id="nombreUsuario"  value="#{usuarioBean.usuario.nombreUsuario}"  />
+                <p:outputLabel value="Password:" /> <p:inputText id="password" />
+                <p:outputLabel value="Nombre Completo:" /> <p:inputText id="nombreCompleto" value="#{usuarioBean.usuario.nombreCompleto}" />
+                <p:commandButton value="Enviar" icon="ui-icon-check" action="#{usuarioBean.agregarNuevoUsuario}"/>            
             </h:panelGrid>
        </h:form>
     </h:body>

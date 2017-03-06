@@ -11,10 +11,10 @@
         <h:form>
             <h:panelGrid columns="2" cellpadding="4">
                 
-                <p:outputLabel for="fecha" value="Fecha:" />
+                <p:outputLabel value="Fecha:" />
                 <p:calendar id="fecha" value="#{calendarView.fecha}" showOn="button" pattern="dd/MM/yyyy" />
 
-                <p:outputLabel for="activo" value="Activo:" />   
+                <p:outputLabel value="Activo:" />   
                 <p:selectOneMenu id="activo" value="#{selectOneMenuView.activo}" style="width:125px">
                     <f:selectItem itemLabel="Seleccione un Activo" itemValue="" />
                     <f:selectItem itemLabel="1" itemValue="1" />
@@ -22,10 +22,10 @@
                     <f:selectItem itemLabel="3" itemValue="3" />
                 </p:selectOneMenu>
                 
-                <p:outputLabel for="precioLimpio" value="Precio Limpio:" /> 
-                <p:inputText id="precioLimpio" />
+                <p:outputLabel value="Precio Limpio:" /> 
+                <p:inputText id="precioLimpio" value="#{vectorActivoBean.vectorActivoList.precioLimpio}" />
                 
-                <p:commandButton value="Enviar" icon="ui-icon-check" />
+                <p:commandButton value="Enviar" icon="ui-icon-check" action="#{vectorActivoBean.agregarNuevoVectorActivo}" />
 
             </h:panelGrid>
 

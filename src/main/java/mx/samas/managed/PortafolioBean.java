@@ -40,7 +40,8 @@ public class PortafolioBean {
 
     @Autowired
     private PortafolioService portafolioService;
-
+    private Portafolio portafolio = new Portafolio();
+    
     @PostConstruct
     public void init() {
         portafolioList = portafolioService.getAll();
@@ -52,6 +53,16 @@ public class PortafolioBean {
     public List<Portafolio> getPortafolioList() {
         return portafolioList;
     }
+    
+    public String verPortafolios(){
+        return "tablaPortafolio.xhtml";
+   }
+   
+   public String agregarNuevoPortafolio(){
+       portafolio = portafolioService.createPortafolio(portafolio);
+       portafolioList = portafolioService.getAll();
+       return "tablaPortafolio.xhtml";
+   }
 
     public void showDetailPortafolio() {
         addMessage("Show it lmao");
