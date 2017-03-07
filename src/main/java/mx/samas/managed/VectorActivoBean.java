@@ -40,6 +40,7 @@ public class VectorActivoBean {
 
     @Autowired
     private VectorActivoService vectorActivoService;
+    private VectorActivo vectorActivo = new VectorActivo();
 
     @PostConstruct
     public void init() {
@@ -51,6 +52,30 @@ public class VectorActivoBean {
      */
     public List<VectorActivo> getVectorActivoList() {
         return vectorActivoList;
+    }
+    
+    public String verVectoresActivo(){
+        return "tablaVectorActivo.xhtml";
+   }
+   
+   public String agregarNuevoVectorActivo(){
+        setVectorActivo(vectorActivoService.createVectorActivo(getVectorActivo()));
+       vectorActivoList = vectorActivoService.getAllVectores();
+       return "tablaVectorActivo.xhtml";
+   }
+
+    /**
+     * @return the vectorActivo
+     */
+    public VectorActivo getVectorActivo() {
+        return vectorActivo;
+    }
+
+    /**
+     * @param vectorActivo the vectorActivo to set
+     */
+    public void setVectorActivo(VectorActivo vectorActivo) {
+        this.vectorActivo = vectorActivo;
     }
     
 }

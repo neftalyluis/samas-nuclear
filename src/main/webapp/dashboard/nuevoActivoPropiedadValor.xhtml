@@ -12,7 +12,7 @@
             <h:panelGrid columns="2" cellpadding="4">
                 
                 <p:outputLabel for="valor" value="Valor:" /> 
-                <p:inputText id="valor" />
+                <p:inputText id="valor" value="#{activoPropiedadValorBean.activoPropiedadValor.valor}" />
 
                 <p:outputLabel for="propiedad" value="Propiedad:" />   
                 <p:selectOneMenu id="propiedad" value="#{selectOneMenuView.propiedad}" style="width:125px">
@@ -22,7 +22,7 @@
                     <f:selectItem itemLabel="3" itemValue="3" />
                 </p:selectOneMenu>
                 
-                <p:commandButton value="Enviar" icon="ui-icon-check" />
+                <p:commandButton value="Enviar" icon="ui-icon-check" action="#{activoPropiedadValorBean.agregarNuevoActivoPropiedadValor}" />
 
             </h:panelGrid>
 

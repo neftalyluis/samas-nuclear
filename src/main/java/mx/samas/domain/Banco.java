@@ -57,7 +57,7 @@ public class Banco implements Serializable {
 
     @Override
     public String toString() {
-        return "mx.samas.domain.Banco[ id=" + id + " ]";
+        return String.valueOf(id);
     }
 
     /**

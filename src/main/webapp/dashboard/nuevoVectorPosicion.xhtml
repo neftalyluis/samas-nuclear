@@ -11,7 +11,7 @@
         <h:form>
             <h:panelGrid columns="2" cellpadding="8">
                 
-                <p:outputLabel for="portafolio" value="Portafolio:" />   
+                <p:outputLabel value="Portafolio:" />   
                 <p:selectOneMenu id="portafolio" value="#{selectOneMenuView.portafolio}" style="width:125px">
                     <f:selectItem itemLabel="Seleccione un Portafolio" itemValue="" />
                     <f:selectItem itemLabel="1" itemValue="1" />
@@ -19,7 +19,7 @@
                     <f:selectItem itemLabel="3" itemValue="3" />
                 </p:selectOneMenu>
                 
-                <p:outputLabel for="activo" value="Activo:" />   
+                <p:outputLabel value="Activo:" />   
                 <p:selectOneMenu id="activo" value="#{selectOneMenuView.activo}" style="width:125px">
                     <f:selectItem itemLabel="Seleccione un Activo" itemValue="" />
                     <f:selectItem itemLabel="1" itemValue="1" />
@@ -27,25 +27,17 @@
                     <f:selectItem itemLabel="3" itemValue="3" />
                 </p:selectOneMenu>
                 
-                <p:outputLabel for="cantidad" value="Cantidad:" /> <p:inputText id="cantidad" />
-                <p:outputLabel for="valuacion" value="Valuacion:" /> <p:inputText id="valuacion" />
-                <p:outputLabel for="porcentajeRespectoPortafolio" value="Porcentaje Respecto a un Portafolio:" /> <p:inputText id="porcentajeRespectoPortafolio" />
+                <p:outputLabel value="Cantidad:" /> <p:inputText id="cantidad" value="#{vectorPosicionBean.vectorPosicion.cantidad}" />
+                <p:outputLabel value="Valuacion:" /> <p:inputText id="valuacion" value="#{vectorPosicionBean.vectorPosicion.valuacion}" />
+                <p:outputLabel value="Porcentaje Respecto a un Portafolio:" /> <p:inputText id="porcentajeRespectoPortafolio" value="#{vectorPosicionBean.vectorPosicion.porcentajeRespectoPortafolio}" />
                 
-                <p:outputLabel for="prendado" value="Prendado:" />   
-                <p:selectOneMenu id="prendado" value="#{selectOneMenuView.prendado}" style="width:125px">
-                    <f:selectItem itemLabel="Seleccione una Opcion" itemValue="" />
-                    <f:selectItem itemLabel="si" itemValue="Si" />
-                    <f:selectItem itemLabel="no" itemValue="No" />
-                </p:selectOneMenu>
+                <p:outputLabel value="Prendado:" />   
+                <p:selectBooleanCheckbox value="#{vectorPosicionBean.vectorPosicion.prendado}" />
                 
-                <p:outputLabel for="reporto" value="Reporto:" />   
-                <p:selectOneMenu id="reporto" value="#{selectOneMenuView.reporto}" style="width:125px">
-                    <f:selectItem itemLabel="Seleccione una Opcion" itemValue="" />
-                    <f:selectItem itemLabel="si" itemValue="Si" />
-                    <f:selectItem itemLabel="no" itemValue="No" />
-                </p:selectOneMenu>
+                <p:outputLabel value="Reporto:" />   
+                <p:selectBooleanCheckbox value="#{vectorPosicionBean.vectorPosicion.reporto}" />
                 
-                <p:commandButton value="Enviar" icon="ui-icon-check" />
+                <p:commandButton value="Enviar" icon="ui-icon-check" action="#{vectorActivoBean.agregarNuevoVectorActivo}" />
             </h:panelGrid>
        </h:form>
     </h:body>
