@@ -10,13 +10,13 @@
     <h:body>
         <h:form>
             <h:panelGrid columns="2" cellpadding="4">
-                <p:outputLabel for="nombre" value="Nombre:" /> 
-                <p:inputText id="nombre" />
+                <p:outputLabel value="Nombre:" /> 
+                <p:inputText id="nombre" value="#{activoPropiedadBean.activoPropiedad.nombre}" />
                 
-                <p:outputLabel for="descripcion" value="Descripcion:" /> 
-                <p:inputText id="descripcion" />
+                <p:outputLabel value="Descripcion:" /> 
+                <p:inputText id="descripcion" value="#{activoPropiedadBean.activoPropiedad.descripcion}" />
 
-                <p:outputLabel for="tipoDato" value="Tipo de Dato:" />   
+                <p:outputLabel value="Tipo de Dato:" />   
                 <p:selectOneMenu id="tipoDato" value="#{selectOneMenuView.tipoDato}" style="width:125px">
                     <f:selectItem itemLabel="Seleccione un Tipo de Dato" itemValue="" />
                     <f:selectItem itemLabel="1" itemValue="1" />
@@ -24,10 +24,10 @@
                     <f:selectItem itemLabel="3" itemValue="3" />
                 </p:selectOneMenu>
                 
-                <p:outputLabel for="indice" value="Indice:" /> 
-                <p:inputText id="indice" />
+                <p:outputLabel value="Indice:" /> 
+                <p:inputText id="indice" value="#{activoPropiedadBean.activoPropiedad.indice}" />
                 
-                <p:outputLabel for="origenDatos" value="Origen de los Datos:" />   
+                <p:outputLabel value="Origen de los Datos:" />   
                 <p:selectOneMenu id="origenDatos" value="#{selectOneMenuView.origenDatos}" style="width:125px">
                     <f:selectItem itemLabel="Seleccione un Origen" itemValue="" />
                     <f:selectItem itemLabel="1" itemValue="1" />
@@ -35,7 +35,7 @@
                     <f:selectItem itemLabel="3" itemValue="3" />
                 </p:selectOneMenu>
                 
-                <p:outputLabel for="tipoActivo" value="Tipo de Activo:" />   
+                <p:outputLabel value="Tipo de Activo:" />   
                 <p:selectOneMenu id="tipoActivo" value="#{selectOneMenuView.tipoActivo}" style="width:190px">
                     <f:selectItem itemLabel="Seleccione un tipo de activo" itemValue="" />
                     <f:selectItem itemLabel="1" itemValue="1" />
@@ -43,14 +43,10 @@
                     <f:selectItem itemLabel="3" itemValue="3" />
                 </p:selectOneMenu>
                 
-                <p:outputLabel for="vectorial" value="Vectorial:" />   
-                <p:selectOneMenu id="vectorial" value="#{selectOneMenuView.vectorial}" style="width:125px">
-                    <f:selectItem itemLabel="Seleccione una Opcion" itemValue="" />
-                    <f:selectItem itemLabel="si" itemValue="Si" />
-                    <f:selectItem itemLabel="no" itemValue="No" />
-                </p:selectOneMenu>
+                <p:outputLabel value="Vectorial:" />   
+                <p:selectBooleanCheckbox value="#{activoPropiedadBean.activoPropiedad.vectorial}" />
                 
-                <p:commandButton value="Enviar" icon="ui-icon-check" />
+                <p:commandButton value="Enviar" icon="ui-icon-check" action="#{activoPropiedadBean.agregarNuevoActivoPropiedad}" />
 
             </h:panelGrid>
 

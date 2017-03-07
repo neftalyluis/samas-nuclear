@@ -37,6 +37,7 @@ public class VectorPosicionBean {
    
    @Autowired
    private VectorPosicionService vectorPosicionService;
+   private VectorPosicion vectorPosicion = new VectorPosicion();
    
    @PostConstruct
    public void init(){
@@ -46,5 +47,29 @@ public class VectorPosicionBean {
    public List<VectorPosicion> getVectorPosicionList(){
        return vectorPosicionList;   
    }
+    
+   public String verVectoresPosicion(){
+        return "tablaVectorPosicion.xhtml";
+   }
+   
+   public String agregarNuevoVectorPosicion(){
+       vectorPosicionService.persistPosiciones(vectorPosicionList);
+       vectorPosicionList = vectorPosicionService.getAllPosiciones();
+       return "tablaVectorPosicion.xhtml";
+   }
+
+    /**
+     * @return the vectorPosicion
+     */
+    public VectorPosicion getVectorPosicion() {
+        return vectorPosicion;
+    }
+
+    /**
+     * @param vectorPosicion the vectorPosicion to set
+     */
+    public void setVectorPosicion(VectorPosicion vectorPosicion) {
+        this.vectorPosicion = vectorPosicion;
+    }
     
 }

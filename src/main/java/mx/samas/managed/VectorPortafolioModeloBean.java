@@ -20,6 +20,7 @@ import javax.annotation.PostConstruct;
 import javax.inject.Named;
 import javax.enterprise.context.Dependent;
 import mx.samas.domain.VectorPortafolioModelo;
+import mx.samas.domain.dto.PortafolioModeloDTO;
 import mx.samas.service.VectorPortafolioModeloService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -37,6 +38,8 @@ public class VectorPortafolioModeloBean {
    
    @Autowired
    private VectorPortafolioModeloService vectorPortafolioModeloService;
+   private VectorPortafolioModelo vectorPortafolioModelo = new VectorPortafolioModelo();
+   private PortafolioModeloDTO portafolioModeloDTO = new PortafolioModeloDTO();
    
    @PostConstruct
    public void init(){
@@ -46,5 +49,43 @@ public class VectorPortafolioModeloBean {
    public List<VectorPortafolioModelo> getVectorPortafolioModeloList(){
        return vectorPortafolioModeloList;   
    }
+   
+    public String verVectoresPortafolioModelo(){
+        return "tablaVectorPortafolioModelo.xhtml";
+   }
+   
+   public String agregarNuevoVectorPortafolioModelo(){
+       vectorPortafolioModeloService.createNewPortafolioModeloListForEstrategia(Long.MIN_VALUE, getPortafolioModeloDTO());
+       vectorPortafolioModeloList = vectorPortafolioModeloService.getAll();
+       return "tablaVectorPortafolioModelo.xhtml";
+   }
+
+    /**
+     * @return the vectorPortafolioModelo
+     */
+    public VectorPortafolioModelo getVectorPortafolioModelo() {
+        return vectorPortafolioModelo;
+    }
+
+    /**
+     * @param vectorPortafolioModelo the vectorPortafolioModelo to set
+     */
+    public void setVectorPortafolioModelo(VectorPortafolioModelo vectorPortafolioModelo) {
+        this.vectorPortafolioModelo = vectorPortafolioModelo;
+    }
+
+    /**
+     * @return the portafolioModeloDTO
+     */
+    public PortafolioModeloDTO getPortafolioModeloDTO() {
+        return portafolioModeloDTO;
+    }
+
+    /**
+     * @param portafolioModeloDTO the portafolioModeloDTO to set
+     */
+    public void setPortafolioModeloDTO(PortafolioModeloDTO portafolioModeloDTO) {
+        this.portafolioModeloDTO = portafolioModeloDTO;
+    }
     
 }

@@ -5,51 +5,33 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
-        <title>Facelet Title</title>
+        <title>Nueva Cuenta</title>
     </h:head>
     <h:body>
         <h:form>
             <h:panelGrid columns="2" cellpadding="4">
-                <p:outputLabel for="idCuenta" value="ID de la Cuenta:" /> 
-                <p:inputText id="idCuenta" />
+                <p:outputLabel value="ID de la Cuenta:" /> 
+                <p:inputText id="idCuenta" value="#{cuentaBean.cuenta.idCuenta}" />
                 
-                <p:outputLabel for="banco" value="Banco:" />   
-                <p:selectOneMenu id="banco" value="" style="width:125px">
-                    <f:selectItem itemLabel="Seleccione un Banco" itemValue="" />
-                    <f:selectItem itemLabel="1" itemValue="1" />
-                    <f:selectItem itemLabel="2" itemValue="2" />
-                    <f:selectItem itemLabel="3" itemValue="3" />
+                <p:outputLabel value="Banco:"/>   
+                <p:selectOneMenu id="banco" converter="#{bancoConverter}" value="#{cuentaBean.cuenta.banco}" style="width:125px">
+                    
+                    <f:selectItems value="#{cuentaBean.bancos}" var="banco" itemValue="#{banco}" itemLabel="#{banco.nombre}" />
                 </p:selectOneMenu>
                
-                <p:outputLabel for="tieneCredito" value="Tiene Credito:" />   
-                <p:selectOneMenu id="tieneCredito" value="" style="width:125px">
-                    <f:selectItem itemLabel="Seleccione una Opcion" itemValue="" />
-                    <f:selectItem itemLabel="si" itemValue="Si" />
-                    <f:selectItem itemLabel="no" itemValue="No" />
-                </p:selectOneMenu>
+                <p:outputLabel value="Tiene Credito:"/>   
+                <p:selectBooleanCheckbox value="#{cuentaBean.cuenta.tieneCredito}" />
                 
-                <p:outputLabel for="operaFlujo" value="Opera Flujo:" />   
-                <p:selectOneMenu id="operaFlujo" value="" style="width:125px">
-                    <f:selectItem itemLabel="Seleccione una Opcion" itemValue="" />
-                    <f:selectItem itemLabel="si" itemValue="Si" />
-                    <f:selectItem itemLabel="no" itemValue="No" />
-                </p:selectOneMenu>
+                <p:outputLabel value="Opera Flujo:"/>   
+                <p:selectBooleanCheckbox value="#{cuentaBean.cuenta.operaFlujo}" />
                 
-                <p:outputLabel for="operaIndice" value="Opera Indice:" />   
-                <p:selectOneMenu id="operaIndice" value="" style="width:125px">
-                    <f:selectItem itemLabel="Seleccione una Opcion" itemValue="" />
-                    <f:selectItem itemLabel="si" itemValue="Si" />
-                    <f:selectItem itemLabel="no" itemValue="No" />
-                </p:selectOneMenu>
+                <p:outputLabel value="Opera Indice:"/>   
+                <p:selectBooleanCheckbox value="#{cuentaBean.cuenta.operaIndice}" />
                 
-                <p:outputLabel for="operaDerivado" value="Opera Derivado:" />   
-                <p:selectOneMenu id="operaDerivado" value="" style="width:125px">
-                    <f:selectItem itemLabel="Seleccione una Opcion" itemValue="" />
-                    <f:selectItem itemLabel="si" itemValue="Si" />
-                    <f:selectItem itemLabel="no" itemValue="No" />
-                </p:selectOneMenu>
+                <p:outputLabel value="Opera Derivado:"/>   
+                <p:selectBooleanCheckbox value="#{cuentaBean.cuenta.operaDerivado}" />
                 
-                <p:commandButton value="Enviar" icon="ui-icon-check" />
+                <p:commandButton value="Enviar" icon="ui-icon-check" action="#{cuentaBean.agregarNuevaCuenta}" />
 
             </h:panelGrid>
 

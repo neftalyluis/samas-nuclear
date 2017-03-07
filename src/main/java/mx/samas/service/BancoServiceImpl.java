@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
  *
  * @author samas
  */
-@Service
+@Service("bancoService")
 public class BancoServiceImpl implements BancoService {
 
     @Autowired

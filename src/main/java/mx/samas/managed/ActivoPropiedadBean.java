@@ -40,6 +40,7 @@ public class ActivoPropiedadBean {
 
     @Autowired
     private ActivoPropiedadService activoPropiedadService;
+    private ActivoPropiedad activoPropiedad = new ActivoPropiedad();
 
     @PostConstruct
     public void init() {
@@ -51,6 +52,30 @@ public class ActivoPropiedadBean {
      */
     public List<ActivoPropiedad> getActivoPropiedadList() {
         return activoPropiedadList;
+    }
+    
+    public String verActivosPropiedad(){
+        return "tablaPropiedadActivo.xhtml";
+    }
+    
+    public String agregarNuevoActivoPropiedad(){
+       setActivoPropiedad(activoPropiedadService.createPropiedad(getActivoPropiedad()));
+       activoPropiedadList = activoPropiedadService.getPropiedades();
+       return "tablaActivoPropiedad.xhtml";
+   }
+
+    /**
+     * @return the activoPropiedad
+     */
+    public ActivoPropiedad getActivoPropiedad() {
+        return activoPropiedad;
+    }
+
+    /**
+     * @param activoPropiedad the activoPropiedad to set
+     */
+    public void setActivoPropiedad(ActivoPropiedad activoPropiedad) {
+        this.activoPropiedad = activoPropiedad;
     }
     
 }

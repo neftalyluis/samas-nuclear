@@ -37,6 +37,7 @@ public class UsuarioBean {
     
     @Autowired
     private UsuarioService usuarioService;
+    private Usuario usuario = new Usuario();
 
     @PostConstruct
     public void init(){
@@ -50,5 +51,28 @@ public class UsuarioBean {
         return usuarioList;
     }
     
+    public String verUsurios(){
+        return "tablaUsuario.xhtml";
+   }
+   
+   public String agregarNuevoUsuario(){
+        setUsuario(usuarioService.createUsuario(getUsuario()));
+       usuarioList = usuarioService.getAllUsuarios();
+       return "tablaUsuario.xhtml";
+   }
+
+    /**
+     * @return the usuario
+     */
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    /**
+     * @param usuario the usuario to set
+     */
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
     
 }

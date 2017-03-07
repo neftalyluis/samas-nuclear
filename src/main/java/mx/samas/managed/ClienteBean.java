@@ -37,9 +37,10 @@ public class ClienteBean {
      * Creates a new instance of ClienteBean
      */
    private List<Cliente> clienteList;
-   
+    
    @Autowired
    private ClienteService clienteService;
+   private Cliente cliente = new Cliente();
    
    @PostConstruct
    public void init(){
@@ -49,5 +50,29 @@ public class ClienteBean {
    public List<Cliente> getClienteList(){
        return clienteList;   
    }
+   
+   public String verClientes(){
+        return "tablaCliente.xhtml";
+   }
+   
+   public String agregarNuevoCliente(){
+        setCliente(clienteService.createCliente(getCliente()));
+       clienteList = clienteService.getAllClientes();
+       return "tablaCliente.xhtml";
+   }
+
+    /**
+     * @return the cliente
+     */
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    /**
+     * @param cliente the cliente to set
+     */
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
     
 }

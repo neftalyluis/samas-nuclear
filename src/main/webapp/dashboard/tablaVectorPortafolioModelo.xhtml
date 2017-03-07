@@ -8,8 +8,8 @@
     </h:head>
     <h:body>
         <p:dataTable var="vectorPortafolioModelo" value="#{vectorPortafolioModeloBean.vectorPortafolioModeloList}">
-            <p:column headerText="Activo">
-                <h:outputText value="#{vectorPortafolioModelo.activo.clavePizarra}" />
+            <p:column headerText="Fungibilidad">
+                <h:outputText value="#{vectorPortafolioModelo.fungibilidad.nombre}" />
             </p:column>
  
             <p:column headerText="Estrategia">
