@@ -15,14 +15,22 @@
  */
 package mx.samas.managed;
 
-import java.time.LocalDate;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.inject.Named;
 import javax.enterprise.context.Dependent;
 import mx.samas.service.BatchService;
 import org.primefaces.model.UploadedFile;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 /**
@@ -34,18 +42,66 @@ import org.springframework.stereotype.Component;
 @Dependent
 public class CierreDiaBean {
 
-    private LocalDate fecha;
+    private static final Logger LOG = Logger.getLogger(CierreDiaBean.class.getName());
 
     private Date fechaCalendario;
 
     private UploadedFile archivo;
-    
+
     @Autowired
     private BatchService batchService;
+
+    @Value("${samas.pip.directory}")
+    private String directoryVector;
+
+    private String rutaFinal;
+
+    private final SimpleDateFormat formatter = new SimpleDateFormat("ddMMyyyy");
 
     @PostConstruct
     public void init() {
 
+    }
+
+    public void upload() {
+        LOG.info(getArchivo().getFileName());
+        LOG.info(getFechaCalendario().toString());
+        InputStream archivoStream = null;
+        OutputStream archivoEnDisco = null;
+        rutaFinal = directoryVector + "/Vector" + formatter.format(fechaCalendario) + ".csv";
+        if (getArchivo() != null) {
+            try {
+                archivoStream = getArchivo().getInputstream();
+                archivoEnDisco = new FileOutputStream(new File(rutaFinal));
+                int read = 0;
+                byte[] bytes = new byte[1024];
+                while ((read = archivoStream.read(bytes)) != -1) {
+                    archivoEnDisco.write(bytes, 0, read);
+                }
+            } catch (IOException ex) {
+                Logger.getLogger(CierreDiaBean.class.getName()).log(Level.SEVERE, null, ex);
+            } finally {
+                if (archivoStream != null) {
+                    try {
+                        archivoStream.close();
+                    } catch (IOException e) {
+                        LOG.warning(e.toString());
+                    }
+                }
+                if (archivoEnDisco != null) {
+                    try {
+                        archivoEnDisco.close();
+                    } catch (IOException e) {
+                        LOG.warning(e.toString());
+                    }
+                }
+                launchVectorJob();
+            }
+        }
+    }
+
+    public void launchVectorJob() {
+        batchService.cierreDia(rutaFinal, getFechaCalendario());
     }
 
     /**

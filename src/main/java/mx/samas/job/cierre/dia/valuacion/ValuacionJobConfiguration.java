@@ -5,8 +5,8 @@
  */
 package mx.samas.job.cierre.dia.valuacion;
 
-import java.io.File;
 import java.io.IOException;
+import java.util.Date;
 import javax.persistence.EntityManagerFactory;
 import mx.samas.domain.Activo;
 import mx.samas.domain.VectorActivo;
@@ -26,6 +26,7 @@ import org.springframework.batch.item.file.mapping.BeanWrapperFieldSetMapper;
 import org.springframework.batch.item.file.mapping.DefaultLineMapper;
 import org.springframework.batch.item.file.transform.DelimitedLineTokenizer;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.FileSystemResource;
@@ -91,19 +92,22 @@ public class ValuacionJobConfiguration {
     public FlatFileItemReader<VectorActivoDTO> vectorActivoReader() {
         FlatFileItemReader<VectorActivoDTO> reader = new FlatFileItemReader<>();
         reader.setLinesToSkip(1);//first line is title definition 
-        reader.setResource(getFileFromDirectory());
+        reader.setResource(getFileFromDirectory("memes"));
         reader.setLineMapper(vectorActivoLineMapper());
-
         return reader;
     }
 
-    private Resource getFileFromDirectory() {
-        String PIP_LOCATION = "vector/pip/VectorTest.csv";
-        ClassLoader classLoader = getClass().getClassLoader();
-
-        File fl = new File(classLoader.getResource(PIP_LOCATION).getFile());
-
+    //aqui leo
+    @StepScope
+    @Bean
+    public Resource getFileFromDirectory(@Value("#{jobParameters[archivo]}") String fl) {
         return new FileSystemResource(fl);
+    }
+    
+    @StepScope
+    @Bean
+    public Date getDateForJob(@Value("#{jobParameters[fecha]}") Date fecha) {
+        return fecha;
     }
 
     @Bean
@@ -126,7 +130,7 @@ public class ValuacionJobConfiguration {
 
     @Bean
     public VectorActivoFieldSetMapper vectorActivoFieldSetMapper() {
-        return new VectorActivoFieldSetMapper();
+        return new VectorActivoFieldSetMapper(new Date());
     }
 
     @Bean

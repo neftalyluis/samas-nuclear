@@ -7,16 +7,14 @@
         <title>Cerrar Dia</title>
     </h:head>
     <h:body>
-        <h:form>
+        <h:form  enctype="multipart/form-data">
             <h:panelGrid columns="2" cellpadding="4">
 
                 <p:outputLabel for="button" value="Fecha de Cierre" />
                 <p:calendar id="button" value="#{cierreDiaBean.fechaCalendario}" showOn="button" />
-
                 <p:outputLabel value="Seleccione el vector que desa subir:" /> 
-                <p:fileUpload value="#{cierreDiaBean.archivo}" mode="simple" skinSimple="true"/>
-
-                <p:commandButton value="Aceptar" icon="ui-icon-check" />
+                <p:fileUpload value="#{cierreDiaBean.archivo}" mode="simple"/>
+                <p:commandButton value="Aceptar" icon="ui-icon-check" ajax="false" action="#{cierreDiaBean.upload()}" />
 
             </h:panelGrid>
 

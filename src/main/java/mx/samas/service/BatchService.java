@@ -15,10 +15,13 @@
  */
 package mx.samas.service;
 
+import java.util.Date;
+
 /**
  *
  * @author samas
  */
 public interface BatchService {
-        
+
+    public Boolean cierreDia(String fileToRead, Date fechaCierre);
 }

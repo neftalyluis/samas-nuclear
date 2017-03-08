@@ -37,7 +37,7 @@ public class Accion extends Activo implements Serializable {
             String nombre, TipoActivo tipo, Boolean ventaEnCorto,
             Double pujaMinima) {
         super(tipoValor, emisora, serie, isin, nombre, tipo, ventaEnCorto, pujaMinima);
-
+        
     }
 
     /**
