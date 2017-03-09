@@ -19,31 +19,31 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
-import mx.samas.domain.Banco;
-import mx.samas.service.BancoService;
+import mx.samas.domain.BitacoraOrden;
+import mx.samas.service.BitacoraOrdenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
  *
- * @author gerardo
+ * @author samas
  */
 @Service
-@FacesConverter("bancoConverter")
-public class BancoConverter implements Converter {
+@FacesConverter("bitacoraOrdenConverter")
+public class BitacoraOrdenConverter implements Converter {
 
     @Autowired
-    private BancoService bancoService;
+    private BitacoraOrdenService bitacoraOrdenService;
 
     @Override
-    public Object getAsObject(FacesContext fc, UIComponent uic, String string) {
-        return bancoService.getBancoById(Long.parseLong(string));
+    public Object getAsObject(FacesContext context, UIComponent component, String value) {
+        return bitacoraOrdenService.findOrdenById(Long.parseLong(value));
     }
 
     @Override
-    public String getAsString(FacesContext fc, UIComponent uic, Object o) {
-        Banco banco = (Banco) o;
-        return banco.getId().toString();
+    public String getAsString(FacesContext context, UIComponent component, Object value) {
+        BitacoraOrden bo = (BitacoraOrden) value;
+        return String.valueOf(bo.getId());
     }
 
 }
