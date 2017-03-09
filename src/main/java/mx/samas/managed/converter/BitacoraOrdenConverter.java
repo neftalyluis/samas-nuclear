@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package mx.samas.converter;
+package mx.samas.managed.converter;
 
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
