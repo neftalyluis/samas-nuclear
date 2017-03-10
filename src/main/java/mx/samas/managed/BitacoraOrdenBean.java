@@ -15,11 +15,16 @@
  */
 package mx.samas.managed;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.inject.Named;
 import javax.enterprise.context.Dependent;
 import mx.samas.domain.BitacoraOrden;
+import mx.samas.domain.Transaccion;
+import mx.samas.domain.dto.BitacoraOrdenEjecutorDTO;
+import mx.samas.domain.dto.BitacoraOrdenValorDTO;
 import mx.samas.service.BitacoraOrdenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -33,20 +38,41 @@ import org.springframework.stereotype.Component;
 @Dependent
 public class BitacoraOrdenBean {
     
+    private static final Logger LOG = Logger.getLogger(BitacoraOrdenBean.class.getName());
+    
     @Autowired
     private BitacoraOrdenService bitacoraOrdenService;
     
     private List<BitacoraOrden> listaOrdenes;
     
     private BitacoraOrden ordenSeleccionada;
-
+    
+    private BitacoraOrdenEjecutorDTO bitacoraOrdenDTO;
+    
     @PostConstruct
     public void init() {
-        
         listaOrdenes = bitacoraOrdenService.getAll();
         ordenSeleccionada = new BitacoraOrden();
+        bitacoraOrdenDTO = new BitacoraOrdenEjecutorDTO();
     }
-
+    
+    public void buildDTO() {
+        
+        bitacoraOrdenDTO.setIdOperacion(ordenSeleccionada.getId());
+        
+        List<BitacoraOrdenValorDTO> bovl = new ArrayList<>();
+        for (Transaccion t : ordenSeleccionada.getTransacciones()) {
+            BitacoraOrdenValorDTO bov = new BitacoraOrdenValorDTO(t.getId(), t.getNombre());
+            bovl.add(bov);
+        }
+        bitacoraOrdenDTO.setValorTransacciones(bovl);
+    }
+    
+    public String createOrden(){
+        bitacoraOrdenService.executeOrden(bitacoraOrdenDTO);
+        return "bitacora.xhtml";
+    }
+    
     /**
      * @return the listaOrdenes
      */
@@ -73,6 +99,20 @@ public class BitacoraOrdenBean {
      */
     public void setOrdenSeleccionada(BitacoraOrden ordenSeleccionada) {
         this.ordenSeleccionada = ordenSeleccionada;
+    }
+
+    /**
+     * @return the bitacoraOrdenDTO
+     */
+    public BitacoraOrdenEjecutorDTO getBitacoraOrdenDTO() {
+        return bitacoraOrdenDTO;
+    }
+
+    /**
+     * @param bitacoraOrdenDTO the bitacoraOrdenDTO to set
+     */
+    public void setBitacoraOrdenDTO(BitacoraOrdenEjecutorDTO bitacoraOrdenDTO) {
+        this.bitacoraOrdenDTO = bitacoraOrdenDTO;
     }
     
 }

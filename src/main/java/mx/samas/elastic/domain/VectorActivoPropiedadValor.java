@@ -18,10 +18,19 @@ import org.springframework.data.elasticsearch.annotations.FieldType;
 @Document(indexName = "vectoractivo", type = "VectorActivoPropiedadValor")
 public class VectorActivoPropiedadValor {
 
+    /**
+     * id es igual a TV_EMISORA_SERIE_FECHA
+     */
     @Id
     private String id;
+
     @Field(type = FieldType.Nested)
     private Map<String, Object> propiedadesValor;
+
+    public VectorActivoPropiedadValor(String id, Map<String, Object> propiedadesValor) {
+        this.id = id;
+        this.propiedadesValor = propiedadesValor;
+    }
 
     /**
      * @return the idx

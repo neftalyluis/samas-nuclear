@@ -14,11 +14,12 @@ import java.time.LocalDateTime;
  *
  * @author samas
  */
-    public class BitacoraOrdenValorDTO {
+public class BitacoraOrdenValorDTO {
 
     private Long transaccionId;
     private Long titulos;
     private Double efectivo;
+    private String nombre;
     /**
      * 2.- Momento en el que se ejecuta la orden
      */
@@ -31,6 +32,11 @@ import java.time.LocalDateTime;
      * 1.- Momento que se (asenta) ingresa la orden
      */
     private LocalDateTime fechaIngreso;
+    
+    public BitacoraOrdenValorDTO(Long id, String nombre){
+        this.transaccionId = id;
+        this.nombre = nombre;
+    }
 
     /**
      * @return the transaccionId
@@ -114,6 +120,20 @@ import java.time.LocalDateTime;
      */
     public void setFechaIngreso(LocalDateTime fechaIngreso) {
         this.fechaIngreso = fechaIngreso;
+    }
+
+    /**
+     * @return the nombre
+     */
+    public String getNombre() {
+        return nombre;
+    }
+
+    /**
+     * @param nombre the nombre to set
+     */
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
 }

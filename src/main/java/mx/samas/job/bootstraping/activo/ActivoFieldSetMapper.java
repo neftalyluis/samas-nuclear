@@ -18,6 +18,9 @@ import org.springframework.validation.BindException;
 
 /**
  *
+ * Este FieldSetMapper se encarga de convertir el FieldSet del Job a un tipo de
+ * Activo existente
+ *
  * @author samas
  */
 public class ActivoFieldSetMapper implements FieldSetMapper<Activo> {
@@ -28,8 +31,7 @@ public class ActivoFieldSetMapper implements FieldSetMapper<Activo> {
     public Activo mapFieldSet(FieldSet fieldSet) throws BindException {
 
         tipoActivoResolver = TipoActivoResolver.getInstance();
-
-//Perdoname madre por mi vida loca        
+   
         Activo a = null;
         switch (tipoActivoResolver.resolveFromTipoValor(fieldSet.readString(1))) {
             case ACCION:

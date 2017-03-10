@@ -15,7 +15,6 @@
                 
                 <p:outputLabel value="Banco:"/>   
                 <p:selectOneMenu id="banco" converter="#{bancoConverter}" value="#{cuentaBean.cuenta.banco}" style="width:125px">
-                    
                     <f:selectItems value="#{cuentaBean.bancos}" var="banco" itemValue="#{banco}" itemLabel="#{banco.nombre}" />
                 </p:selectOneMenu>
                

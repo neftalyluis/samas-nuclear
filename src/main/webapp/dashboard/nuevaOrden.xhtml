@@ -9,14 +9,45 @@
     </h:head>
     <h:body>
 
-        <h:panelGrid columns="2" cellpadding="5">
-            <p:outputLabel for="console" value="Elige una Orden:" />
-            <p:selectOneMenu id="console" value="#{bitacoraOrdenBean.ordenSeleccionada}">
-                <f:selectItem itemLabel="Elige" itemValue="" />
-                <f:selectItems value="#{bitacoraOrdenBean.listaOrdenes}" var="orden" itemLabel="#{orden.nombre}" itemValue="#{orden}"/>
-            </p:selectOneMenu>
-        </h:panelGrid>
-     
+        <h:form>
+
+            <h:panelGrid columns="2" cellpadding="5">
+
+                <p:outputLabel value="Folio de Operacion" />
+                <p:inputText value ="#{bitacoraOrdenBean.bitacoraOrdenDTO.folioOperacion}" />
+
+                <p:outputLabel value="Numero de Contrato" />
+                <p:inputText value ="#{bitacoraOrdenBean.bitacoraOrdenDTO.numeroContrato}" />
+
+                <p:outputLabel for="console" value="Elige una Orden:" />
+                <p:selectOneMenu id="console" converter="#{bitacoraOrdenConverter}" value="#{bitacoraOrdenBean.ordenSeleccionada}">
+                    <f:selectItems value="#{bitacoraOrdenBean.listaOrdenes}" var="orden" itemLabel="#{orden.nombre}" itemValue="#{orden}"/>
+                    <p:ajax event="change" update="ordenRepeater" listener="#{bitacoraOrdenBean.buildDTO}" /> 
+                </p:selectOneMenu>
+            </h:panelGrid>
+
+            <h:panelGrid id="ordenRepeater">
+
+                <p:panelGrid rendered="#{bitacoraOrdenBean.ordenSeleccionada.usaActivo}" columns="2">
+                    <p:outputLabel value="Activo" />
+                    <p:inputText value ="#{bitacoraOrdenBean.bitacoraOrdenDTO.clavePizarra}" />
+                </p:panelGrid>
+
+                <p:repeat var="transaccion" value="#{bitacoraOrdenBean.bitacoraOrdenDTO.valorTransacciones}">
+                    <p:outputLabel value="#{transaccion.nombre}"/>
+                    <h:panelGrid columns="2" cellpadding="5">
+                        <p:outputLabel value="Efectivo:" />
+                        <p:inputText value="#{transaccion.efectivo}" style="font-weight: bold"/>
+                        <p:outputLabel value="Titulos:" />
+                        <p:inputText value="#{transaccion.titulos}" style="font-weight: bold"/>
+                    </h:panelGrid>
+                </p:repeat>
+            </h:panelGrid>
+
+            <p:commandButton value="Crear Orden"  action="#{bitacoraOrdenBean.createOrden}"/>
+        </h:form>
+
+
     </h:body>
 </html>
 
