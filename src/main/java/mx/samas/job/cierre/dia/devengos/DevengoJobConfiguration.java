@@ -14,8 +14,6 @@ import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepScope;
-import org.springframework.batch.item.ItemProcessor;
-import org.springframework.batch.item.ItemWriter;
 import org.springframework.batch.item.database.JpaPagingItemReader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -47,8 +45,6 @@ public class DevengoJobConfiguration {
         return stepBuilderFactory.get("devengosPosicionStep")
                 .<Cuenta, List<VectorPosicionCredito>>chunk(1000)
                 .reader(posicionReader())
-                .processor(posicionProcessor())
-                .writer(posicionWriter())
                 .faultTolerant()
                 .build();
 
@@ -62,15 +58,5 @@ public class DevengoJobConfiguration {
         reader.setQueryString("SELECT c FROM Cuenta c "
                 + "JOIN FETCH a.portafolios p");
         return reader;
-    }
-
-    @Bean
-    public ItemProcessor<Cuenta, List<VectorPosicionCredito>> posicionProcessor() {
-        return null;
-    }
-
-    @Bean
-    public ItemWriter<List<VectorPosicionCredito>> posicionWriter() {
-        return null;
     }
 }

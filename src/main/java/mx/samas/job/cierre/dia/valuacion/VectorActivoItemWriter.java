@@ -15,6 +15,7 @@ import org.springframework.batch.item.ItemWriter;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
+ * Este ItemWriter persiste el VectorActivo ya construido con sus relaciones
  *
  * @author samas
  */

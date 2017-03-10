@@ -5,12 +5,11 @@
  */
 package mx.samas.job.cierre.dia.valuacion;
 
-import java.io.IOException;
 import java.util.Date;
 import javax.persistence.EntityManagerFactory;
 import mx.samas.domain.Activo;
-import mx.samas.domain.VectorActivo;
 import mx.samas.domain.dto.VectorActivoDTO;
+import mx.samas.elastic.domain.VectorActivoPropiedadValor;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
@@ -18,7 +17,6 @@ import org.springframework.batch.core.configuration.annotation.StepBuilderFactor
 import org.springframework.batch.core.configuration.annotation.StepScope;
 import org.springframework.batch.item.ItemProcessor;
 import org.springframework.batch.item.ItemWriter;
-import org.springframework.batch.item.database.JpaItemWriter;
 import org.springframework.batch.item.database.JpaPagingItemReader;
 import org.springframework.batch.item.file.FlatFileItemReader;
 import org.springframework.batch.item.file.LineMapper;
@@ -33,6 +31,11 @@ import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
 
 /**
+ * Este Job hace principalmente dos cosas
+ * <ul>
+ * <li>Carga los precios a la DB usando VectorActivo </li>
+ * <li>Carga las propiedades Vectoriales desde PIP</li>
+ * </ul>
  *
  * @author samas
  */
@@ -53,12 +56,14 @@ public class ValuacionJobConfiguration {
         return jobs.get("valuacionJob")
                 .start(vectorActivoStep())
                 .next(vectorPropiedadesStep())
-                //                .next(propiedadesTerminosPIPStep())
-                //                .next(propiedadesUsuarioCSVStep())
-                //                .next(propiedadesJuliaStep())
                 .build();
     }
 
+    /**
+     * Genera un Step que solo crea VectorActivo desde el CSV
+     *
+     * @return El Step listo para ejecutar
+     */
     @Bean
     public Step vectorActivoStep() {
         return stepBuilderFactory.get("vectorActivoStep")
@@ -69,10 +74,15 @@ public class ValuacionJobConfiguration {
                 .build();
     }
 
+    /**
+     * Genera un Step que construye las propiedades vectoriales para cada Activo
+     *
+     * @return
+     */
     @Bean
     public Step vectorPropiedadesStep() {
         return stepBuilderFactory.get("vectorPropiedadesStep")
-                .<Activo, VectorActivo>chunk(1000)
+                .<Activo, VectorActivoPropiedadValor>chunk(1000)
                 .reader(vectorPropiedadesReader())
                 .processor(vectorPropiedadesProcessor())
                 .writer(vectorPropiedadesWriter())
@@ -84,27 +94,25 @@ public class ValuacionJobConfiguration {
     public JpaPagingItemReader<Activo> vectorPropiedadesReader() {
         JpaPagingItemReader<Activo> reader = new JpaPagingItemReader<>();
         reader.setEntityManagerFactory(emFactory);
-        reader.setQueryString("SELECT a FROM Activo a JOIN FETCH a.propiedades p ");
+        reader.setQueryString("SELECT a FROM Activo a JOIN FETCH a.propiedades p");
         return reader;
     }
 
     @StepScope
     public FlatFileItemReader<VectorActivoDTO> vectorActivoReader() {
         FlatFileItemReader<VectorActivoDTO> reader = new FlatFileItemReader<>();
-        reader.setLinesToSkip(1);//first line is title definition 
+        reader.setLinesToSkip(1);
         reader.setResource(getFileFromDirectory("memes"));
         reader.setLineMapper(vectorActivoLineMapper());
         return reader;
     }
 
-    //aqui leo
     @StepScope
     @Bean
     public Resource getFileFromDirectory(@Value("#{jobParameters[archivo]}") String fl) {
         return new FileSystemResource(fl);
     }
     
-    @StepScope
     @Bean
     public Date getDateForJob(@Value("#{jobParameters[fecha]}") Date fecha) {
         return fecha;
@@ -130,12 +138,7 @@ public class ValuacionJobConfiguration {
 
     @Bean
     public VectorActivoFieldSetMapper vectorActivoFieldSetMapper() {
-        return new VectorActivoFieldSetMapper(new Date());
-    }
-
-    @Bean
-    public ItemProcessor<VectorActivo, VectorActivo> vectorActivoProcessor() throws IOException {
-        return new VectorActivoItemProcessor();
+        return new VectorActivoFieldSetMapper(getDateForJob(new Date()));
     }
 
     @Bean
@@ -144,14 +147,12 @@ public class ValuacionJobConfiguration {
     }
 
     @Bean
-    public ItemProcessor<Activo, VectorActivo> vectorPropiedadesProcessor() {
-        return new VectorPropiedadesItemProcessor();
+    public ItemProcessor<Activo, VectorActivoPropiedadValor> vectorPropiedadesProcessor() {
+        return new VectorPropiedadesItemProcessor(getDateForJob(new Date()), getFileFromDirectory("NA"));
     }
 
     @Bean
-    public JpaItemWriter<VectorActivo> vectorPropiedadesWriter() {
-        JpaItemWriter<VectorActivo> writer = new JpaItemWriter<>();
-        writer.setEntityManagerFactory(emFactory);
-        return writer;
+    public VectorActivoPropiedadValorItemWriter vectorPropiedadesWriter() {
+        return new VectorActivoPropiedadValorItemWriter();
     }
 }

@@ -29,6 +29,9 @@ import org.springframework.core.io.Resource;
 
 /**
  *
+ * Este Job se encarga de crear una lista por default de Activos que existen en
+ * un CSV
+ *
  * @author samas
  */
 @Configuration
@@ -99,11 +102,6 @@ public class ActivoJobConfiguration {
     @Bean
     public ActivoFieldSetMapper activoFieldSetMapper() {
         return new ActivoFieldSetMapper();
-    }
-
-    @Bean
-    public ItemProcessor<Activo, Activo> activoProcessor() throws IOException {
-        return new ActivoItemProcessor();
     }
 
     @Bean

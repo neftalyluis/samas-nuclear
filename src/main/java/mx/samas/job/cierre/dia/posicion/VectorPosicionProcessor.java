@@ -32,7 +32,7 @@ public class VectorPosicionProcessor implements ItemProcessor<Cuenta, List<Vecto
 
     @Autowired
     private BitacoraService bitacoraService;
-    
+
     @Autowired
     private PortafolioService portafolioService;
 
@@ -52,7 +52,6 @@ public class VectorPosicionProcessor implements ItemProcessor<Cuenta, List<Vecto
          */
         List<VectorPosicion> posicionesNuevas = new ArrayList<>();
 
-        
         //Iteramos en todos los portafolios
         for (Portafolio p : portafolioService.getPortafoliosFromCuenta(item)) {
 

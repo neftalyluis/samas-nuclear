@@ -12,6 +12,7 @@ import org.springframework.batch.item.ItemWriter;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
+ * ItemWriter que persiste todos los Activos creador por el Job
  *
  * @author samas
  */
