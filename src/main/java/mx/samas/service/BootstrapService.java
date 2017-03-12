@@ -22,4 +22,8 @@ package mx.samas.service;
 public interface BootstrapService {
 
     public void execute();
+    
+    public void activo();
+    
+    public void transacciones();
 }

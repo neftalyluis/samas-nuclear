@@ -41,10 +41,10 @@ import org.springframework.stereotype.Service;
 public class BatchServiceImpl implements BatchService {
 
     private static final Logger LOG = Logger.getLogger(BatchServiceImpl.class.getName());
-    
+
     @Autowired
     private JobLauncher jobLauncher;
-    
+
     @Autowired
     private ApplicationContext appContext;
 
@@ -55,6 +55,21 @@ public class BatchServiceImpl implements BatchService {
         params.put("archivo", new JobParameter(fileToRead));
         params.put("fecha", new JobParameter(fechaCierre));
         Job job = (Job) appContext.getBean(SAMASJobs.VALUACION_VECTOR.toString());
+        JobParameters jpb = new JobParameters(params);
+
+        try {
+            JobExecution a = jobLauncher.run(job, jpb);
+            return true;
+        } catch (JobExecutionAlreadyRunningException | JobRestartException | JobInstanceAlreadyCompleteException | JobParametersInvalidException ex) {
+            LOG.warning(ex.toString());
+            return false;
+        }
+    }
+
+    @Override
+    public Boolean bootstrapActivo() {
+        Map<String, JobParameter> params = new HashMap<>();
+        Job job = (Job) appContext.getBean(SAMASJobs.BOOTSTRAP_ACTIVO.toString());
         JobParameters jpb = new JobParameters(params);
 
         try {

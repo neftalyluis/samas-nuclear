@@ -18,7 +18,7 @@
 
                 <p:outputLabel value="Numero de Contrato" />
                 <p:inputText value ="#{bitacoraOrdenBean.bitacoraOrdenDTO.numeroContrato}" />
-
+                
                 <p:outputLabel for="console" value="Elige una Orden:" />
                 <p:selectOneMenu id="console" converter="#{bitacoraOrdenConverter}" value="#{bitacoraOrdenBean.ordenSeleccionada}">
                     <f:selectItems value="#{bitacoraOrdenBean.listaOrdenes}" var="orden" itemLabel="#{orden.nombre}" itemValue="#{orden}"/>

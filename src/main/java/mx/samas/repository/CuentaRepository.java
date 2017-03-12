@@ -5,8 +5,10 @@
  */
 package mx.samas.repository;
 
+import java.util.List;
 import mx.samas.domain.Cuenta;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 import org.springframework.stereotype.Repository;
 
@@ -22,4 +24,7 @@ public interface CuentaRepository extends JpaRepository<Cuenta, Long> {
      * @return La cuenta asignada a un id.
      */
     public Cuenta getByIdCuenta(String idCuenta);
+    
+    @Query("SELECT c.idCuenta FROM Cuenta c")
+    public List<String> getAllIdCuenta();
 }

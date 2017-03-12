@@ -99,7 +99,7 @@ public class BitacoraOrdenServiceImpl implements BitacoraOrdenService {
                         /**
                          * TODO: Checa estoooo!! //
                          */
-//                        b.setContratoServicio(cuentaService.getCuentaByCadena(ordenDto.getNumeroContrato()));
+                        b.setContratoServicio(cuentaService.getByIdCuenta(ordenDto.getNumeroContrato()));
 //                    ///MMMMMM, hay que checar que ondas con la tasa
 //                    b.setTasa(Double.NaN);
 //                    Por ahora no pelamos el mercado, pero no es tan dificil hecharlo a andar

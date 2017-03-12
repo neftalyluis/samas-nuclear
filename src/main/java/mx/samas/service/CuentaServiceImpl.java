@@ -72,4 +72,9 @@ public class CuentaServiceImpl implements CuentaService {
         return true;
     }
 
+    @Override
+    public List<String> getAllIdCuenta() {
+        return cuentaRepository.getAllIdCuenta();
+    }
+
 }

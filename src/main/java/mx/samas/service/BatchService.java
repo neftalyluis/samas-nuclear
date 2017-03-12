@@ -24,4 +24,6 @@ import java.util.Date;
 public interface BatchService {
 
     public Boolean cierreDia(String fileToRead, Date fechaCierre);
+    
+    public Boolean bootstrapActivo();
 }

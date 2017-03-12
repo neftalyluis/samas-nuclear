@@ -28,4 +28,6 @@ public interface CuentaService {
     public Cuenta getById(Long id);
     
     public Boolean removeById(Long id);
+    
+    public List<String> getAllIdCuenta();
 }

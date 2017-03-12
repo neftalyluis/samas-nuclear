@@ -26,6 +26,7 @@ import mx.samas.domain.Transaccion;
 import mx.samas.domain.dto.BitacoraOrdenEjecutorDTO;
 import mx.samas.domain.dto.BitacoraOrdenValorDTO;
 import mx.samas.service.BitacoraOrdenService;
+import mx.samas.service.CuentaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -43,17 +44,26 @@ public class BitacoraOrdenBean {
     @Autowired
     private BitacoraOrdenService bitacoraOrdenService;
     
+    @Autowired
+    private CuentaService cuentaService;
+    
     private List<BitacoraOrden> listaOrdenes;
     
     private BitacoraOrden ordenSeleccionada;
     
     private BitacoraOrdenEjecutorDTO bitacoraOrdenDTO;
     
+    private List<String> cuentaList;
+    
+    @Autowired
+    private BitacoraBean bitacoraBean;
+    
     @PostConstruct
     public void init() {
         listaOrdenes = bitacoraOrdenService.getAll();
         ordenSeleccionada = new BitacoraOrden();
         bitacoraOrdenDTO = new BitacoraOrdenEjecutorDTO();
+        cuentaList = cuentaService.getAllIdCuenta();
     }
     
     public void buildDTO() {
@@ -70,6 +80,7 @@ public class BitacoraOrdenBean {
     
     public String createOrden(){
         bitacoraOrdenService.executeOrden(bitacoraOrdenDTO);
+        bitacoraBean.init();
         return "bitacora.xhtml";
     }
     
@@ -113,6 +124,20 @@ public class BitacoraOrdenBean {
      */
     public void setBitacoraOrdenDTO(BitacoraOrdenEjecutorDTO bitacoraOrdenDTO) {
         this.bitacoraOrdenDTO = bitacoraOrdenDTO;
+    }
+
+    /**
+     * @return the cuentaList
+     */
+    public List<String> getCuentaList() {
+        return cuentaList;
+    }
+
+    /**
+     * @param cuentaList the cuentaList to set
+     */
+    public void setCuentaList(List<String> cuentaList) {
+        this.cuentaList = cuentaList;
     }
     
 }

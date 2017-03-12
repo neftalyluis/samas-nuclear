@@ -55,10 +55,15 @@ public class BootstrapServiceImpl implements BootstrapService {
     @Autowired
     private BitacoraOrdenService bitacoraOrdenService;
 
+    @Autowired
+    private BatchService batchService;
+
     @Override
     public void execute() {
         persistPerfiles();
         persistPortfolioEstatus();
+        transacciones();
+        activo();
 
     }
 
@@ -299,6 +304,7 @@ public class BootstrapServiceImpl implements BootstrapService {
             ordenCompra.setUsaActivo(Boolean.TRUE);
             ordenCompra.setTransacciones(listaOrden);
             bitacoraOrdenService.createOrden(ordenCompra);
+            listaOrden = new ArrayList<>();
 
             BitacoraOrden ordenVenta = new BitacoraOrden();
             listaOrden.clear();
@@ -309,6 +315,7 @@ public class BootstrapServiceImpl implements BootstrapService {
             ordenVenta.setUsaActivo(Boolean.TRUE);
             ordenVenta.setTransacciones(listaOrden);
             bitacoraOrdenService.createOrden(ordenVenta);
+            listaOrden = new ArrayList<>();
 
             BitacoraOrden ordenDeposito = new BitacoraOrden();
             listaOrden.clear();
@@ -317,6 +324,7 @@ public class BootstrapServiceImpl implements BootstrapService {
             ordenDeposito.setUsaActivo(Boolean.FALSE);
             ordenDeposito.setTransacciones(listaOrden);
             bitacoraOrdenService.createOrden(ordenDeposito);
+            listaOrden = new ArrayList<>();
 
             BitacoraOrden ordenRedito = new BitacoraOrden();
             listaOrden.clear();
@@ -326,6 +334,7 @@ public class BootstrapServiceImpl implements BootstrapService {
             ordenRedito.setUsaActivo(Boolean.FALSE);
             ordenRedito.setTransacciones(listaOrden);
             bitacoraOrdenService.createOrden(ordenRedito);
+            listaOrden = new ArrayList<>();
 
             LOG.info("--Ordenes");
 
@@ -361,5 +370,15 @@ public class BootstrapServiceImpl implements BootstrapService {
             LOG.log(Level.WARNING, "No pudimos persistir los PortfolioStatus, la excepcion es: {0}", e);
             return false;
         }
+    }
+
+    @Override
+    public void activo() {
+        batchService.bootstrapActivo();
+    }
+
+    @Override
+    public void transacciones() {
+        persistTransacciones();
     }
 }

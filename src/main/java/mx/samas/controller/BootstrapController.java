@@ -15,7 +15,6 @@
  */
 package mx.samas.controller;
 
-import mx.samas.domain.dto.BitacoraOrdenDTO;
 import mx.samas.service.BootstrapService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -35,8 +34,8 @@ public class BootstrapController {
     @Autowired
     private BootstrapService bootstrapService;
 
-    @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<String> createFromDTO(BitacoraOrdenDTO dto) {
+    @RequestMapping(method = RequestMethod.GET)
+    public ResponseEntity<String> createFromDTO() {
         bootstrapService.execute();
         return new ResponseEntity<>("OK", HttpStatus.OK);
     }
