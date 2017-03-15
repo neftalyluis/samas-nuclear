@@ -16,12 +16,3 @@ before_script:
   PRIVILEGES;\n" | mysql -u root
 after_success:
 - bash <(curl -s https://codecov.io/bash) -t c40f0969-f6ec-4c50-bc86-a369613ce30e
-deploy:
-  provider: openshift
-  user: amaalanis@gmail.com
-  password:
-    secure: VOoPqsS3aciJx1ifxlrVKqsp6kzkkvhJJQH9pD/uCl9ukum5CXMoEc8qLx5MWTZRUO3ntMj44UGSHD9ccSRNy6wNzIHWg9ln6Wt3jtM4T9jV7CGzPaWxO3Fn++ntv71GW7YkNLHjKOpc5eXREwuugxeSSNrk+PLjYgcr67hF+4Z+UQ8JfQMrqYkvInFYcnH13nBUnBRfKfLNTfuHXiElebpvE+PX0SHcg+APqiqtrd2xfxB3iyt1+gz+Pv1p1iS01VXehBYExanMRiCuqBpYS+APQCd3tWgh6scRkdhonFstFhGJMfdUB007qInbcLWMRXI+haSO84w7T9999MLB5YyAJVc4AGl0Uc6bqPWSmUws1X5iy4U21UhIxbHUo+npKY0IODHxxmVsQaLeqM0dIWeH6Ccdc28BfPxDQCgmtMyvtgpQEDlVRsrALgie4+kkWdbtLYNEUT6AV0UZOsF7LnsIqYRfoGHuCGZiMiYisQ1yA469n26x5o2LvVqPgl3uJc41xbzdbDDpU7I/PBd+srxGzsD81CVUkDjROBixNgRIJIP5Bl9rwQhN8fdrEd886qZOaS0CQREwgLxTpTL3aKhrsBx6CI5MUVIzwu0mqzVudSl4vAHF3Bs+g8P1OgEDh6v5m0E3YgoBFD21IAdB2hU8DuoOTBID1LFUQ75qAck=
-  app: samas
-  domain: neftalyluis
-  on:
-    repo: neftalyluis/samas
