@@ -6,6 +6,7 @@
 package mx.samas.domain;
 
 import java.io.Serializable;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -24,6 +25,7 @@ public class Cuenta implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @Column(unique = true, nullable = false)
     private String idCuenta;
 
     @ManyToOne
@@ -45,10 +47,14 @@ public class Cuenta implements Serializable {
     /**
      * @param idCuenta Guardara la cadena que se ingrese desde la interfaz.
      * @param banco Guardara el banco que se ingrese desde la interfaz.
-     * @param tieneCredito Solo acepta como valores verdadero o falso (booleano) el cual guardara. 
-     * @param operaFlujo Solo acepta como valores verdadero o falso (booleano) el cual guardara. 
-     * @param operaIndice Solo acepta como valores verdadero o falso (booleano) el cual guardara. 
-     * @param operaDerivado Solo acepta como valores verdadero o falso (booleano) el cual guardara. 
+     * @param tieneCredito Solo acepta como valores verdadero o falso (booleano)
+     * el cual guardara.
+     * @param operaFlujo Solo acepta como valores verdadero o falso (booleano)
+     * el cual guardara.
+     * @param operaIndice Solo acepta como valores verdadero o falso (booleano)
+     * el cual guardara.
+     * @param operaDerivado Solo acepta como valores verdadero o falso
+     * (booleano) el cual guardara.
      */
     public Cuenta(String idCuenta, Banco banco, Boolean tieneCredito,
             Boolean operaFlujo, Boolean operaIndice, Boolean operaDerivado) {

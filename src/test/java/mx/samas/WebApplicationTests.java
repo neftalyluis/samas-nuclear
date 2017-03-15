@@ -7,32 +7,34 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import java.util.logging.Logger;
-import mx.samas.repository.ActivoRepository;
-import mx.samas.repository.ClienteRepository;
+import mx.samas.repository.UsuarioRepository;
+import mx.samas.service.BootstrapService;
+import org.junit.Before;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
 @WebAppConfiguration
+@ActiveProfiles("test")
 public class WebApplicationTests {
 
     private static final Logger LOG = Logger.getLogger(WebApplicationTests.class.getName());
 
     @Autowired
-    private ClienteRepository clienteRepository;
-
+    private UsuarioRepository usuarioRepository;
+    
     @Autowired
-    private ActivoRepository activoRepository;
+    private BootstrapService bootstrapService;
+    
+    @Before
+    public void bootstrap(){
+        bootstrapService.execute();
+    }
 
     @Test
     public void testBootstraping() {
         LOG.info("Probamos que Solo Existan 3 Clientes");
-        Assert.assertEquals(3, clienteRepository.count());
+        Assert.assertEquals(1, usuarioRepository.count());
     }
-//
-//    @Test
-//    public void testActivoRepository() {
-//        LOG.info("Probamos que Exista el Activo AMAZON usando una NamedQuery");
-////        Assert.assertEquals(Boolean.TRUE, true);
-//    }
 }

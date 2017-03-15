@@ -7,6 +7,7 @@ package mx.samas.domain;
 
 import java.io.Serializable;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -27,6 +28,7 @@ public class Mercado implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @Column(unique = true, nullable = false)
     private String nombre;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)

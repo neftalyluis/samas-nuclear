@@ -5,6 +5,7 @@
  */
 package mx.samas.elastic.domain;
 
+import java.time.LocalDate;
 import java.util.Map;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
@@ -15,7 +16,7 @@ import org.springframework.data.elasticsearch.annotations.FieldType;
  *
  * @author samas
  */
-@Document(indexName = "vectoractivo", type = "VectorActivoPropiedadValor")
+@Document(indexName = "activo", type = "vector")
 public class VectorActivoPropiedadValor {
 
     /**
@@ -23,6 +24,10 @@ public class VectorActivoPropiedadValor {
      */
     @Id
     private String id;
+    
+    private String clavePizarra;
+    
+    private LocalDate fecha;
 
     @Field(type = FieldType.Nested)
     private Map<String, Object> propiedadesValor;
@@ -58,5 +63,33 @@ public class VectorActivoPropiedadValor {
      */
     public void setPropiedadesValor(Map<String, Object> propiedadesValor) {
         this.propiedadesValor = propiedadesValor;
+    }
+
+    /**
+     * @return the clavePizarra
+     */
+    public String getClavePizarra() {
+        return clavePizarra;
+    }
+
+    /**
+     * @param clavePizarra the clavePizarra to set
+     */
+    public void setClavePizarra(String clavePizarra) {
+        this.clavePizarra = clavePizarra;
+    }
+
+    /**
+     * @return the fecha
+     */
+    public LocalDate getFecha() {
+        return fecha;
+    }
+
+    /**
+     * @param fecha the fecha to set
+     */
+    public void setFecha(LocalDate fecha) {
+        this.fecha = fecha;
     }
 }

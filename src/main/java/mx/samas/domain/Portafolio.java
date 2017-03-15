@@ -8,6 +8,7 @@ package mx.samas.domain;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -27,6 +28,7 @@ public class Portafolio implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @Column(unique = true, nullable = false)
     private String cuentaEje;
 
     @ManyToOne
@@ -50,19 +52,24 @@ public class Portafolio implements Serializable {
     private List<Cuenta> corredores;
 
     /**
-     * Credito Margen 
+     * Credito Margen
      */
     private Double margen;
 
     /**
      * @param cuentaEje Guardara la cadena que se ingrese desde la interfaz.
-     * @param estrategia Guardara la Estrategia que se ingrese desde la interfaz.
-     * @param tipoServicio Giardara el TipoServicio que se ingrese desde la interfaz
-     * @param estatus Guardara el PortafolioEstatus que se ingrese desde la interfaz.
-     * @param monedaDenominacion Guardara un Activo que se ingrese desde la interfaz.
+     * @param estrategia Guardara la Estrategia que se ingrese desde la
+     * interfaz.
+     * @param tipoServicio Giardara el TipoServicio que se ingrese desde la
+     * interfaz
+     * @param estatus Guardara el PortafolioEstatus que se ingrese desde la
+     * interfaz.
+     * @param monedaDenominacion Guardara un Activo que se ingrese desde la
+     * interfaz.
      * @param clientes Guardara una Lista de Clientes.
      * @param corredores Guardara una Lista de Cuentas.
-     * @param margen Guardara un numero fraccionario (de hasta 15 digitos) que se ingrese desde la interfaz.  
+     * @param margen Guardara un numero fraccionario (de hasta 15 digitos) que
+     * se ingrese desde la interfaz.
      */
     public Portafolio(String cuentaEje, Estrategia estrategia,
             TipoServicio tipoServicio, PortafolioEstatus estatus,
@@ -80,8 +87,8 @@ public class Portafolio implements Serializable {
         this.margen = margen;
     }
 
-    /**Obtiene la fecha actual.
-     * No hay parametros.
+    /**
+     * Obtiene la fecha actual. No hay parametros.
      */
     public Portafolio() {
         this.fecha = LocalDate.now();

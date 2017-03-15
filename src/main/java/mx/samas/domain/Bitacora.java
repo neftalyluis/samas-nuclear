@@ -8,6 +8,7 @@ package mx.samas.domain;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
@@ -76,6 +77,7 @@ public class Bitacora implements Serializable {
     @ManyToOne
     private Mercado mercado;
 
+    @Column(unique = true, nullable = false)
     private String folioOperacion;
 
     private Double precio;

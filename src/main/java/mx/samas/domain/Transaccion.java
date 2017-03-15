@@ -6,6 +6,7 @@
 package mx.samas.domain;
 
 import java.io.Serializable;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -33,6 +34,7 @@ public class Transaccion implements Serializable {
     /**
      * Nombre de la Transaccion
      */
+    @Column(unique = true, nullable = false)
     private String nombre;
 
     /**

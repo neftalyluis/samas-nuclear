@@ -6,6 +6,7 @@
 package mx.samas.domain;
 
 import java.io.Serializable;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -23,6 +24,7 @@ public class Cliente implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @Column(unique = true, nullable = false)
     private String nombre;
 
     private Boolean sofisticado;
@@ -43,8 +45,10 @@ public class Cliente implements Serializable {
 
     /**
      * @param nombre Guardara la cadena que se ingrese desde la interfaz.
-     * @param elegible Solo acepta como valores verdadero o falso (booleano) el cual guardara. 
-     * @param sofisticado Solo acepta como valores verdadero o falso (booleano) el cual guardara. 
+     * @param elegible Solo acepta como valores verdadero o falso (booleano) el
+     * cual guardara.
+     * @param sofisticado Solo acepta como valores verdadero o falso (booleano)
+     * el cual guardara.
      */
     public Cliente(String nombre, Boolean elegible, Boolean sofisticado) {
         this.nombre = nombre;
@@ -54,7 +58,8 @@ public class Cliente implements Serializable {
 
     /**
      * @param nombre Guardara la cadena que se ingrese desde la interfaz.
-     * @param elegible Solo acepta como valores verdadero o falso (booleano) el cual guardara. 
+     * @param elegible Solo acepta como valores verdadero o falso (booleano) el
+     * cual guardara.
      */
     public Cliente(String nombre, Boolean elegible) {
         this.nombre = nombre;
