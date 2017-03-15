@@ -62,7 +62,7 @@ public class BootstrapServiceImpl implements BootstrapService {
     public void execute() {
         persistPerfiles();
         persistPortfolioEstatus();
-        transacciones();
+        persistTransacciones();
         activo();
 
     }
@@ -194,7 +194,7 @@ public class BootstrapServiceImpl implements BootstrapService {
         tl.add(incomingSecurityLendingFromBusiness);
 
         Transaccion outgoingSecurityLendingFromBusiness = new Transaccion();
-        outgoingSecurityLendingFromBusiness.setNombre("Pestamo de valores Saliente");
+        outgoingSecurityLendingFromBusiness.setNombre("Prestamo de valores Saliente");
         outgoingSecurityLendingFromBusiness.setFlujoEfectivo(new Long(0));
         outgoingSecurityLendingFromBusiness.setFlujoTitulos(new Long(-1));
         outgoingSecurityLendingFromBusiness.setCredito(true);
@@ -211,7 +211,7 @@ public class BootstrapServiceImpl implements BootstrapService {
 //////////////////////////////////////////////////////////////// BROKER
 
         Transaccion refundFromBroker = new Transaccion();
-        refundFromBroker.setNombre("Reembolso de Correduría");
+        refundFromBroker.setNombre("Reembolso en efectivo de Correduría");
         refundFromBroker.setFlujoEfectivo(new Long(1));
         refundFromBroker.setFlujoTitulos(new Long(0));
         refundFromBroker.setCredito(false);
@@ -219,7 +219,7 @@ public class BootstrapServiceImpl implements BootstrapService {
         tl.add(refundFromBroker);
 
         Transaccion refund2FromBroker = new Transaccion();
-        refund2FromBroker.setNombre("Reembolso");
+        refund2FromBroker.setNombre("Reembolso en titulos de Correduría");
         refund2FromBroker.setFlujoEfectivo(new Long(0));
         refund2FromBroker.setFlujoTitulos(new Long(1));
         refund2FromBroker.setCredito(false);
@@ -227,7 +227,7 @@ public class BootstrapServiceImpl implements BootstrapService {
         tl.add(refund2FromBroker);
 
         Transaccion buyAsset = new Transaccion();
-        buyAsset.setNombre("Compra");
+        buyAsset.setNombre("Compra de titulos");
         buyAsset.setFlujoEfectivo(new Long(-1));
         buyAsset.setFlujoTitulos(new Long(1));
         buyAsset.setCredito(false);
@@ -235,7 +235,7 @@ public class BootstrapServiceImpl implements BootstrapService {
         tl.add(buyAsset);
 
         Transaccion sellAsset = new Transaccion();
-        sellAsset.setNombre("Venta");
+        sellAsset.setNombre("Venta de titulos");
         sellAsset.setFlujoEfectivo(new Long(1));
         sellAsset.setFlujoTitulos(new Long(-1));
         sellAsset.setCredito(false);
@@ -375,10 +375,5 @@ public class BootstrapServiceImpl implements BootstrapService {
     @Override
     public void activo() {
         batchService.bootstrapActivo();
-    }
-
-    @Override
-    public void transacciones() {
-        persistTransacciones();
     }
 }
