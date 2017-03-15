@@ -11,12 +11,10 @@ import mx.samas.repository.UsuarioRepository;
 import mx.samas.service.BootstrapService;
 import org.junit.Before;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ActiveProfiles;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
 @WebAppConfiguration
-@ActiveProfiles("test")
 public class WebApplicationTests {
 
     private static final Logger LOG = Logger.getLogger(WebApplicationTests.class.getName());
