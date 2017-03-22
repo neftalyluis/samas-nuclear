@@ -35,16 +35,9 @@ public class VectorPosicionCredito implements Serializable {
     @ManyToOne
     private Activo activo;
 
-    /**
-     * Reporto y en Prenda, si es verdadero entonces existe un Activo que los
-     * respalda de lo contrario es quirografario
-     */
-    private Boolean bursatilizado;
-
-    private Boolean impuesto;
-
-    @ManyToOne
-    private Activo moneda;
+    private Long cantidad;
+    
+    private Contraparte contraparte;
 
     public Long getId() {
         return id;
@@ -122,48 +115,6 @@ public class VectorPosicionCredito implements Serializable {
     }
 
     /**
-     * @return the bursatilizado
-     */
-    public Boolean getBursatilizado() {
-        return bursatilizado;
-    }
-
-    /**
-     * @param bursatilizado the bursatilizado to set
-     */
-    public void setBursatilizado(Boolean bursatilizado) {
-        this.bursatilizado = bursatilizado;
-    }
-
-    /**
-     * @return the impuesto
-     */
-    public Boolean getImpuesto() {
-        return impuesto;
-    }
-
-    /**
-     * @param impuesto the impuesto to set
-     */
-    public void setImpuesto(Boolean impuesto) {
-        this.impuesto = impuesto;
-    }
-
-    /**
-     * @return the moneda
-     */
-    public Activo getMoneda() {
-        return moneda;
-    }
-
-    /**
-     * @param moneda the moneda to set
-     */
-    public void setMoneda(Activo moneda) {
-        this.moneda = moneda;
-    }
-
-    /**
      * @return the fecha
      */
     public LocalDate getFecha() {
@@ -175,5 +126,33 @@ public class VectorPosicionCredito implements Serializable {
      */
     public void setFecha(LocalDate fecha) {
         this.fecha = fecha;
+    }
+
+    /**
+     * @return the cantidad
+     */
+    public Long getCantidad() {
+        return cantidad;
+    }
+
+    /**
+     * @param cantidad the cantidad to set
+     */
+    public void setCantidad(Long cantidad) {
+        this.cantidad = cantidad;
+    }
+
+    /**
+     * @return the contraparte
+     */
+    public Contraparte getContraparte() {
+        return contraparte;
+    }
+
+    /**
+     * @param contraparte the contraparte to set
+     */
+    public void setContraparte(Contraparte contraparte) {
+        this.contraparte = contraparte;
     }
 }
