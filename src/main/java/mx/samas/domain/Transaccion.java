@@ -6,12 +6,14 @@
 package mx.samas.domain;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 /**
  *
@@ -51,7 +53,13 @@ public class Transaccion implements Serializable {
      * Indica si entran, salen o no hay flujo de efectivo
      */
     private Long flujoEfectivo;
-
+    
+    /**
+     * Relacion que indica que comisiones aplican para esta transaccion
+     */
+    @OneToMany
+    private List<TransaccionComision> comisiones;
+    
     public Long getId() {
         return id;
     }
@@ -153,6 +161,20 @@ public class Transaccion implements Serializable {
      */
     public void setFlujoEfectivo(Long flujoEfectivo) {
         this.flujoEfectivo = flujoEfectivo;
+    }
+
+    /**
+     * @return the comisiones
+     */
+    public List<TransaccionComision> getComisiones() {
+        return comisiones;
+    }
+
+    /**
+     * @param comisiones the comisiones to set
+     */
+    public void setComisiones(List<TransaccionComision> comisiones) {
+        this.comisiones = comisiones;
     }
 
 }
