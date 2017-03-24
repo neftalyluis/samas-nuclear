@@ -7,7 +7,7 @@ package mx.samas.service;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
-import mx.samas.domain.Bono;
+import mx.samas.domain.Flujo;
 import mx.samas.domain.CalendarioComercial;
 import org.springframework.stereotype.Service;
 
@@ -39,7 +39,7 @@ public class DevengoServiceImpl implements DevengoService {
     }
 
     @Override
-    public Double calculaDevengo(Bono bono, LocalDate dia, Long posicion, Double valorNominal, Double tipoDeCambio, LocalDate inicioBono) {
+    public Double calculaDevengo(Flujo bono, LocalDate dia, Long posicion, Double valorNominal, Double tipoDeCambio, LocalDate inicioBono) {
         return tipoDeCambio * posicion * bono.getTasaReferencia().getTasa() * calculaPlazoComercial(inicioBono, dia, bono.getMercado().getCalendario());
     }
 

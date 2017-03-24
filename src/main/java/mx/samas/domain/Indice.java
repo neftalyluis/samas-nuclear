@@ -13,13 +13,13 @@ import javax.persistence.Entity;
  * @author samas
  */
 @Entity
-public class Accion extends Activo implements Serializable {
+public class Indice extends Activo implements Serializable {
 
     private Boolean privada;
     private Boolean fondo;
     private Double comisionAnual;
 
-    public Accion() {
+    public Indice() {
 
     }
 
@@ -33,7 +33,7 @@ public class Accion extends Activo implements Serializable {
      * @param ventaEnCorto Solo acepta como valores verdadero o falso (booleano) el cual guardara. 
      * @param pujaMinima Guardara un numero fraccionario (de hasta 15 digitos) que se ingrese desde la interfaz.
      */
-    public Accion(String tipoValor, String emisora, String serie, String isin,
+    public Indice(String tipoValor, String emisora, String serie, String isin,
             String nombre, TipoActivo tipo, Boolean ventaEnCorto,
             Double pujaMinima) {
         super(tipoValor, emisora, serie, isin, nombre, tipo, ventaEnCorto, pujaMinima);

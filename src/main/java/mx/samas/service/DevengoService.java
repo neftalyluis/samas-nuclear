@@ -6,7 +6,7 @@
 package mx.samas.service;
 
 import java.time.LocalDate;
-import mx.samas.domain.Bono;
+import mx.samas.domain.Flujo;
 import mx.samas.domain.CalendarioComercial;
 
 /**
@@ -20,6 +20,6 @@ public interface DevengoService {
 
     public Long calculaPlazoComercial(LocalDate fechaInicio, LocalDate fechaTermino, CalendarioComercial calendario);
 
-    public Double calculaDevengo(Bono bono, LocalDate dia, Long posicion, Double valorNominal, Double tipoDeCambio, LocalDate inicioBono);
+    public Double calculaDevengo(Flujo bono, LocalDate dia, Long posicion, Double valorNominal, Double tipoDeCambio, LocalDate inicioBono);
 
 }

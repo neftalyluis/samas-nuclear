@@ -19,7 +19,7 @@ import javax.persistence.OneToMany;
  * @author samas
  */
 @Entity
-public class Bono extends Activo implements Serializable {
+public class Flujo extends Activo implements Serializable {
 
     private Double diferencial;
 
@@ -36,7 +36,7 @@ public class Bono extends Activo implements Serializable {
     @Enumerated(EnumType.STRING)
     private AnoComercial anoComercial;
 
-    public Bono() {
+    public Flujo() {
 
     }
 
@@ -50,7 +50,7 @@ public class Bono extends Activo implements Serializable {
      * @param ventaEnCorto Solo acepta como valores verdadero o falso (booleano) el cual guardara. 
      * @param pujaMinima Guardara un numero fraccionario (de hasta 15 digitos) que se ingrese desde la interfaz.
      */
-    public Bono(String tipoValor, String emisora, String serie, String isin,
+    public Flujo(String tipoValor, String emisora, String serie, String isin,
             String nombre, TipoActivo tipo, Boolean ventaEnCorto,
             Double pujaMinima) {
         super(tipoValor, emisora, serie, isin, nombre, tipo, ventaEnCorto, pujaMinima);

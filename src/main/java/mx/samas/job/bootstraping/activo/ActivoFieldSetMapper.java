@@ -5,11 +5,10 @@
  */
 package mx.samas.job.bootstraping.activo;
 
-import mx.samas.domain.Accion;
+import mx.samas.domain.Indice;
 import mx.samas.domain.Activo;
-import mx.samas.domain.Bono;
+import mx.samas.domain.Flujo;
 import mx.samas.domain.Derivado;
-import mx.samas.domain.Moneda;
 import mx.samas.domain.TipoActivo;
 import mx.samas.util.TipoActivoResolver;
 import org.springframework.batch.item.file.mapping.FieldSetMapper;
@@ -35,12 +34,12 @@ public class ActivoFieldSetMapper implements FieldSetMapper<Activo> {
         Activo a = null;
         switch (tipoActivoResolver.resolveFromTipoValor(fieldSet.readString(1))) {
             case ACCION:
-                a = new Accion(fieldSet.readString(1), fieldSet.readString(2),
+                a = new Indice(fieldSet.readString(1), fieldSet.readString(2),
                         fieldSet.readString(3), null, fieldSet.readString(9), null, Boolean.FALSE, null);
                 a.setTipo(TipoActivo.ACCION);
                 break;
             case BONO:
-                a = new Bono(fieldSet.readString(1), fieldSet.readString(2),
+                a = new Flujo(fieldSet.readString(1), fieldSet.readString(2),
                         fieldSet.readString(3), null, fieldSet.readString(9), null, Boolean.FALSE, null);
                 a.setTipo(TipoActivo.BONO);
 
@@ -52,11 +51,6 @@ public class ActivoFieldSetMapper implements FieldSetMapper<Activo> {
 
                 break;
             case MONEDA:
-                a = new Moneda(fieldSet.readString(1), fieldSet.readString(2),
-                        fieldSet.readString(3), null, fieldSet.readString(9), null, Boolean.FALSE, null);
-                a.setTipo(TipoActivo.MONEDA);
-
-                break;
             case ACTIVO:
                 a = new Activo(fieldSet.readString(1), fieldSet.readString(2),
                         fieldSet.readString(3), null, fieldSet.readString(9), null, Boolean.FALSE, null);

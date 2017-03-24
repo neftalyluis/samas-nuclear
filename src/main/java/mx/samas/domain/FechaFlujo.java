@@ -29,7 +29,7 @@ public class FechaFlujo implements Serializable {
     private Boolean amortizacion;
 
     @ManyToOne
-    private Bono bono;
+    private Flujo bono;
 
     public Long getId() {
         return id;
@@ -81,14 +81,14 @@ public class FechaFlujo implements Serializable {
     /**
      * @return the bono
      */
-    public Bono getBono() {
+    public Flujo getBono() {
         return bono;
     }
 
     /**
      * @param bono the bono to set
      */
-    public void setBono(Bono bono) {
+    public void setBono(Flujo bono) {
         this.bono = bono;
     }
 
