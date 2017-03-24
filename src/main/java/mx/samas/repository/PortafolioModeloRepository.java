@@ -7,8 +7,8 @@ package mx.samas.repository;
 
 import java.time.LocalDate;
 import java.util.List;
-import mx.samas.domain.Estrategia;
-import mx.samas.domain.VectorPortafolioModelo;
+import mx.samas.domain.Modelo;
+import mx.samas.domain.VectorModelo;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import org.springframework.stereotype.Repository;
@@ -18,7 +18,7 @@ import org.springframework.stereotype.Repository;
  * @author samas
  */
 @Repository
-public interface PortafolioModeloRepository extends JpaRepository<VectorPortafolioModelo, Long> {
+public interface PortafolioModeloRepository extends JpaRepository<VectorModelo, Long> {
 
-    public List<VectorPortafolioModelo> findByEstrategiaAndCreado(Estrategia estrategia, LocalDate creado);
+    public List<VectorModelo> findByEstrategiaAndCreado(Modelo estrategia, LocalDate creado);
 }

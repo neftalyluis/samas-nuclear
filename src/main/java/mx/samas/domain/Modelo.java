@@ -21,32 +21,28 @@ import javax.persistence.OneToMany;
  * @author samas
  */
 @Entity
-public class Estrategia implements Serializable {
+public class Modelo implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
     @Column(unique = true, nullable = false)
     private String nombre;
-
     @OneToMany(mappedBy = "estrategia", cascade = CascadeType.ALL)
-    private List<VectorPortafolioModelo> estrategiaModelo;
-
+    private List<VectorModelo> estrategiaModelo;
     //Eversiones respecto a desbalances
     private Boolean liquidez;
     private Boolean efectivo;
     private Boolean grupos;
     private Boolean margen;
     private Double concentracionPorExposicion;
-
     @ManyToMany
     private List<Grupo> grupoLista;
-
-    //    @ManyToOne
+    private Double liquidezCantidad;
+//    @ManyToOne
 //    private PerfilRiesgo perfilRiesgo;
-    public Estrategia() {
+    public Modelo() {
 
     }
 
@@ -55,7 +51,7 @@ public class Estrategia implements Serializable {
      * @param modelo Guardara el Modelo (Lista de VectoresPortafolioModelo) que
      * se ingrese desde la interfaz.
      */
-    public Estrategia(String nombre, List<VectorPortafolioModelo> modelo) {
+    public Modelo(String nombre, List<VectorModelo> modelo) {
         this.nombre = nombre;
         this.estrategiaModelo = modelo;
 
@@ -64,7 +60,7 @@ public class Estrategia implements Serializable {
     /**
      * @param nombre Guardara la cadena que se ingrese desde la interfaz.
      */
-    public Estrategia(String nombre) {
+    public Modelo(String nombre) {
         this.nombre = nombre;
 
     }
@@ -87,10 +83,10 @@ public class Estrategia implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Estrategia)) {
+        if (!(object instanceof Modelo)) {
             return false;
         }
-        Estrategia other = (Estrategia) object;
+        Modelo other = (Modelo) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -119,14 +115,14 @@ public class Estrategia implements Serializable {
     /**
      * @return the estrategiaModelo
      */
-    public List<VectorPortafolioModelo> getEstrategiaModelo() {
+    public List<VectorModelo> getEstrategiaModelo() {
         return estrategiaModelo;
     }
 
     /**
      * @param estrategiaModelo the estrategiaModelo to set
      */
-    public void setEstrategiaModelo(List<VectorPortafolioModelo> estrategiaModelo) {
+    public void setEstrategiaModelo(List<VectorModelo> estrategiaModelo) {
         this.estrategiaModelo = estrategiaModelo;
     }
 
@@ -212,6 +208,20 @@ public class Estrategia implements Serializable {
      */
     public void setConcentracionPorExposicion(Double concentracionPorExposicion) {
         this.concentracionPorExposicion = concentracionPorExposicion;
+    }
+
+    /**
+     * @return the liquidezCantidad
+     */
+    public Double getLiquidezCantidad() {
+        return liquidezCantidad;
+    }
+
+    /**
+     * @param liquidezCantidad the liquidezCantidad to set
+     */
+    public void setLiquidezCantidad(Double liquidezCantidad) {
+        this.liquidezCantidad = liquidezCantidad;
     }
 
 }

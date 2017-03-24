@@ -15,7 +15,7 @@
  */
 package mx.samas.repository;
 
-import mx.samas.domain.VectorPortafolioModelo;
+import mx.samas.domain.VectorModelo;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -24,6 +24,6 @@ import org.springframework.stereotype.Repository;
  * @author samas
  */
 @Repository
-public interface VectorPortafolioModeloRepository extends JpaRepository<VectorPortafolioModelo, Long>{
+public interface VectorModeloRepository extends JpaRepository<VectorModelo, Long>{
     
 }

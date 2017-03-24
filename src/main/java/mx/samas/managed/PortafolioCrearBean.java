@@ -22,15 +22,15 @@ import javax.annotation.PostConstruct;
 import javax.enterprise.context.Dependent;
 import javax.faces.model.SelectItem;
 import javax.inject.Named;
-import mx.samas.domain.Estrategia;
+import mx.samas.domain.Modelo;
 import mx.samas.domain.Portafolio;
 import mx.samas.domain.PortafolioEstatus;
 import mx.samas.domain.TipoServicio;
-import mx.samas.service.EstrategiaService;
 import mx.samas.service.PortafolioEstatusService;
 import mx.samas.service.TipoServicioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import mx.samas.service.ModeloService;
 
 /**
  *
@@ -48,7 +48,7 @@ public class PortafolioCrearBean {
     private List<SelectItem> tipoServicioSelectList;
 
     @Autowired
-    private EstrategiaService estrategiaService;
+    private ModeloService estrategiaService;
 
     @Autowired
     private PortafolioEstatusService estatusService;
@@ -61,7 +61,7 @@ public class PortafolioCrearBean {
         nuevo = new Portafolio();
 
         estrategiaSelectList = new ArrayList<>();
-        for (Estrategia e : estrategiaService.getAll()) {
+        for (Modelo e : estrategiaService.getAll()) {
             estrategiaSelectList.add(new SelectItem(e, e.getNombre()));
         }
 

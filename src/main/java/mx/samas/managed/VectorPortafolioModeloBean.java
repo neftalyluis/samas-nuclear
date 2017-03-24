@@ -19,11 +19,11 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.inject.Named;
 import javax.enterprise.context.Dependent;
-import mx.samas.domain.VectorPortafolioModelo;
+import mx.samas.domain.VectorModelo;
 import mx.samas.domain.dto.PortafolioModeloDTO;
-import mx.samas.service.VectorPortafolioModeloService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import mx.samas.service.VectorModeloService;
 
 /**
  *
@@ -34,11 +34,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class VectorPortafolioModeloBean {
 
-   private List<VectorPortafolioModelo> vectorPortafolioModeloList;
+   private List<VectorModelo> vectorPortafolioModeloList;
    
    @Autowired
-   private VectorPortafolioModeloService vectorPortafolioModeloService;
-   private VectorPortafolioModelo vectorPortafolioModelo = new VectorPortafolioModelo();
+   private VectorModeloService vectorPortafolioModeloService;
+   private VectorModelo vectorPortafolioModelo = new VectorModelo();
    private PortafolioModeloDTO portafolioModeloDTO = new PortafolioModeloDTO();
    
    @PostConstruct
@@ -46,7 +46,7 @@ public class VectorPortafolioModeloBean {
        vectorPortafolioModeloList = vectorPortafolioModeloService.getAll();
    }
    
-   public List<VectorPortafolioModelo> getVectorPortafolioModeloList(){
+   public List<VectorModelo> getVectorPortafolioModeloList(){
        return vectorPortafolioModeloList;   
    }
    
@@ -63,14 +63,14 @@ public class VectorPortafolioModeloBean {
     /**
      * @return the vectorPortafolioModelo
      */
-    public VectorPortafolioModelo getVectorPortafolioModelo() {
+    public VectorModelo getVectorPortafolioModelo() {
         return vectorPortafolioModelo;
     }
 
     /**
      * @param vectorPortafolioModelo the vectorPortafolioModelo to set
      */
-    public void setVectorPortafolioModelo(VectorPortafolioModelo vectorPortafolioModelo) {
+    public void setVectorPortafolioModelo(VectorModelo vectorPortafolioModelo) {
         this.vectorPortafolioModelo = vectorPortafolioModelo;
     }
 

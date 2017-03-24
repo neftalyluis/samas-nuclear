@@ -6,7 +6,7 @@
 package mx.samas.repository;
 
 import java.util.List;
-import mx.samas.domain.Estrategia;
+import mx.samas.domain.Modelo;
 import mx.samas.domain.projection.EstrategiaModeloProjection;
 import mx.samas.domain.projection.EstrategiaProjection;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -20,16 +20,16 @@ import org.springframework.stereotype.Repository;
  * @author samas
  */
 @Repository
-public interface EstrategiaRepository extends JpaRepository<Estrategia, Long> {
+public interface ModeloRepository extends JpaRepository<Modelo, Long> {
 
     /**
      *
      * @param id
-     * @return La ID de la Estrategia
+     * @return La ID de la Modelo
      */
     @Query("SELECT NEW mx.samas.domain.projection.EstrategiaProjection("
             + "e.id, e.nombre, e.liquidez, e.efectivo, e.grupos, e.margen) "
-            + "FROM Estrategia e WHERE e.id= :idEstrategia")
+            + "FROM Modelo e WHERE e.id= :idEstrategia")
     public EstrategiaProjection findOneProjectedById(@Param("idEstrategia") Long id);
 
     /**
@@ -41,11 +41,11 @@ public interface EstrategiaRepository extends JpaRepository<Estrategia, Long> {
             + "vpm.creado, "
             + "f.nombre, "
             + "vpm.diana) "
-            + "FROM VectorPortafolioModelo vpm "
+            + "FROM VectorModelo vpm "
             + "JOIN vpm.estrategia es "
             + "JOIN vpm.fungibilidad f "
             + "WHERE es.id= :idEstrategia "
             + "AND vpm.creado= (SELECT MAX(vp.creado) "
-            + "FROM VectorPortafolioModelo vp WHERE vp.estrategia.id= :idEstrategia) ")
+            + "FROM VectorModelo vp WHERE vp.estrategia.id= :idEstrategia) ")
     public List<EstrategiaModeloProjection> getLastModeloWithIdEstrategia(@Param("idEstrategia") Long id);
 }

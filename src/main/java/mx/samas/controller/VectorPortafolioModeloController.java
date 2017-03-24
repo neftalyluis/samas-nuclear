@@ -7,7 +7,7 @@ package mx.samas.controller;
  */
 import java.time.LocalDate;
 import java.util.List;
-import mx.samas.domain.VectorPortafolioModelo;
+import mx.samas.domain.VectorModelo;
 import mx.samas.domain.dto.PortafolioModeloDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,10 +17,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import mx.samas.service.VectorPortafolioModeloService;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import mx.samas.service.VectorModeloService;
 
 /**Este es el controlador que se encargara de manipular los VectoresPortafolioModelo.
  *
@@ -31,14 +31,14 @@ import org.springframework.web.multipart.MultipartFile;
 public class VectorPortafolioModeloController {
     // TODO:Checar los metodos de aqui
     @Autowired
-    private VectorPortafolioModeloService portafolioModeloService;
+    private VectorModeloService portafolioModeloService;
 
     /**
      * @param id Guardara el Id del Modelo actualmente en uso.
      * @return Una respuesta de que se encontro con exito el Id del ultimo PortafolioModelo.
      */
     @RequestMapping(method = RequestMethod.GET, value = "/{id}/modelo/actual")
-    public ResponseEntity<List<VectorPortafolioModelo>> getActualModel(@PathVariable Long id) {
+    public ResponseEntity<List<VectorModelo>> getActualModel(@PathVariable Long id) {
         return new ResponseEntity<>(portafolioModeloService.getLastPortafolioModeloFromEstrategia(id), HttpStatus.OK);
     }
 
@@ -49,7 +49,7 @@ public class VectorPortafolioModeloController {
      *         de no ser asi, se emitira un mensaje de que la request esta mal.
      */
     @RequestMapping(method = RequestMethod.POST, value = "/{id}/modelo/actual")
-    public ResponseEntity<List<VectorPortafolioModelo>> createNewModel(@PathVariable Long id, @RequestBody PortafolioModeloDTO modelo) {
+    public ResponseEntity<List<VectorModelo>> createNewModel(@PathVariable Long id, @RequestBody PortafolioModeloDTO modelo) {
         if (modelo.validate()) {
             return new ResponseEntity<>(portafolioModeloService.createNewPortafolioModeloListForEstrategia(id, modelo), HttpStatus.CREATED);
         } else {
@@ -72,7 +72,7 @@ public class VectorPortafolioModeloController {
      * @return Una respuesta de que se encontraron de manera exitosa todos los Modelos.
      */
     @RequestMapping(method = RequestMethod.GET, value = "/{id}/modelo/")
-    public ResponseEntity<List<VectorPortafolioModelo>> getAllModels(@PathVariable Long id) {
+    public ResponseEntity<List<VectorModelo>> getAllModels(@PathVariable Long id) {
         return new ResponseEntity<>(portafolioModeloService.getAllModelosFromEstrategia(id), HttpStatus.OK);
     }
 

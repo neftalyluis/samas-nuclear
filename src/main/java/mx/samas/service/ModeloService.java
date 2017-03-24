@@ -6,7 +6,7 @@
 package mx.samas.service;
 
 import java.util.List;
-import mx.samas.domain.Estrategia;
+import mx.samas.domain.Modelo;
 import mx.samas.domain.dto.EstrategiaDTO;
 import mx.samas.domain.projection.EstrategiaModeloProjection;
 import mx.samas.domain.projection.EstrategiaProjection;
@@ -15,15 +15,15 @@ import mx.samas.domain.projection.EstrategiaProjection;
  *
  * @author samas
  */
-public interface EstrategiaService {
+public interface ModeloService {
 
-    public List<Estrategia> getAll();
+    public List<Modelo> getAll();
 
-    public Estrategia createFromDTO(EstrategiaDTO estrategia);
+    public Modelo createFromDTO(EstrategiaDTO estrategia);
 
-    public void createEstrategia(Estrategia e);
+    public void createEstrategia(Modelo e);
     
-    public Estrategia getEstrategiaWithId(Long id);
+    public Modelo getEstrategiaWithId(Long id);
     
     public EstrategiaProjection getEstrategiaProjectedWithId(Long id);
     

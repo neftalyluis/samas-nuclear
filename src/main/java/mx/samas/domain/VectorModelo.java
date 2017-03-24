@@ -19,7 +19,7 @@ import javax.persistence.ManyToOne;
  * @author samas
  */
 @Entity
-public class VectorPortafolioModelo implements Serializable {
+public class VectorModelo implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -33,14 +33,14 @@ public class VectorPortafolioModelo implements Serializable {
 
     @JsonIgnore
     @ManyToOne
-    private Estrategia estrategia;
+    private Modelo estrategia;
 
     private Double diana;
 
     /**Obtiene la fecha actual.
      * No hay parametros.
      */
-    public VectorPortafolioModelo() {
+    public VectorModelo() {
         this.creado = LocalDate.now();
 
     }
@@ -49,7 +49,7 @@ public class VectorPortafolioModelo implements Serializable {
      * @param f Guardara la Fungibilidad ingresado desde la interfaz.
      * @param diana Guardara un numero fraccionario (de hasta 15 digitos) que se ingrese desde la interfaz.
      */
-    public VectorPortafolioModelo(Fungibilidad f, Double diana) {
+    public VectorModelo(Fungibilidad f, Double diana) {
         this.fungibilidad = f;
         this.diana = diana;
         this.creado = LocalDate.now();
@@ -58,9 +58,9 @@ public class VectorPortafolioModelo implements Serializable {
     /**
      * @param f Guardara la Fungibilidad ingresado desde la interfaz.
      * @param diana Guardara un numero fraccionario (de hasta 15 digitos) que se ingrese desde la interfaz.
-     * @param e Guardara la Estrategia ingresada desde la interfaz.
+     * @param e Guardara la Modelo ingresada desde la interfaz.
      */
-    public VectorPortafolioModelo(Fungibilidad f, Double diana, Estrategia e) {
+    public VectorModelo(Fungibilidad f, Double diana, Modelo e) {
         this.fungibilidad = f;
         this.diana = diana;
         this.estrategia = e;
@@ -71,10 +71,10 @@ public class VectorPortafolioModelo implements Serializable {
     /**
      * @param d Guardara la fecha del dia actual.
      * @param f Guardara la Fungibilidad ingresado desde la interfaz.
-     * @param e Guardara la Estrategia ingresada desde la interfaz.
+     * @param e Guardara la Modelo ingresada desde la interfaz.
      * @param diana Guardara un numero fraccionario (de hasta 15 digitos) que se ingrese desde la interfaz.
      */
-    public VectorPortafolioModelo(LocalDate d, Fungibilidad f, Estrategia e, Double diana) {
+    public VectorModelo(LocalDate d, Fungibilidad f, Modelo e, Double diana) {
         this.fungibilidad = f;
         this.diana = diana;
         this.estrategia = e;
@@ -100,10 +100,10 @@ public class VectorPortafolioModelo implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof VectorPortafolioModelo)) {
+        if (!(object instanceof VectorModelo)) {
             return false;
         }
-        VectorPortafolioModelo other = (VectorPortafolioModelo) object;
+        VectorModelo other = (VectorModelo) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -118,14 +118,14 @@ public class VectorPortafolioModelo implements Serializable {
     /**
      * @return the estrategia
      */
-    public Estrategia getEstrategia() {
+    public Modelo getEstrategia() {
         return estrategia;
     }
 
     /**
      * @param estrategia the estrategia to set
      */
-    public void setEstrategia(Estrategia estrategia) {
+    public void setEstrategia(Modelo estrategia) {
         this.estrategia = estrategia;
     }
 

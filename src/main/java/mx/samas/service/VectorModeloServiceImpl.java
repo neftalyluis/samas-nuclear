@@ -10,47 +10,47 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import mx.samas.domain.Activo;
-import mx.samas.domain.Estrategia;
-import mx.samas.domain.VectorPortafolioModelo;
+import mx.samas.domain.Modelo;
+import mx.samas.domain.VectorModelo;
 import mx.samas.domain.dto.PortafolioModeloDTO;
 import mx.samas.repository.ActivoRepository;
-import mx.samas.repository.EstrategiaRepository;
-import mx.samas.repository.VectorPortafolioModeloRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import mx.samas.repository.VectorModeloRepository;
+import mx.samas.repository.ModeloRepository;
 
 /**
  *
  * @author samas
  */
 @Service
-public class VectorPortafolioModeloServiceImpl implements VectorPortafolioModeloService {
+public class VectorModeloServiceImpl implements VectorModeloService {
 
     @Autowired
-    private EstrategiaRepository estrategiaRepository;
+    private ModeloRepository estrategiaRepository;
 
     @Autowired
     private ActivoRepository activoRepository;
 
     @Autowired
-    private VectorPortafolioModeloRepository vectorPortafolioModeloRepository;
+    private VectorModeloRepository vectorPortafolioModeloRepository;
 
     @Override
-    public List<VectorPortafolioModelo> getLastPortafolioModeloFromEstrategia(Long id) {
+    public List<VectorModelo> getLastPortafolioModeloFromEstrategia(Long id) {
 
-        Estrategia estrategia = estrategiaRepository.findOne(id);
-        List<VectorPortafolioModelo> modelos = estrategia.getEstrategiaModelo();
-        List<VectorPortafolioModelo> lastModel = getModelosWithDate(getMaxDate(modelos), modelos);
+        Modelo estrategia = estrategiaRepository.findOne(id);
+        List<VectorModelo> modelos = estrategia.getEstrategiaModelo();
+        List<VectorModelo> lastModel = getModelosWithDate(getMaxDate(modelos), modelos);
 
         return lastModel;
     }
 
     @Override
-    public List<VectorPortafolioModelo> createNewPortafolioModeloListForEstrategia(Long id, PortafolioModeloDTO model) {
+    public List<VectorModelo> createNewPortafolioModeloListForEstrategia(Long id, PortafolioModeloDTO model) {
 
-        Estrategia e = estrategiaRepository.findOne(id);
-        List<VectorPortafolioModelo> fromDTO = createPortafolioModeloListFromDTO(model, e);
-        List<VectorPortafolioModelo> fromEstrategia = e.getEstrategiaModelo();
+        Modelo e = estrategiaRepository.findOne(id);
+        List<VectorModelo> fromDTO = createPortafolioModeloListFromDTO(model, e);
+        List<VectorModelo> fromEstrategia = e.getEstrategiaModelo();
         fromEstrategia.addAll(fromDTO);
         e.setEstrategiaModelo(fromEstrategia);
         estrategiaRepository.save(e);
@@ -59,14 +59,14 @@ public class VectorPortafolioModeloServiceImpl implements VectorPortafolioModelo
     }
 
     @Override
-    public List<VectorPortafolioModelo> getAllModelosFromEstrategia(Long id) {
+    public List<VectorModelo> getAllModelosFromEstrategia(Long id) {
         return estrategiaRepository.findOne(id).getEstrategiaModelo();
     }
 
     //TODO: Esta implementacion esta Rota
-    private LocalDate getMaxDate(List<VectorPortafolioModelo> list) {
+    private LocalDate getMaxDate(List<VectorModelo> list) {
         LocalDate maxDate = null;
-        for (VectorPortafolioModelo model : list) {
+        for (VectorModelo model : list) {
             LocalDate dateFromEntity = model.getCreado();
             if (maxDate == null) {
                 maxDate = dateFromEntity;
@@ -79,9 +79,9 @@ public class VectorPortafolioModeloServiceImpl implements VectorPortafolioModelo
     }
 
     //Igual de Rota
-    private List<VectorPortafolioModelo> getModelosWithDate(LocalDate date, List<VectorPortafolioModelo> modelList) {
-        List<VectorPortafolioModelo> newList = new ArrayList<>();
-        for (VectorPortafolioModelo pm : modelList) {
+    private List<VectorModelo> getModelosWithDate(LocalDate date, List<VectorModelo> modelList) {
+        List<VectorModelo> newList = new ArrayList<>();
+        for (VectorModelo pm : modelList) {
             if (pm.getCreado().compareTo(date) == 0) {
                 newList.add(pm);
             }
@@ -89,21 +89,21 @@ public class VectorPortafolioModeloServiceImpl implements VectorPortafolioModelo
         return newList;
     }
 
-    public List<VectorPortafolioModelo> createPortafolioModeloListFromDTO(PortafolioModeloDTO models, Estrategia e) {
-        List<VectorPortafolioModelo> newList = new ArrayList<>();
+    public List<VectorModelo> createPortafolioModeloListFromDTO(PortafolioModeloDTO models, Modelo e) {
+        List<VectorModelo> newList = new ArrayList<>();
         for (Map.Entry<String, Long> entry : models.entrySet()) {
             String key = entry.getKey();
             Long value = entry.getValue();
             Activo a = activoRepository.findFirstByClavePizarra(key);
             //TODO
-            VectorPortafolioModelo pm = new VectorPortafolioModelo();
+            VectorModelo pm = new VectorModelo();
             newList.add(pm);
         }
         return newList;
     }
 
     @Override
-    public List<VectorPortafolioModelo> getAll() {
+    public List<VectorModelo> getAll() {
         return vectorPortafolioModeloRepository.findAll();
     }
 

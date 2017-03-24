@@ -32,7 +32,7 @@ public class Portafolio implements Serializable {
     private String cuentaEje;
 
     @ManyToOne
-    private Estrategia estrategia;
+    private Modelo estrategia;
 
     @ManyToOne
     private TipoServicio tipoServicio;
@@ -58,8 +58,8 @@ public class Portafolio implements Serializable {
 
     /**
      * @param cuentaEje Guardara la cadena que se ingrese desde la interfaz.
-     * @param estrategia Guardara la Estrategia que se ingrese desde la
-     * interfaz.
+     * @param estrategia Guardara la Modelo que se ingrese desde la
+ interfaz.
      * @param tipoServicio Giardara el TipoServicio que se ingrese desde la
      * interfaz
      * @param estatus Guardara el PortafolioEstatus que se ingrese desde la
@@ -71,7 +71,7 @@ public class Portafolio implements Serializable {
      * @param margen Guardara un numero fraccionario (de hasta 15 digitos) que
      * se ingrese desde la interfaz.
      */
-    public Portafolio(String cuentaEje, Estrategia estrategia,
+    public Portafolio(String cuentaEje, Modelo estrategia,
             TipoServicio tipoServicio, PortafolioEstatus estatus,
             Activo monedaDenominacion, List<Cliente> clientes,
             List<Cuenta> corredores, Double margen) {
@@ -130,14 +130,14 @@ public class Portafolio implements Serializable {
     /**
      * @return the estrategia
      */
-    public Estrategia getEstrategia() {
+    public Modelo getEstrategia() {
         return estrategia;
     }
 
     /**
      * @param estrategia the estrategia to set
      */
-    public void setEstrategia(Estrategia estrategia) {
+    public void setEstrategia(Modelo estrategia) {
         this.estrategia = estrategia;
     }
 

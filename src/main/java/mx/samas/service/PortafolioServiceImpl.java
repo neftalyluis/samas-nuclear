@@ -10,7 +10,7 @@ import java.util.logging.Logger;
 import mx.samas.domain.Activo;
 import mx.samas.domain.Cliente;
 import mx.samas.domain.Cuenta;
-import mx.samas.domain.Estrategia;
+import mx.samas.domain.Modelo;
 import mx.samas.domain.Portafolio;
 import mx.samas.domain.PortafolioEstatus;
 import mx.samas.domain.TipoServicio;
@@ -39,7 +39,7 @@ public class PortafolioServiceImpl implements PortafolioService {
     private CuentaService cuentaService;
 
     @Autowired
-    private EstrategiaService estrategiaService;
+    private ModeloService estrategiaService;
 
     @Autowired
     private ActivoService activoService;
@@ -65,7 +65,7 @@ public class PortafolioServiceImpl implements PortafolioService {
 
         List<Cliente> clientes = clienteService.getClientesFromIdList(p.getClientes());
         List<Cuenta> cuentas = cuentaService.createFromDto(p.getCuentas());
-        Estrategia es = estrategiaService.getEstrategiaWithId(p.getEstrategiaId());
+        Modelo es = estrategiaService.getEstrategiaWithId(p.getEstrategiaId());
         Activo monedaDenominacion = activoService.getByClavePizarra(p.getMonedaDenominacion());
         TipoServicio servicio = tipoServicioService.getTipoServicioById(p.getTipoServicioId());
         PortafolioEstatus estatusInicial = portafolioEstatusService.getEstatusInicial();
