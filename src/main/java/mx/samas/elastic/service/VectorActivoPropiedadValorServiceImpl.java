@@ -5,6 +5,7 @@
  */
 package mx.samas.elastic.service;
 
+import java.time.LocalDate;
 import mx.samas.elastic.domain.VectorActivoPropiedadValor;
 import mx.samas.elastic.repository.VectorActivoPropiedadValorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +44,11 @@ public class VectorActivoPropiedadValorServiceImpl implements VectorActivoPropie
     @Override
     public void delete(VectorActivoPropiedadValor article) {
         vectorRepository.delete(article);
+    }
+
+    @Override
+    public VectorActivoPropiedadValor findByDateAndTicker(LocalDate date, String ticker) {
+        return vectorRepository.findByClavePizarraAndFecha(date, ticker);
     }
 
 }

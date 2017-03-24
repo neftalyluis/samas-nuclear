@@ -24,13 +24,17 @@ public class VectorActivoPropiedadValor {
      */
     @Id
     private String id;
-    
+
     private String clavePizarra;
-    
+
     private LocalDate fecha;
 
     @Field(type = FieldType.Nested)
     private Map<String, Object> propiedadesValor;
+
+    public VectorActivoPropiedadValor() {
+
+    }
 
     public VectorActivoPropiedadValor(String id, Map<String, Object> propiedadesValor) {
         this.id = id;

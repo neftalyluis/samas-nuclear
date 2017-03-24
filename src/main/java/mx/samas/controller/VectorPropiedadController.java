@@ -5,12 +5,15 @@
  */
 package mx.samas.controller;
 
+import java.time.LocalDate;
 import mx.samas.elastic.service.VectorActivoPropiedadValorService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -29,4 +32,10 @@ public class VectorPropiedadController {
         return new ResponseEntity<>(vectorService.findAll(), HttpStatus.OK);
     }
 
+    @RequestMapping(method = RequestMethod.GET, value = "/{clavePizarra}/{fecha}/")
+    public ResponseEntity<?> getVectorFromActivoWithDateAndTicker(
+            @RequestParam("clavePizarra") String clavePizarra,
+            @RequestParam("fecha") @DateTimeFormat(pattern = "yyyyMMdd") LocalDate fecha) {
+        return new ResponseEntity<>(vectorService.findByDateAndTicker(fecha, clavePizarra), HttpStatus.OK);
+    }
 }

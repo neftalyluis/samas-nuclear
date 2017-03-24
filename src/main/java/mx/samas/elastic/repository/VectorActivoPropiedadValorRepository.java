@@ -5,6 +5,7 @@
  */
 package mx.samas.elastic.repository;
 
+import java.time.LocalDate;
 import mx.samas.elastic.domain.VectorActivoPropiedadValor;
 import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
 import org.springframework.stereotype.Repository;
@@ -16,4 +17,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface VectorActivoPropiedadValorRepository extends ElasticsearchRepository<VectorActivoPropiedadValor, String> {
 
+    public VectorActivoPropiedadValor findByClavePizarraAndFecha(LocalDate fecha, String clavePizarra);
 }
