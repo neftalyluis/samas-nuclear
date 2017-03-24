@@ -6,7 +6,7 @@
 package mx.samas.service;
 
 import java.util.List;
-import mx.samas.domain.Cuenta;
+import mx.samas.domain.CuentaCorredor;
 import mx.samas.domain.dto.CuentaDTO;
 
 /**
@@ -15,17 +15,17 @@ import mx.samas.domain.dto.CuentaDTO;
  */
 public interface CuentaService {
 
-    public Cuenta getByIdCuenta(String idCuenta);
+    public CuentaCorredor getByIdCuenta(String idCuenta);
 
-    public Cuenta createOrUpdateCuenta(Cuenta c);
+    public CuentaCorredor createOrUpdateCuenta(CuentaCorredor c);
     
-    public Cuenta createFromDto(CuentaDTO c);
+    public CuentaCorredor createFromDto(CuentaDTO c);
     
-    public List<Cuenta> createFromDto(List<CuentaDTO> cuentaList);
+    public List<CuentaCorredor> createFromDto(List<CuentaDTO> cuentaList);
     
-    public List<Cuenta> getAll();
+    public List<CuentaCorredor> getAll();
     
-    public Cuenta getById(Long id);
+    public CuentaCorredor getById(Long id);
     
     public Boolean removeById(Long id);
     

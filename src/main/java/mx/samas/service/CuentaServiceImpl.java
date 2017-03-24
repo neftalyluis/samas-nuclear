@@ -8,7 +8,7 @@ package mx.samas.service;
 import java.util.LinkedList;
 import java.util.List;
 import mx.samas.domain.Banco;
-import mx.samas.domain.Cuenta;
+import mx.samas.domain.CuentaCorredor;
 import mx.samas.domain.dto.CuentaDTO;
 import mx.samas.repository.CuentaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,28 +28,28 @@ public class CuentaServiceImpl implements CuentaService {
     private BancoService bancoService;
 
     @Override
-    public Cuenta getByIdCuenta(String cadena) {
+    public CuentaCorredor getByIdCuenta(String cadena) {
         return cuentaRepository.getByIdCuenta(cadena);
     }
 
     @Override
-    public Cuenta createOrUpdateCuenta(Cuenta c) {
+    public CuentaCorredor createOrUpdateCuenta(CuentaCorredor c) {
         return cuentaRepository.save(c);
     }
 
     @Override
-    public Cuenta createFromDto(CuentaDTO c) {
+    public CuentaCorredor createFromDto(CuentaDTO c) {
         Banco b = bancoService.getBancoById(c.getBancoId());
 
-        Cuenta entity = new Cuenta(c.getIdCuenta(), b, c.getTieneCredito(),
+        CuentaCorredor entity = new CuentaCorredor(c.getIdCuenta(), b, c.getTieneCredito(),
                 c.getOperaFlujo(), c.getOperaIndice(), c.getOperaDerivado());
 
         return cuentaRepository.save(entity);
     }
 
     @Override
-    public List<Cuenta> createFromDto(List<CuentaDTO> cuentaList) {
-        List<Cuenta> createdCuentas = new LinkedList<>();
+    public List<CuentaCorredor> createFromDto(List<CuentaDTO> cuentaList) {
+        List<CuentaCorredor> createdCuentas = new LinkedList<>();
         for (CuentaDTO cuenta : cuentaList) {
             createdCuentas.add(createFromDto(cuenta));
         }
@@ -57,12 +57,12 @@ public class CuentaServiceImpl implements CuentaService {
     }
 
     @Override
-    public List<Cuenta> getAll() {
+    public List<CuentaCorredor> getAll() {
         return cuentaRepository.findAll();
     }
 
     @Override
-    public Cuenta getById(Long id) {
+    public CuentaCorredor getById(Long id) {
         return cuentaRepository.findOne(id);
     }
 

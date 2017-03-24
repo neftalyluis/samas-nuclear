@@ -69,7 +69,10 @@ public class Bitacora implements Serializable {
      * Contrato del que deriva esta entrada
      */
     @ManyToOne
-    private Cuenta contratoServicio;
+    private Cuenta destino;
+    
+    @ManyToOne
+    private Cuenta origen;
 
     /**
      * Mercado en el cual se operó esta transaccion
@@ -200,20 +203,6 @@ public class Bitacora implements Serializable {
     }
 
     /**
-     * @return the contratoServicio
-     */
-    public Cuenta getContratoServicio() {
-        return contratoServicio;
-    }
-
-    /**
-     * @param contratoServicio the contratoServicio to set
-     */
-    public void setContratoServicio(Cuenta contratoServicio) {
-        this.contratoServicio = contratoServicio;
-    }
-
-    /**
      * @return the conductorRiesgo
      */
     public ConductorRiesgo getConductorRiesgo() {
@@ -281,6 +270,34 @@ public class Bitacora implements Serializable {
      */
     public void setFechaIngreso(LocalDateTime fechaIngreso) {
         this.fechaIngreso = fechaIngreso;
+    }
+
+    /**
+     * @return the destino
+     */
+    public Cuenta getDestino() {
+        return destino;
+    }
+
+    /**
+     * @param destino the destino to set
+     */
+    public void setDestino(Cuenta destino) {
+        this.destino = destino;
+    }
+
+    /**
+     * @return the origen
+     */
+    public Cuenta getOrigen() {
+        return origen;
+    }
+
+    /**
+     * @param origen the origen to set
+     */
+    public void setOrigen(Cuenta origen) {
+        this.origen = origen;
     }
 
 }

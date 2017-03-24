@@ -12,7 +12,7 @@ import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import mx.samas.domain.Activo;
-import mx.samas.domain.Cuenta;
+import mx.samas.domain.CuentaCorredor;
 import mx.samas.domain.Portafolio;
 import mx.samas.domain.VectorPosicion;
 import mx.samas.service.BitacoraService;
@@ -25,7 +25,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  *
  * @author samas
  */
-public class VectorPosicionProcessor implements ItemProcessor<Cuenta, List<VectorPosicion>> {
+public class VectorPosicionProcessor implements ItemProcessor<CuentaCorredor, List<VectorPosicion>> {
 
     @Autowired
     private VectorPosicionService vectorPosicionService;
@@ -45,7 +45,7 @@ public class VectorPosicionProcessor implements ItemProcessor<Cuenta, List<Vecto
      * @throws Exception
      */
     @Override
-    public List<VectorPosicion> process(Cuenta item) throws Exception {
+    public List<VectorPosicion> process(CuentaCorredor item) throws Exception {
 
         /**
          * ¿Seria mejor idea usar un HashMap? Yo digo que si :v

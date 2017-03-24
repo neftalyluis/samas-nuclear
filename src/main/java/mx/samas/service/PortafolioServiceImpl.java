@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.logging.Logger;
 import mx.samas.domain.Activo;
 import mx.samas.domain.Cliente;
-import mx.samas.domain.Cuenta;
+import mx.samas.domain.CuentaCorredor;
 import mx.samas.domain.Modelo;
 import mx.samas.domain.Portafolio;
 import mx.samas.domain.PortafolioEstatus;
@@ -56,7 +56,7 @@ public class PortafolioServiceImpl implements PortafolioService {
     }
 
     @Override
-    public List<Portafolio> getPortafoliosFromCuenta(Cuenta c) {
+    public List<Portafolio> getPortafoliosFromCuenta(CuentaCorredor c) {
         return portafolioRepository.findByCorredores(c);
     }
 
@@ -64,7 +64,7 @@ public class PortafolioServiceImpl implements PortafolioService {
     public Portafolio createPortafolioFromDto(PortafolioDTO p) {
 
         List<Cliente> clientes = clienteService.getClientesFromIdList(p.getClientes());
-        List<Cuenta> cuentas = cuentaService.createFromDto(p.getCuentas());
+        List<CuentaCorredor> cuentas = cuentaService.createFromDto(p.getCuentas());
         Modelo es = estrategiaService.getEstrategiaWithId(p.getEstrategiaId());
         Activo monedaDenominacion = activoService.getByClavePizarra(p.getMonedaDenominacion());
         TipoServicio servicio = tipoServicioService.getTipoServicioById(p.getTipoServicioId());

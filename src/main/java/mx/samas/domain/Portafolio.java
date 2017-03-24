@@ -49,7 +49,7 @@ public class Portafolio implements Serializable {
     private List<Cliente> clientes;
 
     @ManyToMany
-    private List<Cuenta> corredores;
+    private List<CuentaCorredor> corredores;
 
     /**
      * Credito Margen
@@ -74,7 +74,7 @@ public class Portafolio implements Serializable {
     public Portafolio(String cuentaEje, Modelo estrategia,
             TipoServicio tipoServicio, PortafolioEstatus estatus,
             Activo monedaDenominacion, List<Cliente> clientes,
-            List<Cuenta> corredores, Double margen) {
+            List<CuentaCorredor> corredores, Double margen) {
 
         this.cuentaEje = cuentaEje;
         this.estrategia = estrategia;
@@ -200,14 +200,14 @@ public class Portafolio implements Serializable {
     /**
      * @return the corredores
      */
-    public List<Cuenta> getCorredores() {
+    public List<CuentaCorredor> getCorredores() {
         return corredores;
     }
 
     /**
      * @param corredores the corredores to set
      */
-    public void setCorredores(List<Cuenta> corredores) {
+    public void setCorredores(List<CuentaCorredor> corredores) {
         this.corredores = corredores;
     }
 

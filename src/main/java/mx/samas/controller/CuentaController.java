@@ -6,7 +6,7 @@
 package mx.samas.controller;
 
 import java.util.List;
-import mx.samas.domain.Cuenta;
+import mx.samas.domain.CuentaCorredor;
 import mx.samas.domain.dto.CuentaDTO;
 import mx.samas.service.CuentaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +30,7 @@ public class CuentaController {
     private CuentaService cuentaService;
 
     @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<List<Cuenta>> getAllCuentas() {
+    public ResponseEntity<List<CuentaCorredor>> getAllCuentas() {
         return new ResponseEntity<>(cuentaService.getAll(), HttpStatus.OK);
     }
 
@@ -39,22 +39,22 @@ public class CuentaController {
      * @return Una respuesta de que se encontro con exito el Id. 
      */
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
-    public ResponseEntity<Cuenta> getCuentaById(@PathVariable(value = "id") Long id) {
+    public ResponseEntity<CuentaCorredor> getCuentaById(@PathVariable(value = "id") Long id) {
         return new ResponseEntity<>(cuentaService.getById(id), HttpStatus.OK);
     }
 
     /**
-     * @param idCuenta Guardara el Id de la Cuenta que se ingrese desde la interfaz.
-     * @return Una respuesta de que se encontro con exito la Cuenta por el Id. 
+     * @param idCuenta Guardara el Id de la CuentaCorredor que se ingrese desde la interfaz.
+     * @return Una respuesta de que se encontro con exito la CuentaCorredor por el Id. 
      */
     @RequestMapping(method = RequestMethod.GET, value = "/{idCuenta}")
-    public ResponseEntity<Cuenta> getCuentaById(@PathVariable(value = "idCuenta") String idCuenta) {
+    public ResponseEntity<CuentaCorredor> getCuentaById(@PathVariable(value = "idCuenta") String idCuenta) {
         return new ResponseEntity<>(cuentaService.getByIdCuenta(idCuenta), HttpStatus.OK);
     }
 
     /**
-     * @param id Guardara el Id de la Cuenta que se desea eliminar ingresandola desde la interfaz.
-     * @return Una respuesta de que se elimino con exito la Cuenta usando su Id.
+     * @param id Guardara el Id de la CuentaCorredor que se desea eliminar ingresandola desde la interfaz.
+     * @return Una respuesta de que se elimino con exito la CuentaCorredor usando su Id.
      */
     @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
     public ResponseEntity<Boolean> deleteCuentaWithId(@PathVariable(value = "id") Long id) {
@@ -63,10 +63,10 @@ public class CuentaController {
 
     /**
      * @param c Guardara el cuerpo de la request.
-     * @return Una respuesta de que se creo con exito una nueva Cuenta.
+     * @return Una respuesta de que se creo con exito una nueva CuentaCorredor.
      */
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<Cuenta> createCuenta(@RequestBody CuentaDTO c) {
+    public ResponseEntity<CuentaCorredor> createCuenta(@RequestBody CuentaDTO c) {
         return new ResponseEntity<>(cuentaService.createFromDto(c), HttpStatus.CREATED);
     }
 }

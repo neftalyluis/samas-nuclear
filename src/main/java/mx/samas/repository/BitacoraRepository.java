@@ -43,7 +43,7 @@ public interface BitacoraRepository extends JpaRepository<Bitacora, Long> {
      * liquidacion
      * @return La lista que cumpla esos requerimientos
      */
-    @Query(value = "SELECT b FROM Bitacora b WHERE b.contratoServicio = :portafolio "
+    @Query(value = "SELECT b FROM Bitacora b WHERE b.origen = :portafolio "
             + "AND b.fechaEjecucion <= :fechaActual "
             + "AND b.fechaLiquidacion <= :fechaValor")
     public List<Bitacora> findByPortafolioAndOperacionAndLiquidacion(

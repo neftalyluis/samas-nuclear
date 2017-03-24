@@ -7,7 +7,7 @@ package mx.samas.job.cierre.dia.devengos;
 
 import java.util.List;
 import javax.persistence.EntityManagerFactory;
-import mx.samas.domain.Cuenta;
+import mx.samas.domain.CuentaCorredor;
 import mx.samas.domain.VectorPosicionCredito;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
@@ -43,7 +43,7 @@ public class DevengoJobConfiguration {
     @Bean
     public Step devengoStep() {
         return stepBuilderFactory.get("devengosPosicionStep")
-                .<Cuenta, List<VectorPosicionCredito>>chunk(1000)
+                .<CuentaCorredor, List<VectorPosicionCredito>>chunk(1000)
                 .reader(posicionReader())
                 .faultTolerant()
                 .build();
@@ -52,8 +52,8 @@ public class DevengoJobConfiguration {
 
     @Bean(destroyMethod = "")
     @StepScope
-    public JpaPagingItemReader<Cuenta> posicionReader() {
-        JpaPagingItemReader<Cuenta> reader = new JpaPagingItemReader<>();
+    public JpaPagingItemReader<CuentaCorredor> posicionReader() {
+        JpaPagingItemReader<CuentaCorredor> reader = new JpaPagingItemReader<>();
         reader.setEntityManagerFactory(emFactory);
         reader.setQueryString("SELECT c FROM Cuenta c "
                 + "JOIN FETCH a.portafolios p");

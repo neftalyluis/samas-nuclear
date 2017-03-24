@@ -22,7 +22,7 @@ import javax.inject.Named;
 import javax.enterprise.context.Dependent;
 import javax.enterprise.context.SessionScoped;
 import mx.samas.domain.Banco;
-import mx.samas.domain.Cuenta;
+import mx.samas.domain.CuentaCorredor;
 import mx.samas.service.BancoService;
 import mx.samas.service.CuentaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +38,7 @@ public class CuentaBean implements Serializable{
     /**
      * Creates a new instance of CuentaBean
      */
-   private List<Cuenta> cuentaList;
+   private List<CuentaCorredor> cuentaList;
    
    private List<Banco> bancos;
    
@@ -47,7 +47,7 @@ public class CuentaBean implements Serializable{
    @Autowired
    private BancoService bancoService;
    
-   private Cuenta cuenta = new Cuenta();
+   private CuentaCorredor cuenta = new CuentaCorredor();
    
    
    @PostConstruct
@@ -60,7 +60,7 @@ public class CuentaBean implements Serializable{
        return bancoService.getBancoById(id);
    }
    
-   public List<Cuenta> getCuentaList(){
+   public List<CuentaCorredor> getCuentaList(){
        return cuentaList;   
    }
    
@@ -77,14 +77,14 @@ public class CuentaBean implements Serializable{
     /**
      * @return the cuenta
      */
-    public Cuenta getCuenta() {
+    public CuentaCorredor getCuenta() {
         return cuenta;
     }
 
     /**
      * @param cuenta the cuenta to set
      */
-    public void setCuenta(Cuenta cuenta) {
+    public void setCuenta(CuentaCorredor cuenta) {
         this.cuenta = cuenta;
     }
 

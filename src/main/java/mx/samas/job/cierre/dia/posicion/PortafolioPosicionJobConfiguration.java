@@ -7,7 +7,7 @@ package mx.samas.job.cierre.dia.posicion;
 
 import java.util.List;
 import javax.persistence.EntityManagerFactory;
-import mx.samas.domain.Cuenta;
+import mx.samas.domain.CuentaCorredor;
 import mx.samas.domain.VectorPosicion;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
@@ -22,9 +22,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * Cuenta->VectorPosicion Para cada cuenta, buscar las entradas de Bitacora que
- * sean de Esa Cuenta y ese dia Juntar con los POrtafolios y sus respectivas
- * posiciones del dia anterior para crear los del dia
+ * CuentaCorredor->VectorPosicion Para cada cuenta, buscar las entradas de Bitacora que
+ sean de Esa CuentaCorredor y ese dia Juntar con los POrtafolios y sus respectivas
+ posiciones del dia anterior para crear los del dia
  *
  *
  * @author samas
@@ -51,7 +51,7 @@ public class PortafolioPosicionJobConfiguration {
     @Bean
     public Step sumatoriaPosicionStep() {
         return stepBuilderFactory.get("sumatoriaPosicionStep")
-                .<Cuenta, List<VectorPosicion>>chunk(1000)
+                .<CuentaCorredor, List<VectorPosicion>>chunk(1000)
                 .reader(bitacoraReader())
                 .processor(vectorPosicionProcessor())
                 .writer(vectorPosicionWriter())
@@ -61,8 +61,8 @@ public class PortafolioPosicionJobConfiguration {
 
     @Bean(destroyMethod = "")
     @StepScope
-    public JpaPagingItemReader<Cuenta> bitacoraReader() {
-        JpaPagingItemReader<Cuenta> reader = new JpaPagingItemReader<>();
+    public JpaPagingItemReader<CuentaCorredor> bitacoraReader() {
+        JpaPagingItemReader<CuentaCorredor> reader = new JpaPagingItemReader<>();
         reader.setEntityManagerFactory(emFactory);
         reader.setQueryString("SELECT c FROM Cuenta c "
                 + "JOIN FETCH a.portafolios p");
@@ -70,7 +70,7 @@ public class PortafolioPosicionJobConfiguration {
     }
 
     @Bean
-    public ItemProcessor<Cuenta, List<VectorPosicion>> vectorPosicionProcessor() {
+    public ItemProcessor<CuentaCorredor, List<VectorPosicion>> vectorPosicionProcessor() {
         return new VectorPosicionProcessor();
     }
 

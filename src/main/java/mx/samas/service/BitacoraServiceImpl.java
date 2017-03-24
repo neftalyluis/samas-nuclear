@@ -9,7 +9,7 @@ import java.time.LocalDate;
 import java.util.List;
 import mx.samas.domain.Activo;
 import mx.samas.domain.Bitacora;
-import mx.samas.domain.Cuenta;
+import mx.samas.domain.CuentaCorredor;
 import mx.samas.domain.Portafolio;
 import mx.samas.repository.BitacoraRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,7 +55,7 @@ public class BitacoraServiceImpl implements BitacoraService {
     }
 
     @Override
-    public List<Bitacora> getBitacoraListFromLastDay(Cuenta item) {
+    public List<Bitacora> getBitacoraListFromLastDay(CuentaCorredor item) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
